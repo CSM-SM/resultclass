@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>상세페이지 만들기 — 결과클래스</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0C1B35;--navy-mid:#152444;
+  --gold:#C8922A;--gold-light:#F0C060;--gold-pale:#FDF5E0;
+  --teal:#1A7A68;--teal-light:#E0F5F0;
+  --white:#FFFFFF;--off-white:#F8F6F0;
+  --text:#1A1814;--text-mid:#4A4740;--text-muted:#8A877E;
+  --border:#E5E2D8;--border-dark:#CCC9BE;
+  --success-bg:#E8F6F2;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;
+  --font:'Noto Sans KR',sans-serif;
+}
+html{scroll-behavior:smooth;font-family:var(--font);color:var(--text)}
+body{background:var(--off-white);overflow-x:hidden}
+
+nav{position:sticky;top:0;z-index:100;background:var(--navy);padding:0 5vw;height:60px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-size:18px;font-weight:900;color:var(--white);text-decoration:none}
+.nav-logo span{color:var(--gold-light)}
+.nav-back{color:rgba(255,255,255,0.6);font-size:14px;text-decoration:none}
+.nav-back:hover{color:var(--white)}
+
+.guide-hero{background:var(--navy);padding:36px 5vw 40px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.guide-breadcrumb{font-size:12px;color:rgba(255,255,255,0.4);margin-bottom:12px}
+.guide-title{font-size:clamp(26px,4vw,40px);font-weight:900;color:var(--white);letter-spacing:-1.5px;margin-bottom:10px}
+.guide-title em{color:var(--gold-light);font-style:normal}
+.guide-desc{font-size:15px;color:rgba(255,255,255,0.6);line-height:1.7;max-width:600px;margin-bottom:16px}
+.guide-process{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.gp-step{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);color:var(--white);padding:7px 16px;border-radius:100px;font-size:13px;font-weight:600}
+.gp-arrow{color:var(--gold-light);font-size:16px;font-weight:900}
+.gp-step.highlight{background:rgba(200,146,42,0.2);border-color:rgba(200,146,42,0.4);color:var(--gold-light)}
+.guide-meta{display:flex;gap:20px;flex-wrap:wrap}
+.meta-item{display:flex;align-items:center;gap:7px;font-size:13px;color:rgba(255,255,255,0.5)}
+.meta-dot{width:6px;height:6px;border-radius:50%;background:var(--gold)}
+
+.progress-wrap{background:var(--white);border-bottom:1px solid var(--border);padding:0 5vw;position:sticky;top:60px;z-index:90}
+.progress-inner{display:flex;align-items:center;overflow-x:auto;scrollbar-width:none}
+.progress-inner::-webkit-scrollbar{display:none}
+.prog-step{display:flex;align-items:center;flex-shrink:0;cursor:pointer;padding:14px 0 12px;border-bottom:2px solid transparent;transition:all .2s;margin-right:4px}
+.prog-step.active{border-bottom-color:var(--gold)}
+.prog-step.done{border-bottom-color:var(--teal)}
+.prog-num{width:24px;height:24px;border-radius:50%;background:var(--border);color:var(--text-muted);font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-right:8px;flex-shrink:0;transition:all .2s}
+.prog-step.active .prog-num{background:var(--gold);color:var(--navy)}
+.prog-step.done .prog-num{background:var(--teal);color:var(--white)}
+.prog-label{font-size:13px;font-weight:500;color:var(--text-muted);white-space:nowrap;transition:color .2s}
+.prog-step.active .prog-label{color:var(--navy);font-weight:700}
+.prog-step.done .prog-label{color:var(--teal)}
+.prog-arrow{font-size:14px;color:var(--border);margin:0 8px}
+
+.main-wrap{display:grid;grid-template-columns:1fr 300px;gap:24px;padding:28px 5vw;max-width:1200px;margin:0 auto}
+
+.step-card{background:var(--white);border-radius:var(--r-lg);border:1px solid var(--border);overflow:hidden}
+.step-header{padding:28px 32px 24px;border-bottom:1px solid var(--border)}
+.step-badge{display:inline-flex;background:var(--gold-pale);border:1px solid rgba(200,146,42,0.3);color:var(--gold);padding:4px 12px;border-radius:100px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+.step-badge.teal-badge{background:var(--teal-light);border-color:rgba(26,122,104,0.3);color:var(--teal)}
+.step-card-title{font-size:22px;font-weight:900;color:var(--navy);letter-spacing:-0.8px;margin-bottom:8px}
+.step-card-desc{font-size:15px;color:var(--text-muted);line-height:1.7}
+.step-body{padding:28px 32px}
+
+.section-label{font-size:13px;font-weight:700;color:var(--text-mid);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.section-label::before{content:'';width:3px;height:14px;background:var(--gold);border-radius:2px;flex-shrink:0}
+.section-label.teal::before{background:var(--teal)}
+
+/* TOOL SELECT */
+.tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.tool-option{border:1.5px solid var(--border);border-radius:var(--r-md);padding:16px;cursor:pointer;transition:all .18s;background:var(--white);position:relative}
+.tool-option:hover{border-color:var(--gold);background:var(--gold-pale)}
+.tool-option.selected{border-color:var(--gold);background:var(--gold-pale)}
+.tool-option.selected .to-check{background:var(--gold);border-color:var(--gold);color:var(--white)}
+.to-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.to-name{font-size:14px;font-weight:700;color:var(--navy)}
+.to-check{width:20px;height:20px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:10px;transition:all .18s}
+.to-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:100px}
+.to-badge.free{background:#E8F5E9;color:#2E7D32}
+.to-desc{font-size:12px;color:var(--text-muted);line-height:1.5;margin-top:6px}
+.recommend-tag{position:absolute;top:-9px;right:10px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;padding:2px 9px;border-radius:100px}
+
+/* INPUT */
+.input-group{display:flex;flex-direction:column;gap:16px;margin-bottom:24px}
+.input-row{display:flex;flex-direction:column;gap:5px}
+.input-label{font-size:13px;font-weight:700;color:var(--navy);display:flex;align-items:center;gap:6px}
+.required{color:var(--gold);font-size:11px}
+.input-hint{font-size:12px;color:var(--text-muted)}
+.input-field{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--r-sm);font-size:14px;font-family:var(--font);color:var(--text);background:var(--white);outline:none;transition:all .18s;resize:vertical}
+.input-field:focus{border-color:var(--gold);background:var(--gold-pale)}
+.input-field::placeholder{color:var(--text-muted);font-size:13px}
+
+/* URL/IMG SECTION */
+.attach-section{background:var(--off-white);border:1.5px solid var(--border);border-radius:var(--r-md);padding:18px;margin-bottom:18px}
+.attach-header{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.attach-icon{width:30px;height:30px;background:var(--navy);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.attach-title{font-size:13px;font-weight:700;color:var(--navy)}
+.attach-sub{font-size:12px;color:var(--text-muted);line-height:1.6;margin-bottom:12px}
+.url-input-wrap{display:flex;gap:8px}
+.url-field{flex:1;padding:10px 13px;border:1.5px solid var(--border);border-radius:var(--r-sm);font-size:13px;font-family:var(--font);color:var(--text);background:var(--white);outline:none;transition:all .18s}
+.url-field:focus{border-color:var(--gold)}
+.url-field::placeholder{color:var(--text-muted);font-size:12px}
+.btn-analyze{background:var(--navy);color:var(--white);border:none;padding:10px 16px;border-radius:var(--r-sm);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font);white-space:nowrap;transition:all .15s}
+.btn-analyze:disabled{background:var(--border);color:var(--text-muted);cursor:not-allowed}
+.url-status{margin-top:8px;font-size:12px;display:none;align-items:center;gap:6px;padding:8px 12px;border-radius:6px}
+.url-status.analyzing{display:flex;background:#EEF2FF;color:#4F46E5}
+.url-status.success{display:flex;background:var(--success-bg);color:var(--teal)}
+.url-result{margin-top:10px;display:none;background:var(--white);border:1px solid rgba(26,122,104,0.2);border-radius:var(--r-sm);padding:12px}
+.url-result.show{display:block}
+.uar-title{font-size:11px;font-weight:700;color:var(--teal);margin-bottom:6px}
+.uar-tags{display:flex;flex-wrap:wrap;gap:5px}
+.uar-tag{font-size:11px;background:var(--teal-light);color:var(--teal);padding:3px 9px;border-radius:100px;font-weight:500}
+.spinner{width:13px;height:13px;border:2px solid currentColor;border-top-color:transparent;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* 이미지 업로드 */
+#img-upload-area{border:2px dashed var(--border-dark);border-radius:var(--r-md);padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:var(--white)}
+#img-upload-area:hover{border-color:var(--gold);background:var(--gold-pale)}
+
+/* PROMPT BOX */
+.prompt-section{margin-bottom:24px}
+.prompt-box{background:var(--navy);border-radius:var(--r-md);padding:20px 22px;position:relative;margin-top:10px}
+.prompt-text{font-size:13px;color:rgba(255,255,255,0.85);line-height:1.9;font-family:var(--font);white-space:pre-wrap;word-break:break-all}
+.prompt-text .user-val{color:#5DCAA5;font-weight:700}
+.prompt-text .ref-val{color:#A78BFA;font-weight:600}
+.copy-btn{position:absolute;top:12px;right:12px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);padding:6px 12px;border-radius:6px;font-size:12px;font-weight:500;cursor:pointer;font-family:var(--font);transition:all .15s}
+.copy-btn:hover{background:rgba(255,255,255,0.2);color:var(--white)}
+.copy-btn.copied{background:rgba(26,122,104,0.3);border-color:rgba(26,122,104,0.5);color:#5DCAA5}
+.prompt-note{font-size:12px;color:var(--text-muted);margin-top:8px;line-height:1.6}
+.prompt-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:8px}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text-muted)}
+.legend-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+
+/* ACTION STEP (5단계 합치기) */
+.action-step-item{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 18px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r-md);margin-bottom:10px;cursor:pointer;transition:all .18s}
+.action-step-item:hover{border-color:var(--gold-light);background:var(--gold-pale)}
+.action-step-item.done{background:var(--success-bg);border-color:rgba(26,122,104,0.3)}
+.action-step-left{display:flex;align-items:center;gap:12px;flex:1;min-width:0}
+.action-step-content{flex:1;min-width:0}
+.action-step-num{font-size:10px;font-weight:700;color:var(--text-muted);letter-spacing:1px;margin-bottom:3px}
+.action-step-item.done .action-step-num{color:var(--teal)}
+.action-step-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:3px;line-height:1.35}
+.action-step-item.done .action-step-title{color:var(--teal);text-decoration:line-through;text-decoration-color:rgba(26,122,104,0.4)}
+.action-step-sub{font-size:12px;color:var(--text-muted);line-height:1.5}
+.action-step-btn{flex-shrink:0;padding:9px 16px;border-radius:var(--r-sm);font-size:12px;font-weight:700;cursor:pointer;font-family:var(--font);text-decoration:none;display:inline-flex;align-items:center;border:none;transition:all .15s;white-space:nowrap}
+.action-step-btn.teal{background:var(--teal);color:var(--white)}
+.action-step-btn.teal:hover{background:var(--teal-mid,#0F5548)}
+.action-step-btn.gold{background:var(--gold);color:var(--navy)}
+.action-step-btn.gold:hover{background:var(--gold-light)}
+.action-step-btn.navy{background:var(--navy);color:var(--white)}
+.action-step-btn.navy:hover{background:var(--navy-mid)}
+.action-step-btn.copied{background:var(--teal)!important;color:var(--white)!important}
+.action-step-badge{flex-shrink:0;padding:6px 12px;border-radius:100px;font-size:11px;font-weight:700;background:var(--off-white);color:var(--text-muted);border:1px solid var(--border)}
+.action-btn-desc{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:14px}
+.action-btn{border:none;padding:15px 36px;border-radius:var(--r-sm);font-size:15px;font-weight:900;cursor:pointer;font-family:var(--font);transition:all .15s;width:100%;max-width:340px}
+.action-btn.gold{background:var(--gold);color:var(--navy)}
+.action-btn.canva{background:#00C4CC;color:var(--white)}
+.action-msg{display:none;margin-top:10px;font-size:12px;font-weight:600}
+
+/* CHECKLIST */
+.checklist-wrap{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;background:var(--off-white);border-radius:var(--r-md);border:1.5px solid transparent;cursor:pointer;transition:all .18s}
+.check-item:hover{border-color:var(--border-dark)}
+.check-item.done{background:var(--success-bg);border-color:rgba(26,122,104,0.25)}
+.check-box{width:22px;height:22px;border-radius:6px;border:2px solid var(--border-dark);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:1px;transition:all .18s;background:var(--white)}
+.check-item.done .check-box{background:var(--teal);border-color:var(--teal);color:var(--white)}
+.check-content{flex:1}
+.check-title{font-size:14px;font-weight:600;color:var(--navy);margin-bottom:3px}
+.check-item.done .check-title{color:var(--teal);text-decoration:line-through;text-decoration-color:rgba(26,122,104,0.4)}
+.check-sub{font-size:12px;color:var(--text-muted);line-height:1.6}
+
+/* TIP / INFO BOX */
+.tip-box{background:linear-gradient(135deg,#F0F9F6,#E8F5F1);border:1px solid rgba(26,122,104,0.2);border-radius:var(--r-md);padding:15px 17px;margin-bottom:18px}
+.tip-head{font-size:13px;font-weight:700;color:var(--teal);margin-bottom:6px}
+.tip-body{font-size:13px;color:var(--text-mid);line-height:1.7}
+.info-box{background:var(--gold-pale);border:1px solid rgba(200,146,42,0.25);border-radius:var(--r-md);padding:15px 17px;margin-bottom:18px;font-size:13px;color:var(--text-mid);line-height:1.7}
+
+/* PATH GUIDE */
+.path-guide{background:var(--off-white);border:1px solid var(--border);border-radius:var(--r-md);padding:14px 16px;margin-bottom:18px}
+.path-label{font-size:11px;font-weight:700;color:var(--navy);margin-bottom:9px}
+.path-steps{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.path-node{padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600}
+.path-node.dark{background:var(--navy);color:var(--white)}
+.path-node.light{background:var(--white);border:1.5px solid var(--border);color:var(--navy)}
+.path-node.accent{background:var(--teal);color:var(--white)}
+.path-arrow{color:var(--gold);font-size:15px;font-weight:900}
+
+/* STEP NAV */
+.step-nav{display:flex;justify-content:space-between;align-items:center;padding:18px 32px;border-top:1px solid var(--border)}
+.btn-prev{background:transparent;border:1.5px solid var(--border);color:var(--text-muted);padding:11px 22px;border-radius:var(--r-sm);font-size:14px;font-weight:500;cursor:pointer;font-family:var(--font);transition:all .15s}
+.btn-prev:hover{border-color:var(--border-dark);color:var(--text)}
+.btn-next{background:var(--navy);color:var(--white);border:none;padding:11px 28px;border-radius:var(--r-sm);font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:all .15s}
+.btn-next:hover{background:var(--navy-mid)}
+.btn-next.gold{background:var(--gold);color:var(--navy)}
+.step-counter{font-size:13px;color:var(--text-muted)}
+
+/* SIDEBAR */
+.sidebar{display:flex;flex-direction:column;gap:16px}
+.side-card{background:var(--white);border-radius:var(--r-lg);border:1px solid var(--border);padding:20px}
+.side-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.side-title::before{content:'';width:3px;height:15px;background:var(--gold);border-radius:2px}
+.progress-ring-wrap{display:flex;flex-direction:column;align-items:center;margin-bottom:14px}
+.progress-ring{position:relative;width:84px;height:84px}
+.progress-ring svg{transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:var(--border);stroke-width:7}
+.ring-fill{fill:none;stroke:var(--teal);stroke-width:7;stroke-linecap:round;transition:stroke-dashoffset .4s ease}
+.ring-text{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-pct{font-size:19px;font-weight:900;color:var(--navy)}
+.ring-label{font-size:10px;color:var(--text-muted)}
+.side-steps{display:flex;flex-direction:column;gap:6px}
+.side-step{display:flex;align-items:center;gap:10px;padding:7px 10px;border-radius:8px;cursor:pointer;transition:background .15s}
+.side-step:hover{background:var(--off-white)}
+.side-step.active{background:var(--gold-pale)}
+.side-step-num{width:22px;height:22px;border-radius:50%;background:var(--border);color:var(--text-muted);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.side-step.active .side-step-num{background:var(--gold);color:var(--navy)}
+.side-step.done .side-step-num{background:var(--teal);color:var(--white)}
+.side-step-label{font-size:13px;color:var(--text-muted)}
+.side-step.active .side-step-label{color:var(--navy);font-weight:600}
+.side-step.done .side-step-label{color:var(--teal)}
+.preview-list{display:flex;flex-direction:column;gap:7px}
+.preview-row{padding:8px 10px;background:var(--off-white);border-radius:6px;border-left:3px solid var(--border)}
+.preview-row.filled{border-left-color:var(--teal);background:var(--success-bg)}
+.preview-key{font-size:11px;color:var(--text-muted);margin-bottom:2px}
+.preview-val{font-size:12px;color:var(--navy);font-weight:600;word-break:break-all}
+.preview-empty{font-size:12px;color:var(--border-dark);font-style:italic}
+.side-links{display:flex;flex-direction:column;gap:7px}
+.side-link{display:flex;align-items:center;gap:8px;padding:9px 11px;background:var(--off-white);border-radius:8px;text-decoration:none;font-size:13px;color:var(--text-mid);transition:all .15s}
+.side-link:hover{background:var(--gold-pale);color:var(--navy)}
+.side-link-icon{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+
+/* COMPLETE */
+.complete-screen{padding:48px 32px;text-align:center;display:none}
+.complete-screen.show{display:block}
+.complete-icon{font-size:52px;margin-bottom:18px;animation:pop .4s ease}
+@keyframes pop{0%{transform:scale(0)}80%{transform:scale(1.2)}100%{transform:scale(1)}}
+.complete-title{font-size:24px;font-weight:900;color:var(--navy);letter-spacing:-1px;margin-bottom:10px}
+.complete-desc{font-size:14px;color:var(--text-muted);line-height:1.75;margin-bottom:28px}
+.complete-btns{display:flex;flex-direction:column;gap:9px;max-width:280px;margin:0 auto}
+.btn-complete{padding:13px;border-radius:var(--r-sm);font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font);border:none;transition:all .15s}
+.btn-complete.primary{background:var(--navy);color:var(--white)}
+.btn-complete.secondary{background:var(--off-white);color:var(--text-mid);border:1.5px solid var(--border)}
+
+@media(max-width:860px){.main-wrap{grid-template-columns:1fr}.sidebar{display:none}.tool-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">결과<span>클래스</span></a>
+  <a class="nav-back" href="index.html">← 결과물 목록으로</a>
+</nav>
+
+<div class="guide-hero">
+  <div class="guide-breadcrumb">결과물 카탈로그 › 상세페이지</div>
+  <div class="guide-title">쇼핑몰 <em>상세페이지</em> 만들기</div>
+  <div class="guide-desc">AI로 카피, Canva로 디자인. 딱 2가지 툴만 쓰면 됩니다.</div>
+  <div class="guide-process">
+    <div class="gp-step highlight">① AI로 카피 작성</div>
+    <div class="gp-arrow">+</div>
+    <div class="gp-step highlight">② Canva로 이미지·레이아웃</div>
+    <div class="gp-arrow">→</div>
+    <div class="gp-step">상세페이지 완성</div>
+  </div>
+  <div class="guide-meta">
+    <div class="meta-item"><div class="meta-dot"></div>총 5단계</div>
+    <div class="meta-item"><div class="meta-dot"></div>예상 30분</div>
+    <div class="meta-item"><div class="meta-dot"></div>모두 무료</div>
+  </div>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-inner">
+    <div class="prog-step active" onclick="goStep(0)"><div class="prog-num">1</div><div class="prog-label">AI 툴 선택</div></div>
+    <div class="prog-arrow">›</div>
+    <div class="prog-step" onclick="goStep(1)"><div class="prog-num">2</div><div class="prog-label">상품 정보 입력</div></div>
+    <div class="prog-arrow">›</div>
+    <div class="prog-step" onclick="goStep(2)"><div class="prog-num">3</div><div class="prog-label">AI로 카피 작성</div></div>
+    <div class="prog-arrow">›</div>
+    <div class="prog-step" onclick="goStep(3)"><div class="prog-num">4</div><div class="prog-label">Canva로 디자인</div></div>
+    <div class="prog-arrow">›</div>
+    <div class="prog-step" onclick="goStep(4)"><div class="prog-num">5</div><div class="prog-label">카피+이미지 합치기</div></div>
+  </div>
+</div>
+
+<div class="main-wrap">
+  <div>
+
+    <!-- STEP 1: AI 툴 선택 -->
+    <div class="step-card" id="step-0">
+      <div class="step-header">
+        <div class="step-badge">STEP 01</div>
+        <div class="step-card-title">카피 작성할 AI 툴을 고르세요</div>
+        <div class="step-card-desc">어떤 툴이든 이미지·레이아웃은 Canva에서 만듭니다. 카피 스타일에 맞는 툴을 선택하세요.</div>
+      </div>
+      <div class="step-body">
+        <div class="section-label" style="margin-bottom:14px">카피 작성 툴 선택</div>
+        <div class="tool-grid">
+          <div class="tool-option selected" onclick="selectTool(this,'ChatGPT')">
+            <div class="to-header"><div class="to-name">ChatGPT</div><div class="to-check">✓</div></div>
+            <span class="to-badge free">무료</span>
+            <div class="to-desc">가장 대중적. 구조적인 카피 작성에 강함. 처음이라면 추천.</div>
+          </div>
+          <div class="tool-option" onclick="selectTool(this,'Claude')">
+            <div class="to-header"><div class="to-name">Claude</div><div class="to-check"></div></div>
+            <span class="to-badge free">무료</span>
+            <div class="to-desc">자연스럽고 긴 문체에 강함. 감성적인 브랜드에 추천.</div>
+          </div>
+          <div class="tool-option" onclick="selectTool(this,'Gemini')">
+            <div class="to-header"><div class="to-name">Gemini</div><div class="to-check"></div></div>
+            <span class="to-badge free">무료</span>
+            <div class="to-desc">구글 AI. 최신 트렌드 반영 카피에 강함.</div>
+          </div>
+          <div class="tool-option" onclick="selectTool(this,'Grok')">
+            <div class="recommend-tag">⭐ 추천</div>
+            <div class="to-header"><div class="to-name">Grok</div><div class="to-check"></div></div>
+            <span class="to-badge free">무료</span>
+            <div class="to-desc">카피 + 이미지 생성 동시 가능. 결과물 빠르게 확인할 때 추천.</div>
+          </div>
+        </div>
+        <div class="tip-box">
+          <div class="tip-head">💡 2가지 툴, 이게 전부입니다</div>
+          <div class="tip-body">
+            <strong>AI 툴</strong> (ChatGPT·Claude·Gemini·Grok) → 카피 텍스트 생성<br>
+            <strong>Canva</strong> → 이미지 만들고 카피 넣어서 상세페이지 레이아웃 완성<br>
+            복잡하게 생각하지 마세요. 이 2가지만 쓰면 됩니다.
+          </div>
+        </div>
+        <div class="step-nav"><div></div><div class="step-counter">1 / 5 단계</div><button class="btn-next" onclick="nextStep()">다음 단계 →</button></div>
+      </div>
+    </div>
+
+    <!-- STEP 2: 상품 정보 입력 -->
+    <div class="step-card" id="step-1" style="display:none">
+      <div class="step-header">
+        <div class="step-badge">STEP 02</div>
+        <div class="step-card-title">상품 정보를 입력하세요</div>
+        <div class="step-card-desc">입력한 내용이 다음 단계 AI 프롬프트에 자동으로 채워집니다.</div>
+      </div>
+      <div class="step-body">
+        <div class="section-label" style="margin-bottom:14px">상품 기본 정보</div>
+        <div class="input-group">
+          <div class="input-row">
+            <div class="input-label">상품명 &amp; 브랜드명 <span class="required">필수</span></div>
+            <div class="input-hint">예: 제로슈가 그래놀라바 / 브랜드: 헬시스낵</div>
+            <input class="input-field" id="inp-product" type="text" placeholder="상품명과 브랜드명을 입력하세요" oninput="onInputChange()">
+          </div>
+          <div class="input-row">
+            <div class="input-label">핵심 특징 3가지 <span class="required">필수</span></div>
+            <div class="input-hint">예: 설탕 0g, 단백질 15g 함유, 글루텐 프리</div>
+            <textarea class="input-field" id="inp-features" rows="2" placeholder="쉼표로 구분 (예: 특징1, 특징2, 특징3)" oninput="onInputChange()"></textarea>
+          </div>
+          <div class="input-row">
+            <div class="input-label">타겟 고객</div>
+            <div class="input-hint">예: 다이어트 중인 30~40대 직장인 여성</div>
+            <input class="input-field" id="inp-target" type="text" placeholder="어떤 사람을 위한 상품인가요?" oninput="onInputChange()">
+          </div>
+          <div class="input-row">
+            <div class="input-label">가격 &amp; 용량</div>
+            <div class="input-hint">예: 15,000원 / 30개입 / 1개월치</div>
+            <input class="input-field" id="inp-price" type="text" placeholder="가격과 용량" oninput="onInputChange()">
+          </div>
+          <div class="input-row">
+            <div class="input-label">경쟁 제품과의 차별점</div>
+            <div class="input-hint">예: 타사 대비 칼로리 30% 낮음, 천연 재료만 사용</div>
+            <textarea class="input-field" id="inp-diff" rows="2" placeholder="우리 상품만의 강점" oninput="onInputChange()"></textarea>
+          </div>
+          <div class="input-row">
+            <div class="input-label">원하는 톤 &amp; 분위기</div>
+            <div class="input-hint">예: 고급스럽게 / 친근하게 / 감성적으로</div>
+            <input class="input-field" id="inp-tone" type="text" placeholder="어떤 느낌의 카피?" oninput="onInputChange()">
+          </div>
+        </div>
+
+        <!-- 제품 사진 -->
+        <div class="attach-section">
+          <div class="attach-header">
+            <div class="attach-icon">📸</div>
+            <div><div class="attach-title">제품 사진 첨부 <span style="font-size:11px;color:var(--text-muted);font-weight:400">(선택)</span></div></div>
+          </div>
+          <div class="attach-sub">첨부하면 카피 프롬프트 + Canva 이미지 프롬프트에 제품 특성이 자동 반영됩니다.</div>
+          <div id="img-upload-area" onclick="document.getElementById('inp-image').click()" ondragover="onDragOver(event)" ondragleave="onDragLeave(event)" ondrop="onDrop(event)">
+            <div style="font-size:28px;margin-bottom:8px">📷</div>
+            <div style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px">사진 드래그 또는 클릭해서 첨부</div>
+            <div style="font-size:12px;color:var(--text-muted)">JPG, PNG, WEBP · 최대 10MB</div>
+            <input type="file" id="inp-image" accept="image/*" style="display:none" onchange="onImageUpload(this)">
+          </div>
+          <div id="img-preview-wrap" style="display:none;margin-top:12px">
+            <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--success-bg);border:1px solid rgba(26,122,104,0.2);border-radius:var(--r-md)">
+              <img id="img-preview" style="width:60px;height:60px;object-fit:cover;border-radius:8px;border:1px solid var(--border)" src="" alt="제품 사진">
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:700;color:var(--teal);margin-bottom:2px">✅ 사진 첨부 완료</div>
+                <div style="font-size:12px;color:var(--text-muted)" id="img-filename"></div>
+              </div>
+              <button onclick="removeImage()" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:20px;padding:4px;line-height:1">×</button>
+            </div>
+            <div style="margin-top:8px;padding:10px 13px;background:var(--white);border:1px solid rgba(26,122,104,0.15);border-radius:var(--r-sm)">
+              <div style="font-size:11px;font-weight:700;color:var(--teal);margin-bottom:5px">📊 분석된 이미지 정보</div>
+              <div id="img-tags" style="display:flex;flex-wrap:wrap;gap:5px"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 참고 URL -->
+        <div class="attach-section" style="margin-bottom:0">
+          <div class="attach-header">
+            <div class="attach-icon">🔗</div>
+            <div><div class="attach-title">참고 상세페이지 URL <span style="font-size:11px;color:var(--text-muted);font-weight:400">(선택)</span></div></div>
+          </div>
+          <div class="attach-sub">마음에 드는 상세페이지 URL을 넣으면 그 스타일이 카피 프롬프트에 자동 반영됩니다.</div>
+          <div class="url-input-wrap">
+            <input class="url-field" id="inp-url" type="url" placeholder="https://참고하고싶은상세페이지.com" oninput="onUrlChange()">
+            <button class="btn-analyze" id="btn-analyze" onclick="analyzeUrl()" disabled>🔍 분석</button>
+          </div>
+          <div class="url-status" id="url-status"></div>
+          <div class="url-result" id="url-result"></div>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-prev" onclick="prevStep()">← 이전</button>
+          <div class="step-counter">2 / 5 단계</div>
+          <button class="btn-next" id="btn-step2-next" onclick="nextStep()" disabled style="opacity:0.4">프롬프트 생성 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: AI로 카피 작성 -->
+    <div class="step-card" id="step-2" style="display:none">
+      <div class="step-header">
+        <div class="step-badge">STEP 03</div>
+        <div class="step-card-title" id="step3-title">AI로 카피를 작성하세요</div>
+        <div class="step-card-desc" id="step3-desc">버튼을 누르면 프롬프트가 복사되고 AI 툴이 열립니다. Ctrl+V로 붙여넣기만 하면 됩니다.</div>
+      </div>
+      <div class="step-body">
+        <div style="background:var(--success-bg);border:1px solid rgba(26,122,104,0.2);border-radius:var(--r-sm);padding:10px 14px;margin-bottom:20px;font-size:13px;color:var(--teal);font-weight:500">
+          ✅ 내 상품 정보가 프롬프트에 자동 반영됐습니다
+        </div>
+
+        <div class="action-btn-wrap">
+          <div class="action-btn-desc">버튼 클릭 한 번으로 → 프롬프트 자동 복사 + <span id="tool-name-label">AI 툴</span> 새 탭 열기</div>
+          <button class="action-btn gold" onclick="copyAndOpenTool()">🚀 <span id="btn-tool-text">ChatGPT 열고 카피 프롬프트 복사</span></button>
+          <div class="action-msg" id="copy-success-msg"></div>
+        </div>
+
+        <div class="prompt-section">
+          <div class="section-label teal" style="margin-bottom:6px">완성 카피 프롬프트 (자동 완성)</div>
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px">작성 + 다듬기 조건이 한 번에 포함돼 있습니다. 이 프롬프트 하나만 붙여넣으면 됩니다.</div>
+          <div class="prompt-box">
+            <button class="copy-btn" id="copy-p1" onclick="copyPrompt('copy-p1','p1')">📋 복사</button>
+            <div class="prompt-text" id="prompt-p1-text"></div>
+          </div>
+          <div class="prompt-legend">
+            <div class="legend-item"><div class="legend-dot" style="background:#5DCAA5"></div>내가 입력한 내용</div>
+            <div class="legend-item"><div class="legend-dot" style="background:#A78BFA"></div>URL 분석 내용</div>
+          </div>
+        </div>
+
+        <div class="checklist-wrap">
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-content"><div class="check-title" id="check-copy-title">AI 채팅창에 Ctrl+V → 전송 완료</div><div class="check-sub">프롬프트 하나에 작성 + 다듬기 조건이 모두 포함됩니다</div></div>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-content"><div class="check-title">결과가 마음에 안 들면 "다시 써줘" 한 마디면 OK</div><div class="check-sub">같은 채팅창에서 "더 임팩트 있게", "좀 더 친근하게" 등 추가 요청만 하면 됩니다</div></div>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-content"><div class="check-title">완성된 카피 복사해두기</div><div class="check-sub">다음 단계(Canva)에서 붙여넣을 텍스트를 미리 복사해두세요</div></div>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-prev" onclick="prevStep()">← 이전</button>
+          <div class="step-counter">3 / 5 단계</div>
+          <button class="btn-next" onclick="nextStep()">4단계 Canva 디자인 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4: Canva로 이미지·레이아웃 -->
+    <div class="step-card" id="step-3" style="display:none">
+      <div class="step-header">
+        <div class="step-badge teal-badge">STEP 04</div>
+        <div class="step-card-title">Canva AI로 이미지를 만드세요</div>
+        <div class="step-card-desc">버튼을 누르면 이미지 프롬프트가 복사되고 Canva AI가 열립니다. 이미지를 만들고 5단계에서 카피와 합칩니다.</div>
+      </div>
+      <div class="step-body">
+
+        <div class="action-btn-wrap">
+          <div class="action-btn-desc">버튼 클릭 → 이미지 프롬프트 자동 복사 + canva.com/ai 열기</div>
+          <button class="action-btn canva" onclick="copyAndOpenCanva()">🎨 Canva 열고 이미지 프롬프트 복사</button>
+          <div class="action-msg" id="canva-copy-msg"></div>
+        </div>
+
+        <div class="prompt-section">
+          <div class="section-label teal" style="margin-bottom:10px">Canva AI 이미지 프롬프트 (자동 완성)</div>
+          <div class="prompt-box">
+            <button class="copy-btn" id="copy-p3" onclick="copyPrompt('copy-p3','p3')">📋 복사</button>
+            <div class="prompt-text" id="prompt-p3-text"></div>
+          </div>
+          <div class="prompt-note">💡 영어 프롬프트가 더 좋은 결과를 만듭니다.</div>
+        </div>
+
+        <div class="path-guide">
+          <div class="path-label">📍 Canva AI 이미지 생성 경로</div>
+          <div class="path-steps">
+            <div class="path-node dark">canva.com/ai</div>
+            <div class="path-arrow">→</div>
+            <div class="path-node light">상단 "이미지" 탭</div>
+            <div class="path-arrow">→</div>
+            <div class="path-node accent">Ctrl+V 붙여넣기</div>
+          </div>
+        </div>
+
+        <div class="checklist-wrap">
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-content"><div class="check-title">위 버튼 클릭 → Canva AI 자동 열림</div><div class="check-sub">이미지 프롬프트가 복사된 상태로 열립니다</div></div>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-content"><div class="check-title">상단 "이미지" 탭 → Ctrl+V → 이미지 생성</div><div class="check-sub">마음에 드는 이미지가 나올 때까지 여러 번 생성해보세요</div></div>
+          </div>
+          <div class="check-item" onclick="toggleCheck(this)">
+            <div class="check-box"></div>
+            <div class="check-content"><div class="check-title">생성된 이미지 PNG로 다운로드</div><div class="check-sub">오른쪽 상단 "공유" → "다운로드" → PNG</div></div>
+          </div>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-prev" onclick="prevStep()">← 이전</button>
+          <div class="step-counter">4 / 5 단계</div>
+          <button class="btn-next" onclick="nextStep()">5단계 합치기 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5: 카피 + 이미지 합치기 -->
+    <div class="step-card" id="step-4" style="display:none">
+      <div class="step-header">
+        <div class="step-badge teal-badge">STEP 05</div>
+        <div class="step-card-title">카피 + 이미지를 합쳐서 완성!</div>
+        <div class="step-card-desc">각 단계 버튼을 순서대로 클릭하면 됩니다. 텍스트 설명 없이 바로 실행할 수 있어요.</div>
+      </div>
+      <div class="step-body">
+
+        <!-- 액션 스텝 1 -->
+        <div class="action-step-item" onclick="toggleCheck(this)">
+          <div class="action-step-left">
+            <div class="check-item" style="padding:0;background:transparent;border:none">
+              <div class="check-box"></div>
+            </div>
+            <div class="action-step-content">
+              <div class="action-step-num">01</div>
+              <div class="action-step-title">상세페이지 템플릿 고르기</div>
+              <div class="action-step-sub">Canva 상세페이지 템플릿 모음이 바로 열립니다</div>
+            </div>
+          </div>
+          <button class="action-step-btn teal" onclick="event.stopPropagation();window.open('https://www.canva.com/s/templates?query=%EC%83%81%EC%84%B8%ED%8E%98%EC%9D%B4%EC%A7%80+%ED%85%9C%ED%94%8C%EB%A6%BF','_blank');toggleCheck(this.closest('.action-step-item'))">🎨 템플릿 열기 →</button>
+        </div>
+
+        <!-- 액션 스텝 2 -->
+        <div class="action-step-item" onclick="toggleCheck(this)">
+          <div class="action-step-left">
+            <div class="check-item" style="padding:0;background:transparent;border:none">
+              <div class="check-box"></div>
+            </div>
+            <div class="action-step-content">
+              <div class="action-step-num">02</div>
+              <div class="action-step-title">3단계 카피 복사 → 텍스트 칸에 붙여넣기</div>
+              <div class="action-step-sub">헤드라인 → 서브 헤드라인 → 혜택 → 본문 순서로 배치</div>
+            </div>
+          </div>
+          <button onclick="event.stopPropagation();copyStep2(this)" class="action-step-btn gold">📋 카피 복사</button>
+        </div>
+
+        <!-- 액션 스텝 3 -->
+        <div class="action-step-item" onclick="toggleCheck(this)">
+          <div class="action-step-left">
+            <div class="check-item" style="padding:0;background:transparent;border:none">
+              <div class="check-box"></div>
+            </div>
+            <div class="action-step-content">
+              <div class="action-step-num">03</div>
+              <div class="action-step-title">4단계 이미지 Canva에 업로드 → 배치</div>
+              <div class="action-step-sub">왼쪽 메뉴 "업로드" → 다운받은 PNG 올리기 → 드래그로 배치</div>
+            </div>
+          </div>
+          <button class="action-step-btn navy" onclick="event.stopPropagation();window.open('https://www.canva.com','_blank');toggleCheck(this.closest('.action-step-item'))">Canva 열기 →</button>
+        </div>
+
+        <!-- 액션 스텝 4 -->
+        <div class="action-step-item" onclick="toggleCheck(this)">
+          <div class="action-step-left">
+            <div class="check-item" style="padding:0;background:transparent;border:none">
+              <div class="check-box"></div>
+            </div>
+            <div class="action-step-content">
+              <div class="action-step-num">04</div>
+              <div class="action-step-title">레이아웃 최종 조정</div>
+              <div class="action-step-sub">글자 크기·색상·여백 드래그앤드롭으로 자유롭게 수정</div>
+            </div>
+          </div>
+          <div class="action-step-badge">Canva 내에서</div>
+        </div>
+
+        <!-- 액션 스텝 5 -->
+        <div class="action-step-item" onclick="toggleCheck(this)">
+          <div class="action-step-left">
+            <div class="check-item" style="padding:0;background:transparent;border:none">
+              <div class="check-box"></div>
+            </div>
+            <div class="action-step-content">
+              <div class="action-step-num">05</div>
+              <div class="action-step-title">PNG 다운로드 → 쇼핑몰 등록</div>
+              <div class="action-step-sub">Canva 우측 상단 "공유" → "다운로드" → PNG → 스마트스토어·쿠팡</div>
+            </div>
+          </div>
+          <div class="action-step-badge">완성!</div>
+        </div>
+
+        <div class="tip-box" style="margin-top:20px">
+          <div class="tip-head">💡 수정하고 싶을 때</div>
+          <div class="tip-body">Canva는 저장이 자동으로 됩니다. 언제든지 다시 열어서 텍스트·이미지·색상을 드래그앤드롭으로 자유롭게 수정할 수 있습니다.</div>
+        </div>
+
+        <div class="step-nav">
+          <button class="btn-prev" onclick="prevStep()">← 이전</button>
+          <div class="step-counter">5 / 5 단계</div>
+          <button class="btn-next gold" onclick="completeGuide()">✅ 완료!</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMPLETE -->
+    <div class="step-card" id="step-complete" style="display:none">
+      <div class="complete-screen show">
+        <div class="complete-icon">🎉</div>
+        <div class="complete-title">상세페이지 완성!</div>
+        <div class="complete-desc">AI 카피 + Canva 디자인으로<br>상세페이지를 직접 만들었습니다.</div>
+        <div class="complete-btns">
+          <button class="btn-complete primary" onclick="alert('다음: 유튜브 썸네일 가이드')">다음 결과물 가이드 →</button>
+          <button class="btn-complete secondary" onclick="resetGuide()">처음부터 다시하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="side-card">
+      <div class="side-title">진행률</div>
+      <div class="progress-ring-wrap">
+        <div class="progress-ring">
+          <svg width="84" height="84" viewBox="0 0 84 84">
+            <circle class="ring-bg" cx="42" cy="42" r="35"/>
+            <circle class="ring-fill" id="ringFill" cx="42" cy="42" r="35" stroke-dasharray="219.9" stroke-dashoffset="219.9"/>
+          </svg>
+          <div class="ring-text"><div class="ring-pct" id="ringPct">0%</div><div class="ring-label">완료</div></div>
+        </div>
+      </div>
+      <div class="side-steps">
+        <div class="side-step active" onclick="goStep(0)"><div class="side-step-num">1</div><div class="side-step-label">AI 툴 선택</div></div>
+        <div class="side-step" onclick="goStep(1)"><div class="side-step-num">2</div><div class="side-step-label">상품 정보 입력</div></div>
+        <div class="side-step" onclick="goStep(2)"><div class="side-step-num">3</div><div class="side-step-label">AI로 카피 작성</div></div>
+        <div class="side-step" onclick="goStep(3)"><div class="side-step-num">4</div><div class="side-step-label">Canva 이미지</div></div>
+        <div class="side-step" onclick="goStep(4)"><div class="side-step-num">5</div><div class="side-step-label">카피+이미지 합치기</div></div>
+      </div>
+    </div>
+    <div class="side-card">
+      <div class="side-title">입력 현황</div>
+      <div class="preview-list">
+        <div class="preview-row" id="prev-product"><div class="preview-key">상품명</div><div class="preview-empty">미입력</div></div>
+        <div class="preview-row" id="prev-features"><div class="preview-key">핵심 특징</div><div class="preview-empty">미입력</div></div>
+        <div class="preview-row" id="prev-target"><div class="preview-key">타겟 고객</div><div class="preview-empty">미입력</div></div>
+        <div class="preview-row" id="prev-price"><div class="preview-key">가격/용량</div><div class="preview-empty">미입력</div></div>
+        <div class="preview-row" id="prev-image"><div class="preview-key">📸 제품 사진</div><div class="preview-empty">미첨부</div></div>
+        <div class="preview-row" id="prev-url"><div class="preview-key">🔗 참고 URL</div><div class="preview-empty">미입력</div></div>
+      </div>
+    </div>
+    <div class="side-card">
+      <div class="side-title">바로가기</div>
+      <div class="side-links">
+        <a class="side-link" id="primary-link" href="https://chat.openai.com" target="_blank"><div class="side-link-icon" style="background:#E8F5E9">🤖</div><span id="primary-link-text">ChatGPT 열기 →</span></a>
+        <a class="side-link" href="https://www.canva.com/ai" target="_blank"><div class="side-link-icon" style="background:#E3F2FD">🎨</div>Canva AI 열기 →</a>
+        <a class="side-link" href="https://www.canva.com" target="_blank"><div class="side-link-icon" style="background:#F3E8FF">✏️</div>Canva 편집 열기 →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let currentStep=0,totalSteps=5;
+let urlAnalysisData=null,imageData=null;
+let selectedTool='ChatGPT';
+let rawPrompts={p1:'',p2:'',p3:''};
+const toolLinks={ChatGPT:'https://chat.openai.com',Claude:'https://claude.ai',Gemini:'https://gemini.google.com',Grok:'https://grok.com'};
+
+// ── 툴 선택 ───────────────────────────────────────
+function selectTool(el, toolName){
+  document.querySelectorAll('.tool-option').forEach(o=>{o.classList.remove('selected');o.querySelector('.to-check').textContent=''});
+  el.classList.add('selected');el.querySelector('.to-check').textContent='✓';
+  selectedTool=toolName;
+  updateToolUI();buildPrompts();
+}
+
+function updateToolUI(){
+  const t=selectedTool;
+  const btnText=document.getElementById('btn-tool-text');
+  const label=document.getElementById('tool-name-label');
+  const pl=document.getElementById('primary-link');
+  const plt=document.getElementById('primary-link-text');
+  if(btnText) btnText.textContent=`${t} 열고 카피 프롬프트 복사`;
+  if(label) label.textContent=t;
+  if(pl){ pl.href=toolLinks[t]||'https://chat.openai.com'; }
+  if(plt) plt.textContent=`${t} 열기 →`;
+}
+
+// ── 드래그앤드롭 ──────────────────────────────────
+function onDragOver(e){e.preventDefault();e.stopPropagation();const a=document.getElementById('img-upload-area');a.style.borderColor='var(--gold)';a.style.background='var(--gold-pale)'}
+function onDragLeave(e){e.preventDefault();e.stopPropagation();const a=document.getElementById('img-upload-area');a.style.borderColor='var(--border-dark)';a.style.background='var(--white)'}
+function onDrop(e){e.preventDefault();e.stopPropagation();const a=document.getElementById('img-upload-area');a.style.borderColor='var(--border-dark)';a.style.background='var(--white)';const f=e.dataTransfer.files[0];if(!f||!f.type.startsWith('image/'))return;e.dataTransfer.clearData&&e.dataTransfer.clearData();onImageUpload({files:[f]})}
+
+// ── 이미지 업로드 ──────────────────────────────────
+function onImageUpload(inp){
+  const f=inp.files?inp.files[0]:null;if(!f)return;
+  const r=new FileReader();
+  r.onload=function(e){
+    const du=e.target.result;
+    document.getElementById('img-preview').src=du;
+    document.getElementById('img-filename').textContent=f.name+' · '+(f.size/1024/1024).toFixed(1)+'MB';
+    document.getElementById('img-upload-area').style.display='none';
+    document.getElementById('img-preview-wrap').style.display='block';
+    const ext=f.name.split('.').pop().toLowerCase();
+    const an=analyzeImageMeta(f.name,ext,f.size);
+    imageData={filename:f.name,...an,dataUrl:du};
+    document.getElementById('img-tags').innerHTML=an.tags.map(t=>`<span class="uar-tag">${t}</span>`).join('');
+    updatePreview('prev-image',f.name.length>20?f.name.slice(0,20)+'…':f.name);
+    buildPrompts();
+  };
+  r.readAsDataURL(f);
+}
+function analyzeImageMeta(name,ext,size){const n=name.toLowerCase(),tags=[];
+  if(ext==='png')tags.push('PNG (배경 제거 가능)');else if(ext==='jpg'||ext==='jpeg')tags.push('JPG 이미지');
+  if(n.includes('white')||n.includes('화이트'))tags.push('흰색 계열');else if(n.includes('black')||n.includes('블랙'))tags.push('블랙 계열');
+  if(n.includes('main')||n.includes('메인'))tags.push('메인 제품컷');else tags.push('제품 메인컷');
+  if(size>2*1024*1024)tags.push('고해상도');return{tags,ext}}
+function removeImage(){imageData=null;document.getElementById('inp-image').value='';document.getElementById('img-preview').src='';document.getElementById('img-upload-area').style.display='block';document.getElementById('img-preview-wrap').style.display='none';updatePreview('prev-image','');buildPrompts()}
+
+// ── 입력 변화 ──────────────────────────────────────
+function getVal(id){return(document.getElementById(id)||{}).value||''}
+function vals(){return{product:getVal('inp-product').trim(),features:getVal('inp-features').trim(),target:getVal('inp-target').trim(),price:getVal('inp-price').trim(),diff:getVal('inp-diff').trim(),tone:getVal('inp-tone').trim(),url:getVal('inp-url').trim()}}
+function onInputChange(){const v=vals();const ok=v.product.length>0&&v.features.length>0;const btn=document.getElementById('btn-step2-next');if(btn){btn.disabled=!ok;btn.style.opacity=ok?'1':'0.4'}updatePreview('prev-product',v.product);updatePreview('prev-features',v.features);updatePreview('prev-target',v.target);updatePreview('prev-price',v.price);buildPrompts()}
+function updatePreview(id,val){const el=document.getElementById(id);if(!el)return;const key=el.querySelector('.preview-key').outerHTML;if(val){el.className='preview-row filled';el.innerHTML=key+`<div class="preview-val">${val.length>28?val.slice(0,28)+'…':val}</div>`}else{el.className='preview-row';el.innerHTML=key+'<div class="preview-empty">미입력</div>'}}
+
+// ── URL 분석 ───────────────────────────────────────
+function onUrlChange(){const url=getVal('inp-url').trim();const btn=document.getElementById('btn-analyze');const ok=url.startsWith('http://')||url.startsWith('https://');btn.disabled=!ok;btn.style.opacity=ok?'1':'0.4';if(!url){urlAnalysisData=null;updatePreview('prev-url','');document.getElementById('url-result').classList.remove('show');document.getElementById('url-status').className='url-status';buildPrompts()}}
+function analyzeUrl(){const url=getVal('inp-url').trim();if(!url)return;const s=document.getElementById('url-status'),r=document.getElementById('url-result'),b=document.getElementById('btn-analyze');s.className='url-status analyzing';s.innerHTML='<div class="spinner"></div> 분석 중...';r.classList.remove('show');b.disabled=true;setTimeout(()=>{const d=extractDomain(url);const an=guessStyle(d,url);urlAnalysisData=an;s.className='url-status success';s.innerHTML='✅ 분석 완료!';r.innerHTML=`<div class="uar-title">📊 스타일 요소</div><div class="uar-tags">${an.tags.map(t=>`<span class="uar-tag">${t}</span>`).join('')}</div>`;r.classList.add('show');b.disabled=false;updatePreview('prev-url',d);buildPrompts()},2000)}
+function extractDomain(url){try{return new URL(url).hostname.replace('www.','')}catch(e){return url}}
+function guessStyle(d,url){const s=(d+url).toLowerCase();if(s.includes('coupang')||s.includes('smartstore'))return{tags:['심플·정보 중심','혜택 강조','스펙 표','후기 섹션'],style:'이커머스 표준형'};if(s.includes('musinsa')||s.includes('29cm'))return{tags:['감성 라이프스타일','여백 넓게','미니멀'],style:'패션·라이프스타일형'};if(s.includes('beauty')||s.includes('cosmetic'))return{tags:['성분 강조','Before/After','피부 타입별'],style:'뷰티·코스메틱형'};return{tags:['깔끔한 레이아웃','혜택 상단','신뢰 요소'],style:'일반 상세페이지형'}}
+
+// ── 프롬프트 빌드 ──────────────────────────────────
+function buildPrompts(){
+  const v=vals();
+  const product=v.product||'[상품명]',features=v.features||'[특징]',target=v.target||'일반 소비자',price=v.price||'미정',diff=v.diff||'',tone=v.tone||'신뢰감 있고 친근하게';
+  let ref='';if(urlAnalysisData){ref=`\n참고 스타일 (${extractDomain(v.url)}):\n- 유형: ${urlAnalysisData.style}\n- 반영 요소: ${urlAnalysisData.tags.join(', ')}\n`}
+  let img='',imgEx='';if(imageData){img=`\n제품 사진: ${imageData.tags.join(', ')}\n- 이미지 특성을 카피 톤에 반영해줘\n`;imgEx=`, ${imageData.tags.filter(t=>t.includes('계열')||t.includes('컷')).join(', ')}`}
+  const diffSec=diff?`\n차별점: ${diff}`:'';
+  const p1=`나는 쇼핑몰 상세페이지 카피를 작성하려고 해.\n\n상품명: ${product}\n핵심 특징: ${features}\n타겟 고객: ${target}\n가격 및 용량: ${price}${diffSec}${img}${ref}\n다음 구조로 상세페이지 카피를 작성해줘:\n1. 메인 헤드라인 (15자 이내, 임팩트 있고 궁금증 유발하게)\n2. 서브 헤드라인 (25자 이내)\n3. 핵심 혜택 3가지 (숫자 반드시 포함, 각 2~3줄)\n4. 상품 소개 본문 (200자)\n5. 구매 버튼 문구 3가지 (긴박감 포함, 예: "오늘만 특가", "지금 주문하면 무료배송")\n\n톤 & 분위기: ${tone}\n타겟(${target})이 공감할 수 있는 언어로 작성해줘.\n한국어로 작성해줘.`;
+  const p2=''; // p1에 통합됨
+  const p3=`Professional product photography for ${product}, clean white background, soft studio lighting, high resolution, minimalist composition, commercial photography style${imgEx}${urlAnalysisData?`, ${urlAnalysisData.style} aesthetic`:''}, sharp focus, no text`;
+  setPromptHTML('prompt-p1-text',p1,v,'p1');setPromptHTML('prompt-p2-text',p2,v,'p2');setPromptHTML('prompt-p3-text',p3,v,'p3');
+}
+function setPromptHTML(elId,text,v,key){
+  const el=document.getElementById(elId);if(!el)return;
+  rawPrompts[key]=text;
+  let html=esc(text);
+  if(v.product&&v.product!=='[상품명]')html=html.replace(new RegExp(escR(esc(v.product)),'g'),`<span class="user-val">${esc(v.product)}</span>`);
+  if(v.features&&v.features!=='[특징]')html=html.replace(new RegExp(escR(esc(v.features)),'g'),`<span class="user-val">${esc(v.features)}</span>`);
+  if(urlAnalysisData)html=html.replace(new RegExp(escR(esc(urlAnalysisData.style)),'g'),`<span class="ref-val">${esc(urlAnalysisData.style)}</span>`);
+  el.innerHTML=html;
+}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function escR(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+
+// ── 복사 ──────────────────────────────────────────
+function copyToClipboard(text){return new Promise((res,rej)=>{const ta=document.createElement('textarea');ta.value=text;ta.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0;font-size:16px';document.body.appendChild(ta);ta.focus();ta.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}document.body.removeChild(ta);if(ok){res();return}if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(text).then(res).catch(rej);else rej(new Error('failed'))})}
+
+function copyAndOpenTool(){
+  const text=rawPrompts.p1;if(!text){alert('먼저 2단계에서 상품 정보를 입력해주세요.');return}
+  window.open(toolLinks[selectedTool]||'https://chat.openai.com','_blank');
+  copyToClipboard(text).then(()=>{showMsg('copy-success-msg','✅ 복사 완료! 열린 탭에서 Ctrl+V 붙여넣기 하세요','#5DCAA5')}).catch(()=>{showMsg('copy-success-msg','⚠️ 탭은 열렸습니다. 아래 📋 복사 버튼을 이용해주세요.','#F0C060')})}
+
+function copyAndOpenCanva(){
+  const text=rawPrompts.p3;if(!text){alert('먼저 2단계에서 상품 정보를 입력해주세요.');return}
+  window.open('https://www.canva.com/ai','_blank');
+  copyToClipboard(text).then(()=>{showMsg('canva-copy-msg','✅ 복사 완료! Canva → 이미지 탭에 Ctrl+V 하세요','#5DCAA5')}).catch(()=>{showMsg('canva-copy-msg','⚠️ Canva는 열렸습니다. 아래 📋 복사 버튼을 이용해주세요.','#F0C060')})}
+
+function showMsg(id,text,color){const m=document.getElementById(id);if(!m)return;m.style.color=color;m.textContent=text;m.style.display='block';setTimeout(()=>{m.style.display='none'},5000)}
+
+function copyPrompt(btnId,key){
+  const text=rawPrompts[key];if(!text)return;
+  copyToClipboard(text).then(()=>{
+    const btn=document.getElementById(btnId);
+    if(btn){const orig=btn.textContent;btn.textContent='✓ 복사됨';btn.classList.add('copied');setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied')},2000)}
+  })}
+
+// ── 스텝 이동 ──────────────────────────────────────
+function showStep(idx){for(let i=0;i<totalSteps;i++){const el=document.getElementById('step-'+i);if(el)el.style.display=(i===idx)?'block':'none'}document.getElementById('step-complete').style.display='none';if(idx===2||idx===3)buildPrompts();updateProgress(idx);window.scrollTo({top:0,behavior:'smooth'})}
+function nextStep(){if(currentStep<totalSteps-1){currentStep++;showStep(currentStep)}}
+function prevStep(){if(currentStep>0){currentStep--;showStep(currentStep)}}
+function goStep(idx){currentStep=idx;showStep(idx)}
+function updateProgress(idx){const pct=Math.round((idx/totalSteps)*100),circ=219.9;document.getElementById('ringFill').style.strokeDashoffset=circ-(pct/100)*circ;document.getElementById('ringPct').textContent=pct+'%';document.querySelectorAll('.prog-step').forEach((s,i)=>{s.classList.remove('active','done');if(i===idx)s.classList.add('active');else if(i<idx){s.classList.add('done');s.querySelector('.prog-num').textContent='✓'}else s.querySelector('.prog-num').textContent=i+1});document.querySelectorAll('.side-step').forEach((s,i)=>{s.classList.remove('active','done');if(i===idx)s.classList.add('active');else if(i<idx){s.classList.add('done');s.querySelector('.side-step-num').textContent='✓'}else s.querySelector('.side-step-num').textContent=i+1})}
+function completeGuide(){for(let i=0;i<totalSteps;i++){const el=document.getElementById('step-'+i);if(el)el.style.display='none'}document.getElementById('step-complete').style.display='block';document.getElementById('ringFill').style.strokeDashoffset=0;document.getElementById('ringPct').textContent='100%';window.scrollTo({top:0,behavior:'smooth'})}
+function resetGuide(){currentStep=0;urlAnalysisData=null;imageData=null;['inp-product','inp-features','inp-target','inp-price','inp-diff','inp-tone','inp-url'].forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});document.getElementById('url-status').className='url-status';document.getElementById('url-result').classList.remove('show');document.querySelectorAll('.check-item').forEach(c=>{c.classList.remove('done');c.querySelector('.check-box').textContent=''});showStep(0);onInputChange()}
+function toggleCheck(el){
+  // check-item 직접 전달되거나 action-step-item에서 전달될 수 있음
+  const item = el.classList.contains('check-item') ? el : el.closest('.action-step-item');
+  if(!item) return;
+  if(item.classList.contains('action-step-item')){
+    item.classList.toggle('done');
+    const box = item.querySelector('.check-box');
+    if(box) box.textContent = item.classList.contains('done') ? '✓' : '';
+  } else {
+    item.classList.toggle('done');
+    const box = item.querySelector('.check-box');
+    if(box) box.textContent = item.classList.contains('done') ? '✓' : '';
+  }
+}
+
+function copyStep2(btn){
+  const text = rawPrompts.p1;
+  if(!text){ alert('먼저 2단계에서 상품 정보를 입력해주세요.'); return; }
+  copyToClipboard(text).then(()=>{
+    const orig = btn.textContent;
+    btn.textContent = '✓ 복사됨';
+    btn.classList.add('copied');
+    // 부모 action-step-item 완료 표시
+    const item = btn.closest('.action-step-item');
+    if(item){ item.classList.add('done'); const box=item.querySelector('.check-box'); if(box) box.textContent='✓'; }
+    setTimeout(()=>{ btn.textContent=orig; btn.classList.remove('copied'); },2000);
+  }).catch(()=>{ alert('복사 실패. 3단계에서 📋 복사 버튼을 이용해주세요.'); });
+}
+
+updateProgress(0);buildPrompts();updateToolUI();
+</script>
+</body>
+</html>
