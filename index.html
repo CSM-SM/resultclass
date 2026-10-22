@@ -1421,6 +1421,7 @@ img { max-width: 100%; display: block; }
       <a class="nav-item"        href="#guide"     data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a>
       <a class="nav-item"        href="#requests"  data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a>
       <a class="nav-item"        href="#notice"    data-page="notice"><span class="nav-icon">📢</span>공지</a>
+      <a class="nav-item"        href="#dashboard" data-page="dashboard"><span class="nav-icon">📊</span>절감 대시보드</a>
     </nav>
     <div class="sidebar-footer">© LIVEORALS 사내용</div>
   </aside>
@@ -1653,6 +1654,18 @@ img { max-width: 100%; display: block; }
         <div class="notice-list" id="noticeList"></div>
       </section>
 
+      <!-- ═══ 절감 대시보드 ═══ -->
+      <section class="page" id="page-dashboard">
+        <h2 class="section-title">절감 대시보드</h2>
+        <p class="section-sub">AI TF팀 성과측정 시트의 대시보드와 같은 데이터입니다. 자동화 자산이 등록되면 시트가 갱신되고 이 화면도 자동으로 바뀝니다. 절감 비용은 최저시급 기준입니다.</p>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+          <div class="sheet-status local" id="dbStatus" style="margin:0">불러오는 중...</div>
+          <button type="button" class="btn-secondary" id="dbRefresh">새로고침</button>
+        </div>
+        <div id="dbBody"></div>
+      </section>
+
+
     </div>
   </div>
 </div>
@@ -1675,12 +1688,13 @@ img { max-width: 100%; display: block; }
         <div class="form-group full" id="afAutoExtra" style="display:none;background:#F8F6F0;border-radius:10px;padding:12px 14px">
           <div style="font-weight:700;font-size:13px;margin-bottom:6px">자동화 성과 입력 (AI TF팀 성과측정 시트에 자동 기입됩니다)</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
-            <div><label class="form-label" for="afBefore">기존 소요시간(분) <span class="req">*</span></label><input class="form-control" id="afBefore" type="number" min="0" step="1" placeholder="사람이 1회 할 때"></div>
+            <div><label class="form-label" for="afBefore">기존 소요시간(분) <span class="req">*</span> <button type="button" id="afEstBtn" class="btn-secondary" style="padding:1px 8px;font-size:11px;margin-left:4px">자동 추정</button></label><input class="form-control" id="afBefore" type="number" min="0" step="1" placeholder="사람이 1회 할 때"></div>
             <div><label class="form-label" for="afAfter">개선 후 소요시간(분) <span class="req">*</span></label><input class="form-control" id="afAfter" type="number" min="0" step="1" placeholder="완전 자동이면 0"></div>
             <div><label class="form-label" for="afWeekly">주간 실행 횟수</label><input class="form-control" id="afWeekly" type="number" min="0" step="0.25" placeholder="주기에서 자동 계산"></div>
             <div><label class="form-label" for="afLink">결과물 / 연결 위치</label><input class="form-control" id="afLink" type="text" placeholder="시트·채팅방·문서명 또는 URL"></div>
           </div>
-          <div style="font-size:12px;color:#8A877E;margin-top:6px">※ 자동화를 켠 자산만 성과측정 시트에 기입됩니다. 수동 자산은 목록에만 등록됩니다. 시트의 부서·담당자 목록에 없는 값은 "공통"으로 기입되고 비고에 표시됩니다.</div>
+          <div id="afSavePreview" style="margin-top:10px;padding:8px 10px;background:#fff;border:1px dashed #C8922A;border-radius:8px;font-size:13px"></div>
+          <div style="font-size:12px;color:#8A877E;margin-top:6px">※ 기존 소요시간은 기능·업무 유형과 입력한 진행 단계 수로 자동 추정한 값이며 수정할 수 있습니다. 자동화를 켠 자산만 성과측정 시트에 기입됩니다. 수동 자산은 목록에만 등록됩니다. 시트의 부서·담당자 목록에 없는 값은 "공통"으로 기입되고 비고에 표시됩니다.</div>
         </div>
       </div>
     </div>
@@ -2801,7 +2815,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { precheck: '업무 시작 전 확인사항', requests: '기능 추가 요청', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { precheck: '업무 시작 전 확인사항', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page) {
     if (!PAGES[page]) page = 'home';
@@ -2814,6 +2828,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (page === 'home') renderHome();
     if (page === 'assets') renderAssets();
     if (page === 'requests') loadRequests();
+    if (page === 'dashboard') startDashboard(); else stopDashboard();
     if (page === 'precheck') renderPrecheck();
   }
 
@@ -3483,8 +3498,93 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const on = $('#afAuto').checked;
     $('#afAutoExtra').style.display = on ? 'block' : 'none';
     if (on && !$('#afWeekly').value) { const wk = weeklyFromRrule($('#afSchedule').value); if (wk !== '') $('#afWeekly').value = wk; }
+    if (on && $('#afBefore').value === '') { $('#afBefore').value = estimateManualMin(); if ($('#afAfter').value === '') $('#afAfter').value = 0; }
+    updateSavePreview();
   }
+
+  /* ── 13. 기존 소요시간 자동 추정 · 절감 미리보기 (최저시급 기준) ───────── */
+  const MIN_WAGE = 10320, WEEK_FACTOR = 4.3;
+  const MANUAL_BASE = { '상품기획': 60, '영업·MD': 40, '마케팅': 45, '채널·정산': 40, '패키지·인허가': 60, '업무관리': 30, '데이터·알림': 30, '메일·소통': 20, '교육': 90 };
+  const MANUAL_OVERRIDE = { 'oral-news': 120, 'competitor-crawl': 150, 'oliveyoung-crawl': 120, 'sales-ad-data': 155, 'daily-log': 30, 'weekly-report': 60, 'receipt-data': 15, 'unreplied-mail': 20, 'inventory-alert': 30 };
+  const MANUAL_BY_TYPE = { 'FLOW': 30, '구글챗': 15, '시트': 45, '교육자료': 90, 'Gmail': 20, '기타': 30 };
+  // 사람이 1회 수동으로 할 때 걸리는 시간(분) 추정: 기능별 기준값 + 진행 단계/첨부 수 가중
+  function estimateManualMin() {
+    const card = modalCtx && modalCtx.fromBuilder ? cardById(B.cardId) : null;
+    let m;
+    if (card) {
+      m = MANUAL_OVERRIDE[card.id];
+      if (m === undefined) {
+        m = MANUAL_BASE[card.category] || 30;
+        const v = B.values || {};
+        const steps = (v.steps || []).filter(Boolean).length, att = (v.attachments || []).length;
+        m += Math.max(0, steps - 3) * 5 + att * 3;
+      }
+    } else {
+      m = MANUAL_BY_TYPE[$('#afType').value] || 30;
+    }
+    return Math.max(5, Math.round(m / 5) * 5);
+  }
+  function updateSavePreview() {
+    const el = $('#afSavePreview'); if (!el) return;
+    const b = parseFloat($('#afBefore').value), a = parseFloat($('#afAfter').value), w = parseFloat($('#afWeekly').value);
+    if (isNaN(b) || isNaN(a) || isNaN(w)) { el.textContent = '소요시간과 주간 실행 횟수를 입력하면 예상 절감 효과가 계산됩니다.'; return; }
+    const hours = Math.max(0, b - a) * w * WEEK_FACTOR / 60;
+    const cost = Math.round(hours * MIN_WAGE);
+    el.innerHTML = '예상 월 절감 <b>' + hours.toFixed(1) + '시간</b> · 월 절감 비용 <b>₩' + cost.toLocaleString('ko-KR') + '</b> · 연 환산 <b>₩' + (cost * 12).toLocaleString('ko-KR') + '</b> <span style="color:#8A877E">(최저시급 ₩' + MIN_WAGE.toLocaleString('ko-KR') + ', 주→월 ' + WEEK_FACTOR + '주 기준)</span>';
+  }
+
+  /* ── 14. 절감 대시보드 (성과측정 시트 대시보드와 동일 데이터) ───────── */
+  let dbTimer = null;
+  const KEY_DB = 'lo_dashboard_v1';
+  const won = (n) => '₩' + Math.round(n || 0).toLocaleString('ko-KR');
+  const pct = (n) => (Math.round((n || 0) * 1000) / 10) + '%';
+  function barRows(items, unit) {
+    const max = Math.max.apply(null, items.map((x) => x[1]).concat([1]));
+    return items.map((x) => '<div style="display:flex;align-items:center;gap:10px;margin:6px 0;font-size:13px"><div style="width:84px;flex:none">' + esc(x[0]) + '</div><div style="flex:1;background:#F0EEE6;border-radius:6px;height:18px;overflow:hidden"><div style="width:' + Math.max(2, x[1] / max * 100) + '%;height:100%;background:linear-gradient(90deg,#1A7A68,#2FA58E)"></div></div><div style="width:96px;flex:none;text-align:right"><b>' + x[1].toFixed(1) + '</b>' + unit + '</div></div>').join('');
+  }
+  function renderDashboard(d, fromCache) {
+    const t = d.totals || {}, c = d.counts || {}, rows = d.rows || [];
+    const kpi = (label, val, sub, color) => '<div style="background:#fff;border:1px solid #E5E2D8;border-top:4px solid ' + color + ';border-radius:12px;padding:16px 18px"><div style="font-size:12px;color:#8A877E">' + label + '</div><div style="font-size:26px;font-weight:900;margin:4px 0">' + val + '</div><div style="font-size:12px;color:#4A4740">' + (sub || '') + '</div></div>';
+    const small = (label, val) => '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:12px 16px"><div style="font-size:12px;color:#8A877E">' + label + '</div><div style="font-size:20px;font-weight:800">' + val + '</div></div>';
+    const prog = (label, r) => '<div style="margin:8px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><span>' + label + '</span><b>' + pct(r) + '</b></div><div style="background:#F0EEE6;border-radius:6px;height:12px;overflow:hidden"><div style="width:' + Math.min(100, (r || 0) * 100) + '%;height:100%;background:#C8922A"></div></div></div>';
+    const byDept = {}, byMonth = {};
+    rows.forEach((r) => { byDept[r.dept || '미지정'] = (byDept[r.dept || '미지정'] || 0) + r.hours; byMonth[r.month || '미지정'] = (byMonth[r.month || '미지정'] || 0) + r.hours; });
+    const deptItems = Object.entries(byDept).sort((a, b) => b[1] - a[1]);
+    const monthItems = Object.entries(byMonth).sort((a, b) => (parseInt(a[0], 10) || 0) - (parseInt(b[0], 10) || 0));
+    const top = rows.slice().sort((a, b) => b.hours - a.hours).slice(0, 10);
+    const th = 'padding:8px 10px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8';
+    const td = 'padding:8px 10px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top';
+    $('#dbBody').innerHTML =
+      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:14px">'
+      + kpi('월 총 절감 시간', (t.hoursMonth || 0).toFixed(1) + '<span style="font-size:14px"> 시간</span>', '자동화 ' + (c.assets || rows.length) + '건 합산', '#1A7A68')
+      + kpi('월 총 절감 비용', won(t.costMonth), '최저시급 ' + won(d.wage) + ' 기준', '#C8922A')
+      + kpi('연 환산 절감 비용', won(t.costYear), '월 절감 비용 × 12', '#0C1B35') + '</div>'
+      + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px">'
+      + small('누적 요청 건수', (c.requested || 0) + '건') + small('완료 건수', (c.done || 0) + '건') + small('진행 중', (c.progress || 0) + '건') + small('자산화 등재', (c.assets || 0) + '건') + small('생산성 향상 기획', (c.planned || 0) + '건') + '</div>'
+      + '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px;margin-bottom:14px"><div style="font-weight:800;margin-bottom:4px">목표 진척률</div>' + prog('TF 목표', c.tfRate) + prog('자산화 목표', t.assetRate) + prog('기획 목표', t.planRate) + '</div>'
+      + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-bottom:14px">'
+      + '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px"><div style="font-weight:800;margin-bottom:6px">부서별 월 절감 시간</div>' + barRows(deptItems, '시간') + '</div>'
+      + '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px"><div style="font-weight:800;margin-bottom:6px">적용 월별 월 절감 시간</div>' + barRows(monthItems, '시간') + '</div></div>'
+      + '<div class="asset-table-wrap" style="overflow-x:auto"><div style="font-weight:800;padding:12px 14px 0">절감 TOP 10 자동화</div><table class="asset-table" style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + '">순위</th><th style="' + th + '">자동화</th><th style="' + th + '">부서</th><th style="' + th + '">기존→개선(분)</th><th style="' + th + '">주간 횟수</th><th style="' + th + '">월 절감 시간</th><th style="' + th + '">월 절감 비용</th></tr></thead><tbody>'
+      + top.map((r, i) => '<tr><td style="' + td + '">' + (i + 1) + '</td><td style="' + td + '"><b>' + esc(r.name) + '</b><div style="color:#8A877E;font-size:12px">' + esc(r.content) + '</div></td><td style="' + td + '">' + esc(r.dept) + '</td><td style="' + td + '">' + r.before + ' → ' + r.after + '</td><td style="' + td + '">' + r.weekly + '</td><td style="' + td + '"><b>' + r.hours.toFixed(1) + '시간</b></td><td style="' + td + '">' + won(r.cost) + '</td></tr>').join('')
+      + '</tbody></table></div>'
+      + '<p style="font-size:12px;color:#8A877E;margin-top:10px">산식: (기존 소요시간 − 개선 후 소요시간) × 주간 실행 횟수 × ' + d.weekFactor + '(주→월) ÷ 60 = 월 절감 시간, × 최저시급 = 월 절감 비용. 집계 기준 ' + esc(d.updated || '') + '</p>';
+    const st = $('#dbStatus'); st.className = 'sheet-status ' + (fromCache ? 'local' : 'connected');
+    st.textContent = fromCache ? '저장된 마지막 데이터 (연결 실패)' : '성과측정 시트와 연동됨 · ' + (d.updated || '');
+  }
+  function loadDashboard() {
+    if (!GAS_OK()) { $('#dbStatus').textContent = '시트 연동 필요(SHEET_ENDPOINT)'; return Promise.resolve(); }
+    return fetch(SHEET_ENDPOINT + '?type=dashboard').then((r) => r.json()).then((d) => {
+      if (d && d.ok) { store.set(KEY_DB, d); renderDashboard(d, false); } else throw new Error('bad');
+    }).catch(() => { const c = store.get(KEY_DB, null); if (c) renderDashboard(c, true); else $('#dbStatus').textContent = '데이터를 불러오지 못했습니다.'; });
+  }
+  function startDashboard() { stopDashboard(); loadDashboard(); dbTimer = setInterval(loadDashboard, 60000); }
+  function stopDashboard() { if (dbTimer) { clearInterval(dbTimer); dbTimer = null; } }
+
   function bindExtra() {
+    $('#dbRefresh').addEventListener('click', () => { $('#dbStatus').textContent = '불러오는 중...'; loadDashboard(); });
+    ['#afBefore', '#afAfter', '#afWeekly'].forEach((id) => $(id).addEventListener('input', updateSavePreview));
+    $('#afEstBtn').addEventListener('click', () => { $('#afBefore').value = estimateManualMin(); if ($('#afAfter').value === '') $('#afAfter').value = 0; updateSavePreview(); });
     $('#afAuto').addEventListener('change', syncAutoExtra);
     $('#afSchedule').addEventListener('input', () => { $('#afWeekly').value = ''; syncAutoExtra(); });
     $('#precheckList').addEventListener('change', () => { savePrecheck(false); });
