@@ -1642,7 +1642,7 @@ img { max-width: 100%; display: block; }
         </div>
         <div class="asset-table-wrap" style="overflow-x:auto">
           <table class="asset-table" style="width:100%;border-collapse:collapse">
-            <thead><tr><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">번호</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">요청 기능 (클릭해서 상세 보기)</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">부서 · 담당자</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">공감</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">상태</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">등록일</th></tr></thead>
+            <thead><tr><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">번호</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">요청 기능 (클릭해서 상세 보기)</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">부서 · 담당자</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">공감</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">상태</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">등록일</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">관리</th></tr></thead>
             <tbody id="reqBody"></tbody>
           </table>
         </div>
@@ -3462,8 +3462,9 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
         + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><button type="button" class="btn-secondary" data-vote="' + esc(r.no) + '"' + (voted.includes(String(r.no)) ? ' disabled' : '') + ' aria-label="공감">👍 ' + (parseInt(r.votes, 10) || 0) + '</button></td>'
         + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><span style="padding:3px 9px;border-radius:999px;font-size:12px;background:' + (REQ_STATUS_COLOR[stt] || '#E5E2D8') + '">' + esc(stt) + '</span></td>'
         + '<td style="padding:10px 12px;font-size:12px;color:#8A877E;border-bottom:1px solid #EEE;vertical-align:top">' + esc(String(r.createdAt || '').slice(0, 10)) + '</td>'
+        + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><button type="button" class="btn-secondary" data-reqdel="' + esc(r.no) + '" aria-label="요청 삭제">🗑 삭제</button></td>'
         + '</tr>';
-    }).join('') : '<tr><td colspan="6" style="padding:24px;text-align:center;color:#8A877E;font-size:13px">아직 등록된 요청이 없습니다. 첫 요청을 남겨 주세요.</td></tr>';
+    }).join('') : '<tr><td colspan="7" style="padding:24px;text-align:center;color:#8A877E;font-size:13px">아직 등록된 요청이 없습니다. 첫 요청을 남겨 주세요.</td></tr>';
   }
   function submitRequest() {
     const g = (id) => ($(id).value || '').trim();
@@ -3581,6 +3582,15 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function startDashboard() { stopDashboard(); loadDashboard(); dbTimer = setInterval(loadDashboard, 60000); }
   function stopDashboard() { if (dbTimer) { clearInterval(dbTimer); dbTimer = null; } }
 
+  function deleteRequest(no) {
+    const r = requests.find((x) => String(x.no) === String(no));
+    if (!r) return;
+    if (!confirm('"' + r.title + '" 요청을 삭제할까요?\n삭제하면 목록에서 사라집니다.')) return;
+    requests = requests.filter((x) => String(x.no) !== String(no));
+    store.set(KEY_REQ, requests); renderRequests();
+    toast('요청을 삭제했습니다.', 'success');
+    postGas({ action: 'req_delete', request: { no } }).then(() => { if (GAS_OK()) setTimeout(loadRequests, 2500); });
+  }
   function bindExtra() {
     $('#dbRefresh').addEventListener('click', () => { $('#dbStatus').textContent = '불러오는 중...'; loadDashboard(); });
     ['#afBefore', '#afAfter', '#afWeekly'].forEach((id) => $(id).addEventListener('input', updateSavePreview));
@@ -3595,7 +3605,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     });
     $('#precheckReset').addEventListener('click', () => { store.set(KEY_PRECHECK, { date: '', checked: [] }); renderPrecheck(); });
     $('#rqSubmit').addEventListener('click', submitRequest);
-    $('#reqBody').addEventListener('click', (e) => { const b = e.target.closest('[data-vote]'); if (b && !b.disabled) voteRequest(b.dataset.vote); });
+    $('#reqBody').addEventListener('click', (e) => { const d = e.target.closest('[data-reqdel]'); if (d) { deleteRequest(d.dataset.reqdel); return; } const b = e.target.closest('[data-vote]'); if (b && !b.disabled) voteRequest(b.dataset.vote); });
   }
 
   /* ── 10. 시작 ────────────────────────────────────────────── */
