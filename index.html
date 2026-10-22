@@ -1413,11 +1413,13 @@ img { max-width: 100%; display: block; }
       <div class="sub">어사이드 활용 플랫폼</div>
     </div>
     <nav class="sidebar-nav">
-      <a class="nav-item active" href="#home"      data-page="home"><span class="nav-icon">🏠</span>홈</a>
+      <a class="nav-item active" href="#precheck" data-page="precheck"><span class="nav-icon">✅</span>업무 시작 전 확인사항</a>
+      <a class="nav-item" href="#home"      data-page="home"><span class="nav-icon">🏠</span>홈</a>
       <a class="nav-item"        href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a>
       <a class="nav-item"        href="#builder"   data-page="builder"><span class="nav-icon">🛠️</span>프롬프트 빌더</a>
       <a class="nav-item"        href="#assets"    data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a>
       <a class="nav-item"        href="#guide"     data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a>
+      <a class="nav-item"        href="#requests"  data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a>
       <a class="nav-item"        href="#notice"    data-page="notice"><span class="nav-icon">📢</span>공지</a>
     </nav>
     <div class="sidebar-footer">© LIVEORALS 사내용</div>
@@ -1433,8 +1435,47 @@ img { max-width: 100%; display: block; }
 
     <div class="page-content">
 
+      
+      <!-- ═══ 업무 시작 전 확인사항 ═══ -->
+      <section class="page active" id="page-precheck">
+        <h2 class="section-title">업무 시작 전 확인사항</h2>
+        <p class="section-sub">전사 어사이드 사용량이 늘면서 공유 Claude 계정 사용량이 빠르게 증가하고 있습니다. 업무를 시작하기 전에 아래 모델 설정과 체크리스트를 확인해 주세요.</p>
+
+        <div style="background:#FDF5E0;border:1px solid #F0D9A0;border-radius:12px;padding:14px 18px;margin-bottom:18px;font-size:13px;line-height:1.7">
+          <strong>왜 확인하나요?</strong> 모델과 생각(추론) 수준이 높을수록 같은 업무에도 사용량이 크게 늘고, 공유 Claude 계정은 전 직원의 사용량이 합산됩니다. 업무 난이도에 맞는 최소 설정으로 시작해 주세요.
+        </div>
+
+        <h3 style="font-size:16px;margin:22px 0 8px">1. 어사이드 모델 설정 (Settings &gt; Models &gt; Task models)</h3>
+        <p style="font-size:13px;color:#4A4740;margin-bottom:10px">어사이드 설정의 Models 화면에서 작업 종류별 모델을 정합니다. 각 줄 오른쪽 모델 선택 박스와 <code>…</code> 메뉴에서 모델과 옵션(생각 수준 등)을 바꿀 수 있습니다. 화면 구성은 어사이드 버전에 따라 조금 다를 수 있습니다.</p>
+        <div class="asset-table-wrap" style="overflow-x:auto">
+          <table class="asset-table" style="width:100%;border-collapse:collapse">
+            <thead><tr><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">설정 항목</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">어떤 작업에 쓰이나요</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">권장 설정(안)</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">확인 포인트</th></tr></thead>
+            <tbody>
+              <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Default model</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">새 대화를 열 때 처음 쓰는 모델. 마지막에 쓴 모델이 다음 새 대화의 기본값이 됩니다.</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">Sonnet 5.5 · 생각 수준 낮음~중간</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">어려운 작업에 상위 모델을 쓴 뒤에는 <strong>반드시 원래 설정으로 되돌리기</strong></td></tr>
+              <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Fast</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">빠르고 가볍게 끝나는 보조 작업</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">Haiku 5.5</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">가벼운 작업에 큰 모델을 쓰지 않기</td></tr>
+              <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Standard</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">백그라운드 작업(자동화·루틴), 메모리 정리</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">Haiku 5.5</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">반복 실행되는 작업이라 사용량 영향이 큼. 품질이 부족하면 Sonnet 5.5로 한 단계만 올리기</td></tr>
+              <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Deep</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">어려운 추론·계획·판단·종합 작업</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">Sonnet 5.5 (Opus 계열은 꼭 필요할 때만 임시 사용)</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">전체 기본값으로 상위 모델을 고정하지 않기</td></tr>
+              <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Visual</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">이미지·스크린샷·화면 해석</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">Sonnet 5.5</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">화면 해석이 필요한 업무에서만 사용</td></tr>
+              <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Image generation model</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">이미지 생성·편집</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">변경 불필요</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">이미지가 필요할 때만 요청</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:12px;color:#8A877E;margin-top:8px">※ 위 권장 설정은 초안입니다. 최종 기준은 운영 담당자 확인 후 확정되며, 업무 품질이 부족하면 한 단계 위 모델로 올려서 사용하세요.</p>
+
+        <h3 style="font-size:16px;margin:26px 0 8px">2. 공급자(Providers) 확인</h3>
+        <p style="font-size:13px;color:#4A4740;line-height:1.7">Models 화면 위쪽 Providers에는 Aside, Claude(구독), ChatGPT 등이 연결되어 있습니다. 모델을 고를 때 <strong>어떤 공급자를 거치는 모델인지</strong> 확인하세요. 공유 Claude 계정(Claude 구독)을 거치면 전 직원 사용량이 합산됩니다. 개인 어사이드 플랜으로 처리할 수 있는 업무는 그 경로를 우선 사용해 주세요.</p>
+
+        <h3 style="font-size:16px;margin:26px 0 8px">3. 업무 시작 전 체크리스트 <span style="font-size:12px;color:#8A877E;font-weight:400" id="precheckStamp"></span></h3>
+        <div id="precheckList" style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:6px 18px"></div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <button type="button" class="btn-gold" id="precheckDone">오늘 확인 완료</button>
+          <button type="button" class="btn-secondary" id="precheckReset">체크 초기화</button>
+          <a class="btn-secondary" href="#builder" style="text-decoration:none;display:inline-flex;align-items:center">프롬프트 빌더로 이동 →</a>
+        </div>
+      </section>
+
       <!-- ═══ 홈 ═══ -->
-      <section class="page active" id="page-home">
+      <section class="page" id="page-home">
         <div class="notice-banner">
           <span class="icon">⚠️</span>
           <div class="text">
@@ -1444,16 +1485,10 @@ img { max-width: 100%; display: block; }
         </div>
 
 
-        <div class="lens-section" style="background:#fff;border:1px solid #e5e2d8;border-left:4px solid #C8922A;border-radius:12px;padding:20px 22px;margin:0 0 22px">
-          <div style="font-weight:800;font-size:16px;margin-bottom:4px">🔍 돋보기 전략 — 프롬프트는 3가지를 한 점에 모읍니다</div>
-          <p style="font-size:13px;color:#4A4740;margin-bottom:14px">FLOW 공지(2026-10-22 · 이재명 실장) 기준. 작업자마다 결과물이 다르지 않도록, 빌더 입력 항목을 이 3요소에 맞췄습니다.</p>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
-            <div style="background:#FDF5E0;border-radius:10px;padding:14px"><strong>① 볼록렌즈 · 상위 목표</strong><p style="font-size:13px;margin-top:6px;color:#4A4740">"무엇을 해줘"가 아니라 "이 업무를 왜 하는가". 빌더의 <b>상위 목표</b> 칸.</p></div>
-            <div style="background:#E0F5F0;border-radius:10px;padding:14px"><strong>② 땔감 · 검증된 답안지</strong><p style="font-size:13px;margin-top:6px;color:#4A4740">성공한 기획서·반응 좋은 문구·승인 문서를 참고 기준으로. 빌더의 <b>레퍼런스</b> 칸.</p></div>
-            <div style="background:#F0EEFA;border-radius:10px;padding:14px"><strong>③ 초점 · 핵심 변수</strong><p style="font-size:13px;margin-top:6px;color:#4A4740">결과를 좌우하는 단 하나의 요인. 빌더의 <b>핵심 변수</b> 칸.</p></div>
-            <div style="background:#F8F6F0;border-radius:10px;padding:14px"><strong>④ 거치대 · 자산화</strong><p style="font-size:13px;margin-top:6px;color:#4A4740">잘 나온 프롬프트는 <b>AI 자산</b>에 등록해 팀 표준으로.</p></div>
-          </div>
-        </div>
+        <a class="precheck-callout" href="#precheck" style="display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #e5e2d8;border-left:4px solid #C8922A;border-radius:12px;padding:16px 20px;margin:0 0 22px">
+          <div style="font-weight:800;font-size:15px;margin-bottom:4px">✅ 업무 시작 전 확인사항 — 어사이드 모델 설정부터 확인하세요</div>
+          <div style="font-size:13px;color:#4A4740">전사 어사이드 사용량 증가로 공유 Claude 계정 사용량이 빠르게 늘고 있습니다. 업무 시작 전 모델 설정을 확인해 주세요. 확인하러 가기 →</div>
+        </a>
 
         <div class="counter-grid">
           <div class="counter-card"><div class="label">업무 기능</div><div class="value" id="cntCards">0</div><div class="unit">개</div></div>
@@ -1585,6 +1620,33 @@ img { max-width: 100%; display: block; }
         <div class="yt-grid" id="ytGrid"></div>
       </section>
 
+      
+      <!-- ═══ 기능 추가 요청 ═══ -->
+      <section class="page" id="page-requests">
+        <h2 class="section-title">기능 추가 요청</h2>
+        <p class="section-sub">필요한 프롬프트 기능·업무가 있으면 남겨 주세요. 요청 건수와 공감 수를 보고 우선순위를 정해 추가합니다.</p>
+        <div class="sheet-status local" id="reqStatus">로컬 저장 모드</div>
+        <div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:18px 20px;margin-bottom:20px">
+          <div style="font-weight:800;margin-bottom:10px">새 요청 작성</div>
+          <div class="asset-form-grid">
+            <div class="form-group"><label class="form-label" for="rqDept">부서 <span class="req">*</span></label><input class="form-control" id="rqDept" type="text" placeholder="예: 마케팅팀"></div>
+            <div class="form-group"><label class="form-label" for="rqName">담당자 <span class="req">*</span></label><input class="form-control" id="rqName" type="text" placeholder="예: 홍길동"></div>
+            <div class="form-group full"><label class="form-label" for="rqTitle">필요한 기능 / 업무명 <span class="req">*</span></label><input class="form-control" id="rqTitle" type="text" placeholder="예: 인플루언서 정산서 대조 프롬프트"></div>
+            <div class="form-group full"><label class="form-label" for="rqContent">어떤 업무에, 어떻게 쓰고 싶은가요? <span class="req">*</span></label><textarea class="form-control" id="rqContent" rows="3" placeholder="업무 내용, 원하는 결과물, 쓰는 시점"></textarea></div>
+            <div class="form-group"><label class="form-label" for="rqCurrent">현재 방식·소요시간</label><input class="form-control" id="rqCurrent" type="text" placeholder="예: 수작업 주 2회, 회당 1시간"></div>
+            <div class="form-group"><label class="form-label" for="rqLink">참고 링크·자료</label><input class="form-control" id="rqLink" type="text" placeholder="FLOW 티켓, 시트, 예시 문서 URL"></div>
+          </div>
+          <div class="register-warning" style="margin-top:10px">⚠️ 원가·급여·계약·협상 금액과 개인정보는 적지 마세요.</div>
+          <div style="margin-top:12px"><button type="button" class="btn-gold" id="rqSubmit">요청 등록</button></div>
+        </div>
+        <div class="asset-table-wrap" style="overflow-x:auto">
+          <table class="asset-table" style="width:100%;border-collapse:collapse">
+            <thead><tr><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">번호</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">요청 기능 (클릭해서 상세 보기)</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">부서 · 담당자</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">공감</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">상태</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">등록일</th></tr></thead>
+            <tbody id="reqBody"></tbody>
+          </table>
+        </div>
+      </section>
+
       <!-- ═══ 공지 ═══ -->
       <section class="page" id="page-notice">
         <h2 class="section-title">공지</h2>
@@ -1648,10 +1710,10 @@ const REGISTER_WARNING = '⚠️ 프롬프트·결과 요약에 원가·급여·
 // 공통 블록(모든 기능 공통 조립에서 사용)
 const _commonHead = (v) => `[업무 제목] ${_txt(v.taskTitle)}
 
-[상위 목표 — 이 업무를 왜 하는가]
+[목적 — 이 업무를 왜 하는가]
 ${_txt(v.purpose)}
 
-[핵심 변수 — 결과를 좌우하는 단 하나의 요인. 분석·생성을 여기에 집중]
+[핵심 포인트 — 결과를 가장 크게 좌우하는 요소. 이 부분에 집중할 것]
 ${_opt(v.focus)}
 
 [활용방안]
@@ -1663,7 +1725,7 @@ ${_num(v.steps)}
 [첨부자료]
 ${_list(v.attachments)}
 
-[검증된 답안지·레퍼런스 — 구조·톤·수준의 기준으로 삼을 것]
+[레퍼런스 — 구조·톤·수준의 기준으로 삼을 것]
 ${_nl(v.references)}
 
 [산출물 형식] ${_opt(v.outputFormat, defFmt)}
@@ -1682,13 +1744,13 @@ const COMMON_FIELDS = [
     placeholder: '예: 시린이케어치약 올리브영 상세페이지 기획',
     tip: '무엇을 하는 업무인지 한 줄로 씁니다.',
     example: '시린이케어치약 올리브영 상세페이지 기획', required: true, promptInclude: true },
-  { key: 'purpose', label: '상위 목표 (이 업무를 왜 하는가)', type: 'textarea',
-    placeholder: '단순 작업이 아니라 이 업무로 만들려는 가치·의사결정을 한두 문장으로',
-    tip: '볼록렌즈: "무엇을 해줘"가 아니라 "왜 하는가"를 먼저 씁니다. 예) 경영진의 빠른 의사결정을 돕고 리스크를 사전 차단하는 것이 목표.',
+  { key: 'purpose', label: '목적 (이 업무를 왜 하는가)', type: 'textarea',
+    placeholder: '이 업무로 만들려는 결과와 쓰임새를 한두 문장으로',
+    tip: '"무엇을 해줘"보다 "왜 하는가"를 먼저 씁니다. 예) 경영진의 빠른 의사결정을 돕고 리스크를 사전에 차단하는 것이 목표.',
     example: '신규 입점 채널용 상세페이지 기획안 초안 확보', required: true, promptInclude: true },
-  { key: 'focus', label: '핵심 변수 (초점)', type: 'textarea',
-    placeholder: '이 업무 성과를 좌우하는 단 하나의 요인',
-    tip: '초점: 결과를 결정짓는 결정적 요인 1개에 AI를 집중시킵니다. 예) 클릭률을 높이는 헤드라인 / 비용 절감 포인트 / 핵심 역량 검증 질문.',
+  { key: 'focus', label: '핵심 포인트', type: 'textarea',
+    placeholder: '이 업무의 결과를 가장 크게 좌우하는 요소 1가지',
+    tip: '결과를 가장 크게 좌우하는 요소 1가지를 적으면 어사이드가 그 부분에 집중합니다. 예) 클릭률을 높이는 헤드라인 / 비용 절감 포인트.',
     example: '구매 전환을 좌우하는 첫 화면 소구점', required: false, promptInclude: true },
   { key: 'usage', label: '활용방안', type: 'textarea',
     placeholder: '산출물을 누가 어떻게 쓰는지',
@@ -1700,7 +1762,7 @@ const COMMON_FIELDS = [
   { key: 'attachments', label: '첨부자료', type: 'multiselect',
     options: ['FLOW 티켓', '구글 드라이브 폴더', '구글 시트', '구글 독스', '구글 슬라이드', 'Gmail 메일', '이미지', 'PDF', '웹 URL', '기타'],
     tip: '어사이드 화면에 열려 있는 자료를 선택하세요.', required: false, promptInclude: true },
-  { key: 'references', label: '검증된 답안지 · 레퍼런스 (URL·이미지·문서)', type: 'url-list', placeholder: 'https://... (성공한 기획서, 반응 좋았던 문구, 승인된 문서, 벤치마킹 대상)',
+  { key: 'references', label: '레퍼런스 (URL·이미지·문서)', type: 'url-list', placeholder: 'https://... (잘 된 기획서, 반응 좋았던 문구, 승인된 문서, 벤치마킹 대상)',
     tip: '💡 잘 만들어진 레퍼런스나 벤치마킹하고 싶은 결과물을 넣을수록 결과물이 훨씬 좋아집니다. 성공했던 기획서·반응 좋았던 문구·승인된 결재 문서처럼 결과가 검증된 자료 1~3개를 권장합니다. 이미지·문서는 첨부자료에서 선택하세요.', required: false, promptInclude: true },
   { key: 'outputFormat', label: '산출물 형식', type: 'select',
     options: ['구글 독스', '구글 시트', '텍스트(복사용)', '구글 슬라이드', 'PDF', '이미지', '기타'],
@@ -2722,15 +2784,14 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   };
 
   const NOTICES = [
-    { title: '[인사이트공유] AI 활용 전략 \'돋보기 전략\' (FLOW 공지 · 2026-10-22 · 이재명 실장)', meta: 'FLOW 공지', body: 'AI를 단순 지시 수준으로 쓰면 차별화가 되지 않습니다. AI의 힘을 한 점에 모으는 돋보기 3요소 — ① 볼록렌즈(명확한 상위 목표: 이 업무를 왜 하는가) ② 땔감(검증된 답안지: 성공한 기획서·반응 좋은 문구·승인 문서를 참조 기준으로 제공) ③ 초점(결과를 좌우하는 단 하나의 핵심 변수) — 를 프롬프트에 담고, 잘 된 프롬프트는 사내 자산으로 등록해 표준 프로세스(거치대)로 만듭니다.' },
-    { title: '실천 지침 4가지', meta: 'FLOW 공지', body: '① 단순 지시를 줄이고 상위 목표(Why)를 명시 ② 부서별 성공·실패 데이터(답안지)를 모아 참고 자료로 활용 ③ 내 업무의 핵심 변수 1개 발굴 ④ 효과 본 프롬프트·활용 패턴은 템플릿으로 공유(자산화).' },
+    { title: '결과물 편차를 줄이는 프롬프트 작성 원칙 (FLOW 공지 참고 · 2026-10-22)', meta: 'FLOW 공지', body: '① 단순 지시 대신 목적을 먼저 쓴다(이 업무를 왜 하는지, 결과를 어디에 쓰는지). ② 잘 된 기획서·승인 문서·반응 좋았던 문구를 레퍼런스로 함께 준다. ③ 결과를 가장 크게 좌우하는 요소 1가지를 정해 적는다. ④ 효과를 본 프롬프트는 AI 자산으로 등록해 팀이 같이 쓴다.' },
     { title: '영업·마케팅·채널 기능 20개 추가 (2026-10-22)', meta: '업데이트', body: 'FLOW 전체 업무 633건(대기·진행)을 점검해 건수가 많은 업무를 기능으로 추가했습니다. 공구 셀러 일정·정산·지출결의, 디자인 의뢰서, 광고 소재·성과 리뷰, 스토어 프로모션 등. 빈도 표시는 티켓명 키워드 건수 기준 추정치입니다.' },
-    { title: '이 사이트의 적용 방식', meta: '운영', body: '프롬프트 빌더 입력 항목이 돋보기 전략과 일치합니다 — 상위 목표(볼록렌즈) / 검증된 답안지·레퍼런스(땔감) / 핵심 변수(초점) / 결과 도달 후 AI 자산 등록(거치대).' },
+    { title: '필요한 기능은 "기능 추가 요청" 게시판에 남겨주세요', meta: '운영', body: '부서·담당자·필요한 업무를 적어 주시면 요청 건수와 공감 수를 보고 우선순위를 정해 기능으로 추가합니다.' },
     { title: '입력 시 주의', body: '원가·급여·계약·협상 금액은 프롬프트와 결과 요약에 넣지 마세요. 광고 표현·법령 해석의 최종 판단은 담당자가 합니다.', meta: '보안' }
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { precheck: '업무 시작 전 확인사항', requests: '기능 추가 요청', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page) {
     if (!PAGES[page]) page = 'home';
@@ -2742,6 +2803,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     window.scrollTo(0, 0);
     if (page === 'home') renderHome();
     if (page === 'assets') renderAssets();
+    if (page === 'requests') loadRequests();
+    if (page === 'precheck') renderPrecheck();
   }
 
   function closeSidebar() { $('#sidebar').classList.remove('open'); $('#sidebarOverlay').classList.remove('open'); }
@@ -2961,7 +3024,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       const t = Array.isArray(x) ? (f.type === 'step-list' ? '\n' + N(x) : L(x)) : (x && String(x).trim() ? x : '확인 필요');
       return `• ${f.label}: ${t}`;
     }).join('\n');
-    return `[업무 제목] ${v.taskTitle || '확인 필요'}\n\n[상위 목표 — 이 업무를 왜 하는가]\n${v.purpose || '확인 필요'}\n\n[핵심 변수 — 결과를 좌우하는 단 하나의 요인]\n${v.focus || '없음'}\n\n[활용방안]\n${v.usage || '없음'}\n\n[기능별 정보]\n${extra}\n\n[지시 경로 (프로세스)]\n${N(v.steps)}\n\n[첨부자료]\n${L(v.attachments)}\n\n[검증된 답안지·레퍼런스 — 구조·톤·수준의 기준으로 삼을 것]\n${(v.references || []).join('\n') || '없음'}\n\n[산출물 형식] ${v.outputFormat || '확인 필요'}\n\n${PROMPT_FOOTER}`;
+    return `[업무 제목] ${v.taskTitle || '확인 필요'}\n\n[목적 — 이 업무를 왜 하는가]\n${v.purpose || '확인 필요'}\n\n[핵심 포인트 — 결과를 가장 크게 좌우하는 요소]\n${v.focus || '없음'}\n\n[활용방안]\n${v.usage || '없음'}\n\n[기능별 정보]\n${extra}\n\n[지시 경로 (프로세스)]\n${N(v.steps)}\n\n[첨부자료]\n${L(v.attachments)}\n\n[레퍼런스 — 구조·톤·수준의 기준으로 삼을 것]\n${(v.references || []).join('\n') || '없음'}\n\n[산출물 형식] ${v.outputFormat || '확인 필요'}\n\n${PROMPT_FOOTER}`;
   }
 
   function buildPrompt() {
@@ -3297,6 +3360,104 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAssetModal(); });
   }
 
+  
+  /* ── 11. 업무 시작 전 확인사항 ───────────────────────────── */
+  const PRECHECK_ITEMS = [
+    '어사이드 Models 화면에서 Default / Fast / Standard / Deep / Visual 모델 설정을 확인했다.',
+    '어려운 작업에 상위 모델을 썼다면, 끝난 뒤 기본 모델을 원래대로 되돌렸다.',
+    '모델 공급자(Aside / Claude 구독 등)를 확인하고, 공유 Claude 계정을 꼭 필요한 업무에만 쓴다.',
+    '새 업무는 새 대화로 시작한다. (긴 대화를 이어 쓰면 사용량이 계속 늘어납니다)',
+    '프롬프트 빌더로 목적·진행 경로·레퍼런스를 정리해서 지시한다. (재지시·재시도를 줄입니다)',
+    '자동화(예약) 주기는 필요한 만큼만 설정한다. (3시간마다 같은 반복은 사용량이 빠르게 쌓입니다)',
+    '이미지·스크린샷·대용량 파일은 꼭 필요한 업무에만 첨부한다.',
+    '잘 나온 프롬프트는 AI 자산에 등록해 같은 업무를 다시 처음부터 시키지 않는다.'
+  ];
+  const KEY_PRECHECK = 'lo_precheck_v1';
+  function todayStr() { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); }
+  function renderPrecheck() {
+    const st = store.get(KEY_PRECHECK, { date: '', checked: [] });
+    const checked = st.date === todayStr() ? st.checked : [];
+    $('#precheckList').innerHTML = PRECHECK_ITEMS.map((t, i) => '<label style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F0EEE6;font-size:14px;line-height:1.6;cursor:pointer"><input type="checkbox" data-pc="' + i + '"' + (checked.includes(i) ? ' checked' : '') + ' style="margin-top:5px"> <span>' + esc(t) + '</span></label>').join('');
+    $('#precheckStamp').textContent = (st.date === todayStr() && st.done) ? '· 오늘 확인 완료 (' + st.done + ')' : '';
+  }
+  function savePrecheck(done) {
+    const checked = $$('#precheckList input[type=checkbox]').filter((c) => c.checked).map((c) => parseInt(c.dataset.pc, 10));
+    const prev = store.get(KEY_PRECHECK, {});
+    const rec = { date: todayStr(), checked, done: done ? new Date().toTimeString().slice(0, 5) : (prev.date === todayStr() ? prev.done : '') };
+    store.set(KEY_PRECHECK, rec);
+    return rec;
+  }
+
+  /* ── 12. 기능 추가 요청 게시판 ───────────────────────────── */
+  const KEY_REQ = 'lo_requests_v1', KEY_VOTED = 'lo_voted_v1';
+  let requests = store.get(KEY_REQ, []);
+  let voted = store.get(KEY_VOTED, []);
+  const REQ_STATUS_COLOR = { '접수': '#E5E2D8', '검토중': '#FDF5E0', '개발중': '#E0EAF8', '완료': '#E0F5F0', '보류': '#F3E3E3' };
+
+  function postGas(payload) {
+    if (!GAS_OK()) return Promise.resolve();
+    return fetch(SHEET_ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }).catch(() => {});
+  }
+  function loadRequests() {
+    const st = $('#reqStatus');
+    st.className = 'sheet-status ' + (GAS_OK() ? 'connected' : 'local');
+    st.textContent = GAS_OK() ? '구글 시트 공유 게시판 (전 직원 공통)' : '로컬 저장 모드';
+    if (!GAS_OK()) { renderRequests(); return Promise.resolve(); }
+    return fetch(SHEET_ENDPOINT + '?type=requests').then((r) => r.json()).then((j) => {
+      if (j && j.ok && Array.isArray(j.requests)) { requests = j.requests; store.set(KEY_REQ, requests); }
+      renderRequests();
+    }).catch(() => renderRequests());
+  }
+  function renderRequests() {
+    const list = requests.slice().sort((a, b) => (parseInt(String(b.no).replace(/\D/g, ''), 10) || 0) - (parseInt(String(a.no).replace(/\D/g, ''), 10) || 0));
+    $('#reqBody').innerHTML = list.length ? list.map((r) => {
+      const stt = r.status || '접수';
+      const detail = '<div style="margin-top:8px;font-size:13px;line-height:1.7;color:#4A4740">'
+        + '<div><b>내용</b> ' + esc(r.content).replace(/\n/g, '<br>') + '</div>'
+        + (r.current ? '<div><b>현재 방식</b> ' + esc(r.current) + '</div>' : '')
+        + (r.link ? '<div><b>참고</b> ' + esc(r.link) + '</div>' : '')
+        + (r.reply ? '<div style="margin-top:6px;padding:8px 10px;background:#F8F6F0;border-radius:8px"><b>운영자 답변</b> ' + esc(r.reply) + '</div>' : '')
+        + '</div>';
+      return '<tr>'
+        + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">' + esc(r.no) + '</td>'
+        + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><details><summary style="cursor:pointer"><strong>' + esc(r.title) + '</strong></summary>' + detail + '</details></td>'
+        + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">' + esc(r.dept) + ' · ' + esc(r.name) + '</td>'
+        + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><button type="button" class="btn-secondary" data-vote="' + esc(r.no) + '"' + (voted.includes(String(r.no)) ? ' disabled' : '') + ' aria-label="공감">👍 ' + (parseInt(r.votes, 10) || 0) + '</button></td>'
+        + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><span style="padding:3px 9px;border-radius:999px;font-size:12px;background:' + (REQ_STATUS_COLOR[stt] || '#E5E2D8') + '">' + esc(stt) + '</span></td>'
+        + '<td style="padding:10px 12px;font-size:12px;color:#8A877E;border-bottom:1px solid #EEE;vertical-align:top">' + esc(String(r.createdAt || '').slice(0, 10)) + '</td>'
+        + '</tr>';
+    }).join('') : '<tr><td colspan="6" style="padding:24px;text-align:center;color:#8A877E;font-size:13px">아직 등록된 요청이 없습니다. 첫 요청을 남겨 주세요.</td></tr>';
+  }
+  function submitRequest() {
+    const g = (id) => ($(id).value || '').trim();
+    const r = { dept: g('#rqDept'), name: g('#rqName'), title: g('#rqTitle'), content: g('#rqContent'), current: g('#rqCurrent'), link: g('#rqLink') };
+    if (!r.dept || !r.name || !r.title || !r.content) { toast('부서, 담당자, 기능명, 내용은 필수입니다.', 'error'); return; }
+    const max = requests.reduce((m, x) => Math.max(m, parseInt(String(x.no).replace(/\D/g, ''), 10) || 0), 0);
+    const local = Object.assign({ no: 'R' + String(max + 1).padStart(3, '0'), votes: 0, status: '접수', reply: '', createdAt: todayStr() }, r);
+    requests.push(local); store.set(KEY_REQ, requests); renderRequests();
+    ['#rqTitle', '#rqContent', '#rqCurrent', '#rqLink'].forEach((id) => { $(id).value = ''; });
+    toast('요청을 등록했습니다.', 'success');
+    postGas({ action: 'req_add', request: r }).then(() => { if (GAS_OK()) setTimeout(loadRequests, 2500); });
+  }
+  function voteRequest(no) {
+    if (voted.includes(String(no))) return;
+    voted.push(String(no)); store.set(KEY_VOTED, voted);
+    const r = requests.find((x) => String(x.no) === String(no)); if (r) r.votes = (parseInt(r.votes, 10) || 0) + 1;
+    store.set(KEY_REQ, requests); renderRequests();
+    postGas({ action: 'req_vote', request: { no } });
+  }
+  function bindExtra() {
+    $('#precheckList').addEventListener('change', () => { savePrecheck(false); });
+    $('#precheckDone').addEventListener('click', () => {
+      const all = $$('#precheckList input[type=checkbox]');
+      if (!all.every((c) => c.checked)) { toast('모든 항목을 확인한 뒤 완료를 눌러 주세요.', 'error'); return; }
+      savePrecheck(true); renderPrecheck(); toast('오늘 확인을 완료했습니다.', 'success');
+    });
+    $('#precheckReset').addEventListener('click', () => { store.set(KEY_PRECHECK, { date: '', checked: [] }); renderPrecheck(); });
+    $('#rqSubmit').addEventListener('click', submitRequest);
+    $('#reqBody').addEventListener('click', (e) => { const b = e.target.closest('[data-vote]'); if (b && !b.disabled) voteRequest(b.dataset.vote); });
+  }
+
   /* ── 10. 시작 ────────────────────────────────────────────── */
   function init() {
     renderStatic();
@@ -3304,7 +3465,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     renderStep1();
     bind();
     setStep(1);
-    go(location.hash.slice(1) || 'home');
+    go(location.hash.slice(1) || 'precheck');
+    bindExtra();
     loadRemoteAssets();
   }
   document.addEventListener('DOMContentLoaded', init);
