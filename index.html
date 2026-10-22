@@ -1667,11 +1667,21 @@ img { max-width: 100%; display: block; }
         <div class="form-group"><label class="form-label" for="afName">자산명 <span class="req">*</span></label><input class="form-control" id="afName" type="text"></div>
         <div class="form-group"><label class="form-label" for="afType">유형</label>
           <select class="form-control" id="afType"><option>FLOW</option><option>구글챗</option><option>Gmail</option><option>시트</option><option>교육자료</option><option>기타</option></select></div>
-        <div class="form-group"><label class="form-label" for="afDept">부서</label><input class="form-control" id="afDept" type="text" placeholder="예: 상품기획팀"></div>
-        <div class="form-group"><label class="form-label" for="afAssignee">담당자</label><input class="form-control" id="afAssignee" type="text"></div>
+        <div class="form-group"><label class="form-label" for="afDept">부서</label><select class="form-control" id="afDept"><option value="">선택</option><option>공통</option><option>마케팅</option><option>상품기획</option><option>병원기획</option><option>영업</option><option>디자인</option></select></div>
+        <div class="form-group"><label class="form-label" for="afAssignee">담당자</label><input class="form-control" id="afAssignee" type="text" placeholder="예: 최성민"></div>
         <div class="form-group full"><label class="form-label" for="afContent">내용 요약</label><textarea class="form-control" id="afContent" rows="3"></textarea></div>
         <div class="form-group full"><label class="form-label"><input type="checkbox" id="afAuto"> 자동화 적용</label>
           <input class="form-control" id="afSchedule" type="text" placeholder="RRULE (STEP 3 자동화 패널에서 자동 입력)" style="margin-top:6px"></div>
+        <div class="form-group full" id="afAutoExtra" style="display:none;background:#F8F6F0;border-radius:10px;padding:12px 14px">
+          <div style="font-weight:700;font-size:13px;margin-bottom:6px">자동화 성과 입력 (AI TF팀 성과측정 시트에 자동 기입됩니다)</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
+            <div><label class="form-label" for="afBefore">기존 소요시간(분) <span class="req">*</span></label><input class="form-control" id="afBefore" type="number" min="0" step="1" placeholder="사람이 1회 할 때"></div>
+            <div><label class="form-label" for="afAfter">개선 후 소요시간(분) <span class="req">*</span></label><input class="form-control" id="afAfter" type="number" min="0" step="1" placeholder="완전 자동이면 0"></div>
+            <div><label class="form-label" for="afWeekly">주간 실행 횟수</label><input class="form-control" id="afWeekly" type="number" min="0" step="0.25" placeholder="주기에서 자동 계산"></div>
+            <div><label class="form-label" for="afLink">결과물 / 연결 위치</label><input class="form-control" id="afLink" type="text" placeholder="시트·채팅방·문서명 또는 URL"></div>
+          </div>
+          <div style="font-size:12px;color:#8A877E;margin-top:6px">※ 자동화를 켠 자산만 성과측정 시트에 기입됩니다. 수동 자산은 목록에만 등록됩니다. 시트의 부서·담당자 목록에 없는 값은 "공통"으로 기입되고 비고에 표시됩니다.</div>
+        </div>
       </div>
     </div>
     <div class="modal-footer">
@@ -3131,7 +3141,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
         <td>${esc(a.content)}</td>
         <td><span class="tag">${esc(a.type)}</span></td>
         <td>${esc(a.dept)}</td>
-        <td>${a.auto ? `<span class="badge-auto">자동</span> <small>${esc(a.autoSchedule || '')}</small>` : '<span class="badge-manual">수동</span>'}</td>
+        <td>${a.auto ? `<span class="badge-auto">자동</span> <small>${esc(a.autoSchedule || '')}</small>${a.perf === '기입됨' ? ' <small title="AI TF팀 성과측정 시트에 기입됨">📊</small>' : ''}` : '<span class="badge-manual">수동</span>'}</td>
         <td>${esc(a.assignee || '')}</td>
         <td>
           <button type="button" class="rebuild-btn" data-rebuild="${esc(a.no)}"${a.cardId && cardById(a.cardId) ? '' : ' disabled title="연결된 기능이 없습니다"'}>이 자산으로 다시 만들기</button>
@@ -3154,6 +3164,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#afContent').value = card ? (v.purpose || '') : '';
     $('#afAuto').checked = !!(card && B.autoOn && B.rrule);
     $('#afSchedule').value = card && B.autoOn ? B.rrule : '';
+    ['#afBefore', '#afAfter', '#afWeekly', '#afLink'].forEach((id) => { $(id).value = ''; });
+    syncAutoExtra();
     $('#assetModal').classList.add('open');
     $('#afName').focus();
   }
@@ -3171,6 +3183,12 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const name = $('#afName').value.trim();
     if (!name) { toast('자산명을 입력해 주세요.', 'error'); return; }
     const fromB = modalCtx && modalCtx.fromBuilder;
+    const isAuto = $('#afAuto').checked;
+    if (isAuto) {
+      const bf = $('#afBefore').value, af = $('#afAfter').value;
+      if (bf === '' || af === '' || +bf < 0 || +af < 0) { toast('자동화 자산은 기존·개선 후 소요시간(분)을 입력해 주세요. (완전 자동이면 개선 후 0)', 'error'); return; }
+      if (!$('#afDept').value) { toast('부서를 선택해 주세요.', 'error'); return; }
+    }
     const a = {
       no: nextAssetNo(),
       name,
@@ -3180,6 +3198,10 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       assignee: $('#afAssignee').value.trim(),
       auto: $('#afAuto').checked,
       autoSchedule: $('#afAuto').checked ? $('#afSchedule').value.trim() : '',
+      before: isAuto ? $('#afBefore').value : '',
+      after: isAuto ? $('#afAfter').value : '',
+      weekly: isAuto ? $('#afWeekly').value : '',
+      link: isAuto ? $('#afLink').value.trim() : '',
       cardId: fromB ? B.cardId : '',
       savedFields: fromB ? clone(B.values) : null     // STEP 2 입력값 전체(JSON) 저장
     };
@@ -3187,7 +3209,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     persistAssets();
     syncToSheet('add', a);
     closeAssetModal();
-    toast('자산으로 등록했습니다.', 'success');
+    toast(isAuto && GAS_OK() ? '자산으로 등록했습니다. 성과측정 시트에 기입 중입니다.' : '자산으로 등록했습니다.', 'success');
     if (fromB) go('assets');
     else renderAssets();
   }
@@ -3446,7 +3468,25 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     store.set(KEY_REQ, requests); renderRequests();
     postGas({ action: 'req_vote', request: { no } });
   }
+  function weeklyFromRrule(r) {
+    r = String(r || '');
+    const m = (k) => { const x = r.match(new RegExp(k + '=([^;]+)')); return x ? x[1] : ''; };
+    const f = m('FREQ'), iv = parseInt(m('INTERVAL'), 10) || 1;
+    const cnt = (s) => (s ? s.split(',').length : 1);
+    if (f === 'HOURLY') return Math.round((168 / iv) * 10) / 10;
+    if (f === 'DAILY') return (7 / iv) * cnt(m('BYHOUR'));
+    if (f === 'WEEKLY') return (cnt(m('BYDAY')) * cnt(m('BYHOUR'))) / iv;
+    if (f === 'MONTHLY') return 0.25;
+    return '';
+  }
+  function syncAutoExtra() {
+    const on = $('#afAuto').checked;
+    $('#afAutoExtra').style.display = on ? 'block' : 'none';
+    if (on && !$('#afWeekly').value) { const wk = weeklyFromRrule($('#afSchedule').value); if (wk !== '') $('#afWeekly').value = wk; }
+  }
   function bindExtra() {
+    $('#afAuto').addEventListener('change', syncAutoExtra);
+    $('#afSchedule').addEventListener('input', () => { $('#afWeekly').value = ''; syncAutoExtra(); });
     $('#precheckList').addEventListener('change', () => { savePrecheck(false); });
     $('#precheckDone').addEventListener('click', () => {
       const all = $$('#precheckList input[type=checkbox]');
