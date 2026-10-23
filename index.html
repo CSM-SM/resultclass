@@ -1588,6 +1588,10 @@ img { max-width: 100%; display: block; }
               </div>
               <div class="bp-hint">자동화를 켠 자산만 성과측정 시트에 기입됩니다. 시트 목록에 없는 부서·담당자는 "공통"으로 기입되고 비고에 표시됩니다.</div>
             </div></div>
+          <div class="form-group" style="background:#E0F5F0;border:1px solid #BFE5DC;border-radius:10px;padding:12px 14px">
+            <label style="cursor:pointer;font-weight:700"><input type="checkbox" id="mnFeature" checked> 업무기능에도 자동 추가 (다른 직원이 이 프롬프트를 기능으로 바로 쓸 수 있습니다)</label>
+            <div id="mnFeatBox" style="margin-top:8px"><label class="form-label" for="mnCat">기능 분류</label><select class="form-control" id="mnCat"></select>
+              <div class="bp-hint" id="mnVars">프롬프트를 붙여넣으면 [대괄호] 변수가 입력 항목으로 인식됩니다.</div></div></div>
           <div class="register-warning">⚠️ 원가·급여·계약·협상 금액과 개인정보가 들어 있지 않은지 확인하세요.</div>
           <div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn-gold" id="mnSave" style="flex:1;padding:12px">자산으로 등록</button><button type="button" class="btn-secondary" id="mnReset">초기화</button></div>
         </div>
@@ -3062,7 +3066,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
         <div class="card-title">${esc(c.title)}</div>
         <div class="card-desc">${esc(c.desc)}</div>
         <div class="card-footer">
-          <div class="card-badges"><span class="badge-cat">${esc(c.category)}</span><span class="badge-freq ${fcls}">빈도 ${esc(c.frequency)}</span></div>
+          <div class="card-badges"><span class="badge-cat">${esc(c.category)}</span><span class="badge-freq ${fcls}">${c.custom ? '사용자 등록' : '빈도 ' + esc(c.frequency)}</span></div>
           <span class="card-cta-btn">${pickLabel}</span>
         </div>
       </div>`;
@@ -3139,7 +3143,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     setStep(2);
   }
 
-  const allFields = (card) => COMMON_FIELDS.concat(card.fields || []);
+  const commonFor = (card) => (card.noCommon ? COMMON_FIELDS.filter((f) => f.key === 'assignee') : COMMON_FIELDS);
+  const allFields = (card) => (card.noCommon ? (card.fields || []).concat(commonFor(card)) : COMMON_FIELDS.concat(card.fields || []));
 
   function selectedBanner(card) {
     return `<span class="icon">${card.icon}</span><div class="meta"><strong>${esc(card.title)}</strong><span>${esc(card.category)} · 빈도 ${esc(card.frequency)}</span></div>`;
@@ -3197,7 +3202,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function renderStep2() {
     const card = cardById(B.cardId);
     $('#selectedFn').innerHTML = selectedBanner(card);
-    const cf = COMMON_FIELDS.map(fieldHTML).join('');
+    const cf = commonFor(card).map(fieldHTML).join('');
     const sf = (card.fields || []).map(fieldHTML).join('');
     $('#fieldsForm').innerHTML =
       `<div class="section-divider">기능별 입력 · ${esc(card.title)}</div>${sf}` +
@@ -3355,6 +3360,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if (j && j.ok && Array.isArray(j.assets)) {
         assets = j.assets;
         persistAssets();
+        syncCustomCards(); renderFunctions(); if (B.step === 1) renderStep1();
         if ($('#page-assets').classList.contains('active')) renderAssets();
         if ($('#page-home').classList.contains('active')) renderHome();
       }
@@ -3610,7 +3616,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
         const no = del.dataset.delasset;
         const a = assets.find((x) => x.no === no);
         assets = assets.filter((x) => x.no !== no);
-        persistAssets(); syncToSheet('delete', a); renderAssets(); toast('삭제했습니다.');
+        persistAssets(); syncToSheet('delete', a); syncCustomCards(); renderFunctions(); renderAssets(); toast('삭제했습니다.');
       }
     });
 
@@ -3959,7 +3965,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     return '';
   }
   function mnParse() {
-    const t = $('#mnText').value; if (t.trim().length < 10) return;
+    const t = $('#mnText').value; mnUpdateVars(); if (t.trim().length < 10) return;
     const name = mnPick(t, '자산명'), type = mnPick(t, '유형'), content = mnPick(t, '내용');
     let filled = [];
     if (name && !$('#mnName').value.trim()) { $('#mnName').value = name.slice(0, 60); filled.push('자산명'); }
@@ -3968,9 +3974,62 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (content && !$('#mnContent').value.trim()) { $('#mnContent').value = content.slice(0, 200); filled.push('내용'); }
     $('#mnHint').textContent = filled.length ? '✓ 자동 인식: ' + filled.join(', ') + ' (필요하면 수정하세요)' : '형식 그대로 붙여넣으면 자산명·유형·내용이 자동으로 채워집니다. 형식이 달라도 전체 내용이 프롬프트로 저장됩니다.';
   }
+
+  /* ── 18. 수동 자산화 → 업무기능 자동 추가 ([대괄호] 변수 → 입력칸) ── */
+  const CP_HEADERS = ['자산명', '유형', '내용', '사용한 스킬·도구', '프롬프트', '목적', '업무명', '첨부자료', '레퍼런스', '결과물', '진행 방식', '주의사항', '완료 보고', '작업 원칙', '지시 경로', '활용방안', '첨부 파일', '첨부 파일 안내', '산출물 형식', '산출물', '핵심 포인트', '업무 제목', '스킬', '도구', '진행 절차', '절차', '참고', '조건', '제약', '출력 형식', '역할', '입력 자료', '검증·주의사항', '검증'];
+  const CP_ICON = { 'FLOW': '🎫', '구글챗': '💬', 'Gmail': '✉️', '시트': '📊', '교육자료': '📚', '기타': '🧰' };
+  const DEPT_CAT = { '상품기획': '상품기획', '마케팅': '마케팅', '영업': '영업·MD', '디자인': '디자인', '병원기획': '업무관리', '공통': '업무관리' };
+  function cpSection(text) { const i = text.indexOf('[프롬프트]'); return (i >= 0 ? text.slice(i + 6) : text).trim(); }
+  function cpVars(sec) {
+    const out = [];
+    sec.split('\n').forEach(function (line) {
+      const lead = line.length - line.trimStart().length; let p = 0;
+      while (true) {
+        const a = line.indexOf('[', p); if (a < 0) break;
+        const b = line.indexOf(']', a + 1); if (b < 0) break;
+        let nm = line.slice(a + 1, b); p = b + 1;
+        if (nm.indexOf('[') >= 0) { p = a + 1; continue; }
+        nm = nm.trim();
+        if (!nm || CP_HEADERS.indexOf(nm) >= 0 || !isNaN(Number(nm)) || nm.indexOf('http') === 0) continue;
+        if (a === lead) { const rest = line.slice(b + 1).trim(); if (rest === '' || rest.charAt(0) === '—' || rest.charAt(0) === ':') continue; }
+        if (out.indexOf(nm) < 0) out.push(nm);
+      }
+    });
+    return out.slice(0, 12);
+  }
+  function cpBuildCard(a) {
+    const sf = a.savedFields, vars = sf.vars || [], base = cpSection(sf.manualPrompt);
+    const fields = vars.map(function (nm, i) { return { key: 'v' + i, label: nm, type: /내용|설명|문구|요약|조건/.test(nm) ? 'textarea' : 'text', placeholder: nm + '에 들어갈 값', required: true }; });
+    fields.push({ key: 'cpExtra', label: '추가 요청사항 (선택)', type: 'textarea', placeholder: '이번에만 더 요청할 내용', required: false });
+    fields.push({ key: 'cpRefs', label: '첨부·참고 (URL·파일)', type: 'url-list', placeholder: 'https://...', required: false });
+    return {
+      id: 'u-' + a.no, category: sf.category || '업무관리', icon: CP_ICON[a.type] || '🧰', title: a.name,
+      desc: (a.content || '수동 자산화로 등록된 프롬프트') + ' (등록: ' + (a.dept || '') + ')',
+      frequency: '신규', priority: false, custom: true, noCommon: true, defaultFormat: '', fields: fields,
+      promptTemplate: function (v) {
+        let t = base;
+        vars.forEach(function (nm, i) { t = t.split('[' + nm + ']').join((v['v' + i] || '').trim() || '확인 필요'); });
+        const parts = [t];
+        if (sf.skills) parts.push('[참고 — 이전 작업에서 사용한 스킬·도구]\n' + sf.skills);
+        if ((v.cpExtra || '').trim()) parts.push('[추가 요청사항]\n' + v.cpExtra.trim());
+        if (v.cpRefs && v.cpRefs.length) parts.push('[첨부·참고]\n' + v.cpRefs.join('\n'));
+        parts.push(PROMPT_FOOTER);
+        return parts.join('\n\n');
+      }
+    };
+  }
+  function syncCustomCards() {
+    for (let i = CARDS.length - 1; i >= 0; i--) if (CARDS[i].custom) CARDS.splice(i, 1);
+    assets.forEach(function (a) { const sf = a.savedFields; if (sf && sf.source === 'manual' && sf.asFeature && sf.manualPrompt) CARDS.push(cpBuildCard(a)); });
+  }
+  function mnUpdateVars() {
+    const el = $('#mnVars'); if (!el) return;
+    const vs = cpVars(cpSection($('#mnText').value || ''));
+    el.textContent = vs.length ? '입력 항목으로 인식된 변수: ' + vs.map(function (x) { return '[' + x + ']'; }).join(' ') + ' — 기능을 쓸 때 이 항목들이 입력칸이 됩니다.' : '[대괄호] 변수가 없어 "추가 요청사항" 입력칸만 만들어집니다. (변수가 있으면 입력칸으로 자동 변환)';
+  }
   function mnReset() {
     ['#mnText', '#mnName', '#mnContent', '#mnAssignee', '#mnBefore', '#mnAfter', '#mnWeekly', '#mnSchedule', '#mnLink'].forEach(function (id) { $(id).value = ''; });
-    $('#mnType').value = '기타'; $('#mnDept').value = ''; $('#mnAuto').checked = false; $('#mnAutoBox').style.display = 'none';
+    $('#mnType').value = '기타'; $('#mnDept').value = ''; $('#mnAuto').checked = false; $('#mnFeature').checked = true; $('#mnCat').dataset.touched = ''; mnUpdateVars(); $('#mnAutoBox').style.display = 'none';
     $$('#page-manual .has-error').forEach(function (e) { e.classList.remove('has-error'); });
   }
   function mnSave() {
@@ -3994,10 +4053,11 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       no: nextAssetNo(), name: g('#mnName'), content: g('#mnContent'), type: $('#mnType').value, dept: $('#mnDept').value, assignee: who,
       auto: isAuto, autoSchedule: isAuto ? g('#mnSchedule') : '',
       before: isAuto ? g('#mnBefore') : '', after: isAuto ? g('#mnAfter') : '', weekly: isAuto ? g('#mnWeekly') : '', link: isAuto ? g('#mnLink') : '',
-      cardId: '', savedFields: { source: 'manual', manualPrompt: text }
+      cardId: '', savedFields: { source: 'manual', manualPrompt: text, skills: mnPick(text, '사용한 스킬·도구'), asFeature: $('#mnFeature').checked, category: $('#mnCat').value, vars: cpVars(cpSection(text)) }
     };
     assets.push(a); persistAssets(); syncToSheet('add', a);
-    toast(isAuto && GAS_OK() ? '자산으로 등록했습니다. 성과측정 시트에 기입 중입니다.' : '자산으로 등록했습니다.', 'success');
+    syncCustomCards(); renderFunctions();
+    toast((isAuto && GAS_OK() ? '자산으로 등록했습니다. 성과측정 시트에 기입 중입니다.' : '자산으로 등록했습니다.') + (a.savedFields.asFeature ? ' 업무기능에도 추가되었습니다.' : ''), 'success');
     mnReset(); go('assets');
   }
   function viewAssetPrompt(no) {
@@ -4011,7 +4071,11 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#mnText').addEventListener('input', function (e) { e.target.closest('.form-group').classList.remove('has-error'); clearTimeout(bindManual.t); bindManual.t = setTimeout(mnParse, 400); });
     $('#mnText').addEventListener('paste', function () { setTimeout(mnParse, 50); });
     ['#mnName', '#mnAssignee'].forEach(function (id) { $(id).addEventListener('input', function (e) { e.target.closest('.form-group').classList.remove('has-error'); }); });
-    $('#mnDept').addEventListener('change', function (e) { e.target.closest('.form-group').classList.remove('has-error'); });
+    $('#mnCat').innerHTML = CATEGORIES.filter(function (c) { return c !== '전체'; }).map(function (c) { return '<option>' + esc(c) + '</option>'; }).join('');
+    $('#mnCat').value = '업무관리';
+    $('#mnCat').addEventListener('change', function (e) { e.target.dataset.touched = '1'; });
+    $('#mnFeature').addEventListener('change', function (e) { $('#mnFeatBox').style.display = e.target.checked ? 'block' : 'none'; });
+    $('#mnDept').addEventListener('change', function (e) { e.target.closest('.form-group').classList.remove('has-error'); if (!$('#mnCat').dataset.touched && DEPT_CAT[e.target.value]) $('#mnCat').value = DEPT_CAT[e.target.value]; });
     $('#mnAuto').addEventListener('change', function (e) { $('#mnAutoBox').style.display = e.target.checked ? 'block' : 'none'; });
     $('#mnSave').addEventListener('click', mnSave);
     $('#mnReset').addEventListener('click', mnReset);
@@ -4041,6 +4105,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 
   /* ── 10. 시작 ────────────────────────────────────────────── */
   function init() {
+    syncCustomCards();
     renderStatic();
     renderFunctions();
     renderStep1();
