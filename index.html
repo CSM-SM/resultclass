@@ -1433,6 +1433,7 @@ img { max-width: 100%; display: block; }
       <a class="nav-item"        href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a>
       <a class="nav-item"        href="#builder"   data-page="builder"><span class="nav-icon">🛠️</span>프롬프트 빌더</a>
       <a class="nav-item"        href="#assets"    data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a>
+      <a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a>
       <a class="nav-item"        href="#guide"     data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a>
       <a class="nav-item"        href="#requests"  data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a>
       <a class="nav-item"        href="#notice"    data-page="notice"><span class="nav-icon">📢</span>공지</a>
@@ -1551,6 +1552,44 @@ img { max-width: 100%; display: block; }
           <div class="bp-card" style="padding:0;overflow:hidden"><div style="background:#0C1B35;color:#fff;padding:12px 18px;font-weight:800">최종 어사이드 프롬프트</div>
             <textarea id="bpOut" readonly style="width:100%;min-height:340px;border:0;padding:16px 18px;font-family:inherit;font-size:13px;line-height:1.7;resize:vertical"></textarea>
             <div style="display:flex;gap:8px;padding:12px 18px;border-top:1px solid #E5E2D8"><button type="button" class="btn-gold" id="bpCopy" style="flex:1">📋 복사</button><button type="button" class="btn-secondary" id="bpAsset">🗂 자산 등록</button></div></div>
+        </div>
+      </section>
+
+      
+      <!-- ═══ 수동 자산화 ═══ -->
+      <section class="page" id="page-manual">
+        <h2 class="section-title">수동 자산화</h2>
+        <p class="section-sub">홈페이지를 거치지 않고 어사이드에서 바로 작업했다면, 어사이드가 정리해 준 프롬프트를 여기에 붙여넣어 AI 자산으로 등록하세요.</p>
+        <div class="bp-card" style="margin-bottom:16px">
+          <div style="font-weight:800;margin-bottom:6px">① 작업이 끝난 직후, 어사이드에 이렇게 요청하세요</div>
+          <textarea id="mnAsk" readonly rows="11" style="width:100%;border:1px solid #E5E2D8;border-radius:8px;padding:10px 12px;font-family:inherit;font-size:13px;line-height:1.6;background:#FBFAF6"></textarea>
+          <div style="margin-top:8px"><button type="button" class="btn-gold" id="mnAskCopy">📋 요청 문구 복사</button> <span class="bp-hint">어사이드 입력창에 붙여넣고 Enter. 어사이드가 형식대로 정리해 줍니다.</span></div>
+        </div>
+        <div class="bp-card">
+          <div style="font-weight:800;margin-bottom:6px">② 어사이드가 준 답변(프롬프트·스킬 정리)을 그대로 붙여넣으세요</div>
+          <div class="form-group" data-mn="text"><textarea class="form-control" id="mnText" rows="10" placeholder="[자산명] ...&#10;[유형] ...&#10;[내용] ...&#10;[사용한 스킬·도구] ...&#10;[프롬프트] ..."></textarea>
+            <div class="bp-hint" id="mnHint">형식 그대로 붙여넣으면 자산명·유형·내용이 자동으로 채워집니다. 형식이 달라도 전체 내용이 프롬프트로 저장됩니다.</div>
+            <div class="error-msg">프롬프트를 붙여넣어 주세요. (30자 이상)</div></div>
+          <div class="asset-form-grid">
+            <div class="form-group full" data-mn="name"><label class="form-label" for="mnName">자산명 <span class="req">*</span></label><input class="form-control" id="mnName" type="text"><div class="error-msg">필수 항목입니다.</div></div>
+            <div class="form-group"><label class="form-label" for="mnType">유형</label><select class="form-control" id="mnType"><option>FLOW</option><option>구글챗</option><option>Gmail</option><option>시트</option><option>교육자료</option><option selected>기타</option></select></div>
+            <div class="form-group" data-mn="dept"><label class="form-label" for="mnDept">부서 <span class="req">*</span></label><select class="form-control" id="mnDept"><option value="">선택</option><option>공통</option><option>마케팅</option><option>상품기획</option><option>병원기획</option><option>영업</option><option>디자인</option></select><div class="error-msg">필수 항목입니다.</div></div>
+            <div class="form-group" data-mn="assignee"><label class="form-label" for="mnAssignee">담당자 이름 <span class="req">*</span></label><input class="form-control" id="mnAssignee" type="text" placeholder="예: 최성민"><div class="bp-hint">자산 목록에만 표시되고 프롬프트 본문에는 저장되지 않습니다.</div><div class="error-msg">필수 항목입니다.</div></div>
+            <div class="form-group full"><label class="form-label" for="mnContent">내용 요약</label><textarea class="form-control" id="mnContent" rows="2"></textarea></div>
+          </div>
+          <div class="form-group"><label style="cursor:pointer"><input type="checkbox" id="mnAuto"> 정기 자동화(예약)로 운영 중입니다 — 성과측정 시트와 절감 대시보드에 반영됩니다</label>
+            <div id="mnAutoBox" style="display:none;margin-top:8px;background:#F8F6F0;border-radius:10px;padding:12px 14px">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px">
+                <div><label class="form-label" for="mnBefore">기존 소요시간(분) <span class="req">*</span></label><input class="form-control" id="mnBefore" type="number" min="0" placeholder="사람이 1회 할 때"></div>
+                <div><label class="form-label" for="mnAfter">개선 후 소요시간(분) <span class="req">*</span></label><input class="form-control" id="mnAfter" type="number" min="0" placeholder="완전 자동이면 0"></div>
+                <div><label class="form-label" for="mnWeekly">주간 실행 횟수</label><input class="form-control" id="mnWeekly" type="number" min="0" step="0.25" placeholder="예: 5"></div>
+                <div><label class="form-label" for="mnSchedule">주기 (선택)</label><input class="form-control" id="mnSchedule" type="text" placeholder="예: 월~금 18:00"></div>
+                <div><label class="form-label" for="mnLink">결과물 / 연결 위치</label><input class="form-control" id="mnLink" type="text" placeholder="시트·채팅방·문서명"></div>
+              </div>
+              <div class="bp-hint">자동화를 켠 자산만 성과측정 시트에 기입됩니다. 시트 목록에 없는 부서·담당자는 "공통"으로 기입되고 비고에 표시됩니다.</div>
+            </div></div>
+          <div class="register-warning">⚠️ 원가·급여·계약·협상 금액과 개인정보가 들어 있지 않은지 확인하세요.</div>
+          <div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn-gold" id="mnSave" style="flex:1;padding:12px">자산으로 등록</button><button type="button" class="btn-secondary" id="mnReset">초기화</button></div>
         </div>
       </section>
 
@@ -1784,6 +1823,7 @@ img { max-width: 100%; display: block; }
   </div>
 </div>
 
+<div class="modal-overlay" id="pvModal" role="dialog" aria-modal="true"><div class="modal"><div class="modal-header"><h3 id="pvTitle">프롬프트</h3><button type="button" class="modal-close" id="pvClose" aria-label="닫기">✕</button></div><div class="modal-body"><textarea id="pvText" readonly style="width:100%;min-height:340px;border:1px solid #E5E2D8;border-radius:8px;padding:10px 12px;font-family:inherit;font-size:13px;line-height:1.6"></textarea></div><div class="modal-footer"><button type="button" class="btn-gold" id="pvCopy">📋 프롬프트 복사</button></div></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -2970,7 +3010,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', manual: '수동 자산화', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page) {
     if (!PAGES[page]) page = 'home';
@@ -3342,7 +3382,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
         <td>${a.auto ? `<span class="badge-auto">자동</span> <small>${esc(a.autoSchedule || '')}</small>${a.perf === '기입됨' ? ' <small title="AI TF팀 성과측정 시트에 기입됨">📊</small>' : ''}` : '<span class="badge-manual">수동</span>'}</td>
         <td>${esc(a.assignee || '')}</td>
         <td>
-          <button type="button" class="rebuild-btn" data-rebuild="${esc(a.no)}"${a.cardId && cardById(a.cardId) ? '' : ' disabled title="연결된 기능이 없습니다"'}>이 자산으로 다시 만들기</button>
+          ${(a.savedFields && a.savedFields.manualPrompt) ? '<button type="button" class="rebuild-btn" data-viewprompt="' + esc(a.no) + '">프롬프트 보기</button> ' : ''}<button type="button" class="rebuild-btn" data-rebuild="${esc(a.no)}"${a.cardId && cardById(a.cardId) ? '' : ' disabled title="연결된 기능이 없습니다"'}>이 자산으로 다시 만들기</button>
           <button type="button" class="asset-del-btn" data-delasset="${esc(a.no)}" aria-label="삭제">🗑</button>
         </td>
       </tr>`).join('') : '<tr><td colspan="8"><div class="empty-state"><div class="icon">🗂️</div><p>등록된 자산이 없습니다.</p></div></td></tr>';
@@ -3561,6 +3601,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#exportCsvBtn').addEventListener('click', exportCsv);
     $('#newAssetBtn').addEventListener('click', () => openAssetModal({ fromBuilder: false }));
     $('#assetBody').addEventListener('click', (e) => {
+      const vp = e.target.closest('[data-viewprompt]');
+      if (vp) { viewAssetPrompt(vp.dataset.viewprompt); return; }
       const rb = e.target.closest('[data-rebuild]');
       if (rb && !rb.disabled) { rebuildFromAsset(rb.dataset.rebuild); return; }
       const del = e.target.closest('[data-delasset]');
@@ -3907,7 +3949,78 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       $('#afAssignee').value = ($('#bpAssignee').value || '').trim();
     });
   }
+
+  /* ── 17. 수동 자산화 (어사이드가 정리해 준 프롬프트 붙여넣기) ──── */
+  const MN_TYPES = ['FLOW', '구글챗', 'Gmail', '시트', '교육자료', '기타'];
+  function mnPick(text, key) {
+    const i = text.indexOf('[' + key + ']'); if (i < 0) return '';
+    const lines = text.slice(i + key.length + 2).split('\n');
+    for (let k = 0; k < lines.length; k++) { const s = lines[k].trim(); if (s && s.charAt(0) !== '[') return s; if (s && k === 0) return s; if (k > 0 && s.charAt(0) === '[') break; }
+    return '';
+  }
+  function mnParse() {
+    const t = $('#mnText').value; if (t.trim().length < 10) return;
+    const name = mnPick(t, '자산명'), type = mnPick(t, '유형'), content = mnPick(t, '내용');
+    let filled = [];
+    if (name && !$('#mnName').value.trim()) { $('#mnName').value = name.slice(0, 60); filled.push('자산명'); }
+    const ty = MN_TYPES.filter(function (x) { return type.indexOf(x) >= 0; })[0];
+    if (ty && $('#mnType').value === '기타') { $('#mnType').value = ty; filled.push('유형'); }
+    if (content && !$('#mnContent').value.trim()) { $('#mnContent').value = content.slice(0, 200); filled.push('내용'); }
+    $('#mnHint').textContent = filled.length ? '✓ 자동 인식: ' + filled.join(', ') + ' (필요하면 수정하세요)' : '형식 그대로 붙여넣으면 자산명·유형·내용이 자동으로 채워집니다. 형식이 달라도 전체 내용이 프롬프트로 저장됩니다.';
+  }
+  function mnReset() {
+    ['#mnText', '#mnName', '#mnContent', '#mnAssignee', '#mnBefore', '#mnAfter', '#mnWeekly', '#mnSchedule', '#mnLink'].forEach(function (id) { $(id).value = ''; });
+    $('#mnType').value = '기타'; $('#mnDept').value = ''; $('#mnAuto').checked = false; $('#mnAutoBox').style.display = 'none';
+    $$('#page-manual .has-error').forEach(function (e) { e.classList.remove('has-error'); });
+  }
+  function mnSave() {
+    const g = function (id) { return ($(id).value || '').trim(); };
+    let text = $('#mnText').value.trim();
+    const miss = { text: text.length < 30, name: !g('#mnName'), dept: !$('#mnDept').value, assignee: !g('#mnAssignee') };
+    let first = null;
+    Object.keys(miss).forEach(function (k) { const el = $('[data-mn="' + k + '"]'); el.classList.toggle('has-error', miss[k]); if (miss[k] && !first) first = el; });
+    if (first) { first.scrollIntoView({ behavior: 'smooth', block: 'center' }); toast('필수 항목을 입력해 주세요.', 'error'); return; }
+    if (text.length > 30000) { toast('프롬프트가 너무 깁니다. (30,000자 이하)', 'error'); return; }
+    const isAuto = $('#mnAuto').checked;
+    if (isAuto && (g('#mnBefore') === '' || g('#mnAfter') === '')) { toast('자동화 자산은 기존·개선 후 소요시간(분)을 입력해 주세요.', 'error'); return; }
+    const who = g('#mnAssignee');
+    if (who && text.indexOf(who) >= 0) {
+      if (!confirm('프롬프트 본문에 담당자 이름("' + who + '")이 들어 있습니다.\n프롬프트에는 담당자 이름을 저장하지 않습니다. 이름을 자동으로 지우고 등록할까요?')) return;
+      text = text.split(who).join('').replace(/ {2,}/g, ' ');
+    }
+    if (/원가|급여|연봉|계약금|협상|단가|견적가/.test(text) && !confirm('원가·급여·계약·협상 관련 단어가 포함되어 있습니다.\n금액·조건이 들어 있지 않은지 확인하셨나요? 그래도 등록할까요?')) return;
+    if (assets.some(function (x) { return x.name === g('#mnName'); }) && !confirm('같은 이름의 자산이 이미 있습니다. 그래도 등록할까요?')) return;
+    const a = {
+      no: nextAssetNo(), name: g('#mnName'), content: g('#mnContent'), type: $('#mnType').value, dept: $('#mnDept').value, assignee: who,
+      auto: isAuto, autoSchedule: isAuto ? g('#mnSchedule') : '',
+      before: isAuto ? g('#mnBefore') : '', after: isAuto ? g('#mnAfter') : '', weekly: isAuto ? g('#mnWeekly') : '', link: isAuto ? g('#mnLink') : '',
+      cardId: '', savedFields: { source: 'manual', manualPrompt: text }
+    };
+    assets.push(a); persistAssets(); syncToSheet('add', a);
+    toast(isAuto && GAS_OK() ? '자산으로 등록했습니다. 성과측정 시트에 기입 중입니다.' : '자산으로 등록했습니다.', 'success');
+    mnReset(); go('assets');
+  }
+  function viewAssetPrompt(no) {
+    const a = assets.find(function (x) { return x.no === no; });
+    if (!a || !a.savedFields || !a.savedFields.manualPrompt) return;
+    $('#pvTitle').textContent = a.no + ' ' + a.name; $('#pvText').value = a.savedFields.manualPrompt; $('#pvModal').classList.add('open');
+  }
+  function bindManual() {
+    $('#mnAsk').value = "방금 진행한 업무를 다른 직원이 처음부터 똑같이 재현할 수 있도록 정리해줘. 아래 형식 그대로 한 번에 출력해줘.\n\n[자산명] 업무를 20자 내외로\n[유형] FLOW / 구글챗 / 시트 / Gmail / 교육자료 / 기타 중 하나\n[내용] 이 업무가 무엇이고 어디에 쓰는지 한두 문장\n[사용한 스킬·도구] 사용한 어사이드 스킬, 웹사이트, 구글 앱, 진행 순서\n[프롬프트] 새 대화에 그대로 붙여넣으면 같은 결과가 나오는 자기완결형 프롬프트 (목적, 진행 경로 단계별, 첨부자료 종류, 레퍼런스, 결과물 형식, 주의사항 포함. 이번에 쓴 구체적 값(상품명·날짜·링크 등)은 [대괄호]로 바꿔서 재사용할 수 있게)\n\n조건: 담당자 이름, 원가·급여·계약·협상 금액, 개인정보는 넣지 말 것. 사실만 쓰고 모르는 값은 \"확인 필요\"로 표기.";
+    $('#mnAskCopy').addEventListener('click', function () { copyText($('#mnAsk').value).then(function () { toast('요청 문구를 복사했습니다. 어사이드에 붙여넣으세요.', 'success'); }); });
+    $('#mnText').addEventListener('input', function (e) { e.target.closest('.form-group').classList.remove('has-error'); clearTimeout(bindManual.t); bindManual.t = setTimeout(mnParse, 400); });
+    $('#mnText').addEventListener('paste', function () { setTimeout(mnParse, 50); });
+    ['#mnName', '#mnAssignee'].forEach(function (id) { $(id).addEventListener('input', function (e) { e.target.closest('.form-group').classList.remove('has-error'); }); });
+    $('#mnDept').addEventListener('change', function (e) { e.target.closest('.form-group').classList.remove('has-error'); });
+    $('#mnAuto').addEventListener('change', function (e) { $('#mnAutoBox').style.display = e.target.checked ? 'block' : 'none'; });
+    $('#mnSave').addEventListener('click', mnSave);
+    $('#mnReset').addEventListener('click', mnReset);
+    $('#pvClose').addEventListener('click', function () { $('#pvModal').classList.remove('open'); });
+    $('#pvModal').addEventListener('click', function (e) { if (e.target.id === 'pvModal') $('#pvModal').classList.remove('open'); });
+    $('#pvCopy').addEventListener('click', function () { copyText($('#pvText').value).then(function () { toast('프롬프트를 복사했습니다.', 'success'); }); });
+  }
   function bindExtra() {
+    bindManual();
     bindBasic();
     bindFiles();
     $('#dbRefresh').addEventListener('click', () => { $('#dbStatus').textContent = '불러오는 중...'; loadDashboard(); });
