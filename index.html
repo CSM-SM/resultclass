@@ -1457,7 +1457,7 @@ img { max-width: 100%; display: block; }
               <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Standard</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">백그라운드 작업(자동화·루틴), 메모리 정리</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">Haiku 5.5</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">반복 실행되는 작업이라 사용량 영향이 큼. 품질이 부족하면 Sonnet 5.5로 한 단계만 올리기</td></tr>
               <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Deep</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">어려운 추론·계획·판단·종합 작업</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">Sonnet 5.5 (Opus 계열은 꼭 필요할 때만 임시 사용)</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">전체 기본값으로 상위 모델을 고정하지 않기</td></tr>
               <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Visual</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">이미지·스크린샷·화면 해석</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">Sonnet 5.5</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">화면 해석이 필요한 업무에서만 사용</td></tr>
-              <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Image generation model</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">이미지 생성·편집</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">변경 불필요</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">이미지가 필요할 때만 요청</td></tr>
+              <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Image generation model</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">이미지 생성·편집</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">변경 불필요</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">이미지 생성은 어사이드 대신 Gemini 새 탭 활용 (디자인 &gt; 이미지 생성 기능)</td></tr>
             </tbody>
           </table>
         </div>
@@ -2678,8 +2678,83 @@ const NEW_CARDS = [
 ];
 CARDS.push(...NEW_CARDS);
 
+// ── 1-C. 디자인 기능 카드 (이미지 생성·GIF·웹 포토샵 / 2026-10-22 추가) ──
+// ※ frequency는 FLOW [DE]·[CMK] 티켓(디자인 의뢰·소재 제작 약 90건) 기준 추정치입니다.
+// ※ 외부 웹 도구는 권장(안)입니다. 회사 승인 도구·계정 기준은 담당자가 확인하세요.
+const _DF = (f, d) => Object.assign({}, f, { default: d });
+const _DSIZE = ['1:1', '4:5', '9:16', '16:9', '3:4'];
+const _PROTECT = '[보안 주의] 출시 전 제품 이미지·내부 자료는 외부 웹 도구에 올리기 전에 담당자 확인을 받는다. 로그인이 필요하면 작업을 멈추고 담당자에게 알린다(비밀번호는 입력하지 않는다).';
+
+const DESIGN_CARDS = [
+  _mkCard('img-gen-gemini', '디자인', '🖼️', '이미지 생성 (Gemini 새 탭 활용)',
+    '어사이드가 직접 이미지를 만들지 않고, 새 탭에서 Gemini로 생성해 작업 시간과 어사이드 사용량을 줄인다. 생성 이미지의 사용 범위(저작권·초상)는 담당자가 확인한다.', '상', '이미지',
+    [_F('useFor', '이미지 용도', 'select', '', true, ['상세페이지', '썸네일·배너', '광고 소재', 'SNS·카드뉴스', '기타']),
+     _F('imageDesc', '만들 이미지 설명', 'textarea', '장면, 피사체, 구도, 분위기를 구체적으로', true, null, '예) 욕실 세면대 위 민트색 칫솔 정물컷, 밝은 아침 햇살, 정면 구도'),
+     _F('ratio', '비율', 'select', '', true, _DSIZE),
+     _F('style', '스타일·톤', 'text', '예: 깨끗한 제품 사진, 파스텔 톤', false),
+     _F('refImage', '참고·제품 이미지 (드라이브/URL)', 'url-list', 'https://...', false, null, '제품 형상이 중요하면 실사 이미지를 꼭 첨부하세요.'),
+     _F('count', '생성 장수', 'number', '예: 4', false),
+     _DF(_F('noText', '이미지 안 글자', 'select', '', false, ['글자 넣지 않기 (문구는 후처리)', '영문 짧은 단어만 허용']), '글자 넣지 않기 (문구는 후처리)'),
+     _F('saveTo', '저장 위치', 'text', '드라이브 폴더 경로', false)], '이미지 정보',
+    '[실행 방식 — 사용량 절감]\n1. 어사이드가 직접 이미지 생성 도구를 쓰지 말 것.\n2. 새 탭에서 https://gemini.google.com 을 열고(회사 구글 계정 로그인 상태 사용) 이미지 생성이 가능한 모드로 위 정보를 하나의 이미지 생성 프롬프트로 정리해 입력한다.\n3. 결과 이미지를 확인해 장수만큼 저장한다. 맘에 들지 않으면 같은 대화에서 수정 요청을 1~2회만 한다.\n4. 제품 형상이 중요한 경우 참고 이미지를 Gemini에 첨부하고, 생성 결과의 형상 차이를 확인해 보고한다.\n5. 저장 위치와 파일명을 보고한다. 이미지 안의 한글·숫자는 후처리 대상이므로 생성 결과에 글자가 있으면 표시한다.\n\n' + _PROTECT),
+
+  _mkCard('gif-create', '디자인', '🎞️', 'GIF 제작',
+    '장면별 이미지를 만들어 GIF로 묶거나, 영상·화면 녹화를 GIF로 변환하는 순서를 정리해 진행한다. 채널별 용량·길이 제한은 담당자가 확인한다.', '중', '이미지',
+    [_F('gifUse', 'GIF 용도', 'select', '', true, ['상세페이지', '광고 소재', 'SNS', '안내·사용법', '기타']),
+     _F('concept', '무엇을 보여주는 GIF인가', 'textarea', '핵심 동작·메시지 한 줄', true),
+     _F('frames', '장면(프레임) 구성', 'step-list', '장면 설명 입력', true, null, '3~8장면이 적당합니다. 장면마다 한 줄로 쓰세요.'),
+     _F('duration', '길이·속도', 'text', '예: 총 3초, 장면당 0.5초', false),
+     _F('size', '사이즈·용량 제한', 'text', '예: 가로 800px, 5MB 이하', false),
+     _F('method', '제작 방식', 'select', '', true, ['Gemini 이미지 여러 장 → 웹 도구로 GIF 변환', '영상·화면 녹화 → GIF 변환', 'Photopea 애니메이션으로 직접 제작']),
+     _F('srcFiles', '원본 파일', 'url-list', '영상·이미지 URL 또는 드라이브 링크', false)], 'GIF 정보',
+    '[실행 방식]\n1. 장면 이미지가 필요하면 새 탭에서 Gemini로 생성한다(어사이드 이미지 도구 사용 금지, 사용량 절감).\n2. GIF 변환·편집은 웹 도구(권장: ezgif.com, 또는 photopea.com)를 새 탭에서 열어 진행한다.\n3. 용량과 길이가 요청 기준을 넘으면 프레임 수·크기를 줄여 다시 만든다.\n4. 결과 GIF를 저장하고 파일명·용량·길이를 보고한다.\n\n' + _PROTECT),
+
+  _mkCard('photoshop-web', '디자인', '🧩', '웹 포토샵으로 이미지 편집',
+    '프로그램 설치 없이 웹 브라우저에서 이미지를 편집한다. 어사이드가 화면을 조작하므로 단순 편집(배경 제거·크롭·문구 얹기) 위주로 쓰고, 복잡한 합성은 담당자가 직접 한다.', '중', '이미지',
+    [_F('tool', '사용할 웹 도구', 'select', '', true, ['Photopea (photopea.com, 무설치)', 'Adobe Photoshop 웹 (photoshop.adobe.com, Adobe 로그인 필요)']),
+     _F('editType', '작업 종류', 'multiselect', '', true, ['배경 제거', '리사이즈·크롭', '문구 얹기', '색 보정', '합성', 'GIF 애니메이션']),
+     _F('srcFile', '원본 이미지', 'url-list', '드라이브/URL', true),
+     _F('finalSize', '최종 사이즈·형식', 'text', '예: 860x860 PNG', false),
+     _F('textToAdd', '얹을 문구 (확정 문구만)', 'textarea', '글꼴·위치 요청이 있으면 함께', false),
+     _F('saveTo', '저장 위치·파일명', 'text', '', false)], '편집 정보',
+    '[실행 방식]\n1. 새 탭에서 선택한 웹 도구를 열고 원본 이미지를 불러온다.\n2. 원본은 그대로 두고 복제본에서 작업한다. 저장은 새 파일명으로 한다.\n3. 요청한 작업만 진행하고, 판단이 필요한 부분(문구 수정·구도 변경)은 임의로 바꾸지 말고 보고한다.\n4. 내보내기 후 결과 파일명·사이즈를 보고한다.\n\n' + _PROTECT),
+
+  _mkCard('thumb-banner-make', '디자인', '🪄', '썸네일·배너 이미지 제작 (생성 + 문구 후처리)',
+    '배경·소재 이미지는 Gemini로 생성하고, 확정 문구는 웹 편집 도구에서 얹어 완성한다. 타사 브랜드명·비교 표기 금지, 수치는 성적서 근거만 사용. 광고 표현 최종 판단은 담당자가 한다.', '상', '이미지',
+    [_F('mall', '게재 채널', 'multiselect', '', true, _MALLS), _F('workType', '종류', 'multiselect', '', true, ['썸네일', '배너', '팝업', '광고 이미지']),
+     _F('copy', '들어갈 문구 (확정 문구)', 'textarea', '문구와 강조 위치', true), _F('bgDesc', '배경·소재 설명', 'textarea', '제품 배치, 배경 분위기', true),
+     _F('baseImage', '제품 이미지', 'url-list', '제품 실사 링크', false), _F('size', '채널 규격', 'text', '예: 1000x1000', false)], '제작 정보',
+    '[실행 방식]\n1. 배경·소재 이미지는 새 탭 Gemini에서 글자 없이 생성한다.\n2. 확정 문구는 웹 편집 도구(권장: photopea.com)에서 얹는다. 문구는 한 글자도 바꾸지 않는다.\n3. 채널 규격에 맞춰 내보내고 파일명을 보고한다.\n\n[주의] 타사 브랜드명·비교 표기 금지. 수치는 성적서 근거만 사용. 효능 표현의 최종 판단은 담당자가 한다.\n\n' + _PROTECT),
+
+  _mkCard('detail-section-img', '디자인', '📸', '상세페이지 섹션 예시 이미지 제작',
+    '상세페이지 기획안에 넣을 예시컷(모델 사용컷·핸드컷·라이프스타일)을 제품 실사를 참고해 생성한다. 생성 이미지는 "AI 생성 예시"로 표시하고 최종 디자인은 디자이너가 한다.', '중', '이미지',
+    [_F('productRef', '제품 실사 이미지', 'url-list', '드라이브/URL (필수)', true, null, '실사를 첨부해야 제품 형상이 비슷하게 나옵니다.'),
+     _F('sectionType', '컷 종류', 'select', '', true, ['모델 사용컷', '핸드컷', '라이프스타일', '인포그래픽 배경', '패키지 컷']),
+     _F('composition', '구도·모델·소품', 'textarea', '필요한 정보를 구체적으로', true), _F('tone', '톤', 'text', '예: 밝고 따뜻한 톤', false), _F('count', '장수', 'number', '', false)], '컷 정보',
+    '[실행 방식]\n1. 새 탭 Gemini에서 제품 실사를 첨부하고 위 정보로 생성한다(글자 없이).\n2. 결과의 제품 형상이 실사와 다른 부분(색·형태·로고)을 표로 정리해 보고한다.\n3. 파일명에 "AI예시"를 붙여 저장한다.\n\n' + _PROTECT),
+
+  _mkCard('sns-cardnews', '디자인', '📱', '카드뉴스·SNS 이미지 제작',
+    '주제를 슬라이드별로 나눠 배경 이미지를 생성하고 문구를 얹어 카드뉴스를 만든다. 건강·효능 표현의 최종 판단은 담당자가 한다.', '중', '이미지',
+    [_F('topic', '주제', 'text', '', true), _F('slides', '슬라이드별 내용', 'step-list', '슬라이드 문구', true), _F('ratio', '비율', 'select', '', true, _DSIZE),
+     _F('tone', '톤앤매너', 'text', '', false), _F('refPost', '참고 게시물', 'url-list', 'https://...', false)], '카드뉴스 정보',
+    '[실행 방식]\n1. 슬라이드별 배경 이미지는 새 탭 Gemini에서 글자 없이 생성한다.\n2. 문구는 웹 편집 도구에서 얹고, 슬라이드 순서대로 파일명(01, 02...)을 붙여 저장한다.\n\n' + _PROTECT),
+
+  _mkCard('image-resize-batch', '디자인', '📐', '채널별 규격 리사이즈',
+    '한 장의 원본을 채널별 규격으로 잘라 저장한다. 크롭으로 제품이 잘리면 임의로 늘리지 않고 보고한다.', '중', '이미지',
+    [_F('srcFile', '원본 이미지', 'url-list', '', true), _F('targets', '채널·규격', 'step-list', '예: 스마트스토어 1000x1000', true), _F('format', '형식', 'select', '', false, ['PNG', 'JPG']), _F('saveTo', '저장 위치', 'text', '', false)], '규격 정보',
+    '[실행 방식] 새 탭에서 웹 편집 도구(권장: photopea.com)를 열어 규격별로 크롭·리사이즈하고, 파일명에 규격을 붙여 저장한다. 제품이 잘리는 규격은 표시해서 보고한다.\n\n' + _PROTECT),
+
+  _mkCard('design-review', '디자인', '🔎', '디자인 시안 검수 체크',
+    '시안의 문구·표기·규격을 체크리스트로 점검해 수정 필요 항목을 표로 정리한다. 광고 표현 최종 판단은 담당자가 한다.', '중', '구글 독스',
+    [_F('draftLink', '시안 링크', 'url-list', '이미지·피그마·드라이브', true), _F('checkPoints', '점검 항목', 'multiselect', '', true, ['타사 브랜드명·비교 표기', '수치 근거(성적서)', '효능 과장 표현', '오탈자', '채널 규격', '이미지 저작권·초상']),
+     _F('basisDocs', '근거 자료(성적서·기획안)', 'url-list', '', false)], '검수 정보',
+    '[산출] 항목별 표(위치/문제/근거/수정 제안)로 정리하고, 근거 자료에 없는 수치는 "확인 필요"로 표시. 수정은 하지 않고 제안만 한다.')
+];
+CARDS.push(...DESIGN_CARDS);
+
+
 // ── 2. 카테고리 / 옵션 ────────────────────────────────────────
-const CATEGORIES = ['전체', '상품기획', '영업·MD', '마케팅', '채널·정산', '패키지·인허가', '업무관리', '데이터·알림', '메일·소통', '교육'];
+const CATEGORIES = ['전체', '상품기획', '영업·MD', '마케팅', '디자인', '채널·정산', '패키지·인허가', '업무관리', '데이터·알림', '메일·소통', '교육'];
 
 const ATTACHMENT_OPTIONS = ['FLOW 티켓', '구글 드라이브 폴더', '구글 시트', '구글 독스', '구글 슬라이드', 'Gmail 메일', '이미지', 'PDF', '웹 URL', '기타'];
 
@@ -2810,6 +2885,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   const NOTICES = [
     { title: '결과물 편차를 줄이는 프롬프트 작성 원칙 (FLOW 공지 참고 · 2026-10-22)', meta: 'FLOW 공지', body: '① 단순 지시 대신 목적을 먼저 쓴다(이 업무를 왜 하는지, 결과를 어디에 쓰는지). ② 잘 된 기획서·승인 문서·반응 좋았던 문구를 레퍼런스로 함께 준다. ③ 결과를 가장 크게 좌우하는 요소 1가지를 정해 적는다. ④ 효과를 본 프롬프트는 AI 자산으로 등록해 팀이 같이 쓴다.' },
     { title: '영업·마케팅·채널 기능 20개 추가 (2026-10-22)', meta: '업데이트', body: 'FLOW 전체 업무 633건(대기·진행)을 점검해 건수가 많은 업무를 기능으로 추가했습니다. 공구 셀러 일정·정산·지출결의, 디자인 의뢰서, 광고 소재·성과 리뷰, 스토어 프로모션 등. 빈도 표시는 티켓명 키워드 건수 기준 추정치입니다.' },
+    { title: '디자인 기능 8개 추가 (2026-10-22)', meta: '업데이트', body: '이미지 생성(Gemini 새 탭 활용), GIF 제작, 웹 포토샵 편집, 썸네일·배너 제작, 상세 예시 이미지, 카드뉴스, 규격 리사이즈, 시안 검수. 이미지 생성은 어사이드 대신 Gemini 새 탭으로 처리해 작업 시간과 사용량을 줄이는 방식입니다. 외부 웹 도구는 권장(안)이며 회사 승인 기준은 담당자가 확인하세요.' },
     { title: '필요한 기능은 "기능 추가 요청" 게시판에 남겨주세요', meta: '운영', body: '부서·담당자·필요한 업무를 적어 주시면 요청 건수와 공감 수를 보고 우선순위를 정해 기능으로 추가합니다.' },
     { title: '입력 시 주의', body: '원가·급여·계약·협상 금액은 프롬프트와 결과 요약에 넣지 마세요. 광고 표현·법령 해석의 최종 판단은 담당자가 합니다.', meta: '보안' }
   ];
@@ -3407,6 +3483,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     '프롬프트 빌더로 목적·진행 경로·레퍼런스를 정리해서 지시한다. (재지시·재시도를 줄입니다)',
     '자동화(예약) 주기는 필요한 만큼만 설정한다. (3시간마다 같은 반복은 사용량이 빠르게 쌓입니다)',
     '이미지·스크린샷·대용량 파일은 꼭 필요한 업무에만 첨부한다.',
+    '이미지 생성이 필요하면 어사이드 이미지 도구 대신 새 탭 Gemini로 생성한다. (디자인 > 이미지 생성 기능)',
     '잘 나온 프롬프트는 AI 자산에 등록해 같은 업무를 다시 처음부터 시키지 않는다.'
   ];
   const KEY_PRECHECK = 'lo_precheck_v1';
@@ -3505,7 +3582,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 
   /* ── 13. 기존 소요시간 자동 추정 · 절감 미리보기 (최저시급 기준) ───────── */
   const MIN_WAGE = 10320, WEEK_FACTOR = 4.3;
-  const MANUAL_BASE = { '상품기획': 60, '영업·MD': 40, '마케팅': 45, '채널·정산': 40, '패키지·인허가': 60, '업무관리': 30, '데이터·알림': 30, '메일·소통': 20, '교육': 90 };
+  const MANUAL_BASE = { '상품기획': 60, '영업·MD': 40, '마케팅': 45, '채널·정산': 40, '패키지·인허가': 60, '업무관리': 30, '데이터·알림': 30, '메일·소통': 20, '교육': 90, '디자인': 40 };
   const MANUAL_OVERRIDE = { 'oral-news': 120, 'competitor-crawl': 150, 'oliveyoung-crawl': 120, 'sales-ad-data': 155, 'daily-log': 30, 'weekly-report': 60, 'receipt-data': 15, 'unreplied-mail': 20, 'inventory-alert': 30 };
   const MANUAL_BY_TYPE = { 'FLOW': 30, '구글챗': 15, '시트': 45, '교육자료': 90, 'Gmail': 20, '기타': 30 };
   // 사람이 1회 수동으로 할 때 걸리는 시간(분) 추정: 기능별 기준값 + 진행 단계/첨부 수 가중
