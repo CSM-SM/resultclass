@@ -1409,6 +1409,8 @@ img { max-width: 100%; display: block; }
 .file-chip{display:inline-flex;align-items:center;gap:6px;background:#E0F5F0;border:1px solid #BFE5DC;border-radius:999px;padding:3px 6px 3px 10px;font-size:12.5px}
 .file-chip small{color:#4A4740}
 .file-chip button{border:0;background:transparent;cursor:pointer;font-size:12px;color:#8A877E;padding:0 4px}
+#sendGuide{background:#E0F5F0;border:1px solid #BFE5DC;border-radius:10px;padding:10px 14px;margin:0 0 12px;font-size:13px;line-height:1.7}
+#sendGuide kbd{background:#fff;border:1px solid #C9C5B8;border-radius:4px;padding:0 5px;font-size:12px}
 #fileReminder{display:none;background:#FDF5E0;border:1px solid #F0D9A0;border-radius:10px;padding:10px 14px;margin:0 0 12px;font-size:13px;line-height:1.6}
 </style>
 </head>
@@ -3168,6 +3170,16 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (!rem) { rem = document.createElement('div'); rem.id = 'fileReminder'; $('#selectedFn3').insertAdjacentElement('afterend', rem); }
     rem.style.display = names.length ? 'block' : 'none';
     rem.innerHTML = names.length ? '📎 <b>어사이드 대화창에 아래 파일 ' + names.length + '개를 이 프롬프트와 함께 첨부하세요.</b> (파일은 사이트에 업로드되지 않습니다)<br>' + names.map((n) => esc(n)).join(' · ') : '';
+    // 어사이드로 보내기 안내 + 자동 복사 (어사이드를 먼저 열어 둔 상태에서 붙여넣기)
+    let gd = $('#sendGuide');
+    if (!gd) { gd = document.createElement('div'); gd.id = 'sendGuide'; $('#selectedFn3').insertAdjacentElement('afterend', gd); }
+    const autoPref = store.get('lo_autocopy_v1', true);
+    gd.innerHTML = '<b>어사이드로 보내는 방법</b> ① 어사이드를 먼저 열어 둡니다 &nbsp;② 어사이드 입력창을 클릭하고 <kbd>Ctrl</kbd>+<kbd>V</kbd> (Mac은 <kbd>⌘</kbd>+<kbd>V</kbd>) &nbsp;③ <kbd>Enter</kbd> <span id="autoCopyState" style="font-weight:700;color:#1A7A68"></span>'
+      + '<label style="display:block;margin-top:4px;cursor:pointer"><input type="checkbox" id="autoCopyChk"' + (autoPref ? ' checked' : '') + '> 프롬프트를 만들면 자동으로 복사하기</label>';
+    $('#autoCopyChk').onchange = (e) => store.set('lo_autocopy_v1', e.target.checked);
+    if (autoPref) {
+      copyText($('#promptOut').value).then(() => { const s = $('#autoCopyState'); if (s) s.textContent = '✓ 복사됨 — 어사이드 입력창에 붙여넣으세요'; toast('프롬프트를 복사했습니다. 어사이드 입력창에 붙여넣으세요.', 'success'); }).catch(() => {});
+    }
     setStep(3);
   }
 
