@@ -1401,6 +1401,15 @@ img { max-width: 100%; display: block; }
   .stepper-line { flex-basis:12px; }
 }
 
+.file-zone{margin-top:8px;border:2px dashed #C9C5B8;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:#4A4740;background:#FBFAF6;cursor:pointer;transition:all .15s}
+.file-zone:hover,.file-zone:focus-visible,.file-zone.drag{border-color:#C8922A;background:#FDF5E0;outline:none}
+.file-zone .fz-icon{font-size:18px}
+.file-zone small{flex-basis:100%;color:#8A877E;font-size:11.5px}
+.file-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.file-chip{display:inline-flex;align-items:center;gap:6px;background:#E0F5F0;border:1px solid #BFE5DC;border-radius:999px;padding:3px 6px 3px 10px;font-size:12.5px}
+.file-chip small{color:#4A4740}
+.file-chip button{border:0;background:transparent;cursor:pointer;font-size:12px;color:#8A877E;padding:0 4px}
+#fileReminder{display:none;background:#FDF5E0;border:1px solid #F0D9A0;border-radius:10px;padding:10px 14px;margin:0 0 12px;font-size:13px;line-height:1.6}
 </style>
 </head>
 <body>
@@ -1787,7 +1796,7 @@ const COMMON_FIELDS = [
     options: ['FLOW 티켓', '구글 드라이브 폴더', '구글 시트', '구글 독스', '구글 슬라이드', 'Gmail 메일', '이미지', 'PDF', '웹 URL', '기타'],
     tip: '어사이드 화면에 열려 있는 자료를 선택하세요.', required: false, promptInclude: true },
   { key: 'references', label: '레퍼런스 (URL·이미지·문서)', type: 'url-list', placeholder: 'https://... (잘 된 기획서, 반응 좋았던 문구, 승인된 문서, 벤치마킹 대상)',
-    tip: '💡 잘 만들어진 레퍼런스나 벤치마킹하고 싶은 결과물을 넣을수록 결과물이 훨씬 좋아집니다. 성공했던 기획서·반응 좋았던 문구·승인된 결재 문서처럼 결과가 검증된 자료 1~3개를 권장합니다. 이미지·문서는 첨부자료에서 선택하세요.', required: false, promptInclude: true },
+    tip: '💡 잘 만들어진 레퍼런스나 벤치마킹하고 싶은 결과물을 넣을수록 결과물이 훨씬 좋아집니다. 성공했던 기획서·반응 좋았던 문구·승인된 결재 문서처럼 결과가 검증된 자료 1~3개를 권장합니다. 이미지·문서 파일은 아래 파일 첨부 칸에 끌어다 놓거나 선택하세요.', required: false, promptInclude: true },
   { key: 'outputFormat', label: '산출물 형식', type: 'select',
     options: ['구글 독스', '구글 시트', '텍스트(복사용)', '구글 슬라이드', 'PDF', '이미지', '기타'],
     default: '구글 독스', tip: '결과물이 만들어질 형태.', required: true, promptInclude: true }
@@ -3059,6 +3068,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       default:
         input = `<input class="form-control" type="text" id="${id}" data-key="${f.key}" value="${esc(v || '')}" placeholder="${esc(f.placeholder || '')}">`;
     }
+    if (f.type === 'url-list' || f.key === 'attachments') input += fileZoneHTML(f);
     const tip = f.tip ? `<div class="field-tip">💡 ${esc(f.tip)}</div>` : '';
     const ex = f.example ? `<div class="field-example">예) ${esc(f.example)}<button type="button" data-use-example="${f.key}">예시 넣기</button></div>` : '';
     const note = f.promptInclude === false ? '<div class="field-tip">※ 프롬프트에는 포함되지 않습니다.</div>' : '';
@@ -3106,7 +3116,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       const g = $(`[data-group="${f.key}"]`); if (!g) return;
       const v = B.values[f.key];
       const empty = Array.isArray(v) ? v.length === 0 : !v || !String(v).trim();
-      const bad = f.required && empty;
+      const hasFiles = (B.values[f.key + '__files'] || []).length > 0;
+      const bad = f.required && empty && !hasFiles;
       g.classList.toggle('has-error', bad);
       const c = g.querySelector('.form-control'); if (c) c.classList.toggle('error', bad);
       if (bad && !first) first = g;
@@ -3132,7 +3143,18 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const card = cardById(B.cardId);
     const v = clone(B.values);
     delete v.assignee;                       // 담당자 이름은 어떤 템플릿에도 전달하지 않음
+    // 첨부 파일: 파일명만 프롬프트에 포함 (파일은 어사이드 대화창에 직접 첨부)
+    let fileCount = 0;
+    allFields(card).forEach((f) => {
+      const fl = v[f.key + '__files'] || [];
+      delete v[f.key + '__files'];
+      if (!fl.length) return;
+      fileCount += fl.length;
+      if (f.type === 'url-list') v[f.key] = (v[f.key] || []).concat(fl.map((x) => '[첨부 파일] ' + x.name + ' — 어사이드 대화창에 함께 첨부됨'));
+      else v[f.key] = (v[f.key] || []).concat(fl.map((x) => '파일: ' + x.name));
+    });
     let text = typeof card.promptTemplate === 'function' ? card.promptTemplate(v) : (typeof card.promptTemplate === 'string' ? card.promptTemplate : commonPrompt(card, v));
+    if (fileCount) text += '\n\n[첨부 파일 안내] "[첨부 파일]" 또는 "파일:"로 표시된 항목은 이 메시지와 함께 대화창에 첨부된 파일이다. 파일이 보이지 않으면 작업을 시작하기 전에 알려줄 것.';
     if (B.autoOn && B.rrule) text += `\n\n[자동화 주기] ${B.human}\n${B.rrule}`;
     return text;
   }
@@ -3141,6 +3163,11 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const card = cardById(B.cardId);
     $('#selectedFn3').innerHTML = selectedBanner(card);
     $('#promptOut').value = buildPrompt();
+    const names = []; allFields(card).forEach((f) => (B.values[f.key + '__files'] || []).forEach((x) => names.push(x.name)));
+    let rem = $('#fileReminder');
+    if (!rem) { rem = document.createElement('div'); rem.id = 'fileReminder'; $('#selectedFn3').insertAdjacentElement('afterend', rem); }
+    rem.style.display = names.length ? 'block' : 'none';
+    rem.innerHTML = names.length ? '📎 <b>어사이드 대화창에 아래 파일 ' + names.length + '개를 이 프롬프트와 함께 첨부하세요.</b> (파일은 사이트에 업로드되지 않습니다)<br>' + names.map((n) => esc(n)).join(' · ') : '';
     setStep(3);
   }
 
@@ -3668,7 +3695,56 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     toast('요청을 삭제했습니다.', 'success');
     postGas({ action: 'req_delete', request: { no } }).then(() => { if (GAS_OK()) setTimeout(loadRequests, 2500); });
   }
+  /* ── 15. 파일 첨부 (URL 칸 + 파일 드래그/선택) ─────────────── */
+  const FILE_ACCEPT = '.png,.jpg,.jpeg,.gif,.webp,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.hwp,.hwpx,.csv,.txt,.md';
+  const fmtSize = (n) => (n >= 1048576 ? (n / 1048576).toFixed(1) + 'MB' : Math.max(1, Math.round(n / 1024)) + 'KB');
+  function chipsHTML(key) {
+    return (B.values[key + '__files'] || []).map((f, i) => '<span class="file-chip">📄 ' + esc(f.name) + ' <small>' + fmtSize(f.size || 0) + '</small><button type="button" data-filedel="' + key + '" data-idx="' + i + '" aria-label="파일 제거">✕</button></span>').join('');
+  }
+  function fileZoneHTML(f) {
+    return '<input type="file" multiple hidden data-fileinput="' + f.key + '" accept="' + FILE_ACCEPT + '">'
+      + '<div class="file-zone" data-filezone="' + f.key + '" tabindex="0" role="button" aria-label="' + esc(f.label) + ' 파일 첨부"><span class="fz-icon">📎</span><span>파일을 끌어다 놓거나 <b>클릭해서 선택</b> (여러 개 가능)</span><small>이미지·PDF·워드·엑셀·PPT·한글·CSV·텍스트 · 파일은 업로드되지 않고 파일명만 프롬프트에 들어갑니다. 파일은 어사이드 대화창에 함께 첨부하세요.</small></div>'
+      + '<div class="file-chips" data-filechips="' + f.key + '">' + chipsHTML(f.key) + '</div>';
+  }
+  function addFiles(key, fileList) {
+    const arr = (B.values[key + '__files'] || []).slice();
+    Array.from(fileList || []).forEach((fl) => {
+      if (arr.length >= 10) return;
+      if (arr.some((x) => x.name === fl.name)) return;
+      arr.push({ name: fl.name, size: fl.size });
+    });
+    if (fileList && fileList.length && arr.length >= 10) toast('파일은 항목당 최대 10개까지 첨부할 수 있습니다.', 'error');
+    B.values[key + '__files'] = arr;
+    const box = $('[data-filechips="' + key + '"]'); if (box) box.innerHTML = chipsHTML(key);
+    const g = $('[data-group="' + key + '"]'); if (g) g.classList.remove('has-error');
+  }
+  function bindFiles() {
+    const form = $('#fieldsForm');
+    form.addEventListener('click', (e) => {
+      const del = e.target.closest('[data-filedel]');
+      if (del) { const k = del.dataset.filedel, a = (B.values[k + '__files'] || []).slice(); a.splice(+del.dataset.idx, 1); B.values[k + '__files'] = a; $('[data-filechips="' + k + '"]').innerHTML = chipsHTML(k); return; }
+      const z = e.target.closest('[data-filezone]');
+      if (z) { const inp = $('[data-fileinput="' + z.dataset.filezone + '"]'); if (inp) inp.click(); }
+    });
+    form.addEventListener('keydown', (e) => {
+      const z = e.target.closest && e.target.closest('[data-filezone]');
+      if (z && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); const inp = $('[data-fileinput="' + z.dataset.filezone + '"]'); if (inp) inp.click(); }
+    });
+    form.addEventListener('change', (e) => {
+      const inp = e.target.closest && e.target.closest('[data-fileinput]');
+      if (inp) { addFiles(inp.dataset.fileinput, inp.files); inp.value = ''; }
+    });
+    ['dragenter', 'dragover'].forEach((ev) => form.addEventListener(ev, (e) => { const z = e.target.closest && e.target.closest('[data-filezone]'); if (z) { e.preventDefault(); z.classList.add('drag'); } }));
+    form.addEventListener('dragleave', (e) => { const z = e.target.closest && e.target.closest('[data-filezone]'); if (z) z.classList.remove('drag'); });
+    form.addEventListener('drop', (e) => {
+      const z = e.target.closest && e.target.closest('[data-filezone]');
+      if (z) { e.preventDefault(); z.classList.remove('drag'); addFiles(z.dataset.filezone, e.dataTransfer.files); }
+    });
+    // 폼 밖에 잘못 놓았을 때 브라우저가 파일을 열어버리지 않도록 막기
+    ['dragover', 'drop'].forEach((ev) => window.addEventListener(ev, (e) => { if (!(e.target.closest && e.target.closest('[data-filezone]'))) e.preventDefault(); }));
+  }
   function bindExtra() {
+    bindFiles();
     $('#dbRefresh').addEventListener('click', () => { $('#dbStatus').textContent = '불러오는 중...'; loadDashboard(); });
     ['#afBefore', '#afAfter', '#afWeekly'].forEach((id) => $(id).addEventListener('input', updateSavePreview));
     $('#afEstBtn').addEventListener('click', () => { $('#afBefore').value = estimateManualMin(); if ($('#afAfter').value === '') $('#afAfter').value = 0; updateSavePreview(); });
