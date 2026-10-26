@@ -1682,6 +1682,40 @@ input, textarea, select { font-size: 14px; }
 .ref-tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
 .ref-tab-btn { padding: 10px 20px; font-size: 14.5px; }
 
+
+/* 자동화 리스트 */
+.au-dist { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 14px; }
+.au-box { background: #F6F7F8; border-radius: 16px; padding: 20px 22px; }
+.au-box-title { font-size: 14px; font-weight: 700; color: #1b1b1b; margin-bottom: 12px; }
+.au-bar { display: flex; align-items: center; gap: 10px; margin: 7px 0; font-size: 13px; }
+.au-bar-l { flex: 0 0 74px; color: #4A4F55; }
+.au-bar b { flex: 0 0 28px; text-align: right; color: #1b1b1b; }
+.au-track { flex: 1; display: block; height: 8px; background: #E6E8EB; border-radius: 8px; overflow: hidden; }
+.au-fill { display: block; height: 100%; background: #14C4A9; border-radius: 8px; }
+.au-teamtabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 14px; padding-bottom: 14px; border-bottom: 1px solid #ECEEF0; }
+.au-teamtabs .cat-btn { padding: 10px 20px; font-size: 14.5px; }
+.au-view { display: flex; gap: 6px; margin-left: auto; }
+.au-team { margin-top: 30px; }
+.au-team-head { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 14px; }
+.au-team-head h2 { font-size: 26px; font-weight: 700; letter-spacing: -.8px; color: #1b1b1b; line-height: 1.2; }
+.au-team-sum { font-size: 13.5px; color: #5C6167; margin-left: auto; padding-bottom: 4px; }
+.au-empty { border: 1.5px dashed #D7DADE; border-radius: 16px; padding: 28px; text-align: center; color: #8B9096; font-size: 14px; }
+.au-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 18px; }
+.au-card { background: #F6F7F8; border: 1px solid transparent; border-radius: 16px; padding: 22px; display: flex; flex-direction: column; gap: 10px; transition: all .18s ease; }
+.au-card:hover { background: #fff; border-color: #14C4A9; box-shadow: 0 14px 34px rgba(20,196,169,.14); transform: translateY(-3px); }
+.au-top { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.au-no { font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #14C4A9; margin-right: 2px; }
+.au-card h3 { font-size: 17px; letter-spacing: -.4px; line-height: 1.4; color: #1b1b1b; margin: 2px 0 0; }
+.au-sub { font-size: 12.5px; color: #8B9096; margin-top: -6px; }
+.au-eff { background: #fff; border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 8px; }
+.au-eff-line, .au-eff-sum { font-size: 13px; color: #4A4F55; }
+.au-eff-line b { color: #1b1b1b; }
+.au-eff-sum b { color: #0E8F7B; font-size: 15px; }
+.au-meta { font-size: 12.5px; color: #8B9096; }
+.au-res { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.au-actions { margin-top: auto; padding-top: 4px; }
+@media (max-width: 980px) { .au-dist { grid-template-columns: 1fr; } .au-view { margin-left: 0; } .au-grid { grid-template-columns: 1fr; } .au-team-sum { margin-left: 0; } }
+
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -1730,7 +1764,7 @@ input, textarea, select { font-size: 14px; }
       <div class="nav-group"><span class="nav-group-label">시작하기</span><div class="nav-drop"><a class="nav-item" href="#home" data-page="home"><span class="nav-icon">🏠</span>홈</a>
       <a class="nav-item" href="#quick" data-page="quick"><span class="nav-icon">⚡</span>간단 사용법</a><a class="nav-item" href="#precheck" data-page="precheck"><span class="nav-icon">✅</span>업무 시작 전 확인사항</a><a class="nav-item" href="#guide" data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a></div></div>
       <div class="nav-group"><span class="nav-group-label">업무 도구</span><div class="nav-drop"><a class="nav-item" href="#basic" data-page="basic"><span class="nav-icon">📝</span>기본 프롬프트</a><a class="nav-item" href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a><a class="nav-item" href="#refs" data-page="refs"><span class="nav-icon">📚</span>레퍼런스 참고하기</a></div></div>
-      <div class="nav-group"><span class="nav-group-label">자산</span><div class="nav-drop"><a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a><a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a></div></div>
+      <div class="nav-group"><span class="nav-group-label">자산</span><div class="nav-drop"><a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a><a class="nav-item" href="#automations" data-page="automations"><span class="nav-icon">⚙️</span>자동화 리스트</a><a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a></div></div>
       <div class="nav-group"><span class="nav-group-label">현황</span><div class="nav-drop"><a class="nav-item" href="#dashboard" data-page="dashboard"><span class="nav-icon">📊</span>절감 대시보드</a></div></div>
       <div class="nav-group"><span class="nav-group-label">소통</span><div class="nav-drop"><a class="nav-item" href="#requests" data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a><a class="nav-item" href="#notice" data-page="notice"><span class="nav-icon">📢</span>공지</a></div></div>
     </nav>
@@ -1981,7 +2015,7 @@ input, textarea, select { font-size: 14px; }
           <div class="asset-form-grid">
             <div class="form-group full" data-mn="name"><label class="form-label" for="mnName">자산명 <span class="req">*</span></label><input class="form-control" id="mnName" type="text"><div class="error-msg">필수 항목입니다.</div></div>
             <div class="form-group"><label class="form-label" for="mnType">유형</label><select class="form-control" id="mnType"><option>FLOW</option><option>구글챗</option><option>Gmail</option><option>시트</option><option>교육자료</option><option selected>기타</option></select></div>
-            <div class="form-group" data-mn="dept"><label class="form-label" for="mnDept">부서 <span class="req">*</span></label><select class="form-control" id="mnDept"><option value="">선택</option><option>공통</option><option>마케팅</option><option>상품기획</option><option>병원기획</option><option>영업</option><option>디자인</option></select><div class="error-msg">필수 항목입니다.</div></div>
+            <div class="form-group" data-mn="dept"><label class="form-label" for="mnDept">부서 <span class="req">*</span></label><select class="form-control" id="mnDept"><option value="">선택</option><option>공통</option><option>마케팅</option><option>상품기획</option><option>병원기획</option><option>영업</option><option>디자인</option><option>해외영업</option></select><div class="error-msg">필수 항목입니다.</div></div>
             <div class="form-group" data-mn="assignee"><label class="form-label" for="mnAssignee">담당자 이름 <span class="req">*</span></label><input class="form-control" id="mnAssignee" type="text" placeholder="예: 최성민"><div class="bp-hint">자산 목록에만 표시되고 프롬프트 본문에는 저장되지 않습니다.</div><div class="error-msg">필수 항목입니다.</div></div>
             <div class="form-group full"><label class="form-label" for="mnSample">샘플 결과물 링크 (선택)</label><input class="form-control" id="mnSample" type="text" placeholder="이 프롬프트로 만든 잘 된 결과물 링크"></div>
             <div class="form-group full"><label class="form-label" for="mnContent">내용 요약</label><textarea class="form-control" id="mnContent" rows="2"></textarea></div>
@@ -2162,6 +2196,30 @@ input, textarea, select { font-size: 14px; }
             <tbody id="assetBody"></tbody>
           </table>
         </div>
+      </section>
+
+      <!-- ═══ 자동화 리스트 ═══ -->
+      <section class="page" id="page-automations">
+        <h2 class="section-title">자동화 리스트</h2>
+        <p class="section-sub">팀별로 어사이드 자동화를 모아 봅니다. 성과측정 시트와 AI 자산이 연결되어 있어, 자동화를 등록하면 해당 팀 목록에 반영됩니다. 내 업무와 비슷한 자동화를 찾아 그대로 가져다 쓰세요.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:18px">
+          <div class="sheet-status local" id="auStatus" style="margin:0">불러오는 중...</div>
+          <button type="button" class="btn-secondary" id="auRefresh">새로고침</button>
+          <button type="button" class="btn-gold" data-aunew="" style="padding:10px 18px">+ 자동화 등록하기</button>
+          <a class="btn-secondary" href="https://docs.google.com/spreadsheets/d/1IaqVj-2_rKk8s1secxB-x-DmUeY9nTO91vXakBAty7A/edit" target="_blank" rel="noopener noreferrer" style="text-decoration:none">성과측정 시트 열기 ↗</a>
+        </div>
+        <div class="counter-grid" id="auStats"></div>
+        <div class="au-dist" id="auDist"></div>
+        <div class="au-teamtabs" id="auTeamTabs" aria-label="팀 선택"></div>
+        <div class="filter-bar" style="margin:6px 0 10px">
+          <div class="search-wrap"><span class="search-icon">🔍</span><input type="search" id="auSearch" placeholder="자동화·담당자 검색" aria-label="자동화 검색"></div>
+          <select class="form-control" id="auSort" style="max-width:200px" aria-label="정렬"><option value="no">번호순</option><option value="new">최근 시작순</option><option value="hours">월 절감 시간 많은 순</option><option value="name">이름순</option></select>
+          <div class="au-view"><button type="button" class="cat-btn active" data-auview="card">카드</button><button type="button" class="cat-btn" data-auview="table">표</button></div>
+        </div>
+        <div class="cat-filters" id="auTypeFilters" aria-label="유형 필터"></div>
+        <div id="auTeams"></div>
+        <div class="asset-table-wrap" id="auTableWrap" style="display:none"><table class="asset-table"><thead><tr><th>팀</th><th>번호</th><th>자동화</th><th>분류</th><th>유형</th><th>담당자</th><th>기존 → 개선(분)</th><th>주 횟수</th><th>월 절감(시간)</th><th>상태</th><th>결과물</th></tr></thead><tbody id="auTableBody"></tbody></table></div>
+        <div class="bp-hint" style="margin:14px 0 0">※ 팀은 성과측정 시트의 부서 값을 기준으로 나뉩니다(상품기획은 개발팀, 공통은 공용). 소요시간과 절감 시간은 시트에 작성자가 입력한 값 기준 추정치이며 별도 검증 전입니다. 금액·인원별 성과는 표시하지 않습니다. 절감 산식과 가정은 [절감 대시보드]에서 확인하세요.</div>
       </section>
 
       <!-- ═══ 어사이드 가이드 ═══ -->
@@ -3515,6 +3573,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   };
 
   const NOTICES = [
+    { date: '2026-10-26', pin: false, title: '팀별 자동화 리스트 메뉴 추가', meta: '업데이트', body: '[자산] 아래에 [자동화 리스트]가 생겼습니다. 마케팅팀·영업팀·개발팀·해외영업팀·디자인팀·공용으로 나누어 자동화를 모아 보고, 기존·개선 소요시간과 월 절감 시간, 담당자, 결과물을 카드나 표로 확인할 수 있습니다. 소요시간은 작성자 입력 기준 추정치입니다.' },
     { date: '2026-10-26', pin: false, title: '스킬 파일 등록(선택)과 자동 추천 추가', meta: '업데이트', body: '[레퍼런스 참고하기]의 "스킬 파일" 탭과 [수동 자산화]에서 스킬 파일(SKILL.md 등)을 선택 등록할 수 있습니다. 등록해 두면 업무기능·기본 프롬프트에서 업무에 맞는 스킬 파일이 자동으로 추천되고, 체크한 파일이 프롬프트에 들어가 어사이드가 먼저 읽고 따릅니다.' },
     { date: '2026-10-26', pin: false, title: '레퍼런스 참고하기 메뉴 추가', meta: '업데이트', body: '구글 드라이브의 잘 된 문서를 기능별로 모은 [레퍼런스 참고하기] 메뉴가 생겼습니다. 업무기능에서 프롬프트를 만들 때 해당 기능의 추천 레퍼런스가 표시되고, 선택한 문서가 프롬프트에 들어갑니다. 좋은 문서는 직접 등록할 수 있습니다.' },
     { date: '2026-10-26', pin: true, title: '베타 테스트 안내', meta: '운영', body: '이 사이트는 초기 버전으로 베타 운영 중입니다. 입력 항목, 결과물 체크리스트, 대시보드 수치 기준은 사용 의견을 받아 보완합니다. 불편한 점과 필요한 기능은 [기능 추가 요청]에 남겨 주세요.' },
@@ -3528,7 +3587,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '수동 자산화', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { automations: '자동화 리스트', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '수동 자산화', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page) {
     if (!PAGES[page]) page = 'home';
@@ -3542,6 +3601,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (page === 'assets') renderAssets();
     if (page === 'requests') loadRequests();
     if (page === 'refs') loadRefs();
+    if (page === 'automations') loadAutomations();
     if (page === 'dashboard') startDashboard(); else stopDashboard();
     if (page === 'precheck') renderPrecheck();
   }
@@ -5103,7 +5163,120 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     });
     renderSkillsPage(); renderBpSkillPanel(); loadSkills();
   }
+  /* ── 24. 자동화 리스트 (팀별 · 성과측정 시트 + AI 자산 연결) ── */
+  const AU_TEAMS = ['마케팅팀', '영업팀', '개발팀', '해외영업팀', '디자인팀', '공용'];
+  const AU_TEAM_OF = { '마케팅': '마케팅팀', '영업': '영업팀', '상품기획': '개발팀', '개발': '개발팀', '전략기획': '개발팀', '해외영업': '해외영업팀', '디자인': '디자인팀', '공통': '공용', '전사': '공용', '공용': '공용' };
+  const AU_TEAM_DEPT = { '마케팅팀': '마케팅', '영업팀': '영업', '개발팀': '상품기획', '해외영업팀': '해외영업', '디자인팀': '디자인', '공용': '공통' };
+  const AU = { rows: [], updated: '', team: '전체', type: '전체', sort: 'no', view: 'card', q: '' };
+  function auNorm(s) { return String(s || '').toLowerCase().replace(/[^0-9a-z가-힣]/g, ''); }
+  function auBig(s) { const t = auNorm(s), m = {}; for (let i = 0; i < t.length - 1; i++) { const g = t.substr(i, 2); m[g] = (m[g] || 0) + 1; } return { m: m, n: Math.max(t.length - 1, 0) }; }
+  function auDice(a, b) { const A = auBig(a), B = auBig(b); if (!A.n || !B.n) return 0; let c = 0; Object.keys(A.m).forEach(function (g) { if (B.m[g]) c += Math.min(A.m[g], B.m[g]); }); return 2 * c / (A.n + B.n); }
+  function auTeam(it) { const d = String(it.r.dept || '').replace(/\s/g, '').replace(/팀$/, ''); return AU_TEAM_OF[d] || '미지정'; }
+  function auItems() {
+    const used = {}; const items = AU.rows.map(function (r) { return { r: r, a: null }; });
+    items.forEach(function (it) { const k = auNorm(it.r.content); if (!k) return; const a = assets.find(function (x) { return !used[x.no] && auNorm(x.name) === k; }); if (a) { it.a = a; used[a.no] = true; } });
+    items.forEach(function (it) { if (it.a) return; const k = auNorm(it.r.content); if (!k) return; const a = assets.find(function (x) { const n = auNorm(x.name); return !used[x.no] && n && (n.indexOf(k) >= 0 || k.indexOf(n) >= 0); }); if (a) { it.a = a; used[a.no] = true; } });
+    items.forEach(function (it) {
+      if (it.a) return; let best = null, bs = 0;
+      assets.forEach(function (x) { if (used[x.no]) return; const s = auDice(it.r.content, x.name); if (s > bs) { bs = s; best = x; } });
+      if (best && bs >= 0.45) { it.a = best; used[best.no] = true; }
+    });
+    items.forEach(function (it) { it.team = auTeam(it); });
+    return items;
+  }
+  function auWhen(it) {
+    const s = it.a && it.a.autoSchedule ? it.a.autoSchedule : '';
+    if (s) {
+      const f = (s.match(/FREQ=(\w+)/) || [])[1], d = (s.match(/BYDAY=([A-Z,]+)/) || [])[1], h = (s.match(/BYHOUR=([0-9,]+)/) || [])[1];
+      const dn = { MO: '월', TU: '화', WE: '수', TH: '목', FR: '금', SA: '토', SU: '일' };
+      let t = f === 'DAILY' ? '매일' : f === 'WEEKLY' ? '매주' + (d ? ' ' + d.split(',').map(function (x) { return dn[x] || x; }).join('·') : '') : f === 'MONTHLY' ? '매월' : '';
+      if (h) t += (t ? ' ' : '') + h.split(',').map(function (x) { return ('0' + x).slice(-2) + '시'; }).join('·');
+      if (t) return t;
+    }
+    return it.r.weekly > 0 ? '주 ' + it.r.weekly + '회' : '수시';
+  }
+  function auHours(h) { return h >= 100 ? Math.round(h) : (Math.round(h * 10) / 10); }
+  function auFiltered(items) {
+    const q = AU.q.trim().toLowerCase();
+    const list = items.filter(function (it) {
+      if (AU.type !== '전체' && it.r.type !== AU.type) return false;
+      if (!q) return true;
+      return (it.r.content + ' ' + it.r.name + ' ' + it.r.dept + ' ' + it.r.type + ' ' + it.team + ' ' + (it.a ? it.a.assignee + ' ' + it.a.name : '')).toLowerCase().indexOf(q) >= 0;
+    });
+    const by = { no: function (a, b) { return Number(a.r.no) - Number(b.r.no); }, new: function (a, b) { return String(b.r.start).localeCompare(String(a.r.start)); }, hours: function (a, b) { return (b.r.hours || 0) - (a.r.hours || 0); }, name: function (a, b) { return String(a.r.content).localeCompare(String(b.r.content), 'ko'); } };
+    return list.sort(by[AU.sort] || by.no);
+  }
+  function auBars(title, counts, order) {
+    const keys = (order || Object.keys(counts)).filter(function (k) { return counts[k] != null; }), max = Math.max.apply(null, keys.map(function (k) { return counts[k]; }).concat([1]));
+    return '<div class="au-box"><div class="au-box-title">' + title + '</div>' + keys.map(function (k) { return '<div class="au-bar"><span class="au-bar-l">' + esc(k) + '</span><span class="au-track"><span class="au-fill" style="width:' + Math.round(counts[k] / max * 100) + '%"></span></span><b>' + counts[k] + '</b></div>'; }).join('') + '</div>';
+  }
+  function auResultChips(a, max) {
+    const rs = (a && a.results) || []; if (!rs.length) return '';
+    return '<div class="au-res">' + rs.slice(0, max).map(function (x) { return '<a class="res-chip" href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer" title="' + esc(x.name) + '">' + (x.kind === 'file' ? '📎 ' : '🔗 ') + esc(x.name) + '</a>'; }).join('') + (rs.length > max ? '<span class="ref-meta">외 ' + (rs.length - max) + '건</span>' : '') + '</div>';
+  }
+  function auCard(it) {
+    const r = it.r, a = it.a, saved = r.before > 0 ? Math.max(0, Math.round((r.before - r.after) / r.before * 100)) : 0;
+    const eff = r.before > 0 ? '<div class="au-eff"><div class="au-eff-line">기존 <b>' + r.before + '분</b> → 개선 후 <b>' + r.after + '분</b> · ' + auWhen(it) + '</div><div class="au-track"><span class="au-fill" style="width:' + saved + '%"></span></div><div class="au-eff-sum">' + (r.hours > 0 ? '월 약 <b>' + auHours(r.hours) + '시간</b> 절감 (' + saved + '% 단축)' : '절감 시간 미산정') + '</div></div>' : '<div class="au-eff"><div class="au-eff-line">' + auWhen(it) + '</div><div class="au-eff-sum">절감 시간 미산정 (교육·배포 자료 등)</div></div>';
+    return '<div class="au-card"><div class="au-top"><span class="au-no">NO ' + esc(r.no) + '</span><span class="tag">' + esc(r.type || '기타') + '</span>' + (it.team === '미지정' ? '<span class="tag">' + esc(r.dept || '미분류') + '</span>' : '') + (a ? refBadge({ status: a.status || '등록됨' }) : '<span class="status-badge">AI 자산 미등록</span>') + '</div>'
+      + '<h3>' + esc(r.content || r.name) + '</h3><div class="au-sub">' + esc(r.name || '') + (r.start ? ' · ' + esc(r.start) + ' 시작' : '') + '</div>' + eff
+      + '<div class="au-meta">' + (a && a.assignee ? '담당 ' + esc(a.assignee) : '담당 미표기') + (a ? ' · ' + esc(a.no) : '') + '</div>' + auResultChips(a, 3)
+      + '<div class="au-actions">' + (a ? '<button type="button" class="btn-secondary" data-auasset="' + esc(a.name) + '" style="padding:8px 14px;font-size:13px">AI 자산에서 보기</button>' : '<button type="button" class="btn-secondary" data-aunew="' + esc(AU_TEAM_DEPT[it.team] || '') + '" style="padding:8px 14px;font-size:13px">AI 자산으로 등록</button>') + '</div></div>';
+  }
+  function renderAutomations() {
+    const st = $('#auStatus'); if (!st) return;
+    st.className = 'sheet-status ' + (GAS_OK() && AU.rows.length ? 'connected' : 'local');
+    st.textContent = !GAS_OK() ? '로컬 저장 모드 (구글 시트 연동 시 표시됩니다)' : (AU.rows.length ? '성과측정 시트 연동 · ' + (AU.updated || '') : '불러오는 중...');
+    const all = auItems();
+    const hours = AU.rows.reduce(function (s, r) { return s + (r.hours || 0); }, 0);
+    const teams = {}, types = {}; all.forEach(function (it) { teams[it.team] = (teams[it.team] || 0) + 1; types[it.r.type || '기타'] = (types[it.r.type || '기타'] || 0) + 1; });
+    const order = AU_TEAMS.concat(teams['미지정'] ? ['미지정'] : []);
+    const withRes = all.filter(function (it) { return it.a && (it.a.results || []).length; }).length;
+    const activeTeams = order.filter(function (t) { return teams[t]; }).length;
+    $('#auStats').innerHTML = [['등록 자동화', AU.rows.length, '건'], ['월 절감 시간 (작성자 입력 기준)', AU.rows.length ? auHours(hours).toLocaleString() : 0, '시간'], ['자동화가 있는 팀', activeTeams, '개 / 6개 팀'], ['결과물 등록', withRes, '건']].map(function (c) { return '<div class="counter-card"><div class="label">' + c[0] + '</div><div class="value">' + c[1] + '</div><div class="unit">' + c[2] + '</div></div>'; }).join('');
+    const tc = {}; order.forEach(function (t) { tc[t] = teams[t] || 0; });
+    $('#auDist').innerHTML = AU.rows.length ? auBars('팀별', tc, order) + auBars('유형별', types, Object.keys(types).sort(function (a, b) { return types[b] - types[a]; })) : '';
+    $('#auTeamTabs').innerHTML = ['전체'].concat(order).map(function (t) { return '<button type="button" class="cat-btn' + (AU.team === t ? ' active' : '') + '" data-auteam="' + esc(t) + '">' + esc(t) + (t === '전체' ? ' ' + all.length : ' ' + (teams[t] || 0)) + '</button>'; }).join('');
+    $('#auTypeFilters').innerHTML = ['전체'].concat(Object.keys(types).sort()).map(function (k) { return '<button type="button" class="cat-btn' + (AU.type === k ? ' active' : '') + '" data-autype="' + esc(k) + '">' + (k === '전체' ? '유형 전체' : esc(k)) + '</button>'; }).join('');
+    $$('[data-auview]').forEach(function (b) { b.classList.toggle('active', b.dataset.auview === AU.view); });
+    $('#auTeams').style.display = AU.view === 'card' ? '' : 'none'; $('#auTableWrap').style.display = AU.view === 'table' ? '' : 'none';
+    const list = auFiltered(all), filtering = !!(AU.q.trim() || AU.type !== '전체');
+    const shown = order.filter(function (t) { return AU.team === '전체' || AU.team === t; });
+    $('#auTeams').innerHTML = shown.map(function (t) {
+      const mine = list.filter(function (it) { return it.team === t; });
+      const sum = all.filter(function (it) { return it.team === t; }).reduce(function (s, it) { return s + (it.r.hours || 0); }, 0);
+      const body = mine.length ? '<div class="au-grid">' + mine.map(auCard).join('') + '</div>' : '<div class="au-empty">' + (filtering && (teams[t] || 0) ? '조건에 맞는 자동화가 없습니다.' : '아직 등록된 자동화가 없습니다. ' + (t === '미지정' ? '' : t + '에서 어사이드로 만든 자동화가 있으면 등록해 주세요.')) + '</div>';
+      return '<section class="au-team"><div class="au-team-head"><div><span class="eyebrow">TEAM</span><h2>' + esc(t === '미지정' ? '팀 미지정' : t) + '</h2></div><div class="au-team-sum">' + (teams[t] || 0) + '건' + (sum > 0 ? ' · 월 약 ' + auHours(sum) + '시간 절감' : '') + '</div>' + (t === '미지정' ? '' : '<button type="button" class="btn-secondary" data-aunew="' + esc(AU_TEAM_DEPT[t] || '') + '" style="padding:8px 14px;font-size:13px">+ ' + esc(t) + ' 자동화 등록</button>') + '</div>' + body + '</section>';
+    }).join('');
+    const rowsT = list.filter(function (it) { return AU.team === '전체' || it.team === AU.team; }).sort(function (a, b) { return order.indexOf(a.team) - order.indexOf(b.team); });
+    $('#auTableBody').innerHTML = rowsT.map(function (it) {
+      const r = it.r, a = it.a;
+      return '<tr><td>' + esc(it.team === '미지정' ? '팀 미지정' : it.team) + '</td><td>' + esc(r.no) + '</td><td><b>' + esc(r.content || r.name) + '</b></td><td>' + esc(r.name || '') + '</td><td>' + esc(r.type || '') + '</td><td>' + (a && a.assignee ? esc(a.assignee) : '-') + '</td><td>' + (r.before > 0 ? r.before + ' → ' + r.after : '-') + '</td><td>' + (r.weekly || '-') + '</td><td>' + (r.hours > 0 ? auHours(r.hours) : '-') + '</td><td>' + (a ? esc(a.status || '등록됨') : '미등록') + '</td><td>' + ((a && (a.results || []).length) ? (a.results || []).length + '건' : '-') + '</td></tr>';
+    }).join('') || '<tr><td colspan="11" style="text-align:center;color:#8B9096;padding:20px">조건에 맞는 자동화가 없습니다.</td></tr>';
+  }
+  function loadAutomations() {
+    if (!GAS_OK()) { renderAutomations(); return Promise.resolve(); }
+    return fetch(SHEET_ENDPOINT + '?type=dashboard').then(function (r) { return r.json(); }).then(function (j) {
+      if (j && j.ok && Array.isArray(j.rows)) { AU.rows = j.rows; AU.updated = j.updated || ''; }
+      renderAutomations();
+    }).catch(function () { renderAutomations(); });
+  }
+  function bindAutomations() {
+    if (!$('#auTeams')) return;
+    $('#auSearch').addEventListener('input', function (e) { AU.q = e.target.value; renderAutomations(); });
+    $('#auSort').addEventListener('change', function (e) { AU.sort = e.target.value; renderAutomations(); });
+    $('#auRefresh').addEventListener('click', function () { $('#auStatus').textContent = '불러오는 중...'; loadAutomations(); });
+    $('#page-automations').addEventListener('click', function (e) {
+      const tm = e.target.closest('[data-auteam]'), t = e.target.closest('[data-autype]'), v = e.target.closest('[data-auview]'), s = e.target.closest('[data-auasset]'), n = e.target.closest('[data-aunew]');
+      if (tm) { AU.team = tm.dataset.auteam; renderAutomations(); }
+      if (t) { AU.type = t.dataset.autype; renderAutomations(); }
+      if (v) { AU.view = v.dataset.auview; renderAutomations(); }
+      if (s) { go('assets'); const inp = $('#assetSearch'); if (inp) { inp.value = s.dataset.auasset; inp.dispatchEvent(new Event('input', { bubbles: true })); } }
+      if (n) { go('manual'); const d = $('#mnDept'); if (d && n.dataset.aunew) { d.value = n.dataset.aunew; d.dispatchEvent(new Event('change', { bubbles: true })); } }
+    });
+    renderAutomations();
+  }
   function bindExtra() {
+    bindAutomations();
     bindSkills();
     bindQuick();
     bindRefs();
@@ -5149,7 +5322,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 <div class="fab"><button type="button" class="fab-top" id="fabTop" aria-label="맨 위로">&#8593;</button><a class="fab-chat" href="#requests" aria-label="기능 추가 요청" title="기능 추가 요청"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.6-5A8.5 8.5 0 1 1 21 11.5z"/><circle cx="8.5" cy="11.5" r=".6" fill="#fff"/><circle cx="12.5" cy="11.5" r=".6" fill="#fff"/><circle cx="16.5" cy="11.5" r=".6" fill="#fff"/></svg></a></div>
 <script>
 (function () {
-  var m = { quick: 'QUICK START', precheck: 'BEFORE YOU START', guide: 'GUIDE', basic: 'BASIC PROMPT', functions: 'WORK FUNCTIONS', builder: 'PROMPT BUILDER', refs: 'REFERENCE', assets: 'AI ASSETS', manual: 'REGISTER', dashboard: 'SAVINGS', requests: 'REQUEST', notice: 'NOTICE' };
+  var m = { quick: 'QUICK START', automations: 'AUTOMATIONS', precheck: 'BEFORE YOU START', guide: 'GUIDE', basic: 'BASIC PROMPT', functions: 'WORK FUNCTIONS', builder: 'PROMPT BUILDER', refs: 'REFERENCE', assets: 'AI ASSETS', manual: 'REGISTER', dashboard: 'SAVINGS', requests: 'REQUEST', notice: 'NOTICE' };
   Object.keys(m).forEach(function (k) { var t = document.querySelector('#page-' + k + ' .section-title'); if (t) t.setAttribute('data-eyebrow', m[k]); });
   var top = document.getElementById('fabTop');
   if (top) top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
