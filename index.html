@@ -1429,6 +1429,10 @@ img { max-width: 100%; display: block; }
 .asset-table td:nth-child(3){min-width:260px}
 .asset-table td:nth-child(5),.asset-table td:nth-child(6),.asset-table td:nth-child(7){white-space:nowrap}
 .asset-table td .rebuild-btn{white-space:nowrap}
+.res-box{margin-top:2px}
+.res-chip{display:inline-block;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom;background:#E0F5F0;border:1px solid #BFE5DC;color:#0E5A4C;border-radius:999px;padding:2px 10px;font-size:12px;margin:4px 4px 0 0;text-decoration:none;font-weight:600}
+.res-chip:hover{background:#C9EBE2}
+.res-more{font-size:12px;color:#8A877E;margin-right:6px}
 #sendGuide{background:#E0F5F0;border:1px solid #BFE5DC;border-radius:10px;padding:10px 14px;margin:0 0 12px;font-size:13px;line-height:1.7}
 #sendGuide kbd{background:#fff;border:1px solid #C9C5B8;border-radius:4px;padding:0 5px;font-size:12px}
 #fileReminder{display:none;background:#FDF5E0;border:1px solid #F0D9A0;border-radius:10px;padding:10px 14px;margin:0 0 12px;font-size:13px;line-height:1.6}
@@ -3426,7 +3430,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#assetBody').innerHTML = list.length ? list.map((a) => `
       <tr>
         <td>${esc(a.no)}</td>
-        <td><strong>${esc(a.name)}</strong>${(a.sample && /^https?:/.test(a.sample)) ? '<div><a href="' + esc(a.sample) + '" target="_blank" rel="noopener noreferrer" style="font-size:12px">샘플 결과물 ↗</a></div>' : ''}<div style="margin-top:5px"><button type="button" class="rebuild-btn" data-results="${esc(a.no)}">${(a.results && a.results.length) ? '📎 결과물 ' + a.results.length : '📤 결과물 올리기'}</button></div></td>
+        <td><strong>${esc(a.name)}</strong>${resultChips(a)}</td>
         <td>${esc(a.content)}</td>
         <td><span class="tag">${esc(a.type)}</span></td>
         <td>${esc(normDept(a.dept))}</td>
@@ -4240,6 +4244,15 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     return '<div class="rc-box" style="margin:0 0 14px"><div style="font-weight:800;margin-bottom:4px">✅ 잘 된 결과물 샘플 <span style="font-weight:400;color:#8A877E;font-size:12px">(레퍼런스로 활용하세요)</span></div>'
       + list.map(function (a) { return '<div style="font-size:13px;padding:2px 0"><a href="' + esc(a.sample) + '" target="_blank" rel="noopener noreferrer">' + esc(a.name) + '</a> <span class="status-badge' + (a.status === '검증됨' ? ' ok' : '') + '">' + esc(a.status || '테스트 중') + '</span></div>'; }).join('') + '</div>';
   }
+  function resultChips(a) {
+    const rs = (a.results || []).filter(function (r) { return r && /^https?:/.test(r.url); });
+    const sample = a.sample && /^https?:/.test(a.sample) ? a.sample : '';
+    const cut = function (s) { s = String(s || ''); return s.length > 16 ? s.slice(0, 15) + '…' : s; };
+    let h = rs.slice(0, 3).map(function (r) { return '<a class="res-chip" href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" title="' + esc(r.name) + ' (새 탭에서 열기)">' + (sample === r.url ? '⭐ ' : (r.kind === 'file' ? '📄 ' : '🔗 ')) + esc(cut(r.name)) + '</a>'; }).join('');
+    if (sample && !rs.some(function (r) { return r.url === sample; })) h += '<a class="res-chip" href="' + esc(sample) + '" target="_blank" rel="noopener noreferrer">⭐ 샘플 결과물</a>';
+    if (rs.length > 3) h += '<span class="res-more">외 ' + (rs.length - 3) + '개</span>';
+    return '<div class="res-box">' + h + '<div><button type="button" class="rebuild-btn" data-results="' + esc(a.no) + '">' + (rs.length ? '결과물 관리' : '📤 결과물 올리기') + '</button></div></div>';
+  }
   function normDept(d) {
     d = String(d || '').trim(); if (!d) return '미지정';
     d = d.replace(/팀$/, '');
@@ -4265,7 +4278,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const a = rsAsset(); const list = (a && a.results) || [];
     $('#rsList').innerHTML = list.length ? list.map(function (r, i) {
       const isSample = a.sample && a.sample === r.url;
-      return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #EEE;font-size:13px;flex-wrap:wrap"><span>' + (r.kind === 'file' ? '📄' : '🔗') + '</span><a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" style="flex:1;min-width:140px;font-weight:700">' + esc(r.name) + '</a><span style="color:#8A877E;font-size:12px">' + (r.size ? fmtSize(r.size) + ' · ' : '') + esc(String(r.date || '').slice(0, 10)) + '</span>'
+      return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #EEE;font-size:13px;flex-wrap:wrap"><span>' + (r.kind === 'file' ? '📄' : '🔗') + '</span><a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" style="flex:1;min-width:140px;font-weight:700">' + esc(r.name) + '</a><a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding:2px 8px;font-size:12px;text-decoration:none">열기 ↗</a><span style="color:#8A877E;font-size:12px">' + (r.size ? fmtSize(r.size) + ' · ' : '') + esc(String(r.date || '').slice(0, 10)) + '</span>'
         + (isSample ? '<span class="status-badge ok">샘플 지정됨</span>' : '<button type="button" class="btn-secondary" style="padding:2px 8px;font-size:12px" data-rssample="' + i + '">샘플로 지정</button>')
         + '<button type="button" class="asset-del-btn" data-rsdel="' + i + '" aria-label="결과물 삭제">🗑</button></div>';
     }).join('') : '<div style="padding:10px 0;color:#8A877E;font-size:13px">아직 올린 결과물이 없습니다.</div>';
