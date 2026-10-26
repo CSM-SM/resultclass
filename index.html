@@ -1778,6 +1778,51 @@ input, textarea, select { font-size: 14px; }
   .fab { right: 16px; bottom: 16px; }
 }
 
+
+/* ============================================================
+   가로 스크롤 제거 · 반응형 표 (좁은 화면에서는 카드형으로 쌓임)
+   ============================================================ */
+.main { min-width: 0; overflow-x: clip; }
+.page-content { min-width: 0; }
+.asset-table-wrap { overflow: hidden; }
+.asset-table, .gd-table { min-width: 0 !important; width: 100%; }
+.asset-table th, .asset-table td, .gd-table th, .gd-table td { min-width: 0 !important; white-space: normal !important; overflow-wrap: anywhere; word-break: keep-all; }
+.asset-table td .rebuild-btn, .asset-table td .asset-del-btn { white-space: normal; margin: 2px 4px 2px 0; }
+.asset-table td .cell { min-width: 0; }
+.asset-table td .res-chip, .asset-table td .badge-auto, .asset-table td .badge-manual { white-space: normal; }
+.res-chip { max-width: 100%; }
+pre.gd-code { max-width: 100%; }
+img, svg, video { max-width: 100%; }
+#page-assets .asset-table th:nth-child(1) { width: 58px; }
+#page-assets .asset-table th:nth-child(2) { width: 27%; }
+#page-assets .asset-table th:nth-child(4) { width: 138px; }
+#page-assets .asset-table th:nth-child(5) { width: 84px; }
+#page-assets .asset-table th:nth-child(6) { width: 132px; }
+.as-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 4px 0 2px; font-size: 11.5px; color: #8B9096; }
+.as-hrs { font-size: 12px; color: #0E8F7B; font-weight: 600; margin-top: 4px; }
+.as-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.as-actions .rebuild-btn { margin: 0 !important; }
+@media (max-width: 980px) { .as-actions { flex-direction: row; flex-wrap: wrap; } }
+.asset-table th, .asset-table td { padding: 10px 10px; }
+@media (max-width: 1180px) {
+  .counter-grid { grid-template-columns: 1fr 1fr; }
+  .au-box .au-bar b { flex-basis: 120px !important; }
+}
+@media (max-width: 980px) {
+  table.asset-table, table.gd-table, .asset-table thead, .asset-table tbody, .asset-table tr, .asset-table td, .gd-table thead, .gd-table tbody, .gd-table tr, .gd-table td { display: block; width: 100% !important; }
+  .asset-table thead, .gd-table thead { display: none; }
+  .asset-table tr, .gd-table tr { padding: 12px 14px; border-bottom: 1px solid #F0F1F3; }
+  .asset-table tr:last-child, .gd-table tr:last-child { border-bottom: 0; }
+  .asset-table td, .gd-table td { display: flex; gap: 10px; align-items: flex-start; padding: 4px 0 !important; border: 0 !important; background: none !important; }
+  .asset-table td[data-label]::before, .gd-table td[data-label]::before { content: attr(data-label); flex: 0 0 74px; font-size: 11.5px; font-weight: 700; color: #8B9096; padding-top: 2px; }
+  .asset-table td > *, .gd-table td > * { min-width: 0; }
+  .as-teamrow td { display: block; padding: 0 !important; }
+  .as-teamrow { padding: 0 !important; }
+  .as-teamrow td { background: #F6F7F8 !important; padding: 12px 14px !important; }
+  .as-empty { display: block !important; }
+  .asset-table td .cell, .gd-table td .cell { flex: 1; min-width: 0; }
+  .page [style*="display:flex"] { flex-wrap: wrap; }
+}
 </style>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -2260,7 +2305,7 @@ input, textarea, select { font-size: 14px; }
         <div class="cat-filters" id="asTypeFilters" aria-label="유형 필터" style="margin-top:-6px"></div>
         <div class="asset-table-wrap">
           <table class="asset-table">
-            <thead><tr><th>번호</th><th>자산명</th><th>내용</th><th>유형</th><th>구분</th><th>월 절감(시간)</th><th>담당자</th><th>수정일</th><th>관리</th></tr></thead>
+            <thead><tr><th>번호</th><th>자산명</th><th>내용</th><th>구분 · 절감</th><th>담당자</th><th>관리</th></tr></thead>
             <tbody id="assetBody"></tbody>
           </table>
         </div>
@@ -4092,20 +4137,21 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const rowHtml = function (it) {
       const a = it.a, hrs = it.r.hours || 0;
       const when = it.isAuto && (a.autoSchedule || it.r.weekly) ? auWhen(it) : '';
-      return '<tr><td>' + esc(a.no) + '</td><td><strong>' + esc(a.name) + '</strong>' + resultChips(a) + '</td><td>' + esc(a.content) + '</td><td><span class="tag">' + esc(a.type) + '</span></td>'
-        + '<td>' + (it.isAuto ? '<span class="badge-auto">자동화</span>' + (when ? ' <small>' + esc(when) + '</small>' : '') + (a.perf === '기입됨' ? ' <small title="AI TF팀 성과측정 시트에 기입됨">📊</small>' : '') : '<span class="badge-manual">수동</span>') + '</td>'
-        + '<td>' + (hrs > 0 ? auHours(hrs) : '-') + '</td>'
+      const canView = (a.savedFields && a.savedFields.manualPrompt) || (a.cardId && cardById(a.cardId));
+      return '<tr><td>' + esc(a.no) + '</td>'
+        + '<td><strong>' + esc(a.name) + '</strong><div class="as-meta"><span class="tag">' + esc(a.type) + '</span><span>' + esc(String(a.updated || a.createdAt || '').slice(0, 10) || '-') + '</span></div>' + resultChips(a) + '</td>'
+        + '<td>' + esc(a.content) + '</td>'
+        + '<td>' + (it.isAuto ? '<span class="badge-auto">자동화</span>' + (when ? ' <small>' + esc(when) + '</small>' : '') + (a.perf === '기입됨' ? ' <small title="AI TF팀 성과측정 시트에 기입됨">📊</small>' : '') : '<span class="badge-manual">수동</span>') + (hrs > 0 ? '<div class="as-hrs">월 ' + auHours(hrs) + '시간 절감</div>' : '') + '</td>'
         + '<td>' + (a.assignee ? esc(a.assignee) : '<button type="button" class="rebuild-btn" data-setowner="' + esc(a.no) + '">담당자 지정</button>') + '</td>'
-        + '<td style="white-space:nowrap;font-size:12px">' + esc(String(a.updated || a.createdAt || '').slice(0, 10) || '-') + '</td>'
-        + '<td>' + (((a.savedFields && a.savedFields.manualPrompt) || (a.cardId && cardById(a.cardId))) ? '<button type="button" class="rebuild-btn" data-viewprompt="' + esc(a.no) + '">프롬프트 보기</button> ' : '') + '<button type="button" class="rebuild-btn" data-rebuild="' + esc(a.no) + '"' + (a.cardId && cardById(a.cardId) ? '' : ' disabled title="연결된 기능이 없습니다"') + '>이 자산으로 다시 만들기</button> <button type="button" class="asset-del-btn" data-delasset="' + esc(a.no) + '" aria-label="삭제">🗑</button></td></tr>';
+        + '<td><div class="as-actions">' + (canView ? '<button type="button" class="rebuild-btn" data-viewprompt="' + esc(a.no) + '">프롬프트 보기</button>' : '') + '<button type="button" class="rebuild-btn" data-rebuild="' + esc(a.no) + '"' + (a.cardId && cardById(a.cardId) ? ' title="이 자산의 기능·입력값으로 빌더 열기"' : ' disabled title="연결된 기능이 없습니다"') + '>다시 만들기</button><button type="button" class="asset-del-btn" data-delasset="' + esc(a.no) + '" aria-label="삭제">🗑</button></div></td></tr>';
     };
     $('#assetBody').innerHTML = shown.map(function (t) {
       const mine = list.filter(function (it) { return it.team === t; });
       const sum = all.filter(function (it) { return it.team === t; }).reduce(function (s, it) { return s + (it.r.hours || 0); }, 0);
-      const head = '<tr class="as-teamrow"><td colspan="9"><div class="as-teamhead"><b>' + esc(t === '미지정' ? '팀 미지정' : t) + '</b><span>' + (teams[t] || 0) + '건' + (sum > 0 ? ' · 월 약 ' + auHours(sum) + '시간 절감' : '') + '</span>' + (t === '미지정' ? '' : '<button type="button" class="btn-secondary" data-aunew="' + esc(AU_TEAM_DEPT[t] || '') + '" style="padding:6px 12px;font-size:12.5px">+ ' + esc(t) + ' 자산 등록</button>') + '</div></td></tr>';
-      const body = mine.length ? mine.map(rowHtml).join('') : '<tr><td colspan="9" class="as-empty">' + (filtering && (teams[t] || 0) ? '조건에 맞는 자산이 없습니다.' : '아직 등록된 자산이 없습니다.') + '</td></tr>';
+      const head = '<tr class="as-teamrow"><td colspan="6"><div class="as-teamhead"><b>' + esc(t === '미지정' ? '팀 미지정' : t) + '</b><span>' + (teams[t] || 0) + '건' + (sum > 0 ? ' · 월 약 ' + auHours(sum) + '시간 절감' : '') + '</span>' + (t === '미지정' ? '' : '<button type="button" class="btn-secondary" data-aunew="' + esc(AU_TEAM_DEPT[t] || '') + '" style="padding:6px 12px;font-size:12.5px">+ ' + esc(t) + ' 자산 등록</button>') + '</div></td></tr>';
+      const body = mine.length ? mine.map(rowHtml).join('') : '<tr><td colspan="6" class="as-empty">' + (filtering && (teams[t] || 0) ? '조건에 맞는 자산이 없습니다.' : '아직 등록된 자산이 없습니다.') + '</td></tr>';
       return head + body;
-    }).join('') || '<tr><td colspan="9"><div class="empty-state"><div class="icon">🗂️</div><p>등록된 자산이 없습니다.</p></div></td></tr>';
+    }).join('') || '<tr><td colspan="6"><div class="empty-state"><div class="icon">🗂️</div><p>등록된 자산이 없습니다.</p></div></td></tr>';
   }
 
   /* 모달 */
@@ -5460,6 +5506,23 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 (function () {
   var m = { quick: 'QUICK START', as: 'AS CENTER', setup: 'ASIDE SETUP', precheck: 'BEFORE YOU START', guide: 'GUIDE', basic: 'BASIC PROMPT', functions: 'WORK FUNCTIONS', builder: 'PROMPT BUILDER', refs: 'REFERENCE', assets: 'AI ASSETS', manual: 'REGISTER', dashboard: 'SAVINGS', requests: 'REQUEST', notice: 'NOTICE' };
   Object.keys(m).forEach(function (k) { var t = document.querySelector('#page-' + k + ' .section-title'); if (t) t.setAttribute('data-eyebrow', m[k]); });
+  function labelTables() {
+    document.querySelectorAll('table.asset-table, table.gd-table').forEach(function (t) {
+      var ths = Array.prototype.map.call(t.querySelectorAll('thead th'), function (h) { return h.textContent.trim(); });
+      if (!ths.length) return;
+      t.querySelectorAll('tbody tr').forEach(function (tr) {
+        if (tr.classList.contains('as-teamrow')) return;
+        Array.prototype.forEach.call(tr.children, function (td, i) {
+          if (td.tagName !== 'TD' || td.colSpan > 1) return;
+          if (ths[i] && td.getAttribute('data-label') !== ths[i]) td.setAttribute('data-label', ths[i]);
+          if (t.classList.contains('asset-table') && !(td.children.length === 1 && td.firstElementChild.classList.contains('cell')) && td.childNodes.length) { var w = document.createElement('div'); w.className = 'cell'; while (td.firstChild) w.appendChild(td.firstChild); td.appendChild(w); }
+        });
+      });
+    });
+  }
+  var lblT = null, pcEl = document.querySelector('.page-content');
+  if (pcEl && window.MutationObserver) new MutationObserver(function () { clearTimeout(lblT); lblT = setTimeout(labelTables, 80); }).observe(pcEl, { childList: true, subtree: true });
+  labelTables();
   var top = document.getElementById('fabTop');
   if (top) top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
   window.addEventListener('scroll', function () { if (top) top.classList.toggle('show', window.scrollY > 300); }, { passive: true });
