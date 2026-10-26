@@ -1741,6 +1741,14 @@ input, textarea, select { font-size: 14px; }
 .su-path code { background: #111; color: #E9ECEF; border-radius: 8px; padding: 6px 12px; font-size: 13px; font-family: Consolas, "Courier New", monospace; }
 @media (max-width: 980px) { .su-layout { grid-template-columns: 1fr; } .su-side { position: static; max-height: none; } .su-panel { padding: 22px 18px; } }
 
+.as-hours { margin: 14px 0 0; }
+@media (max-width: 980px) { .as-hours .au-bar b { flex-basis: 110px !important; } }
+.as-teamrow td { background: #F6F7F8; padding: 14px 16px; border-top: 8px solid #fff; }
+.as-teamhead { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.as-teamhead b { font-size: 17px; color: #1b1b1b; letter-spacing: -.4px; }
+.as-teamhead span { font-size: 13px; color: #5C6167; }
+.as-teamhead button { margin-left: auto; }
+.as-empty { text-align: center; color: #8B9096; font-size: 13px; padding: 18px; }
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -1790,7 +1798,7 @@ input, textarea, select { font-size: 14px; }
       <a class="nav-item" href="#setup" data-page="setup"><span class="nav-icon">🧭</span>어사이드 초기 세팅</a>
       <a class="nav-item" href="#quick" data-page="quick"><span class="nav-icon">⚡</span>간단 사용법</a><a class="nav-item" href="#precheck" data-page="precheck"><span class="nav-icon">✅</span>업무 시작 전 확인사항</a><a class="nav-item" href="#guide" data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a></div></div>
       <div class="nav-group"><span class="nav-group-label">업무 도구</span><div class="nav-drop"><a class="nav-item" href="#basic" data-page="basic"><span class="nav-icon">📝</span>기본 프롬프트</a><a class="nav-item" href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a><a class="nav-item" href="#refs" data-page="refs"><span class="nav-icon">📚</span>레퍼런스 참고하기</a></div></div>
-      <div class="nav-group"><span class="nav-group-label">자산</span><div class="nav-drop"><a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a><a class="nav-item" href="#automations" data-page="automations"><span class="nav-icon">⚙️</span>자동화 리스트</a><a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a></div></div>
+      <div class="nav-group"><span class="nav-group-label">자산</span><div class="nav-drop"><a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>팀별 AI 자산</a><a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a></div></div>
       <div class="nav-group"><span class="nav-group-label">현황</span><div class="nav-drop"><a class="nav-item" href="#dashboard" data-page="dashboard"><span class="nav-icon">📊</span>절감 대시보드</a></div></div>
       <div class="nav-group"><span class="nav-group-label">소통</span><div class="nav-drop"><a class="nav-item" href="#requests" data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a><a class="nav-item" href="#notice" data-page="notice"><span class="nav-icon">📢</span>공지</a></div></div>
     <div class="nav-group nav-group-as"><span class="nav-group-label">AS</span><div class="nav-drop"><a class="nav-item" href="#as" data-page="as"><span class="nav-icon">🛠️</span>AS (고장·오류 시)</a></div></div>
@@ -2236,108 +2244,25 @@ input, textarea, select { font-size: 14px; }
 
       <!-- ═══ AI 자산 ═══ -->
       <section class="page" id="page-assets">
-        <h2 class="section-title">AI 자산</h2>
-        <p class="section-sub">등록된 자산을 확인하고, '다시 만들기'로 같은 기능·같은 입력값의 빌더를 엽니다. 각 자산의 [결과물] 버튼에서 결과 파일이나 링크를 올리고 확인할 수 있습니다.</p>
+        <h2 class="section-title">팀별 AI 자산</h2>
+        <p class="section-sub">자동화와 수동 자산을 팀별로 한곳에 모았습니다. 자산을 등록하면 <b>고른 부서에 따라 해당 팀에 자동으로 올라가고</b>, 1분마다 새로 불러옵니다. '다시 만들기'로 같은 기능·같은 입력값의 빌더를 열고, [결과물]에서 파일이나 링크를 올릴 수 있습니다. 팀 안에서 자산화하고 인수인계할 때 쓰세요.</p>
         <div class="sheet-status local" id="sheetStatus">로컬 저장 모드</div>
+        <div class="counter-grid" id="asStats"></div>
+        <div class="au-box as-hours" id="asHours"></div>
+        <div class="au-teamtabs" id="asTeamTabs" aria-label="팀 선택"></div>
         <div class="asset-toolbar">
           <div class="search-wrap"><span class="search-icon">🔍</span><input type="search" id="assetSearch" placeholder="자산 검색" aria-label="자산 검색"></div>
           <button type="button" class="btn-secondary" id="exportCsvBtn">CSV 내보내기</button>
           <button type="button" class="btn-gold" id="newAssetBtn">+ 자산 등록</button>
         </div>
+        <div class="cat-filters" id="asKindFilters" aria-label="구분 필터"></div>
+        <div class="cat-filters" id="asTypeFilters" aria-label="유형 필터" style="margin-top:-6px"></div>
         <div class="asset-table-wrap">
           <table class="asset-table">
-            <thead><tr><th>번호</th><th>자산명</th><th>내용</th><th>유형</th><th>부서</th><th>상태</th><th>자동화</th><th>담당자</th><th>수정일</th><th>관리</th></tr></thead>
+            <thead><tr><th>번호</th><th>자산명</th><th>내용</th><th>유형</th><th>구분</th><th>월 절감(시간)</th><th>담당자</th><th>수정일</th><th>관리</th></tr></thead>
             <tbody id="assetBody"></tbody>
           </table>
         </div>
-      </section>
-
-      <!-- ═══ 자동화 리스트 ═══ -->
-      <section class="page" id="page-automations">
-        <h2 class="section-title">자동화 리스트</h2>
-        <p class="section-sub">팀별로 어사이드 자동화와 수동 자산을 모아 봅니다. 자산을 등록하면 <b>선택한 부서에 따라 해당 팀 목록에 자동으로 올라가며</b>, 이 화면은 1분마다 자동으로 새로 불러옵니다. 팀 안에서 자산화하고 인수인계할 때 쓰세요.</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:18px">
-          <div class="sheet-status local" id="auStatus" style="margin:0">불러오는 중...</div>
-          <button type="button" class="btn-secondary" id="auRefresh">새로고침</button>
-          <button type="button" class="btn-gold" data-aunew="" style="padding:10px 18px">+ 자동화 등록하기</button>
-          <a class="btn-secondary" href="https://docs.google.com/spreadsheets/d/1IaqVj-2_rKk8s1secxB-x-DmUeY9nTO91vXakBAty7A/edit" target="_blank" rel="noopener noreferrer" style="text-decoration:none">성과측정 시트 열기 ↗</a>
-        </div>
-        <div class="counter-grid" id="auStats"></div>
-        <div class="au-dist" id="auDist"></div>
-        <div class="au-teamtabs" id="auTeamTabs" aria-label="팀 선택"></div>
-        <div class="filter-bar" style="margin:6px 0 10px">
-          <div class="search-wrap"><span class="search-icon">🔍</span><input type="search" id="auSearch" placeholder="자동화·담당자 검색" aria-label="자동화 검색"></div>
-          <select class="form-control" id="auSort" style="max-width:200px" aria-label="정렬"><option value="recent">최근 등록순</option><option value="hours">월 절감 시간 많은 순</option><option value="name">이름순</option></select>
-          <div class="au-view"><button type="button" class="cat-btn active" data-auview="card">카드</button><button type="button" class="cat-btn" data-auview="table">표</button></div>
-        </div>
-        <div class="cat-filters" id="auKindFilters" aria-label="구분 필터"></div>
-        <div class="cat-filters" id="auTypeFilters" aria-label="유형 필터" style="margin-top:-6px"></div>
-        <div id="auTeams"></div>
-        <div class="asset-table-wrap" id="auTableWrap" style="display:none"><table class="asset-table"><thead><tr><th>팀</th><th>번호</th><th>자산·자동화</th><th>구분</th><th>유형</th><th>담당자</th><th>기존 → 개선(분)</th><th>주 횟수</th><th>월 절감(시간)</th><th>상태</th><th>결과물</th></tr></thead><tbody id="auTableBody"></tbody></table></div>
-        <div class="bp-hint" style="margin:14px 0 0">※ 팀은 자산 등록 때 고른 부서(또는 성과측정 시트의 부서) 기준으로 자동 분류됩니다(마케팅→마케팅팀, 영업→영업팀, 상품기획→개발팀, 디자인→디자인팀, 해외영업→해외영업팀, 공통·전사→공용). 부서가 위 목록에 없으면 "팀 미지정"에 표시됩니다. 소요시간과 절감 시간은 시트에 작성자가 입력한 값 기준 추정치이며 별도 검증 전입니다. 금액·인원별 성과는 표시하지 않습니다. 절감 산식과 가정은 [절감 대시보드]에서 확인하세요.</div>
-      </section>
-
-      <!-- ═══ AS ═══ -->
-      <section class="page" id="page-as">
-        <h2 class="section-title">AS (어사이드 고장·오류 시)</h2>
-        <p class="section-sub">어사이드가 멈추거나 오류가 날 때 순서대로 따라 해 보세요. 대부분은 작업 수를 줄이고 재부팅하면 해결됩니다. 그래도 반복되면 최성민 과장에게 문의해 주세요.</p>
-
-        <div class="qk-flow" aria-label="AS 순서">
-          <div class="qk-node"><span class="qk-no">1</span><b>동시 작업 확인</b><small>진행 중인 작업이 3개를 넘는지 보고, 2개 이내로 줄입니다</small></div>
-          <div class="qk-arrow" aria-hidden="true">→</div>
-          <div class="qk-node qk-hl"><span class="qk-no">2</span><b>컴퓨터 재부팅</b><small>멈추거나 반응이 없으면 컴퓨터를 재부팅한 뒤 어사이드를 다시 실행합니다</small></div>
-          <div class="qk-arrow" aria-hidden="true">→</div>
-          <div class="qk-node"><span class="qk-no">3</span><b>최성민 과장 문의</b><small>재부팅 후에도 같은 오류가 계속되면 문의합니다</small></div>
-        </div>
-
-        <div class="gd-callout gd-mint"><b>동시 작업은 권장 2개, 최대 3개입니다.</b> 처음 쓰는 분은 한 번에 하나씩 끝내는 것부터 시작하세요. 작업을 많이 열어 두면 멈춤·오류가 늘 수 있으니, 끝난 작업은 닫고 새 작업을 시작합니다.</div>
-
-        <h3 class="gd-h">증상별 대처</h3>
-        <div class="asset-table-wrap gd-table-wrap">
-          <table class="gd-table">
-            <thead><tr><th>증상</th><th>먼저 해 볼 것</th><th>그래도 안 되면</th></tr></thead>
-            <tbody>
-              <tr><td><b>작업이 멈춤, 반응 없음, 너무 느림</b></td><td>동시 작업을 2개 이내로 줄이고, 컴퓨터를 재부팅합니다</td><td>같은 증상이 반복되면 최성민 과장에게 문의</td></tr>
-              <tr><td><b>"Aside can't connect to its local service" 같은 오류, 설정·대화가 안 열림</b></td><td>컴퓨터를 재부팅하고 어사이드를 다시 실행합니다</td><td>최성민 과장에게 문의 (아래 복구 방법은 담당자 안내에 따라 진행)</td></tr>
-              <tr><td><b>작업이 승인·답변을 기다림</b></td><td>오류가 아닙니다. 작업을 열어 요청을 확인하고 승인·거절하거나 답합니다</td><td>그래도 진행이 안 되면 재부팅</td></tr>
-              <tr><td><b>작업이 엉뚱한 방향으로 감</b></td><td>추가 지시를 보냅니다. Steer는 바로 반영, Queue는 현재 작업이 끝난 뒤 반영합니다</td><td>작업을 멈추고 새 작업으로 다시 시작</td></tr>
-            </tbody>
-          </table>
-        </div>
-
-        <h3 class="gd-h">문의할 때는 이렇게 알려 주세요</h3>
-        <div class="start-steps">
-          <div class="start-step"><b>누구에게</b><b style="display:inline">최성민 과장</b>에게 문의합니다. FLOW·구글챗 등 평소 쓰는 연락 수단을 이용하세요.</div>
-          <div class="start-step"><b>무엇을 알려 주나요</b>발생 시각, 하던 작업, 화면에 뜬 오류 메시지(스크린샷), 동시에 열어 둔 작업 수, 재부팅을 해 봤는지를 함께 알려 주세요.</div>
-          <div class="start-step"><b>직접 하지 마세요</b>폴더 삭제나 설정 초기화는 데이터가 사라질 수 있으니 담당자 안내 없이 직접 하지 않습니다.</div>
-        </div>
-
-        <details class="bp-card" style="max-width:none;margin-top:22px"><summary style="cursor:pointer;font-weight:800">담당자 안내에 따라 진행하는 복구 방법 (고급)</summary>
-          <p class="gd-p" style="margin-top:12px">아래는 최성민 과장이 문의를 받고 안내할 때 쓰는 복구 방법입니다. 데이터에 영향이 있을 수 있으니 담당자와 먼저 상의한 뒤 진행하세요. 숫자가 큰 단계일수록 영향이 큽니다.</p>
-          <div class="start-steps">
-            <div class="start-step"><b>1단계 설치 키 복구 (공식)</b>어사이드를 완전히 종료한 뒤(작업 관리자에서 남은 Aside 프로세스도 종료), PowerShell에서 아래 명령으로 <code>.aside</code> 폴더에 빈 파일 <code>repair-installation</code>을 만듭니다. 탐색기로 만들면 .txt가 붙으니 꼭 명령으로 만드세요. 그다음 어사이드를 다시 실행하고, 로그인과 비밀번호 관리자 잠금 해제를 다시 하라고 하면 따릅니다. 대화·루틴·메모리 파일은 그대로 남습니다.<pre class="gd-code">New-Item -ItemType File "$env:USERPROFILE\.aside\repair-installation"</pre></div>
-            <div class="start-step"><b>2단계 막힌 키 정리 (공식, Windows)</b>1단계 후에도 계속 재시작되면 공식 도움말의 "Clear a stuck key" 절차를 따릅니다. 명령이 길어 이 사이트에는 옮겨 적지 않았습니다. <a href="https://docs.aside.com/help/troubleshooting" target="_blank" rel="noopener noreferrer" style="color:#0E8F7B;font-weight:700">공식 문제 해결 페이지 열기 ↗</a></div>
-            <div class="start-step"><b>3단계 .aside 폴더 리셋 (사내 경험)</b>최성민 과장 PC에서 위 방법으로 해결되지 않아 폴더를 초기화하자 정상화된 방법입니다. <b>공식 안내가 아니라 사내에서 한 번 성공한 방법</b>입니다.<br>① 어사이드와 관련 프로세스를 모두 종료합니다.<br>② 탐색기 주소창에 <code>%USERPROFILE%</code>를 입력해 이동한 뒤 <code>.aside</code> 폴더 이름을 <code>.aside_old</code>로 바꿉니다. (백업 복사 없이 이름 변경만 합니다)<br>③ 어사이드를 다시 실행합니다. 새 <code>.aside</code> 폴더로 처음부터 시작합니다.</div>
-          </div>
-          <div class="gd-callout"><b>3단계 전에 꼭 알아두세요</b><br>· <code>.aside</code> 폴더에는 대화·작업 기록, 메모리, 사용자 스킬 같은 <b>로컬 데이터</b>가 들어 있습니다. 리셋하면 새 폴더에서는 비어 보이고, 다시 로그인과 초기 설정이 필요할 수 있습니다.<br>· 되돌리려면 어사이드를 종료하고, 새로 생긴 <code>.aside</code> 폴더를 다른 이름으로 바꾼 뒤 <code>.aside_old</code>를 다시 <code>.aside</code>로 바꿉니다.<br>· <code>.aside_old</code>는 <b>며칠 정상적으로 써 보고 문제가 없을 때 삭제</b>하세요. 그 전에는 복구용으로 남겨 둡니다.<br>· 작업이 멈춘 경우(승인 대기, 방향 이탈)에는 리셋하지 마세요.</div>
-          <p class="gd-note">출처: 1·2단계는 어사이드 공식 도움말(Troubleshoot Aside), 3단계는 사내 경험입니다. 맥은 <code>%USERPROFILE%\.aside</code> 대신 <code>~/.aside</code> 폴더입니다. 담당자가 해결하지 못하면 어사이드 지원팀(support@aside.com)에 시각, 증상, 오류 메시지, 그날의 로그 파일(<code>.aside\logs\daemon-날짜.log</code>)을 보냅니다.</p>
-        </details>
-      </section>
-
-      <!-- ═══ 어사이드 초기 세팅 ═══ -->
-      <section class="page" id="page-setup">
-        <h2 class="section-title">어사이드 초기 세팅 가이드</h2>
-        <p class="section-sub">어사이드 설정(Settings) 메뉴는 영문으로 되어 있습니다. 메뉴를 클릭하면 <b>설정 경로와 그 화면에서 할 수 있는 일</b>을 한글로 풀어 보여 드립니다. 어사이드 설정 화면의 왼쪽 메뉴 순서 그대로 정리했습니다.</p>
-        <div class="sec-head" style="margin:6px 0 12px"><span class="eyebrow">FIRST SETUP</span><h2 style="font-size:22px">처음 설정 순서 (권장)</h2></div>
-        <div class="su-steps" id="suSteps"></div>
-        <div class="su-layout">
-          <aside class="su-side" aria-label="설정 메뉴">
-            <div class="search-wrap" style="margin-bottom:10px"><span class="search-icon">🔍</span><input type="search" id="suSearch" placeholder="한글·영문으로 설정 찾기" aria-label="설정 검색"></div>
-            <div id="suList"></div>
-          </aside>
-          <div class="su-panel" id="suPanel"></div>
-        </div>
-        <p class="gd-note" style="margin-top:18px">출처: 어사이드 공식 도움말(docs.aside.com)과 변경 이력, 실제 설정 화면(General) 캡처 기준, 2026-10-26 확인. "변경 이력 기준"이라고 적은 항목은 공식 도움말에 상세 설명이 없습니다. 화면 구성과 메뉴 이름은 어사이드 버전에 따라 달라질 수 있습니다.</p>
       </section>
 
       <!-- ═══ 어사이드 가이드 ═══ -->
@@ -3691,10 +3616,9 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   };
 
   const NOTICES = [
-    { date: '2026-10-26', pin: false, title: '팀별 자동 분류·AI 자산 최신순 정렬', meta: '업데이트', body: '[자동화 리스트]가 성과측정 시트의 자동화뿐 아니라 수동 자산화로 등록한 자산까지 등록 때 고른 부서 기준으로 팀(마케팅·영업·개발·해외영업·디자인·공용)별로 자동 분류하고, 1분마다 새로 불러옵니다. [AI 자산]은 최근 등록된 자산이 위로 오도록 번호 역순으로 정렬됩니다.' },
+    { date: '2026-10-26', pin: false, title: 'AI 자산과 자동화 리스트를 [팀별 AI 자산]으로 통합', meta: '업데이트', body: 'AI 자산과 자동화 리스트를 하나로 합쳐 [팀별 AI 자산]으로 바꿨습니다. 마케팅팀·영업팀·개발팀·해외영업팀·디자인팀·공용으로 나뉘며, 등록 때 고른 부서에 따라 자동으로 올라가고 1분마다 새로 불러옵니다. 각 자산에는 자동화/수동 구분만 표시하고 상태(테스트 중) 열은 없앴습니다. 최근 등록한 자산(번호가 큰 순)이 위에 보입니다.' },
     { date: '2026-10-26', pin: false, title: '어사이드 초기 세팅 가이드 메뉴 추가', meta: '업데이트', body: '[시작하기] 아래에 [어사이드 초기 세팅]이 생겼습니다. 영문으로 된 어사이드 설정(Settings) 메뉴를 한글로 풀어, 메뉴를 클릭하면 설정 경로와 할 수 있는 일을 확인할 수 있습니다. 처음 설정 순서도 함께 안내합니다.' },
     { date: '2026-10-26', pin: false, title: 'AS 메뉴 추가와 동시 작업 안내', meta: '업데이트', body: '왼쪽 메뉴 맨 아래에 [AS (고장·오류 시)]가 생겼습니다. 어사이드가 멈추면 컴퓨터를 재부팅하고, 계속 오류가 나면 최성민 과장에게 문의해 주세요. 어사이드 작업은 동시에 권장 2개, 최대 3개까지만 진행합니다.' },
-    { date: '2026-10-26', pin: false, title: '팀별 자동화 리스트 메뉴 추가', meta: '업데이트', body: '[자산] 아래에 [자동화 리스트]가 생겼습니다. 마케팅팀·영업팀·개발팀·해외영업팀·디자인팀·공용으로 나누어 자동화를 모아 보고, 기존·개선 소요시간과 월 절감 시간, 담당자, 결과물을 카드나 표로 확인할 수 있습니다. 소요시간은 작성자 입력 기준 추정치입니다.' },
     { date: '2026-10-26', pin: false, title: '스킬 파일 등록(선택)과 자동 추천 추가', meta: '업데이트', body: '[레퍼런스 참고하기]의 "스킬 파일" 탭과 [수동 자산화]에서 스킬 파일(SKILL.md 등)을 선택 등록할 수 있습니다. 등록해 두면 업무기능·기본 프롬프트에서 업무에 맞는 스킬 파일이 자동으로 추천되고, 체크한 파일이 프롬프트에 들어가 어사이드가 먼저 읽고 따릅니다.' },
     { date: '2026-10-26', pin: false, title: '레퍼런스 참고하기 메뉴 추가', meta: '업데이트', body: '구글 드라이브의 잘 된 문서를 기능별로 모은 [레퍼런스 참고하기] 메뉴가 생겼습니다. 업무기능에서 프롬프트를 만들 때 해당 기능의 추천 레퍼런스가 표시되고, 선택한 문서가 프롬프트에 들어갑니다. 좋은 문서는 직접 등록할 수 있습니다.' },
     { date: '2026-10-26', pin: true, title: '베타 테스트 안내', meta: '운영', body: '이 사이트는 초기 버전으로 베타 운영 중입니다. 입력 항목, 결과물 체크리스트, 대시보드 수치 기준은 사용 의견을 받아 보완합니다. 불편한 점과 필요한 기능은 [기능 추가 요청]에 남겨 주세요.' },
@@ -3708,9 +3632,10 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { setup: '어사이드 초기 세팅', as: 'AS', automations: '자동화 리스트', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '수동 자산화', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '수동 자산화', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page) {
+    if (page === 'automations') page = 'assets';
     if (!PAGES[page]) page = 'home';
     $$('.page').forEach((p) => p.classList.toggle('active', p.id === 'page-' + page));
     $$('.nav-item').forEach((n) => n.classList.toggle('active', n.dataset.page === (page === 'builder' ? 'functions' : page)));
@@ -3719,10 +3644,9 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     closeSidebar();
     window.scrollTo(0, 0);
     if (page === 'home') renderHome();
-    if (page === 'assets') renderAssets();
+    if (page === 'assets') { renderAssets(); loadAssetsPage(); }
     if (page === 'requests') loadRequests();
     if (page === 'refs') loadRefs();
-    if (page === 'automations') loadAutomations();
     if (page === 'dashboard') startDashboard(); else stopDashboard();
     if (page === 'precheck') renderPrecheck();
   }
@@ -4076,26 +4000,47 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function renderAssets() {
     const st = $('#sheetStatus');
     st.className = 'sheet-status ' + (GAS_OK() ? 'connected' : 'local');
-    st.textContent = GAS_OK() ? '구글 시트 연동됨 (로컬 병행 저장)' : '로컬 저장 모드 (data.js의 SHEET_ENDPOINT 입력 시 시트 연동)';
+    st.textContent = GAS_OK() ? '구글 시트 실시간 연동 · 1분마다 자동 갱신' : '로컬 저장 모드 (data.js의 SHEET_ENDPOINT 입력 시 시트 연동)';
     const q = ($('#assetSearch').value || '').trim().toLowerCase();
-    const noNum = (a) => parseInt(String(a.no).replace(/\D/g, ''), 10) || 0;
-    const list = assets.filter((a) => !q || [a.no, a.name, a.content, a.type, a.dept, a.assignee].join(' ').toLowerCase().includes(q)).sort((a, b) => noNum(b) - noNum(a));
-    $('#assetBody').innerHTML = list.length ? list.map((a) => `
-      <tr>
-        <td>${esc(a.no)}</td>
-        <td><strong>${esc(a.name)}</strong>${resultChips(a)}</td>
-        <td>${esc(a.content)}</td>
-        <td><span class="tag">${esc(a.type)}</span></td>
-        <td>${esc(normDept(a.dept))}</td>
-        <td><span class="status-badge${a.status === '검증됨' ? ' ok' : ''}">${esc(a.status || '테스트 중')}</span></td>
-        <td>${a.auto ? `<span class="badge-auto">자동</span> <small>${esc(a.autoSchedule || '')}</small>${a.perf === '기입됨' ? ' <small title="AI TF팀 성과측정 시트에 기입됨">📊</small>' : ''}` : '<span class="badge-manual">수동</span>'}</td>
-        <td>${a.assignee ? esc(a.assignee) : '<button type="button" class="rebuild-btn" data-setowner="' + esc(a.no) + '">담당자 지정</button>'}</td>
-        <td style="white-space:nowrap;font-size:12px">${esc(String(a.updated || a.createdAt || '').slice(0, 10) || '-')}</td>
-        <td>
-          ${((a.savedFields && a.savedFields.manualPrompt) || (a.cardId && cardById(a.cardId))) ? '<button type="button" class="rebuild-btn" data-viewprompt="' + esc(a.no) + '">프롬프트 보기</button> ' : ''}<button type="button" class="rebuild-btn" data-rebuild="${esc(a.no)}"${a.cardId && cardById(a.cardId) ? '' : ' disabled title="연결된 기능이 없습니다"'}>이 자산으로 다시 만들기</button>
-          <button type="button" class="asset-del-btn" data-delasset="${esc(a.no)}" aria-label="삭제">🗑</button>
-        </td>
-      </tr>`).join('') : '<tr><td colspan="10"><div class="empty-state"><div class="icon">🗂️</div><p>등록된 자산이 없습니다.</p></div></td></tr>';
+    const ordT = AU_TEAMS.concat(['미지정']);
+    const all = auItems().filter(function (it) { return it.a; });
+    const teams = {}, types = {};
+    all.forEach(function (it) { teams[it.team] = (teams[it.team] || 0) + 1; types[it.r.type || '기타'] = (types[it.r.type || '기타'] || 0) + 1; });
+    const order = AU_TEAMS.concat(teams['미지정'] ? ['미지정'] : []);
+    const hoursAll = all.reduce(function (s, it) { return s + (it.r.hours || 0); }, 0), autoCnt = all.filter(function (it) { return it.isAuto; }).length;
+    $('#asStats').innerHTML = [['등록 자산', all.length, '건'], ['자동화', autoCnt, '건'], ['수동 자산', all.length - autoCnt, '건'], ['월 절감 시간 (작성자 입력 기준)', all.length ? auHours(hoursAll).toLocaleString() : 0, '시간']].map(function (c) { return '<div class="counter-card"><div class="label">' + c[0] + '</div><div class="value">' + c[1] + '</div><div class="unit">' + c[2] + '</div></div>'; }).join('');
+    const hByTeam = {}, aByTeam = {}; order.forEach(function (t) { hByTeam[t] = 0; aByTeam[t] = 0; });
+    all.forEach(function (it) { hByTeam[it.team] = (hByTeam[it.team] || 0) + (it.r.hours || 0); if (it.isAuto) aByTeam[it.team] = (aByTeam[it.team] || 0) + 1; });
+    const hMax = Math.max.apply(null, order.map(function (t) { return hByTeam[t]; }).concat([1]));
+    $('#asHours').innerHTML = '<div class="au-box-title">팀별 월 절감 시간 <small style="font-weight:400;color:#8B9096">작성자 입력 기준 추정치 · 합계 ' + auHours(hoursAll) + '시간</small></div>' + order.map(function (t) { return '<div class="au-bar"><span class="au-bar-l" style="flex-basis:84px">' + esc(t === '미지정' ? '팀 미지정' : t) + '</span><span class="au-track"><span class="au-fill" style="width:' + Math.round(hByTeam[t] / hMax * 100) + '%"></span></span><b style="flex:0 0 150px;text-align:right">' + (hByTeam[t] > 0 ? auHours(hByTeam[t]) + '시간' : '-') + ' <small style="font-weight:400;color:#8B9096">자동화 ' + aByTeam[t] + '건</small></b></div>'; }).join('');
+    $('#asTeamTabs').innerHTML = ['전체'].concat(order).map(function (t) { return '<button type="button" class="cat-btn' + (AU.team === t ? ' active' : '') + '" data-auteam="' + esc(t) + '">' + esc(t === '미지정' ? '팀 미지정' : t) + ' ' + (t === '전체' ? all.length : (teams[t] || 0)) + '</button>'; }).join('');
+    $('#asKindFilters').innerHTML = ['전체', '자동화', '수동'].map(function (k) { return '<button type="button" class="cat-btn' + (AU.kind === k ? ' active' : '') + '" data-aukind="' + esc(k) + '">' + (k === '전체' ? '구분 전체' : esc(k)) + '</button>'; }).join('');
+    $('#asTypeFilters').innerHTML = ['전체'].concat(Object.keys(types).sort()).map(function (k) { return '<button type="button" class="cat-btn' + (AU.type === k ? ' active' : '') + '" data-autype="' + esc(k) + '">' + (k === '전체' ? '유형 전체' : esc(k)) + '</button>'; }).join('');
+    const filtering = !!(q || AU.type !== '전체' || AU.kind !== '전체');
+    const list = all.filter(function (it) {
+      if (AU.type !== '전체' && it.r.type !== AU.type) return false;
+      if (AU.kind === '자동화' && !it.isAuto) return false;
+      if (AU.kind === '수동' && it.isAuto) return false;
+      const a = it.a; return !q || [a.no, a.name, a.content, a.type, a.dept, a.assignee, it.team].join(' ').toLowerCase().includes(q);
+    }).sort(function (x, y) { return auNo(y.a) - auNo(x.a); });
+    const shown = order.filter(function (t) { return AU.team === '전체' || AU.team === t; });
+    const rowHtml = function (it) {
+      const a = it.a, hrs = it.r.hours || 0;
+      const when = it.isAuto && (a.autoSchedule || it.r.weekly) ? auWhen(it) : '';
+      return '<tr><td>' + esc(a.no) + '</td><td><strong>' + esc(a.name) + '</strong>' + resultChips(a) + '</td><td>' + esc(a.content) + '</td><td><span class="tag">' + esc(a.type) + '</span></td>'
+        + '<td>' + (it.isAuto ? '<span class="badge-auto">자동화</span>' + (when ? ' <small>' + esc(when) + '</small>' : '') + (a.perf === '기입됨' ? ' <small title="AI TF팀 성과측정 시트에 기입됨">📊</small>' : '') : '<span class="badge-manual">수동</span>') + '</td>'
+        + '<td>' + (hrs > 0 ? auHours(hrs) : '-') + '</td>'
+        + '<td>' + (a.assignee ? esc(a.assignee) : '<button type="button" class="rebuild-btn" data-setowner="' + esc(a.no) + '">담당자 지정</button>') + '</td>'
+        + '<td style="white-space:nowrap;font-size:12px">' + esc(String(a.updated || a.createdAt || '').slice(0, 10) || '-') + '</td>'
+        + '<td>' + (((a.savedFields && a.savedFields.manualPrompt) || (a.cardId && cardById(a.cardId))) ? '<button type="button" class="rebuild-btn" data-viewprompt="' + esc(a.no) + '">프롬프트 보기</button> ' : '') + '<button type="button" class="rebuild-btn" data-rebuild="' + esc(a.no) + '"' + (a.cardId && cardById(a.cardId) ? '' : ' disabled title="연결된 기능이 없습니다"') + '>이 자산으로 다시 만들기</button> <button type="button" class="asset-del-btn" data-delasset="' + esc(a.no) + '" aria-label="삭제">🗑</button></td></tr>';
+    };
+    $('#assetBody').innerHTML = shown.map(function (t) {
+      const mine = list.filter(function (it) { return it.team === t; });
+      const sum = all.filter(function (it) { return it.team === t; }).reduce(function (s, it) { return s + (it.r.hours || 0); }, 0);
+      const head = '<tr class="as-teamrow"><td colspan="9"><div class="as-teamhead"><b>' + esc(t === '미지정' ? '팀 미지정' : t) + '</b><span>' + (teams[t] || 0) + '건' + (sum > 0 ? ' · 월 약 ' + auHours(sum) + '시간 절감' : '') + '</span>' + (t === '미지정' ? '' : '<button type="button" class="btn-secondary" data-aunew="' + esc(AU_TEAM_DEPT[t] || '') + '" style="padding:6px 12px;font-size:12.5px">+ ' + esc(t) + ' 자산 등록</button>') + '</div></td></tr>';
+      const body = mine.length ? mine.map(rowHtml).join('') : '<tr><td colspan="9" class="as-empty">' + (filtering && (teams[t] || 0) ? '조건에 맞는 자산이 없습니다.' : '아직 등록된 자산이 없습니다.') + '</td></tr>';
+      return head + body;
+    }).join('') || '<tr><td colspan="9"><div class="empty-state"><div class="icon">🗂️</div><p>등록된 자산이 없습니다.</p></div></td></tr>';
   }
 
   /* 모달 */
@@ -5339,82 +5284,23 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const by = { recent: function (a, b) { return auNo(b.a) - auNo(a.a); }, hours: function (a, b) { return (b.r.hours || 0) - (a.r.hours || 0) || auNo(b.a) - auNo(a.a); }, name: function (a, b) { return String(a.r.content).localeCompare(String(b.r.content), 'ko'); } };
     return list.sort(by[AU.sort] || by.recent);
   }
-  function auBars(title, counts, order) {
-    const keys = (order || Object.keys(counts)).filter(function (k) { return counts[k] != null; }), max = Math.max.apply(null, keys.map(function (k) { return counts[k]; }).concat([1]));
-    return '<div class="au-box"><div class="au-box-title">' + title + '</div>' + keys.map(function (k) { return '<div class="au-bar"><span class="au-bar-l">' + esc(k) + '</span><span class="au-track"><span class="au-fill" style="width:' + Math.round(counts[k] / max * 100) + '%"></span></span><b>' + counts[k] + '</b></div>'; }).join('') + '</div>';
-  }
-  function auResultChips(a, max) {
-    const rs = (a && a.results) || []; if (!rs.length) return '';
-    return '<div class="au-res">' + rs.slice(0, max).map(function (x) { return '<a class="res-chip" href="' + esc(x.url) + '" target="_blank" rel="noopener noreferrer" title="' + esc(x.name) + '">' + (x.kind === 'file' ? '📎 ' : '🔗 ') + esc(x.name) + '</a>'; }).join('') + (rs.length > max ? '<span class="ref-meta">외 ' + (rs.length - max) + '건</span>' : '') + '</div>';
-  }
-  function auCard(it) {
-    const r = it.r, a = it.a, saved = r.before > 0 ? Math.max(0, Math.round((r.before - r.after) / r.before * 100)) : 0;
-    let eff;
-    if (r.before > 0) eff = '<div class="au-eff"><div class="au-eff-line">기존 <b>' + r.before + '분</b> → 개선 후 <b>' + r.after + '분</b> · ' + auWhen(it) + '</div><div class="au-track"><span class="au-fill" style="width:' + saved + '%"></span></div><div class="au-eff-sum">' + (r.hours > 0 ? '월 약 <b>' + auHours(r.hours) + '시간</b> 절감 (' + saved + '% 단축)' : '절감 시간 미산정') + '</div></div>';
-    else if (it.sheet) eff = '<div class="au-eff"><div class="au-eff-line">' + auWhen(it) + '</div><div class="au-eff-sum">절감 시간 미산정 (교육·배포 자료 등)</div></div>';
-    else eff = '<div class="au-eff"><div class="au-eff-line">' + (it.isAuto ? '자동화 · ' + auWhen(it) : '수동 자산 (자동화 아님)') + '</div><div class="au-eff-sum">' + (it.isAuto ? '성과측정 시트에 아직 기입되지 않았습니다' : '프롬프트·인수인계용으로 등록된 자산입니다') + '</div></div>';
-    return '<div class="au-card"><div class="au-top"><span class="au-no">' + (it.sheet ? 'NO ' + esc(r.no) : esc(r.no)) + '</span><span class="tag">' + esc(r.type || '기타') + '</span>' + (it.isAuto ? '' : '<span class="tag" style="background:#FFF1D6;color:#8A5A00">수동 자산</span>') + (it.team === '미지정' ? '<span class="tag">' + esc(r.dept || '미분류') + '</span>' : '') + (a ? refBadge({ status: a.status || '등록됨' }) : '<span class="status-badge">AI 자산 미등록</span>') + '</div>'
-      + '<h3>' + esc(r.content || r.name) + '</h3><div class="au-sub">' + esc(it.sheet ? (r.name || '') : (a && a.content ? a.content : '')) + (r.start ? ' · ' + esc(r.start) + (it.sheet ? ' 시작' : ' 등록') : '') + '</div>' + eff
-      + '<div class="au-meta">' + (a && a.assignee ? '담당 ' + esc(a.assignee) : '담당 미표기') + (a ? ' · ' + esc(a.no) : '') + '</div>' + auResultChips(a, 3)
-      + '<div class="au-actions">' + (a ? '<button type="button" class="btn-secondary" data-auasset="' + esc(a.name) + '" style="padding:8px 14px;font-size:13px">AI 자산에서 보기</button>' : '<button type="button" class="btn-secondary" data-aunew="' + esc(AU_TEAM_DEPT[it.team] || '') + '" style="padding:8px 14px;font-size:13px">AI 자산으로 등록</button>') + '</div></div>';
-  }
-  function renderAutomations() {
-    const st = $('#auStatus'); if (!st) return;
-    st.className = 'sheet-status ' + (GAS_OK() && (AU.rows.length || assets.length) ? 'connected' : 'local');
-    st.textContent = !GAS_OK() ? '로컬 저장 모드 (구글 시트 연동 시 표시됩니다)' : ((AU.rows.length || assets.length) ? '실시간 연동 · ' + (AU.updated || '') + ' · 1분마다 자동 갱신' : '불러오는 중...');
-    const all = auItems();
-    const hours = all.reduce(function (s, it) { return s + (it.r.hours || 0); }, 0);
-    const teams = {}, types = {}; all.forEach(function (it) { teams[it.team] = (teams[it.team] || 0) + 1; types[it.r.type || '기타'] = (types[it.r.type || '기타'] || 0) + 1; });
-    const order = AU_TEAMS.concat(teams['미지정'] ? ['미지정'] : []);
-    const withRes = all.filter(function (it) { return it.a && (it.a.results || []).length; }).length;
-    const autoCnt = all.filter(function (it) { return it.isAuto; }).length;
-    const activeTeams = order.filter(function (t) { return teams[t]; }).length;
-    $('#auStats').innerHTML = [['등록 자산·자동화', all.length, '건 (자동화 ' + autoCnt + '건)'], ['월 절감 시간 (작성자 입력 기준)', all.length ? auHours(hours).toLocaleString() : 0, '시간'], ['자산이 있는 팀', activeTeams, '개 / 6개 팀'], ['결과물 등록', withRes, '건']].map(function (c) { return '<div class="counter-card"><div class="label">' + c[0] + '</div><div class="value">' + c[1] + '</div><div class="unit">' + c[2] + '</div></div>'; }).join('');
-    const tc = {}; order.forEach(function (t) { tc[t] = teams[t] || 0; });
-    $('#auDist').innerHTML = all.length ? auBars('팀별', tc, order) + auBars('유형별', types, Object.keys(types).sort(function (a, b) { return types[b] - types[a]; })) : '';
-    $('#auTeamTabs').innerHTML = ['전체'].concat(order).map(function (t) { return '<button type="button" class="cat-btn' + (AU.team === t ? ' active' : '') + '" data-auteam="' + esc(t) + '">' + esc(t === '미지정' ? '팀 미지정' : t) + (t === '전체' ? ' ' + all.length : ' ' + (teams[t] || 0)) + '</button>'; }).join('');
-    $('#auKindFilters').innerHTML = ['전체', '자동화', '수동 자산'].map(function (k) { return '<button type="button" class="cat-btn' + (AU.kind === k ? ' active' : '') + '" data-aukind="' + esc(k) + '">' + (k === '전체' ? '구분 전체' : esc(k)) + '</button>'; }).join('');
-    $('#auTypeFilters').innerHTML = ['전체'].concat(Object.keys(types).sort()).map(function (k) { return '<button type="button" class="cat-btn' + (AU.type === k ? ' active' : '') + '" data-autype="' + esc(k) + '">' + (k === '전체' ? '유형 전체' : esc(k)) + '</button>'; }).join('');
-    $$('[data-auview]').forEach(function (b) { b.classList.toggle('active', b.dataset.auview === AU.view); });
-    $('#auTeams').style.display = AU.view === 'card' ? '' : 'none'; $('#auTableWrap').style.display = AU.view === 'table' ? '' : 'none';
-    const list = auFiltered(all), filtering = !!(AU.q.trim() || AU.type !== '전체' || AU.kind !== '전체');
-    const shown = order.filter(function (t) { return AU.team === '전체' || AU.team === t; });
-    $('#auTeams').innerHTML = shown.map(function (t) {
-      const mine = list.filter(function (it) { return it.team === t; });
-      const sum = all.filter(function (it) { return it.team === t; }).reduce(function (s, it) { return s + (it.r.hours || 0); }, 0);
-      const body = mine.length ? '<div class="au-grid">' + mine.map(auCard).join('') + '</div>' : '<div class="au-empty">' + (filtering && (teams[t] || 0) ? '조건에 맞는 자산이 없습니다.' : '아직 등록된 자산이 없습니다. ' + (t === '미지정' ? '' : t + '에서 어사이드로 만든 자동화나 프롬프트가 있으면 등록해 주세요.')) + '</div>';
-      return '<section class="au-team"><div class="au-team-head"><div><span class="eyebrow">TEAM</span><h2>' + esc(t === '미지정' ? '팀 미지정' : t) + '</h2></div><div class="au-team-sum">' + (teams[t] || 0) + '건' + (sum > 0 ? ' · 월 약 ' + auHours(sum) + '시간 절감' : '') + '</div>' + (t === '미지정' ? '' : '<button type="button" class="btn-secondary" data-aunew="' + esc(AU_TEAM_DEPT[t] || '') + '" style="padding:8px 14px;font-size:13px">+ ' + esc(t) + ' 자산 등록</button>') + '</div>' + body + '</section>';
-    }).join('');
-    const rowsT = list.filter(function (it) { return AU.team === '전체' || it.team === AU.team; }).sort(function (a, b) { return order.indexOf(a.team) - order.indexOf(b.team); });
-    $('#auTableBody').innerHTML = rowsT.map(function (it) {
-      const r = it.r, a = it.a;
-      return '<tr><td>' + esc(it.team === '미지정' ? '팀 미지정' : it.team) + '</td><td>' + esc(it.sheet ? r.no : (a ? a.no : '')) + '</td><td><b>' + esc(r.content || r.name) + '</b></td><td>' + (it.isAuto ? '자동화' : '수동 자산') + '</td><td>' + esc(r.type || '') + '</td><td>' + (a && a.assignee ? esc(a.assignee) : '-') + '</td><td>' + (r.before > 0 ? r.before + ' → ' + r.after : '-') + '</td><td>' + (r.weekly || '-') + '</td><td>' + (r.hours > 0 ? auHours(r.hours) : '-') + '</td><td>' + (a ? esc(a.status || '등록됨') : '미등록') + '</td><td>' + ((a && (a.results || []).length) ? (a.results || []).length + '건' : '-') + '</td></tr>';
-    }).join('') || '<tr><td colspan="11" style="text-align:center;color:#8B9096;padding:20px">조건에 맞는 자산이 없습니다.</td></tr>';
-  }
-  function loadAutomations() {
-    if (!GAS_OK()) { renderAutomations(); return Promise.resolve(); }
-    const d = fetch(SHEET_ENDPOINT + '?type=dashboard').then(function (r) { return r.json(); }).then(function (j) {
-      if (j && j.ok && Array.isArray(j.rows)) { AU.rows = j.rows; AU.updated = j.updated || ''; }
-    }).catch(function () {});
-    return Promise.all([d, loadRemoteAssets()]).then(renderAutomations, renderAutomations);
+  function loadAssetsPage() {
+    if (!GAS_OK()) return Promise.resolve();
+    const d = fetch(SHEET_ENDPOINT + '?type=dashboard').then(function (r) { return r.json(); }).then(function (j) { if (j && j.ok && Array.isArray(j.rows)) { AU.rows = j.rows; AU.updated = j.updated || ''; } }).catch(function () {});
+    return Promise.all([d, loadRemoteAssets()]).then(renderAssets, renderAssets);
   }
   function bindAutomations() {
-    if (!$('#auTeams')) return;
-    $('#auSearch').addEventListener('input', function (e) { AU.q = e.target.value; renderAutomations(); });
-    $('#auSort').addEventListener('change', function (e) { AU.sort = e.target.value; renderAutomations(); });
-    $('#auRefresh').addEventListener('click', function () { $('#auStatus').textContent = '불러오는 중...'; loadAutomations(); });
-    $('#page-automations').addEventListener('click', function (e) {
-      const tm = e.target.closest('[data-auteam]'), t = e.target.closest('[data-autype]'), k = e.target.closest('[data-aukind]'), v = e.target.closest('[data-auview]'), s = e.target.closest('[data-auasset]'), n = e.target.closest('[data-aunew]');
-      if (tm) { AU.team = tm.dataset.auteam; renderAutomations(); }
-      if (t) { AU.type = t.dataset.autype; renderAutomations(); }
-      if (k) { AU.kind = k.dataset.aukind; renderAutomations(); }
-      if (v) { AU.view = v.dataset.auview; renderAutomations(); }
-      if (s) { go('assets'); const inp = $('#assetSearch'); if (inp) { inp.value = s.dataset.auasset; inp.dispatchEvent(new Event('input', { bubbles: true })); } }
+    const pg = $('#page-assets'); if (!pg) return;
+    pg.addEventListener('click', function (e) {
+      const tm = e.target.closest('[data-auteam]'), t = e.target.closest('[data-autype]'), k = e.target.closest('[data-aukind]'), n = e.target.closest('[data-aunew]');
+      if (tm) { AU.team = tm.dataset.auteam; renderAssets(); }
+      if (t) { AU.type = t.dataset.autype; renderAssets(); }
+      if (k) { AU.kind = k.dataset.aukind; renderAssets(); }
       if (n) { go('manual'); const d = $('#mnDept'); if (d && n.dataset.aunew) { d.value = n.dataset.aunew; d.dispatchEvent(new Event('change', { bubbles: true })); } }
     });
-    setInterval(function () { const pg = $('#page-automations'); if (pg && pg.classList.contains('active') && !document.hidden) loadAutomations(); }, 60000);
-    document.addEventListener('visibilitychange', function () { const pg = $('#page-automations'); if (!document.hidden && pg && pg.classList.contains('active')) loadAutomations(); });
-    renderAutomations();
+    setInterval(function () { if (pg.classList.contains('active') && !document.hidden) loadAssetsPage(); }, 60000);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden && pg.classList.contains('active')) loadAssetsPage(); });
+    loadAssetsPage();
   }
   /* ── 25. 어사이드 초기 세팅 가이드 (설정 메뉴 한글 안내) ── */
   const SETUP = [{"id":"general","grp":"개인 설정 (Personal)","en":"General","ko":"일반","path":"Settings > General","sum":"로그인 계정, 기본 브라우저, 검색·새 탭, 가져오기, 업데이트 확인을 다루는 기본 화면입니다.","rows":[["Set as default","기본 브라우저로 설정 — 어사이드를 기본 브라우저로 지정합니다 (화면 맨 위 파란 배너)"],["Sign out","로그아웃 — 현재 로그인한 계정에서 나갑니다. 계정 이름과 로그인 방식(예: Signed in with Google)이 함께 표시됩니다"],["Invite your friends to Aside","친구 초대 — 초대한 사람이 가입하면 양쪽이 100 크레딧을 받는다고 화면에 안내됩니다 (화면 기준)"],["Default search engine","기본 검색엔진 — 주소창 검색에 쓰는 검색엔진 (예: Google)"],["New tab mode","새 탭 모드 — 새 탭을 Search(검색)로 열지 Ask(어사이드에게 바로 요청)로 열지 고릅니다"],["Auto Picture-in-Picture","자동 화면 속 화면 — 영상 탭에서 다른 탭으로 옮길 때 작은 재생 창을 띄웁니다"],["Screenshot","스크린샷 — 마우스 오른쪽 메뉴에서 현재 페이지를 캡처합니다"],["Preferred languages","선호 언어 — Configure 버튼에서 언어 목록을 설정합니다 (예: 한국어, 영어)"],["Spell check","맞춤법 검사 — 입력할 때 철자를 검사합니다"],["Import from another browser","다른 브라우저에서 가져오기 — 방문 기록, 쿠키, 북마크, 비밀번호를 어사이드로 가져옵니다"],["Import bookmarks","북마크 가져오기 — 다른 브라우저의 북마크만 가져옵니다"],["About Aside > Check for updates","어사이드 정보 > 업데이트 확인 — 브라우저 버전을 보고 업데이트를 확인합니다"]],"tips":["처음 설정: 로그인 계정이 맞는지 확인하고, 쓰던 브라우저의 로그인 상태를 쓰려면 \"다른 브라우저에서 가져오기\"를 하세요.","선호 언어에 한국어가 들어 있는지 확인하세요.","업데이트 확인에서 HTTP 429 같은 오류가 보이면 잠시 후 다시 눌러 보세요. 계속되면 AS 탭을 참고하세요 (운영 안내)."],"doc":"https://docs.aside.com/help/get-started"},{"id":"appearance","grp":"개인 설정 (Personal)","en":"Appearance","ko":"화면 설정","path":"Settings > Appearance","sum":"화면 테마와 키보드 단축키, 탭 모양을 정하는 곳입니다.","rows":[["Theme","테마 — 화면 색상 테마를 고릅니다"],["Keyboard shortcuts","키보드 단축키 — 단축키 설정 화면으로 연결됩니다"],["Vertical tabs","세로 탭 — 탭 스타일과 북마크 영역 숨기기를 정합니다"]],"tips":["자주 쓰는 단축키: Ctrl+E 어사이드에게 요청(Ask Aside), Ctrl+Shift+E 새 작업(New Task), Ctrl+S 사이드바 열기/닫기, Ctrl+Shift+C 주소 복사, Ctrl+Shift+\\ 화면 분할 (맥은 Cmd).","이 페이지의 항목 설명은 공식 변경 이력 기준이며, 공식 도움말에는 상세 설명이 없습니다."],"doc":"https://docs.aside.com/help/browser-basics"},{"id":"account","grp":"개인 설정 (Personal)","en":"Account","ko":"계정","path":"Settings > Account","sum":"로그인한 계정과 이 계정에 연결된 기기를 관리합니다.","rows":[["Account","계정 — 로그인한 계정 정보와 로그아웃"],["Devices","기기 — 다른 기기(예: CLI)의 로그인 요청을 승인합니다 (Settings > Account > Devices)"],["Browser data recovery","브라우저 데이터 복구 — 기기 간 복구 설정 (공식 문제 해결 문서에 언급)"]],"tips":["일반 업무에서는 로그인 상태만 확인하면 됩니다. 로그인 오류는 공식 문제 해결 문서의 \"Sign-in says the account is already signed in\" 항목을 참고하세요."],"doc":"https://docs.aside.com/help/troubleshooting"},{"id":"plan","grp":"개인 설정 (Personal)","en":"Plan & Usage","ko":"요금제·사용량","path":"Settings > Plan & Usage","sum":"내 요금제, 남은 크레딧, 결제 수단, 사용 내역을 봅니다.","rows":[["Plan","요금제 — 현재 플랜(Free, Pro, Max)"],["Credits","크레딧 — 남은 크레딧 비율, 갱신일, 월 크레딧. 무료 플랜은 매월 UTC 달력 월 초에 갱신됩니다"],["Adjust plan","플랜 변경 — 요금제를 올리거나 바꿉니다"],["Payment method / invoices (Open)","결제 수단·청구서 — Open 버튼으로 Stripe에서 관리합니다"],["Aside credits usage","크레딧 사용 내역 — 날짜·작업·모델별 사용량을 보고 Download CSV로 월별 내보내기"]],"tips":["무료 플랜은 월 500 크레딧, 활성 루틴 3개까지입니다. 자세한 비교는 업무 시작 전 확인사항의 입문 가이드 C를 보세요.","연결한 구독(Claude 등)·API 사용량은 어사이드 크레딧과 별도로 관리됩니다."],"doc":"https://docs.aside.com/help/subscription"},{"id":"security","grp":"개인 설정 (Personal)","en":"Security & Privacy","ko":"보안·개인정보","path":"Settings > Security & Privacy","sum":"방문 기록 삭제, 쿠키, 분석 정보 공유 등 개인정보 관련 설정입니다.","rows":[["Delete browsing history","방문 기록 삭제 — 지울 데이터 종류와 기간(전체, 15분, 30분, 24시간, 7일, 4주)을 골라 삭제"],["View browsing history","방문 기록 보기"],["Third-party cookies","서드파티 쿠키 — Allow(허용) 또는 Block all(모두 차단)"],["Analytics sharing","분석 정보 공유 — 기본값은 켜짐"],["Ads privacy","광고 개인정보 — 광고 주제 설정 페이지로 이동"],["Site settings","사이트 설정 — 사이트별 권한"],["Advanced","고급 — DNS, SSL, Safe Browsing 설정"]],"tips":["지울 수 있는 데이터: 방문 기록, 쿠키·사이트 데이터, 캐시, 다운로드 기록, 자동 완성 양식, 사이트 저장소.","분석 정보 공유를 켜 둘지는 회사 정책에 따라 정하세요 (운영 안내)."],"doc":"https://docs.aside.com/help/privacy"},{"id":"agents","grp":"에이전트 (Agent)","en":"Agents","ko":"에이전트","path":"Settings > Agents","sum":"어사이드가 할 수 있는 일(읽기·쓰기·실행)의 범위와 후속 지시 방식을 정합니다.","rows":[["Sandbox","샌드박스 — 명령을 OS 수준으로 격리해 실행할지 정합니다"],["File permissions","파일 권한 — 에이전트가 보거나 수정할 수 있는 폴더 목록"],["Tool permissions","도구 권한 — Allow(묻지 않고 허용), Ask(먼저 묻기), Deny(차단). Deny가 가장 우선합니다"],["Chat (follow-up)","채팅 후속 지시 방식 — Queue(현재 작업이 끝난 뒤 적용) 또는 Steer(진행 중인 작업에 바로 반영). Settings > Agents > Chat"]],"tips":["새 작업을 시작할 때는 작업별 권한 모드(Read only, Guard, Full access)를 고릅니다. 기본값은 Guard입니다.","발송·결제·삭제 직전 확인(물어보고 승인 / 자동 승인)은 업무 시작 전 확인사항의 \"1. 승인 방식\"을 보세요."],"doc":"https://docs.aside.com/help/security"},{"id":"projects","grp":"에이전트 (Agent)","en":"Projects","ko":"프로젝트","path":"Settings > Projects","sum":"관련 대화를 하나의 프로젝트로 묶어 관리합니다.","rows":[["Projects","프로젝트 — 프로젝트를 만들고, 기존 대화를 프로젝트에 추가·이동·제거합니다"]],"tips":["채널(Slack 등) 연결 때 봇을 특정 프로젝트에 연결할 수 있습니다.","이 페이지의 설명은 공식 변경 이력 기준입니다."],"doc":"https://docs.aside.com/help/channels"},{"id":"models","grp":"에이전트 (Agent)","en":"Models","ko":"모델","path":"Settings > Models","sum":"어사이드가 어떤 AI 모델을 어떤 경로로 쓸지 정합니다. 사용량에 가장 큰 영향을 주는 설정입니다.","rows":[["Providers","공급자 — Aside(요금제에 포함된 모델), Subscription(Claude Pro·Max, ChatGPT Plus·Pro, GitHub Copilot 구독 연결), API(Anthropic, OpenAI, OpenRouter, Google, xAI 등 키 연결). Connect를 누르면 로그인 팝업이 열립니다"],["Task models","작업별 모델 — Default(기본), Fast(빠른 보조), Standard(백그라운드·루틴), Deep(어려운 추론), Visual(화면 해석), Image generation(이미지 생성) 모델을 고릅니다"]],"tips":["공유 Claude 계정 연결: Settings > Models > Providers > Connect > Subscription > Claude Subscription 순서로 누르고 로그인합니다.","권장 모델 설정(초안)은 업무 시작 전 확인사항의 \"2. 어사이드 모델 설정\" 표를 보세요. 공유 계정은 전 직원의 사용량이 합산됩니다."],"doc":"https://docs.aside.com/help/ai"},{"id":"plugins","grp":"에이전트 (Agent)","en":"Plugins & MCPs","ko":"플러그인·MCP","path":"Settings > Plugins & MCPs","sum":"외부 도구(MCP)와 플러그인, 스킬 폴더를 연결·관리하는 고급 설정입니다.","rows":[["Plugins & MCPs","플러그인·MCP — 외부 도구 연결(MCP)과 플러그인, 스킬·메모리 폴더 관련 설정"]],"tips":["일반 업무에서는 건드릴 필요가 없습니다. 연결이 필요하면 담당자와 먼저 상의하세요 (운영 안내).","공식 도움말에 상세 설명이 없어 변경 이력과 개발자 문서 기준으로 요약했습니다."],"doc":"https://docs.aside.com/help/developers"},{"id":"memory","grp":"에이전트 (Agent)","en":"Memory","ko":"메모리","path":"Settings > Memory","sum":"어사이드가 방문 기록, 대화, 작업에서 무엇을 기억할지 정합니다.","rows":[["Overview","개요 — 저장된 메모리를 보고 수정합니다"],["History","기록 — 메모리가 바뀐 내역을 봅니다"],["Configure","설정 — 메모리 켜기/끄기, 보관 기간(Never forget 계속 / 30 days / 90 days)"]],"tips":["메모리를 끄면 새 대화·작업에서 메모리가 만들어지지 않습니다. 짧게 보관하면 일상 기록을 더 빨리 잊습니다.","원가·급여·계약·협상 금액·개인정보는 대화에 넣지 마세요."],"doc":"https://docs.aside.com/help/memory"},{"id":"context","grp":"에이전트 (Agent)","en":"Context Awareness","ko":"컨텍스트 인식","isNew":true,"path":"Settings > Context Awareness","sum":"켜면 브라우저 활동을 캡처해 요약으로 만들어 어사이드가 참고합니다. 켜기 전까지는 꺼져 있습니다.","rows":[["Context Awareness","컨텍스트 인식 — 켜면 브라우저 활동(방문·클릭)을 캡처해 요약에 활용합니다. 지원되는 Mac·Windows 기기에서 사용할 수 있습니다"],["Use this account","이 계정으로 사용 — 캡처는 켠 계정 한 곳에서만 이뤄지며, 다른 계정에서는 캡처 중인 계정이 표시됩니다"]],"tips":["고객·개인정보가 보이는 화면을 다룰 때는 꺼 두는 것을 권장합니다 (운영 안내 초안).","공식 도움말에 상세 설명이 없어 변경 이력 기준으로 요약했습니다. 켜기 전에 화면의 안내 문구를 먼저 읽으세요."],"doc":"https://docs.aside.com/changelog/components"},{"id":"passwords","grp":"기능 (Features)","en":"Passwords","ko":"비밀번호","path":"Settings > Passwords","sum":"어사이드 비밀번호 관리자(Aside Vault)와 자동 입력을 설정합니다. 저장된 비밀번호 값은 AI에게 보이지 않습니다.","rows":[["Use default password manager","기본 비밀번호 관리자 사용 — 어사이드가 비밀번호를 관리하게 합니다"],["Autofill","자동 입력 — 기본값은 켜짐. 일치하는 로그인만 채웁니다"],["URL matching","주소 일치 방식 — 어떤 주소에서 채울지"],["Excluded domains","제외할 도메인 — 자동 입력을 하지 않을 사이트"],["Insecure protocols","보안되지 않은 사이트에서 제안 표시 여부"],["Incognito autofill","시크릿 창에서 자동 입력 여부"],["Import","가져오기 — 1Password, Apple Passwords, Bitwarden, Chrome, Dashlane, Edge, Firefox, LastPass CSV, 일반 CSV"],["Access policy for AI agents","AI 에이전트 접근 정책 — Always allow(항상 허용, 기본값) / While unlocked(잠금 해제 중에만) / Never(차단)"],["Vaults and sync","보관함·동기화 — 보관함 관리, 클라우드 동기화, 내보내기"],["Clear vault data","보관함 데이터 삭제 — 로컬 항목과 키를 지우고 새 개인 보관함을 만듭니다"]],"tips":["처음 설정: 기본 비밀번호 관리자 사용을 켜고 Autofill을 확인한 뒤, 쓰던 브라우저나 비밀번호 관리자에서 가져오기를 하세요.","삭제 전에는 반드시 내보내기로 백업하세요. 에이전트는 시크릿 세션에서 비밀번호 관리자를 쓸 수 없습니다."],"doc":"https://docs.aside.com/help/passwords"},{"id":"routines","grp":"기능 (Features)","en":"Routines","ko":"루틴","path":"Settings > Routines","sum":"정해 둔 일정에 맞춰 어사이드가 같은 작업을 자동으로 시작하게 합니다.","rows":[["Create a routine","루틴 만들기"],["Edit instructions or schedule","지시 내용·일정 수정"],["Pause / Resume","일시정지·다시 시작"],["Delete a routine","루틴 삭제"],["Run a routine now","지금 실행"],["Find routine suggestions","루틴 제안 찾기 — 어사이드가 반복 업무를 찾아 초안 루틴을 제안하고, 수정 후 Activate(활성화)합니다"],["Cron routine / Heartbeat routine","크론 루틴(일정마다 새 작업) / 하트비트 루틴(기존 대화를 깨워 이어서)"]],"tips":["무료 플랜은 활성 루틴 3개까지, Pro는 무제한입니다.","루틴처럼 반복 실행되는 작업의 모델은 Task models의 Standard 설정 영향이 큽니다."],"doc":"https://docs.aside.com/help/automation"},{"id":"channels","grp":"기능 (Features)","en":"Channels","ko":"채널","isNew":true,"path":"Settings > Channels","sum":"Slack, Telegram, Discord의 봇으로 어사이드에 작업을 시키고 같은 대화창에서 답을 받습니다.","rows":[["Create with Aside","어사이드로 만들기 — 봇 생성과 인증 정보 등록을 어사이드가 대신 진행합니다"],["Manual","직접 입력 — 인증 정보 칸을 직접 채웁니다"],["Pairing","페어링 — 처음 메시지를 보낸 사람의 요청을 Approve(승인)해야 작업을 시킬 수 있습니다. 요청은 1시간 뒤 만료됩니다"],["Require mentions in threads","스레드에서 멘션 필요 — 끄면 멘션 없이도 스레드에서 작동"]],"tips":["플랫폼마다 봇은 1개까지이고, 어사이드가 켜져 있는 동안에만 응답합니다.","요금 페이지에서 Channels(원격 제어)는 Pro 기능으로 안내됩니다."],"doc":"https://docs.aside.com/help/channels"},{"id":"developers","grp":"기능 (Features)","en":"Developers","ko":"개발자","path":"Settings > Developers","sum":"명령줄(CLI)과 개발자 도구를 설치·관리합니다. 일반 업무에는 필요 없습니다.","rows":[["Install / update CLI","CLI 설치·업데이트 — 설정 화면에서 직접 설치하거나 업데이트합니다"],["Save sessions / default profile","세션 저장·기본 프로필 — CLI를 설치하면 설정할 수 있습니다"]],"tips":["개발·자동화 담당자만 필요합니다. CLI 로그인은 Settings > Account > Devices에서 승인합니다."],"doc":"https://docs.aside.com/help/developers"},{"id":"mini","grp":"기능 (Features)","en":"Mini popup","ko":"미니 팝업","path":"Settings > Mini popup","sum":"작은 팝업 창에서 어사이드에 바로 요청하는 기능의 설정입니다.","rows":[["Mini popup shortcuts","미니 팝업 단축키 — 설정에서 단축키를 바꿀 수 있습니다"]],"tips":["공식 도움말에 상세 설명이 없어 변경 이력 기준으로 요약했습니다."],"doc":"https://docs.aside.com/changelog/components"},{"id":"lasso","grp":"기능 (Features)","en":"Lasso","ko":"영역 선택 도구","path":"Settings > Lasso","sum":"화면의 글자나 이미지를 선택했을 때 나타나는 빠른 실행 버튼(요약, 번역 등)을 설정합니다. 기본으로 켜져 있습니다.","rows":[["Text selection defaults","글자 선택 기본 버튼 — Summarize(요약), Translate(번역)"],["Lasso selection defaults","영역 선택 기본 버튼 — Copy code(코드 복사), Search image(이미지 검색)"],["Turn off / reorder / edit / delete / add","끄기·순서 변경·수정·삭제·추가 — 바로가기를 직접 관리합니다"],["Shortcut actions","바로가기 동작 — 프롬프트 실행, 선택 내용 복사, 주소 열기. 프롬프트 안에 {text}, {code}, {image}를 쓸 수 있습니다"],["Activation hotkey","실행 단축키 — 사용자가 바꿀 수 있습니다"]],"tips":["예: \"이 조항을 쉬운 말로 요약하고 챙길 의무를 정리해 줘: {text}\" 같은 바로가기를 만들어 둘 수 있습니다."],"doc":"https://docs.aside.com/help/browser-basics"},{"id":"archived","grp":"보관 (Archived)","en":"Archived chats","ko":"보관된 대화","path":"Settings > Archived chats","sum":"보관(Archive) 처리한 대화를 찾아봅니다.","rows":[["Archived chats","보관된 대화 — 보관한 대화 목록을 보고 찾습니다"]],"tips":["지난 대화를 정리하되 지우고 싶지 않을 때 보관을 씁니다."],"doc":"https://docs.aside.com/"},{"id":"others","grp":"기타","en":"Send feedback · Extensions · Docs · Community","ko":"의견·확장·문서·커뮤니티","path":"Settings 왼쪽 맨 아래","sum":"의견 보내기와 외부 링크 모음입니다.","rows":[["Send feedback","의견 보내기 — Settings > Send feedback 또는 작업 상세의 더보기 메뉴에서 보냅니다. 작업 의견에는 작업 기록과 진단 정보를 포함할 수 있습니다"],["Extensions ↗","확장 프로그램 — 브라우저 확장 관리 페이지로 이동"],["Docs ↗","공식 문서 — docs.aside.com 도움말 센터"],["Community ↗","커뮤니티 — 어사이드 커뮤니티 페이지"]],"tips":["오류 문의는 먼저 이 사이트의 AS 탭을 보고, 해결되지 않으면 최성민 과장에게 문의하세요."],"doc":"https://docs.aside.com/help/troubleshooting"}];
@@ -5504,7 +5390,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 <div class="fab"><button type="button" class="fab-top" id="fabTop" aria-label="맨 위로">&#8593;</button><a class="fab-chat" href="#requests" aria-label="기능 추가 요청" title="기능 추가 요청"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.6-5A8.5 8.5 0 1 1 21 11.5z"/><circle cx="8.5" cy="11.5" r=".6" fill="#fff"/><circle cx="12.5" cy="11.5" r=".6" fill="#fff"/><circle cx="16.5" cy="11.5" r=".6" fill="#fff"/></svg></a></div>
 <script>
 (function () {
-  var m = { quick: 'QUICK START', automations: 'AUTOMATIONS', as: 'AS CENTER', setup: 'ASIDE SETUP', precheck: 'BEFORE YOU START', guide: 'GUIDE', basic: 'BASIC PROMPT', functions: 'WORK FUNCTIONS', builder: 'PROMPT BUILDER', refs: 'REFERENCE', assets: 'AI ASSETS', manual: 'REGISTER', dashboard: 'SAVINGS', requests: 'REQUEST', notice: 'NOTICE' };
+  var m = { quick: 'QUICK START', as: 'AS CENTER', setup: 'ASIDE SETUP', precheck: 'BEFORE YOU START', guide: 'GUIDE', basic: 'BASIC PROMPT', functions: 'WORK FUNCTIONS', builder: 'PROMPT BUILDER', refs: 'REFERENCE', assets: 'AI ASSETS', manual: 'REGISTER', dashboard: 'SAVINGS', requests: 'REQUEST', notice: 'NOTICE' };
   Object.keys(m).forEach(function (k) { var t = document.querySelector('#page-' + k + ' .section-title'); if (t) t.setAttribute('data-eyebrow', m[k]); });
   var top = document.getElementById('fabTop');
   if (top) top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
