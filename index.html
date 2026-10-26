@@ -2255,7 +2255,7 @@ input, textarea, select { font-size: 14px; }
       <!-- ═══ 자동화 리스트 ═══ -->
       <section class="page" id="page-automations">
         <h2 class="section-title">자동화 리스트</h2>
-        <p class="section-sub">팀별로 어사이드 자동화를 모아 봅니다. 성과측정 시트와 AI 자산이 연결되어 있어, 자동화를 등록하면 해당 팀 목록에 반영됩니다. 내 업무와 비슷한 자동화를 찾아 그대로 가져다 쓰세요.</p>
+        <p class="section-sub">팀별로 어사이드 자동화와 수동 자산을 모아 봅니다. 자산을 등록하면 <b>선택한 부서에 따라 해당 팀 목록에 자동으로 올라가며</b>, 이 화면은 1분마다 자동으로 새로 불러옵니다. 팀 안에서 자산화하고 인수인계할 때 쓰세요.</p>
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:18px">
           <div class="sheet-status local" id="auStatus" style="margin:0">불러오는 중...</div>
           <button type="button" class="btn-secondary" id="auRefresh">새로고침</button>
@@ -2267,13 +2267,14 @@ input, textarea, select { font-size: 14px; }
         <div class="au-teamtabs" id="auTeamTabs" aria-label="팀 선택"></div>
         <div class="filter-bar" style="margin:6px 0 10px">
           <div class="search-wrap"><span class="search-icon">🔍</span><input type="search" id="auSearch" placeholder="자동화·담당자 검색" aria-label="자동화 검색"></div>
-          <select class="form-control" id="auSort" style="max-width:200px" aria-label="정렬"><option value="no">번호순</option><option value="new">최근 시작순</option><option value="hours">월 절감 시간 많은 순</option><option value="name">이름순</option></select>
+          <select class="form-control" id="auSort" style="max-width:200px" aria-label="정렬"><option value="recent">최근 등록순</option><option value="hours">월 절감 시간 많은 순</option><option value="name">이름순</option></select>
           <div class="au-view"><button type="button" class="cat-btn active" data-auview="card">카드</button><button type="button" class="cat-btn" data-auview="table">표</button></div>
         </div>
-        <div class="cat-filters" id="auTypeFilters" aria-label="유형 필터"></div>
+        <div class="cat-filters" id="auKindFilters" aria-label="구분 필터"></div>
+        <div class="cat-filters" id="auTypeFilters" aria-label="유형 필터" style="margin-top:-6px"></div>
         <div id="auTeams"></div>
-        <div class="asset-table-wrap" id="auTableWrap" style="display:none"><table class="asset-table"><thead><tr><th>팀</th><th>번호</th><th>자동화</th><th>분류</th><th>유형</th><th>담당자</th><th>기존 → 개선(분)</th><th>주 횟수</th><th>월 절감(시간)</th><th>상태</th><th>결과물</th></tr></thead><tbody id="auTableBody"></tbody></table></div>
-        <div class="bp-hint" style="margin:14px 0 0">※ 팀은 성과측정 시트의 부서 값을 기준으로 나뉩니다(상품기획은 개발팀, 공통은 공용). 소요시간과 절감 시간은 시트에 작성자가 입력한 값 기준 추정치이며 별도 검증 전입니다. 금액·인원별 성과는 표시하지 않습니다. 절감 산식과 가정은 [절감 대시보드]에서 확인하세요.</div>
+        <div class="asset-table-wrap" id="auTableWrap" style="display:none"><table class="asset-table"><thead><tr><th>팀</th><th>번호</th><th>자산·자동화</th><th>구분</th><th>유형</th><th>담당자</th><th>기존 → 개선(분)</th><th>주 횟수</th><th>월 절감(시간)</th><th>상태</th><th>결과물</th></tr></thead><tbody id="auTableBody"></tbody></table></div>
+        <div class="bp-hint" style="margin:14px 0 0">※ 팀은 자산 등록 때 고른 부서(또는 성과측정 시트의 부서) 기준으로 자동 분류됩니다(마케팅→마케팅팀, 영업→영업팀, 상품기획→개발팀, 디자인→디자인팀, 해외영업→해외영업팀, 공통·전사→공용). 부서가 위 목록에 없으면 "팀 미지정"에 표시됩니다. 소요시간과 절감 시간은 시트에 작성자가 입력한 값 기준 추정치이며 별도 검증 전입니다. 금액·인원별 성과는 표시하지 않습니다. 절감 산식과 가정은 [절감 대시보드]에서 확인하세요.</div>
       </section>
 
       <!-- ═══ AS ═══ -->
@@ -3690,6 +3691,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   };
 
   const NOTICES = [
+    { date: '2026-10-26', pin: false, title: '팀별 자동 분류·AI 자산 최신순 정렬', meta: '업데이트', body: '[자동화 리스트]가 성과측정 시트의 자동화뿐 아니라 수동 자산화로 등록한 자산까지 등록 때 고른 부서 기준으로 팀(마케팅·영업·개발·해외영업·디자인·공용)별로 자동 분류하고, 1분마다 새로 불러옵니다. [AI 자산]은 최근 등록된 자산이 위로 오도록 번호 역순으로 정렬됩니다.' },
     { date: '2026-10-26', pin: false, title: '어사이드 초기 세팅 가이드 메뉴 추가', meta: '업데이트', body: '[시작하기] 아래에 [어사이드 초기 세팅]이 생겼습니다. 영문으로 된 어사이드 설정(Settings) 메뉴를 한글로 풀어, 메뉴를 클릭하면 설정 경로와 할 수 있는 일을 확인할 수 있습니다. 처음 설정 순서도 함께 안내합니다.' },
     { date: '2026-10-26', pin: false, title: 'AS 메뉴 추가와 동시 작업 안내', meta: '업데이트', body: '왼쪽 메뉴 맨 아래에 [AS (고장·오류 시)]가 생겼습니다. 어사이드가 멈추면 컴퓨터를 재부팅하고, 계속 오류가 나면 최성민 과장에게 문의해 주세요. 어사이드 작업은 동시에 권장 2개, 최대 3개까지만 진행합니다.' },
     { date: '2026-10-26', pin: false, title: '팀별 자동화 리스트 메뉴 추가', meta: '업데이트', body: '[자산] 아래에 [자동화 리스트]가 생겼습니다. 마케팅팀·영업팀·개발팀·해외영업팀·디자인팀·공용으로 나누어 자동화를 모아 보고, 기존·개선 소요시간과 월 절감 시간, 담당자, 결과물을 카드나 표로 확인할 수 있습니다. 소요시간은 작성자 입력 기준 추정치입니다.' },
@@ -4076,7 +4078,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     st.className = 'sheet-status ' + (GAS_OK() ? 'connected' : 'local');
     st.textContent = GAS_OK() ? '구글 시트 연동됨 (로컬 병행 저장)' : '로컬 저장 모드 (data.js의 SHEET_ENDPOINT 입력 시 시트 연동)';
     const q = ($('#assetSearch').value || '').trim().toLowerCase();
-    const list = assets.filter((a) => !q || [a.no, a.name, a.content, a.type, a.dept, a.assignee].join(' ').toLowerCase().includes(q));
+    const noNum = (a) => parseInt(String(a.no).replace(/\D/g, ''), 10) || 0;
+    const list = assets.filter((a) => !q || [a.no, a.name, a.content, a.type, a.dept, a.assignee].join(' ').toLowerCase().includes(q)).sort((a, b) => noNum(b) - noNum(a));
     $('#assetBody').innerHTML = list.length ? list.map((a) => `
       <tr>
         <td>${esc(a.no)}</td>
@@ -5285,23 +5288,29 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     });
     renderSkillsPage(); renderBpSkillPanel(); loadSkills();
   }
-  /* ── 24. 자동화 리스트 (팀별 · 성과측정 시트 + AI 자산 연결) ── */
+  /* ── 24. 자동화 리스트 (팀별 · AI 자산 전체 + 성과측정 시트 연결, 자동 갱신) ── */
   const AU_TEAMS = ['마케팅팀', '영업팀', '개발팀', '해외영업팀', '디자인팀', '공용'];
   const AU_TEAM_OF = { '마케팅': '마케팅팀', '영업': '영업팀', '상품기획': '개발팀', '개발': '개발팀', '전략기획': '개발팀', '해외영업': '해외영업팀', '디자인': '디자인팀', '공통': '공용', '전사': '공용', '공용': '공용' };
   const AU_TEAM_DEPT = { '마케팅팀': '마케팅', '영업팀': '영업', '개발팀': '상품기획', '해외영업팀': '해외영업', '디자인팀': '디자인', '공용': '공통' };
-  const AU = { rows: [], updated: '', team: '전체', type: '전체', sort: 'no', view: 'card', q: '' };
+  const AU = { rows: [], updated: '', team: '전체', type: '전체', kind: '전체', sort: 'recent', view: 'card', q: '' };
   function auNorm(s) { return String(s || '').toLowerCase().replace(/[^0-9a-z가-힣]/g, ''); }
   function auBig(s) { const t = auNorm(s), m = {}; for (let i = 0; i < t.length - 1; i++) { const g = t.substr(i, 2); m[g] = (m[g] || 0) + 1; } return { m: m, n: Math.max(t.length - 1, 0) }; }
   function auDice(a, b) { const A = auBig(a), B = auBig(b); if (!A.n || !B.n) return 0; let c = 0; Object.keys(A.m).forEach(function (g) { if (B.m[g]) c += Math.min(A.m[g], B.m[g]); }); return 2 * c / (A.n + B.n); }
   function auTeam(it) { const d = String(it.r.dept || '').replace(/\s/g, '').replace(/팀$/, ''); return AU_TEAM_OF[d] || '미지정'; }
+  function auNo(a) { return a ? (parseInt(String(a.no).replace(/\D/g, ''), 10) || 0) : -1; }
   function auItems() {
-    const used = {}; const items = AU.rows.map(function (r) { return { r: r, a: null }; });
+    const used = {}; const items = AU.rows.map(function (r) { return { r: r, a: null, sheet: true }; });
     items.forEach(function (it) { const k = auNorm(it.r.content); if (!k) return; const a = assets.find(function (x) { return !used[x.no] && auNorm(x.name) === k; }); if (a) { it.a = a; used[a.no] = true; } });
     items.forEach(function (it) { if (it.a) return; const k = auNorm(it.r.content); if (!k) return; const a = assets.find(function (x) { const n = auNorm(x.name); return !used[x.no] && n && (n.indexOf(k) >= 0 || k.indexOf(n) >= 0); }); if (a) { it.a = a; used[a.no] = true; } });
     items.forEach(function (it) {
       if (it.a) return; let best = null, bs = 0;
       assets.forEach(function (x) { if (used[x.no]) return; const s = auDice(it.r.content, x.name); if (s > bs) { bs = s; best = x; } });
       if (best && bs >= 0.45) { it.a = best; used[best.no] = true; }
+    });
+    items.forEach(function (it) { it.isAuto = true; });
+    assets.forEach(function (a) {
+      if (used[a.no]) return;
+      items.push({ a: a, sheet: false, isAuto: !!a.auto, r: { no: a.no, content: a.name, name: a.content || '', dept: a.dept, type: a.type || '기타', before: 0, after: 0, weekly: 0, hours: 0, start: String(a.createdAt || '').slice(0, 10) } });
     });
     items.forEach(function (it) { it.team = auTeam(it); });
     return items;
@@ -5322,11 +5331,13 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const q = AU.q.trim().toLowerCase();
     const list = items.filter(function (it) {
       if (AU.type !== '전체' && it.r.type !== AU.type) return false;
+      if (AU.kind === '자동화' && !it.isAuto) return false;
+      if (AU.kind === '수동 자산' && it.isAuto) return false;
       if (!q) return true;
-      return (it.r.content + ' ' + it.r.name + ' ' + it.r.dept + ' ' + it.r.type + ' ' + it.team + ' ' + (it.a ? it.a.assignee + ' ' + it.a.name : '')).toLowerCase().indexOf(q) >= 0;
+      return (it.r.content + ' ' + it.r.name + ' ' + it.r.dept + ' ' + it.r.type + ' ' + it.team + ' ' + (it.a ? it.a.assignee + ' ' + it.a.name + ' ' + it.a.no : '')).toLowerCase().indexOf(q) >= 0;
     });
-    const by = { no: function (a, b) { return Number(a.r.no) - Number(b.r.no); }, new: function (a, b) { return String(b.r.start).localeCompare(String(a.r.start)); }, hours: function (a, b) { return (b.r.hours || 0) - (a.r.hours || 0); }, name: function (a, b) { return String(a.r.content).localeCompare(String(b.r.content), 'ko'); } };
-    return list.sort(by[AU.sort] || by.no);
+    const by = { recent: function (a, b) { return auNo(b.a) - auNo(a.a); }, hours: function (a, b) { return (b.r.hours || 0) - (a.r.hours || 0) || auNo(b.a) - auNo(a.a); }, name: function (a, b) { return String(a.r.content).localeCompare(String(b.r.content), 'ko'); } };
+    return list.sort(by[AU.sort] || by.recent);
   }
   function auBars(title, counts, order) {
     const keys = (order || Object.keys(counts)).filter(function (k) { return counts[k] != null; }), max = Math.max.apply(null, keys.map(function (k) { return counts[k]; }).concat([1]));
@@ -5338,49 +5349,54 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function auCard(it) {
     const r = it.r, a = it.a, saved = r.before > 0 ? Math.max(0, Math.round((r.before - r.after) / r.before * 100)) : 0;
-    const eff = r.before > 0 ? '<div class="au-eff"><div class="au-eff-line">기존 <b>' + r.before + '분</b> → 개선 후 <b>' + r.after + '분</b> · ' + auWhen(it) + '</div><div class="au-track"><span class="au-fill" style="width:' + saved + '%"></span></div><div class="au-eff-sum">' + (r.hours > 0 ? '월 약 <b>' + auHours(r.hours) + '시간</b> 절감 (' + saved + '% 단축)' : '절감 시간 미산정') + '</div></div>' : '<div class="au-eff"><div class="au-eff-line">' + auWhen(it) + '</div><div class="au-eff-sum">절감 시간 미산정 (교육·배포 자료 등)</div></div>';
-    return '<div class="au-card"><div class="au-top"><span class="au-no">NO ' + esc(r.no) + '</span><span class="tag">' + esc(r.type || '기타') + '</span>' + (it.team === '미지정' ? '<span class="tag">' + esc(r.dept || '미분류') + '</span>' : '') + (a ? refBadge({ status: a.status || '등록됨' }) : '<span class="status-badge">AI 자산 미등록</span>') + '</div>'
-      + '<h3>' + esc(r.content || r.name) + '</h3><div class="au-sub">' + esc(r.name || '') + (r.start ? ' · ' + esc(r.start) + ' 시작' : '') + '</div>' + eff
+    let eff;
+    if (r.before > 0) eff = '<div class="au-eff"><div class="au-eff-line">기존 <b>' + r.before + '분</b> → 개선 후 <b>' + r.after + '분</b> · ' + auWhen(it) + '</div><div class="au-track"><span class="au-fill" style="width:' + saved + '%"></span></div><div class="au-eff-sum">' + (r.hours > 0 ? '월 약 <b>' + auHours(r.hours) + '시간</b> 절감 (' + saved + '% 단축)' : '절감 시간 미산정') + '</div></div>';
+    else if (it.sheet) eff = '<div class="au-eff"><div class="au-eff-line">' + auWhen(it) + '</div><div class="au-eff-sum">절감 시간 미산정 (교육·배포 자료 등)</div></div>';
+    else eff = '<div class="au-eff"><div class="au-eff-line">' + (it.isAuto ? '자동화 · ' + auWhen(it) : '수동 자산 (자동화 아님)') + '</div><div class="au-eff-sum">' + (it.isAuto ? '성과측정 시트에 아직 기입되지 않았습니다' : '프롬프트·인수인계용으로 등록된 자산입니다') + '</div></div>';
+    return '<div class="au-card"><div class="au-top"><span class="au-no">' + (it.sheet ? 'NO ' + esc(r.no) : esc(r.no)) + '</span><span class="tag">' + esc(r.type || '기타') + '</span>' + (it.isAuto ? '' : '<span class="tag" style="background:#FFF1D6;color:#8A5A00">수동 자산</span>') + (it.team === '미지정' ? '<span class="tag">' + esc(r.dept || '미분류') + '</span>' : '') + (a ? refBadge({ status: a.status || '등록됨' }) : '<span class="status-badge">AI 자산 미등록</span>') + '</div>'
+      + '<h3>' + esc(r.content || r.name) + '</h3><div class="au-sub">' + esc(it.sheet ? (r.name || '') : (a && a.content ? a.content : '')) + (r.start ? ' · ' + esc(r.start) + (it.sheet ? ' 시작' : ' 등록') : '') + '</div>' + eff
       + '<div class="au-meta">' + (a && a.assignee ? '담당 ' + esc(a.assignee) : '담당 미표기') + (a ? ' · ' + esc(a.no) : '') + '</div>' + auResultChips(a, 3)
       + '<div class="au-actions">' + (a ? '<button type="button" class="btn-secondary" data-auasset="' + esc(a.name) + '" style="padding:8px 14px;font-size:13px">AI 자산에서 보기</button>' : '<button type="button" class="btn-secondary" data-aunew="' + esc(AU_TEAM_DEPT[it.team] || '') + '" style="padding:8px 14px;font-size:13px">AI 자산으로 등록</button>') + '</div></div>';
   }
   function renderAutomations() {
     const st = $('#auStatus'); if (!st) return;
-    st.className = 'sheet-status ' + (GAS_OK() && AU.rows.length ? 'connected' : 'local');
-    st.textContent = !GAS_OK() ? '로컬 저장 모드 (구글 시트 연동 시 표시됩니다)' : (AU.rows.length ? '성과측정 시트 연동 · ' + (AU.updated || '') : '불러오는 중...');
+    st.className = 'sheet-status ' + (GAS_OK() && (AU.rows.length || assets.length) ? 'connected' : 'local');
+    st.textContent = !GAS_OK() ? '로컬 저장 모드 (구글 시트 연동 시 표시됩니다)' : ((AU.rows.length || assets.length) ? '실시간 연동 · ' + (AU.updated || '') + ' · 1분마다 자동 갱신' : '불러오는 중...');
     const all = auItems();
-    const hours = AU.rows.reduce(function (s, r) { return s + (r.hours || 0); }, 0);
+    const hours = all.reduce(function (s, it) { return s + (it.r.hours || 0); }, 0);
     const teams = {}, types = {}; all.forEach(function (it) { teams[it.team] = (teams[it.team] || 0) + 1; types[it.r.type || '기타'] = (types[it.r.type || '기타'] || 0) + 1; });
     const order = AU_TEAMS.concat(teams['미지정'] ? ['미지정'] : []);
     const withRes = all.filter(function (it) { return it.a && (it.a.results || []).length; }).length;
+    const autoCnt = all.filter(function (it) { return it.isAuto; }).length;
     const activeTeams = order.filter(function (t) { return teams[t]; }).length;
-    $('#auStats').innerHTML = [['등록 자동화', AU.rows.length, '건'], ['월 절감 시간 (작성자 입력 기준)', AU.rows.length ? auHours(hours).toLocaleString() : 0, '시간'], ['자동화가 있는 팀', activeTeams, '개 / 6개 팀'], ['결과물 등록', withRes, '건']].map(function (c) { return '<div class="counter-card"><div class="label">' + c[0] + '</div><div class="value">' + c[1] + '</div><div class="unit">' + c[2] + '</div></div>'; }).join('');
+    $('#auStats').innerHTML = [['등록 자산·자동화', all.length, '건 (자동화 ' + autoCnt + '건)'], ['월 절감 시간 (작성자 입력 기준)', all.length ? auHours(hours).toLocaleString() : 0, '시간'], ['자산이 있는 팀', activeTeams, '개 / 6개 팀'], ['결과물 등록', withRes, '건']].map(function (c) { return '<div class="counter-card"><div class="label">' + c[0] + '</div><div class="value">' + c[1] + '</div><div class="unit">' + c[2] + '</div></div>'; }).join('');
     const tc = {}; order.forEach(function (t) { tc[t] = teams[t] || 0; });
-    $('#auDist').innerHTML = AU.rows.length ? auBars('팀별', tc, order) + auBars('유형별', types, Object.keys(types).sort(function (a, b) { return types[b] - types[a]; })) : '';
-    $('#auTeamTabs').innerHTML = ['전체'].concat(order).map(function (t) { return '<button type="button" class="cat-btn' + (AU.team === t ? ' active' : '') + '" data-auteam="' + esc(t) + '">' + esc(t) + (t === '전체' ? ' ' + all.length : ' ' + (teams[t] || 0)) + '</button>'; }).join('');
+    $('#auDist').innerHTML = all.length ? auBars('팀별', tc, order) + auBars('유형별', types, Object.keys(types).sort(function (a, b) { return types[b] - types[a]; })) : '';
+    $('#auTeamTabs').innerHTML = ['전체'].concat(order).map(function (t) { return '<button type="button" class="cat-btn' + (AU.team === t ? ' active' : '') + '" data-auteam="' + esc(t) + '">' + esc(t === '미지정' ? '팀 미지정' : t) + (t === '전체' ? ' ' + all.length : ' ' + (teams[t] || 0)) + '</button>'; }).join('');
+    $('#auKindFilters').innerHTML = ['전체', '자동화', '수동 자산'].map(function (k) { return '<button type="button" class="cat-btn' + (AU.kind === k ? ' active' : '') + '" data-aukind="' + esc(k) + '">' + (k === '전체' ? '구분 전체' : esc(k)) + '</button>'; }).join('');
     $('#auTypeFilters').innerHTML = ['전체'].concat(Object.keys(types).sort()).map(function (k) { return '<button type="button" class="cat-btn' + (AU.type === k ? ' active' : '') + '" data-autype="' + esc(k) + '">' + (k === '전체' ? '유형 전체' : esc(k)) + '</button>'; }).join('');
     $$('[data-auview]').forEach(function (b) { b.classList.toggle('active', b.dataset.auview === AU.view); });
     $('#auTeams').style.display = AU.view === 'card' ? '' : 'none'; $('#auTableWrap').style.display = AU.view === 'table' ? '' : 'none';
-    const list = auFiltered(all), filtering = !!(AU.q.trim() || AU.type !== '전체');
+    const list = auFiltered(all), filtering = !!(AU.q.trim() || AU.type !== '전체' || AU.kind !== '전체');
     const shown = order.filter(function (t) { return AU.team === '전체' || AU.team === t; });
     $('#auTeams').innerHTML = shown.map(function (t) {
       const mine = list.filter(function (it) { return it.team === t; });
       const sum = all.filter(function (it) { return it.team === t; }).reduce(function (s, it) { return s + (it.r.hours || 0); }, 0);
-      const body = mine.length ? '<div class="au-grid">' + mine.map(auCard).join('') + '</div>' : '<div class="au-empty">' + (filtering && (teams[t] || 0) ? '조건에 맞는 자동화가 없습니다.' : '아직 등록된 자동화가 없습니다. ' + (t === '미지정' ? '' : t + '에서 어사이드로 만든 자동화가 있으면 등록해 주세요.')) + '</div>';
-      return '<section class="au-team"><div class="au-team-head"><div><span class="eyebrow">TEAM</span><h2>' + esc(t === '미지정' ? '팀 미지정' : t) + '</h2></div><div class="au-team-sum">' + (teams[t] || 0) + '건' + (sum > 0 ? ' · 월 약 ' + auHours(sum) + '시간 절감' : '') + '</div>' + (t === '미지정' ? '' : '<button type="button" class="btn-secondary" data-aunew="' + esc(AU_TEAM_DEPT[t] || '') + '" style="padding:8px 14px;font-size:13px">+ ' + esc(t) + ' 자동화 등록</button>') + '</div>' + body + '</section>';
+      const body = mine.length ? '<div class="au-grid">' + mine.map(auCard).join('') + '</div>' : '<div class="au-empty">' + (filtering && (teams[t] || 0) ? '조건에 맞는 자산이 없습니다.' : '아직 등록된 자산이 없습니다. ' + (t === '미지정' ? '' : t + '에서 어사이드로 만든 자동화나 프롬프트가 있으면 등록해 주세요.')) + '</div>';
+      return '<section class="au-team"><div class="au-team-head"><div><span class="eyebrow">TEAM</span><h2>' + esc(t === '미지정' ? '팀 미지정' : t) + '</h2></div><div class="au-team-sum">' + (teams[t] || 0) + '건' + (sum > 0 ? ' · 월 약 ' + auHours(sum) + '시간 절감' : '') + '</div>' + (t === '미지정' ? '' : '<button type="button" class="btn-secondary" data-aunew="' + esc(AU_TEAM_DEPT[t] || '') + '" style="padding:8px 14px;font-size:13px">+ ' + esc(t) + ' 자산 등록</button>') + '</div>' + body + '</section>';
     }).join('');
     const rowsT = list.filter(function (it) { return AU.team === '전체' || it.team === AU.team; }).sort(function (a, b) { return order.indexOf(a.team) - order.indexOf(b.team); });
     $('#auTableBody').innerHTML = rowsT.map(function (it) {
       const r = it.r, a = it.a;
-      return '<tr><td>' + esc(it.team === '미지정' ? '팀 미지정' : it.team) + '</td><td>' + esc(r.no) + '</td><td><b>' + esc(r.content || r.name) + '</b></td><td>' + esc(r.name || '') + '</td><td>' + esc(r.type || '') + '</td><td>' + (a && a.assignee ? esc(a.assignee) : '-') + '</td><td>' + (r.before > 0 ? r.before + ' → ' + r.after : '-') + '</td><td>' + (r.weekly || '-') + '</td><td>' + (r.hours > 0 ? auHours(r.hours) : '-') + '</td><td>' + (a ? esc(a.status || '등록됨') : '미등록') + '</td><td>' + ((a && (a.results || []).length) ? (a.results || []).length + '건' : '-') + '</td></tr>';
-    }).join('') || '<tr><td colspan="11" style="text-align:center;color:#8B9096;padding:20px">조건에 맞는 자동화가 없습니다.</td></tr>';
+      return '<tr><td>' + esc(it.team === '미지정' ? '팀 미지정' : it.team) + '</td><td>' + esc(it.sheet ? r.no : (a ? a.no : '')) + '</td><td><b>' + esc(r.content || r.name) + '</b></td><td>' + (it.isAuto ? '자동화' : '수동 자산') + '</td><td>' + esc(r.type || '') + '</td><td>' + (a && a.assignee ? esc(a.assignee) : '-') + '</td><td>' + (r.before > 0 ? r.before + ' → ' + r.after : '-') + '</td><td>' + (r.weekly || '-') + '</td><td>' + (r.hours > 0 ? auHours(r.hours) : '-') + '</td><td>' + (a ? esc(a.status || '등록됨') : '미등록') + '</td><td>' + ((a && (a.results || []).length) ? (a.results || []).length + '건' : '-') + '</td></tr>';
+    }).join('') || '<tr><td colspan="11" style="text-align:center;color:#8B9096;padding:20px">조건에 맞는 자산이 없습니다.</td></tr>';
   }
   function loadAutomations() {
     if (!GAS_OK()) { renderAutomations(); return Promise.resolve(); }
-    return fetch(SHEET_ENDPOINT + '?type=dashboard').then(function (r) { return r.json(); }).then(function (j) {
+    const d = fetch(SHEET_ENDPOINT + '?type=dashboard').then(function (r) { return r.json(); }).then(function (j) {
       if (j && j.ok && Array.isArray(j.rows)) { AU.rows = j.rows; AU.updated = j.updated || ''; }
-      renderAutomations();
-    }).catch(function () { renderAutomations(); });
+    }).catch(function () {});
+    return Promise.all([d, loadRemoteAssets()]).then(renderAutomations, renderAutomations);
   }
   function bindAutomations() {
     if (!$('#auTeams')) return;
@@ -5388,13 +5404,16 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#auSort').addEventListener('change', function (e) { AU.sort = e.target.value; renderAutomations(); });
     $('#auRefresh').addEventListener('click', function () { $('#auStatus').textContent = '불러오는 중...'; loadAutomations(); });
     $('#page-automations').addEventListener('click', function (e) {
-      const tm = e.target.closest('[data-auteam]'), t = e.target.closest('[data-autype]'), v = e.target.closest('[data-auview]'), s = e.target.closest('[data-auasset]'), n = e.target.closest('[data-aunew]');
+      const tm = e.target.closest('[data-auteam]'), t = e.target.closest('[data-autype]'), k = e.target.closest('[data-aukind]'), v = e.target.closest('[data-auview]'), s = e.target.closest('[data-auasset]'), n = e.target.closest('[data-aunew]');
       if (tm) { AU.team = tm.dataset.auteam; renderAutomations(); }
       if (t) { AU.type = t.dataset.autype; renderAutomations(); }
+      if (k) { AU.kind = k.dataset.aukind; renderAutomations(); }
       if (v) { AU.view = v.dataset.auview; renderAutomations(); }
       if (s) { go('assets'); const inp = $('#assetSearch'); if (inp) { inp.value = s.dataset.auasset; inp.dispatchEvent(new Event('input', { bubbles: true })); } }
       if (n) { go('manual'); const d = $('#mnDept'); if (d && n.dataset.aunew) { d.value = n.dataset.aunew; d.dispatchEvent(new Event('change', { bubbles: true })); } }
     });
+    setInterval(function () { const pg = $('#page-automations'); if (pg && pg.classList.contains('active') && !document.hidden) loadAutomations(); }, 60000);
+    document.addEventListener('visibilitychange', function () { const pg = $('#page-automations'); if (!document.hidden && pg && pg.classList.contains('active')) loadAutomations(); });
     renderAutomations();
   }
   /* ── 25. 어사이드 초기 세팅 가이드 (설정 메뉴 한글 안내) ── */
