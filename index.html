@@ -1615,6 +1615,34 @@ input, textarea, select { font-size: 14px; }
 .card-top { align-items: flex-start; }
 
 .sheet-status.connected { background: #E6F9F6; color: #0E5A4C; }
+
+/* ── 왼쪽 고정 사이드 메뉴 (데스크톱) — 디자인은 자사몰 테마 유지 ── */
+@media (min-width: 981px) {
+  .layout { display: flex; align-items: flex-start; }
+  .main { flex: 1; min-width: 0; margin-left: 0; display: block; }
+  .sidebar { position: sticky; top: 0; flex: 0 0 272px; width: 272px; height: 100vh; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0; padding: 0; border-bottom: 0; border-right: 1px solid #ECEEF0; overflow-y: auto; background: #fff; }
+  .sidebar-logo { padding: 28px 26px 20px; border-bottom: 1px solid #F0F1F3; flex: none; }
+  .sidebar-logo img { width: 150px; }
+  .sidebar-logo .sub { font-size: 12px; margin-top: 2px; }
+  .sidebar-nav { flex: 1; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0; height: auto; padding: 8px 14px 28px; overflow: visible; }
+  .nav-item { display: flex; align-items: center; gap: 12px; height: auto; padding: 11px 14px; border-radius: 12px; font-size: 15px; font-weight: 500; color: #3c3a39; width: 100%; }
+  .nav-item .nav-icon { display: inline-flex; width: 22px; justify-content: center; font-size: 17px; flex: none; }
+  .nav-item:hover { background: #F6F7F8; color: #1b1b1b; }
+  .nav-item.active, .nav-drop .nav-item.active { background: #E6F9F6; color: #0E8F7B; font-weight: 700; box-shadow: inset 3px 0 0 #14C4A9; }
+  .nav-group { display: block; height: auto; margin-top: 4px; }
+  .nav-group-label { display: block; height: auto; padding: 18px 14px 8px; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #14C4A9; cursor: default; }
+  .nav-group:hover > .nav-group-label, .nav-group:focus-within > .nav-group-label, .nav-group:has(.nav-item.active) > .nav-group-label { color: #14C4A9; font-weight: 700; }
+  .sidebar-nav > .nav-item.active::after, .nav-group:has(.nav-item.active) > .nav-group-label::after { display: none; }
+  .nav-drop { display: block; position: static; transform: none; min-width: 0; border: 0; box-shadow: none; padding: 0; background: none; }
+  .nav-drop .nav-item { padding: 11px 14px; width: 100%; }
+  .nav-drop .nav-item:hover { background: #F6F7F8; color: #1b1b1b; }
+  .page-content { padding: 48px clamp(20px, 3.5vw, 56px) 96px; }
+  .site-footer-inner { max-width: 1320px; }
+}
+@media (min-width: 981px) { .nav-item, .nav-drop .nav-item { padding: 9px 14px; } .nav-group-label { padding: 14px 14px 6px; } .sidebar-logo { padding: 22px 26px 16px; } .sidebar::-webkit-scrollbar { width: 6px; } .sidebar::-webkit-scrollbar-thumb { background: #E6E8EB; border-radius: 6px; } }
+/* 모바일: 아이콘 표시 + 그룹 라벨 유지 */
+@media (max-width: 980px) { .nav-item .nav-icon { display: inline-flex; width: 24px; margin-right: 8px; } .nav-item { display: flex; align-items: center; } }
+
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -1645,6 +1673,12 @@ input, textarea, select { font-size: 14px; }
 }
 
 </style>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon-48.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#ffffff">
 </head>
 <body>
 <div class="announce"><a href="#functions">누가 써도 같은 품질로 &middot; <b>업무기능</b>에서 프롬프트를 만들고 <b>레퍼런스</b>를 참고하세요</a></div>
@@ -1654,12 +1688,11 @@ input, textarea, select { font-size: 14px; }
   <aside class="sidebar" id="sidebar" aria-label="주 메뉴">
     <a class="sidebar-logo" href="#home" aria-label="홈"><img src="logo.svg" alt="Live orals" width="154" height="22"><span class="sub">어사이드 활용 플랫폼</span></a>
     <nav class="sidebar-nav">
-      <a class="nav-item" href="#home" data-page="home"><span class="nav-icon">🏠</span>홈</a>
-      <div class="nav-group"><span class="nav-group-label" tabindex="0">시작하기</span><div class="nav-drop"><a class="nav-item" href="#precheck" data-page="precheck"><span class="nav-icon">✅</span>업무 시작 전 확인사항</a><a class="nav-item" href="#guide" data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a></div></div>
-      <div class="nav-group"><span class="nav-group-label" tabindex="0">업무 도구</span><div class="nav-drop"><a class="nav-item" href="#basic" data-page="basic"><span class="nav-icon">📝</span>기본 프롬프트</a><a class="nav-item" href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a><a class="nav-item" href="#refs" data-page="refs"><span class="nav-icon">📚</span>레퍼런스 참고하기</a></div></div>
-      <div class="nav-group"><span class="nav-group-label" tabindex="0">자산</span><div class="nav-drop"><a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a><a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a></div></div>
-      <a class="nav-item" href="#dashboard" data-page="dashboard"><span class="nav-icon">📊</span>절감 대시보드</a>
-      <div class="nav-group"><span class="nav-group-label" tabindex="0">소통</span><div class="nav-drop"><a class="nav-item" href="#requests" data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a><a class="nav-item" href="#notice" data-page="notice"><span class="nav-icon">📢</span>공지</a></div></div>
+      <div class="nav-group"><span class="nav-group-label">시작하기</span><div class="nav-drop"><a class="nav-item" href="#home" data-page="home"><span class="nav-icon">🏠</span>홈</a><a class="nav-item" href="#precheck" data-page="precheck"><span class="nav-icon">✅</span>업무 시작 전 확인사항</a><a class="nav-item" href="#guide" data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a></div></div>
+      <div class="nav-group"><span class="nav-group-label">업무 도구</span><div class="nav-drop"><a class="nav-item" href="#basic" data-page="basic"><span class="nav-icon">📝</span>기본 프롬프트</a><a class="nav-item" href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a><a class="nav-item" href="#refs" data-page="refs"><span class="nav-icon">📚</span>레퍼런스 참고하기</a></div></div>
+      <div class="nav-group"><span class="nav-group-label">자산</span><div class="nav-drop"><a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a><a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a></div></div>
+      <div class="nav-group"><span class="nav-group-label">현황</span><div class="nav-drop"><a class="nav-item" href="#dashboard" data-page="dashboard"><span class="nav-icon">📊</span>절감 대시보드</a></div></div>
+      <div class="nav-group"><span class="nav-group-label">소통</span><div class="nav-drop"><a class="nav-item" href="#requests" data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a><a class="nav-item" href="#notice" data-page="notice"><span class="nav-icon">📢</span>공지</a></div></div>
     </nav>
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="메뉴 열기">☰</button>
   </aside>
