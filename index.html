@@ -1719,6 +1719,28 @@ input, textarea, select { font-size: 14px; }
 .gd-code { background: #111; color: #E9ECEF; border-radius: 10px; padding: 10px 14px; font-size: 12.5px; line-height: 1.6; overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin: 10px 0 0; font-family: Consolas, "Courier New", monospace; }
 .nav-group-as { margin-top: auto; padding-top: 6px; position: sticky; bottom: 0; background: #fff; z-index: 3; padding-bottom: 8px; }
 @media (min-width: 981px) { .nav-group-as { border-top: 1px solid #F0F1F3; margin-top: auto; } .sidebar-nav { min-height: 0; } }
+
+/* 어사이드 초기 세팅 가이드 */
+.su-steps { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+.su-step { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: 999px; background: #F6F7F8; border: 1px solid transparent; font-size: 14px; font-weight: 600; color: #2e2e2e; cursor: pointer; transition: all .18s ease; }
+.su-step:hover { background: #fff; border-color: #14C4A9; color: #0E8F7B; }
+.su-no { width: 22px; height: 22px; border-radius: 50%; background: #111; color: #fff; font-size: 12px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
+.su-layout { display: grid; grid-template-columns: 300px 1fr; gap: 28px; align-items: start; }
+.su-side { position: sticky; top: 20px; max-height: calc(100vh - 40px); overflow-y: auto; padding-right: 4px; }
+.su-grp { font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #14C4A9; margin: 16px 6px 6px; }
+.su-item { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; width: 100%; text-align: left; padding: 10px 14px; border-radius: 12px; background: none; border: 1px solid transparent; cursor: pointer; transition: all .15s ease; }
+.su-item:hover { background: #F6F7F8; }
+.su-item.active { background: #E6F9F6; border-color: #BFEDE5; box-shadow: inset 3px 0 0 #14C4A9; }
+.su-ko { font-size: 15px; font-weight: 700; color: #1b1b1b; }
+.su-en { font-size: 12.5px; color: #8B9096; }
+.su-new { font-size: 10.5px; font-weight: 700; background: #14C4A9; color: #fff; border-radius: 6px; padding: 1px 6px; margin-left: 4px; vertical-align: middle; }
+.su-panel { background: #fff; border: 1px solid #E6E8EB; border-radius: 20px; padding: 28px 30px; min-height: 320px; }
+.su-title { font-size: 28px; font-weight: 700; letter-spacing: -.8px; color: #1b1b1b; line-height: 1.25; margin-bottom: 10px; }
+.su-title small { font-size: 15px; font-weight: 500; color: #8B9096; letter-spacing: 0; margin-left: 6px; }
+.su-path { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; }
+.su-path code { background: #111; color: #E9ECEF; border-radius: 8px; padding: 6px 12px; font-size: 13px; font-family: Consolas, "Courier New", monospace; }
+@media (max-width: 980px) { .su-layout { grid-template-columns: 1fr; } .su-side { position: static; max-height: none; } .su-panel { padding: 22px 18px; } }
+
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -1765,6 +1787,7 @@ input, textarea, select { font-size: 14px; }
     <a class="sidebar-logo" href="#home" aria-label="홈"><img src="logo.svg" alt="Live orals" width="154" height="22"><span class="sub">어사이드 활용 플랫폼</span></a>
     <nav class="sidebar-nav">
       <div class="nav-group"><span class="nav-group-label">시작하기</span><div class="nav-drop"><a class="nav-item" href="#home" data-page="home"><span class="nav-icon">🏠</span>홈</a>
+      <a class="nav-item" href="#setup" data-page="setup"><span class="nav-icon">🧭</span>어사이드 초기 세팅</a>
       <a class="nav-item" href="#quick" data-page="quick"><span class="nav-icon">⚡</span>간단 사용법</a><a class="nav-item" href="#precheck" data-page="precheck"><span class="nav-icon">✅</span>업무 시작 전 확인사항</a><a class="nav-item" href="#guide" data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a></div></div>
       <div class="nav-group"><span class="nav-group-label">업무 도구</span><div class="nav-drop"><a class="nav-item" href="#basic" data-page="basic"><span class="nav-icon">📝</span>기본 프롬프트</a><a class="nav-item" href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a><a class="nav-item" href="#refs" data-page="refs"><span class="nav-icon">📚</span>레퍼런스 참고하기</a></div></div>
       <div class="nav-group"><span class="nav-group-label">자산</span><div class="nav-drop"><a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a><a class="nav-item" href="#automations" data-page="automations"><span class="nav-icon">⚙️</span>자동화 리스트</a><a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a></div></div>
@@ -1867,7 +1890,7 @@ input, textarea, select { font-size: 14px; }
         <h3 class="gd-h">B. 시작하기: 개인 계정으로 무료 가입하고 공유 Claude 계정 연결하기</h3>
         <div class="start-steps">
           <div class="start-step"><b>① 설치와 무료 가입</b>aside.com/download에서 PC에 맞는 설치 파일을 받아 설치합니다(지원 환경은 다운로드 페이지에서 확인). 처음 실행하면 로그인 화면이 나오며, <b>개인 이메일 등으로 새 계정을 만들면 무료(Free) 플랜</b>으로 시작합니다.</div>
-          <div class="start-step"><b>② 처음 설정</b>안내에 따라 <b>브라우저 데이터 가져오기</b>(방문 기록·쿠키·북마크, 선택)를 하고, <b>비밀번호 관리자</b>를 설정합니다. 쓰던 브라우저의 로그인 상태를 가져오면 어사이드가 바로 업무 사이트를 쓸 수 있습니다.</div>
+          <div class="start-step"><b>② 처음 설정</b>영문 설정 메뉴가 어렵다면 왼쪽 메뉴의 <a href="#setup" style="color:#0E8F7B;font-weight:700">어사이드 초기 세팅</a>에서 한글로 확인하세요. 안내에 따라 <b>브라우저 데이터 가져오기</b>(방문 기록·쿠키·북마크, 선택)를 하고, <b>비밀번호 관리자</b>를 설정합니다. 쓰던 브라우저의 로그인 상태를 가져오면 어사이드가 바로 업무 사이트를 쓸 수 있습니다.</div>
           <div class="start-step"><b>③ 공유 Claude 계정 연결</b>어사이드 <code>Settings &gt; Models &gt; Providers</code>에서 <code>Connect</code> → <code>Subscription</code> → <code>Claude Subscription</code>을 고릅니다. 열리는 로그인 팝업에서 공유 Claude 계정으로 로그인하고 어사이드로 돌아오면 연결됩니다.</div>
         </div>
         <div class="gd-callout"><b>연결할 때 확인하세요</b><br>· 공유 계정의 로그인 정보는 이 사이트에 적지 않습니다. 운영 담당자에게 따로 받으세요.<br>· 어사이드 공식 도움말은 Claude 구독 연결을 <b>Claude Pro 또는 Max 구독</b> 기준으로 안내합니다. 공유 계정이 해당 플랜인지는 담당자 확인이 필요합니다.<br>· 연결이 끝나면 아래 <b>2. 모델 설정</b> 표대로 Task models를 맞춰 사용량을 아껴 주세요. 공유 계정은 전 직원의 사용량이 합산됩니다.<br>· Aside 크레딧은 연결한 구독·API와 별도로 관리됩니다(공식 도움말).</div>
@@ -2298,6 +2321,22 @@ input, textarea, select { font-size: 14px; }
           <div class="gd-callout"><b>3단계 전에 꼭 알아두세요</b><br>· <code>.aside</code> 폴더에는 대화·작업 기록, 메모리, 사용자 스킬 같은 <b>로컬 데이터</b>가 들어 있습니다. 리셋하면 새 폴더에서는 비어 보이고, 다시 로그인과 초기 설정이 필요할 수 있습니다.<br>· 되돌리려면 어사이드를 종료하고, 새로 생긴 <code>.aside</code> 폴더를 다른 이름으로 바꾼 뒤 <code>.aside_old</code>를 다시 <code>.aside</code>로 바꿉니다.<br>· <code>.aside_old</code>는 <b>며칠 정상적으로 써 보고 문제가 없을 때 삭제</b>하세요. 그 전에는 복구용으로 남겨 둡니다.<br>· 작업이 멈춘 경우(승인 대기, 방향 이탈)에는 리셋하지 마세요.</div>
           <p class="gd-note">출처: 1·2단계는 어사이드 공식 도움말(Troubleshoot Aside), 3단계는 사내 경험입니다. 맥은 <code>%USERPROFILE%\.aside</code> 대신 <code>~/.aside</code> 폴더입니다. 담당자가 해결하지 못하면 어사이드 지원팀(support@aside.com)에 시각, 증상, 오류 메시지, 그날의 로그 파일(<code>.aside\logs\daemon-날짜.log</code>)을 보냅니다.</p>
         </details>
+      </section>
+
+      <!-- ═══ 어사이드 초기 세팅 ═══ -->
+      <section class="page" id="page-setup">
+        <h2 class="section-title">어사이드 초기 세팅 가이드</h2>
+        <p class="section-sub">어사이드 설정(Settings) 메뉴는 영문으로 되어 있습니다. 메뉴를 클릭하면 <b>설정 경로와 그 화면에서 할 수 있는 일</b>을 한글로 풀어 보여 드립니다. 어사이드 설정 화면의 왼쪽 메뉴 순서 그대로 정리했습니다.</p>
+        <div class="sec-head" style="margin:6px 0 12px"><span class="eyebrow">FIRST SETUP</span><h2 style="font-size:22px">처음 설정 순서 (권장)</h2></div>
+        <div class="su-steps" id="suSteps"></div>
+        <div class="su-layout">
+          <aside class="su-side" aria-label="설정 메뉴">
+            <div class="search-wrap" style="margin-bottom:10px"><span class="search-icon">🔍</span><input type="search" id="suSearch" placeholder="한글·영문으로 설정 찾기" aria-label="설정 검색"></div>
+            <div id="suList"></div>
+          </aside>
+          <div class="su-panel" id="suPanel"></div>
+        </div>
+        <p class="gd-note" style="margin-top:18px">출처: 어사이드 공식 도움말(docs.aside.com)과 변경 이력, 실제 설정 화면(General) 캡처 기준, 2026-10-26 확인. "변경 이력 기준"이라고 적은 항목은 공식 도움말에 상세 설명이 없습니다. 화면 구성과 메뉴 이름은 어사이드 버전에 따라 달라질 수 있습니다.</p>
       </section>
 
       <!-- ═══ 어사이드 가이드 ═══ -->
@@ -3651,6 +3690,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   };
 
   const NOTICES = [
+    { date: '2026-10-26', pin: false, title: '어사이드 초기 세팅 가이드 메뉴 추가', meta: '업데이트', body: '[시작하기] 아래에 [어사이드 초기 세팅]이 생겼습니다. 영문으로 된 어사이드 설정(Settings) 메뉴를 한글로 풀어, 메뉴를 클릭하면 설정 경로와 할 수 있는 일을 확인할 수 있습니다. 처음 설정 순서도 함께 안내합니다.' },
     { date: '2026-10-26', pin: false, title: 'AS 메뉴 추가와 동시 작업 안내', meta: '업데이트', body: '왼쪽 메뉴 맨 아래에 [AS (고장·오류 시)]가 생겼습니다. 어사이드가 멈추면 컴퓨터를 재부팅하고, 계속 오류가 나면 최성민 과장에게 문의해 주세요. 어사이드 작업은 동시에 권장 2개, 최대 3개까지만 진행합니다.' },
     { date: '2026-10-26', pin: false, title: '팀별 자동화 리스트 메뉴 추가', meta: '업데이트', body: '[자산] 아래에 [자동화 리스트]가 생겼습니다. 마케팅팀·영업팀·개발팀·해외영업팀·디자인팀·공용으로 나누어 자동화를 모아 보고, 기존·개선 소요시간과 월 절감 시간, 담당자, 결과물을 카드나 표로 확인할 수 있습니다. 소요시간은 작성자 입력 기준 추정치입니다.' },
     { date: '2026-10-26', pin: false, title: '스킬 파일 등록(선택)과 자동 추천 추가', meta: '업데이트', body: '[레퍼런스 참고하기]의 "스킬 파일" 탭과 [수동 자산화]에서 스킬 파일(SKILL.md 등)을 선택 등록할 수 있습니다. 등록해 두면 업무기능·기본 프롬프트에서 업무에 맞는 스킬 파일이 자동으로 추천되고, 체크한 파일이 프롬프트에 들어가 어사이드가 먼저 읽고 따릅니다.' },
@@ -3666,7 +3706,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { as: 'AS', automations: '자동화 리스트', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '수동 자산화', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { setup: '어사이드 초기 세팅', as: 'AS', automations: '자동화 리스트', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '수동 자산화', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page) {
     if (!PAGES[page]) page = 'home';
@@ -5357,7 +5397,48 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     });
     renderAutomations();
   }
+  /* ── 25. 어사이드 초기 세팅 가이드 (설정 메뉴 한글 안내) ── */
+  const SETUP = [{"id":"general","grp":"개인 설정 (Personal)","en":"General","ko":"일반","path":"Settings > General","sum":"로그인 계정, 기본 브라우저, 검색·새 탭, 가져오기, 업데이트 확인을 다루는 기본 화면입니다.","rows":[["Set as default","기본 브라우저로 설정 — 어사이드를 기본 브라우저로 지정합니다 (화면 맨 위 파란 배너)"],["Sign out","로그아웃 — 현재 로그인한 계정에서 나갑니다. 계정 이름과 로그인 방식(예: Signed in with Google)이 함께 표시됩니다"],["Invite your friends to Aside","친구 초대 — 초대한 사람이 가입하면 양쪽이 100 크레딧을 받는다고 화면에 안내됩니다 (화면 기준)"],["Default search engine","기본 검색엔진 — 주소창 검색에 쓰는 검색엔진 (예: Google)"],["New tab mode","새 탭 모드 — 새 탭을 Search(검색)로 열지 Ask(어사이드에게 바로 요청)로 열지 고릅니다"],["Auto Picture-in-Picture","자동 화면 속 화면 — 영상 탭에서 다른 탭으로 옮길 때 작은 재생 창을 띄웁니다"],["Screenshot","스크린샷 — 마우스 오른쪽 메뉴에서 현재 페이지를 캡처합니다"],["Preferred languages","선호 언어 — Configure 버튼에서 언어 목록을 설정합니다 (예: 한국어, 영어)"],["Spell check","맞춤법 검사 — 입력할 때 철자를 검사합니다"],["Import from another browser","다른 브라우저에서 가져오기 — 방문 기록, 쿠키, 북마크, 비밀번호를 어사이드로 가져옵니다"],["Import bookmarks","북마크 가져오기 — 다른 브라우저의 북마크만 가져옵니다"],["About Aside > Check for updates","어사이드 정보 > 업데이트 확인 — 브라우저 버전을 보고 업데이트를 확인합니다"]],"tips":["처음 설정: 로그인 계정이 맞는지 확인하고, 쓰던 브라우저의 로그인 상태를 쓰려면 \"다른 브라우저에서 가져오기\"를 하세요.","선호 언어에 한국어가 들어 있는지 확인하세요.","업데이트 확인에서 HTTP 429 같은 오류가 보이면 잠시 후 다시 눌러 보세요. 계속되면 AS 탭을 참고하세요 (운영 안내)."],"doc":"https://docs.aside.com/help/get-started"},{"id":"appearance","grp":"개인 설정 (Personal)","en":"Appearance","ko":"화면 설정","path":"Settings > Appearance","sum":"화면 테마와 키보드 단축키, 탭 모양을 정하는 곳입니다.","rows":[["Theme","테마 — 화면 색상 테마를 고릅니다"],["Keyboard shortcuts","키보드 단축키 — 단축키 설정 화면으로 연결됩니다"],["Vertical tabs","세로 탭 — 탭 스타일과 북마크 영역 숨기기를 정합니다"]],"tips":["자주 쓰는 단축키: Ctrl+E 어사이드에게 요청(Ask Aside), Ctrl+Shift+E 새 작업(New Task), Ctrl+S 사이드바 열기/닫기, Ctrl+Shift+C 주소 복사, Ctrl+Shift+\\ 화면 분할 (맥은 Cmd).","이 페이지의 항목 설명은 공식 변경 이력 기준이며, 공식 도움말에는 상세 설명이 없습니다."],"doc":"https://docs.aside.com/help/browser-basics"},{"id":"account","grp":"개인 설정 (Personal)","en":"Account","ko":"계정","path":"Settings > Account","sum":"로그인한 계정과 이 계정에 연결된 기기를 관리합니다.","rows":[["Account","계정 — 로그인한 계정 정보와 로그아웃"],["Devices","기기 — 다른 기기(예: CLI)의 로그인 요청을 승인합니다 (Settings > Account > Devices)"],["Browser data recovery","브라우저 데이터 복구 — 기기 간 복구 설정 (공식 문제 해결 문서에 언급)"]],"tips":["일반 업무에서는 로그인 상태만 확인하면 됩니다. 로그인 오류는 공식 문제 해결 문서의 \"Sign-in says the account is already signed in\" 항목을 참고하세요."],"doc":"https://docs.aside.com/help/troubleshooting"},{"id":"plan","grp":"개인 설정 (Personal)","en":"Plan & Usage","ko":"요금제·사용량","path":"Settings > Plan & Usage","sum":"내 요금제, 남은 크레딧, 결제 수단, 사용 내역을 봅니다.","rows":[["Plan","요금제 — 현재 플랜(Free, Pro, Max)"],["Credits","크레딧 — 남은 크레딧 비율, 갱신일, 월 크레딧. 무료 플랜은 매월 UTC 달력 월 초에 갱신됩니다"],["Adjust plan","플랜 변경 — 요금제를 올리거나 바꿉니다"],["Payment method / invoices (Open)","결제 수단·청구서 — Open 버튼으로 Stripe에서 관리합니다"],["Aside credits usage","크레딧 사용 내역 — 날짜·작업·모델별 사용량을 보고 Download CSV로 월별 내보내기"]],"tips":["무료 플랜은 월 500 크레딧, 활성 루틴 3개까지입니다. 자세한 비교는 업무 시작 전 확인사항의 입문 가이드 C를 보세요.","연결한 구독(Claude 등)·API 사용량은 어사이드 크레딧과 별도로 관리됩니다."],"doc":"https://docs.aside.com/help/subscription"},{"id":"security","grp":"개인 설정 (Personal)","en":"Security & Privacy","ko":"보안·개인정보","path":"Settings > Security & Privacy","sum":"방문 기록 삭제, 쿠키, 분석 정보 공유 등 개인정보 관련 설정입니다.","rows":[["Delete browsing history","방문 기록 삭제 — 지울 데이터 종류와 기간(전체, 15분, 30분, 24시간, 7일, 4주)을 골라 삭제"],["View browsing history","방문 기록 보기"],["Third-party cookies","서드파티 쿠키 — Allow(허용) 또는 Block all(모두 차단)"],["Analytics sharing","분석 정보 공유 — 기본값은 켜짐"],["Ads privacy","광고 개인정보 — 광고 주제 설정 페이지로 이동"],["Site settings","사이트 설정 — 사이트별 권한"],["Advanced","고급 — DNS, SSL, Safe Browsing 설정"]],"tips":["지울 수 있는 데이터: 방문 기록, 쿠키·사이트 데이터, 캐시, 다운로드 기록, 자동 완성 양식, 사이트 저장소.","분석 정보 공유를 켜 둘지는 회사 정책에 따라 정하세요 (운영 안내)."],"doc":"https://docs.aside.com/help/privacy"},{"id":"agents","grp":"에이전트 (Agent)","en":"Agents","ko":"에이전트","path":"Settings > Agents","sum":"어사이드가 할 수 있는 일(읽기·쓰기·실행)의 범위와 후속 지시 방식을 정합니다.","rows":[["Sandbox","샌드박스 — 명령을 OS 수준으로 격리해 실행할지 정합니다"],["File permissions","파일 권한 — 에이전트가 보거나 수정할 수 있는 폴더 목록"],["Tool permissions","도구 권한 — Allow(묻지 않고 허용), Ask(먼저 묻기), Deny(차단). Deny가 가장 우선합니다"],["Chat (follow-up)","채팅 후속 지시 방식 — Queue(현재 작업이 끝난 뒤 적용) 또는 Steer(진행 중인 작업에 바로 반영). Settings > Agents > Chat"]],"tips":["새 작업을 시작할 때는 작업별 권한 모드(Read only, Guard, Full access)를 고릅니다. 기본값은 Guard입니다.","발송·결제·삭제 직전 확인(물어보고 승인 / 자동 승인)은 업무 시작 전 확인사항의 \"1. 승인 방식\"을 보세요."],"doc":"https://docs.aside.com/help/security"},{"id":"projects","grp":"에이전트 (Agent)","en":"Projects","ko":"프로젝트","path":"Settings > Projects","sum":"관련 대화를 하나의 프로젝트로 묶어 관리합니다.","rows":[["Projects","프로젝트 — 프로젝트를 만들고, 기존 대화를 프로젝트에 추가·이동·제거합니다"]],"tips":["채널(Slack 등) 연결 때 봇을 특정 프로젝트에 연결할 수 있습니다.","이 페이지의 설명은 공식 변경 이력 기준입니다."],"doc":"https://docs.aside.com/help/channels"},{"id":"models","grp":"에이전트 (Agent)","en":"Models","ko":"모델","path":"Settings > Models","sum":"어사이드가 어떤 AI 모델을 어떤 경로로 쓸지 정합니다. 사용량에 가장 큰 영향을 주는 설정입니다.","rows":[["Providers","공급자 — Aside(요금제에 포함된 모델), Subscription(Claude Pro·Max, ChatGPT Plus·Pro, GitHub Copilot 구독 연결), API(Anthropic, OpenAI, OpenRouter, Google, xAI 등 키 연결). Connect를 누르면 로그인 팝업이 열립니다"],["Task models","작업별 모델 — Default(기본), Fast(빠른 보조), Standard(백그라운드·루틴), Deep(어려운 추론), Visual(화면 해석), Image generation(이미지 생성) 모델을 고릅니다"]],"tips":["공유 Claude 계정 연결: Settings > Models > Providers > Connect > Subscription > Claude Subscription 순서로 누르고 로그인합니다.","권장 모델 설정(초안)은 업무 시작 전 확인사항의 \"2. 어사이드 모델 설정\" 표를 보세요. 공유 계정은 전 직원의 사용량이 합산됩니다."],"doc":"https://docs.aside.com/help/ai"},{"id":"plugins","grp":"에이전트 (Agent)","en":"Plugins & MCPs","ko":"플러그인·MCP","path":"Settings > Plugins & MCPs","sum":"외부 도구(MCP)와 플러그인, 스킬 폴더를 연결·관리하는 고급 설정입니다.","rows":[["Plugins & MCPs","플러그인·MCP — 외부 도구 연결(MCP)과 플러그인, 스킬·메모리 폴더 관련 설정"]],"tips":["일반 업무에서는 건드릴 필요가 없습니다. 연결이 필요하면 담당자와 먼저 상의하세요 (운영 안내).","공식 도움말에 상세 설명이 없어 변경 이력과 개발자 문서 기준으로 요약했습니다."],"doc":"https://docs.aside.com/help/developers"},{"id":"memory","grp":"에이전트 (Agent)","en":"Memory","ko":"메모리","path":"Settings > Memory","sum":"어사이드가 방문 기록, 대화, 작업에서 무엇을 기억할지 정합니다.","rows":[["Overview","개요 — 저장된 메모리를 보고 수정합니다"],["History","기록 — 메모리가 바뀐 내역을 봅니다"],["Configure","설정 — 메모리 켜기/끄기, 보관 기간(Never forget 계속 / 30 days / 90 days)"]],"tips":["메모리를 끄면 새 대화·작업에서 메모리가 만들어지지 않습니다. 짧게 보관하면 일상 기록을 더 빨리 잊습니다.","원가·급여·계약·협상 금액·개인정보는 대화에 넣지 마세요."],"doc":"https://docs.aside.com/help/memory"},{"id":"context","grp":"에이전트 (Agent)","en":"Context Awareness","ko":"컨텍스트 인식","isNew":true,"path":"Settings > Context Awareness","sum":"켜면 브라우저 활동을 캡처해 요약으로 만들어 어사이드가 참고합니다. 켜기 전까지는 꺼져 있습니다.","rows":[["Context Awareness","컨텍스트 인식 — 켜면 브라우저 활동(방문·클릭)을 캡처해 요약에 활용합니다. 지원되는 Mac·Windows 기기에서 사용할 수 있습니다"],["Use this account","이 계정으로 사용 — 캡처는 켠 계정 한 곳에서만 이뤄지며, 다른 계정에서는 캡처 중인 계정이 표시됩니다"]],"tips":["고객·개인정보가 보이는 화면을 다룰 때는 꺼 두는 것을 권장합니다 (운영 안내 초안).","공식 도움말에 상세 설명이 없어 변경 이력 기준으로 요약했습니다. 켜기 전에 화면의 안내 문구를 먼저 읽으세요."],"doc":"https://docs.aside.com/changelog/components"},{"id":"passwords","grp":"기능 (Features)","en":"Passwords","ko":"비밀번호","path":"Settings > Passwords","sum":"어사이드 비밀번호 관리자(Aside Vault)와 자동 입력을 설정합니다. 저장된 비밀번호 값은 AI에게 보이지 않습니다.","rows":[["Use default password manager","기본 비밀번호 관리자 사용 — 어사이드가 비밀번호를 관리하게 합니다"],["Autofill","자동 입력 — 기본값은 켜짐. 일치하는 로그인만 채웁니다"],["URL matching","주소 일치 방식 — 어떤 주소에서 채울지"],["Excluded domains","제외할 도메인 — 자동 입력을 하지 않을 사이트"],["Insecure protocols","보안되지 않은 사이트에서 제안 표시 여부"],["Incognito autofill","시크릿 창에서 자동 입력 여부"],["Import","가져오기 — 1Password, Apple Passwords, Bitwarden, Chrome, Dashlane, Edge, Firefox, LastPass CSV, 일반 CSV"],["Access policy for AI agents","AI 에이전트 접근 정책 — Always allow(항상 허용, 기본값) / While unlocked(잠금 해제 중에만) / Never(차단)"],["Vaults and sync","보관함·동기화 — 보관함 관리, 클라우드 동기화, 내보내기"],["Clear vault data","보관함 데이터 삭제 — 로컬 항목과 키를 지우고 새 개인 보관함을 만듭니다"]],"tips":["처음 설정: 기본 비밀번호 관리자 사용을 켜고 Autofill을 확인한 뒤, 쓰던 브라우저나 비밀번호 관리자에서 가져오기를 하세요.","삭제 전에는 반드시 내보내기로 백업하세요. 에이전트는 시크릿 세션에서 비밀번호 관리자를 쓸 수 없습니다."],"doc":"https://docs.aside.com/help/passwords"},{"id":"routines","grp":"기능 (Features)","en":"Routines","ko":"루틴","path":"Settings > Routines","sum":"정해 둔 일정에 맞춰 어사이드가 같은 작업을 자동으로 시작하게 합니다.","rows":[["Create a routine","루틴 만들기"],["Edit instructions or schedule","지시 내용·일정 수정"],["Pause / Resume","일시정지·다시 시작"],["Delete a routine","루틴 삭제"],["Run a routine now","지금 실행"],["Find routine suggestions","루틴 제안 찾기 — 어사이드가 반복 업무를 찾아 초안 루틴을 제안하고, 수정 후 Activate(활성화)합니다"],["Cron routine / Heartbeat routine","크론 루틴(일정마다 새 작업) / 하트비트 루틴(기존 대화를 깨워 이어서)"]],"tips":["무료 플랜은 활성 루틴 3개까지, Pro는 무제한입니다.","루틴처럼 반복 실행되는 작업의 모델은 Task models의 Standard 설정 영향이 큽니다."],"doc":"https://docs.aside.com/help/automation"},{"id":"channels","grp":"기능 (Features)","en":"Channels","ko":"채널","isNew":true,"path":"Settings > Channels","sum":"Slack, Telegram, Discord의 봇으로 어사이드에 작업을 시키고 같은 대화창에서 답을 받습니다.","rows":[["Create with Aside","어사이드로 만들기 — 봇 생성과 인증 정보 등록을 어사이드가 대신 진행합니다"],["Manual","직접 입력 — 인증 정보 칸을 직접 채웁니다"],["Pairing","페어링 — 처음 메시지를 보낸 사람의 요청을 Approve(승인)해야 작업을 시킬 수 있습니다. 요청은 1시간 뒤 만료됩니다"],["Require mentions in threads","스레드에서 멘션 필요 — 끄면 멘션 없이도 스레드에서 작동"]],"tips":["플랫폼마다 봇은 1개까지이고, 어사이드가 켜져 있는 동안에만 응답합니다.","요금 페이지에서 Channels(원격 제어)는 Pro 기능으로 안내됩니다."],"doc":"https://docs.aside.com/help/channels"},{"id":"developers","grp":"기능 (Features)","en":"Developers","ko":"개발자","path":"Settings > Developers","sum":"명령줄(CLI)과 개발자 도구를 설치·관리합니다. 일반 업무에는 필요 없습니다.","rows":[["Install / update CLI","CLI 설치·업데이트 — 설정 화면에서 직접 설치하거나 업데이트합니다"],["Save sessions / default profile","세션 저장·기본 프로필 — CLI를 설치하면 설정할 수 있습니다"]],"tips":["개발·자동화 담당자만 필요합니다. CLI 로그인은 Settings > Account > Devices에서 승인합니다."],"doc":"https://docs.aside.com/help/developers"},{"id":"mini","grp":"기능 (Features)","en":"Mini popup","ko":"미니 팝업","path":"Settings > Mini popup","sum":"작은 팝업 창에서 어사이드에 바로 요청하는 기능의 설정입니다.","rows":[["Mini popup shortcuts","미니 팝업 단축키 — 설정에서 단축키를 바꿀 수 있습니다"]],"tips":["공식 도움말에 상세 설명이 없어 변경 이력 기준으로 요약했습니다."],"doc":"https://docs.aside.com/changelog/components"},{"id":"lasso","grp":"기능 (Features)","en":"Lasso","ko":"영역 선택 도구","path":"Settings > Lasso","sum":"화면의 글자나 이미지를 선택했을 때 나타나는 빠른 실행 버튼(요약, 번역 등)을 설정합니다. 기본으로 켜져 있습니다.","rows":[["Text selection defaults","글자 선택 기본 버튼 — Summarize(요약), Translate(번역)"],["Lasso selection defaults","영역 선택 기본 버튼 — Copy code(코드 복사), Search image(이미지 검색)"],["Turn off / reorder / edit / delete / add","끄기·순서 변경·수정·삭제·추가 — 바로가기를 직접 관리합니다"],["Shortcut actions","바로가기 동작 — 프롬프트 실행, 선택 내용 복사, 주소 열기. 프롬프트 안에 {text}, {code}, {image}를 쓸 수 있습니다"],["Activation hotkey","실행 단축키 — 사용자가 바꿀 수 있습니다"]],"tips":["예: \"이 조항을 쉬운 말로 요약하고 챙길 의무를 정리해 줘: {text}\" 같은 바로가기를 만들어 둘 수 있습니다."],"doc":"https://docs.aside.com/help/browser-basics"},{"id":"archived","grp":"보관 (Archived)","en":"Archived chats","ko":"보관된 대화","path":"Settings > Archived chats","sum":"보관(Archive) 처리한 대화를 찾아봅니다.","rows":[["Archived chats","보관된 대화 — 보관한 대화 목록을 보고 찾습니다"]],"tips":["지난 대화를 정리하되 지우고 싶지 않을 때 보관을 씁니다."],"doc":"https://docs.aside.com/"},{"id":"others","grp":"기타","en":"Send feedback · Extensions · Docs · Community","ko":"의견·확장·문서·커뮤니티","path":"Settings 왼쪽 맨 아래","sum":"의견 보내기와 외부 링크 모음입니다.","rows":[["Send feedback","의견 보내기 — Settings > Send feedback 또는 작업 상세의 더보기 메뉴에서 보냅니다. 작업 의견에는 작업 기록과 진단 정보를 포함할 수 있습니다"],["Extensions ↗","확장 프로그램 — 브라우저 확장 관리 페이지로 이동"],["Docs ↗","공식 문서 — docs.aside.com 도움말 센터"],["Community ↗","커뮤니티 — 어사이드 커뮤니티 페이지"]],"tips":["오류 문의는 먼저 이 사이트의 AS 탭을 보고, 해결되지 않으면 최성민 과장에게 문의하세요."],"doc":"https://docs.aside.com/help/troubleshooting"}];
+  const SETUP_STEPS = [['general', '1. 계정·언어 확인'], ['general', '2. 다른 브라우저에서 가져오기'], ['passwords', '3. 비밀번호 관리자 설정'], ['models', '4. 모델 연결 (공유 Claude)'], ['agents', '5. 권한 확인'], ['memory', '6. 메모리 확인']];
+  let suCur = 'general';
+  function suText(it) { return (it.ko + ' ' + it.en + ' ' + it.path + ' ' + it.sum + ' ' + it.rows.map(function (r) { return r[0] + ' ' + r[1]; }).join(' ')).toLowerCase(); }
+  function renderSetupList() {
+    const q = (($('#suSearch') || {}).value || '').trim().toLowerCase();
+    let html = '', last = '';
+    SETUP.forEach(function (it) {
+      if (q && suText(it).indexOf(q) < 0) return;
+      if (it.grp !== last) { html += '<div class="su-grp">' + esc(it.grp) + '</div>'; last = it.grp; }
+      html += '<button type="button" class="su-item' + (it.id === suCur ? ' active' : '') + '" data-su="' + it.id + '"><span class="su-ko">' + esc(it.ko) + (it.isNew ? ' <span class="su-new">New</span>' : '') + '</span><span class="su-en">' + esc(it.en) + '</span></button>';
+    });
+    $('#suList').innerHTML = html || '<div class="bp-hint" style="padding:10px">검색 결과가 없습니다.</div>';
+  }
+  function renderSetupPanel() {
+    const it = SETUP.find(function (x) { return x.id === suCur; }) || SETUP[0];
+    $('#suPanel').innerHTML = '<span class="eyebrow">' + esc(it.grp) + '</span><h2 class="su-title">' + esc(it.ko) + ' <small>' + esc(it.en) + '</small></h2>'
+      + '<div class="su-path"><code>' + esc(it.path) + '</code><button type="button" class="btn-secondary" data-sucopy="' + esc(it.path) + '" style="padding:6px 12px;font-size:12.5px">경로 복사</button></div>'
+      + '<p class="gd-p" style="margin-bottom:14px">' + esc(it.sum) + '</p>'
+      + '<div class="asset-table-wrap gd-table-wrap"><table class="gd-table"><thead><tr><th style="width:34%">화면에 보이는 영문</th><th>한글 설명</th></tr></thead><tbody>' + it.rows.map(function (r) { return '<tr><td><b>' + esc(r[0]) + '</b></td><td>' + esc(r[1]) + '</td></tr>'; }).join('') + '</tbody></table></div>'
+      + (it.tips && it.tips.length ? '<div class="gd-callout gd-mint" style="margin-top:14px"><b>이렇게 설정하세요 · 알아두세요</b><br>' + it.tips.map(function (t) { return '· ' + esc(t); }).join('<br>') + '</div>' : '')
+      + (it.doc ? '<p class="gd-note"><a href="' + esc(it.doc) + '" target="_blank" rel="noopener noreferrer" style="color:#0E8F7B;font-weight:700">공식 도움말 열기 ↗</a></p>' : '');
+  }
+  function suSelect(id, scroll) {
+    suCur = id; renderSetupList(); renderSetupPanel();
+    if (scroll) { const p = $('#suPanel'); if (p && window.innerWidth <= 980) p.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+  }
+  function bindSetup() {
+    if (!$('#suList')) return;
+    $('#suSteps').innerHTML = SETUP_STEPS.map(function (s, i) { return '<button type="button" class="su-step" data-sustep="' + s[0] + '"><span class="su-no">' + (i + 1) + '</span>' + esc(s[1].replace(/^\d+\.\s*/, '')) + '</button>'; }).join('');
+    $('#suSearch').addEventListener('input', renderSetupList);
+    $('#page-setup').addEventListener('click', function (e) {
+      const a = e.target.closest('[data-su]'), s = e.target.closest('[data-sustep]'), c = e.target.closest('[data-sucopy]');
+      if (a) suSelect(a.dataset.su, true);
+      if (s) { $('#suSearch').value = ''; suSelect(s.dataset.sustep, true); }
+      if (c) copyText(c.dataset.sucopy).then(function () { toast('경로를 복사했습니다.', 'success'); });
+    });
+    renderSetupList(); renderSetupPanel();
+  }
   function bindExtra() {
+    bindSetup();
     bindAutomations();
     bindSkills();
     bindQuick();
@@ -5404,7 +5485,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 <div class="fab"><button type="button" class="fab-top" id="fabTop" aria-label="맨 위로">&#8593;</button><a class="fab-chat" href="#requests" aria-label="기능 추가 요청" title="기능 추가 요청"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.6-5A8.5 8.5 0 1 1 21 11.5z"/><circle cx="8.5" cy="11.5" r=".6" fill="#fff"/><circle cx="12.5" cy="11.5" r=".6" fill="#fff"/><circle cx="16.5" cy="11.5" r=".6" fill="#fff"/></svg></a></div>
 <script>
 (function () {
-  var m = { quick: 'QUICK START', automations: 'AUTOMATIONS', as: 'AS CENTER', precheck: 'BEFORE YOU START', guide: 'GUIDE', basic: 'BASIC PROMPT', functions: 'WORK FUNCTIONS', builder: 'PROMPT BUILDER', refs: 'REFERENCE', assets: 'AI ASSETS', manual: 'REGISTER', dashboard: 'SAVINGS', requests: 'REQUEST', notice: 'NOTICE' };
+  var m = { quick: 'QUICK START', automations: 'AUTOMATIONS', as: 'AS CENTER', setup: 'ASIDE SETUP', precheck: 'BEFORE YOU START', guide: 'GUIDE', basic: 'BASIC PROMPT', functions: 'WORK FUNCTIONS', builder: 'PROMPT BUILDER', refs: 'REFERENCE', assets: 'AI ASSETS', manual: 'REGISTER', dashboard: 'SAVINGS', requests: 'REQUEST', notice: 'NOTICE' };
   Object.keys(m).forEach(function (k) { var t = document.querySelector('#page-' + k + ' .section-title'); if (t) t.setAttribute('data-eyebrow', m[k]); });
   var top = document.getElementById('fabTop');
   if (top) top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
