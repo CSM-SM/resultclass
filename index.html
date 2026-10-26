@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>라이브오랄스 어사이드 활용 플랫폼</title>
 <meta name="description" content="라이브오랄스 사내용 어사이드(Aside) AI 브라우저 업무 활용 플랫폼">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 /* ============================================================
    style.css — 라이브오랄스 어사이드 플랫폼
@@ -971,12 +971,12 @@ img { max-width: 100%; display: block; }
 .asset-toolbar .search-wrap { max-width: 240px; }
 
 .caution-box {
-  background: #fff8e1;
+  background: #EEFBFA;
   border: 1px solid #f6ad55;
   border-radius: var(--radius-sm);
   padding: 10px 14px;
   font-size: 12px;
-  color: #744210;
+  color: #0E5A4C;
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -1401,25 +1401,25 @@ img { max-width: 100%; display: block; }
   .stepper-line { flex-basis:12px; }
 }
 
-.file-zone{margin-top:8px;border:2px dashed #C9C5B8;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:#4A4740;background:#FBFAF6;cursor:pointer;transition:all .15s}
-.file-zone:hover,.file-zone:focus-visible,.file-zone.drag{border-color:#C8922A;background:#FDF5E0;outline:none}
+.file-zone{margin-top:8px;border:2px dashed #CDD0D4;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px;color:#4A4F55;background:#FAFBFB;cursor:pointer;transition:all .15s}
+.file-zone:hover,.file-zone:focus-visible,.file-zone.drag{border-color:#14C4A9;background:#E8FAF7;outline:none}
 .file-zone .fz-icon{font-size:18px}
-.file-zone small{flex-basis:100%;color:#8A877E;font-size:11.5px}
+.file-zone small{flex-basis:100%;color:#8B9096;font-size:11.5px}
 .file-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .file-chip{display:inline-flex;align-items:center;gap:6px;background:#E0F5F0;border:1px solid #BFE5DC;border-radius:999px;padding:3px 6px 3px 10px;font-size:12.5px}
-.file-chip small{color:#4A4740}
-.file-chip button{border:0;background:transparent;cursor:pointer;font-size:12px;color:#8A877E;padding:0 4px}
-.bp-card{background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:18px 20px;max-width:900px}
+.file-chip small{color:#4A4F55}
+.file-chip button{border:0;background:transparent;cursor:pointer;font-size:12px;color:#8B9096;padding:0 4px}
+.bp-card{background:#fff;border:1px solid #E6E8EB;border-radius:12px;padding:18px 20px;max-width:900px}
 .bp-card .form-group{margin-bottom:16px}
-.bp-hint{font-size:12px;color:#8A877E;margin-top:4px;line-height:1.6}
+.bp-hint{font-size:12px;color:#8B9096;margin-top:4px;line-height:1.6}
 .nav-section{padding:14px 20px 6px;font-size:11px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.45)}
 .start-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:8px 0 10px}
-.start-step{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #E5E2D8;border-top:4px solid #C8922A;border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.6}
+.start-step{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #E6E8EB;border-top:4px solid #14C4A9;border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.6}
 .start-step b{display:block;font-size:14px;margin-bottom:4px}
 .fz-warn{flex-basis:100%;color:#B4530A;font-weight:700;font-size:12px}
-.rc-box{background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px;margin-top:14px}
+.rc-box{background:#fff;border:1px solid #E6E8EB;border-radius:12px;padding:14px 18px;margin-top:14px}
 .rc-box label{display:flex;gap:8px;align-items:flex-start;padding:3px 0;font-size:13px;cursor:pointer;line-height:1.5}
-.status-badge{padding:2px 8px;border-radius:999px;font-size:11.5px;background:#FDF5E0;white-space:nowrap}
+.status-badge{padding:2px 8px;border-radius:999px;font-size:11.5px;background:#E8FAF7;white-space:nowrap}
 .status-badge.ok{background:#E0F5F0;color:#0E5A4C}
 .notice-pin{background:#FDECEC;color:#B42318}
 #dbBody ol{list-style:decimal}
@@ -1432,53 +1432,241 @@ img { max-width: 100%; display: block; }
 .res-box{margin-top:2px}
 .res-chip{display:inline-block;max-width:190px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:bottom;background:#E0F5F0;border:1px solid #BFE5DC;color:#0E5A4C;border-radius:999px;padding:2px 10px;font-size:12px;margin:4px 4px 0 0;text-decoration:none;font-weight:600}
 .res-chip:hover{background:#C9EBE2}
-.res-more{font-size:12px;color:#8A877E;margin-right:6px}
+.res-more{font-size:12px;color:#8B9096;margin-right:6px}
 .ref-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
-.ref-card{background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
+.ref-card{background:#fff;border:1px solid #E6E8EB;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px}
 .ref-card h3{font-size:14px;margin:0;line-height:1.4}
-.ref-card p{font-size:12.5px;color:#4A4740;margin:0;line-height:1.55}
-.ref-meta{font-size:11.5px;color:#8A877E}
-.ref-row{display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px solid #F0EEE6;font-size:13px;line-height:1.5}
+.ref-card p{font-size:12.5px;color:#4A4F55;margin:0;line-height:1.55}
+.ref-meta{font-size:11.5px;color:#8B9096}
+.ref-row{display:flex;gap:8px;align-items:flex-start;padding:5px 0;border-bottom:1px solid #F0F1F3;font-size:13px;line-height:1.5}
 .ref-row label{flex:1;display:flex;gap:8px;cursor:pointer}
 #sendGuide{background:#E0F5F0;border:1px solid #BFE5DC;border-radius:10px;padding:10px 14px;margin:0 0 12px;font-size:13px;line-height:1.7}
-#sendGuide kbd{background:#fff;border:1px solid #C9C5B8;border-radius:4px;padding:0 5px;font-size:12px}
-#fileReminder{display:none;background:#FDF5E0;border:1px solid #F0D9A0;border-radius:10px;padding:10px 14px;margin:0 0 12px;font-size:13px;line-height:1.6}
+#sendGuide kbd{background:#fff;border:1px solid #CDD0D4;border-radius:4px;padding:0 5px;font-size:12px}
+#fileReminder{display:none;background:#E8FAF7;border:1px solid #BFEDE5;border-radius:10px;padding:10px 14px;margin:0 0 12px;font-size:13px;line-height:1.6}
+
+/* ============================================================
+   자사몰(liveorals.com) UI 테마 레이어
+   화이트 + 라이브오랄스 민트(#14C4A9) / Pretendard / 상단 가로 메뉴
+   ============================================================ */
+:root {
+  --navy: #1f2023; --navy-deep: #111111; --navy-mid: #2e2e2e; --navy-light: #14C4A9;
+  --gold: #14C4A9; --gold-light: #27CDBE; --gold-pale: #E6F9F6;
+  --white: #ffffff; --gray-50: #F6F7F8; --gray-100: #F0F1F3; --gray-200: #E6E8EB; --gray-400: #9AA0A6; --gray-600: #5C6167; --gray-800: #2e2e2e;
+  --blue-link: #0E8F7B;
+  --radius-sm: 8px; --radius-md: 14px; --radius-lg: 20px;
+  --shadow-xs: none; --shadow-sm: 0 2px 8px rgba(0,0,0,.06); --shadow-md: 0 12px 32px rgba(0,0,0,.10); --shadow-card: none;
+  --teal: #14C4A9; --teal-dark: #0E8F7B; --mint: #EEFBFA;
+}
+body { font-family: 'Pretendard Variable', Pretendard, 'Malgun Gothic', '맑은 고딕', sans-serif; font-size: 15px; background: #fff; color: #2e2e2e; letter-spacing: -.1px; }
+input, textarea, select { font-size: 14px; }
+::selection { background: #BFEDE5; }
+
+/* 상단 안내바 */
+.announce { background: #111; text-align: center; }
+.announce a { display: block; padding: 11px 16px; color: #fff; font-size: 13px; letter-spacing: 0; }
+.announce b { color: #27CDBE; font-weight: 700; }
+
+/* 레이아웃: 사이드바 → 상단 헤더 */
+.layout { display: block; min-height: 0; }
+.main { margin-left: 0; min-height: 0; display: block; }
+.topbar { display: none; }
+.sidebar { position: sticky; top: 0; left: auto; bottom: auto; width: 100%; height: 80px; background: #fff; color: #2e2e2e; flex-direction: row; align-items: center; justify-content: space-between; padding: 0 clamp(16px, 3.5vw, 50px); border-bottom: 1px solid #ECEEF0; z-index: 200; gap: 24px; }
+.sidebar-logo { display: flex; flex-direction: column; gap: 3px; padding: 0; border: 0; flex: 0 0 auto; }
+.sidebar-logo img { width: 154px; height: auto; }
+.sidebar-logo .sub { font-size: 11px; color: #8B9096; margin: 0; letter-spacing: 0; }
+.sidebar-nav { flex: 1; display: flex; flex-direction: row; align-items: center; justify-content: center; gap: clamp(14px, 2.6vw, 44px); overflow: visible; padding: 0; height: 100%; }
+.nav-item { display: inline-flex; align-items: center; padding: 0; gap: 0; color: #3c3a39; font-size: 16px; font-weight: 600; border: 0; background: none; white-space: nowrap; letter-spacing: -.2px; position: relative; height: 100%; }
+.nav-item .nav-icon { display: none; }
+.nav-item:hover { background: none; color: var(--teal-dark); }
+.nav-item.active { background: none; color: var(--teal-dark); font-weight: 700; border: 0; }
+.sidebar-nav > .nav-item.active::after, .nav-group:has(.nav-item.active) > .nav-group-label::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: var(--teal); border-radius: 3px 3px 0 0; }
+.nav-group { position: relative; height: 100%; display: flex; align-items: center; }
+.nav-group-label { display: inline-flex; align-items: center; gap: 4px; height: 100%; font-size: 16px; font-weight: 600; color: #3c3a39; cursor: pointer; position: relative; white-space: nowrap; outline: none; }
+.nav-group-label::before { content: none; }
+.nav-group-label::after { }
+.nav-group:hover > .nav-group-label, .nav-group:focus-within > .nav-group-label { color: var(--teal-dark); }
+.nav-group:has(.nav-item.active) > .nav-group-label { color: var(--teal-dark); font-weight: 700; }
+.nav-drop { display: none; position: absolute; top: calc(100% - 8px); left: 50%; transform: translateX(-50%); min-width: 210px; background: #fff; border: 1px solid #ECEEF0; border-radius: 14px; box-shadow: 0 16px 40px rgba(0,0,0,.10); padding: 8px; z-index: 250; }
+.nav-group:hover .nav-drop, .nav-group:focus-within .nav-drop { display: block; }
+.nav-drop .nav-item { display: flex; height: auto; padding: 11px 14px; border-radius: 10px; font-size: 15px; font-weight: 500; width: 100%; }
+.nav-drop .nav-item:hover { background: var(--mint); color: var(--teal-dark); }
+.nav-drop .nav-item.active { background: var(--mint); color: var(--teal-dark); font-weight: 700; }
+.sidebar-toggle { display: none; position: static; background: none; color: #111; width: 40px; height: 40px; font-size: 24px; border-radius: 8px; align-items: center; justify-content: center; }
+.sidebar-overlay { z-index: 150; }
+
+/* 페이지 영역 */
+.page-content { max-width: 1320px; margin: 0 auto; padding: 48px clamp(16px, 3.5vw, 50px) 96px; width: 100%; }
+.section-title { font-size: 34px; font-weight: 700; letter-spacing: -1px; color: #2e2e2e; margin-bottom: 10px; line-height: 1.25; }
+.section-title[data-eyebrow]::before { content: attr(data-eyebrow); display: block; font-size: 14px; font-weight: 600; letter-spacing: 1px; color: var(--teal); margin-bottom: 8px; }
+.section-sub { font-size: 15px; color: #6b7076; margin-bottom: 28px; line-height: 1.7; max-width: 860px; }
+.eyebrow { display: block; font-size: 14px; font-weight: 600; letter-spacing: 1px; color: var(--teal); margin-bottom: 8px; }
+.sec-head { margin: 44px 0 20px; }
+.sec-head h2 { font-size: 30px; font-weight: 700; letter-spacing: -1px; color: #2e2e2e; line-height: 1.3; }
+.sec-head h2 small { font-size: 14px; font-weight: 500; color: #8B9096; letter-spacing: 0; margin-left: 6px; }
+
+/* 홈 히어로 */
+.hero { position: relative; display: grid; grid-template-columns: 1.1fr .9fr; gap: 32px; align-items: center; padding: clamp(36px, 5vw, 72px) clamp(24px, 5vw, 80px); margin: 0 0 0; border-radius: 24px; background: radial-gradient(900px 420px at 85% 30%, rgba(39,205,190,.22), rgba(39,205,190,0) 70%), linear-gradient(180deg, #F3FCFB 0%, #FFFFFF 100%); border: 1px solid #E4F5F2; overflow: hidden; }
+.hero h1 { font-size: clamp(30px, 4vw, 48px); line-height: 1.28; font-weight: 800; letter-spacing: -1.5px; color: #1b1b1b; margin: 0 0 18px; }
+.hero p { font-size: 17px; line-height: 1.75; color: #3c3a39; margin: 0 0 28px; }
+.hero-cta { display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-cta a { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; padding: 15px 28px; font-size: 15px; border-radius: 999px; width: auto; flex: none; }
+.btn-ghost { background: #fff; color: #111; border: 1px solid #111; font-weight: 700; }
+.btn-ghost:hover { background: #111; color: #fff; }
+.hero-visual { position: relative; min-height: 250px; }
+.hv-card { position: absolute; background: #fff; border-radius: 18px; padding: 20px 26px; box-shadow: 0 18px 40px rgba(20,196,169,.16); border: 1px solid #DDF3EF; min-width: 210px; }
+.hv-card small { display: block; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--teal); }
+.hv-card b { display: block; font-size: 20px; font-weight: 700; letter-spacing: -.5px; color: #1b1b1b; margin-top: 4px; }
+.hv-1 { top: 0; left: 4%; } .hv-2 { top: 84px; left: 30%; } .hv-3 { top: 168px; left: 12%; background: var(--teal); border-color: var(--teal); }
+.hv-3 small, .hv-3 b { color: #fff; }
+
+/* 티커 */
+.ticker { overflow: hidden; margin: 36px 0 40px; white-space: nowrap; }
+.ticker-track { display: inline-flex; align-items: center; gap: 28px; animation: tick 38s linear infinite; }
+.ticker-track span { font-size: clamp(28px, 3.4vw, 44px); font-weight: 700; color: var(--teal); letter-spacing: -.5px; }
+.ticker-track i { width: 30px; height: 30px; border-radius: 50%; background: var(--teal); display: inline-block; flex: none; }
+@keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .ticker-track { animation: none; } }
+
+/* 안내/카운터/시작 단계 */
+.notice-banner { background: var(--mint); border: 1px solid #D6F1EC; border-left: 4px solid var(--teal); border-radius: 14px; }
+.notice-banner .text, .notice-banner .text strong { color: #1b1b1b; }
+.notice-banner .text p { color: #4A4F55; }
+.counter-grid { gap: 14px; }
+.counter-card { background: #F6F7F8; border: 0; border-radius: 16px; padding: 26px 20px; }
+.counter-card .label { font-size: 13px; color: #6b7076; }
+.counter-card .value { font-size: 36px; font-weight: 800; letter-spacing: -1px; color: #1b1b1b; }
+.counter-card .unit { color: var(--teal-dark); font-weight: 600; }
+.start-steps { gap: 14px; }
+.start-step { background: #F6F7F8; border: 1px solid transparent; border-top: 1px solid transparent; border-radius: 16px; padding: 24px 24px; font-size: 14px; line-height: 1.7; color: #4A4F55; transition: all .18s ease; }
+.start-step b { font-size: 17px; letter-spacing: -.4px; color: #1b1b1b; margin-bottom: 8px; }
+.start-step:hover { background: #fff; border-color: var(--teal); box-shadow: 0 12px 30px rgba(20,196,169,.14); transform: translateY(-2px); }
+
+/* 기능 카드 */
+.card-grid { gap: 18px; }
+.func-card { background: #F6F7F8; border: 1px solid transparent; border-radius: 16px; box-shadow: none; padding: 22px; }
+.func-card:hover { background: #fff; border-color: var(--teal); box-shadow: 0 14px 34px rgba(20,196,169,.14); transform: translateY(-3px); }
+.card-icon-wrap { background: #fff; border-radius: 12px; width: 48px; height: 48px; }
+.card-title { letter-spacing: -.4px; }
+.func-card:hover .card-cta-btn, .card-cta-btn { color: var(--teal-dark); }
+.cat-filters { gap: 8px; }
+.cat-btn { border-radius: 999px; padding: 8px 18px; font-size: 14px; font-weight: 600; border: 1px solid #E6E8EB; background: #fff; color: #4A4F55; }
+.cat-btn:hover { border-color: var(--teal); color: var(--teal-dark); }
+.cat-btn.active { background: #111; color: #fff; border-color: #111; }
+
+/* 버튼 */
+.btn-gold { background: var(--teal); color: #fff; border-radius: 10px; font-weight: 700; }
+.btn-gold:hover { background: #10A892; }
+.btn-primary { background: #111; color: #fff; border-radius: 10px; }
+.btn-primary:hover { background: #333; }
+.btn-secondary { background: #F0F1F3; color: #2e2e2e; border-radius: 10px; font-weight: 600; }
+.btn-secondary:hover { background: #E6E8EB; }
+
+/* 폼 */
+.form-control, .search-wrap input { border: 1px solid #DADDE1; border-radius: 10px; padding: 11px 14px; }
+.search-wrap input { padding-left: 38px; }
+.form-control:focus, .search-wrap input:focus { border-color: var(--teal); box-shadow: 0 0 0 3px rgba(20,196,169,.16); outline: none; }
+.attach-tag.selected, .attach-tag.active { background: var(--teal); border-color: var(--teal); color: #fff; }
+.bp-card, .rc-box { border-radius: 16px; border-color: #E6E8EB; }
+
+/* 스텝퍼 */
+.stepper { border-radius: 16px; border-color: #E6E8EB; background: #fff; }
+.stepper-item.active { color: #1b1b1b; }
+.stepper-item.active .st-num { background: var(--teal); color: #fff; }
+.stepper-item.done .st-num { background: #111; color: #fff; }
+
+/* 표 */
+.asset-table-wrap { border-radius: 16px; border: 1px solid #E6E8EB; box-shadow: none; overflow-x: auto; }
+.asset-table th { background: #F6F7F8; color: #2e2e2e; font-weight: 700; border-bottom: 1px solid #E6E8EB; }
+.asset-table td { border-bottom: 1px solid #F0F1F3; }
+.asset-table tr:hover td { background: #FAFBFB; }
+
+/* 태그/뱃지/모달 */
+.tag { background: #F0F1F3; color: #4A4F55; }
+.badge-auto { background: #E6F9F6; color: #0E8F7B; }
+.status-badge { background: #F0F1F3; color: #4A4F55; font-weight: 600; }
+.status-badge.ok { background: #E6F9F6; color: #0E5A4C; }
+.modal { border-radius: 20px; }
+.modal-overlay { background: rgba(17,17,17,.55); }
+
+/* 레퍼런스/가이드 카드 */
+.ref-card, .guide-card, .yt-card, .notice-item { border-radius: 16px; border-color: #E6E8EB; box-shadow: none; }
+.ref-card:hover, .guide-card:hover { border-color: var(--teal); }
+
+/* 플로팅 버튼 (자사몰 채팅/맨위로 버튼) */
+.fab { position: fixed; right: 28px; bottom: 28px; display: flex; flex-direction: column; gap: 12px; align-items: center; z-index: 120; }
+.fab-top { width: 46px; height: 46px; border-radius: 50%; background: #fff; border: 1px solid #E6E8EB; box-shadow: 0 6px 18px rgba(0,0,0,.10); font-size: 20px; color: #111; opacity: 0; pointer-events: none; transition: opacity .2s; display: flex; align-items: center; justify-content: center; }
+.fab-top.show { opacity: 1; pointer-events: auto; }
+.fab-chat { width: 56px; height: 56px; border-radius: 50%; background: #27CDBE; box-shadow: 0 8px 22px rgba(20,196,169,.40); display: flex; align-items: center; justify-content: center; transition: transform .18s; }
+.fab-chat:hover { transform: scale(1.06); }
+
+/* 푸터 */
+.site-footer { border-top: 1px solid #ECEEF0; padding: 36px clamp(16px, 3.5vw, 50px) 44px; background: #fff; color: #8B9096; font-size: 13px; line-height: 1.8; }
+.site-footer b { color: #3c3a39; }
+.site-footer-inner { max-width: 1320px; margin: 0 auto; display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: flex-end; }
+.site-footer img { width: 120px; opacity: .85; margin-bottom: 10px; }
+
+
+.counter-grid { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 980px) { .counter-grid { grid-template-columns: 1fr 1fr; } }
+.cat-filters { margin-bottom: 16px; }
+.bp-hint { line-height: 1.7; }
+.start-steps { margin-bottom: 16px; }
+.badge-cat { background: #fff; color: #2e2e2e; border: 1px solid #E6E8EB; }
+.card-top { align-items: flex-start; }
+
+.sheet-status.connected { background: #E6F9F6; color: #0E5A4C; }
+/* 반응형 */
+@media (max-width: 1180px) {
+  .sidebar-nav { gap: 16px; }
+  .nav-item, .nav-group-label { font-size: 15px; }
+}
+@media (max-width: 980px) {
+  .sidebar { height: 64px; transform: none; width: 100%; }
+  .sidebar-logo img { width: 128px; }
+  .sidebar-logo .sub { display: none; }
+  .sidebar-toggle { display: flex; }
+  .sidebar-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0; height: auto; max-height: calc(100vh - 64px); overflow-y: auto; padding: 8px 20px 24px; border-bottom: 1px solid #ECEEF0; box-shadow: 0 16px 30px rgba(0,0,0,.08); }
+  .sidebar.open .sidebar-nav { display: flex; }
+  .sidebar-nav > .nav-item { height: auto; padding: 14px 4px; border-bottom: 1px solid #F0F1F3; }
+  .sidebar-nav > .nav-item.active::after, .nav-group:has(.nav-item.active) > .nav-group-label::after { display: none; }
+  .nav-group { display: block; height: auto; }
+  .nav-group-label { display: block; height: auto; padding: 16px 4px 6px; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: var(--teal); }
+  .nav-drop { display: block; position: static; transform: none; min-width: 0; border: 0; box-shadow: none; padding: 0; background: none; }
+  .nav-drop .nav-item { padding: 13px 4px; border-bottom: 1px solid #F0F1F3; border-radius: 0; }
+  .nav-drop .nav-item:hover, .nav-drop .nav-item.active { background: none; }
+  .main { margin-left: 0; }
+  .page-content { padding: 28px 16px 72px; }
+  .section-title { font-size: 26px; }
+  .sec-head h2 { font-size: 24px; }
+  .hero { grid-template-columns: 1fr; padding: 32px 22px; border-radius: 20px; }
+  .hero-visual { display: none; }
+  .hero p { font-size: 15px; }
+  .fab { right: 16px; bottom: 16px; }
+}
+
 </style>
 </head>
 <body>
+<div class="announce"><a href="#functions">누가 써도 같은 품질로 &middot; <b>업무기능</b>에서 프롬프트를 만들고 <b>레퍼런스</b>를 참고하세요</a></div>
 <div class="layout">
 
   <!-- 사이드바 -->
   <aside class="sidebar" id="sidebar" aria-label="주 메뉴">
-    <div class="sidebar-logo">
-      <div class="brand">LIVEORALS</div>
-      <div class="sub">어사이드 활용 플랫폼</div>
-    </div>
+    <a class="sidebar-logo" href="#home" aria-label="홈"><img src="logo.svg" alt="Live orals" width="154" height="22"><span class="sub">어사이드 활용 플랫폼</span></a>
     <nav class="sidebar-nav">
-      <div class="nav-section">시작하기</div>
       <a class="nav-item" href="#home" data-page="home"><span class="nav-icon">🏠</span>홈</a>
-      <a class="nav-item" href="#precheck" data-page="precheck"><span class="nav-icon">✅</span>업무 시작 전 확인사항</a>
-      <a class="nav-item" href="#guide" data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a>
-      <div class="nav-section">업무 도구</div>
-      <a class="nav-item" href="#basic" data-page="basic"><span class="nav-icon">📝</span>기본 프롬프트</a>
-      <a class="nav-item" href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a>
-      <a class="nav-item" href="#refs" data-page="refs"><span class="nav-icon">📚</span>레퍼런스 참고하기</a>
-      <div class="nav-section">자산</div>
-      <a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a>
-      <a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a>
-      <div class="nav-section">현황</div>
+      <div class="nav-group"><span class="nav-group-label" tabindex="0">시작하기</span><div class="nav-drop"><a class="nav-item" href="#precheck" data-page="precheck"><span class="nav-icon">✅</span>업무 시작 전 확인사항</a><a class="nav-item" href="#guide" data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a></div></div>
+      <div class="nav-group"><span class="nav-group-label" tabindex="0">업무 도구</span><div class="nav-drop"><a class="nav-item" href="#basic" data-page="basic"><span class="nav-icon">📝</span>기본 프롬프트</a><a class="nav-item" href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a><a class="nav-item" href="#refs" data-page="refs"><span class="nav-icon">📚</span>레퍼런스 참고하기</a></div></div>
+      <div class="nav-group"><span class="nav-group-label" tabindex="0">자산</span><div class="nav-drop"><a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a><a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a></div></div>
       <a class="nav-item" href="#dashboard" data-page="dashboard"><span class="nav-icon">📊</span>절감 대시보드</a>
-      <div class="nav-section">소통</div>
-      <a class="nav-item" href="#requests" data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a>
-      <a class="nav-item" href="#notice" data-page="notice"><span class="nav-icon">📢</span>공지</a>
+      <div class="nav-group"><span class="nav-group-label" tabindex="0">소통</span><div class="nav-drop"><a class="nav-item" href="#requests" data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a><a class="nav-item" href="#notice" data-page="notice"><span class="nav-icon">📢</span>공지</a></div></div>
     </nav>
-    <div class="sidebar-footer">© LIVEORALS 사내용</div>
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="메뉴 열기">☰</button>
   </aside>
   <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
   <div class="main">
     <header class="topbar">
-      <button class="sidebar-toggle" id="sidebarToggle" aria-label="메뉴 열기">☰</button>
       <div class="topbar-title" id="topbarTitle">홈</div>
       <div class="topbar-right"><span class="topbar-date" id="topbarDate"></span></div>
     </header>
@@ -1491,15 +1679,15 @@ img { max-width: 100%; display: block; }
         <h2 class="section-title">업무 시작 전 확인사항</h2>
         <p class="section-sub">전사 어사이드 사용량이 늘면서 공유 Claude 계정 사용량이 빠르게 증가하고 있습니다. 업무를 시작하기 전에 아래 모델 설정과 체크리스트를 확인해 주세요.</p>
 
-        <div style="background:#FDF5E0;border:1px solid #F0D9A0;border-radius:12px;padding:14px 18px;margin-bottom:18px;font-size:13px;line-height:1.7">
+        <div style="background:#E8FAF7;border:1px solid #BFEDE5;border-radius:12px;padding:14px 18px;margin-bottom:18px;font-size:13px;line-height:1.7">
           <strong>왜 확인하나요?</strong> 모델과 생각(추론) 수준이 높을수록 같은 업무에도 사용량이 크게 늘고, 공유 Claude 계정은 전 직원의 사용량이 합산됩니다. 업무 난이도에 맞는 최소 설정으로 시작해 주세요.
         </div>
 
         <h3 style="font-size:16px;margin:22px 0 8px">1. 어사이드 모델 설정 (Settings &gt; Models &gt; Task models)</h3>
-        <p style="font-size:13px;color:#4A4740;margin-bottom:10px">어사이드 설정의 Models 화면에서 작업 종류별 모델을 정합니다. 각 줄 오른쪽 모델 선택 박스와 <code>…</code> 메뉴에서 모델과 옵션(생각 수준 등)을 바꿀 수 있습니다. 화면 구성은 어사이드 버전에 따라 조금 다를 수 있습니다.</p>
+        <p style="font-size:13px;color:#4A4F55;margin-bottom:10px">어사이드 설정의 Models 화면에서 작업 종류별 모델을 정합니다. 각 줄 오른쪽 모델 선택 박스와 <code>…</code> 메뉴에서 모델과 옵션(생각 수준 등)을 바꿀 수 있습니다. 화면 구성은 어사이드 버전에 따라 조금 다를 수 있습니다.</p>
         <div class="asset-table-wrap" style="overflow-x:auto">
           <table class="asset-table" style="width:100%;border-collapse:collapse">
-            <thead><tr><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">설정 항목</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">어떤 작업에 쓰이나요</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">권장 설정(안)</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">확인 포인트</th></tr></thead>
+            <thead><tr><th style="padding:10px 12px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB">설정 항목</th><th style="padding:10px 12px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB">어떤 작업에 쓰이나요</th><th style="padding:10px 12px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB">권장 설정(안)</th><th style="padding:10px 12px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB">확인 포인트</th></tr></thead>
             <tbody>
               <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Default model</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">새 대화를 열 때 처음 쓰는 모델. 마지막에 쓴 모델이 다음 새 대화의 기본값이 됩니다.</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">Sonnet 5.5 · 생각 수준 낮음~중간</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">어려운 작업에 상위 모델을 쓴 뒤에는 <strong>반드시 원래 설정으로 되돌리기</strong></td></tr>
               <tr><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><strong>Fast</strong></td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">빠르고 가볍게 끝나는 보조 작업</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">Haiku 5.5</td><td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">가벼운 작업에 큰 모델을 쓰지 않기</td></tr>
@@ -1510,13 +1698,13 @@ img { max-width: 100%; display: block; }
             </tbody>
           </table>
         </div>
-        <p style="font-size:12px;color:#8A877E;margin-top:8px">※ 위 권장 설정은 초안입니다. 최종 기준은 운영 담당자 확인 후 확정되며, 업무 품질이 부족하면 한 단계 위 모델로 올려서 사용하세요.</p>
+        <p style="font-size:12px;color:#8B9096;margin-top:8px">※ 위 권장 설정은 초안입니다. 최종 기준은 운영 담당자 확인 후 확정되며, 업무 품질이 부족하면 한 단계 위 모델로 올려서 사용하세요.</p>
 
         <h3 style="font-size:16px;margin:26px 0 8px">2. 공급자(Providers) 확인</h3>
-        <p style="font-size:13px;color:#4A4740;line-height:1.7">Models 화면 위쪽 Providers에는 Aside, Claude(구독), ChatGPT 등이 연결되어 있습니다. 모델을 고를 때 <strong>어떤 공급자를 거치는 모델인지</strong> 확인하세요. 공유 Claude 계정(Claude 구독)을 거치면 전 직원 사용량이 합산됩니다. 개인 어사이드 플랜으로 처리할 수 있는 업무는 그 경로를 우선 사용해 주세요.</p>
+        <p style="font-size:13px;color:#4A4F55;line-height:1.7">Models 화면 위쪽 Providers에는 Aside, Claude(구독), ChatGPT 등이 연결되어 있습니다. 모델을 고를 때 <strong>어떤 공급자를 거치는 모델인지</strong> 확인하세요. 공유 Claude 계정(Claude 구독)을 거치면 전 직원 사용량이 합산됩니다. 개인 어사이드 플랜으로 처리할 수 있는 업무는 그 경로를 우선 사용해 주세요.</p>
 
-        <h3 style="font-size:16px;margin:26px 0 8px">3. 업무 시작 전 체크리스트 <span style="font-size:12px;color:#8A877E;font-weight:400">· 체크 기록은 이 브라우저에만 저장됩니다</span> <span style="font-size:12px;color:#8A877E;font-weight:400" id="precheckStamp"></span></h3>
-        <div id="precheckList" style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:6px 18px"></div>
+        <h3 style="font-size:16px;margin:26px 0 8px">3. 업무 시작 전 체크리스트 <span style="font-size:12px;color:#8B9096;font-weight:400">· 체크 기록은 이 브라우저에만 저장됩니다</span> <span style="font-size:12px;color:#8B9096;font-weight:400" id="precheckStamp"></span></h3>
+        <div id="precheckList" style="background:#fff;border:1px solid #E6E8EB;border-radius:12px;padding:6px 18px"></div>
         <div style="display:flex;gap:8px;margin-top:10px">
           <button type="button" class="btn-gold" id="precheckDone">오늘 확인 완료</button>
           <button type="button" class="btn-secondary" id="precheckReset">체크 초기화</button>
@@ -1549,7 +1737,7 @@ img { max-width: 100%; display: block; }
           <div class="form-group"><label class="form-label" for="bpRefs">레퍼런스 (선택)</label>
             <textarea class="form-control" id="bpRefs" rows="2" placeholder="잘 된 결과물, 벤치마킹할 사례의 링크나 설명"></textarea>
             <div class="bp-hint">💡 잘 만들어진 레퍼런스나 벤치마킹하고 싶은 결과물을 넣을수록 결과물이 훨씬 좋아집니다. 좋은 예시 1~3개를 권장합니다.</div><div id="bpRefPanel"></div></div>
-          <div class="form-group" data-bp="format"><label class="form-label">결과물 형식 (추출) <span class="req">*</span> <span style="font-weight:400;color:#8A877E">여러 개 선택 가능</span></label>
+          <div class="form-group" data-bp="format"><label class="form-label">결과물 형식 (추출) <span class="req">*</span> <span style="font-weight:400;color:#8B9096">여러 개 선택 가능</span></label>
             <div class="attach-tags" id="bpFormats">
               <button type="button" class="attach-tag" data-val="구글 독스">구글 독스</button>
               <button type="button" class="attach-tag" data-val="구글 시트">구글 시트</button>
@@ -1575,7 +1763,7 @@ img { max-width: 100%; display: block; }
             </select></div>
           <div class="form-group"><label class="form-label" for="bpCaution">주의사항 (선택)</label>
             <textarea class="form-control" id="bpCaution" rows="2" placeholder="지켜야 할 것, 하지 말아야 할 것"></textarea></div>
-          <div class="form-group"><label class="form-label" for="bpAssignee">담당자 이름 <span style="font-weight:400;color:#8A877E">(AI 자산 등록용 · 프롬프트에는 들어가지 않습니다)</span></label>
+          <div class="form-group"><label class="form-label" for="bpAssignee">담당자 이름 <span style="font-weight:400;color:#8B9096">(AI 자산 등록용 · 프롬프트에는 들어가지 않습니다)</span></label>
             <input class="form-control" id="bpAssignee" type="text" placeholder="예: 최성민"></div>
           <div style="display:flex;gap:8px"><button type="button" class="btn-gold" id="bpMake" style="flex:1;padding:12px">프롬프트 만들기 →</button><button type="button" class="btn-secondary" id="bpReset">초기화</button></div>
         </div>
@@ -1584,7 +1772,7 @@ img { max-width: 100%; display: block; }
           <div id="bpGuide" style="background:#E0F5F0;border:1px solid #BFE5DC;border-radius:10px;padding:10px 14px;margin-bottom:10px;font-size:13px;line-height:1.7"></div>
           <div class="bp-card" style="padding:0;overflow:hidden"><div style="background:#0C1B35;color:#fff;padding:12px 18px;font-weight:800">최종 어사이드 프롬프트</div>
             <textarea id="bpOut" readonly style="width:100%;min-height:340px;border:0;padding:16px 18px;font-family:inherit;font-size:13px;line-height:1.7;resize:vertical"></textarea>
-            <div style="display:flex;gap:8px;padding:12px 18px;border-top:1px solid #E5E2D8"><button type="button" class="btn-gold" id="bpCopy" style="flex:1">📋 복사</button><button type="button" class="btn-secondary" id="bpAsset">🗂 자산 등록</button></div></div>
+            <div style="display:flex;gap:8px;padding:12px 18px;border-top:1px solid #E6E8EB"><button type="button" class="btn-gold" id="bpCopy" style="flex:1">📋 복사</button><button type="button" class="btn-secondary" id="bpAsset">🗂 자산 등록</button></div></div>
           <div data-rcbox id="bpCheck"></div>
         </div>
       </section>
@@ -1596,7 +1784,7 @@ img { max-width: 100%; display: block; }
         <p class="section-sub">홈페이지를 거치지 않고 어사이드에서 바로 작업했다면, 어사이드가 정리해 준 프롬프트를 여기에 붙여넣어 AI 자산으로 등록하세요.</p>
         <div class="bp-card" style="margin-bottom:16px">
           <div style="font-weight:800;margin-bottom:6px">① 작업이 끝난 직후, 어사이드에 이렇게 요청하세요</div>
-          <textarea id="mnAsk" readonly rows="11" style="width:100%;border:1px solid #E5E2D8;border-radius:8px;padding:10px 12px;font-family:inherit;font-size:13px;line-height:1.6;background:#FBFAF6"></textarea>
+          <textarea id="mnAsk" readonly rows="11" style="width:100%;border:1px solid #E6E8EB;border-radius:8px;padding:10px 12px;font-family:inherit;font-size:13px;line-height:1.6;background:#FAFBFB"></textarea>
           <div style="margin-top:8px"><button type="button" class="btn-gold" id="mnAskCopy">📋 요청 문구 복사</button> <span class="bp-hint">어사이드 입력창에 붙여넣고 Enter. 어사이드가 형식대로 정리해 줍니다.</span></div>
         </div>
         <div class="bp-card">
@@ -1613,7 +1801,7 @@ img { max-width: 100%; display: block; }
             <div class="form-group full"><label class="form-label" for="mnContent">내용 요약</label><textarea class="form-control" id="mnContent" rows="2"></textarea></div>
           </div>
           <div class="form-group"><label style="cursor:pointer"><input type="checkbox" id="mnAuto"> 정기 자동화(예약)로 운영 중입니다 — 성과측정 시트와 절감 대시보드에 반영됩니다</label>
-            <div id="mnAutoBox" style="display:none;margin-top:8px;background:#F8F6F0;border-radius:10px;padding:12px 14px">
+            <div id="mnAutoBox" style="display:none;margin-top:8px;background:#F6F7F8;border-radius:10px;padding:12px 14px">
               <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px">
                 <div><label class="form-label" for="mnBefore">기존 소요시간(분) <span class="req">*</span></label><input class="form-control" id="mnBefore" type="number" min="0" placeholder="사람이 1회 할 때"></div>
                 <div><label class="form-label" for="mnAfter">개선 후 소요시간(분) <span class="req">*</span></label><input class="form-control" id="mnAfter" type="number" min="0" placeholder="확인·검수 시간 포함 (완전 자동이면 0)"></div>
@@ -1634,6 +1822,20 @@ img { max-width: 100%; display: block; }
 
       <!-- ═══ 홈 ═══ -->
       <section class="page" id="page-home">
+        <section class="hero" aria-label="소개">
+          <div class="hero-text">
+            <span class="eyebrow">ASIDE WORKSPACE</span>
+            <h1>누가 써도 같은 품질,<br>어사이드 업무 표준 플랫폼</h1>
+            <p>같은 양식으로 지시하고, 잘 된 지시와 레퍼런스를 모아 씁니다.<br>사람마다 달라지는 어사이드 결과물의 편차를 줄입니다.</p>
+            <div class="hero-cta"><a class="btn-gold" href="#functions">업무기능 시작하기</a><a class="btn-ghost" href="#refs">레퍼런스 참고하기</a></div>
+          </div>
+          <div class="hero-visual" aria-hidden="true">
+            <div class="hv-card hv-1"><small>STEP 1</small><b>기능 선택</b></div>
+            <div class="hv-card hv-2"><small>STEP 2</small><b>입력 작성</b></div>
+            <div class="hv-card hv-3"><small>STEP 3</small><b>프롬프트 복사</b></div>
+          </div>
+        </section>
+        <div class="ticker" aria-hidden="true"><div class="ticker-track"><span>STANDARD PROMPTS FOR BETTER RESULTS</span><i></i><span>LIVEORALS ASIDE WORKSPACE</span><i></i><span>STANDARD PROMPTS FOR BETTER RESULTS</span><i></i><span>LIVEORALS ASIDE WORKSPACE</span><i></i><span>STANDARD PROMPTS FOR BETTER RESULTS</span><i></i><span>LIVEORALS ASIDE WORKSPACE</span><i></i></div></div>
         <div class="notice-banner">
           <span class="icon">⚠️</span>
           <div class="text">
@@ -1643,7 +1845,7 @@ img { max-width: 100%; display: block; }
         </div>
 
 
-        <div style="font-weight:800;font-size:16px">처음이라면 이 순서로 시작하세요</div>
+        <div class="sec-head"><span class="eyebrow">START GUIDE</span><h2>처음이라면 이 순서로 시작하세요</h2></div>
         <div class="start-steps">
           <a class="start-step" href="#precheck"><b>① 업무 시작 전 확인</b>어사이드 모델 설정과 체크리스트를 확인해 사용량을 아낍니다.</a>
           <a class="start-step" href="#functions"><b>② 프롬프트 만들기</b>업무기능에서 기능을 고르고 항목을 채웁니다. 새 업무는 <u>기본 프롬프트</u>를 쓰세요.</a>
@@ -1660,7 +1862,7 @@ img { max-width: 100%; display: block; }
 
         <p class="bp-hint" style="margin:-4px 0 16px">※ 홈의 AI 자산 수는 사이트에 등록된 전체(수동 포함)이고, [절감 대시보드]의 자동화 건수는 성과측정 시트에 기입된 자동화 건만 센 값이라 서로 다릅니다.</p>
         <div class="flow-top-section">
-          <div class="flow-top-title">⭐ 자주 쓰는 업무 (추정 빈도 '상')</div>
+          <div class="sec-head"><span class="eyebrow">POPULAR</span><h2>자주 쓰는 업무 <small>추정 빈도 '상'</small></h2></div>
           <div class="flow-top-grid" id="flowTopGrid"></div>
         </div>
       </section>
@@ -1819,7 +2021,7 @@ img { max-width: 100%; display: block; }
         <h2 class="section-title">기능 추가 요청</h2>
         <p class="section-sub">필요한 프롬프트 기능·업무가 있으면 남겨 주세요. 요청 건수와 공감 수를 보고 우선순위를 정해 추가합니다.</p>
         <div class="sheet-status local" id="reqStatus">로컬 저장 모드</div>
-        <div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:18px 20px;margin-bottom:20px">
+        <div style="background:#fff;border:1px solid #E6E8EB;border-radius:12px;padding:18px 20px;margin-bottom:20px">
           <div style="font-weight:800;margin-bottom:10px">새 요청 작성</div>
           <div class="asset-form-grid">
             <div class="form-group"><label class="form-label" for="rqDept">부서 <span class="req">*</span></label><input class="form-control" id="rqDept" type="text" placeholder="예: 마케팅팀"></div>
@@ -1834,7 +2036,7 @@ img { max-width: 100%; display: block; }
         </div>
         <div class="asset-table-wrap" style="overflow-x:auto">
           <table class="asset-table" style="width:100%;border-collapse:collapse">
-            <thead><tr><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">번호</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">요청 기능 (클릭해서 상세 보기)</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">부서 · 담당자</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">공감</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">상태</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">등록일</th><th style="padding:10px 12px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8">관리</th></tr></thead>
+            <thead><tr><th style="padding:10px 12px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB">번호</th><th style="padding:10px 12px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB">요청 기능 (클릭해서 상세 보기)</th><th style="padding:10px 12px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB">부서 · 담당자</th><th style="padding:10px 12px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB">공감</th><th style="padding:10px 12px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB">상태</th><th style="padding:10px 12px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB">등록일</th><th style="padding:10px 12px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB">관리</th></tr></thead>
             <tbody id="reqBody"></tbody>
           </table>
         </div>
@@ -1878,7 +2080,7 @@ img { max-width: 100%; display: block; }
         <div class="form-group full"><label class="form-label" for="afContent">내용 요약</label><textarea class="form-control" id="afContent" rows="3"></textarea></div>
         <div class="form-group full"><label class="form-label"><input type="checkbox" id="afAuto"> 자동화 적용</label>
           <input class="form-control" id="afSchedule" type="text" placeholder="RRULE (STEP 3 자동화 패널에서 자동 입력)" style="margin-top:6px"></div>
-        <div class="form-group full" id="afAutoExtra" style="display:none;background:#F8F6F0;border-radius:10px;padding:12px 14px">
+        <div class="form-group full" id="afAutoExtra" style="display:none;background:#F6F7F8;border-radius:10px;padding:12px 14px">
           <div style="font-weight:700;font-size:13px;margin-bottom:6px">자동화 성과 입력 (AI TF팀 성과측정 시트에 자동 기입됩니다)</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
             <div><label class="form-label" for="afBefore">기존 소요시간(분) <span class="req">*</span> <button type="button" id="afEstBtn" class="btn-secondary" style="padding:1px 8px;font-size:11px;margin-left:4px">자동 추정</button></label><input class="form-control" id="afBefore" type="number" min="0" step="1" placeholder="사람이 1회 할 때"></div>
@@ -1886,8 +2088,8 @@ img { max-width: 100%; display: block; }
             <div><label class="form-label" for="afWeekly">주간 실행 횟수</label><input class="form-control" id="afWeekly" type="number" min="0" step="0.25" placeholder="주기에서 자동 계산"></div>
             <div><label class="form-label" for="afLink">결과물 / 연결 위치</label><input class="form-control" id="afLink" type="text" placeholder="시트·채팅방·문서명 또는 URL"></div>
           </div>
-          <div id="afSavePreview" style="margin-top:10px;padding:8px 10px;background:#fff;border:1px dashed #C8922A;border-radius:8px;font-size:13px"></div>
-          <div style="font-size:12px;color:#8A877E;margin-top:6px">※ 기존 소요시간은 기능·업무 유형과 입력한 진행 단계 수로 자동 추정한 값이며 수정할 수 있습니다. 자동화를 켠 자산만 성과측정 시트에 기입됩니다. 수동 자산은 목록에만 등록됩니다. 시트의 부서·담당자 목록에 없는 값은 "공통"으로 기입되고 비고에 표시됩니다.</div>
+          <div id="afSavePreview" style="margin-top:10px;padding:8px 10px;background:#fff;border:1px dashed #14C4A9;border-radius:8px;font-size:13px"></div>
+          <div style="font-size:12px;color:#8B9096;margin-top:6px">※ 기존 소요시간은 기능·업무 유형과 입력한 진행 단계 수로 자동 추정한 값이며 수정할 수 있습니다. 자동화를 켠 자산만 성과측정 시트에 기입됩니다. 수동 자산은 목록에만 등록됩니다. 시트의 부서·담당자 목록에 없는 값은 "공통"으로 기입되고 비고에 표시됩니다.</div>
         </div>
       </div>
     </div>
@@ -1907,7 +2109,7 @@ img { max-width: 100%; display: block; }
   <div style="display:grid;grid-template-columns:1fr 2fr auto;gap:8px;margin-top:10px"><input class="form-control" id="rsLinkName" type="text" placeholder="링크 이름 (예: 구글 문서)"><input class="form-control" id="rsLinkUrl" type="text" placeholder="결과물 링크 https://..."><button type="button" class="btn-secondary" id="rsLinkAdd">링크 추가</button></div>
   <div id="rsStatus" class="bp-hint" style="margin-top:8px"></div>
 </div></div></div>
-<div class="modal-overlay" id="pvModal" role="dialog" aria-modal="true"><div class="modal"><div class="modal-header"><h3 id="pvTitle">프롬프트</h3><button type="button" class="modal-close" id="pvClose" aria-label="닫기">✕</button></div><div class="modal-body"><textarea id="pvText" readonly style="width:100%;min-height:340px;border:1px solid #E5E2D8;border-radius:8px;padding:10px 12px;font-family:inherit;font-size:13px;line-height:1.6"></textarea></div><div class="modal-footer"><button type="button" class="btn-gold" id="pvCopy">📋 프롬프트 복사</button></div></div></div>
+<div class="modal-overlay" id="pvModal" role="dialog" aria-modal="true"><div class="modal"><div class="modal-header"><h3 id="pvTitle">프롬프트</h3><button type="button" class="modal-close" id="pvClose" aria-label="닫기">✕</button></div><div class="modal-body"><textarea id="pvText" readonly style="width:100%;min-height:340px;border:1px solid #E6E8EB;border-radius:8px;padding:10px 12px;font-family:inherit;font-size:13px;line-height:1.6"></textarea></div><div class="modal-footer"><button type="button" class="btn-gold" id="pvCopy">📋 프롬프트 복사</button></div></div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -3579,7 +3781,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
         <div class="yt-icon">▶</div>
         <div class="yt-info"><div class="cat">${esc(y.category)}</div><h4>${esc(y.name)}</h4><p>${esc(y.desc)}</p></div>
       </a>`).join('');
-    $('#noticeList').innerHTML = NOTICES.slice().sort((a, b) => (b.pin ? 1 : 0) - (a.pin ? 1 : 0) || String(b.date).localeCompare(String(a.date))).map((n) => '<div class="notice-item"><div class="notice-meta">' + (n.pin ? '<span class="tag notice-pin">중요</span> ' : '') + '<span class="tag">' + esc(n.meta) + '</span> <span style="font-size:12px;color:#8A877E">' + esc(n.date) + '</span></div><h3>' + esc(n.title) + '</h3><p>' + esc(n.body) + '</p></div>').join('');
+    $('#noticeList').innerHTML = NOTICES.slice().sort((a, b) => (b.pin ? 1 : 0) - (a.pin ? 1 : 0) || String(b.date).localeCompare(String(a.date))).map((n) => '<div class="notice-item"><div class="notice-meta">' + (n.pin ? '<span class="tag notice-pin">중요</span> ' : '') + '<span class="tag">' + esc(n.meta) + '</span> <span style="font-size:12px;color:#8B9096">' + esc(n.date) + '</span></div><h3>' + esc(n.title) + '</h3><p>' + esc(n.body) + '</p></div>').join('');
     const d = new Date();
     $('#topbarDate').textContent = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
   }
@@ -3743,7 +3945,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function renderPrecheck() {
     const st = store.get(KEY_PRECHECK, { date: '', checked: [] });
     const checked = st.date === todayStr() ? st.checked : [];
-    $('#precheckList').innerHTML = PRECHECK_ITEMS.map((t, i) => '<label style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F0EEE6;font-size:14px;line-height:1.6;cursor:pointer"><input type="checkbox" data-pc="' + i + '"' + (checked.includes(i) ? ' checked' : '') + ' style="margin-top:5px"> <span>' + esc(t) + '</span></label>').join('');
+    $('#precheckList').innerHTML = PRECHECK_ITEMS.map((t, i) => '<label style="display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F0F1F3;font-size:14px;line-height:1.6;cursor:pointer"><input type="checkbox" data-pc="' + i + '"' + (checked.includes(i) ? ' checked' : '') + ' style="margin-top:5px"> <span>' + esc(t) + '</span></label>').join('');
     $('#precheckStamp').textContent = (st.date === todayStr() && st.done) ? '· 오늘 확인 완료 (' + st.done + ')' : '';
   }
   function savePrecheck(done) {
@@ -3758,7 +3960,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   const KEY_REQ = 'lo_requests_v1', KEY_VOTED = 'lo_voted_v1';
   let requests = store.get(KEY_REQ, []);
   let voted = store.get(KEY_VOTED, []);
-  const REQ_STATUS_COLOR = { '접수': '#E5E2D8', '검토중': '#FDF5E0', '개발중': '#E0EAF8', '완료': '#E0F5F0', '보류': '#F3E3E3' };
+  const REQ_STATUS_COLOR = { '접수': '#E6E8EB', '검토중': '#E8FAF7', '개발중': '#E0EAF8', '완료': '#E0F5F0', '보류': '#F3E3E3' };
 
   function postGas(payload) {
     if (!GAS_OK()) return Promise.resolve();
@@ -3778,22 +3980,22 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const list = requests.slice().sort((a, b) => (parseInt(String(b.no).replace(/\D/g, ''), 10) || 0) - (parseInt(String(a.no).replace(/\D/g, ''), 10) || 0));
     $('#reqBody').innerHTML = list.length ? list.map((r) => {
       const stt = r.status || '접수';
-      const detail = '<div style="margin-top:8px;font-size:13px;line-height:1.7;color:#4A4740">'
+      const detail = '<div style="margin-top:8px;font-size:13px;line-height:1.7;color:#4A4F55">'
         + '<div><b>내용</b> ' + esc(r.content).replace(/\n/g, '<br>') + '</div>'
         + (r.current ? '<div><b>현재 방식</b> ' + esc(r.current) + '</div>' : '')
         + (r.link ? '<div><b>참고</b> ' + esc(r.link) + '</div>' : '')
-        + (r.reply ? '<div style="margin-top:6px;padding:8px 10px;background:#F8F6F0;border-radius:8px"><b>운영자 답변</b> ' + esc(r.reply) + '</div>' : '')
+        + (r.reply ? '<div style="margin-top:6px;padding:8px 10px;background:#F6F7F8;border-radius:8px"><b>운영자 답변</b> ' + esc(r.reply) + '</div>' : '')
         + '</div>';
       return '<tr>'
         + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">' + esc(r.no) + '</td>'
         + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><details><summary style="cursor:pointer"><strong>' + esc(r.title) + '</strong></summary>' + detail + '</details></td>'
         + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top">' + esc(r.dept) + ' · ' + esc(r.name) + '</td>'
         + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><button type="button" class="btn-secondary" data-vote="' + esc(r.no) + '"' + (voted.includes(String(r.no)) ? ' disabled' : '') + ' aria-label="공감">👍 ' + (parseInt(r.votes, 10) || 0) + '</button></td>'
-        + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><span style="padding:3px 9px;border-radius:999px;font-size:12px;background:' + (REQ_STATUS_COLOR[stt] || '#E5E2D8') + '">' + esc(stt) + '</span></td>'
-        + '<td style="padding:10px 12px;font-size:12px;color:#8A877E;border-bottom:1px solid #EEE;vertical-align:top">' + esc(String(r.createdAt || '').slice(0, 10)) + '</td>'
+        + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><span style="padding:3px 9px;border-radius:999px;font-size:12px;background:' + (REQ_STATUS_COLOR[stt] || '#E6E8EB') + '">' + esc(stt) + '</span></td>'
+        + '<td style="padding:10px 12px;font-size:12px;color:#8B9096;border-bottom:1px solid #EEE;vertical-align:top">' + esc(String(r.createdAt || '').slice(0, 10)) + '</td>'
         + '<td style="padding:10px 12px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top"><button type="button" class="btn-secondary" data-reqdel="' + esc(r.no) + '" aria-label="요청 삭제">🗑 삭제</button></td>'
         + '</tr>';
-    }).join('') : '<tr><td colspan="7" style="padding:24px;text-align:center;color:#8A877E;font-size:13px">아직 등록된 요청이 없습니다. 첫 요청을 남겨 주세요.</td></tr>';
+    }).join('') : '<tr><td colspan="7" style="padding:24px;text-align:center;color:#8B9096;font-size:13px">아직 등록된 요청이 없습니다. 첫 요청을 남겨 주세요.</td></tr>';
   }
   function submitRequest() {
     const g = (id) => ($(id).value || '').trim();
@@ -3860,7 +4062,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (isNaN(b) || isNaN(a) || isNaN(w)) { el.textContent = '소요시간과 주간 실행 횟수를 입력하면 예상 절감 효과가 계산됩니다.'; return; }
     const hours = Math.max(0, b - a) * w * WEEK_FACTOR / 60;
     const cost = Math.round(hours * MIN_WAGE);
-    el.innerHTML = '예상 월 절감 <b>' + hours.toFixed(1) + '시간</b> · 월 절감 비용 <b>₩' + cost.toLocaleString('ko-KR') + '</b> · 연 환산 <b>₩' + (cost * 12).toLocaleString('ko-KR') + '</b> <span style="color:#8A877E">(최저시급 ₩' + MIN_WAGE.toLocaleString('ko-KR') + ', 주→월 ' + WEEK_FACTOR + '주 기준)</span>';
+    el.innerHTML = '예상 월 절감 <b>' + hours.toFixed(1) + '시간</b> · 월 절감 비용 <b>₩' + cost.toLocaleString('ko-KR') + '</b> · 연 환산 <b>₩' + (cost * 12).toLocaleString('ko-KR') + '</b> <span style="color:#8B9096">(최저시급 ₩' + MIN_WAGE.toLocaleString('ko-KR') + ', 주→월 ' + WEEK_FACTOR + '주 기준)</span>';
   }
 
   /* ── 14. 절감 대시보드 (성과측정 시트 대시보드와 동일 데이터) ───────── */
@@ -3870,7 +4072,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   const pct = (n) => (Math.round((n || 0) * 1000) / 10) + '%';
   function barRows(items, unit) {
     const max = Math.max.apply(null, items.map((x) => x[1]).concat([1]));
-    return items.map((x) => '<div style="display:flex;align-items:center;gap:10px;margin:6px 0;font-size:13px"><div style="width:84px;flex:none">' + esc(x[0]) + '</div><div style="flex:1;background:#F0EEE6;border-radius:6px;height:18px;overflow:hidden"><div style="width:' + Math.max(2, x[1] / max * 100) + '%;height:100%;background:linear-gradient(90deg,#1A7A68,#2FA58E)"></div></div><div style="width:96px;flex:none;text-align:right"><b>' + x[1].toFixed(1) + '</b>' + unit + '</div></div>').join('');
+    return items.map((x) => '<div style="display:flex;align-items:center;gap:10px;margin:6px 0;font-size:13px"><div style="width:84px;flex:none">' + esc(x[0]) + '</div><div style="flex:1;background:#F0F1F3;border-radius:6px;height:18px;overflow:hidden"><div style="width:' + Math.max(2, x[1] / max * 100) + '%;height:100%;background:linear-gradient(90deg,#1A7A68,#2FA58E)"></div></div><div style="width:96px;flex:none;text-align:right"><b>' + x[1].toFixed(1) + '</b>' + unit + '</div></div>').join('');
   }
   let DBLAST = null;
   function consCut(d, pctVal) {
@@ -3884,30 +4086,30 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const el = $('#dbCons'), inp = $('#dbReview'); if (!el || !inp || !DBLAST) return;
     const d = DBLAST, t = d.totals || {}, p = Math.max(0, parseFloat(inp.value) || 0), r = consCut(d, p);
     const h = Math.max(0, (t.hoursMonth || 0) - r.cut), cost = Math.max(0, (t.costMonth || 0) - Math.round(r.cut * (d.wage || 10320)));
-    el.innerHTML = '월 <b>' + h.toFixed(1) + '시간</b> · 월 <b>' + won(cost) + '</b> · 연 환산 <b>' + won(cost * 12) + '</b> <span style="color:#8A877E">(개선 후 0분인 ' + r.n + '건에 기존 시간의 ' + p + '%(최소 5분)를 검수 시간으로 가정)</span>';
+    el.innerHTML = '월 <b>' + h.toFixed(1) + '시간</b> · 월 <b>' + won(cost) + '</b> · 연 환산 <b>' + won(cost * 12) + '</b> <span style="color:#8B9096">(개선 후 0분인 ' + r.n + '건에 기존 시간의 ' + p + '%(최소 5분)를 검수 시간으로 가정)</span>';
   }
   function renderUsageBox() {
     const el = $('#dbUsage'); if (!el) return;
-    const th = 'padding:8px 10px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8', td = 'padding:8px 10px;font-size:13px;border-bottom:1px solid #EEE';
+    const th = 'padding:8px 10px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB', td = 'padding:8px 10px;font-size:13px;border-bottom:1px solid #EEE';
     const list = Object.keys(USAGE).map(function (k) { return USAGE[k]; }).filter(function (u) { return u.makes || u.good || u.fix; }).sort(function (a, b) { return (b.makes || 0) - (a.makes || 0); }).slice(0, 15);
-    el.innerHTML = '<div class="asset-table-wrap" style="overflow-x:auto;margin-top:14px"><div style="font-weight:800;padding:12px 14px 0">기능별 사용 현황 <span style="font-weight:400;color:#8A877E;font-size:12px">(프롬프트 만들기 횟수와 결과 평가)</span></div>'
+    el.innerHTML = '<div class="asset-table-wrap" style="overflow-x:auto;margin-top:14px"><div style="font-weight:800;padding:12px 14px 0">기능별 사용 현황 <span style="font-weight:400;color:#8B9096;font-size:12px">(프롬프트 만들기 횟수와 결과 평가)</span></div>'
       + (list.length ? '<table class="asset-table" style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + '">기능</th><th style="' + th + '">분류</th><th style="' + th + '">만든 횟수</th><th style="' + th + '">만족</th><th style="' + th + '">수정 필요</th><th style="' + th + '">수정 필요 비율</th></tr></thead><tbody>'
         + list.map(function (u) { const ev = (u.good || 0) + (u.fix || 0); return '<tr><td style="' + td + '"><b>' + esc(u.title) + '</b></td><td style="' + td + '">' + esc(u.category) + '</td><td style="' + td + '">' + (u.makes || 0) + '</td><td style="' + td + '">' + (u.good || 0) + '</td><td style="' + td + '">' + (u.fix || 0) + '</td><td style="' + td + '">' + (ev ? Math.round((u.fix || 0) / ev * 100) + '%' : '-') + '</td></tr>'; }).join('') + '</tbody></table>'
-        : '<div style="padding:14px;font-size:13px;color:#8A877E">아직 사용 기록이 없습니다. 프롬프트를 만들고 결과 평가를 누르면 이곳에 집계됩니다.</div>')
+        : '<div style="padding:14px;font-size:13px;color:#8B9096">아직 사용 기록이 없습니다. 프롬프트를 만들고 결과 평가를 누르면 이곳에 집계됩니다.</div>')
       + '<div class="bp-hint" style="padding:0 14px 12px">사용 횟수는 이 사이트에서 "프롬프트 만들기"를 누른 횟수이며, 어사이드에서 실제로 실행했는지는 알 수 없습니다. 로그인 없이 기록되어 중복 클릭도 포함될 수 있습니다.</div></div>';
   }
   function renderDashboard(d, fromCache) {
     DBLAST = d;
     const t = d.totals || {}, c = d.counts || {}, rows = d.rows || [], g = d.goals || {}, wf = d.weekFactor || 4.3;
-    const kpi = function (label, val, sub, color) { return '<div style="background:#fff;border:1px solid #E5E2D8;border-top:4px solid ' + color + ';border-radius:12px;padding:16px 18px"><div style="font-size:12px;color:#8A877E">' + label + '</div><div style="font-size:26px;font-weight:900;margin:4px 0">' + val + '</div><div style="font-size:12px;color:#4A4740">' + (sub || '') + '</div></div>'; };
-    const small = function (label, val) { return '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:12px 16px"><div style="font-size:12px;color:#8A877E">' + label + '</div><div style="font-size:20px;font-weight:800">' + val + '</div></div>'; };
-    const prog = function (label, r, note) { return '<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><span>' + label + '</span><b>' + pct(r) + '</b></div><div style="background:#F0EEE6;border-radius:6px;height:12px;overflow:hidden"><div style="width:' + Math.min(100, (r || 0) * 100) + '%;height:100%;background:#C8922A"></div></div><div class="bp-hint">' + note + '</div></div>'; };
+    const kpi = function (label, val, sub, color) { return '<div style="background:#fff;border:1px solid #E6E8EB;border-top:4px solid ' + color + ';border-radius:12px;padding:16px 18px"><div style="font-size:12px;color:#8B9096">' + label + '</div><div style="font-size:26px;font-weight:900;margin:4px 0">' + val + '</div><div style="font-size:12px;color:#4A4F55">' + (sub || '') + '</div></div>'; };
+    const small = function (label, val) { return '<div style="background:#fff;border:1px solid #E6E8EB;border-radius:12px;padding:12px 16px"><div style="font-size:12px;color:#8B9096">' + label + '</div><div style="font-size:20px;font-weight:800">' + val + '</div></div>'; };
+    const prog = function (label, r, note) { return '<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><span>' + label + '</span><b>' + pct(r) + '</b></div><div style="background:#F0F1F3;border-radius:6px;height:12px;overflow:hidden"><div style="width:' + Math.min(100, (r || 0) * 100) + '%;height:100%;background:#14C4A9"></div></div><div class="bp-hint">' + note + '</div></div>'; };
     const byDept = {}, byMonth = {};
     rows.forEach(function (r) { byDept[r.dept || '미지정'] = (byDept[r.dept || '미지정'] || 0) + r.hours; byMonth[r.month || '미지정'] = (byMonth[r.month || '미지정'] || 0) + r.hours; });
     const deptItems = Object.entries(byDept).sort(function (a, b) { return b[1] - a[1]; });
     const monthItems = Object.entries(byMonth).sort(function (a, b) { return (parseInt(a[0], 10) || 0) - (parseInt(b[0], 10) || 0); });
     const top = rows.slice().sort(function (a, b) { return b.hours - a.hours; }).slice(0, 10);
-    const th = 'padding:8px 10px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8';
+    const th = 'padding:8px 10px;text-align:left;background:#F6F7F8;font-size:12px;color:#4A4F55;border-bottom:1px solid #E6E8EB';
     const td = 'padding:8px 10px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top';
     const assume = [
       '산식: 월 절감 시간 = (기존 소요시간 − 개선 후 소요시간) × 주간 실행 횟수 × ' + wf + '(주→월) ÷ 60. 월 절감 비용 = 월 절감 시간 × 최저시급 ' + won(d.wage) + '. 연 환산 = 월 절감 비용 × 12 (단순 환산이며 업무량 증감은 반영하지 않음).',
@@ -3919,24 +4121,24 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       '홈의 AI 자산 수(사이트 등록 전체)와 이 화면의 건수(성과측정 시트 기입분)는 기준이 달라 서로 다릅니다. 부서명은 성과측정 시트의 입력 목록(마케팅·병원기획·상품기획·디자인·공통·영업) 기준입니다.'
     ];
     $('#dbBody').innerHTML =
-      '<div style="background:#FDF5E0;border:1px solid #F0D9A0;border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:13px;line-height:1.75"><div style="font-weight:800;margin-bottom:4px">산정 기준과 가정 (먼저 읽어 주세요)</div><ol style="margin:0;padding-left:18px">' + assume.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol></div>'
+      '<div style="background:#E8FAF7;border:1px solid #BFEDE5;border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:13px;line-height:1.75"><div style="font-weight:800;margin-bottom:4px">산정 기준과 가정 (먼저 읽어 주세요)</div><ol style="margin:0;padding-left:18px">' + assume.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol></div>'
       + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:10px">'
       + kpi('월 총 절감 시간 (시트 기준)', (t.hoursMonth || 0).toFixed(1) + '<span style="font-size:14px"> 시간</span>', '성과측정 시트 자동화 ' + (c.assets || rows.length) + '건 합산', '#1A7A68')
-      + kpi('월 총 절감 비용 (시트 기준)', won(t.costMonth), '최저시급 ' + won(d.wage) + ' 기준', '#C8922A')
+      + kpi('월 총 절감 비용 (시트 기준)', won(t.costMonth), '최저시급 ' + won(d.wage) + ' 기준', '#14C4A9')
       + kpi('연 환산 절감 비용 (시트 기준)', won(t.costYear), '월 절감 비용 × 12 (단순 환산)', '#0C1B35') + '</div>'
-      + '<div style="background:#fff;border:1px dashed #C8922A;border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:13px"><div style="font-weight:800;margin-bottom:4px">보수적 가정 (검수 시간 반영) <span style="font-weight:400;color:#8A877E">검수 시간 비율 <input type="number" id="dbReview" value="10" min="0" max="100" style="width:64px;padding:2px 6px"> %</span></div><div id="dbCons"></div></div>'
+      + '<div style="background:#fff;border:1px dashed #14C4A9;border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:13px"><div style="font-weight:800;margin-bottom:4px">보수적 가정 (검수 시간 반영) <span style="font-weight:400;color:#8B9096">검수 시간 비율 <input type="number" id="dbReview" value="10" min="0" max="100" style="width:64px;padding:2px 6px"> %</span></div><div id="dbCons"></div></div>'
       + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px">'
       + small('누적 요청 건수', (c.requested || 0) + '건') + small('완료 건수', (c.done || 0) + '건') + small('진행 중', (c.progress || 0) + '건') + small('자산화 등재', (c.assets || 0) + '건') + small('생산성 향상 기획', (c.planned || 0) + '건') + '</div>'
-      + '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px;margin-bottom:14px"><div style="font-weight:800;margin-bottom:4px">목표 진척률</div>'
+      + '<div style="background:#fff;border:1px solid #E6E8EB;border-radius:12px;padding:14px 18px;margin-bottom:14px"><div style="font-weight:800;margin-bottom:4px">목표 진척률</div>'
       + prog('TF 목표', c.tfRate, '시간 30% 이상 감소 "달성" 과제 ÷ 전체 과제') + prog('자산화 목표', t.assetRate, '자산화 건수 ÷ 목표 ' + (g.asset || '-') + '건') + prog('기획 목표', t.planRate, '기획 건수 ÷ 목표 ' + (g.plan || '-') + '건') + '</div>'
       + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-bottom:14px">'
-      + '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px"><div style="font-weight:800;margin-bottom:6px">부서별 월 절감 시간</div>' + barRows(deptItems, '시간') + '</div>'
-      + '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px"><div style="font-weight:800;margin-bottom:2px">자동화 시작 월별 월 절감 시간</div><div class="bp-hint" style="margin:0 0 6px">시작한 달 기준 합계이며 월별 실제 추이가 아닙니다.</div>' + barRows(monthItems, '시간') + '</div></div>'
+      + '<div style="background:#fff;border:1px solid #E6E8EB;border-radius:12px;padding:14px 18px"><div style="font-weight:800;margin-bottom:6px">부서별 월 절감 시간</div>' + barRows(deptItems, '시간') + '</div>'
+      + '<div style="background:#fff;border:1px solid #E6E8EB;border-radius:12px;padding:14px 18px"><div style="font-weight:800;margin-bottom:2px">자동화 시작 월별 월 절감 시간</div><div class="bp-hint" style="margin:0 0 6px">시작한 달 기준 합계이며 월별 실제 추이가 아닙니다.</div>' + barRows(monthItems, '시간') + '</div></div>'
       + '<div class="asset-table-wrap" style="overflow-x:auto"><div style="font-weight:800;padding:12px 14px 0">절감 TOP 10 자동화</div><table class="asset-table" style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + '">순위</th><th style="' + th + '">자동화</th><th style="' + th + '">부서</th><th style="' + th + '">기존→개선(분)</th><th style="' + th + '">주간 횟수</th><th style="' + th + '">월 절감 시간</th><th style="' + th + '">월 절감 비용</th><th style="' + th + '">근거</th></tr></thead><tbody>'
-      + top.map(function (r, i) { return '<tr><td style="' + td + '">' + (i + 1) + '</td><td style="' + td + '"><b>' + esc(r.name) + '</b><div style="color:#8A877E;font-size:12px">' + esc(r.content) + '</div></td><td style="' + td + '">' + esc(r.dept) + '</td><td style="' + td + '">' + r.before + ' → ' + r.after + (r.after === 0 ? '<div style="font-size:11px;color:#B4530A">검수 시간 미반영</div>' : '') + '</td><td style="' + td + '">' + r.weekly + '</td><td style="' + td + '"><b>' + r.hours.toFixed(1) + '시간</b></td><td style="' + td + '">' + won(r.cost) + '</td><td style="' + td + '"><span class="status-badge">' + esc(r.basis || '작성자 입력') + '</span><div style="font-size:11px;color:#8A877E">미검증</div></td></tr>'; }).join('')
+      + top.map(function (r, i) { return '<tr><td style="' + td + '">' + (i + 1) + '</td><td style="' + td + '"><b>' + esc(r.name) + '</b><div style="color:#8B9096;font-size:12px">' + esc(r.content) + '</div></td><td style="' + td + '">' + esc(r.dept) + '</td><td style="' + td + '">' + r.before + ' → ' + r.after + (r.after === 0 ? '<div style="font-size:11px;color:#B4530A">검수 시간 미반영</div>' : '') + '</td><td style="' + td + '">' + r.weekly + '</td><td style="' + td + '"><b>' + r.hours.toFixed(1) + '시간</b></td><td style="' + td + '">' + won(r.cost) + '</td><td style="' + td + '"><span class="status-badge">' + esc(r.basis || '작성자 입력') + '</span><div style="font-size:11px;color:#8B9096">미검증</div></td></tr>'; }).join('')
       + '</tbody></table></div>'
       + '<div id="dbUsage"></div>'
-      + '<p style="font-size:12px;color:#8A877E;margin-top:10px">집계 기준 ' + esc(d.updated || '') + '</p>';
+      + '<p style="font-size:12px;color:#8B9096;margin-top:10px">집계 기준 ' + esc(d.updated || '') + '</p>';
     const inp = $('#dbReview'); if (inp) inp.addEventListener('input', updateCons);
     updateCons(); renderUsageBox();
     const st = $('#dbStatus'); st.className = 'sheet-status ' + (fromCache ? 'local' : 'connected');
@@ -4261,7 +4463,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function renderResultCheck(el, card) {
     if (!el) return;
     el._card = card;
-    el.innerHTML = '<div class="rc-box"><div style="font-weight:800;margin-bottom:6px">결과물 확인 체크리스트 <span style="font-weight:400;color:#8A877E;font-size:12px">(어사이드 결과를 받은 뒤 확인하세요 · 참고용)</span></div>'
+    el.innerHTML = '<div class="rc-box"><div style="font-weight:800;margin-bottom:6px">결과물 확인 체크리스트 <span style="font-weight:400;color:#8B9096;font-size:12px">(어사이드 결과를 받은 뒤 확인하세요 · 참고용)</span></div>'
       + rcItems(card.category).map(function (t) { return '<label><input type="checkbox"> <span>' + esc(t) + '</span></label>'; }).join('')
       + '<div style="margin-top:12px;font-weight:700">이번 결과는 어땠나요?</div>'
       + '<div data-rcact style="margin-top:6px"><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn-gold" data-rc="good">👍 만족</button><button type="button" class="btn-secondary" data-rc="fix">🛠 수정 필요</button></div>'
@@ -4283,7 +4485,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const list = assets.filter(function (a) { return a.sample && /^https?:/.test(a.sample) && (a.cardId === card.id || ('u-' + a.no) === card.id); })
       .sort(function (x, y) { return (y.status === '검증됨' ? 1 : 0) - (x.status === '검증됨' ? 1 : 0); });
     if (!list.length) return '<div class="bp-hint" style="margin-bottom:12px">📎 이 기능의 "잘 된 결과물 샘플"은 아직 없습니다. 결과가 좋았다면 자산 등록 때 샘플 링크를 남겨 주세요.</div>';
-    return '<div class="rc-box" style="margin:0 0 14px"><div style="font-weight:800;margin-bottom:4px">✅ 잘 된 결과물 샘플 <span style="font-weight:400;color:#8A877E;font-size:12px">(레퍼런스로 활용하세요)</span></div>'
+    return '<div class="rc-box" style="margin:0 0 14px"><div style="font-weight:800;margin-bottom:4px">✅ 잘 된 결과물 샘플 <span style="font-weight:400;color:#8B9096;font-size:12px">(레퍼런스로 활용하세요)</span></div>'
       + list.map(function (a) { return '<div style="font-size:13px;padding:2px 0"><a href="' + esc(a.sample) + '" target="_blank" rel="noopener noreferrer">' + esc(a.name) + '</a> <span class="status-badge' + (a.status === '검증됨' ? ' ok' : '') + '">' + esc(a.status || '테스트 중') + '</span></div>'; }).join('') + '</div>';
   }
   function resultChips(a) {
@@ -4315,15 +4517,15 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   const RS_EXT = ['png', 'jpg', 'jpeg', 'gif', 'webp', 'pdf', 'doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx', 'hwp', 'hwpx', 'csv', 'txt', 'md'];
   const RS_MAX = 8 * 1024 * 1024;
   function rsAsset() { return assets.find(function (a) { return a.no === RS.no; }); }
-  function rsStatus(msg, err) { const el = $('#rsStatus'); el.textContent = msg || ''; el.style.color = err ? '#B42318' : '#4A4740'; }
+  function rsStatus(msg, err) { const el = $('#rsStatus'); el.textContent = msg || ''; el.style.color = err ? '#B42318' : '#4A4F55'; }
   function rsRender() {
     const a = rsAsset(); const list = (a && a.results) || [];
     $('#rsList').innerHTML = list.length ? list.map(function (r, i) {
       const isSample = a.sample && a.sample === r.url;
-      return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #EEE;font-size:13px;flex-wrap:wrap"><span>' + (r.kind === 'file' ? '📄' : '🔗') + '</span><a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" style="flex:1;min-width:140px;font-weight:700">' + esc(r.name) + '</a><a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding:2px 8px;font-size:12px;text-decoration:none">열기 ↗</a><span style="color:#8A877E;font-size:12px">' + (r.size ? fmtSize(r.size) + ' · ' : '') + esc(String(r.date || '').slice(0, 10)) + '</span>'
+      return '<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #EEE;font-size:13px;flex-wrap:wrap"><span>' + (r.kind === 'file' ? '📄' : '🔗') + '</span><a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" style="flex:1;min-width:140px;font-weight:700">' + esc(r.name) + '</a><a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" class="btn-secondary" style="padding:2px 8px;font-size:12px;text-decoration:none">열기 ↗</a><span style="color:#8B9096;font-size:12px">' + (r.size ? fmtSize(r.size) + ' · ' : '') + esc(String(r.date || '').slice(0, 10)) + '</span>'
         + (isSample ? '<span class="status-badge ok">샘플 지정됨</span>' : '<button type="button" class="btn-secondary" style="padding:2px 8px;font-size:12px" data-rssample="' + i + '">샘플로 지정</button>')
         + '<button type="button" class="asset-del-btn" data-rsdel="' + i + '" aria-label="결과물 삭제">🗑</button></div>';
-    }).join('') : '<div style="padding:10px 0;color:#8A877E;font-size:13px">아직 올린 결과물이 없습니다.</div>';
+    }).join('') : '<div style="padding:10px 0;color:#8B9096;font-size:13px">아직 올린 결과물이 없습니다.</div>';
   }
   function openResults(no) {
     RS.no = no; const a = rsAsset(); if (!a) return;
@@ -4422,7 +4624,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
         + (feats.length ? '<div class="ref-meta">연결 기능: ' + feats.slice(0, 3).map(function (c) { return esc(c.title); }).join(', ') + (feats.length > 3 ? ' 외 ' + (feats.length - 3) + '개' : '') + '</div>' : '')
         + '<div class="ref-meta">등록: ' + esc(r.by || '-') + ' · 사용 ' + (r.uses || 0) + '회</div>'
         + '<div style="display:flex;gap:6px;margin-top:4px"><a class="btn-gold" href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" style="text-decoration:none;padding:6px 12px;font-size:13px">열기 ↗</a><button type="button" class="btn-secondary" data-refcopy="' + esc(r.no) + '" style="padding:6px 10px;font-size:13px">링크 복사</button><button type="button" class="asset-del-btn" data-refdel="' + esc(r.no) + '" aria-label="레퍼런스 삭제">🗑</button></div></div>';
-    }).join('') : '<div style="grid-column:1/-1;padding:24px;text-align:center;color:#8A877E;font-size:13px">조건에 맞는 레퍼런스가 없습니다.</div>';
+    }).join('') : '<div style="grid-column:1/-1;padding:24px;text-align:center;color:#8B9096;font-size:13px">조건에 맞는 레퍼런스가 없습니다.</div>';
   }
   function effectiveRefSel(card) {
     if (B.refCard !== card.id) { B.refCard = card.id; B.refSel = null; }
@@ -4435,7 +4637,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const related = REFS.filter(function (r) { return (r.cardIds || []).indexOf(card.id) < 0 && r.category === card.category; }).sort(refSort).slice(0, 6);
     if (!direct.length && !related.length) return '<div class="bp-hint" style="margin-bottom:12px">📚 이 기능에 등록된 레퍼런스가 아직 없습니다. 좋은 문서가 있다면 [레퍼런스 참고하기]에서 등록해 주세요.</div>';
     const row = function (r) { return '<div class="ref-row"><label><input type="checkbox" data-refsel="' + esc(r.no) + '"' + (sel.indexOf(r.no) >= 0 ? ' checked' : '') + '><span><b>' + esc(r.title) + '</b> ' + refBadge(r) + (r.desc ? '<div class="ref-meta">' + esc(r.desc) + '</div>' : '') + '</span></label><a href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" style="white-space:nowrap;font-size:12px">열기 ↗</a></div>'; };
-    return '<div class="rc-box" style="margin:0 0 14px"><div style="font-weight:800;margin-bottom:4px">📚 추천 레퍼런스 <span style="font-weight:400;color:#8A877E;font-size:12px">(체크한 문서가 프롬프트의 레퍼런스로 들어갑니다)</span></div>'
+    return '<div class="rc-box" style="margin:0 0 14px"><div style="font-weight:800;margin-bottom:4px">📚 추천 레퍼런스 <span style="font-weight:400;color:#8B9096;font-size:12px">(체크한 문서가 프롬프트의 레퍼런스로 들어갑니다)</span></div>'
       + (direct.length ? '<div class="ref-meta" style="margin:4px 0">이 기능에 연결된 레퍼런스</div>' + direct.map(row).join('') : '')
       + (related.length ? '<div class="ref-meta" style="margin:8px 0 4px">같은 분류(' + esc(card.category) + ')의 다른 레퍼런스</div>' + related.map(row).join('') : '')
       + '<div class="bp-hint" style="margin-top:6px">열리지 않으면 드라이브 공유 권한을 문서 소유자에게 요청하세요. "검토 중" 문서는 담당자 확인 전입니다.</div></div>';
@@ -4523,6 +4725,18 @@ function bindExtra() {
   document.addEventListener('DOMContentLoaded', init);
 })();
 
+</script>
+<footer class="site-footer"><div class="site-footer-inner"><div><img src="logo.svg" alt="Live orals" width="120"><br><b>어사이드 활용 플랫폼</b> &middot; 라이브오랄스 사내용<br>치과의사가 만든 구강제품 전문브랜드 라이브오랄스</div><div>&copy; LIVEORALS 사내용 &middot; 원가·급여·계약·협상 금액은 입력하지 마세요.</div></div></footer>
+<div class="fab"><button type="button" class="fab-top" id="fabTop" aria-label="맨 위로">&#8593;</button><a class="fab-chat" href="#requests" aria-label="기능 추가 요청" title="기능 추가 요청"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.6-5A8.5 8.5 0 1 1 21 11.5z"/><circle cx="8.5" cy="11.5" r=".6" fill="#fff"/><circle cx="12.5" cy="11.5" r=".6" fill="#fff"/><circle cx="16.5" cy="11.5" r=".6" fill="#fff"/></svg></a></div>
+<script>
+(function () {
+  var m = { precheck: 'BEFORE YOU START', guide: 'GUIDE', basic: 'BASIC PROMPT', functions: 'WORK FUNCTIONS', builder: 'PROMPT BUILDER', refs: 'REFERENCE', assets: 'AI ASSETS', manual: 'REGISTER', dashboard: 'SAVINGS', requests: 'REQUEST', notice: 'NOTICE' };
+  Object.keys(m).forEach(function (k) { var t = document.querySelector('#page-' + k + ' .section-title'); if (t) t.setAttribute('data-eyebrow', m[k]); });
+  var top = document.getElementById('fabTop');
+  if (top) top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+  window.addEventListener('scroll', function () { if (top) top.classList.toggle('show', window.scrollY > 300); }, { passive: true });
+  document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('.nav-item'); if (a && document.activeElement && document.activeElement.blur) document.activeElement.blur(); });
+})();
 </script>
 </body>
 </html>
