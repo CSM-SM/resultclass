@@ -1717,6 +1717,8 @@ input, textarea, select { font-size: 14px; }
 @media (max-width: 980px) { .au-dist { grid-template-columns: 1fr; } .au-view { margin-left: 0; } .au-grid { grid-template-columns: 1fr; } .au-team-sum { margin-left: 0; } }
 
 .gd-code { background: #111; color: #E9ECEF; border-radius: 10px; padding: 10px 14px; font-size: 12.5px; line-height: 1.6; overflow-x: auto; white-space: pre-wrap; word-break: break-all; margin: 10px 0 0; font-family: Consolas, "Courier New", monospace; }
+.nav-group-as { margin-top: auto; padding-top: 6px; }
+@media (min-width: 981px) { .nav-group-as { border-top: 1px solid #F0F1F3; margin-top: auto; } .sidebar-nav { min-height: 0; } }
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -1768,6 +1770,7 @@ input, textarea, select { font-size: 14px; }
       <div class="nav-group"><span class="nav-group-label">자산</span><div class="nav-drop"><a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a><a class="nav-item" href="#automations" data-page="automations"><span class="nav-icon">⚙️</span>자동화 리스트</a><a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a></div></div>
       <div class="nav-group"><span class="nav-group-label">현황</span><div class="nav-drop"><a class="nav-item" href="#dashboard" data-page="dashboard"><span class="nav-icon">📊</span>절감 대시보드</a></div></div>
       <div class="nav-group"><span class="nav-group-label">소통</span><div class="nav-drop"><a class="nav-item" href="#requests" data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a><a class="nav-item" href="#notice" data-page="notice"><span class="nav-icon">📢</span>공지</a></div></div>
+    <div class="nav-group nav-group-as"><span class="nav-group-label">AS</span><div class="nav-drop"><a class="nav-item" href="#as" data-page="as"><span class="nav-icon">🛠️</span>AS (고장·오류 시)</a></div></div>
     </nav>
     <button class="sidebar-toggle" id="sidebarToggle" aria-label="메뉴 열기">☰</button>
   </aside>
@@ -1893,19 +1896,16 @@ input, textarea, select { font-size: 14px; }
           <div class="start-step"><b>지시는 구체적으로</b>"결제 처리해 줘"처럼 막연하게 쓰지 말고, 어떤 사이트·계정·파일로 무엇을 만들지 적습니다. 돈·고객 정보·로그인이 걸린 일은 하지 말아야 할 행동도 함께 적습니다. 이 사이트의 <a href="#quick" style="color:#0E8F7B;font-weight:700">간단 사용법</a>과 프롬프트 빌더가 그 틀을 대신 만들어 줍니다.</div>
           <div class="start-step"><b>권한은 필요한 만큼만</b>작업을 시작할 때 권한 모드를 고릅니다. <b>Read only</b>는 파일을 바꾸지 않고 보기만, <b>Guard</b>는 허용한 폴더 안에서만 작업하고 다른 폴더는 먼저 묻고, <b>Full access</b>는 컴퓨터 전체를 읽고 씁니다. 처음에는 Read only나 Guard로 시작하는 것을 권장합니다(운영 안내 초안). 발송·결제·삭제 직전 확인 방식은 아래 <b>1. 승인 방식</b>에서 업무마다 고르세요.</div>
           <div class="start-step"><b>메모리와 개인정보</b>어사이드는 방문 기록과 대화·작업에서 기억을 만들 수 있습니다. <code>Settings &gt; Memory</code>에서 끄거나 보관 기간(30일·90일·계속)을 바꿀 수 있습니다. 원가·급여·계약·협상 금액·개인정보는 프롬프트에 넣지 마세요.</div>
+          <div class="start-step"><b>동시 작업은 권장 2개, 최대 3개</b>어사이드 작업은 <b>동시에 2개까지를 권장</b>하고, <b>최대 3개</b>를 넘기지 마세요. 많이 열어 두면 멈춤·오류가 늘 수 있습니다. 끝난 작업은 정리하고 새 작업을 시작하세요(운영 안내).</div>
           <div class="start-step"><b>작업 중 추가 지시</b>진행 중에 새 메시지를 보내면 <b>Queue</b>(현재 작업이 끝난 뒤 적용) 또는 <b>Steer</b>(진행 중인 작업에 바로 반영)로 처리됩니다. <code>Settings &gt; Agents &gt; Chat</code>에서 방식을 고릅니다.</div>
         </div>
-        <h3 class="gd-h">E. 어사이드가 고장났을 때 (문제 해결)</h3>
-        <p class="gd-p">증상이 이런 경우입니다. <b>"Something went wrong. Aside can't connect to its local service."</b> 메시지가 뜨거나, 설정과 대화가 열리지 않거나, 루틴이 사라진 것처럼 보일 때입니다. 아래 1단계부터 순서대로 해 보세요. 숫자가 큰 단계일수록 영향이 큽니다.</p>
+        <h3 class="gd-h">E. 어사이드가 멈추거나 오류가 날 때</h3>
         <div class="start-steps">
-          <div class="start-step"><b>1단계 설치 키 복구 (공식)</b>어사이드를 완전히 종료한 뒤(작업 관리자에서 남은 Aside 프로세스도 종료), PowerShell에서 아래 명령으로 <code>.aside</code> 폴더에 빈 파일 <code>repair-installation</code>을 만듭니다. 탐색기로 만들면 .txt가 붙으니 꼭 명령으로 만드세요. 그다음 어사이드를 다시 실행하고, 로그인과 비밀번호 관리자 잠금 해제를 다시 하라고 하면 따릅니다. 대화·루틴·메모리 파일은 그대로 남습니다.<pre class="gd-code">New-Item -ItemType File "$env:USERPROFILE\.aside\repair-installation"</pre></div>
-          <div class="start-step"><b>2단계 막힌 키 정리 (공식, Windows)</b>1단계 후에도 계속 재시작되면, 공식 도움말의 "Clear a stuck key" 절차를 따릅니다. 명령이 길어 이 사이트에는 옮겨 적지 않았습니다. <a href="https://docs.aside.com/help/troubleshooting" target="_blank" rel="noopener noreferrer" style="color:#0E8F7B;font-weight:700">공식 문제 해결 페이지 열기 ↗</a></div>
-          <div class="start-step"><b>3단계 .aside 폴더 리셋 (사내 경험)</b>최성민 과장 PC에서 위 방법으로 해결되지 않아 폴더를 초기화하자 정상화된 방법입니다. <b>공식 안내가 아니라 사내에서 한 번 성공한 방법</b>입니다.<br>① 어사이드와 관련 프로세스를 모두 종료합니다.<br>② 탐색기 주소창에 <code>%USERPROFILE%</code>를 입력해 이동한 뒤, <code>.aside</code> 폴더 이름을 <code>.aside_old</code>로 바꿉니다. (백업 복사 없이 이름 변경만 합니다)<br>③ 어사이드를 다시 실행합니다. 새 <code>.aside</code> 폴더로 처음부터 시작합니다.</div>
+          <div class="start-step"><b>① 동시 작업 줄이기</b>동시에 진행하는 작업이 많으면 멈춤·오류가 늘 수 있습니다. 작업 수를 2개 이내로 줄여 보세요.</div>
+          <div class="start-step"><b>② 컴퓨터 재부팅</b>어사이드가 멈추거나 반응이 없으면 <b>컴퓨터를 재부팅</b>한 뒤 다시 실행합니다.</div>
+          <div class="start-step"><b>③ 계속 오류가 나면 문의</b>재부팅 후에도 같은 오류가 반복되면 <b>최성민 과장에게 문의</b>해 주세요. 직접 폴더를 지우거나 리셋하지 마세요.</div>
         </div>
-        <div class="gd-callout"><b>3단계 전에 꼭 알아두세요</b><br>· <code>.aside</code> 폴더에는 대화·작업 기록, 메모리, 사용자 스킬 같은 <b>로컬 데이터</b>가 들어 있습니다. 리셋하면 새 폴더에서는 이 내용이 비어 보이고, 다시 로그인과 초기 설정이 필요할 수 있습니다.<br>· 되돌리려면 어사이드를 종료하고, 새로 생긴 <code>.aside</code> 폴더를 다른 이름으로 바꾼 뒤 <code>.aside_old</code>를 다시 <code>.aside</code>로 바꿉니다.<br>· <code>.aside_old</code>는 <b>며칠 정상적으로 써 보고 문제가 없을 때 삭제</b>하세요. 그 전에는 복구용으로 남겨 둡니다.<br>· 어사이드가 아니라 <b>작업이 멈춘 경우</b>는 리셋하지 마세요. 작업을 열어 승인·답변 요청을 처리하거나, 방향이 틀리면 Steer(바로 반영) 또는 Queue(끝난 뒤 반영)로 추가 지시를 보냅니다.<br>· 3단계는 사내 경험 기준이라 업무에 중요한 로컬 데이터가 있다면 담당자와 먼저 상의하세요(운영 안내 초안).</div>
-        <div class="gd-callout gd-mint"><b>지원팀에 문의할 때</b><br>support@aside.com으로 시각, 증상, 화면의 오류 메시지, 그날의 로그 파일(<code>.aside\logs\daemon-날짜.log</code>)을 보내세요. 이미 시도한 방법도 적으면 좋습니다. 예: "1단계(repair-installation)와 프로세스 종료로는 해결되지 않았고, .aside 폴더를 .aside_old로 바꿔 리셋하자 정상화됐습니다." 같은 증상을 겪는 다른 사용자에게도 도움이 됩니다.</div>
-        <p class="gd-note">출처: 1·2단계와 문의 방법은 어사이드 공식 도움말(Troubleshoot Aside), 3단계는 사내 경험입니다. 맥은 <code>%USERPROFILE%\.aside</code> 대신 <code>~/.aside</code> 폴더입니다. 화면과 폴더 구성은 버전에 따라 달라질 수 있습니다.</p>
-
+        <p class="gd-p" style="margin-top:12px">증상별 대처와 문의할 때 알려 줄 내용은 왼쪽 메뉴 맨 아래 <a href="#as" style="color:#0E8F7B;font-weight:700;text-decoration:underline">AS (고장·오류 시)</a> 탭에 정리했습니다.</p>
         <p class="gd-note">출처: 어사이드 공식 도움말(docs.aside.com)과 요금 안내(aside.com/pricing), 2026-10-26 확인. 화면 구성과 요금은 어사이드 업데이트에 따라 달라질 수 있습니다. <a href="https://docs.aside.com/help/get-started" target="_blank" rel="noopener noreferrer" style="color:#0E8F7B">공식 도움말 열기 ↗</a></p>
 
         <div class="sec-head" id="precheck-check" style="margin-top:44px"><span class="eyebrow">BEFORE YOU START</span><h2>업무 시작 전 확인 (모델 설정·체크리스트)</h2></div>
@@ -2251,6 +2251,53 @@ input, textarea, select { font-size: 14px; }
         <div id="auTeams"></div>
         <div class="asset-table-wrap" id="auTableWrap" style="display:none"><table class="asset-table"><thead><tr><th>팀</th><th>번호</th><th>자동화</th><th>분류</th><th>유형</th><th>담당자</th><th>기존 → 개선(분)</th><th>주 횟수</th><th>월 절감(시간)</th><th>상태</th><th>결과물</th></tr></thead><tbody id="auTableBody"></tbody></table></div>
         <div class="bp-hint" style="margin:14px 0 0">※ 팀은 성과측정 시트의 부서 값을 기준으로 나뉩니다(상품기획은 개발팀, 공통은 공용). 소요시간과 절감 시간은 시트에 작성자가 입력한 값 기준 추정치이며 별도 검증 전입니다. 금액·인원별 성과는 표시하지 않습니다. 절감 산식과 가정은 [절감 대시보드]에서 확인하세요.</div>
+      </section>
+
+      <!-- ═══ AS ═══ -->
+      <section class="page" id="page-as">
+        <h2 class="section-title">AS (어사이드 고장·오류 시)</h2>
+        <p class="section-sub">어사이드가 멈추거나 오류가 날 때 순서대로 따라 해 보세요. 대부분은 작업 수를 줄이고 재부팅하면 해결됩니다. 그래도 반복되면 최성민 과장에게 문의해 주세요.</p>
+
+        <div class="qk-flow" aria-label="AS 순서">
+          <div class="qk-node"><span class="qk-no">1</span><b>동시 작업 확인</b><small>진행 중인 작업이 3개를 넘는지 보고, 2개 이내로 줄입니다</small></div>
+          <div class="qk-arrow" aria-hidden="true">→</div>
+          <div class="qk-node qk-hl"><span class="qk-no">2</span><b>컴퓨터 재부팅</b><small>멈추거나 반응이 없으면 컴퓨터를 재부팅한 뒤 어사이드를 다시 실행합니다</small></div>
+          <div class="qk-arrow" aria-hidden="true">→</div>
+          <div class="qk-node"><span class="qk-no">3</span><b>최성민 과장 문의</b><small>재부팅 후에도 같은 오류가 계속되면 문의합니다</small></div>
+        </div>
+
+        <div class="gd-callout gd-mint"><b>동시 작업은 권장 2개, 최대 3개입니다.</b> 처음 쓰는 분은 한 번에 하나씩 끝내는 것부터 시작하세요. 작업을 많이 열어 두면 멈춤·오류가 늘 수 있으니, 끝난 작업은 닫고 새 작업을 시작합니다.</div>
+
+        <h3 class="gd-h">증상별 대처</h3>
+        <div class="asset-table-wrap gd-table-wrap">
+          <table class="gd-table">
+            <thead><tr><th>증상</th><th>먼저 해 볼 것</th><th>그래도 안 되면</th></tr></thead>
+            <tbody>
+              <tr><td><b>작업이 멈춤, 반응 없음, 너무 느림</b></td><td>동시 작업을 2개 이내로 줄이고, 컴퓨터를 재부팅합니다</td><td>같은 증상이 반복되면 최성민 과장에게 문의</td></tr>
+              <tr><td><b>"Aside can't connect to its local service" 같은 오류, 설정·대화가 안 열림</b></td><td>컴퓨터를 재부팅하고 어사이드를 다시 실행합니다</td><td>최성민 과장에게 문의 (아래 복구 방법은 담당자 안내에 따라 진행)</td></tr>
+              <tr><td><b>작업이 승인·답변을 기다림</b></td><td>오류가 아닙니다. 작업을 열어 요청을 확인하고 승인·거절하거나 답합니다</td><td>그래도 진행이 안 되면 재부팅</td></tr>
+              <tr><td><b>작업이 엉뚱한 방향으로 감</b></td><td>추가 지시를 보냅니다. Steer는 바로 반영, Queue는 현재 작업이 끝난 뒤 반영합니다</td><td>작업을 멈추고 새 작업으로 다시 시작</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="gd-h">문의할 때는 이렇게 알려 주세요</h3>
+        <div class="start-steps">
+          <div class="start-step"><b>누구에게</b><b style="display:inline">최성민 과장</b>에게 문의합니다. FLOW·구글챗 등 평소 쓰는 연락 수단을 이용하세요.</div>
+          <div class="start-step"><b>무엇을 알려 주나요</b>발생 시각, 하던 작업, 화면에 뜬 오류 메시지(스크린샷), 동시에 열어 둔 작업 수, 재부팅을 해 봤는지를 함께 알려 주세요.</div>
+          <div class="start-step"><b>직접 하지 마세요</b>폴더 삭제나 설정 초기화는 데이터가 사라질 수 있으니 담당자 안내 없이 직접 하지 않습니다.</div>
+        </div>
+
+        <details class="bp-card" style="max-width:none;margin-top:22px"><summary style="cursor:pointer;font-weight:800">담당자 안내에 따라 진행하는 복구 방법 (고급)</summary>
+          <p class="gd-p" style="margin-top:12px">아래는 최성민 과장이 문의를 받고 안내할 때 쓰는 복구 방법입니다. 데이터에 영향이 있을 수 있으니 담당자와 먼저 상의한 뒤 진행하세요. 숫자가 큰 단계일수록 영향이 큽니다.</p>
+          <div class="start-steps">
+            <div class="start-step"><b>1단계 설치 키 복구 (공식)</b>어사이드를 완전히 종료한 뒤(작업 관리자에서 남은 Aside 프로세스도 종료), PowerShell에서 아래 명령으로 <code>.aside</code> 폴더에 빈 파일 <code>repair-installation</code>을 만듭니다. 탐색기로 만들면 .txt가 붙으니 꼭 명령으로 만드세요. 그다음 어사이드를 다시 실행하고, 로그인과 비밀번호 관리자 잠금 해제를 다시 하라고 하면 따릅니다. 대화·루틴·메모리 파일은 그대로 남습니다.<pre class="gd-code">New-Item -ItemType File "$env:USERPROFILE\.aside\repair-installation"</pre></div>
+            <div class="start-step"><b>2단계 막힌 키 정리 (공식, Windows)</b>1단계 후에도 계속 재시작되면 공식 도움말의 "Clear a stuck key" 절차를 따릅니다. 명령이 길어 이 사이트에는 옮겨 적지 않았습니다. <a href="https://docs.aside.com/help/troubleshooting" target="_blank" rel="noopener noreferrer" style="color:#0E8F7B;font-weight:700">공식 문제 해결 페이지 열기 ↗</a></div>
+            <div class="start-step"><b>3단계 .aside 폴더 리셋 (사내 경험)</b>최성민 과장 PC에서 위 방법으로 해결되지 않아 폴더를 초기화하자 정상화된 방법입니다. <b>공식 안내가 아니라 사내에서 한 번 성공한 방법</b>입니다.<br>① 어사이드와 관련 프로세스를 모두 종료합니다.<br>② 탐색기 주소창에 <code>%USERPROFILE%</code>를 입력해 이동한 뒤 <code>.aside</code> 폴더 이름을 <code>.aside_old</code>로 바꿉니다. (백업 복사 없이 이름 변경만 합니다)<br>③ 어사이드를 다시 실행합니다. 새 <code>.aside</code> 폴더로 처음부터 시작합니다.</div>
+          </div>
+          <div class="gd-callout"><b>3단계 전에 꼭 알아두세요</b><br>· <code>.aside</code> 폴더에는 대화·작업 기록, 메모리, 사용자 스킬 같은 <b>로컬 데이터</b>가 들어 있습니다. 리셋하면 새 폴더에서는 비어 보이고, 다시 로그인과 초기 설정이 필요할 수 있습니다.<br>· 되돌리려면 어사이드를 종료하고, 새로 생긴 <code>.aside</code> 폴더를 다른 이름으로 바꾼 뒤 <code>.aside_old</code>를 다시 <code>.aside</code>로 바꿉니다.<br>· <code>.aside_old</code>는 <b>며칠 정상적으로 써 보고 문제가 없을 때 삭제</b>하세요. 그 전에는 복구용으로 남겨 둡니다.<br>· 작업이 멈춘 경우(승인 대기, 방향 이탈)에는 리셋하지 마세요.</div>
+          <p class="gd-note">출처: 1·2단계는 어사이드 공식 도움말(Troubleshoot Aside), 3단계는 사내 경험입니다. 맥은 <code>%USERPROFILE%\.aside</code> 대신 <code>~/.aside</code> 폴더입니다. 담당자가 해결하지 못하면 어사이드 지원팀(support@aside.com)에 시각, 증상, 오류 메시지, 그날의 로그 파일(<code>.aside\logs\daemon-날짜.log</code>)을 보냅니다.</p>
+        </details>
       </section>
 
       <!-- ═══ 어사이드 가이드 ═══ -->
@@ -3604,6 +3651,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   };
 
   const NOTICES = [
+    { date: '2026-10-26', pin: false, title: 'AS 메뉴 추가와 동시 작업 안내', meta: '업데이트', body: '왼쪽 메뉴 맨 아래에 [AS (고장·오류 시)]가 생겼습니다. 어사이드가 멈추면 컴퓨터를 재부팅하고, 계속 오류가 나면 최성민 과장에게 문의해 주세요. 어사이드 작업은 동시에 권장 2개, 최대 3개까지만 진행합니다.' },
     { date: '2026-10-26', pin: false, title: '팀별 자동화 리스트 메뉴 추가', meta: '업데이트', body: '[자산] 아래에 [자동화 리스트]가 생겼습니다. 마케팅팀·영업팀·개발팀·해외영업팀·디자인팀·공용으로 나누어 자동화를 모아 보고, 기존·개선 소요시간과 월 절감 시간, 담당자, 결과물을 카드나 표로 확인할 수 있습니다. 소요시간은 작성자 입력 기준 추정치입니다.' },
     { date: '2026-10-26', pin: false, title: '스킬 파일 등록(선택)과 자동 추천 추가', meta: '업데이트', body: '[레퍼런스 참고하기]의 "스킬 파일" 탭과 [수동 자산화]에서 스킬 파일(SKILL.md 등)을 선택 등록할 수 있습니다. 등록해 두면 업무기능·기본 프롬프트에서 업무에 맞는 스킬 파일이 자동으로 추천되고, 체크한 파일이 프롬프트에 들어가 어사이드가 먼저 읽고 따릅니다.' },
     { date: '2026-10-26', pin: false, title: '레퍼런스 참고하기 메뉴 추가', meta: '업데이트', body: '구글 드라이브의 잘 된 문서를 기능별로 모은 [레퍼런스 참고하기] 메뉴가 생겼습니다. 업무기능에서 프롬프트를 만들 때 해당 기능의 추천 레퍼런스가 표시되고, 선택한 문서가 프롬프트에 들어갑니다. 좋은 문서는 직접 등록할 수 있습니다.' },
@@ -3618,7 +3666,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { automations: '자동화 리스트', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '수동 자산화', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { as: 'AS', automations: '자동화 리스트', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '수동 자산화', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: 'AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page) {
     if (!PAGES[page]) page = 'home';
@@ -4250,6 +4298,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   
   /* ── 11. 업무 시작 전 확인사항 ───────────────────────────── */
   const PRECHECK_ITEMS = [
+    '동시에 진행하는 어사이드 작업은 2개 이내(최대 3개)로 유지한다.',
     '이번 업무에 고객·고객사·MD 등 사람이 걸려 있거나 내가 꼭 확인해야 하는 일이면, 승인 방식을 "물어보고 승인(Ask first)"으로 설정했다.',
     '"자동 승인(Skip confirmation)"은 밖으로 나가는 행동(발송·결제·삭제·제출)이 없는 내부 업무에만 쓰고, 끝나면 물어보고 승인으로 되돌린다.',
     '어사이드 Models 화면에서 Default / Fast / Standard / Deep / Visual 모델 설정을 확인했다.',
@@ -5355,7 +5404,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 <div class="fab"><button type="button" class="fab-top" id="fabTop" aria-label="맨 위로">&#8593;</button><a class="fab-chat" href="#requests" aria-label="기능 추가 요청" title="기능 추가 요청"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.6-5A8.5 8.5 0 1 1 21 11.5z"/><circle cx="8.5" cy="11.5" r=".6" fill="#fff"/><circle cx="12.5" cy="11.5" r=".6" fill="#fff"/><circle cx="16.5" cy="11.5" r=".6" fill="#fff"/></svg></a></div>
 <script>
 (function () {
-  var m = { quick: 'QUICK START', automations: 'AUTOMATIONS', precheck: 'BEFORE YOU START', guide: 'GUIDE', basic: 'BASIC PROMPT', functions: 'WORK FUNCTIONS', builder: 'PROMPT BUILDER', refs: 'REFERENCE', assets: 'AI ASSETS', manual: 'REGISTER', dashboard: 'SAVINGS', requests: 'REQUEST', notice: 'NOTICE' };
+  var m = { quick: 'QUICK START', automations: 'AUTOMATIONS', as: 'AS CENTER', precheck: 'BEFORE YOU START', guide: 'GUIDE', basic: 'BASIC PROMPT', functions: 'WORK FUNCTIONS', builder: 'PROMPT BUILDER', refs: 'REFERENCE', assets: 'AI ASSETS', manual: 'REGISTER', dashboard: 'SAVINGS', requests: 'REQUEST', notice: 'NOTICE' };
   Object.keys(m).forEach(function (k) { var t = document.querySelector('#page-' + k + ' .section-title'); if (t) t.setAttribute('data-eyebrow', m[k]); });
   var top = document.getElementById('fabTop');
   if (top) top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
