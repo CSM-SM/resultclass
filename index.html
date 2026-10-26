@@ -5409,6 +5409,9 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   var top = document.getElementById('fabTop');
   if (top) top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
   window.addEventListener('scroll', function () { if (top) top.classList.toggle('show', window.scrollY > 300); }, { passive: true });
+  var annEl = document.querySelector('.announce'), sbEl = document.getElementById('sidebar');
+  function fitSidebar() { if (!sbEl || !annEl) return; if (window.innerWidth <= 980) { sbEl.style.height = ''; return; } var h = Math.max(0, annEl.offsetHeight - window.scrollY); sbEl.style.height = 'calc(100vh - ' + h + 'px)'; }
+  window.addEventListener('scroll', fitSidebar, { passive: true }); window.addEventListener('resize', fitSidebar); fitSidebar();
   document.addEventListener('click', function (e) { var a = e.target.closest && e.target.closest('.nav-item'); if (a && document.activeElement && document.activeElement.blur) document.activeElement.blur(); });
 })();
 </script>
