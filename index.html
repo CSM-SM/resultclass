@@ -1424,7 +1424,7 @@ img { max-width: 100%; display: block; }
 .notice-pin{background:#FDECEC;color:#B42318}
 #dbBody ol{list-style:decimal}
 .asset-table-wrap{overflow-x:auto}
-.asset-table{min-width:1560px}
+.asset-table{min-width:1380px}
 .asset-table td:nth-child(2){min-width:160px}
 .asset-table td:nth-child(3){min-width:260px}
 .asset-table td:nth-child(5),.asset-table td:nth-child(6),.asset-table td:nth-child(7){white-space:nowrap}
@@ -1750,7 +1750,7 @@ img { max-width: 100%; display: block; }
         </div>
         <div class="asset-table-wrap">
           <table class="asset-table">
-            <thead><tr><th>번호</th><th>자산명</th><th>내용</th><th>유형</th><th>부서</th><th>상태</th><th>자동화</th><th>담당자</th><th>수정일</th><th>결과물</th><th>관리</th></tr></thead>
+            <thead><tr><th>번호</th><th>자산명</th><th>내용</th><th>유형</th><th>부서</th><th>상태</th><th>자동화</th><th>담당자</th><th>수정일</th><th>관리</th></tr></thead>
             <tbody id="assetBody"></tbody>
           </table>
         </div>
@@ -3426,7 +3426,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#assetBody').innerHTML = list.length ? list.map((a) => `
       <tr>
         <td>${esc(a.no)}</td>
-        <td><strong>${esc(a.name)}</strong>${(a.sample && /^https?:/.test(a.sample)) ? '<div><a href="' + esc(a.sample) + '" target="_blank" rel="noopener noreferrer" style="font-size:12px">샘플 결과물 ↗</a></div>' : ''}</td>
+        <td><strong>${esc(a.name)}</strong>${(a.sample && /^https?:/.test(a.sample)) ? '<div><a href="' + esc(a.sample) + '" target="_blank" rel="noopener noreferrer" style="font-size:12px">샘플 결과물 ↗</a></div>' : ''}<div style="margin-top:5px"><button type="button" class="rebuild-btn" data-results="${esc(a.no)}">${(a.results && a.results.length) ? '📎 결과물 ' + a.results.length : '📤 결과물 올리기'}</button></div></td>
         <td>${esc(a.content)}</td>
         <td><span class="tag">${esc(a.type)}</span></td>
         <td>${esc(normDept(a.dept))}</td>
@@ -3434,12 +3434,11 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
         <td>${a.auto ? `<span class="badge-auto">자동</span> <small>${esc(a.autoSchedule || '')}</small>${a.perf === '기입됨' ? ' <small title="AI TF팀 성과측정 시트에 기입됨">📊</small>' : ''}` : '<span class="badge-manual">수동</span>'}</td>
         <td>${a.assignee ? esc(a.assignee) : '<button type="button" class="rebuild-btn" data-setowner="' + esc(a.no) + '">담당자 지정</button>'}</td>
         <td style="white-space:nowrap;font-size:12px">${esc(String(a.updated || a.createdAt || '').slice(0, 10) || '-')}</td>
-        <td><button type="button" class="rebuild-btn" data-results="${esc(a.no)}">${(a.results && a.results.length) ? '📎 결과물 ' + a.results.length : '결과물 올리기'}</button></td>
         <td>
           ${((a.savedFields && a.savedFields.manualPrompt) || (a.cardId && cardById(a.cardId))) ? '<button type="button" class="rebuild-btn" data-viewprompt="' + esc(a.no) + '">프롬프트 보기</button> ' : ''}<button type="button" class="rebuild-btn" data-rebuild="${esc(a.no)}"${a.cardId && cardById(a.cardId) ? '' : ' disabled title="연결된 기능이 없습니다"'}>이 자산으로 다시 만들기</button>
           <button type="button" class="asset-del-btn" data-delasset="${esc(a.no)}" aria-label="삭제">🗑</button>
         </td>
-      </tr>`).join('') : '<tr><td colspan="11"><div class="empty-state"><div class="icon">🗂️</div><p>등록된 자산이 없습니다.</p></div></td></tr>';
+      </tr>`).join('') : '<tr><td colspan="10"><div class="empty-state"><div class="icon">🗂️</div><p>등록된 자산이 없습니다.</p></div></td></tr>';
   }
 
   /* 모달 */
