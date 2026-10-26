@@ -1412,6 +1412,16 @@ img { max-width: 100%; display: block; }
 .bp-card{background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:18px 20px;max-width:900px}
 .bp-card .form-group{margin-bottom:16px}
 .bp-hint{font-size:12px;color:#8A877E;margin-top:4px;line-height:1.6}
+.nav-section{padding:14px 20px 6px;font-size:11px;font-weight:700;letter-spacing:.5px;color:rgba(255,255,255,.45)}
+.start-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:8px 0 10px}
+.start-step{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #E5E2D8;border-top:4px solid #C8922A;border-radius:12px;padding:14px 16px;font-size:13px;line-height:1.6}
+.start-step b{display:block;font-size:14px;margin-bottom:4px}
+.fz-warn{flex-basis:100%;color:#B4530A;font-weight:700;font-size:12px}
+.rc-box{background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px;margin-top:14px}
+.rc-box label{display:flex;gap:8px;align-items:flex-start;padding:3px 0;font-size:13px;cursor:pointer;line-height:1.5}
+.status-badge{padding:2px 8px;border-radius:999px;font-size:11.5px;background:#FDF5E0;white-space:nowrap}
+.status-badge.ok{background:#E0F5F0;color:#0E5A4C}
+.notice-pin{background:#FDECEC;color:#B42318}
 #sendGuide{background:#E0F5F0;border:1px solid #BFE5DC;border-radius:10px;padding:10px 14px;margin:0 0 12px;font-size:13px;line-height:1.7}
 #sendGuide kbd{background:#fff;border:1px solid #C9C5B8;border-radius:4px;padding:0 5px;font-size:12px}
 #fileReminder{display:none;background:#FDF5E0;border:1px solid #F0D9A0;border-radius:10px;padding:10px 14px;margin:0 0 12px;font-size:13px;line-height:1.6}
@@ -1427,17 +1437,21 @@ img { max-width: 100%; display: block; }
       <div class="sub">어사이드 활용 플랫폼</div>
     </div>
     <nav class="sidebar-nav">
-      <a class="nav-item active" href="#precheck" data-page="precheck"><span class="nav-icon">✅</span>업무 시작 전 확인사항</a>
+      <div class="nav-section">시작하기</div>
+      <a class="nav-item" href="#home" data-page="home"><span class="nav-icon">🏠</span>홈</a>
+      <a class="nav-item" href="#precheck" data-page="precheck"><span class="nav-icon">✅</span>업무 시작 전 확인사항</a>
+      <a class="nav-item" href="#guide" data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a>
+      <div class="nav-section">업무 도구</div>
       <a class="nav-item" href="#basic" data-page="basic"><span class="nav-icon">📝</span>기본 프롬프트</a>
-      <a class="nav-item" href="#home"      data-page="home"><span class="nav-icon">🏠</span>홈</a>
-      <a class="nav-item"        href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a>
-      <a class="nav-item"        href="#builder"   data-page="builder"><span class="nav-icon">🛠️</span>프롬프트 빌더</a>
-      <a class="nav-item"        href="#assets"    data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a>
+      <a class="nav-item" href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a>
+      <div class="nav-section">자산</div>
+      <a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>AI 자산</a>
       <a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a>
-      <a class="nav-item"        href="#guide"     data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a>
-      <a class="nav-item"        href="#requests"  data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a>
-      <a class="nav-item"        href="#notice"    data-page="notice"><span class="nav-icon">📢</span>공지</a>
-      <a class="nav-item"        href="#dashboard" data-page="dashboard"><span class="nav-icon">📊</span>절감 대시보드</a>
+      <div class="nav-section">현황</div>
+      <a class="nav-item" href="#dashboard" data-page="dashboard"><span class="nav-icon">📊</span>절감 대시보드</a>
+      <div class="nav-section">소통</div>
+      <a class="nav-item" href="#requests" data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a>
+      <a class="nav-item" href="#notice" data-page="notice"><span class="nav-icon">📢</span>공지</a>
     </nav>
     <div class="sidebar-footer">© LIVEORALS 사내용</div>
   </aside>
@@ -1482,7 +1496,7 @@ img { max-width: 100%; display: block; }
         <h3 style="font-size:16px;margin:26px 0 8px">2. 공급자(Providers) 확인</h3>
         <p style="font-size:13px;color:#4A4740;line-height:1.7">Models 화면 위쪽 Providers에는 Aside, Claude(구독), ChatGPT 등이 연결되어 있습니다. 모델을 고를 때 <strong>어떤 공급자를 거치는 모델인지</strong> 확인하세요. 공유 Claude 계정(Claude 구독)을 거치면 전 직원 사용량이 합산됩니다. 개인 어사이드 플랜으로 처리할 수 있는 업무는 그 경로를 우선 사용해 주세요.</p>
 
-        <h3 style="font-size:16px;margin:26px 0 8px">3. 업무 시작 전 체크리스트 <span style="font-size:12px;color:#8A877E;font-weight:400" id="precheckStamp"></span></h3>
+        <h3 style="font-size:16px;margin:26px 0 8px">3. 업무 시작 전 체크리스트 <span style="font-size:12px;color:#8A877E;font-weight:400">· 체크 기록은 이 브라우저에만 저장됩니다</span> <span style="font-size:12px;color:#8A877E;font-weight:400" id="precheckStamp"></span></h3>
         <div id="precheckList" style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:6px 18px"></div>
         <div style="display:flex;gap:8px;margin-top:10px">
           <button type="button" class="btn-gold" id="precheckDone">오늘 확인 완료</button>
@@ -1510,7 +1524,7 @@ img { max-width: 100%; display: block; }
             <div class="error-msg">필수 항목입니다.</div></div>
           <div class="form-group"><label class="form-label">첨부자료</label>
             <input type="file" multiple hidden id="bpFileInput" accept=".png,.jpg,.jpeg,.gif,.webp,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.hwp,.hwpx,.csv,.txt,.md">
-            <div class="file-zone" id="bpZone" tabindex="0" role="button" aria-label="첨부자료 파일 첨부"><span class="fz-icon">📎</span><span>파일을 끌어다 놓거나 <b>클릭해서 선택</b> (여러 개 가능)</span><small>파일은 업로드되지 않고 파일명만 프롬프트에 들어갑니다. 파일은 어사이드 대화창에 함께 첨부하세요.</small></div>
+            <div class="file-zone" id="bpZone" tabindex="0" role="button" aria-label="첨부자료 파일 첨부"><span class="fz-icon">📎</span><span>파일을 끌어다 놓거나 <b>클릭해서 선택</b> (여러 개 가능)</span><small class="fz-warn">⚠ 선택한 파일은 사이트에 올라가지 않고 파일명만 프롬프트에 들어갑니다. 프롬프트를 붙여넣을 때 어사이드 대화창에 파일을 직접 첨부해야 합니다.</small></div>
             <div class="file-chips" id="bpChips"></div>
             <textarea class="form-control" id="bpUrls" rows="2" style="margin-top:8px" placeholder="구글 문서·시트·드라이브 폴더, FLOW 티켓, 웹 주소 (한 줄에 하나)"></textarea></div>
           <div class="form-group"><label class="form-label" for="bpRefs">레퍼런스 (선택)</label>
@@ -1552,6 +1566,7 @@ img { max-width: 100%; display: block; }
           <div class="bp-card" style="padding:0;overflow:hidden"><div style="background:#0C1B35;color:#fff;padding:12px 18px;font-weight:800">최종 어사이드 프롬프트</div>
             <textarea id="bpOut" readonly style="width:100%;min-height:340px;border:0;padding:16px 18px;font-family:inherit;font-size:13px;line-height:1.7;resize:vertical"></textarea>
             <div style="display:flex;gap:8px;padding:12px 18px;border-top:1px solid #E5E2D8"><button type="button" class="btn-gold" id="bpCopy" style="flex:1">📋 복사</button><button type="button" class="btn-secondary" id="bpAsset">🗂 자산 등록</button></div></div>
+          <div data-rcbox id="bpCheck"></div>
         </div>
       </section>
 
@@ -1575,13 +1590,14 @@ img { max-width: 100%; display: block; }
             <div class="form-group"><label class="form-label" for="mnType">유형</label><select class="form-control" id="mnType"><option>FLOW</option><option>구글챗</option><option>Gmail</option><option>시트</option><option>교육자료</option><option selected>기타</option></select></div>
             <div class="form-group" data-mn="dept"><label class="form-label" for="mnDept">부서 <span class="req">*</span></label><select class="form-control" id="mnDept"><option value="">선택</option><option>공통</option><option>마케팅</option><option>상품기획</option><option>병원기획</option><option>영업</option><option>디자인</option></select><div class="error-msg">필수 항목입니다.</div></div>
             <div class="form-group" data-mn="assignee"><label class="form-label" for="mnAssignee">담당자 이름 <span class="req">*</span></label><input class="form-control" id="mnAssignee" type="text" placeholder="예: 최성민"><div class="bp-hint">자산 목록에만 표시되고 프롬프트 본문에는 저장되지 않습니다.</div><div class="error-msg">필수 항목입니다.</div></div>
+            <div class="form-group full"><label class="form-label" for="mnSample">샘플 결과물 링크 (선택)</label><input class="form-control" id="mnSample" type="text" placeholder="이 프롬프트로 만든 잘 된 결과물 링크"></div>
             <div class="form-group full"><label class="form-label" for="mnContent">내용 요약</label><textarea class="form-control" id="mnContent" rows="2"></textarea></div>
           </div>
           <div class="form-group"><label style="cursor:pointer"><input type="checkbox" id="mnAuto"> 정기 자동화(예약)로 운영 중입니다 — 성과측정 시트와 절감 대시보드에 반영됩니다</label>
             <div id="mnAutoBox" style="display:none;margin-top:8px;background:#F8F6F0;border-radius:10px;padding:12px 14px">
               <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px">
                 <div><label class="form-label" for="mnBefore">기존 소요시간(분) <span class="req">*</span></label><input class="form-control" id="mnBefore" type="number" min="0" placeholder="사람이 1회 할 때"></div>
-                <div><label class="form-label" for="mnAfter">개선 후 소요시간(분) <span class="req">*</span></label><input class="form-control" id="mnAfter" type="number" min="0" placeholder="완전 자동이면 0"></div>
+                <div><label class="form-label" for="mnAfter">개선 후 소요시간(분) <span class="req">*</span></label><input class="form-control" id="mnAfter" type="number" min="0" placeholder="확인·검수 시간 포함 (완전 자동이면 0)"></div>
                 <div><label class="form-label" for="mnWeekly">주간 실행 횟수</label><input class="form-control" id="mnWeekly" type="number" min="0" step="0.25" placeholder="예: 5"></div>
                 <div><label class="form-label" for="mnSchedule">주기 (선택)</label><input class="form-control" id="mnSchedule" type="text" placeholder="예: 월~금 18:00"></div>
                 <div><label class="form-label" for="mnLink">결과물 / 연결 위치</label><input class="form-control" id="mnLink" type="text" placeholder="시트·채팅방·문서명"></div>
@@ -1608,20 +1624,24 @@ img { max-width: 100%; display: block; }
         </div>
 
 
-        <a class="precheck-callout" href="#precheck" style="display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid #e5e2d8;border-left:4px solid #C8922A;border-radius:12px;padding:16px 20px;margin:0 0 22px">
-          <div style="font-weight:800;font-size:15px;margin-bottom:4px">✅ 업무 시작 전 확인사항 — 어사이드 모델 설정부터 확인하세요</div>
-          <div style="font-size:13px;color:#4A4740">전사 어사이드 사용량 증가로 공유 Claude 계정 사용량이 빠르게 늘고 있습니다. 업무 시작 전 모델 설정을 확인해 주세요. 확인하러 가기 →</div>
-        </a>
+        <div style="font-weight:800;font-size:16px">처음이라면 이 순서로 시작하세요</div>
+        <div class="start-steps">
+          <a class="start-step" href="#precheck"><b>① 업무 시작 전 확인</b>어사이드 모델 설정과 체크리스트를 확인해 사용량을 아낍니다.</a>
+          <a class="start-step" href="#functions"><b>② 프롬프트 만들기</b>업무기능에서 기능을 고르고 항목을 채웁니다. 새 업무는 <u>기본 프롬프트</u>를 쓰세요.</a>
+          <a class="start-step" href="#assets"><b>③ 실행·확인·자산화</b>복사한 프롬프트를 어사이드에 붙여넣고, 결과를 체크한 뒤 잘 된 건 자산으로 등록합니다.</a>
+        </div>
+        <p class="bp-hint" style="margin:0 0 18px">이 사이트는 사람마다 달라지는 어사이드 결과물의 편차를 줄이기 위해, 같은 양식으로 지시하고 잘 된 지시를 모아 쓰는 사내 도구입니다. 현재 초기 버전(베타)으로 운영 중이며 부족한 점은 [기능 추가 요청]에 남겨 주세요.</p>
 
         <div class="counter-grid">
           <div class="counter-card"><div class="label">업무 기능</div><div class="value" id="cntCards">0</div><div class="unit">개</div></div>
-          <div class="counter-card"><div class="label">AI 자산</div><div class="value" id="cntAssets">0</div><div class="unit">개</div></div>
+          <div class="counter-card"><div class="label">AI 자산 (등록 전체)</div><div class="value" id="cntAssets">0</div><div class="unit">개</div></div>
           <div class="counter-card"><div class="label">자동화 적용</div><div class="value" id="cntAuto">0</div><div class="unit">개</div></div>
           <div class="counter-card"><div class="label">즐겨찾기</div><div class="value" id="cntFav">0</div><div class="unit">개</div></div>
         </div>
 
+        <p class="bp-hint" style="margin:-4px 0 16px">※ 홈의 AI 자산 수는 사이트에 등록된 전체(수동 포함)이고, [절감 대시보드]의 자동화 건수는 성과측정 시트에 기입된 자동화 건만 센 값이라 서로 다릅니다.</p>
         <div class="flow-top-section">
-          <div class="flow-top-title">⭐ 자주 쓰는 업무 (빈도 '상')</div>
+          <div class="flow-top-title">⭐ 자주 쓰는 업무 (추정 빈도 '상')</div>
           <div class="flow-top-grid" id="flowTopGrid"></div>
         </div>
       </section>
@@ -1635,6 +1655,7 @@ img { max-width: 100%; display: block; }
           <button class="fav-toggle-btn" id="favOnlyBtn" type="button">★ 즐겨찾기만</button>
         </div>
         <div class="cat-filters" id="catFilters"></div>
+        <div class="bp-hint" style="margin:-4px 0 10px">※ 즐겨찾기는 이 브라우저에만 저장됩니다. (PC나 브라우저를 바꾸면 사라집니다)</div>
         <div class="card-grid" id="cardGrid"></div>
         <div class="no-results" id="noResults" style="display:none"><div class="icon">🔍</div><p>조건에 맞는 기능이 없습니다.</p></div>
       </section>
@@ -1686,6 +1707,7 @@ img { max-width: 100%; display: block; }
                   <button type="button" class="btn-secondary auto-icon-btn" id="autoBtn" aria-label="자동화 주기 설정">⏱ 자동화</button>
                   <button type="button" class="save-asset-btn" id="saveAssetBtn">🗂️ 자산 등록</button>
                 </div>
+                <div data-rcbox id="resultCheck"></div>
               </div>
             </div>
 
@@ -1721,7 +1743,7 @@ img { max-width: 100%; display: block; }
         </div>
         <div class="asset-table-wrap">
           <table class="asset-table">
-            <thead><tr><th>번호</th><th>자산명</th><th>내용</th><th>유형</th><th>부서</th><th>자동화</th><th>담당자</th><th>관리</th></tr></thead>
+            <thead><tr><th>번호</th><th>자산명</th><th>내용</th><th>유형</th><th>부서</th><th>상태</th><th>자동화</th><th>담당자</th><th>수정일</th><th>관리</th></tr></thead>
             <tbody id="assetBody"></tbody>
           </table>
         </div>
@@ -1803,7 +1825,8 @@ img { max-width: 100%; display: block; }
         <div class="form-group"><label class="form-label" for="afType">유형</label>
           <select class="form-control" id="afType"><option>FLOW</option><option>구글챗</option><option>Gmail</option><option>시트</option><option>교육자료</option><option>기타</option></select></div>
         <div class="form-group"><label class="form-label" for="afDept">부서</label><select class="form-control" id="afDept"><option value="">선택</option><option>공통</option><option>마케팅</option><option>상품기획</option><option>병원기획</option><option>영업</option><option>디자인</option></select></div>
-        <div class="form-group"><label class="form-label" for="afAssignee">담당자</label><input class="form-control" id="afAssignee" type="text" placeholder="예: 최성민"></div>
+        <div class="form-group"><label class="form-label" for="afAssignee">담당자 <span class="req">*</span></label><input class="form-control" id="afAssignee" type="text" placeholder="예: 최성민"></div>
+        <div class="form-group full"><label class="form-label" for="afSample">샘플 결과물 링크 (선택)</label><input class="form-control" id="afSample" type="text" placeholder="잘 된 결과물의 구글 문서·시트·드라이브 링크 — 같은 기능을 쓰는 사람의 참고 샘플로 표시됩니다"></div>
         <div class="form-group full"><label class="form-label" for="afContent">내용 요약</label><textarea class="form-control" id="afContent" rows="3"></textarea></div>
         <div class="form-group full"><label class="form-label"><input type="checkbox" id="afAuto"> 자동화 적용</label>
           <input class="form-control" id="afSchedule" type="text" placeholder="RRULE (STEP 3 자동화 패널에서 자동 입력)" style="margin-top:6px"></div>
@@ -1811,7 +1834,7 @@ img { max-width: 100%; display: block; }
           <div style="font-weight:700;font-size:13px;margin-bottom:6px">자동화 성과 입력 (AI TF팀 성과측정 시트에 자동 기입됩니다)</div>
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px">
             <div><label class="form-label" for="afBefore">기존 소요시간(분) <span class="req">*</span> <button type="button" id="afEstBtn" class="btn-secondary" style="padding:1px 8px;font-size:11px;margin-left:4px">자동 추정</button></label><input class="form-control" id="afBefore" type="number" min="0" step="1" placeholder="사람이 1회 할 때"></div>
-            <div><label class="form-label" for="afAfter">개선 후 소요시간(분) <span class="req">*</span></label><input class="form-control" id="afAfter" type="number" min="0" step="1" placeholder="완전 자동이면 0"></div>
+            <div><label class="form-label" for="afAfter">개선 후 소요시간(분) <span class="req">*</span></label><input class="form-control" id="afAfter" type="number" min="0" step="1" placeholder="확인·검수 시간 포함 (완전 자동이면 0)"></div>
             <div><label class="form-label" for="afWeekly">주간 실행 횟수</label><input class="form-control" id="afWeekly" type="number" min="0" step="0.25" placeholder="주기에서 자동 계산"></div>
             <div><label class="form-label" for="afLink">결과물 / 연결 위치</label><input class="form-control" id="afLink" type="text" placeholder="시트·채팅방·문서명 또는 URL"></div>
           </div>
@@ -3006,11 +3029,14 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   };
 
   const NOTICES = [
-    { title: '결과물 편차를 줄이는 프롬프트 작성 원칙 (FLOW 공지 참고 · 2026-10-22)', meta: 'FLOW 공지', body: '① 단순 지시 대신 목적을 먼저 쓴다(이 업무를 왜 하는지, 결과를 어디에 쓰는지). ② 잘 된 기획서·승인 문서·반응 좋았던 문구를 레퍼런스로 함께 준다. ③ 결과를 가장 크게 좌우하는 요소 1가지를 정해 적는다. ④ 효과를 본 프롬프트는 AI 자산으로 등록해 팀이 같이 쓴다.' },
-    { title: '영업·마케팅·채널 기능 20개 추가 (2026-10-22)', meta: '업데이트', body: 'FLOW 전체 업무 633건(대기·진행)을 점검해 건수가 많은 업무를 기능으로 추가했습니다. 공구 셀러 일정·정산·지출결의, 디자인 의뢰서, 광고 소재·성과 리뷰, 스토어 프로모션 등. 빈도 표시는 티켓명 키워드 건수 기준 추정치입니다.' },
-    { title: '디자인 기능 8개 추가 (2026-10-22)', meta: '업데이트', body: '이미지 생성(Gemini 새 탭 활용), GIF 제작, 웹 포토샵 편집, 썸네일·배너 제작, 상세 예시 이미지, 카드뉴스, 규격 리사이즈, 시안 검수. 이미지 생성은 어사이드 대신 Gemini 새 탭으로 처리해 작업 시간과 사용량을 줄이는 방식입니다. 외부 웹 도구는 권장(안)이며 회사 승인 기준은 담당자가 확인하세요.' },
-    { title: '필요한 기능은 "기능 추가 요청" 게시판에 남겨주세요', meta: '운영', body: '부서·담당자·필요한 업무를 적어 주시면 요청 건수와 공감 수를 보고 우선순위를 정해 기능으로 추가합니다.' },
-    { title: '입력 시 주의', body: '원가·급여·계약·협상 금액은 프롬프트와 결과 요약에 넣지 마세요. 광고 표현·법령 해석의 최종 판단은 담당자가 합니다.', meta: '보안' }
+    { date: '2026-10-26', pin: true, title: '베타 테스트 안내', meta: '운영', body: '이 사이트는 초기 버전으로 베타 운영 중입니다. 입력 항목, 결과물 체크리스트, 대시보드 수치 기준은 사용 의견을 받아 보완합니다. 불편한 점과 필요한 기능은 [기능 추가 요청]에 남겨 주세요.' },
+    { date: '2026-10-22', pin: true, title: '어사이드 사용량 안내', meta: '운영', body: '전사 어사이드 사용이 늘면서 공유 Claude 계정 사용량이 빠르게 늘고 있습니다. 업무 시작 전 확인사항에서 모델 설정을 확인하고, 이미지 생성은 어사이드 대신 Gemini 새 탭을 활용해 주세요.' },
+    { date: '2026-10-22', pin: true, title: '입력 시 주의 (보안)', meta: '보안', body: '원가·급여·계약·협상 금액과 개인정보는 프롬프트와 결과 요약, 자산 등록에 넣지 마세요. 이 사이트는 로그인 없이 쓰는 주소이므로 입력한 내용은 구글 시트에 저장되어 공유될 수 있습니다. 광고 표현·법령 해석의 최종 판단은 담당자가 합니다.' },
+    { date: '2026-10-26', pin: false, title: '결과물 확인·사용 기록·자산 상태 기능 추가', meta: '업데이트', body: '프롬프트를 만든 뒤 결과물 체크리스트와 [만족/수정 필요] 기록을 남길 수 있습니다. 기능별 사용 횟수는 절감 대시보드에서 확인합니다. AI 자산에 상태(테스트 중/검증됨), 수정일, 샘플 결과물 링크가 추가되었고 메뉴를 업무 흐름 순서로 정리했습니다.' },
+    { date: '2026-10-23', pin: false, title: '디자인 기능 8개 추가', meta: '업데이트', body: '이미지 생성(Gemini 새 탭 활용), GIF 제작, 웹 포토샵 편집, 썸네일·배너 제작, 상세 예시 이미지, 카드뉴스, 규격 리사이즈, 시안 검수. 이미지 생성은 어사이드 대신 Gemini 새 탭으로 처리해 작업 시간과 사용량을 줄이는 방식입니다. 외부 웹 도구는 권장(안)이며 회사 승인 기준은 담당자가 확인하세요.' },
+    { date: '2026-10-22', pin: false, title: '영업·마케팅·채널 기능 20개 추가', meta: '업데이트', body: 'FLOW 전체 업무 633건(대기·진행)을 점검해 건수가 많은 업무를 기능으로 추가했습니다. 공구 셀러 일정·정산·지출결의, 디자인 의뢰서, 광고 소재·성과 리뷰, 스토어 프로모션 등. 빈도 표시는 티켓명 키워드 건수 기준 추정치입니다.' },
+    { date: '2026-10-22', pin: false, title: '결과물 편차를 줄이는 프롬프트 작성 원칙 (FLOW 공지 참고)', meta: 'FLOW 공지', body: '① 단순 지시 대신 목적을 먼저 쓴다(이 업무를 왜 하는지, 결과를 어디에 쓰는지). ② 잘 된 기획서·승인 문서·반응 좋았던 문구를 레퍼런스로 함께 준다. ③ 결과를 가장 크게 좌우하는 요소 1가지를 정해 적는다. ④ 효과를 본 프롬프트는 AI 자산으로 등록해 팀이 같이 쓴다.' },
+    { date: '2026-10-22', pin: false, title: '필요한 기능은 "기능 추가 요청" 게시판에 남겨주세요', meta: '운영', body: '부서·담당자·필요한 업무를 적어 주시면 요청 건수와 공감 수를 보고 우선순위를 정해 기능으로 추가합니다.' }
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
@@ -3019,7 +3045,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function go(page) {
     if (!PAGES[page]) page = 'home';
     $$('.page').forEach((p) => p.classList.toggle('active', p.id === 'page-' + page));
-    $$('.nav-item').forEach((n) => n.classList.toggle('active', n.dataset.page === page));
+    $$('.nav-item').forEach((n) => n.classList.toggle('active', n.dataset.page === (page === 'builder' ? 'functions' : page)));
     $('#topbarTitle').textContent = PAGES[page];
     if (location.hash !== '#' + page) history.replaceState(null, '', '#' + page);
     closeSidebar();
@@ -3066,7 +3092,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
         <div class="card-title">${esc(c.title)}</div>
         <div class="card-desc">${esc(c.desc)}</div>
         <div class="card-footer">
-          <div class="card-badges"><span class="badge-cat">${esc(c.category)}</span><span class="badge-freq ${fcls}">${c.custom ? '사용자 등록' : '빈도 ' + esc(c.frequency)}</span></div>
+          <div class="card-badges"><span class="badge-cat">${esc(c.category)}</span><span class="badge-freq ${fcls}">${c.custom ? '사용자 등록' : '추정 빈도 ' + esc(c.frequency)}${(USAGE[c.id] && USAGE[c.id].makes) ? ' · 사용 ' + USAGE[c.id].makes + '회' : ''}</span></div>
           <span class="card-cta-btn">${pickLabel}</span>
         </div>
       </div>`;
@@ -3204,7 +3230,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#selectedFn').innerHTML = selectedBanner(card);
     const cf = commonFor(card).map(fieldHTML).join('');
     const sf = (card.fields || []).map(fieldHTML).join('');
-    $('#fieldsForm').innerHTML =
+    $('#fieldsForm').innerHTML = samplePanelHTML(card) +
       `<div class="section-divider">기능별 입력 · ${esc(card.title)}</div>${sf}` +
       `<div class="section-divider">공통 입력</div>${cf}`;
   }
@@ -3287,12 +3313,15 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     let gd = $('#sendGuide');
     if (!gd) { gd = document.createElement('div'); gd.id = 'sendGuide'; $('#selectedFn3').insertAdjacentElement('afterend', gd); }
     const autoPref = store.get('lo_autocopy_v1', true);
-    gd.innerHTML = '<b>어사이드로 보내는 방법</b> ① 어사이드를 먼저 열어 둡니다 &nbsp;② 어사이드 입력창을 클릭하고 <kbd>Ctrl</kbd>+<kbd>V</kbd> (Mac은 <kbd>⌘</kbd>+<kbd>V</kbd>) &nbsp;③ <kbd>Enter</kbd> <span id="autoCopyState" style="font-weight:700;color:#1A7A68"></span>'
+    gd.innerHTML = '<b>어사이드로 보내는 방법</b> ① 어사이드를 먼저 열어 둡니다 &nbsp;② 어사이드 입력창을 클릭하고 <kbd>Ctrl</kbd>+<kbd>V</kbd> (Mac은 <kbd>⌘</kbd>+<kbd>V</kbd>) &nbsp;③ <kbd>Enter</kbd> (파일이 있으면 어사이드 대화창에 직접 첨부) <span id="autoCopyState" style="font-weight:700;color:#1A7A68"></span>'
       + '<label style="display:block;margin-top:4px;cursor:pointer"><input type="checkbox" id="autoCopyChk"' + (autoPref ? ' checked' : '') + '> 프롬프트를 만들면 자동으로 복사하기</label>';
     $('#autoCopyChk').onchange = (e) => store.set('lo_autocopy_v1', e.target.checked);
     if (autoPref) {
       copyText($('#promptOut').value).then(() => { const s = $('#autoCopyState'); if (s) s.textContent = '✓ 복사됨 — 어사이드 입력창에 붙여넣으세요'; toast('프롬프트를 복사했습니다. 어사이드 입력창에 붙여넣으세요.', 'success'); }).catch(() => {});
     }
+    const sig = B.cardId + JSON.stringify(B.values);
+    if (B.lastLogged !== sig) { B.lastLogged = sig; logUsage('make', card); }
+    renderResultCheck($('#resultCheck'), card);
     setStep(3);
   }
 
@@ -3381,17 +3410,19 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#assetBody').innerHTML = list.length ? list.map((a) => `
       <tr>
         <td>${esc(a.no)}</td>
-        <td><strong>${esc(a.name)}</strong></td>
+        <td><strong>${esc(a.name)}</strong>${(a.sample && /^https?:/.test(a.sample)) ? '<div><a href="' + esc(a.sample) + '" target="_blank" rel="noopener noreferrer" style="font-size:12px">샘플 결과물 ↗</a></div>' : ''}</td>
         <td>${esc(a.content)}</td>
         <td><span class="tag">${esc(a.type)}</span></td>
-        <td>${esc(a.dept)}</td>
+        <td>${esc(normDept(a.dept))}</td>
+        <td><span class="status-badge${a.status === '검증됨' ? ' ok' : ''}">${esc(a.status || '테스트 중')}</span></td>
         <td>${a.auto ? `<span class="badge-auto">자동</span> <small>${esc(a.autoSchedule || '')}</small>${a.perf === '기입됨' ? ' <small title="AI TF팀 성과측정 시트에 기입됨">📊</small>' : ''}` : '<span class="badge-manual">수동</span>'}</td>
-        <td>${esc(a.assignee || '')}</td>
+        <td>${a.assignee ? esc(a.assignee) : '<button type="button" class="rebuild-btn" data-setowner="' + esc(a.no) + '">담당자 지정</button>'}</td>
+        <td style="white-space:nowrap;font-size:12px">${esc(String(a.updated || a.createdAt || '').slice(0, 10) || '-')}</td>
         <td>
-          ${(a.savedFields && a.savedFields.manualPrompt) ? '<button type="button" class="rebuild-btn" data-viewprompt="' + esc(a.no) + '">프롬프트 보기</button> ' : ''}<button type="button" class="rebuild-btn" data-rebuild="${esc(a.no)}"${a.cardId && cardById(a.cardId) ? '' : ' disabled title="연결된 기능이 없습니다"'}>이 자산으로 다시 만들기</button>
+          ${((a.savedFields && a.savedFields.manualPrompt) || (a.cardId && cardById(a.cardId))) ? '<button type="button" class="rebuild-btn" data-viewprompt="' + esc(a.no) + '">프롬프트 보기</button> ' : ''}<button type="button" class="rebuild-btn" data-rebuild="${esc(a.no)}"${a.cardId && cardById(a.cardId) ? '' : ' disabled title="연결된 기능이 없습니다"'}>이 자산으로 다시 만들기</button>
           <button type="button" class="asset-del-btn" data-delasset="${esc(a.no)}" aria-label="삭제">🗑</button>
         </td>
-      </tr>`).join('') : '<tr><td colspan="8"><div class="empty-state"><div class="icon">🗂️</div><p>등록된 자산이 없습니다.</p></div></td></tr>';
+      </tr>`).join('') : '<tr><td colspan="10"><div class="empty-state"><div class="icon">🗂️</div><p>등록된 자산이 없습니다.</p></div></td></tr>';
   }
 
   /* 모달 */
@@ -3408,7 +3439,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#afContent').value = card ? (v.purpose || '') : '';
     $('#afAuto').checked = !!(card && B.autoOn && B.rrule);
     $('#afSchedule').value = card && B.autoOn ? B.rrule : '';
-    ['#afBefore', '#afAfter', '#afWeekly', '#afLink'].forEach((id) => { $(id).value = ''; });
+    ['#afBefore', '#afAfter', '#afWeekly', '#afLink', '#afSample'].forEach((id) => { $(id).value = ''; });
     syncAutoExtra();
     $('#assetModal').classList.add('open');
     $('#afName').focus();
@@ -3426,6 +3457,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function saveAssetFromModal() {
     const name = $('#afName').value.trim();
     if (!name) { toast('자산명을 입력해 주세요.', 'error'); return; }
+    if (!$('#afAssignee').value.trim()) { toast('담당자 이름을 입력해 주세요. (문의할 사람을 알 수 있어야 합니다)', 'error'); return; }
     const fromB = modalCtx && modalCtx.fromBuilder;
     const isAuto = $('#afAuto').checked;
     if (isAuto) {
@@ -3442,6 +3474,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       assignee: $('#afAssignee').value.trim(),
       auto: $('#afAuto').checked,
       autoSchedule: $('#afAuto').checked ? $('#afSchedule').value.trim() : '',
+      sample: $('#afSample').value.trim(),
+      status: '테스트 중',
       before: isAuto ? $('#afBefore').value : '',
       after: isAuto ? $('#afAfter').value : '',
       weekly: isAuto ? $('#afWeekly').value : '',
@@ -3485,8 +3519,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
         <div class="yt-icon">▶</div>
         <div class="yt-info"><div class="cat">${esc(y.category)}</div><h4>${esc(y.name)}</h4><p>${esc(y.desc)}</p></div>
       </a>`).join('');
-    $('#noticeList').innerHTML = NOTICES.map((n) => `
-      <div class="notice-item"><div class="notice-meta"><span class="tag">${esc(n.meta)}</span></div><h3>${esc(n.title)}</h3><p>${esc(n.body)}</p></div>`).join('');
+    $('#noticeList').innerHTML = NOTICES.slice().sort((a, b) => (b.pin ? 1 : 0) - (a.pin ? 1 : 0) || String(b.date).localeCompare(String(a.date))).map((n) => '<div class="notice-item"><div class="notice-meta">' + (n.pin ? '<span class="tag notice-pin">중요</span> ' : '') + '<span class="tag">' + esc(n.meta) + '</span> <span style="font-size:12px;color:#8A877E">' + esc(n.date) + '</span></div><h3>' + esc(n.title) + '</h3><p>' + esc(n.body) + '</p></div>').join('');
     const d = new Date();
     $('#topbarDate').textContent = `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`;
   }
@@ -3607,6 +3640,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#exportCsvBtn').addEventListener('click', exportCsv);
     $('#newAssetBtn').addEventListener('click', () => openAssetModal({ fromBuilder: false }));
     $('#assetBody').addEventListener('click', (e) => {
+      const so = e.target.closest('[data-setowner]');
+      if (so) { setOwner(so.dataset.setowner); return; }
       const vp = e.target.closest('[data-viewprompt]');
       if (vp) { viewAssetPrompt(vp.dataset.viewprompt); return; }
       const rb = e.target.closest('[data-rebuild]');
@@ -3775,40 +3810,80 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const max = Math.max.apply(null, items.map((x) => x[1]).concat([1]));
     return items.map((x) => '<div style="display:flex;align-items:center;gap:10px;margin:6px 0;font-size:13px"><div style="width:84px;flex:none">' + esc(x[0]) + '</div><div style="flex:1;background:#F0EEE6;border-radius:6px;height:18px;overflow:hidden"><div style="width:' + Math.max(2, x[1] / max * 100) + '%;height:100%;background:linear-gradient(90deg,#1A7A68,#2FA58E)"></div></div><div style="width:96px;flex:none;text-align:right"><b>' + x[1].toFixed(1) + '</b>' + unit + '</div></div>').join('');
   }
+  let DBLAST = null;
+  function consCut(d, pctVal) {
+    const wf = d.weekFactor || 4.3; let cut = 0, n = 0;
+    (d.rows || []).forEach(function (r) {
+      if (r.after === 0 && r.before > 0 && r.weekly > 0) { const rv = Math.max(5, Math.round(r.before * pctVal / 100)); cut += Math.min(r.hours, rv * r.weekly * wf / 60); n++; }
+    });
+    return { cut: cut, n: n };
+  }
+  function updateCons() {
+    const el = $('#dbCons'), inp = $('#dbReview'); if (!el || !inp || !DBLAST) return;
+    const d = DBLAST, t = d.totals || {}, p = Math.max(0, parseFloat(inp.value) || 0), r = consCut(d, p);
+    const h = Math.max(0, (t.hoursMonth || 0) - r.cut), cost = Math.max(0, (t.costMonth || 0) - Math.round(r.cut * (d.wage || 10320)));
+    el.innerHTML = '월 <b>' + h.toFixed(1) + '시간</b> · 월 <b>' + won(cost) + '</b> · 연 환산 <b>' + won(cost * 12) + '</b> <span style="color:#8A877E">(개선 후 0분인 ' + r.n + '건에 기존 시간의 ' + p + '%(최소 5분)를 검수 시간으로 가정)</span>';
+  }
+  function renderUsageBox() {
+    const el = $('#dbUsage'); if (!el) return;
+    const th = 'padding:8px 10px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8', td = 'padding:8px 10px;font-size:13px;border-bottom:1px solid #EEE';
+    const list = Object.keys(USAGE).map(function (k) { return USAGE[k]; }).filter(function (u) { return u.makes || u.good || u.fix; }).sort(function (a, b) { return (b.makes || 0) - (a.makes || 0); }).slice(0, 15);
+    el.innerHTML = '<div class="asset-table-wrap" style="overflow-x:auto;margin-top:14px"><div style="font-weight:800;padding:12px 14px 0">기능별 사용 현황 <span style="font-weight:400;color:#8A877E;font-size:12px">(프롬프트 만들기 횟수와 결과 평가)</span></div>'
+      + (list.length ? '<table class="asset-table" style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + '">기능</th><th style="' + th + '">분류</th><th style="' + th + '">만든 횟수</th><th style="' + th + '">만족</th><th style="' + th + '">수정 필요</th><th style="' + th + '">수정 필요 비율</th></tr></thead><tbody>'
+        + list.map(function (u) { const ev = (u.good || 0) + (u.fix || 0); return '<tr><td style="' + td + '"><b>' + esc(u.title) + '</b></td><td style="' + td + '">' + esc(u.category) + '</td><td style="' + td + '">' + (u.makes || 0) + '</td><td style="' + td + '">' + (u.good || 0) + '</td><td style="' + td + '">' + (u.fix || 0) + '</td><td style="' + td + '">' + (ev ? Math.round((u.fix || 0) / ev * 100) + '%' : '-') + '</td></tr>'; }).join('') + '</tbody></table>'
+        : '<div style="padding:14px;font-size:13px;color:#8A877E">아직 사용 기록이 없습니다. 프롬프트를 만들고 결과 평가를 누르면 이곳에 집계됩니다.</div>')
+      + '<div class="bp-hint" style="padding:0 14px 12px">사용 횟수는 이 사이트에서 "프롬프트 만들기"를 누른 횟수이며, 어사이드에서 실제로 실행했는지는 알 수 없습니다. 로그인 없이 기록되어 중복 클릭도 포함될 수 있습니다.</div></div>';
+  }
   function renderDashboard(d, fromCache) {
-    const t = d.totals || {}, c = d.counts || {}, rows = d.rows || [];
-    const kpi = (label, val, sub, color) => '<div style="background:#fff;border:1px solid #E5E2D8;border-top:4px solid ' + color + ';border-radius:12px;padding:16px 18px"><div style="font-size:12px;color:#8A877E">' + label + '</div><div style="font-size:26px;font-weight:900;margin:4px 0">' + val + '</div><div style="font-size:12px;color:#4A4740">' + (sub || '') + '</div></div>';
-    const small = (label, val) => '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:12px 16px"><div style="font-size:12px;color:#8A877E">' + label + '</div><div style="font-size:20px;font-weight:800">' + val + '</div></div>';
-    const prog = (label, r) => '<div style="margin:8px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><span>' + label + '</span><b>' + pct(r) + '</b></div><div style="background:#F0EEE6;border-radius:6px;height:12px;overflow:hidden"><div style="width:' + Math.min(100, (r || 0) * 100) + '%;height:100%;background:#C8922A"></div></div></div>';
+    DBLAST = d;
+    const t = d.totals || {}, c = d.counts || {}, rows = d.rows || [], g = d.goals || {}, wf = d.weekFactor || 4.3;
+    const kpi = function (label, val, sub, color) { return '<div style="background:#fff;border:1px solid #E5E2D8;border-top:4px solid ' + color + ';border-radius:12px;padding:16px 18px"><div style="font-size:12px;color:#8A877E">' + label + '</div><div style="font-size:26px;font-weight:900;margin:4px 0">' + val + '</div><div style="font-size:12px;color:#4A4740">' + (sub || '') + '</div></div>'; };
+    const small = function (label, val) { return '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:12px 16px"><div style="font-size:12px;color:#8A877E">' + label + '</div><div style="font-size:20px;font-weight:800">' + val + '</div></div>'; };
+    const prog = function (label, r, note) { return '<div style="margin:10px 0"><div style="display:flex;justify-content:space-between;font-size:13px"><span>' + label + '</span><b>' + pct(r) + '</b></div><div style="background:#F0EEE6;border-radius:6px;height:12px;overflow:hidden"><div style="width:' + Math.min(100, (r || 0) * 100) + '%;height:100%;background:#C8922A"></div></div><div class="bp-hint">' + note + '</div></div>'; };
     const byDept = {}, byMonth = {};
-    rows.forEach((r) => { byDept[r.dept || '미지정'] = (byDept[r.dept || '미지정'] || 0) + r.hours; byMonth[r.month || '미지정'] = (byMonth[r.month || '미지정'] || 0) + r.hours; });
-    const deptItems = Object.entries(byDept).sort((a, b) => b[1] - a[1]);
-    const monthItems = Object.entries(byMonth).sort((a, b) => (parseInt(a[0], 10) || 0) - (parseInt(b[0], 10) || 0));
-    const top = rows.slice().sort((a, b) => b.hours - a.hours).slice(0, 10);
+    rows.forEach(function (r) { byDept[r.dept || '미지정'] = (byDept[r.dept || '미지정'] || 0) + r.hours; byMonth[r.month || '미지정'] = (byMonth[r.month || '미지정'] || 0) + r.hours; });
+    const deptItems = Object.entries(byDept).sort(function (a, b) { return b[1] - a[1]; });
+    const monthItems = Object.entries(byMonth).sort(function (a, b) { return (parseInt(a[0], 10) || 0) - (parseInt(b[0], 10) || 0); });
+    const top = rows.slice().sort(function (a, b) { return b.hours - a.hours; }).slice(0, 10);
     const th = 'padding:8px 10px;text-align:left;background:#F8F6F0;font-size:12px;color:#4A4740;border-bottom:1px solid #E5E2D8';
     const td = 'padding:8px 10px;font-size:13px;border-bottom:1px solid #EEE;vertical-align:top';
+    const assume = [
+      '산식: 월 절감 시간 = (기존 소요시간 − 개선 후 소요시간) × 주간 실행 횟수 × ' + wf + '(주→월) ÷ 60. 월 절감 비용 = 월 절감 시간 × 최저시급 ' + won(d.wage) + '. 연 환산 = 월 절감 비용 × 12 (단순 환산이며 업무량 증감은 반영하지 않음).',
+      '근거: 소요시간은 실측이 아니라 작성자 입력 또는 AI 추정입니다(아래 표의 "근거" 열). 별도의 검증(실측) 절차는 아직 없으며 베타 기간 중 마련이 필요합니다.',
+      '개선 후 0분은 확인·검수 시간을 넣지 않은 값이라 과대 추정일 수 있습니다. 아래 "보수적 가정"에서 검수 시간을 반영한 값을 함께 보여줍니다.',
+      '건수: 누적 요청·완료·자산화 등재·기획 건수는 시트에서 모두 같은 수식(성과측정 시트의 과제 수)으로 계산되어 값이 같고, 진행 중은 0으로 고정되어 있습니다.',
+      '목표 진척률: 자산화 목표 = 자산화 건수 ÷ ' + (g.asset || '-') + '건, 기획 목표 = 기획 건수 ÷ ' + (g.plan || '-') + '건, TF 목표 = 시간 30% 이상 감소로 "달성" 표시된 과제 ÷ 전체 과제.',
+      '적용 월별 그래프는 자동화를 시작한 달 기준으로 합산한 값이며 월별 실제 절감 추이가 아닙니다. 그래서 달마다 값이 크게 다릅니다.',
+      '홈의 AI 자산 수(사이트 등록 전체)와 이 화면의 건수(성과측정 시트 기입분)는 기준이 달라 서로 다릅니다. 부서명은 성과측정 시트의 입력 목록(마케팅·병원기획·상품기획·디자인·공통·영업) 기준입니다.'
+    ];
     $('#dbBody').innerHTML =
-      '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:14px">'
-      + kpi('월 총 절감 시간', (t.hoursMonth || 0).toFixed(1) + '<span style="font-size:14px"> 시간</span>', '자동화 ' + (c.assets || rows.length) + '건 합산', '#1A7A68')
-      + kpi('월 총 절감 비용', won(t.costMonth), '최저시급 ' + won(d.wage) + ' 기준', '#C8922A')
-      + kpi('연 환산 절감 비용', won(t.costYear), '월 절감 비용 × 12', '#0C1B35') + '</div>'
+      '<div style="background:#FDF5E0;border:1px solid #F0D9A0;border-radius:12px;padding:14px 18px;margin-bottom:16px;font-size:13px;line-height:1.75"><div style="font-weight:800;margin-bottom:4px">산정 기준과 가정 (먼저 읽어 주세요)</div><ol style="margin:0;padding-left:18px">' + assume.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ol></div>'
+      + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:10px">'
+      + kpi('월 총 절감 시간 (시트 기준)', (t.hoursMonth || 0).toFixed(1) + '<span style="font-size:14px"> 시간</span>', '성과측정 시트 자동화 ' + (c.assets || rows.length) + '건 합산', '#1A7A68')
+      + kpi('월 총 절감 비용 (시트 기준)', won(t.costMonth), '최저시급 ' + won(d.wage) + ' 기준', '#C8922A')
+      + kpi('연 환산 절감 비용 (시트 기준)', won(t.costYear), '월 절감 비용 × 12 (단순 환산)', '#0C1B35') + '</div>'
+      + '<div style="background:#fff;border:1px dashed #C8922A;border-radius:12px;padding:12px 16px;margin-bottom:14px;font-size:13px"><div style="font-weight:800;margin-bottom:4px">보수적 가정 (검수 시간 반영) <span style="font-weight:400;color:#8A877E">검수 시간 비율 <input type="number" id="dbReview" value="10" min="0" max="100" style="width:64px;padding:2px 6px"> %</span></div><div id="dbCons"></div></div>'
       + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px">'
       + small('누적 요청 건수', (c.requested || 0) + '건') + small('완료 건수', (c.done || 0) + '건') + small('진행 중', (c.progress || 0) + '건') + small('자산화 등재', (c.assets || 0) + '건') + small('생산성 향상 기획', (c.planned || 0) + '건') + '</div>'
-      + '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px;margin-bottom:14px"><div style="font-weight:800;margin-bottom:4px">목표 진척률</div>' + prog('TF 목표', c.tfRate) + prog('자산화 목표', t.assetRate) + prog('기획 목표', t.planRate) + '</div>'
+      + '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px;margin-bottom:14px"><div style="font-weight:800;margin-bottom:4px">목표 진척률</div>'
+      + prog('TF 목표', c.tfRate, '시간 30% 이상 감소 "달성" 과제 ÷ 전체 과제') + prog('자산화 목표', t.assetRate, '자산화 건수 ÷ 목표 ' + (g.asset || '-') + '건') + prog('기획 목표', t.planRate, '기획 건수 ÷ 목표 ' + (g.plan || '-') + '건') + '</div>'
       + '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-bottom:14px">'
       + '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px"><div style="font-weight:800;margin-bottom:6px">부서별 월 절감 시간</div>' + barRows(deptItems, '시간') + '</div>'
-      + '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px"><div style="font-weight:800;margin-bottom:6px">적용 월별 월 절감 시간</div>' + barRows(monthItems, '시간') + '</div></div>'
-      + '<div class="asset-table-wrap" style="overflow-x:auto"><div style="font-weight:800;padding:12px 14px 0">절감 TOP 10 자동화</div><table class="asset-table" style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + '">순위</th><th style="' + th + '">자동화</th><th style="' + th + '">부서</th><th style="' + th + '">기존→개선(분)</th><th style="' + th + '">주간 횟수</th><th style="' + th + '">월 절감 시간</th><th style="' + th + '">월 절감 비용</th></tr></thead><tbody>'
-      + top.map((r, i) => '<tr><td style="' + td + '">' + (i + 1) + '</td><td style="' + td + '"><b>' + esc(r.name) + '</b><div style="color:#8A877E;font-size:12px">' + esc(r.content) + '</div></td><td style="' + td + '">' + esc(r.dept) + '</td><td style="' + td + '">' + r.before + ' → ' + r.after + '</td><td style="' + td + '">' + r.weekly + '</td><td style="' + td + '"><b>' + r.hours.toFixed(1) + '시간</b></td><td style="' + td + '">' + won(r.cost) + '</td></tr>').join('')
+      + '<div style="background:#fff;border:1px solid #E5E2D8;border-radius:12px;padding:14px 18px"><div style="font-weight:800;margin-bottom:2px">자동화 시작 월별 월 절감 시간</div><div class="bp-hint" style="margin:0 0 6px">시작한 달 기준 합계이며 월별 실제 추이가 아닙니다.</div>' + barRows(monthItems, '시간') + '</div></div>'
+      + '<div class="asset-table-wrap" style="overflow-x:auto"><div style="font-weight:800;padding:12px 14px 0">절감 TOP 10 자동화</div><table class="asset-table" style="width:100%;border-collapse:collapse"><thead><tr><th style="' + th + '">순위</th><th style="' + th + '">자동화</th><th style="' + th + '">부서</th><th style="' + th + '">기존→개선(분)</th><th style="' + th + '">주간 횟수</th><th style="' + th + '">월 절감 시간</th><th style="' + th + '">월 절감 비용</th><th style="' + th + '">근거</th></tr></thead><tbody>'
+      + top.map(function (r, i) { return '<tr><td style="' + td + '">' + (i + 1) + '</td><td style="' + td + '"><b>' + esc(r.name) + '</b><div style="color:#8A877E;font-size:12px">' + esc(r.content) + '</div></td><td style="' + td + '">' + esc(r.dept) + '</td><td style="' + td + '">' + r.before + ' → ' + r.after + (r.after === 0 ? '<div style="font-size:11px;color:#B4530A">검수 시간 미반영</div>' : '') + '</td><td style="' + td + '">' + r.weekly + '</td><td style="' + td + '"><b>' + r.hours.toFixed(1) + '시간</b></td><td style="' + td + '">' + won(r.cost) + '</td><td style="' + td + '"><span class="status-badge">' + esc(r.basis || '작성자 입력') + '</span><div style="font-size:11px;color:#8A877E">미검증</div></td></tr>'; }).join('')
       + '</tbody></table></div>'
-      + '<p style="font-size:12px;color:#8A877E;margin-top:10px">산식: (기존 소요시간 − 개선 후 소요시간) × 주간 실행 횟수 × ' + d.weekFactor + '(주→월) ÷ 60 = 월 절감 시간, × 최저시급 = 월 절감 비용. 집계 기준 ' + esc(d.updated || '') + '</p>';
+      + '<div id="dbUsage"></div>'
+      + '<p style="font-size:12px;color:#8A877E;margin-top:10px">집계 기준 ' + esc(d.updated || '') + '</p>';
+    const inp = $('#dbReview'); if (inp) inp.addEventListener('input', updateCons);
+    updateCons(); renderUsageBox();
     const st = $('#dbStatus'); st.className = 'sheet-status ' + (fromCache ? 'local' : 'connected');
     st.textContent = fromCache ? '저장된 마지막 데이터 (연결 실패)' : '성과측정 시트와 연동됨 · ' + (d.updated || '');
   }
   function loadDashboard() {
     if (!GAS_OK()) { $('#dbStatus').textContent = '시트 연동 필요(SHEET_ENDPOINT)'; return Promise.resolve(); }
     return fetch(SHEET_ENDPOINT + '?type=dashboard').then((r) => r.json()).then((d) => {
-      if (d && d.ok) { store.set(KEY_DB, d); renderDashboard(d, false); } else throw new Error('bad');
+      if (d && d.ok) { store.set(KEY_DB, d); renderDashboard(d, false); loadUsage().then(renderUsageBox); } else throw new Error('bad');
     }).catch(() => { const c = store.get(KEY_DB, null); if (c) renderDashboard(c, true); else $('#dbStatus').textContent = '데이터를 불러오지 못했습니다.'; });
   }
   function startDashboard() { stopDashboard(); loadDashboard(); dbTimer = setInterval(loadDashboard, 60000); }
@@ -3831,7 +3906,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function fileZoneHTML(f) {
     return '<input type="file" multiple hidden data-fileinput="' + f.key + '" accept="' + FILE_ACCEPT + '">'
-      + '<div class="file-zone" data-filezone="' + f.key + '" tabindex="0" role="button" aria-label="' + esc(f.label) + ' 파일 첨부"><span class="fz-icon">📎</span><span>파일을 끌어다 놓거나 <b>클릭해서 선택</b> (여러 개 가능)</span><small>이미지·PDF·워드·엑셀·PPT·한글·CSV·텍스트 · 파일은 업로드되지 않고 파일명만 프롬프트에 들어갑니다. 파일은 어사이드 대화창에 함께 첨부하세요.</small></div>'
+      + '<div class="file-zone" data-filezone="' + f.key + '" tabindex="0" role="button" aria-label="' + esc(f.label) + ' 파일 첨부"><span class="fz-icon">📎</span><span>파일을 끌어다 놓거나 <b>클릭해서 선택</b> (여러 개 가능)</span><small>이미지·PDF·워드·엑셀·PPT·한글·CSV·텍스트</small><small class="fz-warn">⚠ 선택한 파일은 사이트에 올라가지 않고 파일명만 프롬프트에 들어갑니다. 프롬프트를 붙여넣을 때 어사이드 대화창에 파일을 직접 첨부해야 합니다.</small></div>'
       + '<div class="file-chips" data-filechips="' + f.key + '">' + chipsHTML(f.key) + '</div>';
   }
   function addFiles(key, fileList) {
@@ -3915,8 +3990,10 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const text = L.join('\n');
     $('#bpOut').value = text;
     $('#bpResult').style.display = 'block';
+    const bpCard = { id: 'basic', title: '기본 프롬프트', category: '기본' };
+    logUsage('make', bpCard); renderResultCheck($('#bpCheck'), bpCard);
     const files = BP.files.map(function (f) { return esc(f.name); });
-    $('#bpGuide').innerHTML = '<b>어사이드로 보내는 방법</b> ① 어사이드를 먼저 열어 둡니다 &nbsp;② 어사이드 입력창을 클릭하고 <kbd>Ctrl</kbd>+<kbd>V</kbd> (Mac은 <kbd>⌘</kbd>+<kbd>V</kbd>) &nbsp;③ <kbd>Enter</kbd> <span id="bpCopyState" style="font-weight:700;color:#1A7A68"></span>'
+    $('#bpGuide').innerHTML = '<b>어사이드로 보내는 방법</b> ① 어사이드를 먼저 열어 둡니다 &nbsp;② 어사이드 입력창을 클릭하고 <kbd>Ctrl</kbd>+<kbd>V</kbd> (Mac은 <kbd>⌘</kbd>+<kbd>V</kbd>) &nbsp;③ <kbd>Enter</kbd> (파일이 있으면 어사이드 대화창에 직접 첨부) <span id="bpCopyState" style="font-weight:700;color:#1A7A68"></span>'
       + (files.length ? '<br>📎 <b>어사이드 대화창에 아래 파일 ' + files.length + '개를 함께 첨부하세요.</b> ' + files.join(' · ') : '');
     if (store.get('lo_autocopy_v1', true)) {
       copyText(text).then(function () { const s = $('#bpCopyState'); if (s) s.textContent = '✓ 복사됨 — 어사이드 입력창에 붙여넣으세요'; toast('프롬프트를 복사했습니다.', 'success'); }).catch(function () {});
@@ -4028,7 +4105,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     el.textContent = vs.length ? '입력 항목으로 인식된 변수: ' + vs.map(function (x) { return '[' + x + ']'; }).join(' ') + ' — 기능을 쓸 때 이 항목들이 입력칸이 됩니다.' : '[대괄호] 변수가 없어 "추가 요청사항" 입력칸만 만들어집니다. (변수가 있으면 입력칸으로 자동 변환)';
   }
   function mnReset() {
-    ['#mnText', '#mnName', '#mnContent', '#mnAssignee', '#mnBefore', '#mnAfter', '#mnWeekly', '#mnSchedule', '#mnLink'].forEach(function (id) { $(id).value = ''; });
+    ['#mnText', '#mnName', '#mnContent', '#mnSample', '#mnAssignee', '#mnBefore', '#mnAfter', '#mnWeekly', '#mnSchedule', '#mnLink'].forEach(function (id) { $(id).value = ''; });
     $('#mnType').value = '기타'; $('#mnDept').value = ''; $('#mnAuto').checked = false; $('#mnFeature').checked = true; $('#mnCat').dataset.touched = ''; mnUpdateVars(); $('#mnAutoBox').style.display = 'none';
     $$('#page-manual .has-error').forEach(function (e) { e.classList.remove('has-error'); });
   }
@@ -4053,6 +4130,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       no: nextAssetNo(), name: g('#mnName'), content: g('#mnContent'), type: $('#mnType').value, dept: $('#mnDept').value, assignee: who,
       auto: isAuto, autoSchedule: isAuto ? g('#mnSchedule') : '',
       before: isAuto ? g('#mnBefore') : '', after: isAuto ? g('#mnAfter') : '', weekly: isAuto ? g('#mnWeekly') : '', link: isAuto ? g('#mnLink') : '',
+      sample: g('#mnSample'), status: '테스트 중',
       cardId: '', savedFields: { source: 'manual', manualPrompt: text, skills: mnPick(text, '사용한 스킬·도구'), asFeature: $('#mnFeature').checked, category: $('#mnCat').value, vars: cpVars(cpSection(text)) }
     };
     assets.push(a); persistAssets(); syncToSheet('add', a);
@@ -4062,8 +4140,17 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function viewAssetPrompt(no) {
     const a = assets.find(function (x) { return x.no === no; });
-    if (!a || !a.savedFields || !a.savedFields.manualPrompt) return;
-    $('#pvTitle').textContent = a.no + ' ' + a.name; $('#pvText').value = a.savedFields.manualPrompt; $('#pvModal').classList.add('open');
+    if (!a) return;
+    let text = '', note = '';
+    if (a.savedFields && a.savedFields.manualPrompt) { text = a.savedFields.manualPrompt; }
+    else if (a.cardId && cardById(a.cardId)) {
+      const card = cardById(a.cardId), v = Object.assign({}, a.savedFields || {});
+      delete v.assignee;
+      try { text = typeof card.promptTemplate === 'function' ? card.promptTemplate(v) : commonPrompt(card, v); } catch (err) { text = ''; }
+      note = a.savedFields ? ' (등록 당시 입력값 기준)' : ' (연결 기능의 표준 양식 · 입력값 미저장)';
+    }
+    if (!text) { toast('보여줄 프롬프트가 없습니다.', 'error'); return; }
+    $('#pvTitle').textContent = a.no + ' ' + a.name + note; $('#pvText').value = text; $('#pvModal').classList.add('open');
   }
   function bindManual() {
     $('#mnAsk').value = "방금 진행한 업무를 다른 직원이 처음부터 똑같이 재현할 수 있도록 정리해줘. 아래 형식 그대로 한 번에 출력해줘.\n\n[자산명] 업무를 20자 내외로\n[유형] FLOW / 구글챗 / 시트 / Gmail / 교육자료 / 기타 중 하나\n[내용] 이 업무가 무엇이고 어디에 쓰는지 한두 문장\n[사용한 스킬·도구] 사용한 어사이드 스킬, 웹사이트, 구글 앱, 진행 순서\n[프롬프트] 새 대화에 그대로 붙여넣으면 같은 결과가 나오는 자기완결형 프롬프트 (목적, 진행 경로 단계별, 첨부자료 종류, 레퍼런스, 결과물 형식, 주의사항 포함. 이번에 쓴 구체적 값(상품명·날짜·링크 등)은 [대괄호]로 바꿔서 재사용할 수 있게)\n\n조건: 담당자 이름, 원가·급여·계약·협상 금액, 개인정보는 넣지 말 것. 사실만 쓰고 모르는 값은 \"확인 필요\"로 표기.";
@@ -4083,7 +4170,75 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#pvModal').addEventListener('click', function (e) { if (e.target.id === 'pvModal') $('#pvModal').classList.remove('open'); });
     $('#pvCopy').addEventListener('click', function () { copyText($('#pvText').value).then(function () { toast('프롬프트를 복사했습니다.', 'success'); }); });
   }
+
+  /* ── 19. 사용 기록 · 결과물 확인 · 자산 보조 ─────────────── */
+  let USAGE = {};
+  (store.get('lo_usage_v1', []) || []).forEach(function (u) { USAGE[u.cardId] = u; });
+  function loadUsage() {
+    if (!GAS_OK()) return Promise.resolve();
+    return fetch(SHEET_ENDPOINT + '?type=usage').then(function (r) { return r.json(); }).then(function (j) {
+      if (j && j.ok) { USAGE = {}; j.usage.forEach(function (u) { USAGE[u.cardId] = u; }); store.set('lo_usage_v1', j.usage); }
+    }).catch(function () {});
+  }
+  function logUsage(ev, card, memo) {
+    postGas({ action: 'usage', usage: { cardId: card.id, title: card.title, category: card.category, event: ev, memo: memo || '' } });
+    const u = USAGE[card.id] || (USAGE[card.id] = { cardId: card.id, title: card.title, category: card.category, makes: 0, good: 0, fix: 0 });
+    if (ev === 'make') u.makes++; else if (ev === 'good') u.good++; else if (ev === 'fix') u.fix++;
+  }
+  function rcItems(cat) {
+    const items = ['결과에 사실과 다른 내용이 없다 (수치·고유명사를 원본과 대조)', '근거 없는 수치나 단정 표현이 없다', '원가·급여·계약·협상 금액과 개인정보가 들어 있지 않다', '요청한 결과물 형식·저장 위치와 맞다', '"확인 필요"로 표시된 항목을 해결했다'];
+    if (['상품기획', '마케팅', '디자인', '영업·MD', '채널·정산', '패키지·인허가'].indexOf(cat) >= 0) items.push('타사 브랜드명·비교 표기가 없다', '효능·효과·광고 표현을 담당자가 최종 확인했다');
+    if (cat === '패키지·인허가') items.push('법령·표시사항 근거를 원문으로 확인했다');
+    if (cat === '메일·소통') items.push('수신처·첨부·어조를 확인했고 발송은 직접 한다');
+    if (cat === '데이터·알림') items.push('원본 데이터와 샘플 몇 건을 직접 대조했다');
+    if (cat === '디자인') items.push('이미지 안 글자·수치 오탈자를 확인했다', '이미지 저작권·초상 사용 가능 여부를 확인했다');
+    return items;
+  }
+  function renderResultCheck(el, card) {
+    if (!el) return;
+    el._card = card;
+    el.innerHTML = '<div class="rc-box"><div style="font-weight:800;margin-bottom:6px">결과물 확인 체크리스트 <span style="font-weight:400;color:#8A877E;font-size:12px">(어사이드 결과를 받은 뒤 확인하세요 · 참고용)</span></div>'
+      + rcItems(card.category).map(function (t) { return '<label><input type="checkbox"> <span>' + esc(t) + '</span></label>'; }).join('')
+      + '<div style="margin-top:12px;font-weight:700">이번 결과는 어땠나요?</div>'
+      + '<div data-rcact style="margin-top:6px"><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" class="btn-gold" data-rc="good">👍 만족</button><button type="button" class="btn-secondary" data-rc="fix">🛠 수정 필요</button></div>'
+      + '<div data-rcfix style="display:none;margin-top:8px"><textarea class="form-control" rows="2" data-rcmemo placeholder="어떤 점이 부족했나요? (개인정보·금액은 적지 마세요)"></textarea><button type="button" class="btn-secondary" data-rc="send" style="margin-top:6px">보내기</button></div></div>'
+      + '<div class="bp-hint">평가는 기능 개선과 사용 현황 집계에만 쓰이며 이름은 기록되지 않습니다. 같은 결과로 여러 번 누르지 않도록 한 번만 기록됩니다.</div></div>';
+  }
+  function bindResultCheck() {
+    document.addEventListener('click', function (e) {
+      const b = e.target.closest('[data-rc]'); if (!b) return;
+      const box = b.closest('[data-rcbox]'); if (!box || !box._card) return;
+      const act = box.querySelector('[data-rcact]');
+      const done = function () { act.innerHTML = '<div style="color:#1A7A68;font-weight:700">✓ 기록되었습니다. 감사합니다.</div>'; };
+      if (b.dataset.rc === 'good') { logUsage('good', box._card); done(); }
+      else if (b.dataset.rc === 'fix') { box.querySelector('[data-rcfix]').style.display = 'block'; }
+      else if (b.dataset.rc === 'send') { logUsage('fix', box._card, (box.querySelector('[data-rcmemo]').value || '').trim()); done(); }
+    });
+  }
+  function samplePanelHTML(card) {
+    const list = assets.filter(function (a) { return a.sample && /^https?:/.test(a.sample) && (a.cardId === card.id || ('u-' + a.no) === card.id); })
+      .sort(function (x, y) { return (y.status === '검증됨' ? 1 : 0) - (x.status === '검증됨' ? 1 : 0); });
+    if (!list.length) return '<div class="bp-hint" style="margin-bottom:12px">📎 이 기능의 "잘 된 결과물 샘플"은 아직 없습니다. 결과가 좋았다면 자산 등록 때 샘플 링크를 남겨 주세요.</div>';
+    return '<div class="rc-box" style="margin:0 0 14px"><div style="font-weight:800;margin-bottom:4px">✅ 잘 된 결과물 샘플 <span style="font-weight:400;color:#8A877E;font-size:12px">(레퍼런스로 활용하세요)</span></div>'
+      + list.map(function (a) { return '<div style="font-size:13px;padding:2px 0"><a href="' + esc(a.sample) + '" target="_blank" rel="noopener noreferrer">' + esc(a.name) + '</a> <span class="status-badge' + (a.status === '검증됨' ? ' ok' : '') + '">' + esc(a.status || '테스트 중') + '</span></div>'; }).join('') + '</div>';
+  }
+  function normDept(d) {
+    d = String(d || '').trim(); if (!d) return '미지정';
+    d = d.replace(/팀$/, '');
+    if (d === '전사') return '공통';
+    if (d === '상품개발') return '상품기획';
+    return d;
+  }
+  function setOwner(no) {
+    const a = assets.find(function (x) { return x.no === no; }); if (!a || a.assignee) return;
+    const name = (prompt('담당자(문의 대상) 이름을 입력해 주세요.\n프롬프트 본문에는 저장되지 않고 자산 목록에만 표시됩니다.') || '').trim();
+    if (!name) return;
+    a.assignee = name; persistAssets(); renderAssets(); postGas({ action: 'asset_update', asset: { no: a.no, assignee: name } });
+    toast('담당자를 지정했습니다.', 'success');
+  }
   function bindExtra() {
+    bindResultCheck();
+    loadUsage().then(function () { renderFunctions(); });
     bindManual();
     bindBasic();
     bindFiles();
@@ -4111,7 +4266,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     renderStep1();
     bind();
     setStep(1);
-    go(location.hash.slice(1) || 'precheck');
+    go(location.hash.slice(1) || 'home');
     bindExtra();
     loadRemoteAssets();
   }
