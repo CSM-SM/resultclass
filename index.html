@@ -1798,7 +1798,7 @@ input, textarea, select { font-size: 14px; }
       <a class="nav-item" href="#setup" data-page="setup"><span class="nav-icon">🧭</span>어사이드 초기 세팅</a>
       <a class="nav-item" href="#quick" data-page="quick"><span class="nav-icon">⚡</span>간단 사용법</a><a class="nav-item" href="#precheck" data-page="precheck"><span class="nav-icon">✅</span>업무 시작 전 확인사항</a><a class="nav-item" href="#guide" data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a></div></div>
       <div class="nav-group"><span class="nav-group-label">업무 도구</span><div class="nav-drop"><a class="nav-item" href="#basic" data-page="basic"><span class="nav-icon">📝</span>기본 프롬프트</a><a class="nav-item" href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a><a class="nav-item" href="#refs" data-page="refs"><span class="nav-icon">📚</span>레퍼런스 참고하기</a></div></div>
-      <div class="nav-group"><span class="nav-group-label">자산</span><div class="nav-drop"><a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>팀별 AI 자산</a><a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>수동 자산화</a></div></div>
+      <div class="nav-group"><span class="nav-group-label">자산</span><div class="nav-drop"><a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>팀별 AI 자산</a><a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>팀별 AI 자산 등록</a></div></div>
       <div class="nav-group"><span class="nav-group-label">현황</span><div class="nav-drop"><a class="nav-item" href="#dashboard" data-page="dashboard"><span class="nav-icon">📊</span>절감 대시보드</a></div></div>
       <div class="nav-group"><span class="nav-group-label">소통</span><div class="nav-drop"><a class="nav-item" href="#requests" data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a><a class="nav-item" href="#notice" data-page="notice"><span class="nav-icon">📢</span>공지</a></div></div>
     <div class="nav-group nav-group-as"><span class="nav-group-label">AS</span><div class="nav-drop"><a class="nav-item" href="#as" data-page="as"><span class="nav-icon">🛠️</span>AS (고장·오류 시)</a></div></div>
@@ -2062,8 +2062,8 @@ input, textarea, select { font-size: 14px; }
       
       <!-- ═══ 수동 자산화 ═══ -->
       <section class="page" id="page-manual">
-        <h2 class="section-title">수동 자산화</h2>
-        <p class="section-sub">홈페이지를 거치지 않고 어사이드에서 바로 작업했다면, 어사이드가 정리해 준 프롬프트를 여기에 붙여넣어 AI 자산으로 등록하세요.</p>
+        <h2 class="section-title">팀별 AI 자산 등록</h2>
+        <p class="section-sub">어사이드에서 한 작업을 우리 팀의 자산으로 등록하세요. 어사이드가 정리해 준 프롬프트를 붙여넣으면 <b>업무기능과 팀별 AI 자산에 자동으로 올라가고</b>, 다른 팀원이 바로 쓰거나 인수인계 받을 수 있습니다.</p>
         <div class="bp-card" style="margin-bottom:16px">
           <div style="font-weight:800;margin-bottom:6px">① 작업이 끝난 직후, 어사이드에 이렇게 요청하세요</div>
           <textarea id="mnAsk" readonly rows="11" style="width:100%;border:1px solid #E6E8EB;border-radius:8px;padding:10px 12px;font-family:inherit;font-size:13px;line-height:1.6;background:#FAFBFB"></textarea>
@@ -2077,7 +2077,7 @@ input, textarea, select { font-size: 14px; }
           <div class="asset-form-grid">
             <div class="form-group full" data-mn="name"><label class="form-label" for="mnName">자산명 <span class="req">*</span></label><input class="form-control" id="mnName" type="text"><div class="error-msg">필수 항목입니다.</div></div>
             <div class="form-group"><label class="form-label" for="mnType">유형</label><select class="form-control" id="mnType"><option>FLOW</option><option>구글챗</option><option>Gmail</option><option>시트</option><option>교육자료</option><option selected>기타</option></select></div>
-            <div class="form-group" data-mn="dept"><label class="form-label" for="mnDept">부서 <span class="req">*</span></label><select class="form-control" id="mnDept"><option value="">선택</option><option>공통</option><option>마케팅</option><option>상품기획</option><option>병원기획</option><option>영업</option><option>디자인</option><option>해외영업</option></select><div class="error-msg">필수 항목입니다.</div></div>
+            <div class="form-group" data-mn="dept"><label class="form-label" for="mnDept">부서 <span class="req">*</span></label><select class="form-control" id="mnDept"><option value="">선택</option><option>공통</option><option>마케팅</option><option>상품기획</option><option>병원기획</option><option>영업</option><option>디자인</option><option>해외영업</option></select><div class="bp-hint" id="mnTeamHint">부서를 고르면 등록될 팀이 표시됩니다.</div><div class="error-msg">필수 항목입니다.</div></div>
             <div class="form-group" data-mn="assignee"><label class="form-label" for="mnAssignee">담당자 이름 <span class="req">*</span></label><input class="form-control" id="mnAssignee" type="text" placeholder="예: 최성민"><div class="bp-hint">자산 목록에만 표시되고 프롬프트 본문에는 저장되지 않습니다.</div><div class="error-msg">필수 항목입니다.</div></div>
             <div class="form-group full"><label class="form-label" for="mnSample">샘플 결과물 링크 (선택)</label><input class="form-control" id="mnSample" type="text" placeholder="이 프롬프트로 만든 잘 된 결과물 링크"></div>
             <div class="form-group full"><label class="form-label" for="mnContent">내용 요약</label><textarea class="form-control" id="mnContent" rows="2"></textarea></div>
@@ -2094,7 +2094,8 @@ input, textarea, select { font-size: 14px; }
               <div class="bp-hint">자동화를 켠 자산만 성과측정 시트에 기입됩니다. 시트 목록에 없는 부서·담당자는 "공통"으로 기입되고 비고에 표시됩니다.</div>
             </div></div>
           <div class="form-group" style="background:#E0F5F0;border:1px solid #BFE5DC;border-radius:10px;padding:12px 14px">
-            <label style="cursor:pointer;font-weight:700"><input type="checkbox" id="mnFeature" checked> 업무기능에도 자동 추가 (다른 직원이 이 프롬프트를 기능으로 바로 쓸 수 있습니다)</label>
+            <div style="font-weight:700"><input type="checkbox" id="mnFeature" checked style="display:none">등록하면 업무기능과 팀별 AI 자산에 자동으로 올라갑니다</div>
+            <div class="bp-hint">다른 직원이 이 프롬프트를 기능으로 바로 쓸 수 있고, 위에서 고른 부서에 따라 해당 팀 목록에 표시됩니다.</div>
             <div id="mnFeatBox" style="margin-top:8px"><label class="form-label" for="mnCat">기능 분류</label><select class="form-control" id="mnCat"></select>
               <div class="bp-hint" id="mnVars">프롬프트를 붙여넣으면 [대괄호] 변수가 입력 항목으로 인식됩니다.</div></div></div>
           <div class="form-group" style="background:#F6F7F8;border-radius:12px;padding:14px 16px">
@@ -3616,10 +3617,11 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   };
 
   const NOTICES = [
+    { date: '2026-10-26', pin: false, title: '[수동 자산화]가 [팀별 AI 자산 등록]으로 바뀌었습니다', meta: '업데이트', body: '이름을 [팀별 AI 자산 등록]으로 바꿨습니다. 어사이드에서 한 작업의 프롬프트를 붙여넣고 부서를 고르면, 업무기능과 팀별 AI 자산에 자동으로 올라갑니다. 정기 자동화로 운영 중이면 체크하고 소요시간을 넣어 주세요.' },
     { date: '2026-10-26', pin: false, title: 'AI 자산과 자동화 리스트를 [팀별 AI 자산]으로 통합', meta: '업데이트', body: 'AI 자산과 자동화 리스트를 하나로 합쳐 [팀별 AI 자산]으로 바꿨습니다. 마케팅팀·영업팀·개발팀·해외영업팀·디자인팀·공용으로 나뉘며, 등록 때 고른 부서에 따라 자동으로 올라가고 1분마다 새로 불러옵니다. 각 자산에는 자동화/수동 구분만 표시하고 상태(테스트 중) 열은 없앴습니다. 최근 등록한 자산(번호가 큰 순)이 위에 보입니다.' },
     { date: '2026-10-26', pin: false, title: '어사이드 초기 세팅 가이드 메뉴 추가', meta: '업데이트', body: '[시작하기] 아래에 [어사이드 초기 세팅]이 생겼습니다. 영문으로 된 어사이드 설정(Settings) 메뉴를 한글로 풀어, 메뉴를 클릭하면 설정 경로와 할 수 있는 일을 확인할 수 있습니다. 처음 설정 순서도 함께 안내합니다.' },
     { date: '2026-10-26', pin: false, title: 'AS 메뉴 추가와 동시 작업 안내', meta: '업데이트', body: '왼쪽 메뉴 맨 아래에 [AS (고장·오류 시)]가 생겼습니다. 어사이드가 멈추면 컴퓨터를 재부팅하고, 계속 오류가 나면 최성민 과장에게 문의해 주세요. 어사이드 작업은 동시에 권장 2개, 최대 3개까지만 진행합니다.' },
-    { date: '2026-10-26', pin: false, title: '스킬 파일 등록(선택)과 자동 추천 추가', meta: '업데이트', body: '[레퍼런스 참고하기]의 "스킬 파일" 탭과 [수동 자산화]에서 스킬 파일(SKILL.md 등)을 선택 등록할 수 있습니다. 등록해 두면 업무기능·기본 프롬프트에서 업무에 맞는 스킬 파일이 자동으로 추천되고, 체크한 파일이 프롬프트에 들어가 어사이드가 먼저 읽고 따릅니다.' },
+    { date: '2026-10-26', pin: false, title: '스킬 파일 등록(선택)과 자동 추천 추가', meta: '업데이트', body: '[레퍼런스 참고하기]의 "스킬 파일" 탭과 [팀별 AI 자산 등록]에서 스킬 파일(SKILL.md 등)을 선택 등록할 수 있습니다. 등록해 두면 업무기능·기본 프롬프트에서 업무에 맞는 스킬 파일이 자동으로 추천되고, 체크한 파일이 프롬프트에 들어가 어사이드가 먼저 읽고 따릅니다.' },
     { date: '2026-10-26', pin: false, title: '레퍼런스 참고하기 메뉴 추가', meta: '업데이트', body: '구글 드라이브의 잘 된 문서를 기능별로 모은 [레퍼런스 참고하기] 메뉴가 생겼습니다. 업무기능에서 프롬프트를 만들 때 해당 기능의 추천 레퍼런스가 표시되고, 선택한 문서가 프롬프트에 들어갑니다. 좋은 문서는 직접 등록할 수 있습니다.' },
     { date: '2026-10-26', pin: true, title: '베타 테스트 안내', meta: '운영', body: '이 사이트는 초기 버전으로 베타 운영 중입니다. 입력 항목, 결과물 체크리스트, 대시보드 수치 기준은 사용 의견을 받아 보완합니다. 불편한 점과 필요한 기능은 [기능 추가 요청]에 남겨 주세요.' },
     { date: '2026-10-22', pin: true, title: '어사이드 사용량 안내', meta: '운영', body: '전사 어사이드 사용이 늘면서 공유 Claude 계정 사용량이 빠르게 늘고 있습니다. 업무 시작 전 확인사항에서 모델 설정을 확인하고, 이미지 생성은 어사이드 대신 Gemini 새 탭을 활용해 주세요.' },
@@ -3632,7 +3634,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '수동 자산화', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page) {
     if (page === 'automations') page = 'assets';
@@ -4708,7 +4710,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     fields.push({ key: 'cpRefs', label: '첨부·참고 (URL·파일)', type: 'url-list', placeholder: 'https://...', required: false });
     return {
       id: 'u-' + a.no, category: sf.category || '업무관리', icon: CP_ICON[a.type] || '🧰', title: a.name,
-      desc: (a.content || '수동 자산화로 등록된 프롬프트') + ' (등록: ' + (a.dept || '') + ')',
+      desc: (a.content || '팀별 AI 자산으로 등록된 프롬프트') + ' (등록: ' + (a.dept || '') + ')',
       frequency: '신규', priority: false, custom: true, noCommon: true, defaultFormat: '', fields: fields,
       promptTemplate: function (v) {
         let t = base;
@@ -5290,6 +5292,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     return Promise.all([d, loadRemoteAssets()]).then(renderAssets, renderAssets);
   }
   function bindAutomations() {
+    const mdp = $('#mnDept');
+    if (mdp) { const upTeam = function () { const d = String(mdp.value || '').replace(/\s/g, '').replace(/팀$/, ''); const h = $('#mnTeamHint'); if (!h) return; h.textContent = !d ? '부서를 고르면 등록될 팀이 표시됩니다.' : (AU_TEAM_OF[d] ? '→ ' + AU_TEAM_OF[d] + ' AI 자산과 업무기능에 등록됩니다.' : '→ 팀 미지정으로 표시됩니다. (업무기능에는 등록됩니다)'); }; mdp.addEventListener('change', upTeam); upTeam(); }
     const pg = $('#page-assets'); if (!pg) return;
     pg.addEventListener('click', function (e) {
       const tm = e.target.closest('[data-auteam]'), t = e.target.closest('[data-autype]'), k = e.target.closest('[data-aukind]'), n = e.target.closest('[data-aunew]');
