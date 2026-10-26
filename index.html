@@ -1677,6 +1677,11 @@ input, textarea, select { font-size: 14px; }
 .start-step code, .gd-callout code, .gd-p code { background: #fff; border: 1px solid #E6E8EB; border-radius: 6px; padding: 1px 6px; font-size: 12.5px; color: #0E5A4C; }
 
 .start-step b:not(:first-child) { display: inline; font-size: inherit; margin: 0; color: #1b1b1b; letter-spacing: 0; }
+
+/* 스킬 파일 */
+.ref-tabs { display: flex; gap: 8px; margin-bottom: 18px; flex-wrap: wrap; }
+.ref-tab-btn { padding: 10px 20px; font-size: 14.5px; }
+
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -1917,7 +1922,7 @@ input, textarea, select { font-size: 14px; }
             <textarea class="form-control" id="bpUrls" rows="2" style="margin-top:8px" placeholder="구글 문서·시트·드라이브 폴더, FLOW 티켓, 웹 주소 (한 줄에 하나)"></textarea></div>
           <div class="form-group"><label class="form-label" for="bpRefs">레퍼런스 (선택)</label>
             <textarea class="form-control" id="bpRefs" rows="2" placeholder="잘 된 결과물, 벤치마킹할 사례의 링크나 설명"></textarea>
-            <div class="bp-hint">💡 잘 만들어진 레퍼런스나 벤치마킹하고 싶은 결과물을 넣을수록 결과물이 훨씬 좋아집니다. 좋은 예시 1~3개를 권장합니다.</div><div id="bpRefPanel"></div></div>
+            <div class="bp-hint">💡 잘 만들어진 레퍼런스나 벤치마킹하고 싶은 결과물을 넣을수록 결과물이 훨씬 좋아집니다. 좋은 예시 1~3개를 권장합니다.</div><div id="bpRefPanel"></div><div id="bpSkillPanel"></div></div>
           <div class="form-group" data-bp="format"><label class="form-label">결과물 형식 (추출) <span class="req">*</span> <span style="font-weight:400;color:#8B9096">여러 개 선택 가능</span></label>
             <div class="attach-tags" id="bpFormats">
               <button type="button" class="attach-tag" data-val="구글 독스">구글 독스</button>
@@ -1996,6 +2001,13 @@ input, textarea, select { font-size: 14px; }
             <label style="cursor:pointer;font-weight:700"><input type="checkbox" id="mnFeature" checked> 업무기능에도 자동 추가 (다른 직원이 이 프롬프트를 기능으로 바로 쓸 수 있습니다)</label>
             <div id="mnFeatBox" style="margin-top:8px"><label class="form-label" for="mnCat">기능 분류</label><select class="form-control" id="mnCat"></select>
               <div class="bp-hint" id="mnVars">프롬프트를 붙여넣으면 [대괄호] 변수가 입력 항목으로 인식됩니다.</div></div></div>
+          <div class="form-group" style="background:#F6F7F8;border-radius:12px;padding:14px 16px">
+            <div style="font-weight:800;margin-bottom:4px">스킬 파일 업데이트 (선택)</div>
+            <div class="bp-hint" style="margin-bottom:8px">이 업무에 쓴 스킬 파일(SKILL.md 등)이 있으면 함께 올리세요. 업무기능으로 추가된 경우 이 기능에서 자동 추천되고, 선택하면 프롬프트에 들어갑니다. 올리지 않아도 등록됩니다.</div>
+            <input class="form-control" id="mnSkFile" type="file" accept=".md,.txt,.zip,.pdf,.docx,.json">
+            <input class="form-control" id="mnSkUrl" type="text" placeholder="또는 구글 드라이브·문서 링크" style="margin-top:8px">
+            <input class="form-control" id="mnSkName" type="text" placeholder="스킬 이름 (비우면 '자산명 + 스킬'로 저장)" style="margin-top:8px">
+          </div>
           <div class="register-warning">⚠️ 원가·급여·계약·협상 금액과 개인정보가 들어 있지 않은지 확인하세요.</div>
           <div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn-gold" id="mnSave" style="flex:1;padding:12px">자산으로 등록</button><button type="button" class="btn-secondary" id="mnReset">초기화</button></div>
         </div>
@@ -2174,6 +2186,8 @@ input, textarea, select { font-size: 14px; }
       <section class="page" id="page-refs">
         <h2 class="section-title">레퍼런스 참고하기</h2>
         <p class="section-sub">신입·사회초년생도 잘 된 사례를 보고 시작할 수 있도록, 구글 드라이브의 잘 된 문서를 기능별로 모았습니다. 업무기능에서 프롬프트를 만들 때 해당 기능의 레퍼런스가 자동으로 추천되고, 선택한 문서가 프롬프트의 레퍼런스로 들어갑니다.</p>
+        <div class="ref-tabs"><button type="button" class="cat-btn active ref-tab-btn" data-tab="docs">레퍼런스 문서</button><button type="button" class="cat-btn ref-tab-btn" data-tab="skills">스킬 파일 (선택)</button></div>
+        <div id="refTabDocs">
         <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
           <div class="sheet-status local" id="refStatus" style="margin:0">불러오는 중...</div>
           <a class="btn-secondary" href="https://drive.google.com/drive/shared-drives" target="_blank" rel="noopener noreferrer" style="text-decoration:none">공유 드라이브 열기 ↗</a>
@@ -2196,6 +2210,37 @@ input, textarea, select { font-size: 14px; }
           <div class="register-warning">⚠️ 원가·급여·계약·협상 금액이 담긴 문서는 등록하지 마세요. 로그인 없는 사이트라 제목과 설명이 모든 방문자에게 보입니다.</div>
           <div style="margin-top:10px"><button type="button" class="btn-gold" id="rfSave">레퍼런스 등록</button></div>
         </details>
+        </div>
+
+        <div id="refTabSkills" style="display:none">
+          <p class="gd-p">스킬 파일은 어사이드가 작업 전에 먼저 읽고 그 지침과 절차를 따르는 파일입니다(예: SKILL.md). <b>등록은 선택</b>입니다. 등록해 두면 업무기능과 기본 프롬프트에서 업무에 맞는 스킬 파일이 자동으로 추천되고, 선택한 파일이 프롬프트에 들어갑니다.</p>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px">
+            <div class="sheet-status local" id="skStatus" style="margin:0">불러오는 중...</div>
+          </div>
+          <div class="filter-bar" style="margin-bottom:12px">
+            <div class="search-wrap"><span class="search-icon">🔍</span><input type="search" id="skSearch" placeholder="스킬 파일·키워드 검색" aria-label="스킬 파일 검색"></div>
+            <select class="form-control" id="skCatFilter" style="max-width:200px" aria-label="분류"></select>
+          </div>
+          <div class="ref-grid" id="skillList"></div>
+          <div class="bp-hint" style="margin:10px 0 18px">※ 파일은 회사 구글 드라이브(회사 도메인 공유)에 저장되고, 이 사이트에는 이름·설명·키워드만 보입니다. "검토 중" 파일은 담당자 확인 전이므로 내용을 확인하고 쓰세요.</div>
+          <details class="bp-card" style="max-width:none"><summary style="cursor:pointer;font-weight:800">+ 스킬 파일 등록하기 (선택)</summary>
+            <div class="asset-form-grid" style="margin-top:12px">
+              <div class="form-group full" data-sk="title"><label class="form-label" for="skTitle">스킬 이름 <span class="req">*</span></label><input class="form-control" id="skTitle" type="text" placeholder="예: 상세페이지 기획 스킬"><div class="error-msg">필수 항목입니다.</div></div>
+              <div class="form-group full" data-sk="desc"><label class="form-label" for="skDesc">언제, 무엇을 하는 스킬인가요? <span class="req">*</span></label><textarea class="form-control" id="skDesc" rows="2" placeholder="예: 올리브영 상세페이지 기획 시 섹션 구성과 금지 표현 기준을 알려 준다"></textarea><div class="error-msg">필수 항목입니다.</div></div>
+              <div class="form-group full"><label class="form-label" for="skKeys">키워드 (쉼표로 구분, 자동 추천에 사용됩니다)</label><input class="form-control" id="skKeys" type="text" placeholder="예: 상세페이지, 올리브영, 기획안"></div>
+              <div class="form-group"><label class="form-label" for="skCat">분류</label><select class="form-control" id="skCat"></select></div>
+              <div class="form-group" data-sk="by"><label class="form-label" for="skBy">등록자 <span class="req">*</span></label><input class="form-control" id="skBy" type="text" placeholder="예: 최성민"><div class="error-msg">필수 항목입니다.</div></div>
+              <div class="form-group full"><label class="form-label" for="skFeat">연결할 기능 (선택, 이 기능에서 우선 추천됩니다)</label><div style="display:flex;gap:8px"><select class="form-control" id="skFeat"></select><button type="button" class="btn-secondary" id="skFeatAdd">추가</button></div><div class="file-chips" id="skFeatChips"></div></div>
+              <div class="form-group full" data-sk="src"><label class="form-label" for="skFile">스킬 파일 올리기 또는 링크 중 하나 <span class="req">*</span></label>
+                <input class="form-control" id="skFile" type="file" accept=".md,.txt,.zip,.pdf,.docx,.json">
+                <div class="bp-hint">.md .txt .zip .pdf .docx .json, 8MB 이하. 파일을 올리면 회사 구글 드라이브에 저장됩니다.</div>
+                <input class="form-control" id="skUrl" type="text" placeholder="또는 구글 드라이브·문서 링크 https://drive.google.com/..." style="margin-top:8px">
+                <div class="error-msg">파일을 올리거나 구글 드라이브·문서 링크를 입력해 주세요.</div></div>
+            </div>
+            <div class="register-warning">⚠️ 원가·급여·계약·협상 금액과 개인정보가 들어 있는 파일은 올리지 마세요. 어사이드가 이 파일의 지침을 그대로 따르므로 내용이 맞는지 확인한 뒤 등록하세요.</div>
+            <div style="margin-top:10px"><button type="button" class="btn-gold" id="skSave">스킬 파일 등록</button></div>
+          </details>
+        </div>
       </section>
 
       <!-- ═══ 기능 추가 요청 ═══ -->
@@ -3470,6 +3515,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   };
 
   const NOTICES = [
+    { date: '2026-10-26', pin: false, title: '스킬 파일 등록(선택)과 자동 추천 추가', meta: '업데이트', body: '[레퍼런스 참고하기]의 "스킬 파일" 탭과 [수동 자산화]에서 스킬 파일(SKILL.md 등)을 선택 등록할 수 있습니다. 등록해 두면 업무기능·기본 프롬프트에서 업무에 맞는 스킬 파일이 자동으로 추천되고, 체크한 파일이 프롬프트에 들어가 어사이드가 먼저 읽고 따릅니다.' },
     { date: '2026-10-26', pin: false, title: '레퍼런스 참고하기 메뉴 추가', meta: '업데이트', body: '구글 드라이브의 잘 된 문서를 기능별로 모은 [레퍼런스 참고하기] 메뉴가 생겼습니다. 업무기능에서 프롬프트를 만들 때 해당 기능의 추천 레퍼런스가 표시되고, 선택한 문서가 프롬프트에 들어갑니다. 좋은 문서는 직접 등록할 수 있습니다.' },
     { date: '2026-10-26', pin: true, title: '베타 테스트 안내', meta: '운영', body: '이 사이트는 초기 버전으로 베타 운영 중입니다. 입력 항목, 결과물 체크리스트, 대시보드 수치 기준은 사용 의견을 받아 보완합니다. 불편한 점과 필요한 기능은 [기능 추가 요청]에 남겨 주세요.' },
     { date: '2026-10-22', pin: true, title: '어사이드 사용량 안내', meta: '운영', body: '전사 어사이드 사용이 늘면서 공유 Claude 계정 사용량이 빠르게 늘고 있습니다. 업무 시작 전 확인사항에서 모델 설정을 확인하고, 이미지 생성은 어사이드 대신 Gemini 새 탭을 활용해 주세요.' },
@@ -3673,7 +3719,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#selectedFn').innerHTML = selectedBanner(card);
     const cf = commonFor(card).map(fieldHTML).join('');
     const sf = (card.fields || []).map(fieldHTML).join('');
-    $('#fieldsForm').innerHTML = samplePanelHTML(card) + refPanelHTML(card) +
+    $('#fieldsForm').innerHTML = samplePanelHTML(card) + refPanelHTML(card) + skillPanelHTML(card) +
       `<div class="section-divider">기능별 입력 · ${esc(card.title)}</div>${sf}` +
       `<div class="section-divider">공통 입력</div>${cf}`;
   }
@@ -3740,6 +3786,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     let text = typeof card.promptTemplate === 'function' ? card.promptTemplate(v) : (typeof card.promptTemplate === 'string' ? card.promptTemplate : commonPrompt(card, v));
     if (fileCount) text += '\n\n[첨부 파일 안내] "[첨부 파일]" 또는 "파일:"로 표시된 항목은 이 메시지와 함께 대화창에 첨부된 파일이다. 파일이 보이지 않으면 작업을 시작하기 전에 알려줄 것.';
     const refTxt = selectedRefsText(card); if (refTxt) text += '\n\n' + refTxt;
+    const skTxt = selectedSkillsText(card); if (skTxt) text += '\n\n' + skTxt;
     if (B.autoOn && B.rrule) text += `\n\n[자동화 주기] ${B.human}\n${B.rrule}`;
     return text;
   }
@@ -3764,7 +3811,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       copyText($('#promptOut').value).then(() => { const s = $('#autoCopyState'); if (s) s.textContent = '✓ 복사됨 — 어사이드 입력창에 붙여넣으세요'; toast('프롬프트를 복사했습니다. 어사이드 입력창에 붙여넣으세요.', 'success'); }).catch(() => {});
     }
     const sig = B.cardId + JSON.stringify(B.values);
-    if (B.lastLogged !== sig) { B.lastLogged = sig; logUsage('make', card); countRefUse(effectiveRefSel(card)); }
+    if (B.lastLogged !== sig) { B.lastLogged = sig; logUsage('make', card); countRefUse(effectiveRefSel(card)); countSkillUse(effectiveSkillSel(card)); }
     renderResultCheck($('#resultCheck'), card);
     setStep(3);
   }
@@ -4434,6 +4481,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (BP.files.length) L.push('[첨부 파일 안내] "[첨부 파일]"로 표시된 항목은 이 메시지와 함께 대화창에 첨부된 파일이다. 파일이 보이지 않으면 작업을 시작하기 전에 알려줄 것.', '');
     const bpSel = $$('[data-bprefsel]:checked').map((c) => c.dataset.bprefsel); const bpRefs = REFS.filter((r) => bpSel.indexOf(r.no) >= 0);
     if (bpRefs.length) { L.push('[선택한 레퍼런스 — 구조·톤·수준의 기준으로 삼을 것]', bpRefs.map((r) => '- ' + r.title + ': ' + r.url + (r.desc ? ' (' + r.desc + ')' : '')).join('\n'), '링크는 회사 구글 드라이브 문서입니다. 열 수 없으면 알려 줄 것.', ''); countRefUse(bpSel); }
+    const bpSkSel = $$('[data-bpsksel]:checked').map((c) => c.dataset.bpsksel); const bpSks = SKILLS.filter((s) => bpSkSel.indexOf(s.no) >= 0);
+    if (bpSks.length) { L.push(skillBlock(bpSks), ''); countSkillUse(bpSkSel); }
     L.push(PROMPT_FOOTER);
     const text = L.join('\n');
     $('#bpOut').value = text;
@@ -4574,6 +4623,10 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     }
     if (/원가|급여|연봉|계약금|협상|단가|견적가/.test(text) && !confirm('원가·급여·계약·협상 관련 단어가 포함되어 있습니다.\n금액·조건이 들어 있지 않은지 확인하셨나요? 그래도 등록할까요?')) return;
     if (assets.some(function (x) { return x.name === g('#mnName'); }) && !confirm('같은 이름의 자산이 이미 있습니다. 그래도 등록할까요?')) return;
+    const mnSkFile = ($('#mnSkFile').files || [])[0] || null, mnSkUrl = g('#mnSkUrl');
+    if (mnSkFile && (SK_EXT.indexOf(skExt(mnSkFile.name)) < 0 || mnSkFile.size > 8 * 1024 * 1024)) { toast('스킬 파일은 .md .txt .zip .pdf .docx .json, 8MB 이하만 올릴 수 있습니다.', 'error'); return; }
+    if (mnSkUrl && !REF_OK(mnSkUrl)) { toast('스킬 파일 링크는 구글 드라이브·문서 링크만 가능합니다.', 'error'); return; }
+    if ((mnSkFile || mnSkUrl) && !GAS_OK()) { toast('스킬 파일은 구글 시트 연동 상태에서만 등록할 수 있습니다.', 'error'); return; }
     const a = {
       no: nextAssetNo(), name: g('#mnName'), content: g('#mnContent'), type: $('#mnType').value, dept: $('#mnDept').value, assignee: who,
       auto: isAuto, autoSchedule: isAuto ? g('#mnSchedule') : '',
@@ -4583,6 +4636,10 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     };
     assets.push(a); persistAssets(); syncToSheet('add', a);
     syncCustomCards(); renderFunctions();
+    if (mnSkFile || mnSkUrl) {
+      skSubmit({ title: g('#mnSkName') || (a.name + ' 스킬'), desc: a.content || (a.name + ' 업무에 쓰는 스킬 파일'), keywords: '', cardIds: a.savedFields.asFeature ? ['u-' + a.no] : [], category: $('#mnCat').value, by: who, url: mnSkUrl, file: mnSkFile }).then(function () { setTimeout(loadSkills, 4500); setTimeout(loadSkills, 10000); });
+      $('#mnSkFile').value = ''; $('#mnSkUrl').value = ''; $('#mnSkName').value = '';
+    }
     toast((isAuto && GAS_OK() ? '자산으로 등록했습니다. 성과측정 시트에 기입 중입니다.' : '자산으로 등록했습니다.') + (a.savedFields.asFeature ? ' 업무기능에도 추가되었습니다.' : ''), 'success');
     mnReset(); go('assets');
   }
@@ -4883,7 +4940,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       '2. 왼쪽 메뉴 [레퍼런스 참고하기]에서 위 목적과 관련된 잘 된 문서를 검색해 찾는다.',
       '3. 왼쪽 메뉴 [업무기능]에서 목적에 가장 맞는 기능 카드를 찾아 선택한다. 맞는 카드가 없으면 [기본 프롬프트]를 사용한다.',
       '4. 입력 화면(STEP 2)에는 최소한의 값만 쓴다. 필수(*) 항목만 채우고, 위 목적·내용에서 알 수 있는 값만 쓴다. 알 수 없는 글자 입력 항목은 지어내지 말고 "미정(작업 시작 시 나에게 질문)"이라고 적는다. 선택 항목(채널·산출물 형식 등)은 내용에 가장 가까운 것을 고르고, 고른 값은 마지막에 알려 준다.',
-      '5. 화면에 나온 추천 레퍼런스 중 목적에 맞는 문서만 체크한다. 맞지 않으면 체크를 해제하고, 맞는 문서가 없으면 레퍼런스 없이 진행한다.',
+      '5. 화면에 나온 추천 레퍼런스 중 목적에 맞는 문서만 체크한다. 맞지 않으면 체크를 해제하고, 맞는 문서가 없으면 레퍼런스 없이 진행한다. 추천 스킬 파일이 있으면 같은 방식으로 목적에 맞는 것만 체크한다.',
       '6. [프롬프트 만들기]를 눌러 STEP 3에 나온 최종 프롬프트 전체를 읽는다.',
       '7. 그 프롬프트를 내 새 지시로 보고, 원래 대화 탭으로 돌아와 그대로 실행한다. 프롬프트에 "미정"이 남아 있으면 그 부분만 먼저 나에게 질문한 뒤 진행한다. 레퍼런스 링크가 열리지 않으면 건너뛰고 알려 준다.',
       '',
@@ -4900,7 +4957,154 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     });
     upd();
   }
+  /* ── 23. 스킬 파일 (선택 등록 · 기능별 자동 추천 · 프롬프트 반영) ── */
+  let SKILLS = store.get('lo_skills_v1', []) || [];
+  const SK_EXT = ['md', 'txt', 'zip', 'pdf', 'docx', 'json'];
+  function skExt(n) { const i = String(n || '').lastIndexOf('.'); return i < 0 ? '' : String(n).slice(i + 1).toLowerCase(); }
+  function loadSkills() {
+    if (!GAS_OK()) { renderSkillsPage(); return Promise.resolve(); }
+    return fetch(SHEET_ENDPOINT + '?type=skills').then(function (r) { return r.json(); }).then(function (j) {
+      if (j && j.ok && Array.isArray(j.skills)) { SKILLS = j.skills; store.set('lo_skills_v1', SKILLS); }
+      renderSkillsPage(); refreshSkillPanels();
+    }).catch(function () { renderSkillsPage(); });
+  }
+  function skTok(s) { return String(s || '').toLowerCase().split(/[^0-9a-z가-힣]+/).filter(function (t) { return t.length >= 2; }); }
+  function skScore(sk, ctx, card) {
+    let sc = 0; const c = String(ctx || '').toLowerCase();
+    if (card && (sk.cardIds || []).indexOf(card.id) >= 0) sc += 10;
+    (sk.keywords || []).forEach(function (k) { k = String(k).toLowerCase(); if (k && c.indexOf(k) >= 0) sc += 2; });
+    skTok(sk.title).forEach(function (t) { if (c.indexOf(t) >= 0) sc += 1; });
+    if (card && sk.category && sk.category === card.category) sc += 0.5;
+    return sc;
+  }
+  function skSuggest(ctx, card) {
+    const rows = SKILLS.map(function (sk) { return { sk: sk, direct: !!(card && (sk.cardIds || []).indexOf(card.id) >= 0), score: skScore(sk, ctx, card) }; });
+    let list = rows.filter(function (r) { return r.direct || r.score >= 1; }).sort(function (a, b) { return b.score - a.score; });
+    if (!list.length && card) list = rows.filter(function (r) { return r.sk.category && r.sk.category === card.category; });
+    return list.slice(0, 6).map(function (r) { r.auto = r.direct || r.score >= 4; return r; });
+  }
+  function skContext(card) {
+    const parts = [card.title, card.desc, card.category];
+    $$('#fieldsForm input[type=text], #fieldsForm input:not([type]), #fieldsForm textarea').forEach(function (e) { parts.push(e.value); });
+    return parts.join(' ');
+  }
+  function effectiveSkillSel(card) {
+    if (B.skCard !== card.id) { B.skCard = card.id; B.skSel = null; }
+    if (B.skSel === null || B.skSel === undefined) return skSuggest(skContext(card), card).filter(function (r) { return r.auto; }).map(function (r) { return r.sk.no; });
+    return B.skSel;
+  }
+  function skRow(r, sel, attr) {
+    const sk = r.sk;
+    return '<div class="ref-row"><label><input type="checkbox" ' + attr + '="' + esc(sk.no) + '"' + (sel.indexOf(sk.no) >= 0 ? ' checked' : '') + '><span><b>' + esc(sk.title) + '</b> ' + refBadge(sk) + (r.auto ? ' <span class="tag" style="background:#E6F9F6;color:#0E5A4C">자동 추천</span>' : '') + (sk.desc ? '<div class="ref-meta">' + esc(sk.desc) + '</div>' : '') + '</span></label><a href="' + esc(sk.url) + '" target="_blank" rel="noopener noreferrer" style="white-space:nowrap;font-size:12px">열기 ↗</a></div>';
+  }
+  function skillPanelInner(card) {
+    if (!SKILLS.length) return '<div class="bp-hint" style="margin-bottom:12px">🧩 등록된 스킬 파일이 아직 없습니다. 업무에 쓰는 스킬 파일이 있다면 <a href="#refs" data-reftab="skills" style="color:#0E8F7B;font-weight:700">레퍼런스 참고하기 &gt; 스킬 파일</a>에서 선택 등록해 주세요.</div>';
+    const sel = effectiveSkillSel(card);
+    const list = skSuggest(skContext(card), card);
+    sel.forEach(function (no) { if (!list.some(function (r) { return r.sk.no === no; })) { const sk = SKILLS.find(function (s) { return s.no === no; }); if (sk) list.push({ sk: sk, direct: false, score: 0, auto: false }); } });
+    if (!list.length) return '<div class="bp-hint" style="margin-bottom:12px">🧩 이 업무에 맞는 스킬 파일이 아직 없습니다. (등록 ' + SKILLS.length + '건) <a href="#refs" data-reftab="skills" style="color:#0E8F7B;font-weight:700">스킬 파일 보기</a></div>';
+    return '<div class="rc-box" style="margin:0 0 14px"><div style="font-weight:800;margin-bottom:4px">🧩 추천 스킬 파일 <span style="font-weight:400;color:#8B9096;font-size:12px">(체크한 파일을 어사이드가 먼저 읽고 따릅니다 · 업무 내용을 쓰면 추천이 바뀝니다)</span></div>'
+      + list.map(function (r) { return skRow(r, sel, 'data-sksel'); }).join('')
+      + '<div class="bp-hint" style="margin-top:6px">"자동 추천"은 연결된 기능 또는 키워드가 맞는 파일입니다. 맞지 않으면 체크를 해제하세요. "검토 중" 파일은 담당자 확인 전입니다.</div></div>';
+  }
+  function skillPanelHTML(card) { return '<div id="skillPanel">' + skillPanelInner(card) + '</div>'; }
+  function skillBlock(list) {
+    return '[선택한 스킬 파일 — 작업 전에 먼저 열어 읽고, 그 지침과 절차를 따를 것]\n' + list.map(function (s) { return '- ' + s.title + ': ' + s.url + (s.desc ? ' (사용 시점: ' + s.desc + ')' : ''); }).join('\n') + '\n스킬 파일이 열리지 않으면 작업을 시작하기 전에 알려 줄 것.';
+  }
+  function selectedSkillsText(card) {
+    const sel = effectiveSkillSel(card); const list = SKILLS.filter(function (s) { return sel.indexOf(s.no) >= 0; });
+    return list.length ? skillBlock(list) : '';
+  }
+  function countSkillUse(nos) { (nos || []).forEach(function (no) { const s = SKILLS.find(function (x) { return x.no === no; }); if (s) s.uses = (s.uses || 0) + 1; postGas({ action: 'skill_use', skill: { no: no } }); }); }
+  const BPSK = { touched: false };
+  function renderBpSkillPanel() {
+    const el = $('#bpSkillPanel'); if (!el) return;
+    if (!SKILLS.length) { el.innerHTML = '<div class="bp-hint" style="margin-top:8px">🧩 등록된 스킬 파일이 있으면 업무 내용에 맞게 추천됩니다. <a href="#refs" data-reftab="skills" style="color:#0E8F7B;font-weight:700">스킬 파일 등록하기</a></div>'; return; }
+    const prev = $$('[data-bpsksel]:checked').map(function (c) { return c.dataset.bpsksel; });
+    const ctx = ['#bpName', '#bpPurpose', '#bpContent', '#bpCaution'].map(function (id) { return ($(id) || {}).value || ''; }).join(' ');
+    const list = skSuggest(ctx, null);
+    const sel = BPSK.touched ? prev : list.filter(function (r) { return r.auto; }).map(function (r) { return r.sk.no; });
+    prev.forEach(function (no) { if (BPSK.touched && !list.some(function (r) { return r.sk.no === no; })) { const sk = SKILLS.find(function (s) { return s.no === no; }); if (sk) list.push({ sk: sk, direct: false, score: 0, auto: false }); } });
+    el.innerHTML = list.length
+      ? '<div class="rc-box" style="margin-top:10px"><div style="font-weight:800;margin-bottom:4px">🧩 추천 스킬 파일 <span style="font-weight:400;color:#8B9096;font-size:12px">(업무명·목적·내용에 맞춰 자동 추천, 체크한 파일이 프롬프트에 들어갑니다)</span></div>' + list.map(function (r) { return skRow(r, sel, 'data-bpsksel'); }).join('') + '</div>'
+      : '<div class="bp-hint" style="margin-top:8px">🧩 업무 내용에 맞는 스킬 파일이 아직 없습니다. (등록 ' + SKILLS.length + '건) <a href="#refs" data-reftab="skills" style="color:#0E8F7B;font-weight:700">스킬 파일 보기</a></div>';
+  }
+  function refreshSkillPanels() {
+    const p = $('#skillPanel'); if (p && B.cardId) { const card = cardById(B.cardId); if (card) p.innerHTML = skillPanelInner(card); }
+    renderBpSkillPanel();
+  }
+  function renderSkillsPage() {
+    const st = $('#skStatus'); if (!st) return;
+    st.className = 'sheet-status ' + (GAS_OK() ? 'connected' : 'local'); st.textContent = GAS_OK() ? '구글 시트 공유 목록 · 등록 ' + SKILLS.length + '건' : '로컬 저장 모드 (스킬 파일 등록은 시트 연동 필요)';
+    const q = ($('#skSearch').value || '').trim().toLowerCase(), cat = $('#skCatFilter').value;
+    const list = SKILLS.filter(function (s) {
+      const feats = (s.cardIds || []).map(function (id) { const c = cardById(id); return c ? c.title : ''; }).join(' ');
+      return (!cat || cat === '전체' || s.category === cat) && (!q || (s.title + ' ' + s.desc + ' ' + (s.keywords || []).join(' ') + ' ' + feats).toLowerCase().indexOf(q) >= 0);
+    }).sort(function (a, b) { return refSort(a, b); });
+    $('#skillList').innerHTML = list.length ? list.map(function (s) {
+      const feats = (s.cardIds || []).map(function (id) { return cardById(id); }).filter(Boolean);
+      return '<div class="ref-card"><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><span class="tag">' + esc(s.category || '기타') + '</span> ' + refBadge(s) + '</div>'
+        + '<h3>' + esc(s.title) + '</h3>' + (s.desc ? '<p>' + esc(s.desc) + '</p>' : '')
+        + ((s.keywords || []).length ? '<div class="ref-meta">키워드: ' + (s.keywords || []).map(esc).join(', ') + '</div>' : '')
+        + (feats.length ? '<div class="ref-meta">연결 기능: ' + feats.slice(0, 3).map(function (c) { return esc(c.title); }).join(', ') + (feats.length > 3 ? ' 외 ' + (feats.length - 3) + '개' : '') + '</div>' : '')
+        + '<div class="ref-meta">등록: ' + esc(s.by || '-') + ' · 사용 ' + (s.uses || 0) + '회</div>'
+        + '<div style="display:flex;gap:6px;margin-top:4px"><a class="btn-gold" href="' + esc(s.url) + '" target="_blank" rel="noopener noreferrer" style="text-decoration:none;padding:6px 12px;font-size:13px">열기 ↗</a><button type="button" class="btn-secondary" data-skcopy="' + esc(s.no) + '" style="padding:6px 10px;font-size:13px">링크 복사</button><button type="button" class="asset-del-btn" data-skdel="' + esc(s.no) + '" aria-label="스킬 파일 삭제">🗑</button></div></div>';
+    }).join('') : '<div style="grid-column:1/-1;padding:24px;text-align:center;color:#8B9096;font-size:13px">등록된 스킬 파일이 없습니다. 아래 [스킬 파일 등록하기]에서 선택 등록할 수 있습니다.</div>';
+  }
+  function skReadFile(file) { return new Promise(function (res, rej) { const fr = new FileReader(); fr.onload = function () { res(String(fr.result).split(',')[1] || ''); }; fr.onerror = rej; fr.readAsDataURL(file); }); }
+  function skSubmit(p) {
+    const send = function (f) { return postGas({ action: 'skill_add', skill: { title: p.title, desc: p.desc, keywords: p.keywords, cardIds: p.cardIds, category: p.category, by: p.by, url: p.url, file: f } }); };
+    if (p.file) return skReadFile(p.file).then(function (b64) { return send({ name: p.file.name, mime: p.file.type || 'application/octet-stream', data: b64 }); });
+    return send(null);
+  }
+  function showRefTab(t) {
+    $('#refTabDocs').style.display = t === 'skills' ? 'none' : ''; $('#refTabSkills').style.display = t === 'skills' ? '' : 'none';
+    $$('.ref-tab-btn').forEach(function (b) { b.classList.toggle('active', b.dataset.tab === t); });
+    if (t === 'skills') loadSkills();
+  }
+  let skFeats = [];
+  function renderSkFeats() { $('#skFeatChips').innerHTML = skFeats.map(function (id, i) { const c = cardById(id); return '<span class="file-chip">' + esc(c ? c.title : id) + '<button type="button" data-skfdel="' + i + '" aria-label="제거">✕</button></span>'; }).join(''); }
+  function bindSkills() {
+    const cats = CATEGORIES.filter(function (c) { return c !== '전체'; });
+    $('#skCatFilter').innerHTML = '<option>전체</option>' + cats.map(function (c) { return '<option>' + esc(c) + '</option>'; }).join('');
+    $('#skCat').innerHTML = cats.map(function (c) { return '<option>' + esc(c) + '</option>'; }).join('');
+    $('#skFeat').innerHTML = '<option value="">— 기능 선택 —</option>' + cats.map(function (cat) { return '<optgroup label="' + esc(cat) + '">' + CARDS.filter(function (c) { return c.category === cat && !c.custom; }).map(function (c) { return '<option value="' + c.id + '">' + esc(c.title) + '</option>'; }).join('') + '</optgroup>'; }).join('');
+    $$('.ref-tab-btn').forEach(function (b) { b.addEventListener('click', function () { showRefTab(b.dataset.tab); }); });
+    document.addEventListener('click', function (e) { const a = e.target.closest && e.target.closest('[data-reftab]'); if (a) { e.preventDefault(); go('refs'); showRefTab(a.dataset.reftab); } });
+    $('#skSearch').addEventListener('input', renderSkillsPage); $('#skCatFilter').addEventListener('change', renderSkillsPage);
+    $('#skFeatAdd').addEventListener('click', function () { const v = $('#skFeat').value; if (v && skFeats.indexOf(v) < 0) { skFeats.push(v); renderSkFeats(); } });
+    $('#skFeatChips').addEventListener('click', function (e) { const d = e.target.closest('[data-skfdel]'); if (d) { skFeats.splice(+d.dataset.skfdel, 1); renderSkFeats(); } });
+    $('#skillList').addEventListener('click', function (e) {
+      const cp = e.target.closest('[data-skcopy]'), del = e.target.closest('[data-skdel]');
+      if (cp) { const s = SKILLS.find(function (x) { return x.no === cp.dataset.skcopy; }); if (s) copyText(s.url).then(function () { toast('링크를 복사했습니다.', 'success'); }); }
+      if (del) { const s = SKILLS.find(function (x) { return x.no === del.dataset.skdel; }); if (!s || !confirm('"' + s.title + '" 스킬 파일을 목록에서 삭제할까요?\n(이 사이트에서 올린 파일은 드라이브에서도 휴지통으로 이동합니다)')) return; SKILLS = SKILLS.filter(function (x) { return x.no !== s.no; }); store.set('lo_skills_v1', SKILLS); renderSkillsPage(); refreshSkillPanels(); postGas({ action: 'skill_remove', skill: { no: s.no } }); toast('삭제했습니다.', 'success'); }
+    });
+    $('#fieldsForm').addEventListener('change', function (e) { if (e.target.closest && e.target.closest('[data-sksel]')) { B.skSel = $$('#skillPanel [data-sksel]:checked').map(function (c) { return c.dataset.sksel; }); } });
+    let skT = null;
+    $('#fieldsForm').addEventListener('input', function (e) { if (!e.target.closest || e.target.closest('#skillPanel') || e.target.closest('#refPanel')) return; clearTimeout(skT); skT = setTimeout(function () { const p = $('#skillPanel'); if (p && B.cardId) { const card = cardById(B.cardId); if (card) p.innerHTML = skillPanelInner(card); } }, 500); });
+    let bpT = null;
+    ['#bpName', '#bpPurpose', '#bpContent', '#bpCaution'].forEach(function (id) { const el = $(id); if (el) el.addEventListener('input', function () { clearTimeout(bpT); bpT = setTimeout(renderBpSkillPanel, 500); }); });
+    const bpp = $('#bpSkillPanel'); if (bpp) bpp.addEventListener('change', function () { BPSK.touched = true; });
+    $('#skSave').addEventListener('click', function () {
+      const g = function (id) { return ($(id).value || '').trim(); };
+      const file = ($('#skFile').files || [])[0] || null, url = g('#skUrl');
+      const badFile = file && (SK_EXT.indexOf(skExt(file.name)) < 0 || file.size > 8 * 1024 * 1024);
+      const miss = { title: !g('#skTitle'), desc: !g('#skDesc'), by: !g('#skBy'), src: (!file && !REF_OK(url)) || (!!url && !REF_OK(url)) };
+      Object.keys(miss).forEach(function (k) { const el = $('[data-sk="' + k + '"]'); if (el) el.classList.toggle('has-error', miss[k]); });
+      if (badFile) { toast('.md .txt .zip .pdf .docx .json, 8MB 이하 파일만 올릴 수 있습니다.', 'error'); return; }
+      if (miss.title || miss.desc || miss.by || miss.src) { toast('필수 항목을 확인해 주세요.', 'error'); return; }
+      if (!GAS_OK()) { toast('스킬 파일은 구글 시트 연동 상태에서만 등록할 수 있습니다.', 'error'); return; }
+      const btn = $('#skSave'); btn.disabled = true; btn.textContent = '등록 중...';
+      skSubmit({ title: g('#skTitle'), desc: g('#skDesc'), keywords: g('#skKeys'), cardIds: skFeats.slice(), category: $('#skCat').value, by: g('#skBy'), url: file ? '' : url, file: file }).then(function () {
+        ['#skTitle', '#skDesc', '#skKeys', '#skUrl'].forEach(function (id) { $(id).value = ''; }); $('#skFile').value = ''; skFeats = []; renderSkFeats();
+        toast('스킬 파일을 등록했습니다. (상태: 검토 중) 목록에 보이기까지 몇 초 걸립니다.', 'success');
+        setTimeout(loadSkills, 4500); setTimeout(loadSkills, 10000);
+      }).catch(function () { toast('등록 중 오류가 발생했습니다. 다시 시도해 주세요.', 'error'); }).then(function () { btn.disabled = false; btn.textContent = '스킬 파일 등록'; });
+    });
+    renderSkillsPage(); renderBpSkillPanel(); loadSkills();
+  }
   function bindExtra() {
+    bindSkills();
     bindQuick();
     bindRefs();
     bindResults();
