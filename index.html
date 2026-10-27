@@ -3769,13 +3769,13 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
   const PAGES = { setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
-  function go(page) {
-    if (page === 'automations') page = 'assets';
-    if (!PAGES[page]) page = 'home';
+  function go(page, replaceHist) {
+    if (page === 'automations') { page = 'assets'; replaceHist = true; }
+    if (!PAGES[page]) { page = 'home'; replaceHist = true; }
     $$('.page').forEach((p) => p.classList.toggle('active', p.id === 'page-' + page));
     $$('.nav-item').forEach((n) => n.classList.toggle('active', n.dataset.page === (page === 'builder' ? 'functions' : page)));
     $('#topbarTitle').textContent = PAGES[page];
-    if (location.hash !== '#' + page) history.replaceState(null, '', '#' + page);
+    if (location.hash !== '#' + page) { if (replaceHist) history.replaceState(null, '', '#' + page); else history.pushState(null, '', '#' + page); }
     closeSidebar();
     window.scrollTo(0, 0);
     if (page === 'home') renderHome();
@@ -5546,7 +5546,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     renderStep1();
     bind();
     setStep(1);
-    go(location.hash.slice(1) || 'home');
+    go(location.hash.slice(1) || 'home', true);
     bindExtra();
     loadRemoteAssets();
   }
