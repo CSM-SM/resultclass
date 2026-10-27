@@ -1749,6 +1749,27 @@ input, textarea, select { font-size: 14px; }
 .as-teamhead span { font-size: 13px; color: #5C6167; }
 .as-teamhead button { margin-left: auto; }
 .as-empty { text-align: center; color: #8B9096; font-size: 13px; padding: 18px; }
+.ed-cell { display: flex; gap: 6px; align-items: flex-start; justify-content: space-between; }
+.ed-text { flex: 1; min-width: 0; font-size: 12.5px; line-height: 1.6; color: #3c3a39; }
+.ed-text.ed-empty { color: #A5AAB0; font-style: italic; }
+.ed-btn { flex: none; background: none; border: 0; cursor: pointer; font-size: 13px; opacity: .45; padding: 2px 4px; border-radius: 6px; }
+.ed-btn:hover, .ed-cell:hover .ed-btn { opacity: 1; background: #E6F9F6; }
+.ed-ta { width: 100%; font-size: 12.5px; line-height: 1.5; resize: vertical; }
+.ed-actions { display: flex; gap: 6px; margin-top: 6px; }
+.ed-actions .btn-gold, .ed-actions .btn-secondary { padding: 6px 14px !important; font-size: 12.5px !important; width: auto !important; flex: none !important; }
+.ed-note { font-size: 11px; color: #8B9096; margin-top: 4px; }
+#assetBody .rebuild-btn[data-setowner] { white-space: nowrap !important; padding: 4px 8px; font-size: 12px; }
+#page-assets .asset-table th:nth-child(6) { width: 88px; }
+.asset-del-btn.as-del { font-size: 15px; width: 36px; height: 36px; border: 1px solid #F3C7C7; background: #fff; color: #C0392B; border-radius: 10px; padding: 0; margin: 0; display: inline-flex; align-items: center; justify-content: center; opacity: 1; }
+.asset-del-btn.as-del:hover { background: #FDECEC; border-color: #E59B9B; }
+#page-assets .asset-table th:nth-child(1) { width: 52px; }
+#page-assets .asset-table th:nth-child(2) { width: 20%; }
+#page-assets .asset-table th:nth-child(3) { width: 19%; }
+#page-assets .asset-table th:nth-child(5) { width: 124px; }
+#page-assets .asset-table th:nth-child(6) { width: 74px; }
+#page-assets .asset-table th:nth-child(7) { width: 112px; }
+#page-assets .asset-table th:nth-child(8) { width: 56px; }
+@media (max-width: 980px) { .asset-del-btn.as-del { width: auto; padding: 0 14px; } .asset-del-btn.as-del::after { content: ' 삭제'; font-size: 12.5px; margin-left: 4px; } }
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -1793,11 +1814,6 @@ input, textarea, select { font-size: 14px; }
 .res-chip { max-width: 100%; }
 pre.gd-code { max-width: 100%; }
 img, svg, video { max-width: 100%; }
-#page-assets .asset-table th:nth-child(1) { width: 58px; }
-#page-assets .asset-table th:nth-child(2) { width: 27%; }
-#page-assets .asset-table th:nth-child(4) { width: 138px; }
-#page-assets .asset-table th:nth-child(5) { width: 84px; }
-#page-assets .asset-table th:nth-child(6) { width: 132px; }
 .as-meta { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 4px 0 2px; font-size: 11.5px; color: #8B9096; }
 .as-hrs { font-size: 12px; color: #0E8F7B; font-weight: 600; margin-top: 4px; }
 .as-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
@@ -2132,6 +2148,7 @@ img, svg, video { max-width: 100%; }
             <div class="form-group" data-mn="dept"><label class="form-label" for="mnDept">부서 <span class="req">*</span></label><select class="form-control" id="mnDept"><option value="">선택</option><option>공통</option><option>마케팅</option><option>상품기획</option><option>병원기획</option><option>영업</option><option>디자인</option><option>해외영업</option></select><div class="bp-hint" id="mnTeamHint">부서를 고르면 등록될 팀이 표시됩니다.</div><div class="error-msg">필수 항목입니다.</div></div>
             <div class="form-group" data-mn="assignee"><label class="form-label" for="mnAssignee">담당자 이름 <span class="req">*</span></label><input class="form-control" id="mnAssignee" type="text" placeholder="예: 최성민"><div class="bp-hint">자산 목록에만 표시되고 프롬프트 본문에는 저장되지 않습니다.</div><div class="error-msg">필수 항목입니다.</div></div>
             <div class="form-group full"><label class="form-label" for="mnSample">샘플 결과물 링크 (선택)</label><input class="form-control" id="mnSample" type="text" placeholder="이 프롬프트로 만든 잘 된 결과물 링크"></div>
+            <div class="form-group full"><label class="form-label" for="mnProcess">프로세스 요약 (단어 위주, 화살표로 연결)</label><input class="form-control" id="mnProcess" type="text" maxlength="300" placeholder="예) 메일 수신 확인 → 미처리 점검 → 마감순 정리"><div class="bp-hint">목록에서 어떤 업무인지 한눈에 보이도록 보여 줍니다. 프롬프트에는 영향이 없고, 등록 후에도 목록에서 직접 고칠 수 있습니다.</div></div>
             <div class="form-group full"><label class="form-label" for="mnContent">내용 요약</label><textarea class="form-control" id="mnContent" rows="2"></textarea></div>
           </div>
           <div class="form-group"><label style="cursor:pointer"><input type="checkbox" id="mnAuto"> 정기 자동화(예약)로 운영 중입니다 — 성과측정 시트와 절감 대시보드에 반영됩니다</label>
@@ -2312,7 +2329,7 @@ img, svg, video { max-width: 100%; }
         <div class="cat-filters" id="asTypeFilters" aria-label="유형 필터" style="margin-top:-6px"></div>
         <div class="asset-table-wrap">
           <table class="asset-table">
-            <thead><tr><th>번호</th><th>자산명</th><th>내용</th><th>구분 · 절감</th><th>담당자</th><th>관리</th></tr></thead>
+            <thead><tr><th>번호</th><th>자산명</th><th>프로세스(요약)</th><th>내용</th><th>구분 · 절감</th><th>담당자</th><th>관리</th><th>삭제</th></tr></thead>
             <tbody id="assetBody"></tbody>
           </table>
         </div>
@@ -2521,6 +2538,7 @@ img, svg, video { max-width: 100%; }
         <div class="form-group"><label class="form-label" for="afDept">부서</label><select class="form-control" id="afDept"><option value="">선택</option><option>공통</option><option>마케팅</option><option>상품기획</option><option>병원기획</option><option>영업</option><option>디자인</option></select></div>
         <div class="form-group"><label class="form-label" for="afAssignee">담당자 <span class="req">*</span></label><input class="form-control" id="afAssignee" type="text" placeholder="예: 최성민"></div>
         <div class="form-group full"><label class="form-label" for="afSample">샘플 결과물 링크 (선택)</label><input class="form-control" id="afSample" type="text" placeholder="잘 된 결과물의 구글 문서·시트·드라이브 링크 — 같은 기능을 쓰는 사람의 참고 샘플로 표시됩니다"></div>
+        <div class="form-group full"><label class="form-label" for="afProcess">프로세스 요약 (단어 위주)</label><input class="form-control" id="afProcess" type="text" maxlength="300" placeholder="예) 메일 수신 확인 → 미처리 점검 → 마감순 정리"></div>
         <div class="form-group full"><label class="form-label" for="afContent">내용 요약</label><textarea class="form-control" id="afContent" rows="3"></textarea></div>
         <div class="form-group full"><label class="form-label"><input type="checkbox" id="afAuto"> 자동화 적용</label>
           <input class="form-control" id="afSchedule" type="text" placeholder="RRULE (STEP 3 자동화 패널에서 자동 입력)" style="margin-top:6px"></div>
@@ -4119,6 +4137,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     st.className = 'sheet-status ' + (GAS_OK() ? 'connected' : 'local');
     st.textContent = GAS_OK() ? '구글 시트 실시간 연동 · 1분마다 자동 갱신' : '로컬 저장 모드 (data.js의 SHEET_ENDPOINT 입력 시 시트 연동)';
     const q = ($('#assetSearch').value || '').trim().toLowerCase();
+    if ($('#assetBody') && $('#assetBody').querySelector('textarea[data-edta]')) return;
     const ordT = AU_TEAMS.concat(['미지정']);
     const all = auItems().filter(function (it) { return it.a; });
     const teams = {}, types = {};
@@ -4145,20 +4164,23 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       const a = it.a, hrs = it.r.hours || 0;
       const when = it.isAuto && (a.autoSchedule || it.r.weekly) ? auWhen(it) : '';
       const canView = (a.savedFields && a.savedFields.manualPrompt) || (a.cardId && cardById(a.cardId));
+      const edCell = function (field, text, empty) { return '<div class="ed-cell"><span class="ed-text' + (text ? '' : ' ed-empty') + '">' + (text ? esc(text) : empty) + '</span><button type="button" class="ed-btn" data-edit="' + field + '" data-no="' + esc(a.no) + '" title="직접 수정 (프롬프트에는 영향 없음)" aria-label="수정">✏️</button></div>'; };
       return '<tr><td>' + esc(a.no) + '</td>'
         + '<td><strong>' + esc(a.name) + '</strong><div class="as-meta"><span class="tag">' + esc(a.type) + '</span><span>' + esc(String(a.updated || a.createdAt || '').slice(0, 10) || '-') + '</span></div>' + resultChips(a) + '</td>'
-        + '<td>' + esc(a.content) + '</td>'
+        + '<td>' + edCell('process', a.process || auProcGuess(a), '미작성 · 직접 입력') + '</td>'
+        + '<td>' + edCell('content', a.content, '미작성 · 직접 입력') + '</td>'
         + '<td>' + (it.isAuto ? '<span class="badge-auto">자동화</span>' + (when ? ' <small>' + esc(when) + '</small>' : '') + (a.perf === '기입됨' ? ' <small title="AI TF팀 성과측정 시트에 기입됨">📊</small>' : '') : '<span class="badge-manual">수동</span>') + (hrs > 0 ? '<div class="as-hrs">월 ' + auHours(hrs) + '시간 절감</div>' : '') + '</td>'
         + '<td>' + (a.assignee ? esc(a.assignee) : '<button type="button" class="rebuild-btn" data-setowner="' + esc(a.no) + '">담당자 지정</button>') + '</td>'
-        + '<td><div class="as-actions">' + (canView ? '<button type="button" class="rebuild-btn" data-viewprompt="' + esc(a.no) + '">프롬프트 보기</button>' : '') + '<button type="button" class="rebuild-btn" data-rebuild="' + esc(a.no) + '"' + (a.cardId && cardById(a.cardId) ? ' title="이 자산의 기능·입력값으로 빌더 열기"' : ' disabled title="연결된 기능이 없습니다"') + '>다시 만들기</button><button type="button" class="asset-del-btn" data-delasset="' + esc(a.no) + '" aria-label="삭제">🗑</button></div></td></tr>';
+        + '<td><div class="as-actions">' + (canView ? '<button type="button" class="rebuild-btn" data-viewprompt="' + esc(a.no) + '">프롬프트 보기</button>' : '') + '<button type="button" class="rebuild-btn" data-rebuild="' + esc(a.no) + '"' + (a.cardId && cardById(a.cardId) ? ' title="이 자산의 기능·입력값으로 빌더 열기"' : ' disabled title="연결된 기능이 없습니다"') + '>다시 만들기</button></div></td>'
+        + '<td><button type="button" class="asset-del-btn as-del" data-delasset="' + esc(a.no) + '" title="잘못 등록된 자산 삭제" aria-label="이 자산 삭제">🗑</button></td></tr>';
     };
     $('#assetBody').innerHTML = shown.map(function (t) {
       const mine = list.filter(function (it) { return it.team === t; });
       const sum = all.filter(function (it) { return it.team === t; }).reduce(function (s, it) { return s + (it.r.hours || 0); }, 0);
-      const head = '<tr class="as-teamrow"><td colspan="6"><div class="as-teamhead"><b>' + esc(t === '미지정' ? '팀 미지정' : t) + '</b><span>' + (teams[t] || 0) + '건' + (sum > 0 ? ' · 월 약 ' + auHours(sum) + '시간 절감' : '') + '</span>' + (t === '미지정' ? '' : '<button type="button" class="btn-secondary" data-aunew="' + esc(AU_TEAM_DEPT[t] || '') + '" style="padding:6px 12px;font-size:12.5px">+ ' + esc(t) + ' 자산 등록</button>') + '</div></td></tr>';
-      const body = mine.length ? mine.map(rowHtml).join('') : '<tr><td colspan="6" class="as-empty">' + (filtering && (teams[t] || 0) ? '조건에 맞는 자산이 없습니다.' : '아직 등록된 자산이 없습니다.') + '</td></tr>';
+      const head = '<tr class="as-teamrow"><td colspan="8"><div class="as-teamhead"><b>' + esc(t === '미지정' ? '팀 미지정' : t) + '</b><span>' + (teams[t] || 0) + '건' + (sum > 0 ? ' · 월 약 ' + auHours(sum) + '시간 절감' : '') + '</span>' + (t === '미지정' ? '' : '<button type="button" class="btn-secondary" data-aunew="' + esc(AU_TEAM_DEPT[t] || '') + '" style="padding:6px 12px;font-size:12.5px">+ ' + esc(t) + ' 자산 등록</button>') + '</div></td></tr>';
+      const body = mine.length ? mine.map(rowHtml).join('') : '<tr><td colspan="8" class="as-empty">' + (filtering && (teams[t] || 0) ? '조건에 맞는 자산이 없습니다.' : '아직 등록된 자산이 없습니다.') + '</td></tr>';
       return head + body;
-    }).join('') || '<tr><td colspan="6"><div class="empty-state"><div class="icon">🗂️</div><p>등록된 자산이 없습니다.</p></div></td></tr>';
+    }).join('') || '<tr><td colspan="8"><div class="empty-state"><div class="icon">🗂️</div><p>등록된 자산이 없습니다.</p></div></td></tr>';
   }
 
   /* 모달 */
@@ -4173,6 +4195,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#afDept').value = '';
     $('#afAssignee').value = card ? (v.assignee || '') : '';
     $('#afContent').value = card ? (v.purpose || '') : '';
+    $('#afProcess').value = '';
     $('#afAuto').checked = !!(card && B.autoOn && B.rrule);
     $('#afSchedule').value = card && B.autoOn ? B.rrule : '';
     ['#afBefore', '#afAfter', '#afWeekly', '#afLink', '#afSample'].forEach((id) => { $(id).value = ''; });
@@ -4205,6 +4228,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       no: nextAssetNo(),
       name,
       content: $('#afContent').value.trim(),
+      process: ($('#afProcess').value || '').trim(),
       type: $('#afType').value,
       dept: $('#afDept').value.trim(),
       assignee: $('#afAssignee').value.trim(),
@@ -4376,6 +4400,23 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#exportCsvBtn').addEventListener('click', exportCsv);
     $('#newAssetBtn').addEventListener('click', () => openAssetModal({ fromBuilder: false }));
     $('#assetBody').addEventListener('click', (e) => {
+      const edb = e.target.closest('[data-edit]');
+      if (edb) {
+        const cell = edb.closest('.ed-cell'), a0 = assets.find((x) => x.no === edb.dataset.no); if (!a0) return;
+        const f = edb.dataset.edit, cur = f === 'process' ? (a0.process || auProcGuess(a0)) : (a0.content || '');
+        cell.innerHTML = '<textarea class="form-control ed-ta" data-edta="' + f + '" data-no="' + esc(a0.no) + '" rows="3" maxlength="' + (f === 'process' ? 300 : 600) + '" placeholder="' + (f === 'process' ? '업무 흐름을 단어 위주로 (예: 메일 수신 → 미처리 점검 → 분류)' : '업무 내용 설명') + '">' + esc(cur) + '</textarea><div class="ed-actions"><button type="button" class="btn-gold ed-save" data-edsave="1">저장</button><button type="button" class="btn-secondary ed-cancel" data-edcancel="1">취소</button></div><div class="ed-note">표시용 설명입니다. 프롬프트에는 영향을 주지 않습니다.</div>';
+        cell.querySelector('textarea').focus(); return;
+      }
+      if (e.target.closest('[data-edcancel]')) { const t = $('#assetBody textarea[data-edta]'); if (t) t.remove(); renderAssets(); return; }
+      if (e.target.closest('[data-edsave]')) {
+        const ta = $('#assetBody textarea[data-edta]'); if (!ta) return;
+        const no = ta.dataset.no, f = ta.dataset.edta, val = ta.value.trim(), a1 = assets.find((x) => x.no === no);
+        ta.remove(); if (!a1) { renderAssets(); return; }
+        a1[f] = val; a1.updated = new Date().toISOString().slice(0, 10); persistAssets();
+        const upd = { no: no }; upd[f] = val; postGas({ action: 'asset_update', asset: upd });
+        if (f === 'content') { syncCustomCards(); renderFunctions(); }
+        renderAssets(); toast(f === 'process' ? '프로세스 요약을 저장했습니다.' : '내용을 저장했습니다.', 'success'); return;
+      }
       const rsb = e.target.closest('[data-results]');
       if (rsb) { openResults(rsb.dataset.results); return; }
       const so = e.target.closest('[data-setowner]');
@@ -4385,7 +4426,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       const rb = e.target.closest('[data-rebuild]');
       if (rb && !rb.disabled) { rebuildFromAsset(rb.dataset.rebuild); return; }
       const del = e.target.closest('[data-delasset]');
-      if (del && confirm('이 자산을 삭제할까요?')) {
+      if (del && confirm('이 자산을 삭제할까요?\n' + (((assets.find((x) => x.no === del.dataset.delasset) || {}).name) || '') + '\n(삭제하면 되돌릴 수 없고, 업무기능으로 추가된 카드도 함께 사라집니다)')) {
         const no = del.dataset.delasset;
         const a = assets.find((x) => x.no === no);
         assets = assets.filter((x) => x.no !== no);
@@ -4788,17 +4829,18 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function mnParse() {
     const t = $('#mnText').value; mnUpdateVars(); if (t.trim().length < 10) return;
-    const name = mnPick(t, '자산명'), type = mnPick(t, '유형'), content = mnPick(t, '내용');
+    const name = mnPick(t, '자산명'), type = mnPick(t, '유형'), content = mnPick(t, '내용'), proc = mnPick(t, '프로세스 요약');
     let filled = [];
     if (name && !$('#mnName').value.trim()) { $('#mnName').value = name.slice(0, 60); filled.push('자산명'); }
     const ty = MN_TYPES.filter(function (x) { return type.indexOf(x) >= 0; })[0];
     if (ty && $('#mnType').value === '기타') { $('#mnType').value = ty; filled.push('유형'); }
     if (content && !$('#mnContent').value.trim()) { $('#mnContent').value = content.slice(0, 200); filled.push('내용'); }
+    if (proc && !$('#mnProcess').value.trim()) { $('#mnProcess').value = proc.slice(0, 300); filled.push('프로세스 요약'); }
     $('#mnHint').textContent = filled.length ? '✓ 자동 인식: ' + filled.join(', ') + ' (필요하면 수정하세요)' : '형식 그대로 붙여넣으면 자산명·유형·내용이 자동으로 채워집니다. 형식이 달라도 전체 내용이 프롬프트로 저장됩니다.';
   }
 
   /* ── 18. 수동 자산화 → 업무기능 자동 추가 ([대괄호] 변수 → 입력칸) ── */
-  const CP_HEADERS = ['자산명', '유형', '내용', '사용한 스킬·도구', '프롬프트', '목적', '업무명', '첨부자료', '레퍼런스', '결과물', '진행 방식', '주의사항', '완료 보고', '작업 원칙', '지시 경로', '활용방안', '첨부 파일', '첨부 파일 안내', '산출물 형식', '산출물', '핵심 포인트', '업무 제목', '스킬', '도구', '진행 절차', '절차', '참고', '조건', '제약', '출력 형식', '역할', '입력 자료', '검증·주의사항', '검증'];
+  const CP_HEADERS = ['자산명', '유형', '내용', '프로세스 요약', '사용한 스킬·도구', '프롬프트', '목적', '업무명', '첨부자료', '레퍼런스', '결과물', '진행 방식', '주의사항', '완료 보고', '작업 원칙', '지시 경로', '활용방안', '첨부 파일', '첨부 파일 안내', '산출물 형식', '산출물', '핵심 포인트', '업무 제목', '스킬', '도구', '진행 절차', '절차', '참고', '조건', '제약', '출력 형식', '역할', '입력 자료', '검증·주의사항', '검증'];
   const CP_ICON = { 'FLOW': '🎫', '구글챗': '💬', 'Gmail': '✉️', '시트': '📊', '교육자료': '📚', '기타': '🧰' };
   const DEPT_CAT = { '상품기획': '상품기획', '마케팅': '마케팅', '영업': '영업·MD', '디자인': '디자인', '병원기획': '업무관리', '공통': '업무관리' };
   function cpSection(text) { const i = text.indexOf('[프롬프트]'); return (i >= 0 ? text.slice(i + 6) : text).trim(); }
@@ -4850,7 +4892,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     el.textContent = vs.length ? '입력 항목으로 인식된 변수: ' + vs.map(function (x) { return '[' + x + ']'; }).join(' ') + ' — 기능을 쓸 때 이 항목들이 입력칸이 됩니다.' : '[대괄호] 변수가 없어 "추가 요청사항" 입력칸만 만들어집니다. (변수가 있으면 입력칸으로 자동 변환)';
   }
   function mnReset() {
-    ['#mnText', '#mnName', '#mnContent', '#mnSample', '#mnAssignee', '#mnBefore', '#mnAfter', '#mnWeekly', '#mnSchedule', '#mnLink'].forEach(function (id) { $(id).value = ''; });
+    ['#mnText', '#mnName', '#mnContent', '#mnProcess', '#mnSample', '#mnAssignee', '#mnBefore', '#mnAfter', '#mnWeekly', '#mnSchedule', '#mnLink'].forEach(function (id) { $(id).value = ''; });
     $('#mnType').value = '기타'; $('#mnDept').value = ''; $('#mnAuto').checked = false; $('#mnFeature').checked = true; $('#mnCat').dataset.touched = ''; mnUpdateVars(); $('#mnAutoBox').style.display = 'none';
     $$('#page-manual .has-error').forEach(function (e) { e.classList.remove('has-error'); });
   }
@@ -4876,7 +4918,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (mnSkUrl && !REF_OK(mnSkUrl)) { toast('스킬 파일 링크는 구글 드라이브·문서 링크만 가능합니다.', 'error'); return; }
     if ((mnSkFile || mnSkUrl) && !GAS_OK()) { toast('스킬 파일은 구글 시트 연동 상태에서만 등록할 수 있습니다.', 'error'); return; }
     const a = {
-      no: nextAssetNo(), name: g('#mnName'), content: g('#mnContent'), type: $('#mnType').value, dept: $('#mnDept').value, assignee: who,
+      no: nextAssetNo(), name: g('#mnName'), content: g('#mnContent'), process: g('#mnProcess'), type: $('#mnType').value, dept: $('#mnDept').value, assignee: who,
       auto: isAuto, autoSchedule: isAuto ? g('#mnSchedule') : '',
       before: isAuto ? g('#mnBefore') : '', after: isAuto ? g('#mnAfter') : '', weekly: isAuto ? g('#mnWeekly') : '', link: isAuto ? g('#mnLink') : '',
       sample: g('#mnSample'), status: '테스트 중',
@@ -4906,7 +4948,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#pvTitle').textContent = a.no + ' ' + a.name + note; $('#pvText').value = text; $('#pvModal').classList.add('open');
   }
   function bindManual() {
-    $('#mnAsk').value = "방금 진행한 업무를 다른 직원이 처음부터 똑같이 재현할 수 있도록 정리해줘. 아래 형식 그대로 한 번에 출력해줘.\n\n[자산명] 업무를 20자 내외로\n[유형] FLOW / 구글챗 / 시트 / Gmail / 교육자료 / 기타 중 하나\n[내용] 이 업무가 무엇이고 어디에 쓰는지 한두 문장\n[사용한 스킬·도구] 사용한 어사이드 스킬, 웹사이트, 구글 앱, 진행 순서\n[프롬프트] 새 대화에 그대로 붙여넣으면 같은 결과가 나오는 자기완결형 프롬프트 (목적, 진행 경로 단계별, 첨부자료 종류, 레퍼런스, 결과물 형식, 주의사항 포함. 이번에 쓴 구체적 값(상품명·날짜·링크 등)은 [대괄호]로 바꿔서 재사용할 수 있게)\n\n조건: 담당자 이름, 원가·급여·계약·협상 금액, 개인정보는 넣지 말 것. 사실만 쓰고 모르는 값은 \"확인 필요\"로 표기.";
+    $('#mnAsk').value = "방금 진행한 업무를 다른 직원이 처음부터 똑같이 재현할 수 있도록 정리해줘. 아래 형식 그대로 한 번에 출력해줘.\n\n[자산명] 업무를 20자 내외로\n[유형] FLOW / 구글챗 / 시트 / Gmail / 교육자료 / 기타 중 하나\n[내용] 이 업무가 무엇이고 어디에 쓰는지 한두 문장\n[프로세스 요약] 업무 흐름을 단어 위주로 3~5단계, 화살표(→)로 연결 (예: 메일 수신 → 미처리 점검 → 분류)\n[사용한 스킬·도구] 사용한 어사이드 스킬, 웹사이트, 구글 앱, 진행 순서\n[프롬프트] 새 대화에 그대로 붙여넣으면 같은 결과가 나오는 자기완결형 프롬프트 (목적, 진행 경로 단계별, 첨부자료 종류, 레퍼런스, 결과물 형식, 주의사항 포함. 이번에 쓴 구체적 값(상품명·날짜·링크 등)은 [대괄호]로 바꿔서 재사용할 수 있게)\n\n조건: 담당자 이름, 원가·급여·계약·협상 금액, 개인정보는 넣지 말 것. 사실만 쓰고 모르는 값은 \"확인 필요\"로 표기.";
     $('#mnAskCopy').addEventListener('click', function () { copyText($('#mnAsk').value).then(function () { toast('요청 문구를 복사했습니다. 어사이드에 붙여넣으세요.', 'success'); }); });
     $('#mnText').addEventListener('input', function (e) { e.target.closest('.form-group').classList.remove('has-error'); clearTimeout(bindManual.t); bindManual.t = setTimeout(mnParse, 400); });
     $('#mnText').addEventListener('paste', function () { setTimeout(mnParse, 50); });
@@ -5389,6 +5431,11 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if (t) return t;
     }
     return it.r.weekly > 0 ? '주 ' + it.r.weekly + '회' : '수시';
+  }
+  function auProcGuess(a) {
+    const c = String(a.content || '');
+    if (c.indexOf('→') < 0) return '';
+    return c.replace(/과제 분류:[^·]*·\s*/, '').replace(/연결:[^·]*·\s*/, '').split('→').map(function (s) { return s.trim().replace(/\s+/g, ' ').slice(0, 14); }).filter(Boolean).slice(0, 5).join(' → ');
   }
   function auHours(h) { return h >= 100 ? Math.round(h) : (Math.round(h * 10) / 10); }
   function auFiltered(items) {
