@@ -5395,9 +5395,9 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     renderSkillsPage(); renderBpSkillPanel(); loadSkills();
   }
   /* ── 24. 자동화 리스트 (팀별 · AI 자산 전체 + 성과측정 시트 연결, 자동 갱신) ── */
-  const AU_TEAMS = ['마케팅팀', '영업팀', '개발팀', '해외영업팀', '디자인팀', '공용'];
-  const AU_TEAM_OF = { '마케팅': '마케팅팀', '영업': '영업팀', '상품기획': '개발팀', '개발': '개발팀', '전략기획': '개발팀', '해외영업': '해외영업팀', '디자인': '디자인팀', '공통': '공용', '전사': '공용', '공용': '공용' };
-  const AU_TEAM_DEPT = { '마케팅팀': '마케팅', '영업팀': '영업', '개발팀': '상품기획', '해외영업팀': '해외영업', '디자인팀': '디자인', '공용': '공통' };
+  const AU_TEAMS = ['마케팅팀', '영업팀', '개발팀', '해외영업팀', '디자인팀', '병원기획팀', '공용'];
+  const AU_TEAM_OF = { '마케팅': '마케팅팀', '영업': '영업팀', '상품기획': '개발팀', '개발': '개발팀', '전략기획': '개발팀', '해외영업': '해외영업팀', '디자인': '디자인팀', '병원기획': '병원기획팀', '공통': '공용', '전사': '공용', '공용': '공용' };
+  const AU_TEAM_DEPT = { '마케팅팀': '마케팅', '영업팀': '영업', '개발팀': '상품기획', '해외영업팀': '해외영업', '디자인팀': '디자인', '병원기획팀': '병원기획', '공용': '공통' };
   const AU = { rows: [], updated: '', team: '전체', type: '전체', kind: '전체', sort: 'recent', view: 'card', q: '' };
   function auNorm(s) { return String(s || '').toLowerCase().replace(/[^0-9a-z가-힣]/g, ''); }
   function auBig(s) { const t = auNorm(s), m = {}; for (let i = 0; i < t.length - 1; i++) { const g = t.substr(i, 2); m[g] = (m[g] || 0) + 1; } return { m: m, n: Math.max(t.length - 1, 0) }; }
