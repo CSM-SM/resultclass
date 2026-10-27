@@ -1770,6 +1770,10 @@ input, textarea, select { font-size: 14px; }
 #page-assets .asset-table th:nth-child(7) { width: 112px; }
 #page-assets .asset-table th:nth-child(8) { width: 56px; }
 @media (max-width: 980px) { .asset-del-btn.as-del { width: auto; padding: 0 14px; } .asset-del-btn.as-del::after { content: ' 삭제'; font-size: 12.5px; margin-left: 4px; } }
+.ref-teamhead { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 8px; padding: 10px 4px 4px; margin-top: 6px; border-bottom: 2px solid #E6F9F6; font-size: 15px; }
+.ref-teamhead small { color: #8B9096; font-size: 12px; }
+.ref-teamtag { background: #E6F9F6 !important; color: #0B8E7A !important; font-weight: 700; }
+.ref-teamsel { font-size: 12px; padding: 1px 4px; border: 1px solid #D8DCE0; border-radius: 6px; background: #fff; color: #3c3a39; }
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -2426,6 +2430,7 @@ img, svg, video { max-width: 100%; }
           <div class="sheet-status local" id="refStatus" style="margin:0">불러오는 중...</div>
           <a class="btn-secondary" href="https://drive.google.com/drive/shared-drives" target="_blank" rel="noopener noreferrer" style="text-decoration:none">공유 드라이브 열기 ↗</a>
         </div>
+        <div class="au-teamtabs" id="refTeamTabs" aria-label="팀 선택" style="margin-bottom:12px"></div>
         <div class="filter-bar" style="margin-bottom:12px">
           <div class="search-wrap"><span class="search-icon">🔍</span><input type="search" id="refSearch" placeholder="레퍼런스·기능 검색" aria-label="레퍼런스 검색"></div>
           <select class="form-control" id="refCat" style="max-width:200px" aria-label="분류"></select>
@@ -2437,6 +2442,7 @@ img, svg, video { max-width: 100%; }
             <div class="form-group full" data-rf="title"><label class="form-label" for="rfTitle">제목 <span class="req">*</span></label><input class="form-control" id="rfTitle" type="text" placeholder="예: [시장조사] 어린이칫솔 시장조사"><div class="error-msg">필수 항목입니다.</div></div>
             <div class="form-group full" data-rf="url"><label class="form-label" for="rfUrl">구글 드라이브·문서 링크 <span class="req">*</span></label><input class="form-control" id="rfUrl" type="text" placeholder="https://drive.google.com/... 또는 https://docs.google.com/..."><div class="bp-hint">구글 드라이브·구글 문서 링크만 등록할 수 있습니다.</div><div class="error-msg">drive.google.com 또는 docs.google.com 링크를 입력해 주세요.</div></div>
             <div class="form-group"><label class="form-label" for="rfCatSel">분류</label><select class="form-control" id="rfCatSel"></select></div>
+            <div class="form-group"><label class="form-label" for="rfTeam">팀</label><select class="form-control" id="rfTeam"></select><div class="bp-hint">분류를 고르면 팀이 자동 선택됩니다. 필요하면 바꿔 주세요.</div></div>
             <div class="form-group"><label class="form-label" for="rfBy">등록자 <span class="req">*</span></label><input class="form-control" id="rfBy" type="text" placeholder="예: 최성민"><div class="error-msg" style="display:none">필수 항목입니다.</div></div>
             <div class="form-group full"><label class="form-label" for="rfFeat">연결할 기능 (추천에 사용됩니다)</label><div style="display:flex;gap:8px"><select class="form-control" id="rfFeat"></select><button type="button" class="btn-secondary" id="rfFeatAdd">추가</button></div><div class="file-chips" id="rfFeatChips"></div></div>
             <div class="form-group full" data-rf="desc"><label class="form-label" for="rfDesc">왜 좋은 레퍼런스인가요? <span class="req">*</span></label><textarea class="form-control" id="rfDesc" rows="2" placeholder="어떤 점을 참고하면 좋은지, 어떤 업무에 쓰는지"></textarea><div class="error-msg">필수 항목입니다.</div></div>
@@ -5136,24 +5142,38 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       renderRefsPage(); refreshRefPanels();
     }).catch(function () { renderRefsPage(); });
   }
+  const REF_TEAM_BY_CAT = { '상품기획': '개발팀', '패키지·인허가': '개발팀', '영업·MD': '영업팀', '채널·정산': '영업팀', '마케팅': '마케팅팀', '디자인': '디자인팀' };
+  let REFT = '전체';
+  function refTeam(r) { return (r.team && AU_TEAMS.indexOf(r.team) >= 0) ? r.team : (REF_TEAM_BY_CAT[r.category] || '공용'); }
   function refSort(a, b) { return (b.status === '추천' ? 1 : 0) - (a.status === '추천' ? 1 : 0) || (b.uses || 0) - (a.uses || 0) || String(a.no).localeCompare(String(b.no)); }
   function refBadge(r) { return '<span class="status-badge' + (r.status === '추천' ? ' ok' : '') + '">' + esc(r.status || '검토 중') + '</span>'; }
   function renderRefsPage() {
     const st = $('#refStatus'); if (!st) return;
     st.className = 'sheet-status ' + (GAS_OK() ? 'connected' : 'local'); st.textContent = GAS_OK() ? '구글 시트 공유 목록 · 등록 ' + REFS.length + '건' : '로컬 저장 모드';
     const q = ($('#refSearch').value || '').trim().toLowerCase(), cat = $('#refCat').value;
-    const list = REFS.filter(function (r) {
+    const base = REFS.filter(function (r) {
       const feats = (r.cardIds || []).map(function (id) { const c = cardById(id); return c ? c.title : ''; }).join(' ');
       return (!cat || cat === '전체' || r.category === cat) && (!q || (r.title + ' ' + r.desc + ' ' + feats).toLowerCase().indexOf(q) >= 0);
-    }).sort(refSort);
+    });
+    const tcnt = {}; base.forEach(function (r) { const t = refTeam(r); tcnt[t] = (tcnt[t] || 0) + 1; });
+    $('#refTeamTabs').innerHTML = ['전체'].concat(AU_TEAMS).map(function (t) { return '<button type="button" class="cat-btn' + (REFT === t ? ' active' : '') + '" data-refteamtab="' + esc(t) + '">' + esc(t) + ' ' + (t === '전체' ? base.length : (tcnt[t] || 0)) + '</button>'; }).join('');
+    const list = base.filter(function (r) { return REFT === '전체' || refTeam(r) === REFT; }).sort(function (a, b) { return (REFT === '전체' ? AU_TEAMS.indexOf(refTeam(a)) - AU_TEAMS.indexOf(refTeam(b)) : 0) || refSort(a, b); });
+    let lastTeam = null;
     $('#refList').innerHTML = list.length ? list.map(function (r) {
+      const tm = refTeam(r);
+      const head = (REFT === '전체' && tm !== lastTeam) ? (lastTeam = tm, '<div class="ref-teamhead"><b>' + esc(tm) + '</b> <small>' + tcnt[tm] + '건</small></div>') : '';
+      return head + refCardHtml(r, tm);
+    }).join('') : '<div style="grid-column:1/-1;padding:24px;text-align:center;color:#8B9096;font-size:13px">조건에 맞는 레퍼런스가 없습니다.</div>';
+  }
+  function refCardHtml(r, tm) {
+    {
       const feats = (r.cardIds || []).map(function (id) { return cardById(id); }).filter(Boolean);
-      return '<div class="ref-card"><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><span class="tag">' + esc(r.category || '기타') + '</span> ' + refBadge(r) + '</div>'
+      return '<div class="ref-card"><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><span class="tag ref-teamtag">' + esc(tm) + '</span><span class="tag">' + esc(r.category || '기타') + '</span> ' + refBadge(r) + '</div>'
         + '<h3>' + esc(r.title) + '</h3>' + (r.desc ? '<p>' + esc(r.desc) + '</p>' : '')
         + (feats.length ? '<div class="ref-meta">연결 기능: ' + feats.slice(0, 3).map(function (c) { return esc(c.title); }).join(', ') + (feats.length > 3 ? ' 외 ' + (feats.length - 3) + '개' : '') + '</div>' : '')
-        + '<div class="ref-meta">등록: ' + esc(r.by || '-') + ' · 사용 ' + (r.uses || 0) + '회</div>'
+        + '<div class="ref-meta">등록: ' + esc(r.by || '-') + ' · 사용 ' + (r.uses || 0) + '회 · 팀 <select class="ref-teamsel" data-refteam="' + esc(r.no) + '" aria-label="팀 변경">' + AU_TEAMS.map(function (t) { return '<option' + (t === tm ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join('') + '</select></div>'
         + '<div style="display:flex;gap:6px;margin-top:4px"><a class="btn-gold" href="' + esc(r.url) + '" target="_blank" rel="noopener noreferrer" style="text-decoration:none;padding:6px 12px;font-size:13px">열기 ↗</a><button type="button" class="btn-secondary" data-refcopy="' + esc(r.no) + '" style="padding:6px 10px;font-size:13px">링크 복사</button><button type="button" class="asset-del-btn" data-refdel="' + esc(r.no) + '" aria-label="레퍼런스 삭제">🗑</button></div></div>';
-    }).join('') : '<div style="grid-column:1/-1;padding:24px;text-align:center;color:#8B9096;font-size:13px">조건에 맞는 레퍼런스가 없습니다.</div>';
+    }
   }
   function effectiveRefSel(card) {
     if (B.refCard !== card.id) { B.refCard = card.id; B.refSel = null; }
@@ -5195,6 +5215,14 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     $('#rfCatSel').innerHTML = cats.map(function (c) { return '<option>' + esc(c) + '</option>'; }).join('');
     $('#rfFeat').innerHTML = '<option value="">— 기능 선택 —</option>' + cats.map(function (cat) { return '<optgroup label="' + esc(cat) + '">' + CARDS.filter(function (c) { return c.category === cat && !c.custom; }).map(function (c) { return '<option value="' + c.id + '">' + esc(c.title) + '</option>'; }).join('') + '</optgroup>'; }).join('');
     $('#refSearch').addEventListener('input', renderRefsPage); $('#refCat').addEventListener('change', renderRefsPage);
+    $('#rfTeam').innerHTML = AU_TEAMS.map(function (t) { return '<option>' + esc(t) + '</option>'; }).join('');
+    const rfSync = function () { $('#rfTeam').value = REF_TEAM_BY_CAT[$('#rfCatSel').value] || '공용'; }; $('#rfCatSel').addEventListener('change', rfSync); rfSync();
+    $('#refTeamTabs').addEventListener('click', function (e) { const b = e.target.closest('[data-refteamtab]'); if (b) { REFT = b.dataset.refteamtab; renderRefsPage(); } });
+    $('#refList').addEventListener('change', function (e) {
+      const s = e.target.closest('[data-refteam]'); if (!s) return;
+      const r = REFS.find(function (x) { return x.no === s.dataset.refteam; }); if (!r) return;
+      r.team = s.value; store.set('lo_refs_v1', REFS); renderRefsPage(); postGas({ action: 'ref_update', ref: { no: r.no, team: s.value } }); toast('팀을 「' + s.value + '」으로 바꿨습니다.', 'success');
+    });
     $('#rfFeatAdd').addEventListener('click', function () { const v = $('#rfFeat').value; if (v && rfFeats.indexOf(v) < 0) { rfFeats.push(v); renderRfFeats(); } });
     $('#rfFeatChips').addEventListener('click', function (e) { const d = e.target.closest('[data-rfdel]'); if (d) { rfFeats.splice(+d.dataset.rfdel, 1); renderRfFeats(); } });
     $('#refList').addEventListener('click', function (e) {
@@ -5208,7 +5236,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       const miss = { title: !g('#rfTitle'), url: !REF_OK(g('#rfUrl')), desc: !g('#rfDesc') };
       Object.keys(miss).forEach(function (k) { $('[data-rf="' + k + '"]').classList.toggle('has-error', miss[k]); });
       if (miss.title || miss.url || miss.desc || !g('#rfBy')) { toast(!g('#rfBy') && !miss.title && !miss.url && !miss.desc ? '등록자 이름을 입력해 주세요.' : '필수 항목을 확인해 주세요.', 'error'); return; }
-      const ref = { title: g('#rfTitle'), url: g('#rfUrl'), cardIds: rfFeats.slice(), category: $('#rfCatSel').value, desc: g('#rfDesc'), by: g('#rfBy'), status: '검토 중' };
+      const ref = { title: g('#rfTitle'), url: g('#rfUrl'), cardIds: rfFeats.slice(), category: $('#rfCatSel').value, team: $('#rfTeam').value, desc: g('#rfDesc'), by: g('#rfBy'), status: '검토 중' };
       REFS.push(Object.assign({ no: 'F' + String(REFS.length + 100), uses: 0 }, ref)); renderRefsPage();
       postGas({ action: 'ref_add', ref: ref }).then(function () { setTimeout(loadRefs, 2500); });
       ['#rfTitle', '#rfUrl', '#rfDesc'].forEach(function (id) { $(id).value = ''; }); rfFeats = []; renderRfFeats(); toast('레퍼런스를 등록했습니다. (상태: 검토 중)', 'success');
