@@ -2134,6 +2134,22 @@ body[data-mode="bi"] #biApp { grid-template-columns: 272px minmax(0, 1fr); backg
 .bi-rulehd { margin-bottom: 4px; font-size: 14px; } .bi-rulehd small { color: #8B9096; }
 @media (max-width: 640px) { #biChat { right: 12px; bottom: 12px; } #biChatPanel { position: fixed; left: 8px; right: 8px; bottom: 86px; width: auto; height: min(560px, calc(100vh - 110px)); } }
 @media print { #biChat { display: none !important; } }
+
+.bi-btn.pri { background: #0E8F7B; border-color: #0E8F7B; color: #fff; } .bi-btn.pri:hover { background: #0b7968; color: #fff; } .bi-btn.pri:disabled { opacity: .55; cursor: wait; }
+.bi-btn.sm { padding: 4px 10px; font-size: 12px; border-radius: 8px; }
+.qp-banner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; background: #E6F9F6; border: 1px solid #BFEDE5; border-radius: 14px; padding: 12px 16px; margin: 4px 0 12px; font-size: 14px; }
+.qp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px 14px; margin: 10px 0; }
+.qp-grid label { display: flex; flex-direction: column; gap: 5px; font-size: 12.5px; font-weight: 700; color: #3A3F45; } .qp-grid label.wide { grid-column: 1 / -1; }
+.qp-grid select, .qp-grid input, .qp-grid textarea { font: inherit; font-weight: 400; font-size: 13.5px; border: 1px solid #DDE0E4; border-radius: 10px; padding: 9px 11px; background: #fff; outline: 0; max-width: 100%; } .qp-grid select:focus, .qp-grid input:focus, .qp-grid textarea:focus { border-color: #14C4A9; }
+.qp-go { display: flex; align-items: center; gap: 12px; margin-top: 6px; flex-wrap: wrap; }
+.qp-items { display: flex; flex-direction: column; } .qp-item { display: flex; align-items: center; gap: 10px; padding: 12px 2px; border-bottom: 1px solid #F0F1F3; flex-wrap: wrap; } .qp-item:last-child { border-bottom: 0; }
+.qp-main { flex: 1; min-width: 240px; } .qp-main small { display: block; color: #8B9096; font-size: 12px; margin-top: 2px; } .qp-main p { margin: 4px 0 0; font-size: 13px; color: #4A4F55; line-height: 1.6; }
+.qp-del { color: #D24545; } .qp-del:hover { border-color: #D24545; color: #D24545; }
+.qp-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.qp-hook { background: #111; color: #fff; border-radius: 12px; padding: 12px 14px; margin: 8px 0 12px; display: flex; flex-direction: column; gap: 4px; } .qp-hook .bi-btn { align-self: flex-start; } .qp-hook small { color: #9FE9DD; font-size: 11.5px; } .qp-hook b { font-size: 15px; line-height: 1.5; }
+.qp-sec { border: 1px solid #E6E8EB; border-radius: 12px; padding: 10px 12px; margin: 8px 0; } .qp-sh { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; font-size: 13.5px; }
+.qp-txt { margin: 4px 0; font-size: 13px; line-height: 1.7; color: #2e2e2e; } .qp-pre { white-space: pre-wrap; } .qp-line { margin: 2px 0 0; font-size: 12.5px; color: #0E8F7B; font-weight: 600; }
+.qp-cut { border-top: 1px dashed #E6E8EB; padding-top: 8px; margin-top: 8px; } .qp-cut:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -4857,11 +4873,11 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const pt = BIX.pt || {}, cur = BIX.page, order = Object.keys(pt).sort(function (a, b) { return (b === cur) - (a === cur); });
     return base + '\n\n# 각 화면에 표시된 내용 (화면별 요약 텍스트, 시트 값 기준)\n' + order.map(function (k) { return '## 화면: ' + ((BI_PAGES[k] || {}).t || k) + (k === cur ? ' (사용자가 지금 보고 있는 화면)' : '') + '\n' + pt[k]; }).join('\n\n');
   }
-  async function biAiPost(messages, ctx) {
+  async function biAiPost(messages, ctx, opt) {
     if (!biUnlocked()) { biRelock(); throw new Error('암호를 다시 입력해 주세요'); }
-    const ac = new AbortController(), to = setTimeout(function () { ac.abort(); }, 80000);
+    const ac = new AbortController(), to = setTimeout(function () { ac.abort(); }, (opt && opt.timeout) || 80000);
     try {
-      const r = await fetch(SHEET_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: 'bi_chat', pw: biPw(), page: (BI_PAGES[BIX.page] || {}).t || BIX.page, context: ctx, messages: messages }), signal: ac.signal });
+      const r = await fetch(SHEET_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: 'bi_chat', mode: (opt && opt.mode) || '', pw: biPw(), page: (BI_PAGES[BIX.page] || {}).t || BIX.page, context: ctx, messages: messages }), signal: ac.signal });
       const j = await r.json();
       if (!j.ok) { if (j.error === 'auth') { biRelock(); throw new Error('암호가 맞지 않습니다'); } throw new Error(j.msg || 'AI 답변을 가져오지 못했습니다. 잠시 후 다시 시도해 주세요.'); }
       return j;
@@ -4925,6 +4941,149 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     } catch (e) { if (BIX.askSeq !== seq) return; const b = $('#biAiBody'); if (b) b.innerHTML = '<div class="bi-warn">' + esc(e.message || String(e)) + '</div>'; }
     await ruleP;
   }
+
+  /* ===== 기획 요청 (기획서 · 스레드 원고) — 콘텐츠 소재 수집 ===== */
+  const QP_RULES_DEF = '금지: 타사 브랜드명·직접 비교, 효능·치료 단정(완치·100%·1위 등), 전후 비교 과장, 의사·원장·의료진 등장과 흰 가운 연출(의료인 오인 방지, 사용 전 확인 필요)\n인물: 모든 인물은 동양인(한국인). 고정 인물 이미지 프롬프트를 먼저 만들고 모든 컷이 그 인물 기준으로 이어지게 한다.\n제품·혜택: 제품 특징·성분·가격은 입력된 값만 쓴다. 없으면 [확인 필요]로 비워 둔다. 조건부 혜택은 넣지 않는다.\n위닝 공식: 첫 3초에 누가·무엇을·왜 믿을 수 있나를 전달한다. 고객 질문으로 시작한다.\n다양성: 최근 기획과 컨셉·장소·인물·소재가 겹치지 않게 한다.\n스레드: 파트는 ---로 나누고 해시태그는 첫 파트 끝에만 넣는다. Topic은 라이브오랄스(# 없이).';
+  const QP_CONCEPTS = ['고객 질문 해결형', '상황 공감형', '체크리스트·정보형', '후기·체험형(연출 표기)', '전문 지식 설명형(의료인 아님)'];
+  const QP_RISK = /자극 걱정|자극 없|순한|안전|부담 없|걱정 없|효과적|효과가 있|효과 있|해결됩니다|개선됩니다|치료|완치|예방 효과|100\s?%|최고|1위|유일|무조건|부작용 없|특효|의사|원장|의료진|흰 가운|전후|비포|독보적|세계 최초|국내 최초/g;
+  function qpLS(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } }
+  function qpLSset(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function qpState() {
+    if (!BIX.qp) BIX.qp = Object.assign({ kind: 'plan', kw: '', qi: '', product: '', ratio: '세로 9:16 (릴스·쇼츠)', len: '20초', concept: '자동 (다양성)', n: '1', tone: '공감형', parts: '5', tn: '1', extra: '', memo: '', list: 'all' }, qpLS('lo_bi_qpform', {}), { busy: false, prog: '' });
+    return BIX.qp;
+  }
+  function qpSaveForm() { const f = qpState(); const c = {}; Object.keys(f).forEach(function (k) { if (k !== 'busy' && k !== 'prog') c[k] = f[k]; }); qpLSset('lo_bi_qpform', c); }
+  function qpRules() { try { return localStorage.getItem('lo_bi_qprules') || QP_RULES_DEF; } catch (e) { return QP_RULES_DEF; } }
+  function qpPlans() { return qpLS('lo_bi_plans', []); }
+  function qpPlansSet(a) { qpLSset('lo_bi_plans', a.slice(0, 40)); }
+  function qpKwRows(j) { return j.kw.map(function (k) { const w = qnWeek(j, k); return { k: k.k, a: w[0], b: w[1], ch: w[1] ? (w[0] - w[1]) / w[1] * 100 : NaN }; }).sort(function (x, y) { return (isFinite(y.ch) ? y.ch : -999) - (isFinite(x.ch) ? x.ch : -999); }); }
+  function qpQRows(j, kw) { const out = []; for (let i = j.items.length - 1; i >= 0 && out.length < 30; i--) { if (!kw || j.items[i][3] === kw) out.push(i); } return out; }
+  function qpOpts(arr, cur) { return arr.map(function (o) { const v = Array.isArray(o) ? o[0] : o, l = Array.isArray(o) ? o[1] : o; return '<option value="' + esc(v) + '"' + (String(v) === String(cur) ? ' selected' : '') + '>' + esc(l) + '</option>'; }).join(''); }
+  function qpFormHtml(d) {
+    const j = d.j, f = qpState(), ks = qpKwRows(j); if (!f.kw) { const rs = ks.filter(function (k) { return k.a >= 20 && isFinite(k.ch); }); f.kw = (rs[0] || ks[0] || { k: '' }).k; }
+    let qr = qpQRows(j, f.kw); if (f.qi !== '' && qr.indexOf(+f.qi) < 0 && j.items[+f.qi]) qr = [+f.qi].concat(qr);
+    const kwOpts = ks.map(function (k) { return [k.k, k.k + ' (최근 7일 ' + fN(k.a) + '건' + (isFinite(k.ch) ? ', ' + (k.ch >= 0 ? '+' : '') + fP(k.ch, 0) : '') + ')']; });
+    const qOpts = [['', '(고르지 않음 · 키워드 전체 흐름을 근거로 씁니다)']].concat(qr.map(function (i) { return [String(i), j.items[i][0].slice(5) + ' · ' + (j.items[i][4] || '(제목 없음)').slice(0, 60)]; }));
+    const plan = f.kind === 'plan';
+    return '<div class="bi-bar2"><span class="bi-bl">만들 것</span><button type="button" class="bi-chip' + (plan ? ' on' : '') + '" data-qpkind="plan">콘텐츠 기획서 (숏폼)</button><button type="button" class="bi-chip' + (!plan ? ' on' : '') + '" data-qpkind="thread">인스타 스레드 원고</button></div>'
+      + '<div class="qp-grid"><label>근거 키워드<select data-qpf="kw">' + qpOpts(kwOpts, f.kw) + '</select></label><label>근거 고객 질문 (선택)<select data-qpf="qi" id="qpQi">' + qpOpts(qOpts, f.qi) + '</select></label>'
+      + '<label>상품<input type="text" data-qpf="product" list="qpProdList" value="' + esc(f.product) + '" placeholder="선택하거나 직접 입력"><datalist id="qpProdList"></datalist></label>'
+      + (plan ? '<label>화면비<select data-qpf="ratio">' + qpOpts(['세로 9:16 (릴스·쇼츠)', '가로 16:9', '정방 1:1'], f.ratio) + '</select></label><label>길이<select data-qpf="len">' + qpOpts(['15초', '20초', '30초', '60초'], f.len) + '</select></label><label>컨셉<select data-qpf="concept">' + qpOpts(['자동 (다양성)'].concat(QP_CONCEPTS), f.concept) + '</select></label><label>개수<select data-qpf="n">' + qpOpts(['1', '2', '3'], f.n) + '</select></label>'
+        : '<label>톤<select data-qpf="tone">' + qpOpts(['공감형', '정보형', 'Q&A형', '후기·체험형(연출 표기)'], f.tone) + '</select></label><label>파트 수<select data-qpf="parts">' + qpOpts(['3', '4', '5', '6', '7'], f.parts) + '</select></label><label>개수<select data-qpf="tn">' + qpOpts(['1', '2', '3', '4', '5'], f.tn) + '</select></label>')
+      + '<label class="wide">추가 요청 (선택)<input type="text" data-qpf="extra" value="' + esc(f.extra) + '" placeholder="' + (plan ? '예) 퇴근 후 욕실 장면, 20대 후반 여성' : '예) 직장인 말투, 마지막 파트는 질문으로 마무리') + '"></label>'
+      + '<label class="wide">제품 근거 메모 (선택 · 성분·특징을 직접 적으면 그 내용만 사용합니다)<textarea data-qpf="memo" rows="2" placeholder="예) 제품이 가진 특징을 사실 그대로 적어 주세요. 비워 두면 제품 특징은 [확인 필요]로 남깁니다.">' + esc(f.memo) + '</textarea></label></div>'
+      + '<div class="qp-go"><button type="button" class="bi-btn pri" data-qpgo="1"' + (f.busy ? ' disabled' : '') + '>' + (plan ? '기획서 요청' : '스레드 원고 요청') + '</button><span id="qpProg" class="bi-ms">' + esc(f.prog) + '</span></div>';
+  }
+  function qpFormUpd() { const el = $('#qpForm'); if (!el || !BIX.cur || !BIX.cur.j) return; el.innerHTML = qpFormHtml(BIX.cur); qpProdFill(); }
+  function qpProdFill() { biLoadJourney('2026.10').then(function (jd) { const dl = $('#qpProdList'); if (dl) dl.innerHTML = jd.prods.map(function (p) { return '<option value="' + esc(String(p.name).replace(/\s*\(#\d+\)\s*$/, '')) + '">'; }).join(''); }).catch(function () {}); }
+  function qpRulesHtml() {
+    const lines = qpRules().split('\n').filter(function (l) { return l.trim(); });
+    return '<dl class="bi-dl">' + lines.map(function (l) { const m = l.match(/^([^:：]{1,12})[:：]\s*(.*)$/); return m ? '<dt>' + esc(m[1]) + '</dt><dd>' + esc(m[2]) + '</dd>' : '<dt>-</dt><dd>' + esc(l) + '</dd>'; }).join('') + '</dl>'
+      + '<details class="bi-man"><summary>규칙 수정 (이 브라우저에만 저장)</summary><textarea id="qpRulesTa" rows="8" class="bi-q" style="width:100%;max-width:none">' + esc(qpRules()) + '</textarea><div class="qp-go"><button type="button" class="bi-btn" data-qprsave="1">저장</button><button type="button" class="bi-btn" data-qprreset="1">기본값으로</button></div></details>'
+      + '<div class="bi-note">임시 초안입니다. 레퍼런스(라이브 초이의 기획 규칙)를 준용해 구강케어 브랜드용으로 옮긴 것이며, 광고 표현의 최종 판단은 사람이 합니다.</div>';
+  }
+  function qpListHtml() {
+    const f = qpState(), all = qpPlans(), a = all.filter(function (r) { return f.list === 'all' || r.kind === f.list; });
+    const tabs = '<div class="bi-bar2">' + [['all', '전체'], ['plan', '기획서'], ['thread', '스레드 원고']].map(function (t) { return '<button type="button" class="bi-chip' + (f.list === t[0] ? ' on' : '') + '" data-qpl="' + t[0] + '">' + t[1] + ' ' + all.filter(function (r) { return t[0] === 'all' || r.kind === t[0]; }).length + '</button>'; }).join('') + '</div>';
+    if (!a.length) return tabs + '<div class="bi-empty">아직 만든 결과가 없습니다. 위에서 요청하면 이곳에 쌓입니다.</div>';
+    return tabs + '<div class="qp-items">' + a.map(function (r) {
+      const dd = r.data || {}, line = r.kind === 'plan' ? (dd.hook || '') : ((dd.parts || [])[0] || '').slice(0, 90);
+      return '<div class="qp-item"><div class="qp-main"><div><span class="bi-mini">' + (r.kind === 'plan' ? '기획서' : '스레드') + '</span> <b>' + esc(dd.title || r.product || '(제목 없음)') + '</b></div><small>' + esc(r.product) + ' · ' + esc(r.kw) + ' · ' + esc(r.ts) + '</small><p>' + esc(line) + '</p></div><span class="bi-pill ' + (r.status === '사용함' ? 'grn' : r.status === '검수 중' ? 'yel' : '') + '">' + esc(r.status) + '</span><button type="button" class="bi-btn" data-qpopen="' + esc(r.id) + '">열기</button><button type="button" class="bi-btn qp-del" data-qpdel="' + esc(r.id) + '" aria-label="삭제">삭제</button></div>';
+    }).join('') + '</div><div class="bi-note">결과는 이 브라우저에만 저장됩니다(최대 40건). 다른 PC와 공유하려면 열어서 복사해 문서에 붙여 두세요.</div>';
+  }
+  function qpListUpd() { const el = $('#qpListBody'); if (el) el.innerHTML = qpListHtml(); }
+  function qpHtml(d) {
+    return '<section class="bi-card" id="qpCard"><div class="bi-ch"><h3>✍️ 기획 요청 <span class="bi-ms">수집한 고객 질문을 근거로 Gemini가 초안을 씁니다 · 사람 검수 전제</span></h3></div><div id="qpForm">' + qpFormHtml(d) + '</div></section>'
+      + '<section class="bi-card"><h3>📏 기획 규칙 <span class="bi-ms">요청할 때마다 AI에 함께 전달됩니다</span></h3><div id="qpRulesBody">' + qpRulesHtml() + '</div></section>'
+      + '<section class="bi-card"><h3>📚 기획 결과 <span class="bi-ms">열어서 프롬프트별로 복사해 쓰세요</span></h3><div id="qpListBody">' + qpListHtml() + '</div></section>';
+  }
+  function biViewQna2(d) {
+    return '<div class="qp-banner" data-st="all"><span>✍️ 수집된 고객 질문으로 <b>콘텐츠 기획서</b>와 <b>스레드 원고</b>를 바로 만들 수 있어요.</span><button type="button" class="bi-btn pri" data-qpjump="1">기획 요청 열기</button></div>' + biViewQna(d) + qpHtml(d);
+  }
+  function qpContext(d, f) {
+    const j = d.j, L = [], ks = qpKwRows(j), clip = function (s, n) { return String(s || '').replace(/\s+/g, ' ').slice(0, n); };
+    L.push('# 수집 현황 (네이버 지식iN·카페, ' + j.first + ' ~ ' + j.last + ', 누적 ' + fN(j.total) + '건)');
+    L.push('## 최근 7일 상승 키워드'); ks.filter(function (k) { return k.a >= 5 && isFinite(k.ch); }).slice(0, 8).forEach(function (k) { L.push('- ' + k.k + ': 직전 7일 ' + k.b + '건 → 최근 7일 ' + k.a + '건'); });
+    L.push('## 선택 키워드 "' + f.kw + '" 최근 고객 글 제목'); qpQRows(j, f.kw).slice(0, 12).forEach(function (i) { L.push('- ' + clip(j.items[i][4], 90)); });
+    if (f.qi !== '' && j.items[+f.qi]) L.push('## 기획 근거로 고른 고객 질문\n- ' + clip(j.items[+f.qi][4], 120));
+    L.push('[기획 규칙]\n' + qpRules().split('\n').filter(function (l) { return f.kind === 'plan' ? !/^스레드/.test(l) : !/^인물/.test(l); }).join('\n'));
+    const rec = qpPlans().filter(function (r) { return r.kind === f.kind; }).slice(0, 8).map(function (r) { return '- ' + ((r.data && r.data.title) || r.product); });
+    L.push('[최근 기획 제목]\n' + (rec.length ? rec.join('\n') : '(없음)'));
+    return L.join('\n');
+  }
+  function qpParse(t) {
+    let s = String(t || '').trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+    try { return JSON.parse(s); } catch (e) { const a = s.indexOf('{'), b = s.lastIndexOf('}'); if (a >= 0 && b > a) { try { return JSON.parse(s.slice(a, b + 1)); } catch (e2) {} } } return null;
+  }
+  function qpNow() { const d = new Date(); return (d.getMonth() + 1) + '/' + d.getDate() + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); }
+  function qpProg(txt) { const f = qpState(); f.prog = txt; const el = $('#qpProg'); if (el) el.textContent = txt; const b = $('[data-qpgo]'); if (b) b.disabled = f.busy; }
+  async function qpRun() {
+    const f = qpState(), d = BIX.cur; if (f.busy || !d || !d.j) return;
+    if (!String(f.product).trim()) { toast('상품을 선택하거나 입력해 주세요.', 'error'); return; }
+    if (!biUnlocked()) { biRelock(); return; }
+    const plan = f.kind === 'plan', n = +(plan ? f.n : f.tn) || 1, ctx = qpContext(d, f), q = f.qi !== '' && d.j.items[+f.qi] ? d.j.items[+f.qi][4] : '';
+    f.busy = true; qpSaveForm(); let done = 0, ok = 0, lastErr = ''; qpProg('요청 중 0/' + n + ' · 건당 15~40초 걸립니다');
+    const off = Math.floor(Math.random() * QP_CONCEPTS.length);
+    const one = function (i) {
+      const concept = f.concept === '자동 (다양성)' ? QP_CONCEPTS[(off + i) % QP_CONCEPTS.length] : f.concept;
+      const memo = String(f.memo).trim() ? f.memo.trim().slice(0, 600) : '(없음 — 제품의 특징·성분·효능은 대사에 쓰지 말고 [제품 특징 확인 필요]로 비워 둘 것)';
+      const common = '- 상품: ' + f.product + '\n- 근거 키워드: ' + f.kw + '\n- 근거 고객 질문: ' + (q ? q.slice(0, 120) : '(고르지 않음 · 키워드 흐름 기반)') + '\n- 추가 요청: ' + (String(f.extra).trim() || '(없음)').slice(0, 200) + '\n- 제품 근거 메모: ' + memo + '\n- 제품 근거 메모에 없는 특징·효능·안전성 표현(자극 없음, 순함, 효과적 등)은 쓰지 않는다.\n- 이번 건은 ' + (i + 1) + '/' + n + '번째다. 같은 요청의 다른 건과 소재·표현이 달라야 한다.';
+      const text = plan ? '숏폼 광고 기획서 1건을 작성해 줘.\n- 화면비: ' + f.ratio + '\n- 길이: ' + f.len + '\n- 컨셉: ' + concept + '\n' + common : '인스타 스레드 원고 1건을 작성해 줘.\n- 톤: ' + f.tone + '\n- 파트 수: ' + f.parts + '\n- Topic: 라이브오랄스\n' + common;
+      return new Promise(function (r) { setTimeout(r, i * 500); }).then(function () { return biAiPost([{ role: 'user', text: text }], ctx, { mode: plan ? 'plan' : 'thread', timeout: 130000 }); }).then(function (j) {
+        const data = qpParse(j.text), rec = { id: 'p' + Date.now().toString(36) + i, kind: f.kind, ts: qpNow(), product: f.product, kw: f.kw, q: q, req: plan ? { ratio: f.ratio, len: f.len, concept: concept } : { tone: f.tone, parts: f.parts }, status: '초안', data: data || { title: '(형식 오류 — 원문 보기)', raw: String(j.text).slice(0, 6000) } };
+        const a = qpPlans(); a.unshift(rec); qpPlansSet(a); ok++;
+      }).catch(function (e) { lastErr = e.message || String(e); }).then(function () { done++; qpProg('요청 중 ' + done + '/' + n); qpListUpd(); });
+    };
+    await Promise.all(Array.from({ length: n }, function (_, i) { return one(i); }));
+    f.busy = false; qpProg(ok ? '완료: ' + ok + '건 생성' + (ok < n ? ' · ' + (n - ok) + '건 실패(' + lastErr + ')' : '') : '실패: ' + lastErr); qpListUpd(); if (ok) toast(ok + '건을 만들었습니다. 아래 기획 결과에서 열어 보세요.');
+  }
+  function qpCopyBtn(label, text) { BIX.qpTxt = BIX.qpTxt || {}; const k = 'c' + (BIX.qpN = (BIX.qpN || 0) + 1); BIX.qpTxt[k] = text; return '<button type="button" class="bi-btn sm" data-qpc="' + k + '">' + label + '</button>'; }
+  function qpFlags(dd) { const t = [dd.hook, dd.person_prompt, dd.subtitles, dd.caption, (dd.parts || []).join(' '), (dd.cuts || []).map(function (c) { return (c.line || '') + ' ' + (c.video_prompt || ''); }).join(' ')].join(' '), m = t.match(QP_RISK) || []; return m.filter(function (x, i) { return m.indexOf(x) === i; }); }
+  function qpSec(title, body, copyTxt) { return '<div class="qp-sec"><div class="qp-sh"><b>' + title + '</b>' + (copyTxt ? qpCopyBtn('복사', copyTxt) : '') + '</div>' + body + '</div>'; }
+  function qpOpen(id) {
+    const r = qpPlans().filter(function (x) { return x.id === id; })[0]; if (!r) return; const dd = r.data || {}; BIX.qpTxt = {};
+    const meta = '<div class="qp-tags"><span class="bi-mini">' + esc(r.product) + '</span><span class="bi-mini">' + esc(r.kw) + '</span>' + Object.keys(r.req || {}).map(function (k) { return '<span class="bi-mini">' + esc(r.req[k]) + '</span>'; }).join('') + '</div>' + (r.q ? '<div class="bi-note">근거 고객 질문: ' + esc(r.q) + '</div>' : '');
+    const flags = qpFlags(dd), chk = (dd.checks || []).map(function (c) { return '<li>' + esc(c) + '</li>'; }).join(''), unc = (dd.unconfirmed || []).map(function (c) { return '<li>' + esc(c) + '</li>'; }).join('');
+    const foot = (flags.length ? '<div class="bi-warn">자동 점검(키워드): <b>' + esc(flags.join(', ')) + '</b> 표현이 들어 있습니다. 광고 표현으로 쓸 수 있는지 확인해 주세요.</div>' : '<div class="bi-note">자동 점검(키워드)에서 걸린 표현은 없습니다. 이는 일부 단어만 보는 점검이며, 최종 판단은 사람이 합니다.</div>')
+      + (chk ? qpSec('AI가 짚은 점검 포인트', '<ul class="bi-ins">' + chk + '</ul>') : '') + (unc ? qpSec('확인 필요 (입력되지 않은 정보)', '<ul class="bi-ins">' + unc + '</ul>') : '')
+      + '<div class="qp-sec"><div class="qp-sh"><b>상태</b><select data-qpstat="' + esc(r.id) + '">' + qpOpts(['초안', '검수 중', '사용함'], r.status) + '</select></div></div>';
+    let html = '', full = '';
+    if (r.raw || dd.raw) { html = '<div class="bi-warn">AI 답변을 형식대로 읽지 못해 원문을 그대로 보여 드립니다.</div>' + qpSec('원문', '<pre class="qp-pre">' + esc(dd.raw || '') + '</pre>', dd.raw || ''); full = dd.raw || ''; }
+    else if (r.kind === 'plan') {
+      const cuts = dd.cuts || [], cutTxt = cuts.map(function (c) { return '[' + c.time + '] ' + c.video_prompt + '\n대사·자막: ' + c.line; }).join('\n\n');
+      full = '[기획서] ' + dd.title + '\n상품: ' + r.product + ' / ' + Object.keys(r.req || {}).map(function (k) { return r.req[k]; }).join(' / ') + '\n근거: ' + (dd.basis || '') + '\n\n훅(0~3초): ' + dd.hook + '\n\n① 고정 인물 이미지 프롬프트\n' + dd.person_prompt + '\n\n② 컷별 영상 프롬프트\n' + cutTxt + '\n\n③ 자막\n' + dd.subtitles + '\n\n④ 음악 프롬프트\n' + dd.music_prompt + '\n\n⑤ 게시 문구\n' + dd.caption + (unc ? '\n\n※ 확인 필요: ' + (dd.unconfirmed || []).join(' / ') : '');
+      html = '<div class="qp-hook"><small>훅 · 0~3초</small><b>' + esc(dd.hook) + '</b></div>' + qpSec('① 고정 인물 이미지 프롬프트', '<p class="qp-txt">' + esc(dd.person_prompt) + '</p>', dd.person_prompt)
+        + qpSec('② 컷별 영상 프롬프트', cuts.map(function (c) { return '<div class="qp-cut"><div class="qp-sh"><b>' + esc(c.time) + '</b>' + qpCopyBtn('프롬프트 복사', c.video_prompt) + '</div><p class="qp-txt">' + esc(c.video_prompt) + '</p><p class="qp-line">대사·자막: ' + esc(c.line) + '</p></div>'; }).join(''), cutTxt)
+        + qpSec('③ 자막 전체', '<p class="qp-txt qp-pre">' + esc(dd.subtitles) + '</p>', dd.subtitles) + qpSec('④ 음악 프롬프트 (수노)', '<p class="qp-txt">' + esc(dd.music_prompt) + '</p>', dd.music_prompt) + qpSec('⑤ 게시 문구', '<p class="qp-txt qp-pre">' + esc(dd.caption) + '</p>', dd.caption);
+    } else {
+      let parts = (dd.parts || []).map(String); const tags = (parts.join(' ').match(/#[^\s#]+/g) || []);
+      if (tags.length) { const uniq = tags.filter(function (x, i) { return tags.indexOf(x) === i; }); parts = parts.map(function (p, i) { return i === 0 ? p : p.replace(/\s*#[^\s#]+/g, '').trim(); }); if (!/#/.test(parts[0])) parts[0] = parts[0] + '\n' + uniq.join(' '); }
+      full = parts.join('\n---\n'); const topic = (dd.topic || '라이브오랄스').replace(/^#/, '');
+      html = '<div class="qp-hook"><small>Topic</small><b>' + esc(topic) + '</b>' + qpCopyBtn('Topic 복사', topic) + '</div>' + parts.map(function (p, i) { return qpSec('파트 ' + (i + 1) + ' <small>' + p.length + '자</small>', '<p class="qp-txt qp-pre">' + esc(p) + '</p>', p); }).join('') + qpSec('전체 (--- 구분)', '<p class="bi-ms">파트 사이를 ---로 나눈 형태입니다. 해시태그는 첫 파트 끝에만 둡니다.</p>', full);
+    }
+    biOpenDrawer((dd.title || r.product || '결과').slice(0, 40), meta + html + foot + '<div class="bi-dr-btns">' + qpCopyBtn(r.kind === 'plan' ? '기획서 전체 복사' : '원고 전체 복사', full) + '</div>');
+  }
+  function bindQp(app) {
+    app.addEventListener('click', function (e) {
+      const t = e.target; let x; const f = qpState();
+      if ((x = t.closest('[data-qpkind]'))) { f.kind = x.dataset.qpkind; qpSaveForm(); qpFormUpd(); return; }
+      if (t.closest('[data-qpgo]')) { qpRun(); return; }
+      if ((x = t.closest('[data-qpopen]'))) { qpOpen(x.dataset.qpopen); return; }
+      if ((x = t.closest('[data-qpdel]'))) { if (confirm('이 결과를 삭제할까요?')) { qpPlansSet(qpPlans().filter(function (r) { return r.id !== x.dataset.qpdel; })); qpListUpd(); } return; }
+      if ((x = t.closest('[data-qpc]'))) { const v = (BIX.qpTxt || {})[x.dataset.qpc]; if (v !== undefined) biCopy(v, '복사했습니다. 필요한 곳에 붙여 넣으세요.'); return; }
+      if ((x = t.closest('[data-qpl]'))) { f.list = x.dataset.qpl; qpSaveForm(); qpListUpd(); return; }
+      if (t.closest('[data-qprsave]')) { const ta = $('#qpRulesTa'); if (ta) { try { localStorage.setItem('lo_bi_qprules', ta.value.trim() || QP_RULES_DEF); } catch (er) {} const b = $('#qpRulesBody'); if (b) b.innerHTML = qpRulesHtml(); toast('기획 규칙을 저장했습니다.'); } return; }
+      if (t.closest('[data-qprreset]')) { try { localStorage.removeItem('lo_bi_qprules'); } catch (er) {} const b = $('#qpRulesBody'); if (b) b.innerHTML = qpRulesHtml(); toast('기본 규칙으로 되돌렸습니다.'); return; }
+      if (t.closest('[data-qpjump]')) { BIX.stageBy = BIX.stageBy || {}; BIX.stageBy['bi-qna'] = 'action'; const m = $('#biMain'); if (m) m.setAttribute('data-stage', 'action'); $$('.bi-stage').forEach(function (b) { b.classList.toggle('on', b.dataset.bistage === 'action'); }); const c = $('#qpCard'); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+      if ((x = t.closest('[data-qnplan]'))) { const d = BIX.cur; if (!d || !d.j) return; const r = d.j.items[+x.dataset.qnplan]; if (!r) return; f.kind = f.kind || 'plan'; f.kw = r[3]; f.qi = String(x.dataset.qnplan); qpSaveForm(); qpFormUpd(); const jb = $('[data-qpjump]'); if (jb) jb.click(); toast('고객 질문을 기획 요청에 담았습니다. 상품을 고르고 요청하세요.'); return; }
+    });
+    const upd = function (e) {
+      const el = e.target.closest ? e.target.closest('[data-qpf]') : null; if (el) { const f = qpState(), k = el.dataset.qpf; f[k] = el.value; if (k === 'kw') { f.qi = ''; const s = $('#qpQi'); if (s && BIX.cur && BIX.cur.j) { const j = BIX.cur.j; s.innerHTML = qpOpts([['', '(고르지 않음 · 키워드 전체 흐름을 근거로 씁니다)']].concat(qpQRows(j, f.kw).map(function (i) { return [String(i), j.items[i][0].slice(5) + ' · ' + (j.items[i][4] || '(제목 없음)').slice(0, 60)]; })), ''); } } qpSaveForm(); return; }
+      const st = e.target.closest ? e.target.closest('[data-qpstat]') : null; if (st) { const a = qpPlans(); a.forEach(function (r) { if (r.id === st.dataset.qpstat) r.status = st.value; }); qpPlansSet(a); qpListUpd(); }
+    };
+    app.addEventListener('change', upd); app.addEventListener('input', function (e) { if (e.target.matches && e.target.matches('input[data-qpf], textarea[data-qpf]')) upd(e); });
+  }
+
   function bindBi2(app) {
     app.addEventListener('click', function (e) {
       const t = e.target; let x;
@@ -5053,7 +5212,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function qnFeed(j) {
     const st = BIX.qn || {}, qre = /\?|추천|어떻게|어떤|왜|뭐|되나요|가능|방법|궁금|고민|비교/;
     let items = j.items.filter(function (r) { return (!st.cat || st.cat === '전체' || r[1] === st.cat) && (!st.src || st.src === '전체' || r[2] === st.src) && (!st.kw || r[3] === st.kw) && (!st.qOnly || qre.test(r[4])) && (!st.q || (r[4] + ' ' + r[3]).toLowerCase().indexOf(st.q.toLowerCase()) >= 0); }).slice().reverse();
-    return { items: items, html: items.length ? items.slice(0, 40).map(function (r) { return '<tr><td>' + esc(r[0].slice(5)) + '</td><td><span class="bi-pill">' + esc(r[2]) + '</span></td><td>' + esc(r[3]) + '</td><td><a href="' + esc(r[5]) + '" target="_blank" rel="noopener noreferrer">' + esc(r[4] || '(제목 없음)') + ' ↗</a></td></tr>'; }).join('') : '<tr><td colspan="4" class="bi-ms">조건에 맞는 글이 없습니다 (최근 500건 안에서 찾습니다).</td></tr>' };
+    return { items: items, html: items.length ? items.slice(0, 40).map(function (r) { return '<tr><td>' + esc(r[0].slice(5)) + '</td><td><span class="bi-pill">' + esc(r[2]) + '</span></td><td>' + esc(r[3]) + '</td><td><a href="' + esc(r[5]) + '" target="_blank" rel="noopener noreferrer">' + esc(r[4] || '(제목 없음)') + ' ↗</a></td><td><button type="button" class="bi-btn sm" data-qnplan="' + j.items.indexOf(r) + '">기획</button></td></tr>'; }).join('') : '<tr><td colspan="5" class="bi-ms">조건에 맞는 글이 없습니다 (최근 500건 안에서 찾습니다).</td></tr>' };
   }
   function qnFeedUpd() { const d = BIX.cur; if (!d || !d.j.items) return; const f = qnFeed(d.j); const b = $('#qnFeedBody'); if (b) b.innerHTML = f.html; const c = $('#qnFeedCnt'); if (c) c.textContent = fN(f.items.length) + '건' + (f.items.length > 40 ? ' 중 최신 40건' : ''); }
   function biViewQna(d) {
@@ -5076,7 +5235,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       + '<section class="bi-card"><h3>일별 수집 건수 (최근 30일) ' + bReal + '</h3>' + bBars(days30.map(function (x) { return x[0].slice(5); }), [days30.map(function (x) { return x[1]; })], ['#14C4A9'], fN) + '</section>'
       + filt
       + '<div class="bi-grid2"><section class="bi-card"><h3>키워드 트렌드 ' + bReal + ' <span class="bi-ms">행을 누르면 그 키워드 글만 아래에 모아 봅니다</span></h3><div class="bi-tw" style="max-height:420px;overflow:auto"><table class="bi-t"><thead><tr><th>키워드</th><th>분류</th><th>누적</th><th>최근 7일</th><th>직전 7일</th><th>증감</th></tr></thead><tbody>' + krows + '</tbody></table></div></section>'
-      + '<section class="bi-card"><div class="bi-ch"><h3>글 모아보기 <span class="bi-ms" id="qnFeedCnt">' + fN(feed.items.length) + '건' + (feed.items.length > 40 ? ' 중 최신 40건' : '') + '</span></h3><button type="button" class="bi-btn" data-qncopy="1">제목 목록 복사</button></div><input type="search" id="qnQ" class="bi-q" style="max-width:none;width:100%;margin-bottom:8px" placeholder="제목·키워드 검색" value="' + esc(st.q || '') + '"><div class="bi-tw" style="max-height:420px;overflow:auto"><table class="bi-t"><thead><tr><th>날짜</th><th>출처</th><th>키워드</th><th>제목</th></tr></thead><tbody id="qnFeedBody">' + feed.html + '</tbody></table></div><div class="bi-note">최근 수집 500건 안에서 필터합니다. 제목 목록 복사는 콘텐츠 기획 회의용입니다.</div></section></div>';
+      + '<section class="bi-card"><div class="bi-ch"><h3>글 모아보기 <span class="bi-ms" id="qnFeedCnt">' + fN(feed.items.length) + '건' + (feed.items.length > 40 ? ' 중 최신 40건' : '') + '</span></h3><button type="button" class="bi-btn" data-qncopy="1">제목 목록 복사</button></div><input type="search" id="qnQ" class="bi-q" style="max-width:none;width:100%;margin-bottom:8px" placeholder="제목·키워드 검색" value="' + esc(st.q || '') + '"><div class="bi-tw" style="max-height:420px;overflow:auto"><table class="bi-t"><thead><tr><th>날짜</th><th>출처</th><th>키워드</th><th>제목</th><th></th></tr></thead><tbody id="qnFeedBody">' + feed.html + '</tbody></table></div><div class="bi-note">최근 수집 500건 안에서 필터합니다. 제목 목록 복사는 콘텐츠 기획 회의용입니다.</div></section></div>';
   }
 
   /* ── 과거·현재·미래 3단계 프레임 + 실무 액션 ── */
@@ -5090,7 +5249,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     'bi-rev': [[/실무 액션|체크리스트/, 'action'], [/목표 대비/, 'insight']],
     'bi-paid': [[/실무 액션|소재 브리프/, 'action'], [/인사이트|자주 쓰는|성과 비교/, 'insight']],
     'bi-comp': [[/실무 액션/, 'action'], [/인사이트|낮은 별점/, 'insight']],
-    'bi-qna': [[/실무 액션/, 'action'], [/인사이트|키워드 트렌드/, 'insight']],
+    'bi-qna': [[/기획 요청|기획 규칙|기획 결과|실무 액션/, 'action'], [/인사이트|키워드 트렌드/, 'insight']],
     'bi-news': [[/실무 액션/, 'action'], [/오늘의 초점|초점 흐름|키워드|분류별|주의/, 'insight']]
   };
   function biStageTag(pg) {
@@ -5320,8 +5479,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if (pg === 'bi') { inner = await biViewOverview(); inner += biActCard(biActsOverview()); }
       else if (pg === 'bi-manual') inner = biViewManual();
       else if (m.k && BIX.view[pg] === 'tabs') inner = await biViewTabs(pg);
-      else { const K = { 'bi-sales': [biLoadSales, biViewSales], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna], 'bi-news': [biLoadNews, biViewNews] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
-      if (BIX.page === pg) { el.innerHTML = biFrame(pg, inner, BIX.stamp); biStageTag(pg); biStash(pg); }
+      else { const K = { 'bi-sales': [biLoadSales, biViewSales], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
+      if (BIX.page === pg) { el.innerHTML = biFrame(pg, inner, BIX.stamp); biStageTag(pg); biStash(pg); if (pg === 'bi-qna') qpProdFill(); }
     } catch (e) { if (BIX.page === pg) el.innerHTML = biFrame(pg, '<div class="bi-warn">데이터를 불러오지 못했습니다: ' + esc(e.message || String(e)) + '<br>시트 구조가 바뀌었거나 네트워크 문제일 수 있습니다. 새로고침으로 다시 시도해 주세요.</div>', ''); }
   }
   function biRoute(pg) {
@@ -5330,7 +5489,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     clearInterval(BIX.timer); BIX.timer = setInterval(function () { if (document.body.dataset.mode === 'bi' && !document.hidden && BIX.view[BIX.page] !== 'tabs') { BIX.cache = {}; biRender(BIX.page, true); } }, 300000);
   }
   function bindBiApp() {
-    const app = $('#biApp'); if (!app) return; bindBi2(app); biChatInit();
+    const app = $('#biApp'); if (!app) return; bindBi2(app); bindQp(app); biChatInit();
     app.addEventListener('click', function (e) {
       if (e.target.closest('[data-birefresh]')) { BIX.cache = {}; biRender(BIX.page); return; }
       const ex = e.target.closest('[data-biexp]'); if (ex) { biExport(ex.dataset.biexp); return; }
