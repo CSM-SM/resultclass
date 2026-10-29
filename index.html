@@ -1788,9 +1788,9 @@ input, textarea, select { font-size: 14px; }
 .gate-go { align-self: flex-start; background: #111; color: #fff; font-weight: 700; font-size: 14px; padding: 10px 20px; border-radius: 999px; }
 .gate-card:hover .gate-go { background: var(--teal); }
 .bi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
-.bi-card { background: #fff; border: 1px solid #E6E8EB; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; }
-.bi-card:hover { border-color: var(--teal); }
-.bi-card h3 { font-size: 15px; margin: 4px 0 0; line-height: 1.45; }
+.bi-linkcard { background: #fff; border: 1px solid #E6E8EB; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; }
+.bi-linkcard:hover { border-color: var(--teal); }
+.bi-linkcard h3 { font-size: 15px; margin: 4px 0 0; line-height: 1.45; }
 .bi-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
 .bi-actions { display: flex; gap: 8px; margin-top: auto; padding-top: 8px; flex-wrap: wrap; }
 .bi-actions .btn-gold, .bi-actions .btn-secondary { text-decoration: none; padding: 7px 14px; font-size: 13px; width: auto; flex: none; }
@@ -1819,6 +1819,92 @@ body[data-mode="bi"] .page-content { max-width: 1200px; margin: 0 auto; width: 1
 .bi-lock-err { min-height: 18px; font-size: 12.5px; color: #C0392B; }
 .bi-lock-btns { display: flex; gap: 8px; justify-content: flex-end; }
 .bi-lock-btns .btn-gold, .bi-lock-btns .btn-secondary { width: auto; flex: none; padding: 9px 20px; }
+#biApp { display: none; }
+body[data-mode="bi"] .layout, body[data-mode="bi"] .site-footer, body[data-mode="bi"] .announce, body[data-mode="bi"] .fab { display: none !important; }
+body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100vh; background: #F3F5F9; color: #18213A; font-size: 14px; }
+.bs { background: #121F42; color: #C9D2E8; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; }
+.bs-brand { display: flex; align-items: center; gap: 10px; padding: 22px 20px 18px; border-bottom: 1px solid rgba(255,255,255,.07); text-decoration: none; color: #fff; }
+.bs-mark { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, #F57902, #FF9B3D); display: grid; place-items: center; font-weight: 800; font-size: 18px; color: #fff; }
+.bs-brand b { display: block; font-size: 15px; letter-spacing: .08em; }
+.bs-brand small { font-size: 11px; color: #8D9AC0; }
+.bs-nav { padding: 8px 10px 16px; flex: 1; }
+.bs-g { font-size: 11px; color: #6F7DA6; padding: 16px 12px 6px; }
+.bs-nav a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 9px; font-size: 13.5px; color: #C9D2E8; text-decoration: none; position: relative; }
+.bs-nav a:hover { background: rgba(255,255,255,.06); }
+.bs-nav a.on { background: rgba(255,255,255,.10); color: #fff; font-weight: 700; }
+.bs-nav a.on::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 3px; background: #F57902; }
+.bs-ic { width: 20px; text-align: center; }
+.bs-foot { padding: 12px 14px 18px; border-top: 1px solid rgba(255,255,255,.07); display: flex; flex-direction: column; gap: 6px; }
+.bs-foot a, .bs-foot button { text-align: left; background: none; border: 0; color: #9FB0D6; font-size: 13px; padding: 6px 8px; border-radius: 8px; cursor: pointer; text-decoration: none; }
+.bs-foot a:hover, .bs-foot button:hover { background: rgba(255,255,255,.07); color: #fff; }
+.bm { min-width: 0; padding: 0 clamp(16px, 3vw, 40px) 60px; }
+.bm-banner { background: #FFF6E5; border-bottom: 1px solid #F7E3B8; margin: 0 calc(-1 * clamp(16px, 3vw, 40px)); padding: 10px clamp(16px, 3vw, 40px); font-size: 12.5px; color: #6B5314; }
+.bi-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 14px; flex-wrap: wrap; padding: 26px 0 8px; }
+.bi-head h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -.02em; }
+.bi-head p { margin: 0; color: #5b6784; font-size: 13.5px; }
+.bi-ha { display: flex; gap: 8px; }
+.bi-btn { display: inline-block; background: #fff; border: 1px solid #DCE2EC; border-radius: 10px; padding: 8px 14px; font-size: 13px; font-weight: 600; color: #18213A; cursor: pointer; text-decoration: none; }
+.bi-btn:hover { border-color: #28407D; color: #28407D; }
+.bi-src { font-size: 12px; color: #7D879E; margin: 2px 0 14px; }
+.bi-b { display: inline-block; font-size: 11px; font-weight: 700; border-radius: 6px; padding: 1px 7px; vertical-align: middle; }
+.bi-b.real { background: #E6F6EF; color: #1C9A68; }
+.bi-b.ok { background: #E6F6EF; color: #1C9A68; }
+.bi-b.stale { background: #FFE9D2; color: #B85A00; }
+.bi-b.mo { background: #EAEFF9; color: #28407D; }
+.bi-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin: 10px 0 16px; }
+.bi-kpi, .bi-card { background: #fff; border: 1px solid #E3E8F0; border-radius: 14px; padding: 16px 18px; }
+.bi-card { margin-bottom: 16px; min-width: 0; }
+.bi-card.sm { margin: 0; }
+.bi-card h3 { font-size: 15px; margin: 0 0 12px; display: flex; gap: 8px; align-items: center; }
+.bi-kl { font-size: 12.5px; color: #5b6784; margin-bottom: 8px; }
+.bi-kv { font-size: 28px; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+.bi-kv small { font-size: 13px; font-weight: 600; color: #5b6784; margin-left: 3px; }
+.bi-ks { font-size: 12px; color: #7D879E; margin-top: 6px; min-height: 16px; }
+.bi-up { color: #1C9A68; } .bi-dn { color: #D24545; }
+.bi-grid2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
+.bi-grid2 > .bi-card { margin-bottom: 16px; }
+.bi-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-bottom: 14px; }
+.bi-cards2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 16px; }
+.bi-pn { font-size: 13px; font-weight: 700; margin-bottom: 8px; line-height: 1.4; min-height: 36px; }
+.bi-out { font-size: 18px; color: #7D879E; }
+.bi-spark { display: block; margin-top: 8px; }
+.bi-chart { display: flex; align-items: flex-end; gap: 8px; height: 210px; padding-top: 18px; overflow: hidden; }
+.bi-col { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; }
+.bi-bars { flex: 1; display: flex; align-items: flex-end; justify-content: center; gap: 3px; border-bottom: 1px solid #E3E8F0; }
+.bi-b1 { flex: 1; max-width: 34px; border-radius: 4px 4px 0 0; position: relative; min-height: 0; }
+.bi-b1 i { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-style: normal; color: #4A5672; white-space: nowrap; }
+.bi-chart.wide { gap: 2px; } .bi-chart.wide .bi-x { font-size: 9px; }
+.bi-x { text-align: center; font-size: 11.5px; color: #7D879E; padding-top: 4px; }
+.bi-legend { font-size: 12px; color: #5b6784; margin-bottom: 4px; } .bi-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin: 0 4px 0 8px; vertical-align: middle; } .bi-legend i:first-child { margin-left: 0; }
+.bi-h { display: flex; flex-direction: column; gap: 10px; }
+.bi-hr { display: grid; grid-template-columns: 110px 1fr 70px; gap: 10px; align-items: center; font-size: 13px; }
+.bi-hl { color: #3c4766; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bi-ht { height: 12px; background: #EEF1F6; border-radius: 6px; overflow: hidden; } .bi-ht i { display: block; height: 100%; border-radius: 6px; }
+.bi-hv { text-align: right; font-weight: 700; }
+.bi-tw { overflow-x: auto; }
+.bi-t { width: 100%; border-collapse: collapse; font-size: 13px; }
+.bi-t th { text-align: left; font-size: 12px; color: #7D879E; font-weight: 600; padding: 8px 10px; border-bottom: 1px solid #E3E8F0; white-space: nowrap; }
+.bi-t td { padding: 10px; border-bottom: 1px solid #EEF1F6; vertical-align: top; }
+.bi-t td small { display: block; font-size: 11px; color: #7D879E; margin-top: 2px; }
+.bi-t td small.bi-up { color: #1C9A68; } .bi-t td small.bi-dn { color: #D24545; }
+.bi-note { font-size: 12px; color: #7D879E; margin-top: 10px; line-height: 1.6; }
+.bi-warn { background: #FFF1E4; border: 1px solid #F8D3AE; color: #7A3F00; border-radius: 12px; padding: 12px 16px; margin: 10px 0 14px; font-size: 13px; line-height: 1.6; }
+.bi-empty, .bi-loading { padding: 30px; text-align: center; color: #7D879E; font-size: 13px; }
+.bi-ms { color: #A5ADBF; font-size: 12px; }
+.bi-bar2 { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin: 8px 0; }
+.bi-bl, .bi-bn { font-size: 12px; color: #7D879E; } .bi-bn { margin-left: auto; }
+.bi-chip { border: 1px solid #DCE2EC; background: #fff; border-radius: 999px; padding: 5px 13px; font-size: 12.5px; cursor: pointer; color: #3c4766; }
+.bi-chip.on { background: #28407D; border-color: #28407D; color: #fff; font-weight: 700; }
+.bi-ch { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; } .bi-ch h3 { margin: 0; }
+.bi-dl { margin: 0 0 12px; font-size: 13px; line-height: 1.65; } .bi-dl dt { font-weight: 700; color: #28407D; margin-top: 8px; font-size: 12px; } .bi-dl dd { margin: 2px 0 0; color: #3c4766; }
+.bi-man { background: #fff; border: 1px solid #E3E8F0; border-radius: 14px; padding: 12px 18px; margin-bottom: 16px; } .bi-man summary { cursor: pointer; font-weight: 700; font-size: 13.5px; }
+@media (max-width: 980px) {
+  body[data-mode="bi"] #biApp { grid-template-columns: 1fr; }
+  .bs { position: static; height: auto; }
+  .bs-nav { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 10px; } .bs-g { display: none; } .bs-nav a { padding: 7px 11px; }
+  .bs-foot { flex-direction: row; } .bi-grid2 { grid-template-columns: 1fr; } .bi-cards2 { grid-template-columns: 1fr; }
+  .bi-hr { grid-template-columns: 90px 1fr 60px; }
+}
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -3838,16 +3924,16 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { gate: '첫 화면', bi: '대시보드', setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { gate: '첫 화면', bi: '종합 현황', 'bi-sales': '매출·광고', 'bi-journey': '주력상품 고객여정', 'bi-rank': '올영 랭킹', 'bi-inf': '인플루언서', 'bi-rev': '리뷰 운영', 'bi-paid': '페이드 소재', 'bi-manual': '시트 메뉴얼', setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page, replaceHist) {
     if (page === 'automations') { page = 'assets'; replaceHist = true; }
     if (!PAGES[page]) { page = 'home'; replaceHist = true; }
-    if (page === 'bi' && !biUnlocked()) { page = 'gate'; replaceHist = true; setTimeout(openBiLock, 0); }
+    if (page.indexOf('bi') === 0 && !biUnlocked()) { page = 'gate'; replaceHist = true; setTimeout(openBiLock, 0); }
     $$('.page').forEach((p) => p.classList.toggle('active', p.id === 'page-' + page));
     $$('.nav-item').forEach((n) => n.classList.toggle('active', n.dataset.page === (page === 'builder' ? 'functions' : page)));
     $('#topbarTitle').textContent = PAGES[page];
-    document.body.setAttribute('data-mode', page === 'gate' ? 'gate' : page === 'bi' ? 'bi' : 'ai');
+    document.body.setAttribute('data-mode', page === 'gate' ? 'gate' : page.indexOf('bi') === 0 ? 'bi' : 'ai');
     if (location.hash !== '#' + page) { if (replaceHist) history.replaceState(null, '', '#' + page); else history.pushState(null, '', '#' + page); }
     closeSidebar();
     window.scrollTo(0, 0);
@@ -3857,17 +3943,18 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (page === 'refs') loadRefs();
     if (page === 'dashboard') startDashboard(); else stopDashboard();
     if (page === 'precheck') renderPrecheck();
+    if (page.indexOf('bi') === 0) biRoute(page);
   }
 
   const BI_HASH = '1aea18e6c1be0ca74f15127115c4f2710b17043643d0882a7bf8aca151016012';
-  function biUnlocked() { try { return sessionStorage.getItem('lo_bi_ok') === BI_HASH; } catch (e) { return false; } }
+  function biUnlocked() { try { return sessionStorage.getItem('lo_bi_ok') === BI_HASH && !!sessionStorage.getItem('lo_bi_pw'); } catch (e) { return false; } }
   async function biHash(s) { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('resultclass-bi:' + s)); return Array.prototype.map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join(''); }
   function openBiLock() { const m = $('#biLock'); if (!m) return; m.classList.add('open'); $('#biPw').value = ''; $('#biLockErr').textContent = ''; setTimeout(function () { $('#biPw').focus(); }, 30); }
   function closeBiLock() { const m = $('#biLock'); if (m) m.classList.remove('open'); }
   async function submitBiLock() {
     const v = $('#biPw').value; if (!v) { $('#biLockErr').textContent = '암호를 입력해 주세요.'; return; }
     let h = ''; try { h = await biHash(v); } catch (e) { $('#biLockErr').textContent = '이 브라우저에서는 암호 확인을 할 수 없습니다.'; return; }
-    if (h === BI_HASH) { try { sessionStorage.setItem('lo_bi_ok', BI_HASH); } catch (e) {} closeBiLock(); go('bi'); }
+    if (h === BI_HASH) { try { sessionStorage.setItem('lo_bi_ok', BI_HASH); sessionStorage.setItem('lo_bi_pw', v); } catch (e) {} closeBiLock(); go('bi'); }
     else { $('#biLockErr').textContent = '암호가 맞지 않습니다.'; $('#biPw').select(); }
   }
   function bindBiLock() {
@@ -3878,11 +3965,275 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     }, true);
     document.addEventListener('keydown', function (e) { if (!$('#biLock') || !$('#biLock').classList.contains('open')) return; if (e.key === 'Enter') { e.preventDefault(); submitBiLock(); } if (e.key === 'Escape') closeBiLock(); });
   }
+
+  /* ── 대시보드 앱 (시트 요약 · 암호 보호) ───────────────────── */
+  const BIX = { cache: {}, page: 'bi', timer: null, jm: '2026.10', jp: 0, jmet: '방문수', stamp: '' };
+  const BI_SRC = {
+    sales: { t: '20262025 라오전체 매출/광고현황', u: 'https://docs.google.com/spreadsheets/d/1WXSrYGUAiPNGV6Wrm0FE7hV1ON-v0Xyv1DqD7rKYAIw/edit?gid=1115730697#gid=1115730697' },
+    journey: { t: '주력상품 일 고객여정 대시보드', u: 'https://docs.google.com/spreadsheets/d/1ylxLgTobQLWrPUNrqhMmjMafa8JHnrJfoxBqqK5EEtM/edit?gid=1040615685#gid=1040615685' },
+    inf: { t: '[MK] 2026 인플루언서 마케팅 리스트', u: 'https://docs.google.com/spreadsheets/d/19LoIX57UdN13nUXqHbfRA6zFhkRkwobaY0QKokueqzo/edit?gid=1384807088#gid=1384807088' },
+    rev: { t: '자사/스스 리뷰 운영 기획안', u: 'https://docs.google.com/spreadsheets/d/10z94a9TJFrMKlEAeWDdw6BLBuPHXRz4yuLkUHug8LcM/edit?gid=1682728294#gid=1682728294' },
+    paid: { t: '[마케팅팀]2026 페이드 소재 리포트', u: 'https://docs.google.com/spreadsheets/d/1Smrlc0ijiMUDRlY4j7RDLcpGWe5mETTFSwDzZoGBq94/edit?gid=73896278#gid=73896278' },
+    rank: { t: 'oliveyoung_rank_log(올영 랭킹추적 자동화)', u: 'https://docs.google.com/spreadsheets/d/1ovMG7yM7btTv54O1SxU1zmLZYdUbNXlarYL89_q4fLI/edit?gid=141352098#gid=141352098' }
+  };
+  const BI_MANUAL = {
+    sales: { what: '매체(채널)별 월 매출·광고비·ROAS를 한 장으로 모은 손익분기표입니다. 시트 제목에 [보안] 표시가 있는 내부 자료입니다.', tabs: '월별 요약(신규) = 매체별 손익분기표(이 화면이 읽는 탭) · 26년 7~11월·25년 4월~26년 6월 월별 탭 · 월별 국내 B2C/B2B 일별 탭 · 월별 요약', read: '월별 요약(신규)에서 실매출 합계, 국내외 광고비 합계, 채널별 매출, 채널별 ROAS(목표 대비)를 읽습니다.', note: '월 목표·월별 값은 시트에 입력된 그대로이며, 값이 비어 있는 월(11·12월)은 표시하지 않습니다.' },
+    journey: { what: '주력상품 4종(전동칫솔, 치아미백제 세트, 농축가글액, 미백치약)의 일별 방문·구매클릭·전환·구매금액·스크롤 깊이를 모은 시트입니다.', tabs: '2026.07~2026.10(일 고객여정) · CTR_2026.xx(구매클릭률 요약) · 이벤트_2026.xx · 안내 · 주력_템플릿 · 이벤트_템플릿', read: '선택한 월 탭(2026.xx)에서 상품별 방문수, 구매클릭수, 전환수, 구매금액, 평균 객단가를 읽습니다.', note: '당월 탭은 날짜 칸이 월말까지 있고, 아직 값이 없는 날은 비어 있습니다. 데이터가 있는 마지막 날짜까지만 표시합니다.' },
+    inf: { what: '인플루언서 후보 컨택 리스트와 월별 진행 기록을 관리하는 시트입니다.', tabs: '인플루언서 리스트업(이 화면이 읽는 탭) · 2025.06월~2026.09월 월별 탭 · 공구 · 스타일씨 · 선정 기준 · 매뉴얼.계약서 · 영상 기획(템플릿) · 파트너십 광고 인원별 · 영상 캘린더', read: '리스트업 탭에서 컨택 건수, 컨택 월, 플랫폼, 구독자 규모를 집계합니다.', note: '단가·고료·이메일·현황 메모는 협의 금액과 개인정보가 포함되어 있어 서버 단계에서 제외하고, 건수만 집계합니다.' },
+    rev: { what: '자사몰/스마트스토어 리뷰 운영 현황과 월별 KPI(리뷰율, 포토리뷰율, 부정 VOC, 평점)를 정리한 기획안입니다.', tabs: '리뷰 운영 기획안 · 8월운영안/7월성과(이 화면이 읽는 탭) · 7월운영안/6월성과 · 6월운영안/5월성과 · 5월 리뷰 운영 현황 및 성과 공유 · 리뷰 운영 기획안(5월) · 추가 운영안', read: '8월운영안/7월성과 탭의 월별 표(1~7월)를 읽습니다.', note: '월별 표는 사람이 갱신하는 방식으로 보이며, 이 탭의 마지막 월은 7월입니다.' },
+    paid: { what: '마케팅팀 광고 소재의 기획·성과와 경쟁사 소재 분석을 모은 리포트입니다.', tabs: '월간 소재기획 대시보드(이 화면이 읽는 탭) · 경쟁사 소재 분석 리포트(수집일·브랜드만 집계) · 경쟁사 분석/리뷰 분석 데이터 · 7월 미백제_스스/올영 · 7월 전동칫솔_스스 · 6월 미백제 · 6월 고체가글', read: '월간 총괄 현황의 월별 총 기획 수량·담당자 수, 경쟁사 소재 수집 건수를 읽습니다.', note: '광고 문구·링크·USP 같은 상세 내용은 이 화면에 가져오지 않습니다. 소재별 지출·ROAS 탭은 시트에서 직접 확인하세요.' },
+    rank: { what: '올리브영 구강용품 제품별 순위를 시간대별로 기록하는 자동화 로그입니다.', tabs: 'oliveyoung_rank_log.csv(이 화면이 읽는 탭) · Calc_Data · Dashboard · 기준', read: '제품별 가장 최근 순위, 기록된 최고 순위, 순위 추이를 읽습니다. 이름에 (test)가 붙은 기록은 제외합니다.', note: '"순위권 밖"은 순위 숫자 없이 표시합니다.' }
+  };
+  function biPw() { try { return sessionStorage.getItem('lo_bi_pw') || ''; } catch (e) { return ''; } }
+  function biRelock() { try { sessionStorage.removeItem('lo_bi_ok'); sessionStorage.removeItem('lo_bi_pw'); } catch (e) {} go('gate'); }
+  function biFetch(key, gid, rows) {
+    const ck = key + ':' + gid, c = BIX.cache[ck];
+    if (c && Date.now() - c.t < 45000) return Promise.resolve(c.j);
+    return fetch(SHEET_ENDPOINT + '?type=bi_grid&pw=' + encodeURIComponent(biPw()) + '&key=' + key + '&gid=' + gid + '&r=' + (rows || 400))
+      .then(function (r) { return r.json(); })
+      .then(function (j) { if (!j.ok) { if (j.error === 'auth') { biRelock(); } throw new Error(j.error === 'auth' ? '암호가 맞지 않습니다' : (j.error || '읽기 실패')); } BIX.cache[ck] = { t: Date.now(), j: j }; BIX.stamp = j.updated || BIX.stamp; return j; });
+  }
+  function bn(s) { if (s === undefined || s === null) return NaN; s = String(s).trim(); if (!s || s === '-') return NaN; const v = parseFloat(s.replace(/[₩$,%\s초원건회]/g, '')); return isNaN(v) ? NaN : v; }
+  function fN(n) { return isFinite(n) ? Math.round(n).toLocaleString('ko-KR') : '-'; }
+  function fW(n) { if (!isFinite(n)) return '-'; const a = Math.abs(n); if (a >= 1e8) return (n / 1e8).toFixed(2).replace(/\.?0+$/, '') + '억'; if (a >= 1e4) return Math.round(n / 1e4).toLocaleString('ko-KR') + '만'; return Math.round(n).toLocaleString('ko-KR'); }
+  function fP(n, d) { return isFinite(n) ? n.toFixed(d === undefined ? 1 : d).replace(/\.0+$/, '') + '%' : '-'; }
+  function bnorm(s) { return String(s === undefined || s === null ? '' : s).replace(/\s+/g, ' ').trim(); }
+  const bReal = '<span class="bi-b real">실제</span>';
+  function bKpi(label, val, unit, sub, tone) { return '<div class="bi-kpi"><div class="bi-kl">' + esc(label) + ' ' + bReal + '</div><div class="bi-kv' + (tone ? ' ' + tone : '') + '">' + val + (unit ? '<small>' + esc(unit) + '</small>' : '') + '</div><div class="bi-ks">' + (sub || '&nbsp;') + '</div></div>'; }
+  function bBars(labels, series, colors, fmt, note) {
+    let mx = 0; series.forEach(function (s) { s.forEach(function (v) { if (isFinite(v) && v > mx) mx = v; }); });
+    if (!mx) return '<div class="bi-empty">표시할 값이 없습니다.</div>';
+    const wide = labels.length > 14;
+    return '<div class="bi-chart' + (wide ? ' wide' : '') + '">' + labels.map(function (l, i) {
+      return '<div class="bi-col"><div class="bi-bars">' + series.map(function (s, k) { const v = s[i]; const h = isFinite(v) ? Math.max(2, Math.round(v / mx * 100)) : 0; return '<div class="bi-b1" style="height:' + h + '%;background:' + colors[k] + '" title="' + esc(l) + ': ' + (fmt ? fmt(v) : fN(v)) + '">' + (!wide && isFinite(v) ? '<i>' + (fmt ? fmt(v) : fN(v)) + '</i>' : '') + '</div>'; }).join('') + '</div><div class="bi-x">' + esc(l) + '</div></div>';
+    }).join('') + '</div>' + (note ? '<div class="bi-note">' + note + '</div>' : '');
+  }
+  function bH(items, fmt, color) {
+    const mx = Math.max.apply(null, items.map(function (x) { return isFinite(x.v) ? x.v : 0; }).concat([1]));
+    return '<div class="bi-h">' + items.map(function (x) { return '<div class="bi-hr"><span class="bi-hl">' + esc(x.l) + '</span><span class="bi-ht"><i style="width:' + (isFinite(x.v) ? Math.round(x.v / mx * 100) : 0) + '%;background:' + (color || '#28407D') + '"></i></span><span class="bi-hv">' + (fmt ? fmt(x.v) : fN(x.v)) + '</span></div>'; }).join('') + '</div>';
+  }
+  function bSpark(vals, inv) {
+    const pts = vals.map(function (v, i) { return isFinite(v) ? [i, v] : null; }).filter(Boolean); if (pts.length < 2) return '<span class="bi-ms">기록 부족</span>';
+    const xs = pts.map(function (p) { return p[0]; }), ys = pts.map(function (p) { return p[1]; }), x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+    const W = 160, Ht = 38; const px = function (x) { return 4 + (x - x0) / Math.max(1, x1 - x0) * (W - 8); }; const py = function (y) { const t = (y - y0) / Math.max(1, y1 - y0); return 4 + (inv ? t : 1 - t) * (Ht - 8); };
+    return '<svg class="bi-spark" viewBox="0 0 ' + W + ' ' + Ht + '" width="' + W + '" height="' + Ht + '"><polyline fill="none" stroke="#28407D" stroke-width="2" points="' + pts.map(function (p) { return px(p[0]).toFixed(1) + ',' + py(p[1]).toFixed(1); }).join(' ') + '"/></svg>';
+  }
+  function dAgo(dt) { return Math.max(0, Math.floor((Date.now() - dt.getTime()) / 86400000)); }
+  function ymd(d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+  function fresh(label, age) { return age === null || age === undefined ? '<span class="bi-b mo">' + esc(label) + '</span>' : (age > 14 ? '<span class="bi-b stale">' + esc(label) + ' · ' + age + '일 전</span>' : '<span class="bi-b ok">' + esc(label) + ' · ' + (age === 0 ? '오늘' : age + '일 전') + '</span>'); }
+
+  /* 매출·광고 */
+  async function biLoadSales() {
+    const j = await biFetch('sales', '1115730697', 170), v = j.values, hi = v.findIndex(function (r) { return r.indexOf('월 목표') >= 0; });
+    if (hi < 0) throw new Error('매출 시트의 헤더(월 목표)를 찾지 못했습니다');
+    const H = v[hi], mc = []; H.forEach(function (h, i) { if (/^26년 \d+월$/.test(bnorm(h))) mc.push(i); });
+    const find = function (re, col) { return v.find(function (r, i) { return i > hi && (col === undefined ? (re.test(bnorm(r[1])) || re.test(bnorm(r[2]))) : re.test(bnorm(r[col]))); }); };
+    const ser = function (row, pct) { return row ? mc.map(function (c) { return { m: bnorm(H[c]).replace('26년 ', ''), v: pct && String(row[c]).indexOf('%') < 0 ? NaN : bn(row[c]) }; }) : []; };
+    const rs = find(/^국내외 D2C, B2B 합계 \(실매출\)$/), ra = find(/^국내외 광고비 합계/);
+    if (!rs || !ra) throw new Error('실매출/광고비 합계 행을 찾지 못했습니다');
+    const sS = ser(rs), sA = ser(ra); const months = sS.filter(function (x) { return isFinite(x.v); }).map(function (x) { return x.m; });
+    const val = function (arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; };
+    const chans = [['자사몰', /^자사몰 합$/], ['스마트스토어', /^스마트스토어$/], ['올리브영 사입', /^올리브영 사입$/], ['쿠팡 로켓 사입', /^쿠팡 로켓 사입$/]].map(function (c) { const r = find(c[1]); return { l: c[0], s: ser(r) }; });
+    const ov = find(/^해외 D2C 매출 합계$/, 1); if (ov) chans.push({ l: '해외 D2C', s: ser(ov) });
+    const roas = [['자사몰', '자사몰'], ['올리브영', '올리브영'], ['스마트스토어', '스마트스토어'], ['쿠팡', '쿠팡']].map(function (c) { const a = find(new RegExp('^' + c[1] + ' ROAS$')), t = find(new RegExp('^' + c[1] + ' 목표 ROAS$')); return { l: c[0], a: ser(a, true), t: ser(t, true) }; });
+    const last = months[months.length - 1];
+    return { j: j, months: months, sS: sS, sA: sA, chans: chans, roas: roas, last: last, target: bn(rs[3]), fresh: { label: '시트 최신 월 ' + last, age: null } };
+  }
+  function biViewSales(d) {
+    const val = function (arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; };
+    const L = d.last, i = d.months.indexOf(L), P = i > 0 ? d.months[i - 1] : null;
+    const s = val(d.sS, L), a = val(d.sA, L), ps = P ? val(d.sS, P) : NaN;
+    const mom = isFinite(ps) && ps ? (s - ps) / ps * 100 : NaN;
+    const labels = d.months, cS = labels.map(function (m) { return val(d.sS, m); }), cA = labels.map(function (m) { return val(d.sA, m); });
+    const chItems = d.chans.map(function (c) { return { l: c.l, v: val(c.s, L) }; }).filter(function (x) { return isFinite(x.v); }).sort(function (x, y) { return y.v - x.v; });
+    const rrows = d.roas.map(function (r) { return '<tr><td><b>' + esc(r.l) + '</b></td>' + d.months.map(function (m) { const x = val(r.a, m), t = val(r.t, m); const ok = isFinite(x) && isFinite(t) ? x >= t : null; return '<td>' + (isFinite(x) ? '<b>' + fP(x, 0) + '</b>' : '-') + (isFinite(t) ? '<small class="' + (ok === null ? '' : ok ? 'bi-up' : 'bi-dn') + '">목표 ' + fP(t, 0) + '</small>' : '') + '</td>'; }).join('') + '</tr>'; }).join('');
+    return '<div class="bi-kpis">' + bKpi(L + ' 실매출', fW(s), '원', isFinite(mom) ? '전월 대비 <b class="' + (mom >= 0 ? 'bi-up' : 'bi-dn') + '">' + (mom >= 0 ? '▲ ' : '▼ ') + fP(Math.abs(mom)) + '</b>' : '') + bKpi('월 목표 대비', isFinite(d.target) && d.target ? fP(s / d.target * 100, 0) : '-', '', '월 목표 ' + fW(d.target) + '원') + bKpi(L + ' 광고비 합계', fW(a), '원', '마케팅 + 영업') + bKpi('광고비 / 실매출', isFinite(s) && s ? fP(a / s * 100) : '-', '', L + ' 기준') + '</div>'
+      + '<div class="bi-grid2"><section class="bi-card"><h3>월별 실매출 · 광고비 ' + bReal + '</h3>' + '<div class="bi-legend"><i style="background:#28407D"></i>실매출 <i style="background:#F57902"></i>광고비</div>' + bBars(labels, [cS, cA], ['#28407D', '#F57902'], fW, '단위: 원 (억·만 표기)') + '</section>'
+      + '<section class="bi-card"><h3>' + esc(L) + ' 채널별 매출 ' + bReal + '</h3>' + bH(chItems, fW) + '<div class="bi-note">자사몰 합 = 자사몰 + 공동구매. 해외 D2C = 아마존·틱톡US·쇼피 합계.</div></section></div>'
+      + '<section class="bi-card"><h3>채널별 ROAS vs 목표 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>채널</th>' + d.months.map(function (m) { return '<th>' + esc(m) + '</th>'; }).join('') + '</tr></thead><tbody>' + rrows + '</tbody></table></div><div class="bi-note">목표가 시트에 숫자(%)로 입력된 월만 목표를 표시합니다. 초록 = 목표 이상, 빨강 = 목표 미만.</div></section>';
+  }
+
+  /* 주력상품 고객여정 */
+  const BI_JG = { '2026.10': '1280577857', '2026.09': '1187003740', '2026.08': '1157689094', '2026.07': '42565156' };
+  async function biLoadJourney() {
+    const m = BIX.jm, j = await biFetch('journey', BI_JG[m], 110), v = j.values, hi = v.findIndex(function (r) { return r[0] === '상품번호'; });
+    if (hi < 0) throw new Error('고객여정 시트의 헤더(상품번호)를 찾지 못했습니다');
+    const H = v[hi], days = []; for (let c = 4; c < H.length; c++) { if (bnorm(H[c])) days.push({ c: c, l: bnorm(H[c]) }); }
+    const starts = []; for (let r = hi + 1; r < v.length; r++) { if (bnorm(v[r][0]) && bnorm(v[r][1]) === '방문수') starts.push(r); }
+    const prods = starts.map(function (st, k) {
+      const en = k + 1 < starts.length ? starts[k + 1] : v.length, rows = {};
+      for (let r = st; r < en; r++) { const lb = bnorm(v[r][1]); if (lb && !rows[lb]) rows[lb] = v[r]; }
+      return { name: bnorm(v[st][0]), rows: rows };
+    });
+    let lastC = -1; if (prods[0]) { const rr = prods[0].rows['방문수']; days.forEach(function (d) { if (bnorm(rr[d.c]) !== '') lastC = d.c; }); }
+    const upto = days.filter(function (d) { return d.c <= lastC; });
+    const lastLabel = upto.length ? upto[upto.length - 1].l : ''; let age = null; const mm = /^(\d+)-(\d+)$/.exec(lastLabel); if (mm) { age = dAgo(new Date(+m.slice(0, 4), +mm[1] - 1, +mm[2])); }
+    return { j: j, prods: prods, upto: upto, lastLabel: lastLabel, month: m, fresh: { label: m + ' 탭 ' + (lastLabel || '값 없음'), age: age } };
+  }
+  function biViewJourney(d) {
+    const g = function (p, lb, col) { const r = p.rows[lb]; return r ? bn(r[col]) : NaN; };
+    const tot = function (lb) { return d.prods.reduce(function (s, p) { const x = g(p, lb, 3); return s + (isFinite(x) ? x : 0); }, 0); };
+    const vis = tot('방문수'), conv = tot('전환수'), amt = tot('구매금액'), clk = tot('구매클릭수');
+    const sel = d.prods[BIX.jp] || d.prods[0], met = BIX.jmet;
+    const mets = ['방문수', '구매클릭수', '전환수', '구매금액'];
+    const series = sel ? d.upto.map(function (x) { const r = sel.rows[met]; return r ? bn(r[x.c]) : NaN; }) : [];
+    const mTabs = Object.keys(BI_JG).sort().map(function (m) { return '<button type="button" class="bi-chip' + (m === d.month ? ' on' : '') + '" data-jm="' + m + '">' + m + '</button>'; }).join('');
+    const pTabs = d.prods.map(function (p, i) { return '<button type="button" class="bi-chip' + (p === sel ? ' on' : '') + '" data-jp="' + i + '">' + esc(p.name.replace(/\s*\(#\d+\)/, '')) + '</button>'; }).join('');
+    const mmTabs = mets.map(function (x) { return '<button type="button" class="bi-chip' + (x === met ? ' on' : '') + '" data-jmet="' + x + '">' + x + '</button>'; }).join('');
+    const rows = d.prods.map(function (p) { return '<tr><td><b>' + esc(p.name) + '</b></td><td>' + fN(g(p, '방문수', 3)) + '</td><td>' + fN(g(p, '구매클릭수', 3)) + '</td><td>' + fP(g(p, '구매클릭률(CTR)', 3), 2) + '</td><td>' + fN(g(p, '전환수', 3)) + '</td><td>' + fP(g(p, '전환율', 3), 2) + '</td><td>' + fW(g(p, '구매금액', 3)) + '원</td><td>' + fN(g(p, '평균 객단가', 3)) + '원</td></tr>'; }).join('');
+    return '<div class="bi-bar2"><span class="bi-bl">월</span>' + mTabs + '<span class="bi-bn">값이 있는 마지막 날: <b>' + esc(d.lastLabel || '-') + '</b></span></div>'
+      + '<div class="bi-kpis">' + bKpi('총 방문 (누적)', fN(vis), '회', d.prods.length + '개 상품 합계') + bKpi('구매클릭 (누적)', fN(clk), '회', vis ? '방문 대비 ' + fP(clk / vis * 100, 2) : '') + bKpi('전환 (누적)', fN(conv), '건', vis ? '방문 대비 ' + fP(conv / vis * 100, 2) : '') + bKpi('구매금액 (누적)', fW(amt), '원', conv ? '전환당 ' + fN(amt / conv) + '원' : '') + '</div>'
+      + '<section class="bi-card"><h3>일별 추이 ' + bReal + '</h3><div class="bi-bar2">' + pTabs + '</div><div class="bi-bar2">' + mmTabs + '</div>' + bBars(d.upto.map(function (x) { return x.l.replace(/^\d+-/, ''); }), [series], ['#28407D'], met === '구매금액' ? fW : fN, esc(sel ? sel.name : '') + ' · ' + met + ' · 날짜는 일(日)') + '</section>'
+      + '<section class="bi-card"><h3>상품별 누적 요약 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>상품</th><th>방문</th><th>구매클릭</th><th>CTR</th><th>전환</th><th>전환율</th><th>구매금액</th><th>객단가</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>';
+  }
+
+  /* 올영 랭킹 */
+  async function biLoadRank() {
+    const j = await biFetch('rank', '1815489030', 400), v = j.values, H = v[0] || [];
+    const recs = v.slice(1).filter(function (r) { return bnorm(r[0]) && !/test/i.test(r[0]); });
+    const prods = []; for (let c = 1; c < H.length; c++) { if (bnorm(H[c])) prods.push({ c: c, name: bnorm(H[c]) }); }
+    prods.forEach(function (p) {
+      const pts = recs.map(function (r) { const x = bnorm(r[p.c]); return { t: r[0], raw: x, n: /^\d+$/.test(x) ? +x : NaN }; }).filter(function (x) { return x.raw !== ''; });
+      p.pts = pts; p.last = pts[pts.length - 1]; p.best = pts.reduce(function (b, x) { return isFinite(x.n) && (b === null || x.n < b) ? x.n : b; }, null);
+    });
+    const lastT = recs.length ? recs[recs.length - 1][0] : ''; let age = null; const mm = /^(\d{4})-(\d{2})-(\d{2})/.exec(lastT); if (mm) age = dAgo(new Date(+mm[1], +mm[2] - 1, +mm[3]));
+    return { j: j, prods: prods, recs: recs, lastT: lastT, age: age, fresh: { label: '마지막 기록 ' + (lastT ? lastT.slice(0, 10) : '-'), age: age } };
+  }
+  function biViewRank(d) {
+    const warn = d.age !== null && d.age > 14 ? '<div class="bi-warn">⚠️ 이 로그의 마지막 기록은 <b>' + esc(d.lastT) + '</b> (' + d.age + '일 전)입니다. 자동 수집이 멈췄거나 시트가 갱신되지 않은 상태일 수 있으니 자동화 실행 여부를 확인해 주세요.</div>' : '';
+    const cards = d.prods.map(function (p) { const l = p.last; return '<div class="bi-card sm"><div class="bi-pn">' + esc(p.name) + '</div><div class="bi-kv">' + (l ? (isFinite(l.n) ? l.n + '<small>위</small>' : '<span class="bi-out">' + esc(l.raw) + '</span>') : '-') + '</div><div class="bi-ks">' + (l ? esc(l.t) + ' 기록' : '기록 없음') + ' · 최고 ' + (p.best === null ? '-' : p.best + '위') + ' · 기록 ' + p.pts.length + '건</div>' + bSpark(p.pts.map(function (x) { return x.n; }), true) + '</div>'; }).join('');
+    return warn + '<div class="bi-cards">' + cards + '</div><div class="bi-note">순위가 낮을수록(1위에 가까울수록) 그래프 선이 위로 올라갑니다. 전체 기록 ' + d.recs.length + '건 (test 표시 기록 제외).</div>';
+  }
+
+  /* 인플루언서 */
+  function biFollow(s) { s = bnorm(s); const m = /^([\d.]+)\s*(만|천)?$/.exec(s); if (!m) return NaN; const n = parseFloat(m[1]); return m[2] === '만' ? n * 1e4 : m[2] === '천' ? n * 1e3 : n; }
+  async function biLoadInf() {
+    const j = await biFetch('inf', '1384807088', 260), rows = j.values.slice(1).filter(function (r) { return bnorm(r[0]) || bnorm(r[1]); });
+    const cnt = function (f) { const m = {}; rows.forEach(function (r) { const k = f(r); if (k) m[k] = (m[k] || 0) + 1; }); return m; };
+    const byMonth = cnt(function (r) { const m = /^(\d+)\.\s*(\d+)/.exec(bnorm(r[0])); return m ? '20' + m[1] + '-' + ('0' + m[2]).slice(-2) : ''; });
+    const byPlat = cnt(function (r) { return bnorm(r[1]) || '미표기'; });
+    const bucket = cnt(function (r) { const n = biFollow(r[2]); return !isFinite(n) ? '미표기' : n < 1000 ? '1천 미만' : n < 10000 ? '1천~1만' : n < 50000 ? '1만~5만' : '5만 이상'; });
+    let lastD = ''; rows.forEach(function (r) { const m = /^(\d+)\.\s*(\d+)\.\s*(\d+)/.exec(bnorm(r[0])); if (m) { const s = '20' + m[1] + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[3]).slice(-2); if (s > lastD) lastD = s; } });
+    const age = lastD ? dAgo(new Date(lastD + 'T00:00:00')) : null; const noted = rows.filter(function (r) { return r[3] === 'Y'; }).length;
+    return { j: j, total: rows.length, byMonth: byMonth, byPlat: byPlat, bucket: bucket, lastD: lastD, age: age, noted: noted, fresh: { label: '마지막 컨택 ' + (lastD || '-'), age: age } };
+  }
+  function biViewInf(d) {
+    const warn = d.age !== null && d.age > 14 ? '<div class="bi-warn">⚠️ 리스트업 탭의 마지막 컨택일은 <b>' + esc(d.lastD) + '</b> (' + d.age + '일 전)입니다. 이후 진행 기록은 월별 탭에 있을 수 있으니 시트에서 확인해 주세요.</div>' : '';
+    const toI = function (o, order) { const ks = order || Object.keys(o).sort(); return ks.filter(function (k) { return o[k]; }).map(function (k) { return { l: k, v: o[k] }; }); };
+    return warn + '<div class="bi-kpis">' + bKpi('컨택 리스트', fN(d.total), '건', '인플루언서 리스트업 탭') + bKpi('인스타그램', fN(d.byPlat.instagram || 0), '건', fP((d.byPlat.instagram || 0) / d.total * 100, 0) + '') + bKpi('유튜브', fN(d.byPlat.youtube || 0), '건', fP((d.byPlat.youtube || 0) / d.total * 100, 0) + '') + bKpi('현황 기록 있음', fN(d.noted), '건', '내용은 표시하지 않음') + '</div>'
+      + '<div class="bi-grid2"><section class="bi-card"><h3>컨택 월별 건수 ' + bReal + '</h3>' + bH(toI(d.byMonth), fN) + '</section><section class="bi-card"><h3>플랫폼 ' + bReal + '</h3>' + bH(toI(d.byPlat, ['instagram', 'youtube', 'tiktok', 'naver', '기타', '미표기']), fN, '#F57902') + '</section></div>'
+      + '<section class="bi-card"><h3>구독자 규모 ' + bReal + '</h3>' + bH(toI(d.bucket, ['1천 미만', '1천~1만', '1만~5만', '5만 이상', '미표기']), fN, '#1C9A68') + '<div class="bi-note">구독자 칸이 "1.3만", "3.97천"처럼 적혀 있어 숫자로 환산했습니다. 단가·고료·이메일은 이 화면에 가져오지 않습니다.</div></section>';
+  }
+
+  /* 리뷰 운영 */
+  async function biLoadRev() {
+    const j = await biFetch('rev', '1682728294', 60), v = j.values;
+    let hr = -1, hc = -1; v.forEach(function (r, i) { r.forEach(function (x, c) { if (hr < 0 && bnorm(x) === '월' && bnorm(r[c + 1]) === '주문건수') { hr = i; hc = c; } }); });
+    if (hr < 0) throw new Error('리뷰 월별 표를 찾지 못했습니다');
+    const H = v[hr].slice(hc).map(bnorm), rows = []; for (let r = hr + 1; r < v.length; r++) { const m = bnorm(v[r][hc]); if (!/^\d+월$/.test(m)) break; rows.push(v[r].slice(hc).map(bnorm)); }
+    const col = function (name) { return H.findIndex(function (h) { return h.replace(/\s/g, '').indexOf(name) === 0; }); };
+    const goal = []; v.forEach(function (r) { const k = bnorm(r[1]); if (/^(전체리뷰율|포토\/동영상리뷰율|리뷰대응률)$/.test(k) && bnorm(r[2])) goal.push([k, bnorm(r[2])]); });
+    const lastM = rows.length ? rows[rows.length - 1][0] : '';
+    return { j: j, H: H, rows: rows, col: col, goal: goal, lastM: lastM, name: j.name, fresh: { label: '표 마지막 월 ' + lastM + ' (' + j.name + ')', age: null } };
+  }
+  function biViewRev(d) {
+    const c = d.col, last = d.rows[d.rows.length - 1], mo = d.rows.map(function (r) { return r[0]; });
+    const val = function (r, n) { return r[c(n)]; };
+    const orders = d.rows.map(function (r) { return bn(val(r, '주문건수')); }), revs = d.rows.map(function (r) { return bn(val(r, '리뷰수')); });
+    const rate = d.rows.map(function (r) { return bn(val(r, '전체리뷰율')); }), neg = d.rows.map(function (r) { return bn(val(r, '부정VOC비율')); }), star = d.rows.map(function (r) { return bn(val(r, '평균평점')); });
+    const tbl = d.rows.map(function (r) { return '<tr><td><b>' + esc(r[0]) + '</b></td>' + ['주문건수', '리뷰수', '포토', '전체리뷰율', '부정VOC비율(%)', '평균평점'].map(function (n) { const i = n === '포토' ? d.H.findIndex(function (h) { return h.indexOf('포토') === 0 && h.indexOf('수') > 0 && h.indexOf('비율') < 0; }) : c(n.replace('(%)', '')); return '<td>' + esc(r[i] === undefined ? '' : r[i]) + '</td>'; }).join('') + '</tr>'; }).join('');
+    return '<div class="bi-kpis">' + bKpi(d.lastM + ' 전체 리뷰율', esc(val(last, '전체리뷰율')), '', '주문 ' + esc(val(last, '주문건수')) + '건 · 리뷰 ' + esc(val(last, '리뷰수')) + '건') + bKpi('평균 평점', esc(val(last, '평균평점')), '점', d.lastM + ' 기준') + bKpi('부정 VOC 비율', esc(val(last, '부정VOC비율')), '%', d.lastM + ' 기준') + bKpi('포토/동영상 리뷰 비율', esc((function () { const i = d.H.findIndex(function (h) { const t = h.replace(/\s/g, ''); return t.indexOf('포토') === 0 && t.indexOf('비율') > 0; }); return i >= 0 ? last[i] : ''; })()), '', d.lastM + ' 기준') + '</div>'
+      + '<div class="bi-grid2"><section class="bi-card"><h3>월별 주문 · 리뷰 수 ' + bReal + '</h3><div class="bi-legend"><i style="background:#28407D"></i>주문건수 <i style="background:#F57902"></i>리뷰수</div>' + bBars(mo, [orders, revs], ['#28407D', '#F57902'], fN) + '</section>'
+      + '<section class="bi-card"><h3>전체 리뷰율 추이 ' + bReal + '</h3>' + bBars(mo, [rate], ['#1C9A68'], function (x) { return fP(x, 0); }) + '</section></div>'
+      + '<section class="bi-card"><h3>월별 표 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>월</th><th>주문건수</th><th>리뷰수</th><th>포토리뷰수</th><th>전체 리뷰율</th><th>부정 VOC(%)</th><th>평점</th></tr></thead><tbody>' + tbl + '</tbody></table></div>' + (d.goal.length ? '<div class="bi-note">시트에 적힌 목표 KPI: ' + d.goal.map(function (g) { return esc(g[0]) + ' ' + esc(g[1]); }).join(' · ') + '</div>' : '') + '</section>';
+  }
+
+  /* 페이드 소재 */
+  async function biLoadPaid() {
+    const a = await biFetch('paid', '599649638', 40), b = await biFetch('paid', '1486980400', 80);
+    const av = a.values, hi = av.findIndex(function (r) { return bnorm(r[0]) === '월' && /총 기획/.test(bnorm(r[1])); });
+    const months = []; if (hi >= 0) for (let r = hi + 1; r < av.length; r++) { const m = bnorm(av[r][0]); if (!/^\d+$/.test(m)) break; months.push({ m: m + '월', n: bn(av[r][1]), who: bnorm(av[r][2]) }); }
+    const bv = b.values.slice(1).filter(function (r) { return bnorm(r[0]) || bnorm(r[1]); }); const brand = {}; bv.forEach(function (r) { const k = bnorm(r[1]); if (k) brand[k] = (brand[k] || 0) + 1; });
+    let lastD = ''; bv.forEach(function (r) { const m = /^(\d+)\.(\d+)\.(\d+)/.exec(bnorm(r[0])); if (m) { const s = '20' + m[1] + '-' + m[2] + '-' + m[3]; if (s > lastD) lastD = s; } });
+    const age = lastD ? dAgo(new Date(lastD + 'T00:00:00')) : null; const filled = months.filter(function (x) { return isFinite(x.n); });
+    return { months: months, filled: filled, brand: brand, comp: bv.length, lastD: lastD, age: age, fresh: { label: (filled.length ? '기획 수량 ' + filled[filled.length - 1].m : '기획 수량 값 없음') + ' · 경쟁사 수집 ' + (lastD || '-'), age: age } };
+  }
+  function biViewPaid(d) {
+    const warn = d.age !== null && d.age > 14 ? '<div class="bi-warn">⚠️ 경쟁사 소재 수집의 마지막 수집일은 <b>' + esc(d.lastD) + '</b> (' + d.age + '일 전)입니다. 월간 소재 기획 수량도 ' + (d.filled.length ? d.filled.map(function (x) { return x.m; }).join(', ') + '만' : '아직') + ' 입력되어 있습니다.</div>' : '';
+    const tb = d.months.map(function (x) { return '<tr><td><b>' + esc(x.m) + '</b></td><td>' + (isFinite(x.n) ? fN(x.n) + '건' : '<span class="bi-ms">미입력</span>') + '</td><td>' + (esc(x.who) || '<span class="bi-ms">-</span>') + '</td></tr>'; }).join('');
+    const bi = Object.keys(d.brand).map(function (k) { return { l: k, v: d.brand[k] }; }).sort(function (x, y) { return y.v - x.v; }).slice(0, 8);
+    return warn + '<div class="bi-kpis">' + bKpi('최근 입력 월 기획 수량', d.filled.length ? fN(d.filled[d.filled.length - 1].n) : '-', '건', d.filled.length ? d.filled[d.filled.length - 1].m + ' · 담당 ' + esc(d.filled[d.filled.length - 1].who) : '') + bKpi('경쟁사 소재 수집 행', fN(d.comp), '건', '수집일·브랜드가 있는 행') + bKpi('마지막 수집일', esc(d.lastD || '-'), '', d.age !== null ? d.age + '일 전' : '') + '</div>'
+      + '<div class="bi-grid2"><section class="bi-card"><h3>월간 소재 기획 현황 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>월</th><th>총 기획 수량</th><th>담당자</th></tr></thead><tbody>' + tb + '</tbody></table></div></section>'
+      + '<section class="bi-card"><h3>경쟁사 소재 수집 · 브랜드별 ' + bReal + '</h3>' + (bi.length ? bH(bi, fN, '#F57902') : '<div class="bi-empty">브랜드가 입력된 행이 없습니다.</div>') + '<div class="bi-note">광고 문구·링크·USP는 가져오지 않고 건수만 집계합니다.</div></section></div>';
+  }
+
+  /* 시트 메뉴얼 */
+  function biViewManual() {
+    return '<div class="bi-note" style="margin:0 0 14px">시트별 사용 메뉴얼(초안)입니다. 시트에서 확인한 탭 구성과 이 대시보드가 읽는 범위를 적었고, 상세 작성 메뉴얼은 순차적으로 보강합니다.</div><div class="bi-cards2">' + Object.keys(BI_MANUAL).map(function (k) { const m = BI_MANUAL[k], s = BI_SRC[k]; return '<section class="bi-card"><div class="bi-ch"><h3>' + esc(s.t) + '</h3><span class="bi-b mo">메뉴얼 초안</span></div><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(m.what) + '</dd><dt>탭 구성</dt><dd>' + esc(m.tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(m.read) + '</dd><dt>알아둘 점</dt><dd>' + esc(m.note) + '</dd></dl><a class="bi-btn" href="' + esc(s.u) + '" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a></section>'; }).join('') + '</div>';
+  }
+
+  /* 종합 */
+  async function biViewOverview() {
+    const jobs = { sales: biLoadSales(), journey: biLoadJourney(), rank: biLoadRank(), inf: biLoadInf(), rev: biLoadRev(), paid: biLoadPaid() };
+    const keys = Object.keys(jobs), res = await Promise.allSettled(keys.map(function (k) { return jobs[k]; })), D = {}; keys.forEach(function (k, i) { D[k] = res[i].status === 'fulfilled' ? res[i].value : null; });
+    const val = function (arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; };
+    const kp = [];
+    if (D.sales) { const s = val(D.sales.sS, D.sales.last), a = val(D.sales.sA, D.sales.last); kp.push(bKpi(D.sales.last + ' 실매출', fW(s), '원', '광고비 ' + fW(a) + '원 · 비율 ' + fP(a / s * 100))); }
+    if (D.journey) { const tot = function (lb) { return D.journey.prods.reduce(function (s, p) { const r = p.rows[lb]; const x = r ? bn(r[3]) : NaN; return s + (isFinite(x) ? x : 0); }, 0); }; kp.push(bKpi(D.journey.month + ' 주력상품 방문', fN(tot('방문수')), '회', '전환 ' + fN(tot('전환수')) + '건 · 구매금액 ' + fW(tot('구매금액')) + '원')); }
+    if (D.rev) { const c = D.rev.col, l = D.rev.rows[D.rev.rows.length - 1]; kp.push(bKpi(D.rev.lastM + ' 리뷰', esc(l[c('전체리뷰율')]), '', '평점 ' + esc(l[c('평균평점')]) + ' · 부정 VOC ' + esc(l[c('부정VOC비율')]) + '%')); }
+    if (D.inf) kp.push(bKpi('인플루언서 컨택 리스트', fN(D.inf.total), '건', '마지막 컨택 ' + esc(D.inf.lastD)));
+    const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재' };
+    const frs = keys.map(function (k) { const d = D[k]; return '<tr><td><b>' + names[k] + '</b></td><td>' + (d ? fresh(d.fresh.label, d.fresh.age) : '<span class="bi-b stale">읽기 실패</span>') + '</td><td><a href="#bi-' + k + '">열기</a></td></tr>'; }).join('');
+    const stale = keys.filter(function (k) { return D[k] && D[k].fresh.age !== null && D[k].fresh.age > 14; }).map(function (k) { return names[k]; });
+    return (stale.length ? '<div class="bi-warn">⚠️ 마지막 데이터가 14일 넘게 지난 시트: <b>' + stale.join(', ') + '</b>. 자동화가 멈췄거나 갱신되지 않은 상태일 수 있습니다.</div>' : '') + '<div class="bi-kpis">' + kp.join('') + '</div><section class="bi-card"><h3>시트별 데이터 최신성 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>시트</th><th>마지막 데이터</th><th></th></tr></thead><tbody>' + frs + '</tbody></table></div><div class="bi-note">"월 기준"은 월 단위로 입력되는 시트라 일수를 계산하지 않습니다. 14일 넘게 지난 날짜 기준 시트는 주황색으로 표시합니다.</div></section>';
+  }
+
+  const BI_PAGES = {
+    'bi': { t: '종합 현황', s: '시트 6개에서 읽은 핵심 수치와 데이터 최신성을 한눈에 봅니다.' },
+    'bi-sales': { t: '매출 · 광고', s: '채널별 월 매출, 광고비, ROAS를 손익분기표에서 읽어 옵니다.', k: 'sales' },
+    'bi-journey': { t: '주력상품 고객여정', s: '주력상품의 일별 방문 → 구매클릭 → 전환 → 구매금액.', k: 'journey' },
+    'bi-rank': { t: '올영 랭킹', s: '올리브영 제품별 순위 기록과 추이.', k: 'rank' },
+    'bi-inf': { t: '인플루언서', s: '컨택 리스트의 건수·월별·플랫폼·구독자 규모 집계 (금액·개인정보 제외).', k: 'inf' },
+    'bi-rev': { t: '리뷰 운영', s: '월별 리뷰율, 포토리뷰, 부정 VOC, 평점.', k: 'rev' },
+    'bi-paid': { t: '페이드 소재', s: '월간 소재 기획 수량과 경쟁사 소재 수집 현황.', k: 'paid' },
+    'bi-manual': { t: '시트 메뉴얼', s: '시트별 구성과 읽는 방법(초안).' }
+  };
+  function biFrame(pg, inner, stamp) {
+    const m = BI_PAGES[pg], src = m.k ? BI_SRC[m.k] : null;
+    return '<div class="bi-head"><div><h1>' + esc(m.t) + '</h1><p>' + esc(m.s) + '</p></div><div class="bi-ha">' + (src ? '<a class="bi-btn" href="' + esc(src.u) + '" target="_blank" rel="noopener noreferrer">원본 시트 ↗</a>' : '') + '<button type="button" class="bi-btn" data-birefresh="1">새로고침</button></div></div>' + (src ? '<div class="bi-src">시트: ' + esc(src.t) + (stamp ? ' · 읽은 시각 ' + esc(stamp) : '') + '</div>' : '') + inner;
+  }
+  async function biRender(pg, quiet) {
+    const el = $('#biMain'); if (!el) return; BIX.page = pg; const m = BI_PAGES[pg]; if (!m) return;
+    if (!quiet) el.innerHTML = '<div class="bi-loading">시트에서 데이터를 읽는 중...</div>';
+    try {
+      let inner = '';
+      if (pg === 'bi') inner = await biViewOverview();
+      else if (pg === 'bi-manual') inner = biViewManual();
+      else { const K = { 'bi-sales': [biLoadSales, biViewSales], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid] }[pg]; const d = await K[0](); inner = K[1](d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
+      if (BIX.page === pg) el.innerHTML = biFrame(pg, inner, BIX.stamp);
+    } catch (e) { if (BIX.page === pg) el.innerHTML = biFrame(pg, '<div class="bi-warn">데이터를 불러오지 못했습니다: ' + esc(e.message || String(e)) + '<br>시트 구조가 바뀌었거나 네트워크 문제일 수 있습니다. 새로고침으로 다시 시도해 주세요.</div>', ''); }
+  }
+  function biRoute(pg) {
+    BIX.page = pg; $$('#biApp .bs-nav a').forEach(function (a) { a.classList.toggle('on', a.dataset.bi === pg); });
+    $('#biApp').scrollTop = 0; window.scrollTo(0, 0); biRender(pg);
+    clearInterval(BIX.timer); BIX.timer = setInterval(function () { if (document.body.dataset.mode === 'bi' && !document.hidden) { BIX.cache = {}; biRender(BIX.page, true); } }, 300000);
+  }
+  function bindBiApp() {
+    const app = $('#biApp'); if (!app) return;
+    app.addEventListener('click', function (e) {
+      if (e.target.closest('[data-birefresh]')) { BIX.cache = {}; biRender(BIX.page); return; }
+      const jm = e.target.closest('[data-jm]'); if (jm) { BIX.jm = jm.dataset.jm; biRender(BIX.page); return; }
+      const jp = e.target.closest('[data-jp]'); if (jp) { BIX.jp = +jp.dataset.jp; biRender(BIX.page, true); return; }
+      const jt = e.target.closest('[data-jmet]'); if (jt) { BIX.jmet = jt.dataset.jmet; biRender(BIX.page, true); return; }
+      if (e.target.closest('[data-bilock]')) { biRelock(); }
+    });
+  }
+
   const BI_SHEETS = [{"t":"20262025 라오전체 매출/광고현황","tag":"매출·광고","u":"https://docs.google.com/spreadsheets/d/1WXSrYGUAiPNGV6Wrm0FE7hV1ON-v0Xyv1DqD7rKYAIw/edit?gid=1115730697#gid=1115730697"},{"t":"[MK] 2026 인플루언서 마케팅 리스트","tag":"마케팅","u":"https://docs.google.com/spreadsheets/d/19LoIX57UdN13nUXqHbfRA6zFhkRkwobaY0QKokueqzo/edit?gid=1384807088#gid=1384807088"},{"t":"자사/스스 리뷰 운영 기획안","tag":"리뷰 운영","u":"https://docs.google.com/spreadsheets/d/10z94a9TJFrMKlEAeWDdw6BLBuPHXRz4yuLkUHug8LcM/edit?gid=1682728294#gid=1682728294"},{"t":"[마케팅팀]2026 페이드 소재 리포트","tag":"마케팅","u":"https://docs.google.com/spreadsheets/d/1Smrlc0ijiMUDRlY4j7RDLcpGWe5mETTFSwDzZoGBq94/edit?gid=73896278#gid=73896278"},{"t":"oliveyoung_rank_log(올영 랭킹추적 자동화)","tag":"올영 랭킹","u":"https://docs.google.com/spreadsheets/d/1ovMG7yM7btTv54O1SxU1zmLZYdUbNXlarYL89_q4fLI/edit?gid=141352098#gid=141352098","note":"연결 AI 자산: 올리브영 랭킹 크롤링 (A037)"}];
   function renderBi() {
     const el = $('#biGrid'); if (!el) return;
     el.innerHTML = BI_SHEETS.map(function (s) {
-      return '<div class="bi-card"><div class="bi-top"><span class="tag">' + esc(s.tag) + '</span>' + (s.manual ? '<span class="status-badge ok">메뉴얼 있음</span>' : '<span class="status-badge">메뉴얼 준비 중</span>') + '</div>'
+      return '<div class="bi-linkcard"><div class="bi-top"><span class="tag">' + esc(s.tag) + '</span>' + (s.manual ? '<span class="status-badge ok">메뉴얼 있음</span>' : '<span class="status-badge">메뉴얼 준비 중</span>') + '</div>'
         + '<h3>' + esc(s.t) + '</h3>' + (s.note ? '<div class="ref-meta">' + esc(s.note) + '</div>' : '')
         + '<div class="bi-actions"><a class="btn-gold" href="' + esc(s.u) + '" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a>'
         + (s.manual ? '<a class="btn-secondary" href="' + esc(s.manual) + '" target="_blank" rel="noopener noreferrer">메뉴얼 보기</a>' : '<button type="button" class="btn-secondary" disabled>메뉴얼 준비 중</button>') + '</div></div>';
@@ -5670,7 +6021,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     renderStep1();
     bind();
     setStep(1);
-    renderBi(); bindBiLock();
+    renderBi(); bindBiLock(); bindBiApp();
     go(location.hash.slice(1) || 'gate', true);
     bindExtra();
     loadRemoteAssets();
@@ -5679,6 +6030,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 })();
 
 </script>
+<div id="biApp"><aside class="bs"><a class="bs-brand" href="#gate" aria-label="첫 화면"><span class="bs-mark">L</span><span><b>LIVEORALS</b><small>데이터 대시보드</small></span></a><nav class="bs-nav"><div class="bs-g">오늘</div><a href="#bi" data-bi="bi"><span class="bs-ic">🏠</span>종합 현황</a><div class="bs-g">성과</div><a href="#bi-sales" data-bi="bi-sales"><span class="bs-ic">💰</span>매출 · 광고</a><a href="#bi-journey" data-bi="bi-journey"><span class="bs-ic">🛒</span>주력상품 고객여정</a><a href="#bi-rank" data-bi="bi-rank"><span class="bs-ic">🏆</span>올영 랭킹</a><div class="bs-g">마케팅</div><a href="#bi-inf" data-bi="bi-inf"><span class="bs-ic">🤝</span>인플루언서</a><a href="#bi-rev" data-bi="bi-rev"><span class="bs-ic">⭐</span>리뷰 운영</a><a href="#bi-paid" data-bi="bi-paid"><span class="bs-ic">🎯</span>페이드 소재</a><div class="bs-g">자료</div><a href="#bi-manual" data-bi="bi-manual"><span class="bs-ic">📘</span>시트 메뉴얼</a></nav><div class="bs-foot"><a href="#gate">← 첫 화면</a><button type="button" data-bilock="1">🔒 잠그기</button></div></aside><main class="bm"><div class="bm-banner"><span class="bi-b real">실제</span> 표시는 구글 시트에서 읽은 값입니다. 5분마다 자동으로 다시 읽고, 마지막 데이터 날짜가 오래되면 주황색으로 알려 드립니다.</div><div id="biMain"></div></main></div>
 <footer class="site-footer"><div class="site-footer-inner"><div><img src="logo.svg" alt="Live orals" width="120"><br><b>어사이드 활용 플랫폼</b> &middot; 라이브오랄스 사내용<br>치과의사가 만든 구강제품 전문브랜드 라이브오랄스</div><div>&copy; LIVEORALS 사내용 &middot; 원가·급여·계약·협상 금액은 입력하지 마세요.</div></div></footer>
 <div class="fab"><button type="button" class="fab-top" id="fabTop" aria-label="맨 위로">&#8593;</button><a class="fab-chat" href="#requests" aria-label="기능 추가 요청" title="기능 추가 요청"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.6-5A8.5 8.5 0 1 1 21 11.5z"/><circle cx="8.5" cy="11.5" r=".6" fill="#fff"/><circle cx="12.5" cy="11.5" r=".6" fill="#fff"/><circle cx="16.5" cy="11.5" r=".6" fill="#fff"/></svg></a></div>
 <script>
