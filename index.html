@@ -1952,7 +1952,7 @@ body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax
 @media (max-width: 980px) { .bi-grid2.ov, .bi-grid2.ov2 { grid-template-columns: 1fr; } }
 .bi-h3 { font-size: 15px; margin: 18px 0 2px; display: flex; gap: 8px; align-items: center; }
 .bi-slides { width: 100%; aspect-ratio: 16 / 9; border: 1px solid #E3E8F0; border-radius: 10px; background: #fff; }
-.bi-pw { -webkit-text-security: disc; text-security: disc; }
+.bi-pwwrap { position: relative; } .bi-pwwrap .bi-pw { padding-right: 44px; } .bi-eye { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border: 0; background: transparent; border-radius: 8px; color: #6B7076; cursor: pointer; display: grid; place-items: center; } .bi-eye:hover { background: #F1F3F5; color: #111; } .bi-eye[aria-pressed="true"] { color: var(--teal-dark); }
 
 .bi-askbar { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #DCE2EC; border-radius: 14px; padding: 4px 14px; margin: 14px 0 6px; box-shadow: 0 2px 8px rgba(18,31,66,.04); }
 .bi-askbar input { flex: 1; border: 0; outline: 0; padding: 11px 0; font-size: 14px; background: transparent; }
@@ -2463,7 +2463,7 @@ img, svg, video { max-width: 100%; }
         </div>
       </section>
 
-      <div class="bi-lock" id="biLock" role="dialog" aria-modal="true" aria-labelledby="biLockTitle"><div class="bi-lock-box"><div class="bi-lock-ico">🔒</div><b id="biLockTitle">대시보드 암호</b><p>대시보드는 암호를 입력해야 열립니다.</p><input type="text" id="biPw" class="form-control bi-pw" placeholder="암호" autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore aria-label="암호"><div class="bi-lock-err" id="biLockErr" role="alert"></div><div class="bi-lock-btns"><button type="button" class="btn-secondary" id="biLockCancel">취소</button><button type="button" class="btn-gold" id="biLockOk">확인</button></div></div></div>
+      <div class="bi-lock" id="biLock" role="dialog" aria-modal="true" aria-labelledby="biLockTitle"><div class="bi-lock-box"><div class="bi-lock-ico">🔒</div><b id="biLockTitle">대시보드 암호</b><p>대시보드는 암호를 입력해야 열립니다.</p><div class="bi-pwwrap"><input type="password" id="biPw" class="form-control bi-pw" placeholder="암호" autocomplete="new-password" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore aria-label="암호"><button type="button" id="biPwEye" class="bi-eye" aria-label="암호 보기" aria-pressed="false" title="암호 보기"><svg class="eye-on" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg><svg class="eye-off" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M17.94 17.94A10.94 10.94 0 0 1 12 20C5 20 1 12 1 12a18.5 18.5 0 0 1 5.06-5.94"/><path d="M9.9 4.24A10.9 10.9 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><path d="M14.12 14.12a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg></button></div><div class="bi-lock-err" id="biLockErr" role="alert"></div><div class="bi-lock-btns"><button type="button" class="btn-secondary" id="biLockCancel">취소</button><button type="button" class="btn-gold" id="biLockOk">확인</button></div></div></div>
 
       <!-- ═══ 업무 대시보드 (시트 모음) ═══ -->
       <section class="page" id="page-bi">
@@ -4040,19 +4040,30 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   const BI_HASH = '1aea18e6c1be0ca74f15127115c4f2710b17043643d0882a7bf8aca151016012';
   function biUnlocked() { try { const ts = +sessionStorage.getItem('lo_bi_ts') || 0; return sessionStorage.getItem('lo_bi_ok') === BI_HASH && !!sessionStorage.getItem('lo_bi_pw') && ts > 0 && Date.now() - ts < 60 * 60 * 1000; } catch (e) { return false; } }
   async function biHash(s) { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('resultclass-bi:' + s)); return Array.prototype.map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join(''); }
-  function openBiLock() { const m = $('#biLock'); if (!m) return; m.classList.add('open'); $('#biPw').value = ''; $('#biLockErr').textContent = ''; setTimeout(function () { $('#biPw').focus(); }, 30); }
+  function openBiLock() { const m = $('#biLock'); if (!m) return; m.classList.add('open'); $('#biPw').value = ''; $('#biPw').type = 'password'; const ey = $('#biPwEye'); if (ey) { ey.querySelector('.eye-on').style.display = ''; ey.querySelector('.eye-off').style.display = 'none'; ey.setAttribute('aria-pressed', 'false'); } $('#biLockErr').textContent = ''; setTimeout(function () { $('#biPw').focus(); }, 30); }
   function closeBiLock() { const m = $('#biLock'); if (m) m.classList.remove('open'); }
+  const KO_CHO = 'rRseEfaqQtTdwWczxvg', KO_JUNG = ['k', 'o', 'i', 'O', 'j', 'p', 'u', 'P', 'h', 'hk', 'ho', 'hl', 'y', 'n', 'nj', 'np', 'nl', 'b', 'm', 'ml', 'l'], KO_JONG = ['', 'r', 'R', 'rt', 's', 'sw', 'sg', 'e', 'f', 'fr', 'fa', 'fq', 'ft', 'fx', 'fv', 'fg', 'a', 'q', 'qt', 't', 'T', 'd', 'w', 'c', 'z', 'x', 'v', 'g'];
+  const KO_JAMO = { 'ㄱ': 'r', 'ㄲ': 'R', 'ㄴ': 's', 'ㄷ': 'e', 'ㄸ': 'E', 'ㄹ': 'f', 'ㅁ': 'a', 'ㅂ': 'q', 'ㅃ': 'Q', 'ㅅ': 't', 'ㅆ': 'T', 'ㅇ': 'd', 'ㅈ': 'w', 'ㅉ': 'W', 'ㅊ': 'c', 'ㅋ': 'z', 'ㅌ': 'x', 'ㅍ': 'v', 'ㅎ': 'g', 'ㅏ': 'k', 'ㅐ': 'o', 'ㅑ': 'i', 'ㅒ': 'O', 'ㅓ': 'j', 'ㅔ': 'p', 'ㅕ': 'u', 'ㅖ': 'P', 'ㅗ': 'h', 'ㅘ': 'hk', 'ㅙ': 'ho', 'ㅚ': 'hl', 'ㅛ': 'y', 'ㅜ': 'n', 'ㅝ': 'nj', 'ㅞ': 'np', 'ㅟ': 'nl', 'ㅠ': 'b', 'ㅡ': 'm', 'ㅢ': 'ml', 'ㅣ': 'l', 'ㄳ': 'rt', 'ㄵ': 'sw', 'ㄶ': 'sg', 'ㄺ': 'fr', 'ㄻ': 'fa', 'ㄼ': 'fq', 'ㄽ': 'ft', 'ㄾ': 'fx', 'ㄿ': 'fv', 'ㅀ': 'fg', 'ㅄ': 'qt' };
+  function biKo2En(s) {
+    return Array.prototype.map.call(String(s), function (ch) {
+      const c = ch.charCodeAt(0);
+      if (c >= 0xAC00 && c <= 0xD7A3) { const i = c - 0xAC00, jo = Math.floor(i / 588), ju = Math.floor((i % 588) / 28), jn = i % 28; return KO_CHO.charAt(jo) + KO_JUNG[ju] + KO_JONG[jn]; }
+      return KO_JAMO[ch] !== undefined ? KO_JAMO[ch] : ch;
+    }).join('');
+  }
   async function submitBiLock() {
     const v = $('#biPw').value; if (!v) { $('#biLockErr').textContent = '암호를 입력해 주세요.'; return; }
-    let h = ''; try { h = await biHash(v); } catch (e) { $('#biLockErr').textContent = '이 브라우저에서는 암호 확인을 할 수 없습니다.'; return; }
-    if (h === BI_HASH) { try { sessionStorage.setItem('lo_bi_ok', BI_HASH); sessionStorage.setItem('lo_bi_pw', v); sessionStorage.setItem('lo_bi_ts', String(Date.now())); } catch (e) {} closeBiLock(); go('bi'); }
-    else { $('#biLockErr').textContent = '암호가 맞지 않습니다.'; $('#biPw').select(); }
+    const cands = [v], ko = biKo2En(v); if (ko !== v) cands.push(ko); [v, ko].forEach(function (x) { const l = x.toLowerCase(); if (cands.indexOf(l) < 0) cands.push(l); });
+    let hit = ''; try { for (let i = 0; i < cands.length; i++) { if ((await biHash(cands[i])) === BI_HASH) { hit = cands[i]; break; } } } catch (e) { $('#biLockErr').textContent = '이 브라우저에서는 암호 확인을 할 수 없습니다.'; return; }
+    if (hit) { try { sessionStorage.setItem('lo_bi_ok', BI_HASH); sessionStorage.setItem('lo_bi_pw', hit); sessionStorage.setItem('lo_bi_ts', String(Date.now())); } catch (e) {} closeBiLock(); go('bi'); }
+    else { $('#biLockErr').textContent = '암호가 맞지 않습니다. 한/영 키와 Caps Lock을 확인하고, 눈 아이콘으로 입력한 글자를 확인해 보세요.'; $('#biPw').select(); }
   }
   function bindBiLock() {
     document.addEventListener('click', function (e) {
       const c = e.target.closest('.gate-bi'); if (c && !biUnlocked()) { e.preventDefault(); openBiLock(); return; }
       if (e.target.closest('#biLockCancel') || e.target.id === 'biLock') closeBiLock();
       if (e.target.closest('#biLockOk')) submitBiLock();
+      const eye = e.target.closest('#biPwEye'); if (eye) { const inp = $('#biPw'), show = inp.type === 'password'; inp.type = show ? 'text' : 'password'; eye.setAttribute('aria-pressed', show ? 'true' : 'false'); eye.setAttribute('aria-label', show ? '암호 숨기기' : '암호 보기'); eye.title = show ? '암호 숨기기' : '암호 보기'; eye.querySelector('.eye-on').style.display = show ? 'none' : ''; eye.querySelector('.eye-off').style.display = show ? '' : 'none'; inp.focus(); }
     }, true);
     document.addEventListener('keydown', function (e) { if (!$('#biLock') || !$('#biLock').classList.contains('open')) return; if (e.key === 'Enter') { e.preventDefault(); submitBiLock(); } if (e.key === 'Escape') closeBiLock(); });
   }
