@@ -1821,10 +1821,10 @@ body[data-mode="bi"] .page-content { max-width: 1200px; margin: 0 auto; width: 1
 .bi-lock-btns .btn-gold, .bi-lock-btns .btn-secondary { width: auto; flex: none; padding: 9px 20px; }
 #biApp { display: none; }
 body[data-mode="bi"] .layout, body[data-mode="bi"] .site-footer, body[data-mode="bi"] .announce, body[data-mode="bi"] .fab { display: none !important; }
-body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100vh; background: #F3F5F9; color: #18213A; font-size: 14px; }
-.bs { background: #121F42; color: #C9D2E8; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; }
+body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax(0, 1fr); min-height: 100vh; background: #F6F7F8; color: #2e2e2e; font-size: 14px; }
+.bs { background: #111111; color: #C9D2E8; position: sticky; top: 0; height: 100vh; overflow-y: auto; display: flex; flex-direction: column; }
 .bs-brand { display: flex; align-items: center; gap: 10px; padding: 22px 20px 18px; border-bottom: 1px solid rgba(255,255,255,.07); text-decoration: none; color: #fff; }
-.bs-mark { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, #F57902, #FF9B3D); display: grid; place-items: center; font-weight: 800; font-size: 18px; color: #fff; }
+.bs-mark { width: 34px; height: 34px; border-radius: 10px; background: linear-gradient(135deg, #F5A524, #FF9B3D); display: grid; place-items: center; font-weight: 800; font-size: 18px; color: #fff; }
 .bs-brand b { display: block; font-size: 15px; letter-spacing: .08em; }
 .bs-brand small { font-size: 11px; color: #8D9AC0; }
 .bs-nav { padding: 8px 10px 16px; flex: 1; }
@@ -1832,7 +1832,7 @@ body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax
 .bs-nav a { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 9px; font-size: 13.5px; color: #C9D2E8; text-decoration: none; position: relative; }
 .bs-nav a:hover { background: rgba(255,255,255,.06); }
 .bs-nav a.on { background: rgba(255,255,255,.10); color: #fff; font-weight: 700; }
-.bs-nav a.on::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 3px; background: #F57902; }
+.bs-nav a.on::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 3px; background: #F5A524; }
 .bs-ic { width: 20px; text-align: center; }
 .bs-foot { padding: 12px 14px 18px; border-top: 1px solid rgba(255,255,255,.07); display: flex; flex-direction: column; gap: 6px; }
 .bs-foot a, .bs-foot button { text-align: left; background: none; border: 0; color: #9FB0D6; font-size: 13px; padding: 6px 8px; border-radius: 8px; cursor: pointer; text-decoration: none; }
@@ -1841,63 +1841,63 @@ body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax
 .bm-banner { background: #FFF6E5; border-bottom: 1px solid #F7E3B8; margin: 0 calc(-1 * clamp(16px, 3vw, 40px)); padding: 10px clamp(16px, 3vw, 40px); font-size: 12.5px; color: #6B5314; }
 .bi-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 14px; flex-wrap: wrap; padding: 26px 0 8px; }
 .bi-head h1 { font-size: 26px; margin: 0 0 4px; letter-spacing: -.02em; }
-.bi-head p { margin: 0; color: #5b6784; font-size: 13.5px; }
+.bi-head p { margin: 0; color: #6B7076; font-size: 13.5px; }
 .bi-ha { display: flex; gap: 8px; }
-.bi-btn { display: inline-block; background: #fff; border: 1px solid #DCE2EC; border-radius: 10px; padding: 8px 14px; font-size: 13px; font-weight: 600; color: #18213A; cursor: pointer; text-decoration: none; }
-.bi-btn:hover { border-color: #28407D; color: #28407D; }
-.bi-src { font-size: 12px; color: #7D879E; margin: 2px 0 14px; }
+.bi-btn { display: inline-block; background: #fff; border: 1px solid #E6E8EB; border-radius: 10px; padding: 8px 14px; font-size: 13px; font-weight: 600; color: #2e2e2e; cursor: pointer; text-decoration: none; }
+.bi-btn:hover { border-color: #0E8F7B; color: #0E8F7B; }
+.bi-src { font-size: 12px; color: #8B9096; margin: 2px 0 14px; }
 .bi-b { display: inline-block; font-size: 11px; font-weight: 700; border-radius: 6px; padding: 1px 7px; vertical-align: middle; }
-.bi-b.real { background: #E6F6EF; color: #1C9A68; }
-.bi-b.ok { background: #E6F6EF; color: #1C9A68; }
+.bi-b.real { background: #E6F9F6; color: #0E8F7B; }
+.bi-b.ok { background: #E6F9F6; color: #0E8F7B; }
 .bi-b.stale { background: #FFE9D2; color: #B85A00; }
-.bi-b.mo { background: #EAEFF9; color: #28407D; }
+.bi-b.mo { background: #E6F9F6; color: #0E8F7B; }
 .bi-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; margin: 10px 0 16px; }
-.bi-kpi, .bi-card { background: #fff; border: 1px solid #E3E8F0; border-radius: 14px; padding: 16px 18px; }
+.bi-kpi, .bi-card { background: #fff; border: 1px solid #E6E8EB; border-radius: 14px; padding: 16px 18px; }
 .bi-card { margin-bottom: 16px; min-width: 0; }
 .bi-card.sm { margin: 0; }
 .bi-card h3 { font-size: 15px; margin: 0 0 12px; display: flex; gap: 8px; align-items: center; }
-.bi-kl { font-size: 12.5px; color: #5b6784; margin-bottom: 8px; }
+.bi-kl { font-size: 12.5px; color: #6B7076; margin-bottom: 8px; }
 .bi-kv { font-size: 28px; font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
-.bi-kv small { font-size: 13px; font-weight: 600; color: #5b6784; margin-left: 3px; }
-.bi-ks { font-size: 12px; color: #7D879E; margin-top: 6px; min-height: 16px; }
-.bi-up { color: #1C9A68; } .bi-dn { color: #D24545; }
+.bi-kv small { font-size: 13px; font-weight: 600; color: #6B7076; margin-left: 3px; }
+.bi-ks { font-size: 12px; color: #8B9096; margin-top: 6px; min-height: 16px; }
+.bi-up { color: #0E8F7B; } .bi-dn { color: #D24545; }
 .bi-grid2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
 .bi-grid2 > .bi-card { margin-bottom: 16px; }
 .bi-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-bottom: 14px; }
 .bi-cards2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 16px; }
 .bi-pn { font-size: 13px; font-weight: 700; margin-bottom: 8px; line-height: 1.4; min-height: 36px; }
-.bi-out { font-size: 18px; color: #7D879E; }
+.bi-out { font-size: 18px; color: #8B9096; }
 .bi-spark { display: block; margin-top: 8px; }
 .bi-chart { display: flex; align-items: flex-end; gap: 8px; height: 210px; padding-top: 18px; overflow: hidden; }
 .bi-col { flex: 1; min-width: 0; height: 100%; display: flex; flex-direction: column; }
-.bi-bars { flex: 1; display: flex; align-items: flex-end; justify-content: center; gap: 3px; border-bottom: 1px solid #E3E8F0; }
+.bi-bars { flex: 1; display: flex; align-items: flex-end; justify-content: center; gap: 3px; border-bottom: 1px solid #E6E8EB; }
 .bi-b1 { flex: 1; max-width: 34px; border-radius: 4px 4px 0 0; position: relative; min-height: 0; }
-.bi-b1 i { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-style: normal; color: #4A5672; white-space: nowrap; }
+.bi-b1 i { position: absolute; top: -16px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-style: normal; color: #4A4F55; white-space: nowrap; }
 .bi-chart.wide { gap: 2px; } .bi-chart.wide .bi-x { font-size: 9px; }
-.bi-x { text-align: center; font-size: 11.5px; color: #7D879E; padding-top: 4px; }
-.bi-legend { font-size: 12px; color: #5b6784; margin-bottom: 4px; } .bi-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin: 0 4px 0 8px; vertical-align: middle; } .bi-legend i:first-child { margin-left: 0; }
+.bi-x { text-align: center; font-size: 11.5px; color: #8B9096; padding-top: 4px; }
+.bi-legend { font-size: 12px; color: #6B7076; margin-bottom: 4px; } .bi-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin: 0 4px 0 8px; vertical-align: middle; } .bi-legend i:first-child { margin-left: 0; }
 .bi-h { display: flex; flex-direction: column; gap: 10px; }
 .bi-hr { display: grid; grid-template-columns: 110px 1fr 70px; gap: 10px; align-items: center; font-size: 13px; }
-.bi-hl { color: #3c4766; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.bi-ht { height: 12px; background: #EEF1F6; border-radius: 6px; overflow: hidden; } .bi-ht i { display: block; height: 100%; border-radius: 6px; }
+.bi-hl { color: #3c3a39; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bi-ht { height: 12px; background: #F0F1F3; border-radius: 6px; overflow: hidden; } .bi-ht i { display: block; height: 100%; border-radius: 6px; }
 .bi-hv { text-align: right; font-weight: 700; }
 .bi-tw { overflow-x: auto; }
 .bi-t { width: 100%; border-collapse: collapse; font-size: 13px; }
-.bi-t th { text-align: left; font-size: 12px; color: #7D879E; font-weight: 600; padding: 8px 10px; border-bottom: 1px solid #E3E8F0; white-space: nowrap; }
-.bi-t td { padding: 10px; border-bottom: 1px solid #EEF1F6; vertical-align: top; }
-.bi-t td small { display: block; font-size: 11px; color: #7D879E; margin-top: 2px; }
-.bi-t td small.bi-up { color: #1C9A68; } .bi-t td small.bi-dn { color: #D24545; }
-.bi-note { font-size: 12px; color: #7D879E; margin-top: 10px; line-height: 1.6; }
+.bi-t th { text-align: left; font-size: 12px; color: #8B9096; font-weight: 600; padding: 8px 10px; border-bottom: 1px solid #E6E8EB; white-space: nowrap; }
+.bi-t td { padding: 10px; border-bottom: 1px solid #F0F1F3; vertical-align: top; }
+.bi-t td small { display: block; font-size: 11px; color: #8B9096; margin-top: 2px; }
+.bi-t td small.bi-up { color: #0E8F7B; } .bi-t td small.bi-dn { color: #D24545; }
+.bi-note { font-size: 12px; color: #8B9096; margin-top: 10px; line-height: 1.6; }
 .bi-warn { background: #FFF1E4; border: 1px solid #F8D3AE; color: #7A3F00; border-radius: 12px; padding: 12px 16px; margin: 10px 0 14px; font-size: 13px; line-height: 1.6; }
-.bi-empty, .bi-loading { padding: 30px; text-align: center; color: #7D879E; font-size: 13px; }
+.bi-empty, .bi-loading { padding: 30px; text-align: center; color: #8B9096; font-size: 13px; }
 .bi-ms { color: #A5ADBF; font-size: 12px; }
 .bi-bar2 { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; margin: 8px 0; }
-.bi-bl, .bi-bn { font-size: 12px; color: #7D879E; } .bi-bn { margin-left: auto; }
-.bi-chip { border: 1px solid #DCE2EC; background: #fff; border-radius: 999px; padding: 5px 13px; font-size: 12.5px; cursor: pointer; color: #3c4766; }
-.bi-chip.on { background: #28407D; border-color: #28407D; color: #fff; font-weight: 700; }
+.bi-bl, .bi-bn { font-size: 12px; color: #8B9096; } .bi-bn { margin-left: auto; }
+.bi-chip { border: 1px solid #E6E8EB; background: #fff; border-radius: 999px; padding: 5px 13px; font-size: 12.5px; cursor: pointer; color: #3c3a39; }
+.bi-chip.on { background: #0E8F7B; border-color: #0E8F7B; color: #fff; font-weight: 700; }
 .bi-ch { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 10px; } .bi-ch h3 { margin: 0; }
-.bi-dl { margin: 0 0 12px; font-size: 13px; line-height: 1.65; } .bi-dl dt { font-weight: 700; color: #28407D; margin-top: 8px; font-size: 12px; } .bi-dl dd { margin: 2px 0 0; color: #3c4766; }
-.bi-man { background: #fff; border: 1px solid #E3E8F0; border-radius: 14px; padding: 12px 18px; margin-bottom: 16px; } .bi-man summary { cursor: pointer; font-weight: 700; font-size: 13.5px; }
+.bi-dl { margin: 0 0 12px; font-size: 13px; line-height: 1.65; } .bi-dl dt { font-weight: 700; color: #0E8F7B; margin-top: 8px; font-size: 12px; } .bi-dl dd { margin: 2px 0 0; color: #3c3a39; }
+.bi-man { background: #fff; border: 1px solid #E6E8EB; border-radius: 14px; padding: 12px 18px; margin-bottom: 16px; } .bi-man summary { cursor: pointer; font-weight: 700; font-size: 13.5px; }
 @media (max-width: 980px) {
   body[data-mode="bi"] #biApp { grid-template-columns: 1fr; }
   .bs { position: static; height: auto; }
@@ -1906,35 +1906,35 @@ body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax
   .bi-hr { grid-template-columns: 90px 1fr 60px; }
 }
 .bi-views { display: flex; gap: 6px; margin: 4px 0 12px; }
-.bi-vt { border: 1px solid #DCE2EC; background: #fff; border-radius: 10px; padding: 7px 16px; font-size: 13px; font-weight: 600; cursor: pointer; color: #3c4766; }
-.bi-vt.on { background: #121F42; border-color: #121F42; color: #fff; }
+.bi-vt { border: 1px solid #E6E8EB; background: #fff; border-radius: 10px; padding: 7px 16px; font-size: 13px; font-weight: 600; cursor: pointer; color: #3c3a39; }
+.bi-vt.on { background: #111111; border-color: #111111; color: #fff; }
 .bi-tabbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 4px 0 10px; }
-.bi-sel { border: 1px solid #DCE2EC; border-radius: 10px; padding: 8px 10px; font-size: 13px; background: #fff; max-width: 360px; min-width: 200px; }
-.bi-q { border: 1px solid #DCE2EC; border-radius: 10px; padding: 8px 12px; font-size: 13px; min-width: 200px; flex: 1; max-width: 320px; background: #fff; }
-.bi-sheet { background: #fff; border: 1px solid #E3E8F0; border-radius: 12px; overflow: auto; max-height: 72vh; max-width: 100%; }
+.bi-sel { border: 1px solid #E6E8EB; border-radius: 10px; padding: 8px 10px; font-size: 13px; background: #fff; max-width: 360px; min-width: 200px; }
+.bi-q { border: 1px solid #E6E8EB; border-radius: 10px; padding: 8px 12px; font-size: 13px; min-width: 200px; flex: 1; max-width: 320px; background: #fff; }
+.bi-sheet { background: #fff; border: 1px solid #E6E8EB; border-radius: 12px; overflow: auto; max-height: 72vh; max-width: 100%; }
 .bi-sheet table { border-collapse: separate; border-spacing: 0; font-size: 12.5px; min-width: 100%; }
-.bi-sheet th { position: sticky; top: 0; z-index: 2; background: #F3F5F9; color: #7D879E; font-weight: 600; padding: 5px 10px; border-bottom: 1px solid #E3E8F0; border-right: 1px solid #EEF1F6; }
+.bi-sheet th { position: sticky; top: 0; z-index: 2; background: #F6F7F8; color: #8B9096; font-weight: 600; padding: 5px 10px; border-bottom: 1px solid #E6E8EB; border-right: 1px solid #F0F1F3; }
 .bi-sheet td { padding: 4px 10px; border-bottom: 1px solid #F0F2F6; border-right: 1px solid #F4F6F9; max-width: 320px; min-width: 92px; white-space: pre-wrap; vertical-align: top; }
-.bi-sheet .bi-rn { position: sticky; left: 0; background: #F3F5F9; color: #A5ADBF; text-align: right; min-width: 40px; z-index: 1; }
+.bi-sheet .bi-rn { position: sticky; left: 0; background: #F6F7F8; color: #A5ADBF; text-align: right; min-width: 40px; z-index: 1; }
 .bi-sheet th.bi-rn { z-index: 3; }
-.bi-date { font-size: 12.5px; color: #5b6784; padding: 0 6px; align-self: center; }
-.bi-exp { border: 1px solid #DCE2EC; background: #fff; border-radius: 10px; padding: 8px 14px; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+.bi-date { font-size: 12.5px; color: #6B7076; padding: 0 6px; align-self: center; }
+.bi-exp { border: 1px solid #E6E8EB; background: #fff; border-radius: 10px; padding: 8px 14px; font-size: 12.5px; font-weight: 700; cursor: pointer; }
 .bi-exp.x { color: #1C7A4B; } .bi-exp.p { color: #D24545; } .bi-exp.t { color: #D9691A; }
 .bi-exp:hover { background: #F5F7FB; }
 .bi-grid2.ov { grid-template-columns: 1.7fr 1fr; } .bi-grid2.ov2 { grid-template-columns: 1.1fr 1fr; }
-.bi-segs { display: inline-flex; background: #EEF1F6; border-radius: 10px; padding: 3px; gap: 2px; }
-.bi-seg { border: 0; background: transparent; border-radius: 8px; padding: 6px 14px; font-size: 12.5px; font-weight: 700; color: #5b6784; cursor: pointer; }
-.bi-seg.on { background: #121F42; color: #fff; }
+.bi-segs { display: inline-flex; background: #F0F1F3; border-radius: 10px; padding: 3px; gap: 2px; }
+.bi-seg { border: 0; background: transparent; border-radius: 8px; padding: 6px 14px; font-size: 12.5px; font-weight: 700; color: #6B7076; cursor: pointer; }
+.bi-seg.on { background: #111111; color: #fff; }
 .bi-rsum { display: flex; gap: 8px; margin-bottom: 10px; } .bi-rsum span { font-size: 12px; font-weight: 700; border-radius: 999px; padding: 3px 10px; }
-.bi-rsum .red { background: #FDECEC; color: #D24545; } .bi-rsum .yel { background: #FFF6DC; color: #A87400; } .bi-rsum .grn { background: #E6F6EF; color: #1C9A68; }
+.bi-rsum .red { background: #FDECEC; color: #D24545; } .bi-rsum .yel { background: #FFF6DC; color: #A87400; } .bi-rsum .grn { background: #E6F9F6; color: #0E8F7B; }
 .bi-rlist { display: flex; flex-direction: column; gap: 8px; max-height: 360px; overflow-y: auto; }
-.bi-risk { display: flex; gap: 10px; align-items: flex-start; border: 1px solid #E3E8F0; border-radius: 10px; padding: 10px 12px; text-decoration: none; color: inherit; background: #FAFBFD; }
-.bi-risk:hover { border-color: #28407D; }
+.bi-risk { display: flex; gap: 10px; align-items: flex-start; border: 1px solid #E6E8EB; border-radius: 10px; padding: 10px 12px; text-decoration: none; color: inherit; background: #FAFAFA; }
+.bi-risk:hover { border-color: #0E8F7B; }
 .bi-risk i { width: 10px; height: 10px; border-radius: 50%; margin-top: 5px; flex: none; }
-.bi-risk.red i { background: #D24545; box-shadow: 0 0 0 3px #FDECEC; } .bi-risk.yel i { background: #E6A700; box-shadow: 0 0 0 3px #FFF6DC; } .bi-risk.grn i { background: #1C9A68; box-shadow: 0 0 0 3px #E6F6EF; }
-.bi-risk div { flex: 1; min-width: 0; } .bi-risk b { display: block; font-size: 13px; } .bi-risk span { display: block; font-size: 12px; color: #5b6784; line-height: 1.5; margin-top: 2px; }
-.bi-risk em { font-style: normal; font-size: 11px; font-weight: 700; color: #7D879E; flex: none; }
-.bi-brief { background: linear-gradient(160deg, #0F2A5C, #121F42); color: #fff; border-radius: 16px; padding: 20px 22px; margin-bottom: 16px; min-width: 0; }
+.bi-risk.red i { background: #D24545; box-shadow: 0 0 0 3px #FDECEC; } .bi-risk.yel i { background: #E6A700; box-shadow: 0 0 0 3px #FFF6DC; } .bi-risk.grn i { background: #0E8F7B; box-shadow: 0 0 0 3px #E6F9F6; }
+.bi-risk div { flex: 1; min-width: 0; } .bi-risk b { display: block; font-size: 13px; } .bi-risk span { display: block; font-size: 12px; color: #6B7076; line-height: 1.5; margin-top: 2px; }
+.bi-risk em { font-style: normal; font-size: 11px; font-weight: 700; color: #8B9096; flex: none; }
+.bi-brief { background: linear-gradient(160deg, #0F2A5C, #111111); color: #fff; border-radius: 16px; padding: 20px 22px; margin-bottom: 16px; min-width: 0; }
 .bi-brief h3 { font-size: 16px; margin: 4px 0 14px; color: #fff; }
 .bi-brief .bi-ch { margin-bottom: 6px; }
 .bi-tagx { font-size: 11px; font-weight: 800; letter-spacing: .08em; color: #8FB4FF; background: rgba(143,180,255,.14); border-radius: 999px; padding: 3px 10px; }
@@ -1951,51 +1951,127 @@ body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax
 }
 @media (max-width: 980px) { .bi-grid2.ov, .bi-grid2.ov2 { grid-template-columns: 1fr; } }
 .bi-h3 { font-size: 15px; margin: 18px 0 2px; display: flex; gap: 8px; align-items: center; }
-.bi-slides { width: 100%; aspect-ratio: 16 / 9; border: 1px solid #E3E8F0; border-radius: 10px; background: #fff; }
+.bi-slides { width: 100%; aspect-ratio: 16 / 9; border: 1px solid #E6E8EB; border-radius: 10px; background: #fff; }
 .bi-pwwrap { position: relative; } .bi-pwwrap .bi-pw { padding-right: 44px; } .bi-eye { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 34px; height: 34px; border: 0; background: transparent; border-radius: 8px; color: #6B7076; cursor: pointer; display: grid; place-items: center; } .bi-eye:hover { background: #F1F3F5; color: #111; } .bi-eye[aria-pressed="true"] { color: var(--teal-dark); }
 
-.bi-askbar { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #DCE2EC; border-radius: 14px; padding: 4px 14px; margin: 14px 0 6px; box-shadow: 0 2px 8px rgba(18,31,66,.04); }
+.bi-askbar { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #E6E8EB; border-radius: 14px; padding: 4px 14px; margin: 14px 0 6px; box-shadow: 0 2px 8px rgba(18,31,66,.04); }
 .bi-askbar input { flex: 1; border: 0; outline: 0; padding: 11px 0; font-size: 14px; background: transparent; }
-.bi-askbar kbd { font-size: 11px; color: #7D879E; border: 1px solid #DCE2EC; border-radius: 6px; padding: 1px 6px; }
+.bi-askbar kbd { font-size: 11px; color: #8B9096; border: 1px solid #E6E8EB; border-radius: 6px; padding: 1px 6px; }
 .bi-askchips { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 4px; }
-.bi-ans { background: #fff; border: 1px solid #28407D; border-radius: 14px; padding: 14px 18px; margin: 8px 0 4px; }
-.bi-ans-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 14px; } .bi-ans-top button { border: 0; background: none; cursor: pointer; font-size: 15px; color: #7D879E; }
+.bi-ans { background: #fff; border: 1px solid #0E8F7B; border-radius: 14px; padding: 14px 18px; margin: 8px 0 4px; }
+.bi-ans-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 14px; } .bi-ans-top button { border: 0; background: none; cursor: pointer; font-size: 15px; color: #8B9096; }
 .bi-ans .bi-btn { margin-top: 6px; }
 #biDrawer { display: none; position: fixed; inset: 0; z-index: 400; background: rgba(17,24,45,.35); justify-content: flex-end; }
 #biDrawer.open { display: flex; }
 .bi-drawer { width: min(460px, 100%); background: #fff; height: 100%; overflow-y: auto; padding: 22px 24px 40px; box-shadow: -12px 0 40px rgba(0,0,0,.18); }
 .bi-drawer-h { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 12px; } .bi-drawer-h h3 { margin: 0; font-size: 17px; line-height: 1.4; } .bi-drawer-h button { border: 0; background: #F1F3F5; border-radius: 8px; width: 30px; height: 30px; cursor: pointer; }
-.bi-drawer h4 { font-size: 13px; color: #28407D; margin: 16px 0 6px; } .bi-dr-p { font-size: 13px; line-height: 1.7; color: #3c4766; margin: 0 0 6px; } .bi-dr-ul { margin: 0 0 6px; padding-left: 18px; font-size: 13px; line-height: 1.75; color: #3c4766; }
-.bi-dr-lv { display: inline-block; font-size: 12px; font-weight: 800; border-radius: 999px; padding: 3px 12px; margin-bottom: 8px; } .bi-dr-lv.red { background: #FDECEC; color: #D24545; } .bi-dr-lv.yel { background: #FFF6DC; color: #A87400; } .bi-dr-lv.grn { background: #E6F6EF; color: #1C9A68; }
-.bi-dr-btns { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; } .bi-btn.ok { background: #121F42; color: #fff; border-color: #121F42; }
-.bi-ta { width: 100%; border: 1px solid #DCE2EC; border-radius: 10px; padding: 10px; font-size: 13px; line-height: 1.6; font-family: inherit; resize: vertical; }
+.bi-drawer h4 { font-size: 13px; color: #0E8F7B; margin: 16px 0 6px; } .bi-dr-p { font-size: 13px; line-height: 1.7; color: #3c3a39; margin: 0 0 6px; } .bi-dr-ul { margin: 0 0 6px; padding-left: 18px; font-size: 13px; line-height: 1.75; color: #3c3a39; }
+.bi-dr-lv { display: inline-block; font-size: 12px; font-weight: 800; border-radius: 999px; padding: 3px 12px; margin-bottom: 8px; } .bi-dr-lv.red { background: #FDECEC; color: #D24545; } .bi-dr-lv.yel { background: #FFF6DC; color: #A87400; } .bi-dr-lv.grn { background: #E6F9F6; color: #0E8F7B; }
+.bi-dr-btns { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0; } .bi-btn.ok { background: #111111; color: #fff; border-color: #111111; }
+.bi-ta { width: 100%; border: 1px solid #E6E8EB; border-radius: 10px; padding: 10px; font-size: 13px; line-height: 1.6; font-family: inherit; resize: vertical; }
 .bi-risk { cursor: pointer; text-align: left; width: 100%; font: inherit; }
-.bi-click { cursor: pointer; } .bi-click:hover td { background: #F5F8FF; } .bi-t th { cursor: pointer; } .bi-t th[data-dir="asc"]::after { content: " ▲"; font-size: 9px; } .bi-t th[data-dir="desc"]::after { content: " ▼"; font-size: 9px; }
-.bi-kpi.lk { cursor: pointer; transition: border-color .15s, transform .15s; } .bi-kpi.lk:hover { border-color: #28407D; transform: translateY(-2px); }
-.bi-pill { display: inline-block; font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 2px 10px; background: #EEF1F6; color: #5b6784; } .bi-pill.grn { background: #E6F6EF; color: #1C9A68; } .bi-pill.yel { background: #FFF6DC; color: #A87400; } .bi-pill.red { background: #FDECEC; color: #D24545; }
+.bi-click { cursor: pointer; } .bi-click:hover td { background: #EEFBFA; } .bi-t th { cursor: pointer; } .bi-t th[data-dir="asc"]::after { content: " ▲"; font-size: 9px; } .bi-t th[data-dir="desc"]::after { content: " ▼"; font-size: 9px; }
+.bi-kpi.lk { cursor: pointer; transition: border-color .15s, transform .15s; } .bi-kpi.lk:hover { border-color: #0E8F7B; transform: translateY(-2px); }
+.bi-pill { display: inline-block; font-size: 11.5px; font-weight: 700; border-radius: 999px; padding: 2px 10px; background: #F0F1F3; color: #6B7076; } .bi-pill.grn { background: #E6F9F6; color: #0E8F7B; } .bi-pill.yel { background: #FFF6DC; color: #A87400; } .bi-pill.red { background: #FDECEC; color: #D24545; }
 .bi-inrow { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-bottom: 12px; font-size: 13px; } .bi-inrow label { display: flex; gap: 6px; align-items: center; } .bi-inrow .bi-q { min-width: 110px; max-width: 150px; flex: none; }
-.bi-gc { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; } .bi-gc div { background: #F6F8FC; border-radius: 10px; padding: 10px 12px; } .bi-gc small { display: block; font-size: 11.5px; color: #7D879E; } .bi-gc b { font-size: 17px; }
-.bi-verdict { margin-top: 10px; border-radius: 10px; padding: 10px 14px; font-size: 13px; line-height: 1.6; } .bi-verdict.grn { background: #E6F6EF; color: #136B47; } .bi-verdict.yel { background: #FFF6DC; color: #7A5600; } .bi-verdict.red { background: #FDECEC; color: #9B2C2C; }
-.bi-fn { display: grid; grid-template-columns: 70px 1fr 210px; gap: 12px; align-items: center; padding: 8px 10px; border-radius: 10px; cursor: pointer; } .bi-fn:hover, .bi-fn.on { background: #F0F4FF; }
-.bi-fl { font-size: 13px; font-weight: 700; } .bi-ft { height: 16px; background: #EEF1F6; border-radius: 8px; overflow: hidden; } .bi-ft i { display: block; height: 100%; background: linear-gradient(90deg, #28407D, #4F74C9); border-radius: 8px; } .bi-fv { font-weight: 800; font-size: 14px; } .bi-fv small { font-weight: 500; color: #7D879E; font-size: 11.5px; }
-.bi-ins { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; } .bi-ins li { position: relative; padding: 9px 12px 9px 30px; background: #F6F8FC; border-radius: 10px; font-size: 13px; line-height: 1.65; color: #2c3552; } .bi-ins li::before { content: "💡"; position: absolute; left: 9px; top: 9px; font-size: 13px; }
-.bi-line { width: 100%; height: 200px; background: #FAFBFD; border-radius: 10px; } .bi-lt { font-size: 10px; fill: #7D879E; }
-.bi-gaps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; } .bi-gap { border-radius: 12px; padding: 12px 14px; background: #F6F8FC; } .bi-gap.grn { background: #E6F6EF; } .bi-gap.red { background: #FDECEC; } .bi-gap small { display: block; color: #5b6784; font-size: 12px; } .bi-gap b { font-size: 24px; } .bi-gap span { display: block; font-size: 12px; color: #5b6784; }
-.bi-chk { display: flex; flex-direction: column; gap: 6px; } .bi-chk label { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; line-height: 1.6; padding: 6px 8px; border-radius: 8px; cursor: pointer; } .bi-chk label:hover { background: #F6F8FC; } .bi-chk input:checked + span { color: #9aa3b8; text-decoration: line-through; }
+.bi-gc { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; } .bi-gc div { background: #F6F7F8; border-radius: 10px; padding: 10px 12px; } .bi-gc small { display: block; font-size: 11.5px; color: #8B9096; } .bi-gc b { font-size: 17px; }
+.bi-verdict { margin-top: 10px; border-radius: 10px; padding: 10px 14px; font-size: 13px; line-height: 1.6; } .bi-verdict.grn { background: #E6F9F6; color: #136B47; } .bi-verdict.yel { background: #FFF6DC; color: #7A5600; } .bi-verdict.red { background: #FDECEC; color: #9B2C2C; }
+.bi-fn { display: grid; grid-template-columns: 70px 1fr 210px; gap: 12px; align-items: center; padding: 8px 10px; border-radius: 10px; cursor: pointer; } .bi-fn:hover, .bi-fn.on { background: #EEFBFA; }
+.bi-fl { font-size: 13px; font-weight: 700; } .bi-ft { height: 16px; background: #F0F1F3; border-radius: 8px; overflow: hidden; } .bi-ft i { display: block; height: 100%; background: linear-gradient(90deg, #0E8F7B, #4F74C9); border-radius: 8px; } .bi-fv { font-weight: 800; font-size: 14px; } .bi-fv small { font-weight: 500; color: #8B9096; font-size: 11.5px; }
+.bi-ins { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px; } .bi-ins li { position: relative; padding: 9px 12px 9px 30px; background: #F6F7F8; border-radius: 10px; font-size: 13px; line-height: 1.65; color: #2e2e2e; } .bi-ins li::before { content: "💡"; position: absolute; left: 9px; top: 9px; font-size: 13px; }
+.bi-line { width: 100%; height: 200px; background: #FAFAFA; border-radius: 10px; } .bi-lt { font-size: 10px; fill: #8B9096; }
+.bi-gaps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; } .bi-gap { border-radius: 12px; padding: 12px 14px; background: #F6F7F8; } .bi-gap.grn { background: #E6F9F6; } .bi-gap.red { background: #FDECEC; } .bi-gap small { display: block; color: #6B7076; font-size: 12px; } .bi-gap b { font-size: 24px; } .bi-gap span { display: block; font-size: 12px; color: #6B7076; }
+.bi-chk { display: flex; flex-direction: column; gap: 6px; } .bi-chk label { display: flex; gap: 8px; align-items: flex-start; font-size: 13px; line-height: 1.6; padding: 6px 8px; border-radius: 8px; cursor: pointer; } .bi-chk label:hover { background: #F6F7F8; } .bi-chk input:checked + span { color: #9aa3b8; text-decoration: line-through; }
 .bi-picks-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin: 10px 0 8px; }
 .bi-picks { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; }
-.bi-pick { background: #fff; border: 1px solid #DCE2EC; border-radius: 16px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; border-top: 4px solid #F57902; }
-.bi-pk-top { display: flex; justify-content: space-between; align-items: center; } .bi-pk-rk { font-size: 11px; font-weight: 800; color: #F57902; letter-spacing: .06em; } .bi-pk-sc { font-size: 11.5px; background: #EAEFF9; color: #28407D; border-radius: 999px; padding: 2px 10px; font-weight: 700; }
-.bi-pk-h { font-size: 18px; font-weight: 800; color: #121F42; text-decoration: none; word-break: break-all; } .bi-pk-m { font-size: 12.5px; color: #5b6784; }
-.bi-pk-re { display: flex; gap: 6px; flex-wrap: wrap; } .bi-pk-re span { font-size: 11.5px; background: #EAEFF9; color: #28407D; border-radius: 6px; padding: 2px 8px; }
+.bi-pick { background: #fff; border: 1px solid #E6E8EB; border-radius: 16px; padding: 16px 18px; display: flex; flex-direction: column; gap: 8px; border-top: 4px solid #F5A524; }
+.bi-pk-top { display: flex; justify-content: space-between; align-items: center; } .bi-pk-rk { font-size: 11px; font-weight: 800; color: #F5A524; letter-spacing: .06em; } .bi-pk-sc { font-size: 11.5px; background: #E6F9F6; color: #0E8F7B; border-radius: 999px; padding: 2px 10px; font-weight: 700; }
+.bi-pk-h { font-size: 18px; font-weight: 800; color: #111111; text-decoration: none; word-break: break-all; } .bi-pk-m { font-size: 12.5px; color: #6B7076; }
+.bi-pk-re { display: flex; gap: 6px; flex-wrap: wrap; } .bi-pk-re span { font-size: 11.5px; background: #E6F9F6; color: #0E8F7B; border-radius: 6px; padding: 2px 8px; }
 .bi-pk-idea { background: #FFF8EE; border-radius: 10px; padding: 9px 12px; } .bi-pk-idea small { color: #B86A00; font-weight: 700; font-size: 11.5px; } .bi-pk-idea p { margin: 4px 0 0; font-size: 12.5px; line-height: 1.65; color: #4a3a20; }
-.bi-pk-prod { font-size: 12.5px; color: #3c4766; } .bi-pk-btns { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; } .bi-pk-btns .bi-btn { padding: 6px 11px; font-size: 12px; }
-.bi-mini { display: inline-block; font-size: 11px; background: #EAEFF9; color: #28407D; border-radius: 5px; padding: 1px 6px; margin: 0 3px 2px 0; }
+.bi-pk-prod { font-size: 12.5px; color: #3c3a39; } .bi-pk-btns { display: flex; gap: 6px; flex-wrap: wrap; margin-top: auto; } .bi-pk-btns .bi-btn { padding: 6px 11px; font-size: 12px; }
+.bi-mini { display: inline-block; font-size: 11px; background: #E6F9F6; color: #0E8F7B; border-radius: 5px; padding: 1px 6px; margin: 0 3px 2px 0; }
 .bi-favchip { display: inline-flex; align-items: center; gap: 4px; background: #FFF6DC; border-radius: 999px; padding: 3px 4px 3px 11px; font-size: 12.5px; } .bi-favchip a { color: #7A5600; text-decoration: none; font-weight: 600; } .bi-favchip button { border: 0; background: none; cursor: pointer; color: #A87400; }
-.bi-h4 { font-size: 13px; color: #28407D; margin: 0 0 8px; }
-.bi-ovp { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; } .bi-ovp-i { text-align: left; background: #FFF8EE; border: 1px solid #F3DDBE; border-radius: 12px; padding: 10px 14px; cursor: pointer; font: inherit; display: flex; flex-direction: column; gap: 2px; } .bi-ovp-i:hover { border-color: #F57902; } .bi-ovp-i b { font-size: 15px; color: #121F42; } .bi-ovp-i span { font-size: 12px; color: #5b6784; } .bi-ovp-i em { font-style: normal; font-size: 11.5px; color: #B86A00; }
+.bi-h4 { font-size: 13px; color: #0E8F7B; margin: 0 0 8px; }
+.bi-ovp { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; } .bi-ovp-i { text-align: left; background: #FFF8EE; border: 1px solid #F3DDBE; border-radius: 12px; padding: 10px 14px; cursor: pointer; font: inherit; display: flex; flex-direction: column; gap: 2px; } .bi-ovp-i:hover { border-color: #F5A524; } .bi-ovp-i b { font-size: 15px; color: #111111; } .bi-ovp-i span { font-size: 12px; color: #6B7076; } .bi-ovp-i em { font-style: normal; font-size: 11.5px; color: #B86A00; }
 @media (max-width: 980px) { .bi-fn { grid-template-columns: 56px 1fr; } .bi-fv { grid-column: 1 / -1; } }
 @media print { .bi-askbar, .bi-askchips, #biAns, #biDrawer { display: none !important; } }
+.bi-lowrv li { font-size: 12.5px; padding-left: 12px; } .bi-lowrv li::before { content: none; } .bi-click.on td { background: #E6F9F6; }
+
+/* ── 대시보드 톤앤매너: 어사이드 AI 버전과 통일 ── */
+body[data-mode="bi"] #biApp { grid-template-columns: 272px minmax(0, 1fr); background: #fff; color: #2e2e2e; }
+.bs { background: #fff; color: #2e2e2e; border-right: 1px solid #ECEEF0; }
+.bs-brand { flex-direction: column; align-items: flex-start; gap: 3px; padding: 28px 26px 20px; border-bottom: 1px solid #F0F1F3; color: #111; }
+.bs-brand img { display: block; }
+.bs-sub { font-size: 11px; color: #8B9096; margin-top: 2px; }
+.bs-nav { padding: 6px 16px 16px; }
+.bs-g { padding: 18px 4px 6px; font-size: 12px; font-weight: 700; letter-spacing: 1px; color: #14C4A9; }
+.bs-nav a { padding: 11px 14px; gap: 12px; border-radius: 12px; font-size: 15px; font-weight: 500; color: #3c3a39; }
+.bs-nav a:hover { background: #F6F7F8; color: #1b1b1b; }
+.bs-nav a.on { background: #E6F9F6; color: #0E8F7B; font-weight: 700; }
+.bs-nav a.on::before { background: #14C4A9; }
+.bs-foot { border-top: 1px solid #F0F1F3; padding: 12px 16px 20px; }
+.bs-foot a, .bs-foot button { color: #6B7076; font-size: 14px; font-weight: 500; padding: 9px 12px; border-radius: 10px; }
+.bs-foot a:hover, .bs-foot button:hover { background: #F6F7F8; color: #0E8F7B; }
+.bm { background: #fff; }
+.bm-banner { background: #111; border-bottom: 0; color: #fff; text-align: center; font-size: 13px; padding: 11px clamp(16px, 3vw, 40px); }
+.bm-banner b { color: #14C4A9; }
+.bm-banner .bi-b.real { background: #14C4A9; color: #fff; margin-right: 6px; }
+.bi-head { padding: 32px 0 10px; }
+.bi-head > div:first-child::before { content: "DASHBOARD"; display: block; font-size: 14px; font-weight: 600; letter-spacing: 1px; color: #14C4A9; margin-bottom: 8px; }
+.bi-head h1 { font-size: 34px; font-weight: 700; letter-spacing: -1px; color: #2e2e2e; line-height: 1.25; margin-bottom: 8px; }
+.bi-head p { font-size: 15px; color: #6b7076; line-height: 1.7; }
+.bi-askbar { border-radius: 16px; border-color: #E6E8EB; box-shadow: none; }
+.bi-askbar:focus-within { border-color: #14C4A9; box-shadow: 0 0 0 3px rgba(20,196,169,.15); }
+.bi-kpi { background: #F6F7F8; border: 0; border-radius: 16px; padding: 22px 22px 20px; }
+.bi-kv { color: #111; font-weight: 800; }
+.bi-kv small { color: #14C4A9; }
+.bi-card, .bi-man, .bi-ans, .bi-pick { border-radius: 16px; border-color: #E6E8EB; box-shadow: none; }
+.bi-card h3 { font-weight: 800; letter-spacing: -.02em; }
+.bi-chip, .bi-vt, .bi-exp { border-radius: 999px; padding: 7px 16px; font-size: 13.5px; font-weight: 600; border: 1px solid #E6E8EB; background: #fff; color: #4A4F55; }
+.bi-chip:hover, .bi-vt:hover { border-color: #14C4A9; color: #0E8F7B; }
+.bi-chip.on, .bi-vt.on { background: #111; border-color: #111; color: #fff; }
+.bi-seg.on { background: #111; color: #fff; }
+.bi-segs { background: #F0F1F3; }
+.bi-btn { background: #F0F1F3; border: 0; border-radius: 10px; font-weight: 600; color: #2e2e2e; padding: 9px 16px; }
+.bi-btn:hover { background: #E6F9F6; color: #0E8F7B; border: 0; }
+.bi-btn.ok { background: #14C4A9; color: #fff; }
+.bi-btn.ok:hover { background: #0E8F7B; color: #fff; }
+.bi-exp { border-radius: 10px; }
+.bi-exp.x, .bi-exp.p, .bi-exp.t { color: #2e2e2e; }
+.bi-exp.x:hover { background: #E6F9F6; color: #0E8F7B; } .bi-exp.p:hover { background: #FDECEC; color: #D24545; } .bi-exp.t:hover { background: #FFF6DC; color: #A87400; }
+.bi-pill { background: #F0F1F3; color: #4A4F55; }
+.bi-pill.grn { background: #E6F9F6; color: #0E8F7B; }
+.bi-b.mo { background: #F0F1F3; color: #4A4F55; }
+.bi-ft i { background: linear-gradient(90deg, #14C4A9, #5ADBC8); }
+.bi-fn:hover, .bi-fn.on { background: #EEFBFA; }
+.bi-ins li { background: #F6F7F8; color: #2e2e2e; }
+.bi-gc div, .bi-gap { background: #F6F7F8; }
+.bi-gap.grn { background: #E6F9F6; }
+.bi-verdict.grn { background: #E6F9F6; color: #0B6B5C; }
+.bi-risk { background: #fff; border-color: #E6E8EB; border-radius: 14px; }
+.bi-risk:hover { border-color: #14C4A9; }
+.bi-pick { border-top: 4px solid #14C4A9; }
+.bi-pk-rk { color: #0E8F7B; } .bi-pk-sc { background: #E6F9F6; color: #0E8F7B; } .bi-pk-h { color: #111; }
+.bi-pk-re span, .bi-mini { background: #E6F9F6; color: #0E8F7B; }
+.bi-pk-idea { background: #EEFBFA; } .bi-pk-idea small { color: #0E8F7B; } .bi-pk-idea p { color: #1f3b36; }
+.bi-ovp-i { background: #EEFBFA; border-color: #CFF1EA; border-radius: 14px; } .bi-ovp-i:hover { border-color: #14C4A9; } .bi-ovp-i em { color: #0E8F7B; }
+.bi-brief { background: #111; border-radius: 16px; background-image: radial-gradient(520px 220px at 90% 0%, rgba(20,196,169,.25), rgba(20,196,169,0) 70%); }
+.bi-brief h3 { color: #fff; }
+.bi-tagx { color: #14C4A9; background: rgba(20,196,169,.14); }
+.bi-tg { background: #14C4A9; color: #fff; }
+.bi-bl2 { background: rgba(255,255,255,.07); } .bi-bl2 p { color: #EDEDED; }
+.bi-rbtn { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.2); }
+.bi-bnote { color: #9aa0a6; }
+.bi-drawer { border-radius: 20px 0 0 20px; }
+.bi-sheet th, .bi-sheet .bi-rn { background: #F6F7F8; }
+.bi-ans { border-color: #14C4A9; }
+.bi-click:hover td { background: #EEFBFA; }
+.bi-t th { color: #8B9096; font-weight: 600; }
+.bi-warn { background: #FFF6E5; border-color: #F7E3B8; color: #6B5314; border-radius: 14px; }
+.bi-line { background: #FAFAFA; }
+@media (max-width: 980px) { body[data-mode="bi"] #biApp { grid-template-columns: 1fr; } .bs { border-right: 0; border-bottom: 1px solid #ECEEF0; } .bs-brand { padding: 18px 20px 12px; } .bi-head h1 { font-size: 26px; } }
+.bi-t td a { white-space: nowrap; }
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -4015,7 +4091,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { gate: '첫 화면', bi: '종합 현황', 'bi-sales': '매출·광고', 'bi-journey': '주력상품 고객여정', 'bi-rank': '올영 랭킹', 'bi-inf': '인플루언서', 'bi-rev': '리뷰 운영', 'bi-paid': '페이드 소재', 'bi-manual': '시트 메뉴얼', setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { gate: '첫 화면', 'bi-comp': '경쟁사 모니터링', 'bi-qna': '콘텐츠 소재 수집', bi: '종합 현황', 'bi-sales': '매출·광고', 'bi-journey': '주력상품 고객여정', 'bi-rank': '올영 랭킹', 'bi-inf': '인플루언서', 'bi-rev': '리뷰 운영', 'bi-paid': '페이드 소재', 'bi-manual': '시트 메뉴얼', setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page, replaceHist) {
     if (page === 'automations') { page = 'assets'; replaceHist = true; }
@@ -4076,7 +4152,9 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     inf: { t: '[MK] 2026 인플루언서 마케팅 리스트', u: 'https://docs.google.com/spreadsheets/d/19LoIX57UdN13nUXqHbfRA6zFhkRkwobaY0QKokueqzo/edit?gid=1384807088#gid=1384807088' },
     rev: { t: '자사/스스 리뷰 운영 기획안', u: 'https://docs.google.com/spreadsheets/d/10z94a9TJFrMKlEAeWDdw6BLBuPHXRz4yuLkUHug8LcM/edit?gid=1682728294#gid=1682728294' },
     paid: { t: '[마케팅팀]2026 페이드 소재 리포트', u: 'https://docs.google.com/spreadsheets/d/1Smrlc0ijiMUDRlY4j7RDLcpGWe5mETTFSwDzZoGBq94/edit?gid=73896278#gid=73896278' },
-    rank: { t: '라이브오랄스 올리브영 구강용품 랭킹 트래커', u: 'https://docs.google.com/spreadsheets/d/1QD7M4tHciImxKbjNsIECqODVH80RnzUpC5N9rzxEtsM/edit?gid=183848060#gid=183848060' }
+    rank: { t: '라이브오랄스 올리브영 구강용품 랭킹 트래커', u: 'https://docs.google.com/spreadsheets/d/1QD7M4tHciImxKbjNsIECqODVH80RnzUpC5N9rzxEtsM/edit?gid=183848060#gid=183848060' },
+    comp: { t: '경쟁사 리뷰/가격 크롤링 자동화', u: 'https://docs.google.com/spreadsheets/d/1Vj37hdYEQsSjmvxHR6F9zj3ErqXC8QiTj6RT4NfgYeY/edit?gid=1005#gid=1005' },
+    qna: { t: '네이버 지식iN/카페 기반 콘텐츠 소재 자동 수집', u: 'https://docs.google.com/spreadsheets/d/1d0zw6ZfOn6JiB2oVzEo3NpSHSOCVyv3fUTd-wdD4gpU/edit?gid=1244766666#gid=1244766666' }
   };
   const BI_MANUAL = {
     sales: { what: '매체(채널)별 월 매출·광고비·ROAS를 한 장으로 모은 손익분기표입니다. 시트 제목에 [보안] 표시가 있는 내부 자료입니다.', tabs: '월별 요약(신규) = 매체별 손익분기표(이 화면이 읽는 탭) · 26년 7~11월·25년 4월~26년 6월 월별 탭 · 월별 국내 B2C/B2B 일별 탭 · 월별 요약', read: '월별 요약(신규)에서 실매출 합계, 국내외 광고비 합계, 채널별 매출, 채널별 ROAS(목표 대비)를 읽습니다.', note: '월 목표·월별 값은 시트에 입력된 그대로이며, 값이 비어 있는 월(11·12월)은 요약에 표시하지 않습니다. 다른 월 탭과 일별 탭은 "전체 탭 보기"에서 볼 수 있습니다.' },
@@ -4084,6 +4162,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     inf: { what: '인플루언서 후보 컨택 리스트와 월별 진행 기록을 관리하는 시트입니다.', tabs: '인플루언서 리스트업(이 화면이 읽는 탭) · 2025.06월~2026.09월 월별 탭 · 공구 · 스타일씨 · 선정 기준 · 매뉴얼.계약서 · 영상 기획(템플릿) · 파트너십 광고 인원별 · 영상 캘린더', read: '리스트업 탭에서 컨택 건수, 컨택 월, 플랫폼, 구독자 규모를 집계합니다.', note: '요약은 건수만 집계합니다. 전체 탭 보기에서는 금액·이메일·연락처를 가리고(서버에서 처리), 계약서 탭은 열 수 없게 막았습니다.' },
     rev: { what: '자사몰/스마트스토어 리뷰 운영 현황과 월별 KPI(리뷰율, 포토리뷰율, 부정 VOC, 평점)를 정리한 기획안입니다.', tabs: '리뷰 운영 기획안 · 8월운영안/7월성과(이 화면이 읽는 탭) · 7월운영안/6월성과 · 6월운영안/5월성과 · 5월 리뷰 운영 현황 및 성과 공유 · 리뷰 운영 기획안(5월) · 추가 운영안', read: '8월운영안/7월성과 탭의 월별 표(1~7월)를 읽습니다.', note: '월별 표는 사람이 갱신하는 방식으로 보이며, 이 탭의 마지막 월은 7월입니다.' },
     paid: { what: '마케팅팀 광고 소재의 기획·성과와 경쟁사 소재 분석을 모은 리포트입니다.', tabs: '월간 소재기획 대시보드(이 화면이 읽는 탭) · 경쟁사 소재 분석 리포트(수집일·브랜드만 집계) · 경쟁사 분석/리뷰 분석 데이터 · 7월 미백제_스스/올영 · 7월 전동칫솔_스스 · 6월 미백제 · 6월 고체가글', read: '월간 총괄 현황의 월별 총 기획 수량·담당자 수, 경쟁사 소재 수집 건수를 읽습니다.', note: '요약은 수량과 건수만 보여 줍니다. 소재별 지출·ROAS, 경쟁사 소재 상세는 "전체 탭 보기"에서 탭을 골라 확인하세요.' },
+    comp: { what: '올리브영 TOP20 경쟁 제품의 가격·할인·리뷰를 매일 수집하는 자동화 시트입니다(전동칫솔·불소도포제·농축가글·치아미백제).', tabs: 'Dashboard(요약, 이 화면이 참고) · 카테고리별 리뷰 탭 4개 · Raw_OliveYoung(리뷰 원자료) · Competitor_Products(추적 제품 목록·순위) · Price_History(일별 가격·프로모션) · Raw_SmartStore(현재 비어 있음)', read: '제품 목록, 가격 이력, 리뷰 원자료를 서버에서 집계해 평균 판매가 추이, 할인율, 프로모션 태그, 브랜드별 별점, 낮은 별점 리뷰를 보여 줍니다.', note: '스마트스토어 수집은 없고, Dashboard 탭의 리뷰 수집 현황 수치는 0으로 표시되어 실제 Raw 데이터와 맞지 않습니다. 리뷰는 공개 리뷰 원문 일부(1~2점)만 가져옵니다.' },
+    qna: { what: '네이버 지식iN·카페에서 키워드별로 올라온 글을 매일 수집해 콘텐츠 소재를 찾는 자동화 시트입니다(브랜드/경쟁사, 제품카테고리, 증상/니즈 분류).', tabs: '대시보드 · 콘텐츠소재(수집 원자료, 이 화면이 집계) · Calc_Data', read: '서버에서 전체 수집 건수, 일별 수집, 키워드별 7일 증감, 최근 500건 제목을 집계해 보여 줍니다.', note: '제목과 링크만 가져오고 본문 요약은 가져오지 않습니다. 이메일·연락처 형식은 가립니다. 최근 500건 안에서 검색·필터합니다.' },
     rank: { what: '올리브영 구강용품 제품별 랭킹과 올리브영 EDI 판매 실적을 회차마다 자동으로 모으는 대시보드 시트입니다. 랭킹 캡처는 구글 슬라이드에 최신순으로 쌓입니다.', tabs: '대시보드(이 화면이 읽는 탭) · 일자별추세 · 제품별추세 · 회차별추세 · RawData(회차별 순위 원자료) · 판매RawData · 상품매핑 · _차트데이터 · 입금예정(정산 자료라 열 수 없게 막음)', read: '대시보드 탭에서 랭킹 지표, 판매 지표, 제품별 랭킹·판매 표, 주간 추이, 시간대별 패턴, 최근 10회차 순위를 읽습니다.', note: '판매금액은 고객 결제가 기준이고 최근일은 EDI 최신 수집일입니다. 입금 예정(정산·공제) 구간은 거래 조건이 포함되어 표시하지 않습니다.' },
   };
   function biPw() { try { return sessionStorage.getItem('lo_bi_pw') || ''; } catch (e) { return ''; } }
@@ -4113,13 +4193,13 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function bH(items, fmt, color) {
     const mx = Math.max.apply(null, items.map(function (x) { return isFinite(x.v) ? x.v : 0; }).concat([1]));
-    return '<div class="bi-h">' + items.map(function (x) { return '<div class="bi-hr"><span class="bi-hl">' + esc(x.l) + '</span><span class="bi-ht"><i style="width:' + (isFinite(x.v) ? Math.round(x.v / mx * 100) : 0) + '%;background:' + (color || '#28407D') + '"></i></span><span class="bi-hv">' + (fmt ? fmt(x.v) : fN(x.v)) + '</span></div>'; }).join('') + '</div>';
+    return '<div class="bi-h">' + items.map(function (x) { return '<div class="bi-hr"><span class="bi-hl">' + esc(x.l) + '</span><span class="bi-ht"><i style="width:' + (isFinite(x.v) ? Math.round(x.v / mx * 100) : 0) + '%;background:' + (color || '#14C4A9') + '"></i></span><span class="bi-hv">' + (fmt ? fmt(x.v) : fN(x.v)) + '</span></div>'; }).join('') + '</div>';
   }
   function bSpark(vals, inv) {
     const pts = vals.map(function (v, i) { return isFinite(v) ? [i, v] : null; }).filter(Boolean); if (pts.length < 2) return '<span class="bi-ms">기록 부족</span>';
     const xs = pts.map(function (p) { return p[0]; }), ys = pts.map(function (p) { return p[1]; }), x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
     const W = 160, Ht = 38; const px = function (x) { return 4 + (x - x0) / Math.max(1, x1 - x0) * (W - 8); }; const py = function (y) { const t = (y - y0) / Math.max(1, y1 - y0); return 4 + (inv ? t : 1 - t) * (Ht - 8); };
-    return '<svg class="bi-spark" viewBox="0 0 ' + W + ' ' + Ht + '" width="' + W + '" height="' + Ht + '"><polyline fill="none" stroke="#28407D" stroke-width="2" points="' + pts.map(function (p) { return px(p[0]).toFixed(1) + ',' + py(p[1]).toFixed(1); }).join(' ') + '"/></svg>';
+    return '<svg class="bi-spark" viewBox="0 0 ' + W + ' ' + Ht + '" width="' + W + '" height="' + Ht + '"><polyline fill="none" stroke="#14C4A9" stroke-width="2" points="' + pts.map(function (p) { return px(p[0]).toFixed(1) + ',' + py(p[1]).toFixed(1); }).join(' ') + '"/></svg>';
   }
   function dAgo(dt) { return Math.max(0, Math.floor((Date.now() - dt.getTime()) / 86400000)); }
   function ymd(d) { return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
@@ -4151,7 +4231,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const chItems = d.chans.map(function (c) { return { l: c.l, v: val(c.s, L) }; }).filter(function (x) { return isFinite(x.v); }).sort(function (x, y) { return y.v - x.v; });
     const rrows = d.roas.map(function (r) { return '<tr><td><b>' + esc(r.l) + '</b></td>' + d.months.map(function (m) { const x = val(r.a, m), t = val(r.t, m); const ok = isFinite(x) && isFinite(t) ? x >= t : null; return '<td>' + (isFinite(x) ? '<b>' + fP(x, 0) + '</b>' : '-') + (isFinite(t) ? '<small class="' + (ok === null ? '' : ok ? 'bi-up' : 'bi-dn') + '">목표 ' + fP(t, 0) + '</small>' : '') + '</td>'; }).join('') + '</tr>'; }).join('');
     return '<div class="bi-kpis">' + bKpi(L + ' 실매출', fW(s), '원', isFinite(mom) ? '전월 대비 <b class="' + (mom >= 0 ? 'bi-up' : 'bi-dn') + '">' + (mom >= 0 ? '▲ ' : '▼ ') + fP(Math.abs(mom)) + '</b>' : '') + bKpi('월 목표 대비', isFinite(d.target) && d.target ? fP(s / d.target * 100, 0) : '-', '', '월 목표 ' + fW(d.target) + '원') + bKpi(L + ' 광고비 합계', fW(a), '원', '마케팅 + 영업') + bKpi('광고비 / 실매출', isFinite(s) && s ? fP(a / s * 100) : '-', '', L + ' 기준') + '</div>'
-      + '<div class="bi-grid2"><section class="bi-card"><h3>월별 실매출 · 광고비 ' + bReal + '</h3>' + '<div class="bi-legend"><i style="background:#28407D"></i>실매출 <i style="background:#F57902"></i>광고비</div>' + bBars(labels, [cS, cA], ['#28407D', '#F57902'], fW, '단위: 원 (억·만 표기)') + '</section>'
+      + '<div class="bi-grid2"><section class="bi-card"><h3>월별 실매출 · 광고비 ' + bReal + '</h3>' + '<div class="bi-legend"><i style="background:#14C4A9"></i>실매출 <i style="background:#F5A524"></i>광고비</div>' + bBars(labels, [cS, cA], ['#14C4A9', '#F5A524'], fW, '단위: 원 (억·만 표기)') + '</section>'
       + '<section class="bi-card"><h3>' + esc(L) + ' 채널별 매출 ' + bReal + '</h3>' + bH(chItems, fW) + '<div class="bi-note">자사몰 합 = 자사몰 + 공동구매. 해외 D2C = 아마존·틱톡US·쇼피 합계.</div></section></div>'
       + '<section class="bi-card"><h3>채널별 ROAS vs 목표 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>채널</th>' + d.months.map(function (m) { return '<th>' + esc(m) + '</th>'; }).join('') + '</tr></thead><tbody>' + rrows + '</tbody></table></div><div class="bi-note">목표가 시트에 숫자(%)로 입력된 월만 목표를 표시합니다. 초록 = 목표 이상, 빨강 = 목표 미만.</div></section>';
   }
@@ -4186,7 +4266,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const rows = d.prods.map(function (p) { return '<tr><td><b>' + esc(p.name) + '</b></td><td>' + fN(g(p, '방문수', 3)) + '</td><td>' + fN(g(p, '구매클릭수', 3)) + '</td><td>' + fP(g(p, '구매클릭률(CTR)', 3), 2) + '</td><td>' + fN(g(p, '전환수', 3)) + '</td><td>' + fP(g(p, '전환율', 3), 2) + '</td><td>' + fW(g(p, '구매금액', 3)) + '원</td><td>' + fN(g(p, '평균 객단가', 3)) + '원</td></tr>'; }).join('');
     return '<div class="bi-bar2"><span class="bi-bl">월</span>' + mTabs + '<span class="bi-bn">값이 있는 마지막 날: <b>' + esc(d.lastLabel || '-') + '</b></span></div>'
       + '<div class="bi-kpis">' + bKpi('총 방문 (누적)', fN(vis), '회', d.prods.length + '개 상품 합계') + bKpi('구매클릭 (누적)', fN(clk), '회', vis ? '방문 대비 ' + fP(clk / vis * 100, 2) : '') + bKpi('전환 (누적)', fN(conv), '건', vis ? '방문 대비 ' + fP(conv / vis * 100, 2) : '') + bKpi('구매금액 (누적)', fW(amt), '원', conv ? '전환당 ' + fN(amt / conv) + '원' : '') + '</div>'
-      + '<section class="bi-card" id="jChartCard"><h3>일별 추이 ' + bReal + '</h3><div class="bi-bar2">' + pTabs + '</div><div class="bi-bar2">' + mmTabs + '</div>' + bBars(d.upto.map(function (x) { return x.l.replace(/^\d+-/, ''); }), [series], ['#28407D'], met === '구매금액' ? fW : fN, esc(sel ? sel.name : '') + ' · ' + met + ' · 날짜는 일(日)') + '</section>'
+      + '<section class="bi-card" id="jChartCard"><h3>일별 추이 ' + bReal + '</h3><div class="bi-bar2">' + pTabs + '</div><div class="bi-bar2">' + mmTabs + '</div>' + bBars(d.upto.map(function (x) { return x.l.replace(/^\d+-/, ''); }), [series], ['#14C4A9'], met === '구매금액' ? fW : fN, esc(sel ? sel.name : '') + ' · ' + met + ' · 날짜는 일(日)') + '</section>'
       + '<section class="bi-card"><h3>상품별 누적 요약 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>상품</th><th>방문</th><th>구매클릭</th><th>CTR</th><th>전환</th><th>전환율</th><th>구매금액</th><th>객단가</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>';
   }
 
@@ -4218,7 +4298,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     return warn + '<div class="bi-src" style="margin-top:0">' + esc(d.head) + '</div>'
       + '<h3 class="bi-h3">랭킹 지표 ' + bReal + '</h3>' + kp(d.rk)
       + '<h3 class="bi-h3">판매 지표 (올리브영 EDI) ' + bReal + '</h3>' + kp(d.sl) + (d.sl && d.sl.note ? '<div class="bi-note" style="margin:-6px 0 14px">' + esc(d.sl.note) + '</div>' : '')
-      + '<div class="bi-grid2"><section class="bi-card"><h3>주간 판매금액 추이 ' + bReal + '</h3>' + bBars(wLab, [wVal], ['#28407D'], fW, '주 시작일 기준, 최근 9주 (EDI 수집분, 단위: 원)') + '</section>'
+      + '<div class="bi-grid2"><section class="bi-card"><h3>주간 판매금액 추이 ' + bReal + '</h3>' + bBars(wLab, [wVal], ['#14C4A9'], fW, '주 시작일 기준, 최근 9주 (EDI 수집분, 단위: 원)') + '</section>'
       + '<section class="bi-card"><h3>주간 랭킹 요약 ' + bReal + '</h3>' + (d.weeks ? bTable({ head: ['주 시작', '수집 회차', '주간 최고', '주간 평균', 'TOP10 비율'].filter(Boolean), rows: d.weeks.rows.slice(0, 6).map(function (r) { const h = d.weeks.head; const g = function (n) { return r[h.indexOf(n)] || ''; }; return [g('주 시작(월)'), g('수집 회차'), g('주간 최고'), g('주간 평균'), g('TOP10 비율')]; }) }) : '') + '</section></div>'
       + '<section class="bi-card"><h3>제품별 랭킹 현황 ' + bReal + '</h3>' + bTable(d.prods, { wide: true }) + '</section>'
       + '<section class="bi-card"><h3>제품별 판매 실적 (이번 달 판매금액 순) ' + bReal + '</h3>' + bTable(d.sales, { wide: true }) + '</section>'
@@ -4322,7 +4402,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       + '<div class="bi-note" style="margin:6px 0 14px">추천 근거는 시트의 선정 기준(전문성·활동 지속성·설정형 콘텐츠 등), 컨택 리스트의 비고 태그, 지난 진행 사례의 조회수 통계로 만든 규칙 기반 점수입니다. 이미 진행했거나 협의 기록이 있는 계정은 제외했습니다.</div>' + filt
       + (fk.length ? '<section class="bi-card"><h3>★ 관심 목록 (' + fk.length + ')</h3><div class="bi-pk-re">' + fk.map(function (k) { return '<span class="bi-favchip"><a href="' + esc(fav[k].u) + '" target="_blank" rel="noopener noreferrer">@' + esc(fav[k].h) + '</a><button type="button" data-inffav="' + esc(fav[k].h) + '" aria-label="관심 해제">✕</button></span>'; }).join('') + '</div><div class="bi-dr-btns"><button type="button" class="bi-btn" data-inffavcopy="1">목록 복사</button></div></section>' : '')
       + '<section class="bi-card"><h3>후보 순위 (상위 30) <span class="bi-ms">행을 누르면 근거·아이디어·제안 문구가 열립니다</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>#</th><th>계정</th><th>플랫폼</th><th>구독자</th><th>등급</th><th>점수</th><th>근거</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>'
-      + '<section class="bi-card"><h3>💡 진행 사례에서 배우기 ' + bReal + '</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul><div class="bi-grid2" style="margin-top:12px"><div><h4 class="bi-h4">제품별 평균 조회수</h4>' + (pb.length ? bH(pb, fN, '#28407D') : '<div class="bi-empty">3건 이상 진행한 제품이 없습니다.</div>') + '</div><div><h4 class="bi-h4">팔로워 구간별 조회/팔로워 비율(중앙값)</h4>' + (bb.length ? bH(bb, function (v) { return fP(v, 0); }, '#F57902') : '') + '</div></div></section>'
+      + '<section class="bi-card"><h3>💡 진행 사례에서 배우기 ' + bReal + '</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul><div class="bi-grid2" style="margin-top:12px"><div><h4 class="bi-h4">제품별 평균 조회수</h4>' + (pb.length ? bH(pb, fN, '#14C4A9') : '<div class="bi-empty">3건 이상 진행한 제품이 없습니다.</div>') + '</div><div><h4 class="bi-h4">팔로워 구간별 조회/팔로워 비율(중앙값)</h4>' + (bb.length ? bH(bb, function (v) { return fP(v, 0); }, '#F5A524') : '') + '</div></div></section>'
       + '<section class="bi-card"><h3>조회수 상위 진행 사례 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>월</th><th>계정</th><th>제품</th><th>팔로워</th><th>조회수</th><th>참여율</th></tr></thead><tbody>' + top + '</tbody></table></div><div class="bi-note">참여율 = (좋아요+댓글+저장+공유) ÷ 조회수. 고료·CPV·실명·광고 코드는 가져오지 않습니다.</div></section>';
   }
 
@@ -4344,8 +4424,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const rate = d.rows.map(function (r) { return bn(val(r, '전체리뷰율')); }), neg = d.rows.map(function (r) { return bn(val(r, '부정VOC비율')); }), star = d.rows.map(function (r) { return bn(val(r, '평균평점')); });
     const tbl = d.rows.map(function (r) { return '<tr><td><b>' + esc(r[0]) + '</b></td>' + ['주문건수', '리뷰수', '포토', '전체리뷰율', '부정VOC비율(%)', '평균평점'].map(function (n) { const i = n === '포토' ? d.H.findIndex(function (h) { return h.indexOf('포토') === 0 && h.indexOf('수') > 0 && h.indexOf('비율') < 0; }) : c(n.replace('(%)', '')); return '<td>' + esc(r[i] === undefined ? '' : r[i]) + '</td>'; }).join('') + '</tr>'; }).join('');
     return '<div class="bi-kpis">' + bKpi(d.lastM + ' 전체 리뷰율', esc(val(last, '전체리뷰율')), '', '주문 ' + esc(val(last, '주문건수')) + '건 · 리뷰 ' + esc(val(last, '리뷰수')) + '건') + bKpi('평균 평점', esc(val(last, '평균평점')), '점', d.lastM + ' 기준') + bKpi('부정 VOC 비율', esc(val(last, '부정VOC비율')), '%', d.lastM + ' 기준') + bKpi('포토/동영상 리뷰 비율', esc((function () { const i = d.H.findIndex(function (h) { const t = h.replace(/\s/g, ''); return t.indexOf('포토') === 0 && t.indexOf('비율') > 0; }); return i >= 0 ? last[i] : ''; })()), '', d.lastM + ' 기준') + '</div>'
-      + '<div class="bi-grid2"><section class="bi-card"><h3>월별 주문 · 리뷰 수 ' + bReal + '</h3><div class="bi-legend"><i style="background:#28407D"></i>주문건수 <i style="background:#F57902"></i>리뷰수</div>' + bBars(mo, [orders, revs], ['#28407D', '#F57902'], fN) + '</section>'
-      + '<section class="bi-card"><h3>전체 리뷰율 추이 ' + bReal + '</h3>' + bBars(mo, [rate], ['#1C9A68'], function (x) { return fP(x, 0); }) + '</section></div>'
+      + '<div class="bi-grid2"><section class="bi-card"><h3>월별 주문 · 리뷰 수 ' + bReal + '</h3><div class="bi-legend"><i style="background:#14C4A9"></i>주문건수 <i style="background:#F5A524"></i>리뷰수</div>' + bBars(mo, [orders, revs], ['#14C4A9', '#F5A524'], fN) + '</section>'
+      + '<section class="bi-card"><h3>전체 리뷰율 추이 ' + bReal + '</h3>' + bBars(mo, [rate], ['#0E8F7B'], function (x) { return fP(x, 0); }) + '</section></div>'
       + '<section class="bi-card"><h3>월별 표 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>월</th><th>주문건수</th><th>리뷰수</th><th>포토리뷰수</th><th>전체 리뷰율</th><th>부정 VOC(%)</th><th>평점</th></tr></thead><tbody>' + tbl + '</tbody></table></div>' + (d.goal.length ? '<div class="bi-note">시트에 적힌 목표 KPI: ' + d.goal.map(function (g) { return esc(g[0]) + ' ' + esc(g[1]); }).join(' · ') + '</div>' : '') + '</section>';
   }
 
@@ -4365,7 +4445,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const bi = Object.keys(d.brand).map(function (k) { return { l: k, v: d.brand[k] }; }).sort(function (x, y) { return y.v - x.v; }).slice(0, 8);
     return warn + '<div class="bi-kpis">' + bKpi('최근 입력 월 기획 수량', d.filled.length ? fN(d.filled[d.filled.length - 1].n) : '-', '건', d.filled.length ? d.filled[d.filled.length - 1].m + ' · 담당 ' + esc(d.filled[d.filled.length - 1].who) : '') + bKpi('경쟁사 소재 수집 행', fN(d.comp), '건', '수집일·브랜드가 있는 행') + bKpi('마지막 수집일', esc(d.lastD || '-'), '', d.age !== null ? d.age + '일 전' : '') + '</div>'
       + '<div class="bi-grid2"><section class="bi-card"><h3>월간 소재 기획 현황 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>월</th><th>총 기획 수량</th><th>담당자</th></tr></thead><tbody>' + tb + '</tbody></table></div></section>'
-      + '<section class="bi-card"><h3>경쟁사 소재 수집 · 브랜드별 ' + bReal + '</h3>' + (bi.length ? bH(bi, fN, '#F57902') : '<div class="bi-empty">브랜드가 입력된 행이 없습니다.</div>') + '<div class="bi-note">요약에서는 건수만 집계합니다. 상세 내용은 "전체 탭 보기"에서 확인하세요.</div></section></div>';
+      + '<section class="bi-card"><h3>경쟁사 소재 수집 · 브랜드별 ' + bReal + '</h3>' + (bi.length ? bH(bi, fN, '#F5A524') : '<div class="bi-empty">브랜드가 입력된 행이 없습니다.</div>') + '<div class="bi-note">요약에서는 건수만 집계합니다. 상세 내용은 "전체 탭 보기"에서 확인하세요.</div></section></div>';
   }
 
   /* 전체 탭 보기 (시트 원본 그대로) */
@@ -4382,7 +4462,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const key = BI_PAGES[pg].k, BLOCK = { inf: ['181779110'], rank: ['2016237970'] };
     const all = (await biTabsOf(key)).filter(function (t) { return (BLOCK[key] || []).indexOf(String(t.gid)) < 0; });
     if (!all.length) return '<div class="bi-empty">열 수 있는 탭이 없습니다.</div>';
-    let gid = BIX.tabSel[key] || ({ sales: '1115730697', journey: '1280577857', inf: '1384807088', rev: '1682728294', paid: '599649638', rank: '183848060' })[key]; if (!all.some(function (t) { return String(t.gid) === String(gid); })) gid = all[0].gid;
+    let gid = BIX.tabSel[key] || ({ sales: '1115730697', journey: '1280577857', inf: '1384807088', rev: '1682728294', paid: '599649638', rank: '183848060', comp: '1005', qna: '1244766666' })[key]; if (!all.some(function (t) { return String(t.gid) === String(gid); })) gid = all[0].gid;
     const g = await biFetch(key, gid, 1200, true), v = g.values || [];
     let lr = v.length, lc = 0; while (lr > 0 && !v[lr - 1].some(function (x) { return bnorm(x); })) lr--;
     v.slice(0, lr).forEach(function (r) { for (let c = r.length - 1; c >= 0; c--) { if (bnorm(r[c])) { if (c + 1 > lc) lc = c + 1; break; } } });
@@ -4421,8 +4501,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function biRisks(D, today) {
     const R = [], add = function (lv, t, x, link) { R.push({ lv: lv, t: t, x: x, link: link || '' }); };
-    const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재' };
-    Object.keys(names).forEach(function (k) { const d = D[k]; if (!d) { add('red', names[k] + ' 읽기 실패', '시트를 읽지 못했습니다. 권한이나 시트 구조를 확인해 주세요.', 'bi-' + k); return; } const a = d.fresh.age; if (a !== null && a !== undefined) { if (a > BI_RULES.stale[1]) add('red', names[k] + ' 갱신 중단', d.fresh.label + ' (' + a + '일 전). 자동화가 멈췄는지 확인하세요.', 'bi-' + k); else if (a > BI_RULES.stale[0]) add('yel', names[k] + ' 갱신 지연', d.fresh.label + ' (' + a + '일 전)', 'bi-' + k); } });
+    const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재', comp: '경쟁사 모니터링', qna: '콘텐츠 소재 수집' };
+    Object.keys(names).forEach(function (k) { const d = D[k]; if (!d) { if (BIX.pend && BIX.pend[k]) return; add('red', names[k] + ' 읽기 실패', '시트를 읽지 못했습니다. 권한이나 시트 구조를 확인해 주세요.', 'bi-' + k); return; } const a = d.fresh.age; if (a !== null && a !== undefined) { if (a > BI_RULES.stale[1]) add('red', names[k] + ' 갱신 중단', d.fresh.label + ' (' + a + '일 전). 자동화가 멈췄는지 확인하세요.', 'bi-' + k); else if (a > BI_RULES.stale[0]) add('yel', names[k] + ' 갱신 지연', d.fresh.label + ' (' + a + '일 전)', 'bi-' + k); } });
     const cm = today.getMonth() + 1; const behind = function (txt) { const m = /(\d+)월/.exec(txt || ''); return m ? cm - (+m[1]) : 0; };
     if (D.rev) { const b = behind(D.rev.lastM); if (b >= BI_RULES.monthsBehind[1]) add('red', '리뷰 월별 표 입력 지연', '표의 마지막 월이 ' + D.rev.lastM + '입니다 (' + b + '개월 전).', 'bi-rev'); else if (b >= BI_RULES.monthsBehind[0]) add('yel', '리뷰 월별 표 입력 지연', '표의 마지막 월이 ' + D.rev.lastM + '입니다.', 'bi-rev'); }
     if (D.paid && D.paid.filled.length) { const lm = D.paid.filled[D.paid.filled.length - 1].m, b = behind(lm); if (b >= BI_RULES.monthsBehind[0]) add(b >= BI_RULES.monthsBehind[1] ? 'red' : 'yel', '소재 기획 수량 입력 지연', '월간 기획 수량은 ' + lm + '까지만 입력되어 있습니다.', 'bi-paid'); }
@@ -4451,12 +4531,16 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (D.rev) { const c = D.rev.col, l = D.rev.rows[D.rev.rows.length - 1]; B.push(['리뷰', D.rev.lastM + ' 전체 리뷰율 ' + l[c('전체리뷰율')] + ', 평점 ' + l[c('평균평점')] + ', 부정 VOC ' + l[c('부정VOC비율')] + '%.']); }
     const red = risks.filter(function (r) { return r.lv === 'red'; }), yel = risks.filter(function (r) { return r.lv === 'yel'; });
     if (D.rank && D.rank.rk && D.rank.sl) { const rk = D.rank.rk, sl = D.rank.sl; B.push(['올영', '최근 랭킹 ' + rk.vals[0] + ' (' + rk.subs[0] + '), 최근 7일 평균 ' + rk.vals[2] + ' (' + rk.subs[2] + '). 이번 달 누적 판매 ' + sl.vals[3] + ' (' + sl.subs[3] + ').']); }
+    if (D.comp) { const R = D.comp.j.reviews; B.push(['경쟁사', '올영 TOP20 경쟁 제품 ' + D.comp.j.prods.length + '개 추적, 리뷰 ' + fN(R.total) + '건 수집(마지막 ' + R.lastCollected + '), 가격 마지막 수집 ' + D.comp.j.priceLast + '.']); }
+    if (D.qna) B.push(['소재', '지식iN·카페 글 누적 ' + fN(D.qna.j.total) + '건, 마지막 수집 ' + D.qna.j.last + '.']);
     B.push(['종합', red.length || yel.length ? '위험 ' + red.length + '건, 주의 ' + yel.length + '건. ' + (red.length ? '가장 먼저 볼 것: ' + red[0].t + '.' : yel.length ? '가장 먼저 볼 것: ' + yel[0].t + '.' : '') : '자동 점검 기준에서 위험·주의 항목이 없습니다.']);
     return B;
   }
+  function biRace(p, ms) { return Promise.race([p, new Promise(function (res) { setTimeout(function () { res({ pending: true }); }, ms); })]); }
   async function biViewOverview() {
-    const jobs = { sales: biLoadSales(), journey: biLoadJourney('2026.10'), rank: biLoadRank(), inf: biLoadInf(), rev: biLoadRev(), paid: biLoadPaid(), days: biTrendData() };
+    const jobs = { sales: biLoadSales(), journey: biLoadJourney('2026.10'), rank: biLoadRank(), inf: biLoadInf(), rev: biLoadRev(), paid: biLoadPaid(), comp: biRace(biLoadComp(), 20000), qna: biRace(biLoadQna(), 20000), days: biTrendData() };
     const keys = Object.keys(jobs), res = await Promise.allSettled(keys.map(function (k) { return jobs[k]; })), D = {}; keys.forEach(function (k, i) { D[k] = res[i].status === 'fulfilled' ? res[i].value : null; });
+    BIX.pend = {}; ['comp', 'qna'].forEach(function (k) { if (D[k] && D[k].pending) { BIX.pend[k] = 1; D[k] = null; } });
     const today = new Date(), val = function (arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; };
     if (D.days) { const ks = Object.keys(D.days).sort(), cm = {}; ks.forEach(function (k) { const m = k.slice(0, 7); const o = cm[m] || (cm[m] = { v: 0, c: 0 }); o.v += D.days[k]['방문수']; o.c += D.days[k]['전환수']; }); const ms = Object.keys(cm).sort(); if (ms.length >= 2) { const a = cm[ms[ms.length - 1]], b = cm[ms[ms.length - 2]], ca = a.v ? a.c / a.v * 100 : NaN, cb = b.v ? b.c / b.v * 100 : NaN; D.cvr = { drop: isFinite(ca) && isFinite(cb) && cb ? (cb - ca) / cb * 100 : NaN, txt: (+ms[ms.length - 1].slice(5)) + '월 전환율 ' + fP(ca, 2) + ' / 전월 ' + fP(cb, 2) }; } }
     BIX.ovR = true; const kp = [], kx = [];
@@ -4465,16 +4549,16 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (D.rev) { const c = D.rev.col, l = D.rev.rows[D.rev.rows.length - 1]; kp.push(bKpi(D.rev.lastM + ' 리뷰', esc(l[c('전체리뷰율')]), '', '평점 ' + esc(l[c('평균평점')]) + ' · 부정 VOC ' + esc(l[c('부정VOC비율')]) + '%')); kx.push([D.rev.lastM + ' 전체 리뷰율', l[c('전체리뷰율')], '평점 ' + l[c('평균평점')] + ' / 부정 VOC ' + l[c('부정VOC비율')] + '%']); }
     if (D.rank && D.rank.rk) { kp.push(bKpi('올영 최근 랭킹', esc(D.rank.rk.vals[0] || '-'), '', esc((D.rank.rk.subs[0] || '') + ' · 7일 평균 ' + (D.rank.rk.vals[2] || '-')))); kx.push(['올영 최근 랭킹', D.rank.rk.vals[0], (D.rank.rk.subs[0] || '') + ' / 7일 평균 ' + (D.rank.rk.vals[2] || '-')]); }
     if (D.inf) { kp.push(bKpi('인플루언서 컨택 리스트', fN(D.inf.total), '건', '마지막 컨택 ' + esc(D.inf.lastD))); kx.push(['인플루언서 컨택 리스트', fN(D.inf.total) + '건', '마지막 컨택 ' + D.inf.lastD]); }
-    const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재' };
+    const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재', comp: '경쟁사 모니터링', qna: '콘텐츠 소재 수집' };
     BIX.ovR = false; const risks = biRisks(D, today), brief = biBrief(D, risks, today); BIX.risks = risks; const ack = biAck(), nAck = risks.filter(function (r) { return ack[r.t]; }).length;
     const g = BIX.ovg || '주', m = BIX.ovm || '방문수', tr = D.days ? biAgg(D.days, g, m) : { labels: [], vals: [] };
-    const frs = ['sales', 'journey', 'rank', 'inf', 'rev', 'paid'].map(function (k) { const d = D[k]; return '<tr><td><b>' + names[k] + '</b></td><td>' + (d ? fresh(d.fresh.label, d.fresh.age) : '<span class="bi-b stale">읽기 실패</span>') + '</td><td><a href="#bi-' + k + '">열기</a></td></tr>'; }).join('');
+    const frs = ['sales', 'journey', 'rank', 'inf', 'rev', 'paid', 'comp', 'qna'].map(function (k) { const d = D[k]; return '<tr><td><b>' + names[k] + '</b></td><td>' + (d ? fresh(d.fresh.label, d.fresh.age) : (BIX.pend && BIX.pend[k] ? '<span class="bi-b mo">불러오는 중 (새로고침)</span>' : '<span class="bi-b stale">읽기 실패</span>')) + '</td><td><a href="#bi-' + k + '">열기</a></td></tr>'; }).join('');
     const vis = risks.filter(function (r) { return !ack[r.t]; }), nr = vis.filter(function (r) { return r.lv === 'red'; }).length, ny = vis.filter(function (r) { return r.lv === 'yel'; }).length, ng = vis.length - nr - ny;
-    BIX.ovx = { date: biDateKo(today), kpis: kx, risks: risks.map(function (r) { return [BI_LV[r.lv], r.t, r.x]; }), brief: brief, fresh: ['sales', 'journey', 'rank', 'inf', 'rev', 'paid'].map(function (k) { const d = D[k]; return [names[k], d ? d.fresh.label : '읽기 실패', d && d.fresh.age !== null ? d.fresh.age + '일 전' : '']; }), trend: { g: g, m: m, labels: tr.labels, vals: tr.vals } };
+    BIX.ovx = { date: biDateKo(today), kpis: kx, risks: risks.map(function (r) { return [BI_LV[r.lv], r.t, r.x]; }), brief: brief, fresh: ['sales', 'journey', 'rank', 'inf', 'rev', 'paid', 'comp', 'qna'].map(function (k) { const d = D[k]; return [names[k], d ? d.fresh.label : '읽기 실패', d && d.fresh.age !== null ? d.fresh.age + '일 전' : '']; }), trend: { g: g, m: m, labels: tr.labels, vals: tr.vals } };
     const gt = ['일', '주', '월', '년'].map(function (x) { return '<button type="button" class="bi-seg' + (x === g ? ' on' : '') + '" data-ovg="' + x + '">' + x + '</button>'; }).join(''), mt = ['방문수', '전환수', '구매금액'].map(function (x) { return '<button type="button" class="bi-chip' + (x === m ? ' on' : '') + '" data-ovm="' + x + '">' + x + '</button>'; }).join('');
     const rk = risks.length ? risks.map(function (r, i) { return ack[r.t] ? '' : '<button type="button" class="bi-risk ' + r.lv + '" data-birisk="' + i + '"><i></i><div><b>' + esc(r.t) + '</b><span>' + esc(r.x) + '</span></div><em>' + BI_LV[r.lv] + ' ›</em></button>'; }).join('') + (nAck ? '<div class="bi-note">오늘 확인 완료한 항목 ' + nAck + '건은 숨겼습니다. 항목을 열어 "확인 취소"로 되돌릴 수 있습니다.</div>' : '') : '<div class="bi-empty">점검할 항목을 만들 데이터가 없습니다.</div>';
     return '<div class="bi-kpis">' + kp.join('') + '</div>' + biOvPick(D)
-      + '<div class="bi-grid2 ov"><section class="bi-card"><div class="bi-ch"><h3>주력상품 추이 ' + bReal + '</h3><div class="bi-segs">' + gt + '</div></div><div class="bi-bar2">' + mt + '</div>' + bBars(tr.labels, [tr.vals], ['#28407D'], m === '구매금액' ? fW : fN, '4개 주력상품 합계 · 일/주/월/년 단위로 묶어 봅니다. 일은 최근 30일, 주는 최근 12주(월요일 시작, 이번 주는 진행 중).') + '</section>'
+      + '<div class="bi-grid2 ov"><section class="bi-card"><div class="bi-ch"><h3>주력상품 추이 ' + bReal + '</h3><div class="bi-segs">' + gt + '</div></div><div class="bi-bar2">' + mt + '</div>' + bBars(tr.labels, [tr.vals], ['#14C4A9'], m === '구매금액' ? fW : fN, '4개 주력상품 합계 · 일/주/월/년 단위로 묶어 봅니다. 일은 최근 30일, 주는 최근 12주(월요일 시작, 이번 주는 진행 중).') + '</section>'
       + '<section class="bi-card"><div class="bi-ch"><h3>🚦 신호등 리스크 센터</h3><span class="bi-ms">항목을 누르면 할 일이 열립니다</span></div><div class="bi-rsum"><span class="red">위험 ' + nr + '</span><span class="yel">주의 ' + ny + '</span><span class="grn">양호 ' + ng + '</span></div><div class="bi-rlist">' + rk + '</div><div class="bi-note">점검 기준은 임시 기준입니다(갱신 ' + BI_RULES.stale[0] + '일 주의·' + BI_RULES.stale[1] + '일 위험, 광고비 비율 ' + BI_RULES.adRatio[0] + '%·' + BI_RULES.adRatio[1] + '%, 부정 VOC ' + BI_RULES.voc[0] + '%·' + BI_RULES.voc[1] + '%, ROAS 목표 대비 100%·70%). 실제 운영 기준에 맞게 조정이 필요합니다.</div></section></div>'
       + '<div class="bi-grid2 ov2"><section class="bi-brief"><div class="bi-ch"><span class="bi-tagx">● AUTO BRIEF</span><button type="button" class="bi-rbtn" data-bibrief="1">↻ 새로고침</button></div><h3>' + (today.getMonth() + 1) + '월 ' + today.getDate() + '일 자동 분석 브리핑</h3>' + brief.map(function (b) { return '<div class="bi-bl2"><span class="bi-tg t' + b[0].length + '">' + esc(b[0]) + '</span><p>' + esc(b[1]) + '</p></div>'; }).join('') + '<div class="bi-bnote">시트 값으로 문장을 자동 조립한 요약입니다(AI 해석 아님). 새로고침하면 시트를 다시 읽습니다.</div></section>'
       + '<section class="bi-card"><h3>시트별 데이터 최신성 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>시트</th><th>마지막 데이터</th><th></th></tr></thead><tbody>' + frs + '</tbody></table></div><div class="bi-note">"월 기준"은 월 단위로 입력되는 시트라 일수를 계산하지 않습니다. 14일 넘게 지난 날짜 기준 시트는 주황색으로 표시합니다.</div></section></div>';
@@ -4529,7 +4613,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     biOpenDrawer(r.t, '<div class="bi-dr-lv ' + r.lv + '">' + BI_LV[r.lv] + '</div><p class="bi-dr-p">' + esc(r.x) + '</p><h4>다음에 할 일</h4><p class="bi-dr-p">' + esc(biRiskAction(r.t)) + '</p><div class="bi-dr-btns">' + (r.link ? '<a class="bi-btn" href="#' + r.link + '" data-biclose="1">관련 화면 열기</a>' : '') + (r.link && BI_SRC[r.link.replace('bi-', '')] ? '<a class="bi-btn" href="' + esc(BI_SRC[r.link.replace('bi-', '')].u) + '" target="_blank" rel="noopener noreferrer">원본 시트 ↗</a>' : '') + '<button type="button" class="bi-btn ok" data-biack="' + i + '">' + (acked ? '확인 취소' : '오늘은 확인 완료') + '</button></div><div class="bi-note">"확인 완료"는 이 브라우저에서 오늘 하루만 목록에서 숨깁니다.</div>');
   }
   function biCtx() {
-    return Promise.allSettled([biLoadSales(), biLoadJourney('2026.10'), biLoadRank(), biLoadInf(), biLoadRev(), biLoadPaid()]).then(function (rs) { const k = ['sales', 'journey', 'rank', 'inf', 'rev', 'paid'], D = {}; k.forEach(function (n, i) { D[n] = rs[i].status === 'fulfilled' ? rs[i].value : null; }); return D; });
+    return Promise.allSettled([biLoadSales(), biLoadJourney('2026.10'), biLoadRank(), biLoadInf(), biLoadRev(), biLoadPaid(), biLoadComp(), biLoadQna()]).then(function (rs) { const k = ['sales', 'journey', 'rank', 'inf', 'rev', 'paid', 'comp', 'qna'], D = {}; k.forEach(function (n, i) { D[n] = rs[i].status === 'fulfilled' ? rs[i].value : null; }); return D; });
   }
   function biVal(arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; }
   function biGoal(s, mo, targetWon) {
@@ -4563,7 +4647,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const labels = s.months, a = labels.map(function (m) { return biVal(e.r.a, m); }), t = labels.map(function (m) { return biVal(e.r.t, m); }), ok = a.filter(isFinite);
     const best = ok.length ? Math.max.apply(null, ok) : NaN, worst = ok.length ? Math.min.apply(null, ok) : NaN, bi = a.indexOf(best), wi = a.indexOf(worst), n = ok.length;
     const prev = n >= 2 ? ok[n - 2] : NaN, cur = ok[n - 1], ch = isFinite(prev) && prev ? (cur - prev) / prev * 100 : NaN;
-    biOpenDrawer(e.l + ' ROAS', '<div class="bi-legend"><i style="background:#28407D"></i>ROAS <i style="background:#F57902"></i>목표</div>' + bBars(labels, [a, t], ['#28407D', '#F57902'], function (x) { return fP(x, 0); }) + '<h4>읽는 법</h4><ul class="bi-dr-ul"><li>가장 높았던 달: <b>' + (isFinite(best) ? labels[bi] + ' ' + fP(best, 0) : '-') + '</b>, 가장 낮았던 달: <b>' + (isFinite(worst) ? labels[wi] + ' ' + fP(worst, 0) : '-') + '</b></li>' + (isFinite(ch) ? '<li>직전 달 대비 <b class="' + (ch >= 0 ? 'bi-up' : 'bi-dn') + '">' + (ch >= 0 ? '▲ ' : '▼ ') + fP(Math.abs(ch)) + '</b> (' + fP(prev, 0) + ' → ' + fP(cur, 0) + ')</li>' : '') + (e.mm ? '<li>목표 ' + fP(e.mm.t, 0) + ' 대비 ' + fP(e.ratio * 100, 0) + ' (' + e.mm.m + ')</li>' : '') + '</ul><div class="bi-note">ROAS = 매출 ÷ 광고비 × 100. 목표가 비어 있는 달은 막대가 없습니다.</div>');
+    biOpenDrawer(e.l + ' ROAS', '<div class="bi-legend"><i style="background:#14C4A9"></i>ROAS <i style="background:#F5A524"></i>목표</div>' + bBars(labels, [a, t], ['#14C4A9', '#F5A524'], function (x) { return fP(x, 0); }) + '<h4>읽는 법</h4><ul class="bi-dr-ul"><li>가장 높았던 달: <b>' + (isFinite(best) ? labels[bi] + ' ' + fP(best, 0) : '-') + '</b>, 가장 낮았던 달: <b>' + (isFinite(worst) ? labels[wi] + ' ' + fP(worst, 0) : '-') + '</b></li>' + (isFinite(ch) ? '<li>직전 달 대비 <b class="' + (ch >= 0 ? 'bi-up' : 'bi-dn') + '">' + (ch >= 0 ? '▲ ' : '▼ ') + fP(Math.abs(ch)) + '</b> (' + fP(prev, 0) + ' → ' + fP(cur, 0) + ')</li>' : '') + (e.mm ? '<li>목표 ' + fP(e.mm.t, 0) + ' 대비 ' + fP(e.ratio * 100, 0) + ' (' + e.mm.m + ')</li>' : '') + '</ul><div class="bi-note">ROAS = 매출 ÷ 광고비 × 100. 목표가 비어 있는 달은 막대가 없습니다.</div>');
   }
 
   /* 고객여정: 퍼널·인사이트·일별 상세 */
@@ -4600,7 +4684,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (pts.length < 2) return '<div class="bi-empty">기록이 2건 이상 있어야 그래프를 그릴 수 있습니다.</div>';
     w = w || 720; h = h || 200; const ys = pts.map(function (p) { return p.y; }), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys), pad = 26;
     const px = function (i) { return pad + i / (pts.length - 1) * (w - pad * 2); }, py = function (y) { return 14 + (y - y0) / Math.max(1, y1 - y0) * (h - 34); };
-    return '<svg class="bi-line" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none"><text x="4" y="' + (py(y0) + 4) + '" class="bi-lt">' + y0 + '위</text><text x="4" y="' + (py(y1) + 4) + '" class="bi-lt">' + y1 + '위</text><polyline fill="none" stroke="#28407D" stroke-width="2" points="' + pts.map(function (p, i) { return px(i).toFixed(1) + ',' + py(p.y).toFixed(1); }).join(' ') + '"/>' + pts.map(function (p, i) { return '<circle cx="' + px(i).toFixed(1) + '" cy="' + py(p.y).toFixed(1) + '" r="3.5" fill="#F57902"><title>' + esc(p.x + ' · ' + p.y + '위') + '</title></circle>'; }).join('') + '</svg>';
+    return '<svg class="bi-line" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none"><text x="4" y="' + (py(y0) + 4) + '" class="bi-lt">' + y0 + '위</text><text x="4" y="' + (py(y1) + 4) + '" class="bi-lt">' + y1 + '위</text><polyline fill="none" stroke="#14C4A9" stroke-width="2" points="' + pts.map(function (p, i) { return px(i).toFixed(1) + ',' + py(p.y).toFixed(1); }).join(' ') + '"/>' + pts.map(function (p, i) { return '<circle cx="' + px(i).toFixed(1) + '" cy="' + py(p.y).toFixed(1) + '" r="3.5" fill="#F5A524"><title>' + esc(p.x + ' · ' + p.y + '위') + '</title></circle>'; }).join('') + '</svg>';
   }
   function biRankRecs(d) {
     if (!d.raw || !d.raw.length) return null; const H = d.raw[0].map(bnorm), ix = function (n) { return H.indexOf(n); }, it = ix('수집일시'), ir = ix('순위'), ip = ix('상품명'), g = {};
@@ -4636,7 +4720,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
 
   /* 질문창 · 이벤트 */
-  const BI_CHIPS = ['이번 달 목표까지 얼마 남았어?', '광고 효율이 낮은 채널은?', '오늘 추천 인플루언서는?', '전환율이 높은 상품은?', '올영 랭킹은 어때?', '지금 확인할 게 뭐야?'];
+  const BI_CHIPS = ['이번 달 목표까지 얼마 남았어?', '광고 효율이 낮은 채널은?', '오늘 추천 인플루언서는?', '전환율이 높은 상품은?', '올영 랭킹은 어때?', '경쟁사 가격은 어때?', '요즘 뜨는 키워드는?', '지금 확인할 게 뭐야?'];
   const BI_EXTRA = { 'bi-sales': biExtraSales, 'bi-journey': biExtraJourney, 'bi-rank': biExtraRank, 'bi-rev': biExtraRev };
   function biKpiLink(l) { return /실매출/.test(l) ? 'bi-sales' : /주력상품 방문/.test(l) ? 'bi-journey' : /랭킹/.test(l) ? 'bi-rank' : /리뷰/.test(l) ? 'bi-rev' : /인플루언서/.test(l) ? 'bi-inf' : ''; }
   function biOvPick(D) {
@@ -4645,6 +4729,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function biAnswer(q, D) {
     const t = q.toLowerCase(), has = function (re) { return re.test(t); }, link = function (p, l) { return '<a class="bi-btn" href="#' + p + '">' + l + '</a>'; };
+    if (has(/경쟁사|경쟁 제품|가격|할인|프로모션/)) { if (!D.comp) return { t: '경쟁사', h: '<p>경쟁사 시트를 읽지 못했습니다.</p>' }; const j = D.comp.j, R = j.reviews; return { t: '경쟁사 모니터링', h: '<ul class="bi-ins"><li>올영 TOP20 경쟁 제품 <b>' + j.prods.length + '개</b> 추적, 가격 마지막 수집 <b>' + esc(j.priceLast) + '</b></li><li>리뷰 ' + fN(R.total) + '건 수집, 가장 많은 브랜드 <b>' + esc(R.brand[0].b) + '</b> (' + fN(R.brand[0].n) + '건, 평균 ★' + R.brand[0].avg.toFixed(2) + ')</li></ul>' + link('bi-comp', '가격·할인·낮은 별점 리뷰 보기') }; }
+    if (has(/키워드|소재 수집|지식|카페|언급|트렌드|고객 질문/)) { if (!D.qna) return { t: '콘텐츠 소재', h: '<p>소재 수집 시트를 읽지 못했습니다.</p>' }; const j = D.qna.j, ks = j.kw.map(function (k) { const w = qnWeek(j, k); return { k: k.k, a: w[0], b: w[1], ch: w[1] ? (w[0] - w[1]) / w[1] * 100 : NaN }; }).filter(function (k) { return k.a >= 20 && isFinite(k.ch); }).sort(function (a, b) { return b.ch - a.ch; }).slice(0, 5); return { t: '요즘 뜨는 키워드', h: '<ul class="bi-ins">' + ks.map(function (k) { return '<li><b>' + esc(k.k) + '</b> 최근 7일 ' + fN(k.a) + '건 (직전 ' + fN(k.b) + '건, ' + (k.ch >= 0 ? '+' : '') + fP(k.ch, 0) + ')</li>'; }).join('') + '</ul>' + link('bi-qna', '키워드별 글 모아보기') }; }
     if (has(/인플루언서|추천|섭외|협찬|제안/)) { if (!D.inf) return { t: '인플루언서', h: '<p>인플루언서 시트를 읽지 못했습니다.</p>' }; BIX.infd = D.inf; const p = infPicks(D.inf, 3); return { t: '오늘의 추천 인플루언서', h: '<ul class="bi-ins">' + p.map(function (c) { return '<li><b>@' + esc(c.h) + '</b> (' + (c.p === 'youtube' ? '유튜브' : '인스타') + ', ' + esc(infFmt(c.n)) + ', ' + esc(c.gr) + ') — ' + esc(c.re.join(' · ') || '기본 후보') + '</li>'; }).join('') + '</ul>' + link('bi-inf', '근거·아이디어·제안 문구 보기') }; }
     if (has(/목표|남았|달성|부족/)) { if (!D.sales) return { t: '목표', h: '<p>매출 시트를 읽지 못했습니다.</p>' }; const g = biGoal(D.sales, D.sales.last, D.sales.target || 0); return { t: D.sales.last + ' 매출 목표', h: biGoalHtml(g) + link('bi-sales', '목표 계산기 열기') }; }
     if (has(/광고|roas|효율|채널/)) { if (!D.sales) return { t: '광고', h: '<p>매출 시트를 읽지 못했습니다.</p>' }; const e = biChanEff(D.sales).filter(function (x) { return isFinite(x.ratio); }); const low = e.slice().sort(function (a, b) { return a.ratio - b.ratio; }); return { t: '채널 광고 효율(ROAS) 목표 대비', h: '<ul class="bi-ins">' + low.map(function (x) { return '<li><b>' + esc(x.l) + '</b> ' + fP(x.mm.a, 0) + ' / 목표 ' + fP(x.mm.t, 0) + ' → <b class="' + (x.ratio >= 1 ? 'bi-up' : 'bi-dn') + '">' + fP(x.ratio * 100, 0) + '</b> (' + x.mm.m + ')</li>'; }).join('') + '</ul><div class="bi-note">낮은 순서입니다. 가장 낮은 채널부터 소재·타깃을 점검하세요.</div>' + link('bi-sales', '채널 효율 자세히') }; }
@@ -4681,10 +4767,17 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if ((x = t.closest('[data-infdm]'))) { const d = BIX.infd, c = d && d.cands.find(function (z) { return z.h.toLowerCase() === x.dataset.infdm.toLowerCase(); }); if (c) biCopy(infDm(c, d), '제안 문구 초안을 복사했습니다. [ ] 부분을 고쳐 보내세요.'); return; }
       if (t.closest('[data-infcopy]')) { const ta = $('#infDmT'); if (ta) biCopy(ta.value, '제안 문구를 복사했습니다.'); return; }
       if ((x = t.closest('[data-infopen]'))) { infOpen(x.dataset.infopen); return; }
+      if ((x = t.closest('[data-cpc]'))) { BIX.cp = BIX.cp || {}; BIX.cp.cat = x.dataset.cpc; biRender('bi-comp', true); return; }
+      if ((x = t.closest('[data-cpb]'))) { BIX.cp = BIX.cp || {}; BIX.cp.brand = BIX.cp.brand === x.dataset.cpb ? '' : x.dataset.cpb; biRender('bi-comp', true); return; }
+      if ((x = t.closest('[data-cpp]'))) { biCompProd(+x.dataset.cpp); return; }
+      if ((x = t.closest('[data-qnf]'))) { const q = BIX.qn = BIX.qn || { cat: '전체', src: '전체', kw: '', q: '', qOnly: false }, k = x.dataset.qnf, v = x.dataset.v; if (k === 'q') q.qOnly = !q.qOnly; else if (k === 'kw') q.kw = q.kw === v ? '' : v; else q[k] = v; biRender('bi-qna', true); return; }
+      if ((x = t.closest('[data-qnk]'))) { const q = BIX.qn = BIX.qn || {}; q.kw = q.kw === x.dataset.qnk ? '' : x.dataset.qnk; biRender('bi-qna', true); return; }
+      if (t.closest('[data-qncopy]')) { const dd = BIX.cur; if (dd && dd.j && dd.j.items) { const f = qnFeed(dd.j); biCopy(f.items.slice(0, 30).map(function (r) { return '[' + r[2] + '/' + r[3] + '] ' + r[4] + ' ' + r[5]; }).join('\n'), '제목 ' + Math.min(30, f.items.length) + '건을 복사했습니다.'); } return; }
       const th = t.closest('.bi-t th'); if (th) { const table = th.closest('table'), idx = Array.prototype.indexOf.call(th.parentNode.children, th), tb = table.tBodies[0]; if (!tb) return; const dir = th.dataset.dir === 'asc' ? 'desc' : 'asc'; Array.prototype.forEach.call(th.parentNode.children, function (h) { delete h.dataset.dir; }); th.dataset.dir = dir; const rows = Array.prototype.slice.call(tb.rows); rows.sort(function (a, b) { const x1 = (a.cells[idx] || {}).textContent || '', y1 = (b.cells[idx] || {}).textContent || '', nx = bn(x1), ny = bn(y1); const r = isFinite(nx) && isFinite(ny) ? nx - ny : x1.localeCompare(y1, 'ko'); return dir === 'asc' ? r : -r; }); rows.forEach(function (r) { tb.appendChild(r); }); }
     });
     app.addEventListener('input', function (e) {
       if (e.target.id === 'gcT' || e.target.id === 'gcM') { biGoalUpd(); }
+      if (e.target.id === 'qnQ') { const q = BIX.qn = BIX.qn || {}; q.q = e.target.value; clearTimeout(BIX.qnT); BIX.qnT = setTimeout(qnFeedUpd, 150); }
     });
     app.addEventListener('change', function (e) {
       const t = e.target;
@@ -4698,14 +4791,107 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function biGoalUpd() { const s = BIX.sd; if (!s) return; const m = $('#gcM').value, t = (parseFloat($('#gcT').value) || 0) * 1e4; $('#gcOut').innerHTML = biGoalHtml(biGoal(s, m, t)); }
 
+  /* ── 경쟁사 모니터링 · 콘텐츠 소재 수집 ── */
+  function biAggFetch(type) {
+    const ck = 'agg:' + type, c = BIX.cache[ck]; if (c && Date.now() - c.t < 120000) return Promise.resolve(c.j);
+    if (!biUnlocked()) { biRelock(); return Promise.reject(new Error('암호를 다시 입력해 주세요')); }
+    return fetch(SHEET_ENDPOINT + '?type=' + type + '&pw=' + encodeURIComponent(biPw())).then(function (r) { return r.json(); }).then(function (j) { if (!j.ok) { if (j.error === 'auth') biRelock(); throw new Error(j.error === 'auth' ? '암호가 맞지 않습니다' : (j.error || '읽기 실패')); } BIX.cache[ck] = { t: Date.now(), j: j }; BIX.stamp = j.updated || BIX.stamp; return j; });
+  }
+  function bTrend(labels, series, fmt) {
+    const all = []; series.forEach(function (s) { s.vals.forEach(function (v) { if (isFinite(v)) all.push(v); }); }); if (all.length < 2) return '<div class="bi-empty">그래프를 그릴 값이 부족합니다.</div>';
+    const w = 720, h = 220, padL = 52, padR = 12, y0 = Math.min.apply(null, all), y1 = Math.max.apply(null, all), n = labels.length;
+    const px = function (i) { return padL + (n > 1 ? i / (n - 1) : 0) * (w - padL - padR); }, py = function (v) { return 16 + (1 - (v - y0) / Math.max(1, y1 - y0)) * (h - 40); };
+    const lines = series.map(function (s) { let seg = [], out = ''; s.vals.forEach(function (v, i) { if (isFinite(v)) seg.push(px(i).toFixed(1) + ',' + py(v).toFixed(1)); else { if (seg.length > 1) out += '<polyline fill="none" stroke="' + s.color + '" stroke-width="2" points="' + seg.join(' ') + '"/>'; seg = []; } }); if (seg.length > 1) out += '<polyline fill="none" stroke="' + s.color + '" stroke-width="2" points="' + seg.join(' ') + '"/>'; return out + s.vals.map(function (v, i) { return isFinite(v) ? '<circle cx="' + px(i).toFixed(1) + '" cy="' + py(v).toFixed(1) + '" r="3" fill="' + s.color + '"><title>' + esc(s.n + ' · ' + labels[i] + ' · ' + (fmt ? fmt(v) : fN(v))) + '</title></circle>' : ''; }).join(''); }).join('');
+    const ticks = [y0, (y0 + y1) / 2, y1].map(function (v) { return '<text x="4" y="' + (py(v) + 4) + '" class="bi-lt">' + (fmt ? fmt(v) : fN(v)) + '</text><line x1="' + padL + '" x2="' + (w - padR) + '" y1="' + py(v) + '" y2="' + py(v) + '" stroke="#F0F1F3"/>'; }).join('');
+    const xl = [0, Math.floor((n - 1) / 2), n - 1].filter(function (v, i, a) { return a.indexOf(v) === i; }).map(function (i) { return '<text x="' + px(i) + '" y="' + (h - 6) + '" class="bi-lt" text-anchor="middle">' + esc(labels[i]) + '</text>'; }).join('');
+    return '<div class="bi-legend">' + series.map(function (s) { return '<i style="background:' + s.color + '"></i>' + esc(s.n); }).join(' ') + '</div><svg class="bi-line" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none" style="height:240px">' + ticks + lines + xl + '</svg>';
+  }
+  /* 경쟁사 */
+  async function biLoadComp() {
+    const j = await biAggFetch('bi_comp'), dates = [j.lastChecked, j.priceLast, j.reviews && j.reviews.lastCollected].filter(Boolean).sort(), nw = dates[dates.length - 1] || '';
+    const dm = /^(\d{4})-(\d{2})-(\d{2})/.exec(nw), age = dm ? dAgo(new Date(+dm[1], +dm[2] - 1, +dm[3])) : null;
+    return { j: j, fresh: { label: '가격 ' + (j.priceLast || '-') + ' · 리뷰 수집 ' + ((j.reviews && j.reviews.lastCollected) || '-'), age: age } };
+  }
+  const CP_COL = ['#14C4A9', '#F5A524', '#0E8F7B', '#B040C0', '#D24545'];
+  function biViewComp(d) {
+    const j = d.j, st = BIX.cp = BIX.cp || { cat: '전체', brand: '' }, cats = ['전체'].concat(Array.from(new Set(j.prods.map(function (p) { return p[0]; }))));
+    const inCat = function (c) { return st.cat === '전체' || c === st.cat; };
+    const pr = j.prods.filter(function (p) { return inCat(p[0]); }), lt = j.latest.filter(function (p) { return inCat(p[0]); });
+    const avgP = lt.length ? lt.reduce(function (s, p) { return s + p[4]; }, 0) / lt.length : NaN, top20 = pr.filter(function (p) { return p[5] === 'Y'; }).length, newRv = pr.reduce(function (s, p) { return s + p[7]; }, 0);
+    const R = j.reviews, ownB = R.brand.find(function (b) { return b.b === '라이브오랄스'; }), others = R.brand.filter(function (b) { return b.b !== '라이브오랄스' && b.n >= 100; }), oAvg = others.length ? others.reduce(function (s, b) { return s + b.avg * b.n; }, 0) / others.reduce(function (s, b) { return s + b.n; }, 0) : NaN;
+    const chips = '<div class="bi-bar2"><span class="bi-bl">카테고리</span>' + cats.map(function (c) { return '<button type="button" class="bi-chip' + (c === st.cat ? ' on' : '') + '" data-cpc="' + esc(c) + '">' + esc(c) + '</button>'; }).join('') + '</div>';
+    const pcats = st.cat === '전체' ? Array.from(new Set(j.prods.map(function (p) { return p[0]; }))) : [st.cat], days = j.price.slice(-45), labels = days.map(function (x) { return x.d.slice(5); });
+    const trend = bTrend(labels, pcats.map(function (c, i) { return { n: c, color: CP_COL[i % CP_COL.length], vals: days.map(function (x) { return x[c] === undefined ? NaN : x[c]; }) }; }), function (v) { return fN(v) + '원'; });
+    const tagN = {}; Object.keys(j.tags).forEach(function (t) { const k = t.replace(/\s*\d+$/, ''); if (/^(Q&A|리뷰&셔터|상품설명)$/.test(k)) return; tagN[k] = (tagN[k] || 0) + j.tags[t]; });
+    const tagI = Object.keys(tagN).map(function (k) { return { l: k, v: tagN[k] }; }).sort(function (a, b) { return b.v - a.v; });
+    const lrows = lt.slice().sort(function (a, b) { return b[5] - a[5]; }).slice(0, 12).map(function (p) { return '<tr><td>' + esc(p[0]) + '</td><td><b>' + esc(p[1]) + '</b></td><td>' + esc(p[2]) + '</td><td>' + fN(p[3]) + '</td><td>' + fN(p[4]) + '</td><td><b>' + p[5] + '%</b></td></tr>'; }).join('');
+    const prow = pr.slice().sort(function (a, b) { return a[4] - b[4]; }).map(function (p, i) { return '<tr class="bi-click" data-cpp="' + j.prods.indexOf(p) + '"><td>' + esc(String(p[4])) + '</td><td>' + esc(p[0]) + '</td><td><b>' + esc(p[1]) + '</b></td><td>' + esc(p[2]) + '</td><td>' + (p[5] === 'Y' ? '<span class="bi-pill grn">유지</span>' : '<span class="bi-pill">이탈</span>') + '</td><td>' + fN(p[6]) + '</td><td>' + fN(p[7]) + '</td></tr>'; }).join('');
+    const brow = R.brand.map(function (b) { return '<tr class="bi-click' + (st.brand === b.b ? ' on' : '') + '" data-cpb="' + esc(b.b) + '"><td><b>' + esc(b.b) + '</b>' + (b.b === '라이브오랄스' ? ' <span class="bi-pill grn">우리</span>' : '') + '</td><td>' + fN(b.n) + '</td><td>' + b.avg.toFixed(2) + '</td><td>' + fN(b.low) + ' <small>(' + fP(b.n ? b.low / b.n * 100 : NaN, 1) + ')</small></td></tr>'; }).join('');
+    const low = R.low.filter(function (r) { return (!st.brand || r[1] === st.brand) && (st.cat === '전체' || r[5] === st.cat); });
+    const lowH = low.length ? low.map(function (r) { return '<li><b>' + esc(r[1]) + '</b> <span class="bi-ms">' + esc(r[0]) + ' · ' + esc(r[5]) + ' · ★' + r[3] + '</span><br>' + esc(r[4]) + '</li>'; }).join('') : '<li>조건에 맞는 낮은 별점 리뷰가 없습니다.</li>';
+    const ins = [];
+    ins.push('<b>리뷰 ' + fN(R.total) + '건</b>(포토 ' + fN(R.photo) + '건)이 수집되어 있습니다. 시트의 Dashboard 탭 "리뷰 수집 현황"은 0으로 표시되는데 실제 Raw 데이터에는 이만큼 있으니 <b>Dashboard 집계 수식을 점검</b>해야 합니다.');
+    if (ownB && isFinite(oAvg)) ins.push('라이브오랄스 리뷰 평균 별점은 <b>' + ownB.avg.toFixed(2) + '</b>(' + fN(ownB.n) + '건)으로 경쟁 브랜드 가중 평균 ' + oAvg.toFixed(2) + ' ' + (ownB.avg >= oAvg ? '이상' : '보다 낮습니다') + '.');
+    const worst = others.slice().sort(function (a, b) { return a.avg - b.avg; })[0]; if (worst) ins.push('리뷰 100건 이상 브랜드 중 평균 별점이 가장 낮은 곳은 <b>' + esc(worst.b) + ' ' + worst.avg.toFixed(2) + '</b>입니다. 아래 "낮은 별점 리뷰"에서 불만 포인트를 확인해 우리 소재의 차별점으로 쓸 수 있습니다.');
+    ins.push('스마트스토어 수집 데이터는 없습니다(Raw_SmartStore 탭이 비어 있음). 현재 경쟁 모니터링은 올리브영 기준입니다.');
+    if (d.fresh.age !== null && d.fresh.age > 3) ins.push('<b>수집이 ' + d.fresh.age + '일 전에 멈췄습니다.</b> 자동화 실행 상태를 확인하세요.');
+    return chips + '<div class="bi-kpis">' + bKpi('추적 중인 경쟁 제품', fN(pr.length), '개', 'TOP20 유지 ' + top20 + '개') + bKpi('평균 판매가 (' + (j.priceLast || '-') + ')', fN(avgP), '원', lt.length + '개 제품 기준') + bKpi('오늘 신규 리뷰', fN(newRv), '건', '누적 ' + fN(pr.reduce(function (s, p) { return s + p[6]; }, 0)) + '건') + bKpi('리뷰 수집 누적', fN(R.total), '건', '마지막 수집 ' + esc(R.lastCollected || '-')) + '</div>'
+      + '<section class="bi-card"><h3>💡 자동 인사이트</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>'
+      + '<section class="bi-card"><h3>평균 판매가 추이 ' + bReal + ' <span class="bi-ms">점에 마우스를 올리면 값이 보입니다</span></h3>' + trend + '</section>'
+      + '<div class="bi-grid2"><section class="bi-card"><h3>할인율 높은 제품 (' + esc(j.priceLast || '') + ') ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>카테고리</th><th>브랜드</th><th>제품</th><th>정가</th><th>판매가</th><th>할인율</th></tr></thead><tbody>' + lrows + '</tbody></table></div></section><section class="bi-card"><h3>진행 중인 프로모션 태그 ' + bReal + '</h3>' + (tagI.length ? bH(tagI, fN, '#F5A524') : '<div class="bi-empty">태그 없음</div>') + '<div class="bi-note">최근 수집일 제품에 붙은 올리브영 프로모션 표시 개수입니다.</div></section></div>'
+      + '<section class="bi-card"><h3>경쟁 제품 현황 (순위순) ' + bReal + ' <span class="bi-ms">행을 누르면 상세가 열립니다</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>순위</th><th>카테고리</th><th>브랜드</th><th>제품</th><th>TOP20</th><th>누적 리뷰</th><th>오늘 신규</th></tr></thead><tbody>' + prow + '</tbody></table></div></section>'
+      + '<div class="bi-grid2"><section class="bi-card"><h3>브랜드별 리뷰 ' + bReal + ' <span class="bi-ms">브랜드를 누르면 아래 낮은 별점 리뷰가 그 브랜드로 좁혀집니다</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>브랜드</th><th>리뷰 수</th><th>평균 별점</th><th>1~2점</th></tr></thead><tbody>' + brow + '</tbody></table></div></section>'
+      + '<section class="bi-card"><h3>최근 낮은 별점 리뷰 ' + (st.brand ? '· ' + esc(st.brand) + ' <button type="button" class="bi-chip" data-cpb="">해제</button>' : '') + '</h3><ul class="bi-ins bi-lowrv">' + lowH + '</ul><div class="bi-note">공개 리뷰 원문 일부입니다(1~2점, 최신순). 경쟁사의 약점은 우리 상세페이지·광고 소재의 차별점 후보가 됩니다(타사 브랜드명은 광고 표기에 쓰지 마세요).</div></section></div>';
+  }
+  function biCompProd(i) {
+    const d = BIX.cur, p = d && d.j.prods[i]; if (!p) return; const lp = d.j.latest.find(function (x) { return x[2] === p[2] || x[2].indexOf(p[2].slice(0, 20)) >= 0; });
+    biOpenDrawer(p[1] + ' · ' + p[0], '<p class="bi-dr-p"><b>' + esc(p[2]) + '</b></p><ul class="bi-dr-ul"><li>채널: ' + esc(p[3]) + ' · 최근 순위 <b>' + esc(String(p[4])) + '위</b> (' + (p[5] === 'Y' ? 'TOP20 유지' : 'TOP20 이탈') + ')</li><li>누적 리뷰 ' + fN(p[6]) + '건 · 오늘 신규 ' + fN(p[7]) + '건</li><li>처음 발견 ' + esc(p[9]) + ' · 마지막 확인 ' + esc(p[8]) + '</li>' + (lp ? '<li>최근 가격: 정가 ' + fN(lp[3]) + '원 → 판매가 <b>' + fN(lp[4]) + '원</b> (' + lp[5] + '% 할인)</li>' : '') + '</ul><div class="bi-note">제품 정보는 올리브영 TOP20 수집 시트 기록입니다.</div>');
+  }
+  /* 콘텐츠 소재 수집 */
+  async function biLoadQna() {
+    const j = await biAggFetch('bi_qna'), dm = /^(\d{4})-(\d{2})-(\d{2})/.exec(j.last || ''), age = dm ? dAgo(new Date(+dm[1], +dm[2] - 1, +dm[3])) : null;
+    return { j: j, fresh: { label: '마지막 수집 ' + (j.last || '-') + ' · 누적 ' + fN(j.total) + '건', age: age } };
+  }
+  function qnWeek(j, k) { const last = new Date(j.last + 'T00:00:00'); let a = 0, b = 0; Object.keys(k.d).forEach(function (d) { const diff = Math.round((last - new Date(d + 'T00:00:00')) / 86400000); if (diff >= 0 && diff < 7) a += k.d[d]; else if (diff >= 7 && diff < 14) b += k.d[d]; }); return [a, b]; }
+  function qnFeed(j) {
+    const st = BIX.qn || {}, qre = /\?|추천|어떻게|어떤|왜|뭐|되나요|가능|방법|궁금|고민|비교/;
+    let items = j.items.filter(function (r) { return (!st.cat || st.cat === '전체' || r[1] === st.cat) && (!st.src || st.src === '전체' || r[2] === st.src) && (!st.kw || r[3] === st.kw) && (!st.qOnly || qre.test(r[4])) && (!st.q || (r[4] + ' ' + r[3]).toLowerCase().indexOf(st.q.toLowerCase()) >= 0); }).slice().reverse();
+    return { items: items, html: items.length ? items.slice(0, 40).map(function (r) { return '<tr><td>' + esc(r[0].slice(5)) + '</td><td><span class="bi-pill">' + esc(r[2]) + '</span></td><td>' + esc(r[3]) + '</td><td><a href="' + esc(r[5]) + '" target="_blank" rel="noopener noreferrer">' + esc(r[4] || '(제목 없음)') + ' ↗</a></td></tr>'; }).join('') : '<tr><td colspan="4" class="bi-ms">조건에 맞는 글이 없습니다 (최근 500건 안에서 찾습니다).</td></tr>' };
+  }
+  function qnFeedUpd() { const d = BIX.cur; if (!d || !d.j.items) return; const f = qnFeed(d.j); const b = $('#qnFeedBody'); if (b) b.innerHTML = f.html; const c = $('#qnFeedCnt'); if (c) c.textContent = fN(f.items.length) + '건' + (f.items.length > 40 ? ' 중 최신 40건' : ''); }
+  function biViewQna(d) {
+    const j = d.j, st = BIX.qn = BIX.qn || { cat: '전체', src: '전체', kw: '', q: '', qOnly: false };
+    const cats = ['전체'].concat(Object.keys(j.byCat)), srcs = ['전체'].concat(Object.keys(j.bySrc));
+    const kwa = j.kw.map(function (k) { const w = qnWeek(j, k); return { k: k.k, c: k.c, t: k.t, a: w[0], b: w[1], ch: w[1] ? (w[0] - w[1]) / w[1] * 100 : NaN }; }).filter(function (k) { return st.cat === '전체' || k.c === st.cat; }).sort(function (x, y) { return (isFinite(y.ch) ? y.ch : -999) - (isFinite(x.ch) ? x.ch : -999); });
+    const lastDay = j.days.length ? j.days[j.days.length - 1] : ['', 0], w7 = j.days.filter(function (x) { return (new Date(j.last + 'T00:00:00') - new Date(x[0] + 'T00:00:00')) / 86400000 < 7; }).reduce(function (s, x) { return s + x[1]; }, 0);
+    const own = j.kw.filter(function (k) { return k.k === '라이브오랄스'; })[0], ow = own ? qnWeek(j, own) : [0, 0];
+    const chip = function (k, v, on) { return '<button type="button" class="bi-chip' + (on ? ' on' : '') + '" data-qnf="' + k + '" data-v="' + esc(v) + '">' + esc(v) + '</button>'; };
+    const filt = '<div class="bi-bar2"><span class="bi-bl">분류</span>' + cats.map(function (c) { return chip('cat', c, st.cat === c); }).join('') + '<span class="bi-bl">출처</span>' + srcs.map(function (c) { return chip('src', c, st.src === c); }).join('') + '<button type="button" class="bi-chip' + (st.qOnly ? ' on' : '') + '" data-qnf="q" data-v="1">질문형 글만</button><button type="button" class="bi-chip' + (st.kw === '라이브오랄스' ? ' on' : '') + '" data-qnf="kw" data-v="라이브오랄스">우리 브랜드 언급 보기</button>' + (st.kw ? '<button type="button" class="bi-chip on" data-qnf="kw" data-v="">키워드: ' + esc(st.kw) + ' ✕</button>' : '') + '</div>';
+    const krows = kwa.map(function (k) { return '<tr class="bi-click' + (st.kw === k.k ? ' on' : '') + '" data-qnk="' + esc(k.k) + '"><td><b>' + esc(k.k) + '</b></td><td>' + esc(k.c) + '</td><td>' + fN(k.t) + '</td><td>' + fN(k.a) + '</td><td>' + fN(k.b) + '</td><td class="' + (isFinite(k.ch) ? (k.ch >= 0 ? 'bi-up' : 'bi-dn') : '') + '">' + (isFinite(k.ch) ? (k.ch >= 0 ? '▲ ' : '▼ ') + fP(Math.abs(k.ch), 0) : '-') + '</td></tr>'; }).join('');
+    const days30 = j.days.slice(-30), feed = qnFeed(j), rising = kwa.filter(function (k) { return k.a >= 20 && isFinite(k.ch); }), ins = [];
+    if (rising.length) ins.push('최근 7일 가장 크게 늘어난 키워드는 <b>' + esc(rising[0].k) + '</b> (' + fN(rising[0].b) + ' → ' + fN(rising[0].a) + '건, ' + (rising[0].ch >= 0 ? '+' : '') + fP(rising[0].ch, 0) + ')입니다. 관련 고객 질문을 콘텐츠 주제로 잡아 볼 만합니다.');
+    const topK = kwa.slice().sort(function (a, b) { return b.t - a.t; })[0]; if (topK) ins.push('누적 가장 많이 수집된 키워드는 <b>' + esc(topK.k) + ' (' + fN(topK.t) + '건)</b>입니다. 사람들이 가장 많이 이야기하는 주제입니다.');
+    if (own) ins.push('<b>라이브오랄스 언급</b>은 누적 ' + fN(own.t) + '건, 최근 7일 ' + ow[0] + '건(직전 7일 ' + ow[1] + '건)입니다. 아래 "우리 브랜드 언급 보기"로 어떤 맥락에서 언급되는지 확인하세요.');
+    const sym = kwa.filter(function (k) { return k.c === '증상/니즈'; }).sort(function (a, b) { return b.t - a.t; }).slice(0, 3); if (sym.length) ins.push('고객 증상·니즈 상위: ' + sym.map(function (k) { return '<b>' + esc(k.k) + '</b>(' + fN(k.t) + ')'; }).join(', ') + ' → 제품 소구 포인트·FAQ 주제 후보입니다.');
+    if (d.fresh.age !== null && d.fresh.age > 3) ins.push('<b>수집이 ' + d.fresh.age + '일 전에 멈췄습니다.</b> 자동화 실행 상태를 확인하세요.');
+    return '<div class="bi-kpis">' + bKpi('누적 수집', fN(j.total), '건', esc(j.first) + ' ~ ' + esc(j.last)) + bKpi('최근 7일 수집', fN(w7), '건', '마지막 날 ' + esc(lastDay[0].slice(5)) + ' ' + fN(lastDay[1]) + '건') + bKpi('카페 / 지식iN', fN(j.bySrc['카페'] || 0) + ' / ' + fN(j.bySrc['지식iN'] || 0), '', '출처별 누적') + bKpi('라이브오랄스 언급', fN(own ? own.t : 0), '건', '최근 7일 ' + ow[0] + '건') + '</div>'
+      + '<section class="bi-card"><h3>💡 자동 인사이트</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>'
+      + '<section class="bi-card"><h3>일별 수집 건수 (최근 30일) ' + bReal + '</h3>' + bBars(days30.map(function (x) { return x[0].slice(5); }), [days30.map(function (x) { return x[1]; })], ['#14C4A9'], fN) + '</section>'
+      + filt
+      + '<div class="bi-grid2"><section class="bi-card"><h3>키워드 트렌드 ' + bReal + ' <span class="bi-ms">행을 누르면 그 키워드 글만 아래에 모아 봅니다</span></h3><div class="bi-tw" style="max-height:420px;overflow:auto"><table class="bi-t"><thead><tr><th>키워드</th><th>분류</th><th>누적</th><th>최근 7일</th><th>직전 7일</th><th>증감</th></tr></thead><tbody>' + krows + '</tbody></table></div></section>'
+      + '<section class="bi-card"><div class="bi-ch"><h3>글 모아보기 <span class="bi-ms" id="qnFeedCnt">' + fN(feed.items.length) + '건' + (feed.items.length > 40 ? ' 중 최신 40건' : '') + '</span></h3><button type="button" class="bi-btn" data-qncopy="1">제목 목록 복사</button></div><input type="search" id="qnQ" class="bi-q" style="max-width:none;width:100%;margin-bottom:8px" placeholder="제목·키워드 검색" value="' + esc(st.q || '') + '"><div class="bi-tw" style="max-height:420px;overflow:auto"><table class="bi-t"><thead><tr><th>날짜</th><th>출처</th><th>키워드</th><th>제목</th></tr></thead><tbody id="qnFeedBody">' + feed.html + '</tbody></table></div><div class="bi-note">최근 수집 500건 안에서 필터합니다. 제목 목록 복사는 콘텐츠 기획 회의용입니다.</div></section></div>';
+  }
+
   const BI_PAGES = {
-    'bi': { t: '종합 현황', s: '시트 6개에서 읽은 핵심 수치와 데이터 최신성을 한눈에 봅니다.' },
+    'bi': { t: '종합 현황', s: '시트 8개에서 읽은 핵심 수치와 데이터 최신성을 한눈에 봅니다.' },
     'bi-sales': { t: '매출 · 광고', s: '채널별 월 매출, 광고비, ROAS를 손익분기표에서 읽어 옵니다.', k: 'sales' },
     'bi-journey': { t: '주력상품 고객여정', s: '주력상품의 일별 방문 → 구매클릭 → 전환 → 구매금액.', k: 'journey' },
     'bi-rank': { t: '올영 랭킹', s: '올리브영 제품별 순위 기록과 추이.', k: 'rank' },
     'bi-inf': { t: '인플루언서', s: '오늘 추천할 인플루언서와 추천 근거, 브랜드 연결 아이디어, 제안 문구, 진행 사례 인사이트.', k: 'inf' },
     'bi-rev': { t: '리뷰 운영', s: '월별 리뷰율, 포토리뷰, 부정 VOC, 평점.', k: 'rev' },
     'bi-paid': { t: '페이드 소재', s: '월간 소재 기획 수량과 경쟁사 소재 수집 현황.', k: 'paid' },
+    'bi-comp': { t: '경쟁사 모니터링', s: '올리브영 TOP20 경쟁 제품의 가격·할인·리뷰와 경쟁사의 약점.', k: 'comp' },
+    'bi-qna': { t: '콘텐츠 소재 수집', s: '지식iN·카페 글에서 고객이 궁금해하는 주제와 뜨는 키워드를 찾습니다.', k: 'qna' },
     'bi-manual': { t: '시트 메뉴얼', s: '시트별 구성과 읽는 방법(초안).' }
   };
   function biFrame(pg, inner, stamp) {
@@ -4720,7 +4906,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if (pg === 'bi') inner = await biViewOverview();
       else if (pg === 'bi-manual') inner = biViewManual();
       else if (m.k && BIX.view[pg] === 'tabs') inner = await biViewTabs(pg);
-      else { const K = { 'bi-sales': [biLoadSales, biViewSales], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid] }[pg]; const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
+      else { const K = { 'bi-sales': [biLoadSales, biViewSales], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna] }[pg]; const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
       if (BIX.page === pg) el.innerHTML = biFrame(pg, inner, BIX.stamp);
     } catch (e) { if (BIX.page === pg) el.innerHTML = biFrame(pg, '<div class="bi-warn">데이터를 불러오지 못했습니다: ' + esc(e.message || String(e)) + '<br>시트 구조가 바뀌었거나 네트워크 문제일 수 있습니다. 새로고침으로 다시 시도해 주세요.</div>', ''); }
   }
@@ -6552,7 +6738,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 })();
 
 </script>
-<div id="biApp"><aside class="bs"><a class="bs-brand" href="#gate" aria-label="첫 화면"><span class="bs-mark">L</span><span><b>LIVEORALS</b><small>데이터 대시보드</small></span></a><nav class="bs-nav"><div class="bs-g">오늘</div><a href="#bi" data-bi="bi"><span class="bs-ic">🏠</span>종합 현황</a><div class="bs-g">성과</div><a href="#bi-sales" data-bi="bi-sales"><span class="bs-ic">💰</span>매출 · 광고</a><a href="#bi-journey" data-bi="bi-journey"><span class="bs-ic">🛒</span>주력상품 고객여정</a><a href="#bi-rank" data-bi="bi-rank"><span class="bs-ic">🏆</span>올영 랭킹</a><div class="bs-g">마케팅</div><a href="#bi-inf" data-bi="bi-inf"><span class="bs-ic">🤝</span>인플루언서</a><a href="#bi-rev" data-bi="bi-rev"><span class="bs-ic">⭐</span>리뷰 운영</a><a href="#bi-paid" data-bi="bi-paid"><span class="bs-ic">🎯</span>페이드 소재</a><div class="bs-g">자료</div><a href="#bi-manual" data-bi="bi-manual"><span class="bs-ic">📘</span>시트 메뉴얼</a></nav><div class="bs-foot"><a href="#gate">← 첫 화면</a><button type="button" data-bilock="1">🔒 잠그기</button></div></aside><main class="bm"><div class="bm-banner"><span class="bi-b real">실제</span> 표시는 구글 시트에서 읽은 값입니다. 5분마다 자동으로 다시 읽고, 마지막 데이터 날짜가 오래되면 주황색으로 알려 드립니다.</div><div class="bi-askbar"><span>✨</span><input id="biAskQ" type="search" placeholder="무엇이 궁금하세요? 예) 이번 달 목표까지 얼마 남았어? · 오늘 추천 인플루언서는? · 지금 확인할 게 뭐야?" autocomplete="off" aria-label="질문"><kbd>Ctrl K</kbd></div><div class="bi-askchips" id="biAskChips"></div><div id="biAns"></div><div id="biMain"></div></main><div id="biDrawer"><aside class="bi-drawer" role="dialog" aria-modal="true"><div class="bi-drawer-h"><h3 id="biDrawerT"></h3><button type="button" id="biDrawerX" aria-label="닫기">✕</button></div><div id="biDrawerB"></div></aside></div></div>
+<div id="biApp"><aside class="bs"><a class="bs-brand" href="#gate" aria-label="첫 화면"><img src="logo.svg" alt="Live orals" width="154" height="22"><span class="bs-sub">데이터 대시보드</span></a><nav class="bs-nav"><div class="bs-g">오늘</div><a href="#bi" data-bi="bi"><span class="bs-ic">🏠</span>종합 현황</a><div class="bs-g">성과</div><a href="#bi-sales" data-bi="bi-sales"><span class="bs-ic">💰</span>매출 · 광고</a><a href="#bi-journey" data-bi="bi-journey"><span class="bs-ic">🛒</span>주력상품 고객여정</a><a href="#bi-rank" data-bi="bi-rank"><span class="bs-ic">🏆</span>올영 랭킹</a><div class="bs-g">마케팅</div><a href="#bi-inf" data-bi="bi-inf"><span class="bs-ic">🤝</span>인플루언서</a><a href="#bi-rev" data-bi="bi-rev"><span class="bs-ic">⭐</span>리뷰 운영</a><a href="#bi-paid" data-bi="bi-paid"><span class="bs-ic">🎯</span>페이드 소재</a><a href="#bi-comp" data-bi="bi-comp"><span class="bs-ic">🔍</span>경쟁사 모니터링</a><a href="#bi-qna" data-bi="bi-qna"><span class="bs-ic">🧲</span>콘텐츠 소재 수집</a><div class="bs-g">자료</div><a href="#bi-manual" data-bi="bi-manual"><span class="bs-ic">📘</span>시트 메뉴얼</a></nav><div class="bs-foot"><a href="#gate">← 첫 화면</a><button type="button" data-bilock="1">🔒 잠그기</button></div></aside><main class="bm"><div class="bm-banner"><span class="bi-b real">실제</span> 표시는 구글 시트에서 읽은 값 · 5분마다 자동 갱신 · 마지막 데이터가 오래되면 <b>주황색</b>으로 알려 드립니다</div><div class="bi-askbar"><span>✨</span><input id="biAskQ" type="search" placeholder="무엇이 궁금하세요? 예) 이번 달 목표까지 얼마 남았어? · 오늘 추천 인플루언서는? · 지금 확인할 게 뭐야?" autocomplete="off" aria-label="질문"><kbd>Ctrl K</kbd></div><div class="bi-askchips" id="biAskChips"></div><div id="biAns"></div><div id="biMain"></div></main><div id="biDrawer"><aside class="bi-drawer" role="dialog" aria-modal="true"><div class="bi-drawer-h"><h3 id="biDrawerT"></h3><button type="button" id="biDrawerX" aria-label="닫기">✕</button></div><div id="biDrawerB"></div></aside></div></div>
 <footer class="site-footer"><div class="site-footer-inner"><div><img src="logo.svg" alt="Live orals" width="120"><br><b>어사이드 활용 플랫폼</b> &middot; 라이브오랄스 사내용<br>치과의사가 만든 구강제품 전문브랜드 라이브오랄스</div><div>&copy; LIVEORALS 사내용 &middot; 원가·급여·계약·협상 금액은 입력하지 마세요.</div></div></footer>
 <div class="fab"><button type="button" class="fab-top" id="fabTop" aria-label="맨 위로">&#8593;</button><a class="fab-chat" href="#requests" aria-label="기능 추가 요청" title="기능 추가 요청"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.6-5A8.5 8.5 0 1 1 21 11.5z"/><circle cx="8.5" cy="11.5" r=".6" fill="#fff"/><circle cx="12.5" cy="11.5" r=".6" fill="#fff"/><circle cx="16.5" cy="11.5" r=".6" fill="#fff"/></svg></a></div>
 <script>
