@@ -1774,6 +1774,29 @@ input, textarea, select { font-size: 14px; }
 .ref-teamhead small { color: #8B9096; font-size: 12px; }
 .ref-teamtag { background: #E6F9F6 !important; color: #0B8E7A !important; font-weight: 700; }
 .ref-teamsel { font-size: 12px; padding: 1px 4px; border: 1px solid #D8DCE0; border-radius: 6px; background: #fff; color: #3c3a39; }
+.gate-head { text-align: center; padding: clamp(28px, 6vw, 72px) 0 28px; }
+.gate-head h1 { font-size: clamp(28px, 4vw, 44px); margin: 8px 0 10px; letter-spacing: -.02em; }
+.gate-head p { color: #6B7076; margin: 0; }
+.gate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 920px; margin: 0 auto 40px; }
+.gate-card { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 36px 32px 30px; border-radius: 24px; border: 1.5px solid #E4F5F2; text-decoration: none; color: #1b1b1b; background: radial-gradient(520px 260px at 90% 0%, rgba(39,205,190,.20), rgba(39,205,190,0) 70%), linear-gradient(180deg, #F3FCFB 0%, #fff 100%); transition: transform .18s, border-color .18s, box-shadow .18s; min-height: 300px; }
+.gate-card.gate-bi { background: radial-gradient(520px 260px at 90% 0%, rgba(20,20,20,.07), rgba(20,20,20,0) 70%), linear-gradient(180deg, #F6F7F8 0%, #fff 100%); border-color: #E6E8EB; }
+.gate-card:hover { transform: translateY(-4px); border-color: var(--teal); box-shadow: 0 14px 36px rgba(20,196,169,.16); }
+.gate-ico { font-size: 44px; line-height: 1; }
+.gate-tag { font-size: 12px; font-weight: 800; letter-spacing: .12em; color: var(--teal-dark); }
+.gate-card b { font-size: 26px; letter-spacing: -.02em; }
+.gate-desc { font-size: 14px; line-height: 1.7; color: #5b6066; flex: 1; }
+.gate-go { align-self: flex-start; background: #111; color: #fff; font-weight: 700; font-size: 14px; padding: 10px 20px; border-radius: 999px; }
+.gate-card:hover .gate-go { background: var(--teal); }
+.bi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+.bi-card { background: #fff; border: 1px solid #E6E8EB; border-radius: 16px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: inherit; }
+.bi-card:hover { border-color: var(--teal); }
+.bi-card h3 { font-size: 15px; margin: 4px 0 0; line-height: 1.45; }
+.bi-top { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.bi-actions { display: flex; gap: 8px; margin-top: auto; padding-top: 8px; flex-wrap: wrap; }
+.bi-actions .btn-gold, .bi-actions .btn-secondary { text-decoration: none; padding: 7px 14px; font-size: 13px; width: auto; flex: none; }
+.bi-actions button:disabled { opacity: .55; cursor: default; }
+.bi-internal { background: #F6F7F8; }
+@media (max-width: 760px) { .gate-grid { grid-template-columns: 1fr; } .gate-card { min-height: 0; padding: 26px 22px; } }
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -1857,14 +1880,14 @@ img, svg, video { max-width: 100%; }
 
   <!-- 사이드바 -->
   <aside class="sidebar" id="sidebar" aria-label="주 메뉴">
-    <a class="sidebar-logo" href="#home" aria-label="홈"><img src="logo.svg" alt="Live orals" width="154" height="22"><span class="sub">어사이드 활용 플랫폼</span></a>
+    <a class="sidebar-logo" href="#gate" aria-label="첫 화면"><img src="logo.svg" alt="Live orals" width="154" height="22"><span class="sub">어사이드 활용 플랫폼</span></a>
     <nav class="sidebar-nav">
       <div class="nav-group"><span class="nav-group-label">시작하기</span><div class="nav-drop"><a class="nav-item" href="#home" data-page="home"><span class="nav-icon">🏠</span>홈</a>
       <a class="nav-item" href="#setup" data-page="setup"><span class="nav-icon">🧭</span>어사이드 초기 세팅</a>
       <a class="nav-item" href="#quick" data-page="quick"><span class="nav-icon">⚡</span>간단 사용법</a><a class="nav-item" href="#precheck" data-page="precheck"><span class="nav-icon">✅</span>업무 시작 전 확인사항</a><a class="nav-item" href="#guide" data-page="guide"><span class="nav-icon">📘</span>어사이드 가이드</a></div></div>
       <div class="nav-group"><span class="nav-group-label">업무 도구</span><div class="nav-drop"><a class="nav-item" href="#basic" data-page="basic"><span class="nav-icon">📝</span>기본 프롬프트</a><a class="nav-item" href="#functions" data-page="functions"><span class="nav-icon">🧩</span>업무기능</a><a class="nav-item" href="#refs" data-page="refs"><span class="nav-icon">📚</span>레퍼런스 참고하기</a></div></div>
       <div class="nav-group"><span class="nav-group-label">자산</span><div class="nav-drop"><a class="nav-item" href="#assets" data-page="assets"><span class="nav-icon">🗂️</span>팀별 AI 자산</a><a class="nav-item" href="#manual" data-page="manual"><span class="nav-icon">📥</span>팀별 AI 자산 등록</a></div></div>
-      <div class="nav-group"><span class="nav-group-label">현황</span><div class="nav-drop"><a class="nav-item" href="#dashboard" data-page="dashboard"><span class="nav-icon">📊</span>절감 대시보드</a></div></div>
+      <div class="nav-group"><span class="nav-group-label">현황</span><div class="nav-drop"><a class="nav-item" href="#bi" data-page="bi"><span class="nav-icon">🗃️</span>대시보드 (시트 모음)</a><a class="nav-item" href="#dashboard" data-page="dashboard"><span class="nav-icon">📊</span>절감 대시보드</a></div></div>
       <div class="nav-group"><span class="nav-group-label">소통</span><div class="nav-drop"><a class="nav-item" href="#requests" data-page="requests"><span class="nav-icon">💡</span>기능 추가 요청</a><a class="nav-item" href="#notice" data-page="notice"><span class="nav-icon">📢</span>공지</a></div></div>
     <div class="nav-group nav-group-as"><span class="nav-group-label">AS</span><div class="nav-drop"><a class="nav-item" href="#as" data-page="as"><span class="nav-icon">🛠️</span>AS (고장·오류 시)</a></div></div>
     </nav>
@@ -2229,6 +2252,23 @@ img, svg, video { max-width: 100%; }
           <div class="sec-head"><span class="eyebrow">POPULAR</span><h2>자주 쓰는 업무 <small>추정 빈도 '상'</small></h2></div>
           <div class="flow-top-grid" id="flowTopGrid"></div>
         </div>
+      </section>
+
+      <!-- ═══ 첫 화면 ═══ -->
+      <section class="page" id="page-gate">
+        <div class="gate-head"><span class="eyebrow">LIVEORALS WORKSPACE</span><h1>무엇을 하시겠어요?</h1><p>사용할 공간을 선택해 주세요.</p></div>
+        <div class="gate-grid">
+          <a class="gate-card gate-ai" href="#home"><span class="gate-ico">🤖</span><span class="gate-tag">AI</span><b>AI · 어사이드</b><span class="gate-desc">같은 양식으로 지시하고, 잘 된 레퍼런스와 팀별 AI 자산을 모아 쓰는 어사이드 업무 표준 플랫폼</span><span class="gate-go">AI 시작하기 →</span></a>
+          <a class="gate-card gate-bi" href="#bi"><span class="gate-ico">📊</span><span class="gate-tag">DASHBOARD</span><b>대시보드</b><span class="gate-desc">매출·광고·마케팅·리뷰·랭킹 등 팀 업무 시트를 한곳에서 열고, 시트별 메뉴얼로 사용법을 확인</span><span class="gate-go">대시보드 보기 →</span></a>
+        </div>
+      </section>
+
+      <!-- ═══ 업무 대시보드 (시트 모음) ═══ -->
+      <section class="page" id="page-bi">
+        <h2 class="section-title">대시보드</h2>
+        <p class="section-sub">팀에서 쓰는 구글 시트 대시보드를 한곳에 모았습니다. 시트별 사용 메뉴얼은 순차적으로 정리해 이 카드에 연결할 예정입니다.</p>
+        <div class="bi-grid" id="biGrid"></div>
+        <div class="bp-hint" style="margin:14px 0 0">※ 시트는 구글 권한이 있는 계정으로만 열립니다. 열리지 않으면 시트 소유자에게 권한을 요청하세요. 이 사이트에는 시트 링크와 제목만 표시하고 시트 내용은 가져오지 않습니다.</div>
       </section>
 
       <!-- ═══ 업무기능 ═══ -->
@@ -3773,7 +3813,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { gate: '첫 화면', bi: '대시보드', setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page, replaceHist) {
     if (page === 'automations') { page = 'assets'; replaceHist = true; }
@@ -3792,6 +3832,16 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (page === 'precheck') renderPrecheck();
   }
 
+  const BI_SHEETS = [{"t":"20262025 라오전체 매출/광고현황","tag":"매출·광고","u":"https://docs.google.com/spreadsheets/d/1WXSrYGUAiPNGV6Wrm0FE7hV1ON-v0Xyv1DqD7rKYAIw/edit?gid=1115730697#gid=1115730697"},{"t":"[MK] 2026 인플루언서 마케팅 리스트","tag":"마케팅","u":"https://docs.google.com/spreadsheets/d/19LoIX57UdN13nUXqHbfRA6zFhkRkwobaY0QKokueqzo/edit?gid=1384807088#gid=1384807088"},{"t":"자사/스스 리뷰 운영 기획안","tag":"리뷰 운영","u":"https://docs.google.com/spreadsheets/d/10z94a9TJFrMKlEAeWDdw6BLBuPHXRz4yuLkUHug8LcM/edit?gid=1682728294#gid=1682728294"},{"t":"[마케팅팀]2026 페이드 소재 리포트","tag":"마케팅","u":"https://docs.google.com/spreadsheets/d/1Smrlc0ijiMUDRlY4j7RDLcpGWe5mETTFSwDzZoGBq94/edit?gid=73896278#gid=73896278"},{"t":"oliveyoung_rank_log(올영 랭킹추적 자동화)","tag":"올영 랭킹","u":"https://docs.google.com/spreadsheets/d/1ovMG7yM7btTv54O1SxU1zmLZYdUbNXlarYL89_q4fLI/edit?gid=141352098#gid=141352098","note":"연결 AI 자산: 올리브영 랭킹 크롤링 (A037)"}];
+  function renderBi() {
+    const el = $('#biGrid'); if (!el) return;
+    el.innerHTML = BI_SHEETS.map(function (s) {
+      return '<div class="bi-card"><div class="bi-top"><span class="tag">' + esc(s.tag) + '</span>' + (s.manual ? '<span class="status-badge ok">메뉴얼 있음</span>' : '<span class="status-badge">메뉴얼 준비 중</span>') + '</div>'
+        + '<h3>' + esc(s.t) + '</h3>' + (s.note ? '<div class="ref-meta">' + esc(s.note) + '</div>' : '')
+        + '<div class="bi-actions"><a class="btn-gold" href="' + esc(s.u) + '" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a>'
+        + (s.manual ? '<a class="btn-secondary" href="' + esc(s.manual) + '" target="_blank" rel="noopener noreferrer">메뉴얼 보기</a>' : '<button type="button" class="btn-secondary" disabled>메뉴얼 준비 중</button>') + '</div></div>';
+    }).join('') + '<a class="bi-card bi-internal" href="#dashboard"><div class="bi-top"><span class="tag">AI 자동화</span><span class="status-badge ok">사이트 내</span></div><h3>절감 대시보드</h3><div class="ref-meta">AI TF팀 성과측정 시트 기반 · 자동화로 줄인 업무 시간</div><div class="bi-actions"><span class="btn-gold">열기 →</span></div></a>';
+  }
   function closeSidebar() { $('#sidebar').classList.remove('open'); $('#sidebarOverlay').classList.remove('open'); }
 
   /* ── 3. 홈 ───────────────────────────────────────────────── */
@@ -5574,7 +5624,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     renderStep1();
     bind();
     setStep(1);
-    go(location.hash.slice(1) || 'home', true);
+    renderBi();
+    go(location.hash.slice(1) || 'gate', true);
     bindExtra();
     loadRemoteAssets();
   }
