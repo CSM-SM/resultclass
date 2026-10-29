@@ -4038,14 +4038,14 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
 
   const BI_HASH = '1aea18e6c1be0ca74f15127115c4f2710b17043643d0882a7bf8aca151016012';
-  function biUnlocked() { try { return sessionStorage.getItem('lo_bi_ok') === BI_HASH && !!sessionStorage.getItem('lo_bi_pw'); } catch (e) { return false; } }
+  function biUnlocked() { try { const ts = +sessionStorage.getItem('lo_bi_ts') || 0; return sessionStorage.getItem('lo_bi_ok') === BI_HASH && !!sessionStorage.getItem('lo_bi_pw') && ts > 0 && Date.now() - ts < 60 * 60 * 1000; } catch (e) { return false; } }
   async function biHash(s) { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('resultclass-bi:' + s)); return Array.prototype.map.call(new Uint8Array(b), function (x) { return ('0' + x.toString(16)).slice(-2); }).join(''); }
   function openBiLock() { const m = $('#biLock'); if (!m) return; m.classList.add('open'); $('#biPw').value = ''; $('#biLockErr').textContent = ''; setTimeout(function () { $('#biPw').focus(); }, 30); }
   function closeBiLock() { const m = $('#biLock'); if (m) m.classList.remove('open'); }
   async function submitBiLock() {
     const v = $('#biPw').value; if (!v) { $('#biLockErr').textContent = '암호를 입력해 주세요.'; return; }
     let h = ''; try { h = await biHash(v); } catch (e) { $('#biLockErr').textContent = '이 브라우저에서는 암호 확인을 할 수 없습니다.'; return; }
-    if (h === BI_HASH) { try { sessionStorage.setItem('lo_bi_ok', BI_HASH); sessionStorage.setItem('lo_bi_pw', v); } catch (e) {} closeBiLock(); go('bi'); }
+    if (h === BI_HASH) { try { sessionStorage.setItem('lo_bi_ok', BI_HASH); sessionStorage.setItem('lo_bi_pw', v); sessionStorage.setItem('lo_bi_ts', String(Date.now())); } catch (e) {} closeBiLock(); go('bi'); }
     else { $('#biLockErr').textContent = '암호가 맞지 않습니다.'; $('#biPw').select(); }
   }
   function bindBiLock() {
@@ -4076,8 +4076,9 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     rank: { what: '올리브영 구강용품 제품별 랭킹과 올리브영 EDI 판매 실적을 회차마다 자동으로 모으는 대시보드 시트입니다. 랭킹 캡처는 구글 슬라이드에 최신순으로 쌓입니다.', tabs: '대시보드(이 화면이 읽는 탭) · 일자별추세 · 제품별추세 · 회차별추세 · RawData(회차별 순위 원자료) · 판매RawData · 상품매핑 · _차트데이터 · 입금예정(정산 자료라 열 수 없게 막음)', read: '대시보드 탭에서 랭킹 지표, 판매 지표, 제품별 랭킹·판매 표, 주간 추이, 시간대별 패턴, 최근 10회차 순위를 읽습니다.', note: '판매금액은 고객 결제가 기준이고 최근일은 EDI 최신 수집일입니다. 입금 예정(정산·공제) 구간은 거래 조건이 포함되어 표시하지 않습니다.' },
   };
   function biPw() { try { return sessionStorage.getItem('lo_bi_pw') || ''; } catch (e) { return ''; } }
-  function biRelock() { try { sessionStorage.removeItem('lo_bi_ok'); sessionStorage.removeItem('lo_bi_pw'); } catch (e) {} go('gate'); }
+  function biRelock() { try { sessionStorage.removeItem('lo_bi_ok'); sessionStorage.removeItem('lo_bi_pw'); sessionStorage.removeItem('lo_bi_ts'); } catch (e) {} go('gate'); }
   function biFetch(key, gid, rows, raw) {
+    if (!biUnlocked()) { biRelock(); return Promise.reject(new Error('암호를 다시 입력해 주세요')); }
     const ck = key + ':' + gid + (raw ? ':raw' : ''), c = BIX.cache[ck];
     if (c && Date.now() - c.t < 45000) return Promise.resolve(c.j);
     return fetch(SHEET_ENDPOINT + '?type=bi_grid&pw=' + encodeURIComponent(biPw()) + '&key=' + key + '&gid=' + gid + '&r=' + (rows || 400) + (raw ? '&raw=1' : ''))
