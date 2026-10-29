@@ -4193,7 +4193,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const key = BI_PAGES[pg].k, BLOCK = { inf: ['181779110'] };
     const all = (await biTabsOf(key)).filter(function (t) { return (BLOCK[key] || []).indexOf(String(t.gid)) < 0; });
     if (!all.length) return '<div class="bi-empty">열 수 있는 탭이 없습니다.</div>';
-    let gid = BIX.tabSel[key]; if (!all.some(function (t) { return String(t.gid) === String(gid); })) gid = all[0].gid;
+    let gid = BIX.tabSel[key] || ({ sales: '1115730697', journey: '1280577857', inf: '1384807088', rev: '1682728294', paid: '599649638', rank: '1815489030' })[key]; if (!all.some(function (t) { return String(t.gid) === String(gid); })) gid = all[0].gid;
     const g = await biFetch(key, gid, 1200, true), v = g.values || [];
     let lr = v.length, lc = 0; while (lr > 0 && !v[lr - 1].some(function (x) { return bnorm(x); })) lr--;
     v.slice(0, lr).forEach(function (r) { for (let c = r.length - 1; c >= 0; c--) { if (bnorm(r[c])) { if (c + 1 > lc) lc = c + 1; break; } } });
