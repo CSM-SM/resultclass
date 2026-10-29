@@ -1917,6 +1917,39 @@ body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax
 .bi-sheet td { padding: 4px 10px; border-bottom: 1px solid #F0F2F6; border-right: 1px solid #F4F6F9; max-width: 320px; min-width: 92px; white-space: pre-wrap; vertical-align: top; }
 .bi-sheet .bi-rn { position: sticky; left: 0; background: #F3F5F9; color: #A5ADBF; text-align: right; min-width: 40px; z-index: 1; }
 .bi-sheet th.bi-rn { z-index: 3; }
+.bi-date { font-size: 12.5px; color: #5b6784; padding: 0 6px; align-self: center; }
+.bi-exp { border: 1px solid #DCE2EC; background: #fff; border-radius: 10px; padding: 8px 14px; font-size: 12.5px; font-weight: 700; cursor: pointer; }
+.bi-exp.x { color: #1C7A4B; } .bi-exp.p { color: #D24545; } .bi-exp.t { color: #D9691A; }
+.bi-exp:hover { background: #F5F7FB; }
+.bi-grid2.ov { grid-template-columns: 1.7fr 1fr; } .bi-grid2.ov2 { grid-template-columns: 1.1fr 1fr; }
+.bi-segs { display: inline-flex; background: #EEF1F6; border-radius: 10px; padding: 3px; gap: 2px; }
+.bi-seg { border: 0; background: transparent; border-radius: 8px; padding: 6px 14px; font-size: 12.5px; font-weight: 700; color: #5b6784; cursor: pointer; }
+.bi-seg.on { background: #121F42; color: #fff; }
+.bi-rsum { display: flex; gap: 8px; margin-bottom: 10px; } .bi-rsum span { font-size: 12px; font-weight: 700; border-radius: 999px; padding: 3px 10px; }
+.bi-rsum .red { background: #FDECEC; color: #D24545; } .bi-rsum .yel { background: #FFF6DC; color: #A87400; } .bi-rsum .grn { background: #E6F6EF; color: #1C9A68; }
+.bi-rlist { display: flex; flex-direction: column; gap: 8px; max-height: 360px; overflow-y: auto; }
+.bi-risk { display: flex; gap: 10px; align-items: flex-start; border: 1px solid #E3E8F0; border-radius: 10px; padding: 10px 12px; text-decoration: none; color: inherit; background: #FAFBFD; }
+.bi-risk:hover { border-color: #28407D; }
+.bi-risk i { width: 10px; height: 10px; border-radius: 50%; margin-top: 5px; flex: none; }
+.bi-risk.red i { background: #D24545; box-shadow: 0 0 0 3px #FDECEC; } .bi-risk.yel i { background: #E6A700; box-shadow: 0 0 0 3px #FFF6DC; } .bi-risk.grn i { background: #1C9A68; box-shadow: 0 0 0 3px #E6F6EF; }
+.bi-risk div { flex: 1; min-width: 0; } .bi-risk b { display: block; font-size: 13px; } .bi-risk span { display: block; font-size: 12px; color: #5b6784; line-height: 1.5; margin-top: 2px; }
+.bi-risk em { font-style: normal; font-size: 11px; font-weight: 700; color: #7D879E; flex: none; }
+.bi-brief { background: linear-gradient(160deg, #0F2A5C, #121F42); color: #fff; border-radius: 16px; padding: 20px 22px; margin-bottom: 16px; min-width: 0; }
+.bi-brief h3 { font-size: 16px; margin: 4px 0 14px; color: #fff; }
+.bi-brief .bi-ch { margin-bottom: 6px; }
+.bi-tagx { font-size: 11px; font-weight: 800; letter-spacing: .08em; color: #8FB4FF; background: rgba(143,180,255,.14); border-radius: 999px; padding: 3px 10px; }
+.bi-rbtn { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.18); color: #fff; border-radius: 8px; padding: 5px 12px; font-size: 12px; cursor: pointer; }
+.bi-bl2 { display: flex; gap: 10px; align-items: flex-start; background: rgba(255,255,255,.07); border-radius: 10px; padding: 10px 12px; margin-bottom: 8px; }
+.bi-bl2 p { margin: 0; font-size: 13px; line-height: 1.6; color: #E8EEFA; }
+.bi-tg { flex: none; font-size: 11px; font-weight: 800; border-radius: 6px; padding: 2px 8px; background: #2D4E96; color: #CFE0FF; white-space: nowrap; }
+.bi-bnote { font-size: 11px; color: #8D9AC0; margin-top: 8px; }
+@media print {
+  body[data-mode="bi"] .bs, body[data-mode="bi"] .bm-banner, body[data-mode="bi"] .bi-ha, body[data-mode="bi"] .bi-views, body[data-mode="bi"] .bi-rbtn { display: none !important; }
+  body[data-mode="bi"] #biApp { display: block !important; background: #fff; }
+  .bi-brief { -webkit-print-color-adjust: exact; print-color-adjust: exact; } .bi-b1, .bi-risk i, .bi-ht i { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .bi-rlist { max-height: none; }
+}
+@media (max-width: 980px) { .bi-grid2.ov, .bi-grid2.ov2 { grid-template-columns: 1fr; } }
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -4067,8 +4100,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 
   /* 주력상품 고객여정 */
   const BI_JG = { '2026.10': '1280577857', '2026.09': '1187003740', '2026.08': '1157689094', '2026.07': '42565156' };
-  async function biLoadJourney() {
-    const m = BIX.jm, j = await biFetch('journey', BI_JG[m], 110), v = j.values, hi = v.findIndex(function (r) { return r[0] === '상품번호'; });
+  async function biLoadJourney(mo) {
+    const m = mo || BIX.jm, j = await biFetch('journey', BI_JG[m], 110), v = j.values, hi = v.findIndex(function (r) { return r[0] === '상품번호'; });
     if (hi < 0) throw new Error('고객여정 시트의 헤더(상품번호)를 찾지 못했습니다');
     const H = v[hi], days = []; for (let c = 4; c < H.length; c++) { if (bnorm(H[c])) days.push({ c: c, l: bnorm(H[c]) }); }
     const starts = []; for (let r = hi + 1; r < v.length; r++) { if (bnorm(v[r][0]) && bnorm(v[r][1]) === '방문수') starts.push(r); }
@@ -4213,19 +4246,98 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
 
   /* 종합 */
-  async function biViewOverview() {
-    const jobs = { sales: biLoadSales(), journey: biLoadJourney(), rank: biLoadRank(), inf: biLoadInf(), rev: biLoadRev(), paid: biLoadPaid() };
-    const keys = Object.keys(jobs), res = await Promise.allSettled(keys.map(function (k) { return jobs[k]; })), D = {}; keys.forEach(function (k, i) { D[k] = res[i].status === 'fulfilled' ? res[i].value : null; });
-    const val = function (arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; };
-    const kp = [];
-    if (D.sales) { const s = val(D.sales.sS, D.sales.last), a = val(D.sales.sA, D.sales.last); kp.push(bKpi(D.sales.last + ' 실매출', fW(s), '원', '광고비 ' + fW(a) + '원 · 비율 ' + fP(a / s * 100))); }
-    if (D.journey) { const tot = function (lb) { return D.journey.prods.reduce(function (s, p) { const r = p.rows[lb]; const x = r ? bn(r[3]) : NaN; return s + (isFinite(x) ? x : 0); }, 0); }; kp.push(bKpi(D.journey.month + ' 주력상품 방문', fN(tot('방문수')), '회', '전환 ' + fN(tot('전환수')) + '건 · 구매금액 ' + fW(tot('구매금액')) + '원')); }
-    if (D.rev) { const c = D.rev.col, l = D.rev.rows[D.rev.rows.length - 1]; kp.push(bKpi(D.rev.lastM + ' 리뷰', esc(l[c('전체리뷰율')]), '', '평점 ' + esc(l[c('평균평점')]) + ' · 부정 VOC ' + esc(l[c('부정VOC비율')]) + '%')); }
-    if (D.inf) kp.push(bKpi('인플루언서 컨택 리스트', fN(D.inf.total), '건', '마지막 컨택 ' + esc(D.inf.lastD)));
+  const BI_RULES = { stale: [14, 30], adRatio: [40, 60], voc: [15, 20], roasLow: [0.7, 1], cvrDrop: 20, monthsBehind: [2, 3] };
+  const BI_LV = { red: '위험', yel: '주의', grn: '양호' };
+  function biLib(src) { return new Promise(function (res, rej) { if (document.querySelector('script[data-lib="' + src + '"]')) { res(); return; } const s = document.createElement('script'); s.src = src; s.dataset.lib = src; s.onload = function () { res(); }; s.onerror = function () { rej(new Error('내보내기 라이브러리를 불러오지 못했습니다(인터넷 연결 확인)')); }; document.head.appendChild(s); }); }
+  function biDateKo(d) { return d.getFullYear() + '년 ' + (d.getMonth() + 1) + '월 ' + d.getDate() + '일 ' + '일월화수목금토'.charAt(d.getDay()); }
+  async function biTrendData() {
+    const months = Object.keys(BI_JG).sort(), rs = await Promise.allSettled(months.map(function (m) { return biLoadJourney(m); })), days = {};
+    rs.forEach(function (r) { if (r.status !== 'fulfilled') return; const d = r.value, y = d.month.slice(0, 4); d.upto.forEach(function (x) { const mm = /^(\d+)-(\d+)$/.exec(x.l); if (!mm) return; const k = y + '-' + mm[1] + '-' + mm[2]; const o = days[k] || (days[k] = { '방문수': 0, '구매클릭수': 0, '전환수': 0, '구매금액': 0 }); Object.keys(o).forEach(function (met) { d.prods.forEach(function (p) { const row = p.rows[met], v = row ? bn(row[x.c]) : NaN; if (isFinite(v)) o[met] += v; }); }); }); });
+    return days;
+  }
+  function biAgg(days, gran, met) {
+    const ks = Object.keys(days).sort(), mon = function (k) { const d = new Date(k + 'T00:00:00'); const w = (d.getDay() + 6) % 7; d.setDate(d.getDate() - w); return ymd(d); };
+    let keys = [], lab = function (k) { return k; };
+    if (gran === '일') { keys = ks.slice(-30); lab = function (k) { return (+k.slice(5, 7)) + '/' + (+k.slice(8)); }; return { labels: keys.map(lab), vals: keys.map(function (k) { return days[k][met]; }) }; }
+    const g = {}; ks.forEach(function (k) { const gk = gran === '주' ? mon(k) : gran === '월' ? k.slice(0, 7) : k.slice(0, 4); g[gk] = (g[gk] || 0) + days[k][met]; });
+    keys = Object.keys(g).sort(); if (gran === '주') keys = keys.slice(-12);
+    return { labels: keys.map(function (k) { return gran === '주' ? (+k.slice(5, 7)) + '/' + (+k.slice(8)) + '주' : gran === '월' ? (+k.slice(5)) + '월' : k + '년'; }), vals: keys.map(function (k) { return g[k]; }) };
+  }
+  function biRisks(D, today) {
+    const R = [], add = function (lv, t, x, link) { R.push({ lv: lv, t: t, x: x, link: link || '' }); };
     const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재' };
-    const frs = keys.map(function (k) { const d = D[k]; return '<tr><td><b>' + names[k] + '</b></td><td>' + (d ? fresh(d.fresh.label, d.fresh.age) : '<span class="bi-b stale">읽기 실패</span>') + '</td><td><a href="#bi-' + k + '">열기</a></td></tr>'; }).join('');
-    const stale = keys.filter(function (k) { return D[k] && D[k].fresh.age !== null && D[k].fresh.age > 14; }).map(function (k) { return names[k]; });
-    return (stale.length ? '<div class="bi-warn">⚠️ 마지막 데이터가 14일 넘게 지난 시트: <b>' + stale.join(', ') + '</b>. 자동화가 멈췄거나 갱신되지 않은 상태일 수 있습니다.</div>' : '') + '<div class="bi-kpis">' + kp.join('') + '</div><section class="bi-card"><h3>시트별 데이터 최신성 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>시트</th><th>마지막 데이터</th><th></th></tr></thead><tbody>' + frs + '</tbody></table></div><div class="bi-note">"월 기준"은 월 단위로 입력되는 시트라 일수를 계산하지 않습니다. 14일 넘게 지난 날짜 기준 시트는 주황색으로 표시합니다.</div></section>';
+    Object.keys(names).forEach(function (k) { const d = D[k]; if (!d) { add('red', names[k] + ' 읽기 실패', '시트를 읽지 못했습니다. 권한이나 시트 구조를 확인해 주세요.', 'bi-' + k); return; } const a = d.fresh.age; if (a !== null && a !== undefined) { if (a > BI_RULES.stale[1]) add('red', names[k] + ' 갱신 중단', d.fresh.label + ' (' + a + '일 전). 자동화가 멈췄는지 확인하세요.', 'bi-' + k); else if (a > BI_RULES.stale[0]) add('yel', names[k] + ' 갱신 지연', d.fresh.label + ' (' + a + '일 전)', 'bi-' + k); } });
+    const cm = today.getMonth() + 1; const behind = function (txt) { const m = /(\d+)월/.exec(txt || ''); return m ? cm - (+m[1]) : 0; };
+    if (D.rev) { const b = behind(D.rev.lastM); if (b >= BI_RULES.monthsBehind[1]) add('red', '리뷰 월별 표 입력 지연', '표의 마지막 월이 ' + D.rev.lastM + '입니다 (' + b + '개월 전).', 'bi-rev'); else if (b >= BI_RULES.monthsBehind[0]) add('yel', '리뷰 월별 표 입력 지연', '표의 마지막 월이 ' + D.rev.lastM + '입니다.', 'bi-rev'); }
+    if (D.paid && D.paid.filled.length) { const lm = D.paid.filled[D.paid.filled.length - 1].m, b = behind(lm); if (b >= BI_RULES.monthsBehind[0]) add(b >= BI_RULES.monthsBehind[1] ? 'red' : 'yel', '소재 기획 수량 입력 지연', '월간 기획 수량은 ' + lm + '까지만 입력되어 있습니다.', 'bi-paid'); }
+    const val = function (arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; };
+    if (D.sales) {
+      const s = D.sales, L = s.last, sv = val(s.sS, L), av = val(s.sA, L), isCur = (+L.replace('월', '')) === cm;
+      if (isFinite(s.target) && s.target && isFinite(sv)) { const ach = sv / s.target, dim = new Date(today.getFullYear(), cm, 0).getDate(), exp = isCur ? today.getDate() / dim : 1, r = ach / exp; add(r < 0.7 ? 'red' : r < 0.9 ? 'yel' : 'grn', L + ' 매출 목표 진행', '월 목표 ' + fW(s.target) + '원 대비 ' + fP(ach * 100, 0) + (isCur ? ' (월 경과 ' + fP(exp * 100, 0) + ')' : ''), 'bi-sales'); }
+      if (isFinite(av) && isFinite(sv) && sv) { const ar = av / sv * 100; add(ar >= BI_RULES.adRatio[1] ? 'red' : ar >= BI_RULES.adRatio[0] ? 'yel' : 'grn', L + ' 광고비 비율', '실매출 대비 광고비 ' + fP(ar) + ' (기준 ' + BI_RULES.adRatio[0] + '% 주의 / ' + BI_RULES.adRatio[1] + '% 위험)', 'bi-sales'); }
+      let low = 0; s.roas.forEach(function (r) { let mm = null; for (let i = s.months.length - 1; i >= 0; i--) { const a = val(r.a, s.months[i]), t = val(r.t, s.months[i]); if (isFinite(a) && isFinite(t) && t) { mm = [s.months[i], a, t]; break; } } if (!mm) return; const ratio = mm[1] / mm[2]; if (ratio < BI_RULES.roasLow[1]) { low++; add(ratio < BI_RULES.roasLow[0] ? 'red' : 'yel', r.l + ' ROAS 목표 미달', mm[0] + ' ROAS ' + fP(mm[1], 0) + ' / 목표 ' + fP(mm[2], 0) + ' (목표가 숫자로 입력된 가장 최근 월 기준)', 'bi-sales'); } });
+      if (!low) add('grn', '채널 ROAS', '목표가 입력된 채널은 모두 목표 이상입니다.', 'bi-sales');
+    }
+    if (D.rev) { const c = D.rev.col, l = D.rev.rows[D.rev.rows.length - 1], v = bn(l[c('부정VOC비율')]); if (isFinite(v)) add(v >= BI_RULES.voc[1] ? 'red' : v >= BI_RULES.voc[0] ? 'yel' : 'grn', D.rev.lastM + ' 부정 VOC', '비율 ' + fP(v) + ' (기준 ' + BI_RULES.voc[0] + '% 주의 / ' + BI_RULES.voc[1] + '% 위험)', 'bi-rev'); }
+    if (D.cvr && isFinite(D.cvr.drop)) add(D.cvr.drop >= BI_RULES.cvrDrop ? 'yel' : 'grn', '주력상품 전환율', D.cvr.txt, 'bi-journey');
+    const ord = { red: 0, yel: 1, grn: 2 }; R.sort(function (a, b) { return ord[a.lv] - ord[b.lv]; }); return R;
+  }
+  function biBrief(D, risks, today) {
+    const B = [], val = function (arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; };
+    if (D.sales) { const s = D.sales, L = s.last, i = s.months.indexOf(L), P = i > 0 ? s.months[i - 1] : null, sv = val(s.sS, L), av = val(s.sA, L), ps = P ? val(s.sS, P) : NaN, mom = isFinite(ps) && ps ? (sv - ps) / ps * 100 : NaN; B.push(['매출', L + ' 실매출 ' + fW(sv) + '원' + (isFinite(mom) ? ', 전월 대비 ' + (mom >= 0 ? '+' : '') + fP(mom) : '') + (isFinite(s.target) && s.target ? ', 월 목표 대비 ' + fP(sv / s.target * 100, 0) : '') + '.']); B.push(['광고', L + ' 광고비 ' + fW(av) + '원 (실매출의 ' + fP(av / sv * 100) + ').']); }
+    if (D.journey) { const j = D.journey, tot = function (lb) { return j.prods.reduce(function (s, p) { const r = p.rows[lb], x = r ? bn(r[3]) : NaN; return s + (isFinite(x) ? x : 0); }, 0); }; const v = tot('방문수'), c = tot('전환수'); B.push(['고객여정', j.month + ' 주력상품 방문 ' + fN(v) + '회, 전환 ' + fN(c) + '건(전환율 ' + fP(v ? c / v * 100 : NaN, 2) + '), 구매금액 ' + fW(tot('구매금액')) + '원. 마지막 기록일 ' + j.lastLabel + '.']); }
+    if (D.rev) { const c = D.rev.col, l = D.rev.rows[D.rev.rows.length - 1]; B.push(['리뷰', D.rev.lastM + ' 전체 리뷰율 ' + l[c('전체리뷰율')] + ', 평점 ' + l[c('평균평점')] + ', 부정 VOC ' + l[c('부정VOC비율')] + '%.']); }
+    const red = risks.filter(function (r) { return r.lv === 'red'; }), yel = risks.filter(function (r) { return r.lv === 'yel'; });
+    B.push(['종합', red.length || yel.length ? '위험 ' + red.length + '건, 주의 ' + yel.length + '건. ' + (red.length ? '가장 먼저 볼 것: ' + red[0].t + '.' : yel.length ? '가장 먼저 볼 것: ' + yel[0].t + '.' : '') : '자동 점검 기준에서 위험·주의 항목이 없습니다.']);
+    return B;
+  }
+  async function biViewOverview() {
+    const jobs = { sales: biLoadSales(), journey: biLoadJourney('2026.10'), rank: biLoadRank(), inf: biLoadInf(), rev: biLoadRev(), paid: biLoadPaid(), days: biTrendData() };
+    const keys = Object.keys(jobs), res = await Promise.allSettled(keys.map(function (k) { return jobs[k]; })), D = {}; keys.forEach(function (k, i) { D[k] = res[i].status === 'fulfilled' ? res[i].value : null; });
+    const today = new Date(), val = function (arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; };
+    if (D.days) { const ks = Object.keys(D.days).sort(), cm = {}; ks.forEach(function (k) { const m = k.slice(0, 7); const o = cm[m] || (cm[m] = { v: 0, c: 0 }); o.v += D.days[k]['방문수']; o.c += D.days[k]['전환수']; }); const ms = Object.keys(cm).sort(); if (ms.length >= 2) { const a = cm[ms[ms.length - 1]], b = cm[ms[ms.length - 2]], ca = a.v ? a.c / a.v * 100 : NaN, cb = b.v ? b.c / b.v * 100 : NaN; D.cvr = { drop: isFinite(ca) && isFinite(cb) && cb ? (cb - ca) / cb * 100 : NaN, txt: (+ms[ms.length - 1].slice(5)) + '월 전환율 ' + fP(ca, 2) + ' / 전월 ' + fP(cb, 2) }; } }
+    const kp = [], kx = [];
+    if (D.sales) { const s = val(D.sales.sS, D.sales.last), a = val(D.sales.sA, D.sales.last); kp.push(bKpi(D.sales.last + ' 실매출', fW(s), '원', '광고비 ' + fW(a) + '원 · 비율 ' + fP(a / s * 100))); kx.push([D.sales.last + ' 실매출', fW(s) + '원', '광고비 ' + fW(a) + '원 / 비율 ' + fP(a / s * 100)]); }
+    if (D.journey) { const tot = function (lb) { return D.journey.prods.reduce(function (s, p) { const r = p.rows[lb]; const x = r ? bn(r[3]) : NaN; return s + (isFinite(x) ? x : 0); }, 0); }; kp.push(bKpi(D.journey.month + ' 주력상품 방문', fN(tot('방문수')), '회', '전환 ' + fN(tot('전환수')) + '건 · 구매금액 ' + fW(tot('구매금액')) + '원')); kx.push([D.journey.month + ' 주력상품 방문', fN(tot('방문수')) + '회', '전환 ' + fN(tot('전환수')) + '건 / 구매금액 ' + fW(tot('구매금액')) + '원']); }
+    if (D.rev) { const c = D.rev.col, l = D.rev.rows[D.rev.rows.length - 1]; kp.push(bKpi(D.rev.lastM + ' 리뷰', esc(l[c('전체리뷰율')]), '', '평점 ' + esc(l[c('평균평점')]) + ' · 부정 VOC ' + esc(l[c('부정VOC비율')]) + '%')); kx.push([D.rev.lastM + ' 전체 리뷰율', l[c('전체리뷰율')], '평점 ' + l[c('평균평점')] + ' / 부정 VOC ' + l[c('부정VOC비율')] + '%']); }
+    if (D.inf) { kp.push(bKpi('인플루언서 컨택 리스트', fN(D.inf.total), '건', '마지막 컨택 ' + esc(D.inf.lastD))); kx.push(['인플루언서 컨택 리스트', fN(D.inf.total) + '건', '마지막 컨택 ' + D.inf.lastD]); }
+    const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재' };
+    const risks = biRisks(D, today), brief = biBrief(D, risks, today);
+    const g = BIX.ovg || '주', m = BIX.ovm || '방문수', tr = D.days ? biAgg(D.days, g, m) : { labels: [], vals: [] };
+    const frs = ['sales', 'journey', 'rank', 'inf', 'rev', 'paid'].map(function (k) { const d = D[k]; return '<tr><td><b>' + names[k] + '</b></td><td>' + (d ? fresh(d.fresh.label, d.fresh.age) : '<span class="bi-b stale">읽기 실패</span>') + '</td><td><a href="#bi-' + k + '">열기</a></td></tr>'; }).join('');
+    const nr = risks.filter(function (r) { return r.lv === 'red'; }).length, ny = risks.filter(function (r) { return r.lv === 'yel'; }).length, ng = risks.length - nr - ny;
+    BIX.ovx = { date: biDateKo(today), kpis: kx, risks: risks.map(function (r) { return [BI_LV[r.lv], r.t, r.x]; }), brief: brief, fresh: ['sales', 'journey', 'rank', 'inf', 'rev', 'paid'].map(function (k) { const d = D[k]; return [names[k], d ? d.fresh.label : '읽기 실패', d && d.fresh.age !== null ? d.fresh.age + '일 전' : '']; }), trend: { g: g, m: m, labels: tr.labels, vals: tr.vals } };
+    const gt = ['일', '주', '월', '년'].map(function (x) { return '<button type="button" class="bi-seg' + (x === g ? ' on' : '') + '" data-ovg="' + x + '">' + x + '</button>'; }).join(''), mt = ['방문수', '전환수', '구매금액'].map(function (x) { return '<button type="button" class="bi-chip' + (x === m ? ' on' : '') + '" data-ovm="' + x + '">' + x + '</button>'; }).join('');
+    const rk = risks.length ? risks.map(function (r) { return '<a class="bi-risk ' + r.lv + '"' + (r.link ? ' href="#' + r.link + '"' : '') + '><i></i><div><b>' + esc(r.t) + '</b><span>' + esc(r.x) + '</span></div><em>' + BI_LV[r.lv] + '</em></a>'; }).join('') : '<div class="bi-empty">점검할 항목을 만들 데이터가 없습니다.</div>';
+    return '<div class="bi-kpis">' + kp.join('') + '</div>'
+      + '<div class="bi-grid2 ov"><section class="bi-card"><div class="bi-ch"><h3>주력상품 추이 ' + bReal + '</h3><div class="bi-segs">' + gt + '</div></div><div class="bi-bar2">' + mt + '</div>' + bBars(tr.labels, [tr.vals], ['#28407D'], m === '구매금액' ? fW : fN, '4개 주력상품 합계 · 일/주/월/년 단위로 묶어 봅니다. 일은 최근 30일, 주는 최근 12주(월요일 시작, 이번 주는 진행 중).') + '</section>'
+      + '<section class="bi-card"><div class="bi-ch"><h3>🚦 신호등 리스크 센터</h3><span class="bi-ms">자동 점검</span></div><div class="bi-rsum"><span class="red">위험 ' + nr + '</span><span class="yel">주의 ' + ny + '</span><span class="grn">양호 ' + ng + '</span></div><div class="bi-rlist">' + rk + '</div><div class="bi-note">점검 기준은 임시 기준입니다(갱신 ' + BI_RULES.stale[0] + '일 주의·' + BI_RULES.stale[1] + '일 위험, 광고비 비율 ' + BI_RULES.adRatio[0] + '%·' + BI_RULES.adRatio[1] + '%, 부정 VOC ' + BI_RULES.voc[0] + '%·' + BI_RULES.voc[1] + '%, ROAS 목표 대비 100%·70%). 실제 운영 기준에 맞게 조정이 필요합니다.</div></section></div>'
+      + '<div class="bi-grid2 ov2"><section class="bi-brief"><div class="bi-ch"><span class="bi-tagx">● AUTO BRIEF</span><button type="button" class="bi-rbtn" data-bibrief="1">↻ 새로고침</button></div><h3>' + (today.getMonth() + 1) + '월 ' + today.getDate() + '일 자동 분석 브리핑</h3>' + brief.map(function (b) { return '<div class="bi-bl2"><span class="bi-tg t' + b[0].length + '">' + esc(b[0]) + '</span><p>' + esc(b[1]) + '</p></div>'; }).join('') + '<div class="bi-bnote">시트 값으로 문장을 자동 조립한 요약입니다(AI 해석 아님). 새로고침하면 시트를 다시 읽습니다.</div></section>'
+      + '<section class="bi-card"><h3>시트별 데이터 최신성 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>시트</th><th>마지막 데이터</th><th></th></tr></thead><tbody>' + frs + '</tbody></table></div><div class="bi-note">"월 기준"은 월 단위로 입력되는 시트라 일수를 계산하지 않습니다. 14일 넘게 지난 날짜 기준 시트는 주황색으로 표시합니다.</div></section></div>';
+  }
+  async function biExport(kind) {
+    const X = BIX.ovx; if (!X) { toast('종합 현황을 먼저 불러온 뒤 눌러 주세요.', 'error'); return; }
+    const fn = '라이브오랄스_종합현황_' + ymd(new Date());
+    try {
+      if (kind === 'pdf') { document.title = fn; window.print(); return; }
+      if (kind === 'xlsx') {
+        await biLib('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js');
+        const wb = XLSX.utils.book_new(), add = function (n, rows) { XLSX.utils.book_append_sheet(wb, XLSX.utils.aoa_to_sheet(rows), n); };
+        add('핵심 수치', [['항목', '값', '비고']].concat(X.kpis)); add('리스크', [['등급', '항목', '내용']].concat(X.risks)); add('자동 브리핑', [['구분', '내용']].concat(X.brief)); add('데이터 최신성', [['시트', '마지막 데이터', '경과']].concat(X.fresh)); add('추이(' + X.trend.g + '·' + X.trend.m + ')', [['구간', X.trend.m]].concat(X.trend.labels.map(function (l, i) { return [l, X.trend.vals[i]]; })));
+        XLSX.writeFile(wb, fn + '.xlsx'); toast('엑셀 파일을 내려받았습니다.', 'success'); return;
+      }
+      if (kind === 'ppt') {
+        await biLib('https://cdn.jsdelivr.net/gh/gitbrent/pptxgenjs@3.12.0/dist/pptxgen.bundle.js');
+        const p = new PptxGenJS(); p.layout = 'LAYOUT_WIDE'; const NAVY = '121F42', OR = 'F57902';
+        const head = function (s, t) { s.addShape(p.ShapeType.rect, { x: 0, y: 0, w: 13.33, h: 0.9, fill: { color: NAVY } }); s.addText(t, { x: 0.5, y: 0.15, w: 12, h: 0.6, fontSize: 24, bold: true, color: 'FFFFFF', fontFace: 'Malgun Gothic' }); };
+        let s = p.addSlide(); s.background = { color: NAVY }; s.addText('라이브오랄스 종합 현황', { x: 0.7, y: 2.4, w: 12, h: 1, fontSize: 40, bold: true, color: 'FFFFFF', fontFace: 'Malgun Gothic' }); s.addText(X.date + ' 기준 · 구글 시트 실데이터 요약', { x: 0.7, y: 3.5, w: 12, h: 0.6, fontSize: 18, color: 'C9D2E8', fontFace: 'Malgun Gothic' });
+        s = p.addSlide(); head(s, '핵심 수치'); s.addTable([[{ text: '항목', options: { bold: true, fill: { color: 'EAEFF9' } } }, { text: '값', options: { bold: true, fill: { color: 'EAEFF9' } } }, { text: '비고', options: { bold: true, fill: { color: 'EAEFF9' } } }]].concat(X.kpis.map(function (r) { return r.map(function (c) { return { text: String(c) }; }); })), { x: 0.5, y: 1.3, w: 12.3, fontSize: 14, fontFace: 'Malgun Gothic', border: { type: 'solid', color: 'DDE2EC', pt: 1 } });
+        s = p.addSlide(); head(s, '신호등 리스크'); s.addTable([[{ text: '등급', options: { bold: true, fill: { color: 'EAEFF9' } } }, { text: '항목', options: { bold: true, fill: { color: 'EAEFF9' } } }, { text: '내용', options: { bold: true, fill: { color: 'EAEFF9' } } }]].concat(X.risks.slice(0, 12).map(function (r) { const col = r[0] === '위험' ? 'D24545' : r[0] === '주의' ? 'C98A00' : '1C9A68'; return [{ text: r[0], options: { bold: true, color: col } }, { text: r[1] }, { text: r[2] }]; })), { x: 0.5, y: 1.3, w: 12.3, colW: [1.2, 3.6, 7.5], fontSize: 12, fontFace: 'Malgun Gothic', border: { type: 'solid', color: 'DDE2EC', pt: 1 } });
+        s = p.addSlide(); head(s, '자동 분석 브리핑'); s.addText(X.brief.map(function (b) { return { text: '[' + b[0] + '] ' + b[1], options: { bullet: true, breakLine: true } }; }), { x: 0.6, y: 1.3, w: 12, h: 4.5, fontSize: 16, fontFace: 'Malgun Gothic', color: '18213A', valign: 'top', paraSpaceAfter: 10 });
+        s = p.addSlide(); head(s, '시트별 데이터 최신성'); s.addTable([[{ text: '시트', options: { bold: true, fill: { color: 'EAEFF9' } } }, { text: '마지막 데이터', options: { bold: true, fill: { color: 'EAEFF9' } } }, { text: '경과', options: { bold: true, fill: { color: 'EAEFF9' } } }]].concat(X.fresh.map(function (r) { return r.map(function (c) { return { text: String(c) }; }); })), { x: 0.5, y: 1.3, w: 12.3, fontSize: 14, fontFace: 'Malgun Gothic', border: { type: 'solid', color: 'DDE2EC', pt: 1 } });
+        await p.writeFile({ fileName: fn + '.pptx' }); toast('PPT 파일을 내려받았습니다.', 'success'); return;
+      }
+    } catch (e) { toast('내보내기에 실패했습니다: ' + (e.message || e), 'error'); }
   }
 
   const BI_PAGES = {
@@ -4240,7 +4352,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   };
   function biFrame(pg, inner, stamp) {
     const m = BI_PAGES[pg], src = m.k ? BI_SRC[m.k] : null;
-    return '<div class="bi-head"><div><h1>' + esc(m.t) + '</h1><p>' + esc(m.s) + '</p></div><div class="bi-ha">' + (src ? '<a class="bi-btn" href="' + esc(src.u) + '" target="_blank" rel="noopener noreferrer">원본 시트 ↗</a>' : '') + '<button type="button" class="bi-btn" data-birefresh="1">새로고침</button></div></div>' + (src ? '<div class="bi-src">시트: ' + esc(src.t) + (stamp ? ' · 읽은 시각 ' + esc(stamp) : '') + '</div><div class="bi-views"><button type="button" class="bi-vt' + (BIX.view[pg] === 'tabs' ? '' : ' on') + '" data-biview="sum">요약</button><button type="button" class="bi-vt' + (BIX.view[pg] === 'tabs' ? ' on' : '') + '" data-biview="tabs">전체 탭 보기</button></div>' : '') + inner;
+    return '<div class="bi-head"><div><h1>' + esc(m.t) + '</h1><p>' + esc(m.s) + '</p></div><div class="bi-ha">' + (pg === 'bi' ? '<span class="bi-date">' + esc(biDateKo(new Date())) + '</span><button type="button" class="bi-exp x" data-biexp="xlsx">EXCEL</button><button type="button" class="bi-exp p" data-biexp="pdf">PDF</button><button type="button" class="bi-exp t" data-biexp="ppt">PPT</button>' : '') + (src ? '<a class="bi-btn" href="' + esc(src.u) + '" target="_blank" rel="noopener noreferrer">원본 시트 ↗</a>' : '') + '<button type="button" class="bi-btn" data-birefresh="1">새로고침</button></div></div>' + (src ? '<div class="bi-src">시트: ' + esc(src.t) + (stamp ? ' · 읽은 시각 ' + esc(stamp) : '') + '</div><div class="bi-views"><button type="button" class="bi-vt' + (BIX.view[pg] === 'tabs' ? '' : ' on') + '" data-biview="sum">요약</button><button type="button" class="bi-vt' + (BIX.view[pg] === 'tabs' ? ' on' : '') + '" data-biview="tabs">전체 탭 보기</button></div>' : '') + inner;
   }
   async function biRender(pg, quiet) {
     const el = $('#biMain'); if (!el) return; BIX.page = pg; const m = BI_PAGES[pg]; if (!m) return;
@@ -4263,6 +4375,10 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const app = $('#biApp'); if (!app) return;
     app.addEventListener('click', function (e) {
       if (e.target.closest('[data-birefresh]')) { BIX.cache = {}; biRender(BIX.page); return; }
+      const ex = e.target.closest('[data-biexp]'); if (ex) { biExport(ex.dataset.biexp); return; }
+      const og = e.target.closest('[data-ovg]'); if (og) { BIX.ovg = og.dataset.ovg; biRender('bi', true); return; }
+      const om = e.target.closest('[data-ovm]'); if (om) { BIX.ovm = om.dataset.ovm; biRender('bi', true); return; }
+      if (e.target.closest('[data-bibrief]')) { BIX.cache = {}; biRender('bi'); return; }
       const vw = e.target.closest('[data-biview]'); if (vw) { BIX.view[BIX.page] = vw.dataset.biview; biRender(BIX.page); return; }
       const jm = e.target.closest('[data-jm]'); if (jm) { BIX.jm = jm.dataset.jm; biRender(BIX.page); return; }
       const jp = e.target.closest('[data-jp]'); if (jp) { BIX.jp = +jp.dataset.jp; biRender(BIX.page, true); return; }
