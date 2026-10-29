@@ -2072,6 +2072,37 @@ body[data-mode="bi"] #biApp { grid-template-columns: 272px minmax(0, 1fr); backg
 .bi-line { background: #FAFAFA; }
 @media (max-width: 980px) { body[data-mode="bi"] #biApp { grid-template-columns: 1fr; } .bs { border-right: 0; border-bottom: 1px solid #ECEEF0; } .bs-brand { padding: 18px 20px 12px; } .bi-head h1 { font-size: 26px; } }
 .bi-t td a { white-space: nowrap; }
+
+.bi-stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 6px 0 14px; }
+.bi-stage { text-align: left; border: 1px solid #E6E8EB; background: #fff; border-radius: 14px; padding: 12px 16px; cursor: pointer; display: grid; grid-template-columns: 26px 1fr; grid-template-rows: auto auto; column-gap: 10px; align-items: center; font: inherit; }
+.bi-stage i { grid-row: 1 / 3; width: 26px; height: 26px; border-radius: 50%; background: #F0F1F3; color: #6B7076; font-style: normal; font-weight: 800; font-size: 13px; display: grid; place-items: center; }
+.bi-stage b { font-size: 14px; color: #2e2e2e; } .bi-stage span { font-size: 12px; color: #8B9096; }
+.bi-stage:hover { border-color: #14C4A9; }
+.bi-stage.on { border-color: #14C4A9; background: #E6F9F6; } .bi-stage.on i { background: #14C4A9; color: #fff; } .bi-stage.on b { color: #0E8F7B; }
+#biMain[data-stage="explore"] #biBody [data-st]:not([data-st="explore"]):not([data-st="all"]) { display: none; }
+#biMain[data-stage="insight"] #biBody [data-st]:not([data-st="insight"]):not([data-st="all"]) { display: none; }
+#biMain[data-stage="action"] #biBody [data-st]:not([data-st="action"]):not([data-st="all"]) { display: none; }
+.bi-actlist { display: flex; flex-direction: column; gap: 10px; }
+.bi-actrow { display: flex; gap: 12px; align-items: center; border: 1px solid #E6E8EB; border-radius: 14px; padding: 12px 14px; flex-wrap: wrap; }
+.bi-actrow.done { opacity: .55; } .bi-actrow.done .bi-actmain b { text-decoration: line-through; }
+.bi-actchk input { width: 18px; height: 18px; accent-color: #14C4A9; cursor: pointer; }
+.bi-actmain { flex: 1; min-width: 220px; } .bi-actmain b { display: block; font-size: 14px; } .bi-actmain span { display: block; font-size: 12.5px; color: #6B7076; margin-top: 2px; line-height: 1.55; }
+.bi-actbtns { display: flex; gap: 6px; flex-wrap: wrap; }
+.bi-news { border-bottom: 1px solid #F0F1F3; padding: 12px 0; } .bi-news:last-child { border-bottom: 0; }
+.bi-nw-top { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
+.bi-nw-t { font-size: 15px; font-weight: 700; color: #111; text-decoration: none; line-height: 1.5; } .bi-nw-t:hover { color: #0E8F7B; }
+.bi-news p { margin: 4px 0 8px; font-size: 13px; color: #4A4F55; line-height: 1.65; }
+.bi-nw-b { display: flex; gap: 6px; flex-wrap: wrap; } .bi-nw-b .bi-btn { padding: 6px 12px; font-size: 12px; }
+.bi-tl li { cursor: pointer; } .bi-tl li::before { content: "📅"; }
+.pg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
+.pg-card { border: 1px solid #E6E8EB; border-radius: 16px; overflow: hidden; background: #fff; display: flex; flex-direction: column; } .pg-card.picked { border-color: #14C4A9; box-shadow: 0 0 0 2px rgba(20,196,169,.25); }
+.pg-img { position: relative; display: block; width: 100%; aspect-ratio: 4 / 3; background: #F6F7F8; border: 0; padding: 0; cursor: zoom-in; overflow: hidden; }
+.pg-img img { width: 100%; height: 100%; object-fit: cover; display: block; } .pg-img em { display: none; position: absolute; inset: 0; align-items: center; justify-content: center; font-style: normal; font-size: 12px; color: #8B9096; } .pg-img.err em { display: flex; } .pg-img.err img { display: none; }
+.pg-meta { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; } .pg-tags { display: flex; gap: 4px; flex-wrap: wrap; } .pg-copy { font-size: 12.5px; line-height: 1.5; color: #2e2e2e; min-height: 38px; }
+.pg-btns { display: flex; gap: 6px; margin-top: auto; } .pg-btns .bi-btn { padding: 5px 10px; font-size: 11.5px; }
+.pg-big img { width: 100%; border-radius: 12px; border: 1px solid #E6E8EB; margin-bottom: 10px; }
+@media (max-width: 980px) { .bi-stages { grid-template-columns: 1fr; } }
+@media print { .bi-stages { display: none !important; } #biMain #biBody [data-st] { display: block !important; } }
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -4091,7 +4122,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { gate: '첫 화면', 'bi-comp': '경쟁사 모니터링', 'bi-qna': '콘텐츠 소재 수집', bi: '종합 현황', 'bi-sales': '매출·광고', 'bi-journey': '주력상품 고객여정', 'bi-rank': '올영 랭킹', 'bi-inf': '인플루언서', 'bi-rev': '리뷰 운영', 'bi-paid': '페이드 소재', 'bi-manual': '시트 메뉴얼', setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { gate: '첫 화면', 'bi-news': '뉴스 브리핑', 'bi-comp': '경쟁사 모니터링', 'bi-qna': '콘텐츠 소재 수집', bi: '종합 현황', 'bi-sales': '매출·광고', 'bi-journey': '주력상품 고객여정', 'bi-rank': '올영 랭킹', 'bi-inf': '인플루언서', 'bi-rev': '리뷰 운영', 'bi-paid': '페이드 소재', 'bi-manual': '시트 메뉴얼', setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page, replaceHist) {
     if (page === 'automations') { page = 'assets'; replaceHist = true; }
@@ -4153,6 +4184,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     rev: { t: '자사/스스 리뷰 운영 기획안', u: 'https://docs.google.com/spreadsheets/d/10z94a9TJFrMKlEAeWDdw6BLBuPHXRz4yuLkUHug8LcM/edit?gid=1682728294#gid=1682728294' },
     paid: { t: '[마케팅팀]2026 페이드 소재 리포트', u: 'https://docs.google.com/spreadsheets/d/1Smrlc0ijiMUDRlY4j7RDLcpGWe5mETTFSwDzZoGBq94/edit?gid=73896278#gid=73896278' },
     rank: { t: '라이브오랄스 올리브영 구강용품 랭킹 트래커', u: 'https://docs.google.com/spreadsheets/d/1QD7M4tHciImxKbjNsIECqODVH80RnzUpC5N9rzxEtsM/edit?gid=183848060#gid=183848060' },
+    news: { t: '라이브오랄스 데일리 브리핑 아카이브', u: 'https://docs.google.com/spreadsheets/d/1CXIUE8dgF2g0fbvhCAzC8atBhao9dj4OrgN5q7_5CBA/edit?gid=1237927501#gid=1237927501' },
     comp: { t: '경쟁사 리뷰/가격 크롤링 자동화', u: 'https://docs.google.com/spreadsheets/d/1Vj37hdYEQsSjmvxHR6F9zj3ErqXC8QiTj6RT4NfgYeY/edit?gid=1005#gid=1005' },
     qna: { t: '네이버 지식iN/카페 기반 콘텐츠 소재 자동 수집', u: 'https://docs.google.com/spreadsheets/d/1d0zw6ZfOn6JiB2oVzEo3NpSHSOCVyv3fUTd-wdD4gpU/edit?gid=1244766666#gid=1244766666' }
   };
@@ -4162,6 +4194,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     inf: { what: '인플루언서 후보 컨택 리스트와 월별 진행 기록을 관리하는 시트입니다.', tabs: '인플루언서 리스트업(이 화면이 읽는 탭) · 2025.06월~2026.09월 월별 탭 · 공구 · 스타일씨 · 선정 기준 · 매뉴얼.계약서 · 영상 기획(템플릿) · 파트너십 광고 인원별 · 영상 캘린더', read: '리스트업 탭에서 컨택 건수, 컨택 월, 플랫폼, 구독자 규모를 집계합니다.', note: '요약은 건수만 집계합니다. 전체 탭 보기에서는 금액·이메일·연락처를 가리고(서버에서 처리), 계약서 탭은 열 수 없게 막았습니다.' },
     rev: { what: '자사몰/스마트스토어 리뷰 운영 현황과 월별 KPI(리뷰율, 포토리뷰율, 부정 VOC, 평점)를 정리한 기획안입니다.', tabs: '리뷰 운영 기획안 · 8월운영안/7월성과(이 화면이 읽는 탭) · 7월운영안/6월성과 · 6월운영안/5월성과 · 5월 리뷰 운영 현황 및 성과 공유 · 리뷰 운영 기획안(5월) · 추가 운영안', read: '8월운영안/7월성과 탭의 월별 표(1~7월)를 읽습니다.', note: '월별 표는 사람이 갱신하는 방식으로 보이며, 이 탭의 마지막 월은 7월입니다.' },
     paid: { what: '마케팅팀 광고 소재의 기획·성과와 경쟁사 소재 분석을 모은 리포트입니다.', tabs: '월간 소재기획 대시보드(이 화면이 읽는 탭) · 경쟁사 소재 분석 리포트(수집일·브랜드만 집계) · 경쟁사 분석/리뷰 분석 데이터 · 7월 미백제_스스/올영 · 7월 전동칫솔_스스 · 6월 미백제 · 6월 고체가글', read: '월간 총괄 현황의 월별 총 기획 수량·담당자 수, 경쟁사 소재 수집 건수를 읽습니다.', note: '요약은 수량과 건수만 보여 줍니다. 소재별 지출·ROAS, 경쟁사 소재 상세는 "전체 탭 보기"에서 탭을 골라 확인하세요.' },
+    news: { what: '구강케어·치과산업·유통(올리브영) 관련 뉴스를 AI가 매일 자동 취합해 날짜별 탭(예: 1029)으로 쌓는 브리핑 아카이브입니다. 오늘의 초점, 헤드라인, 기사 표가 들어 있습니다.', tabs: '날짜별 탭(0716~오늘, 월일 4자리) · 같은 날 보조 탭은 (2), (3) 표시', read: '최신 탭과 최근 7일 탭을 읽어 기사 목록, 분류별 건수, 키워드, 초점 흐름을 보여 줍니다.', note: 'AI가 자동 취합한 참고 자료이므로 출처 링크로 원문을 확인해야 합니다. 링크가 없는 기사는 검색 링크로 연결합니다.' },
     comp: { what: '올리브영 TOP20 경쟁 제품의 가격·할인·리뷰를 매일 수집하는 자동화 시트입니다(전동칫솔·불소도포제·농축가글·치아미백제).', tabs: 'Dashboard(요약, 이 화면이 참고) · 카테고리별 리뷰 탭 4개 · Raw_OliveYoung(리뷰 원자료) · Competitor_Products(추적 제품 목록·순위) · Price_History(일별 가격·프로모션) · Raw_SmartStore(현재 비어 있음)', read: '제품 목록, 가격 이력, 리뷰 원자료를 서버에서 집계해 평균 판매가 추이, 할인율, 프로모션 태그, 브랜드별 별점, 낮은 별점 리뷰를 보여 줍니다.', note: '스마트스토어 수집은 없고, Dashboard 탭의 리뷰 수집 현황 수치는 0으로 표시되어 실제 Raw 데이터와 맞지 않습니다. 리뷰는 공개 리뷰 원문 일부(1~2점)만 가져옵니다.' },
     qna: { what: '네이버 지식iN·카페에서 키워드별로 올라온 글을 매일 수집해 콘텐츠 소재를 찾는 자동화 시트입니다(브랜드/경쟁사, 제품카테고리, 증상/니즈 분류).', tabs: '대시보드 · 콘텐츠소재(수집 원자료, 이 화면이 집계) · Calc_Data', read: '서버에서 전체 수집 건수, 일별 수집, 키워드별 7일 증감, 최근 500건 제목을 집계해 보여 줍니다.', note: '제목과 링크만 가져오고 본문 요약은 가져오지 않습니다. 이메일·연락처 형식은 가립니다. 최근 500건 안에서 검색·필터합니다.' },
     rank: { what: '올리브영 구강용품 제품별 랭킹과 올리브영 EDI 판매 실적을 회차마다 자동으로 모으는 대시보드 시트입니다. 랭킹 캡처는 구글 슬라이드에 최신순으로 쌓입니다.', tabs: '대시보드(이 화면이 읽는 탭) · 일자별추세 · 제품별추세 · 회차별추세 · RawData(회차별 순위 원자료) · 판매RawData · 상품매핑 · _차트데이터 · 입금예정(정산 자료라 열 수 없게 막음)', read: '대시보드 탭에서 랭킹 지표, 판매 지표, 제품별 랭킹·판매 표, 주간 추이, 시간대별 패턴, 최근 10회차 순위를 읽습니다.', note: '판매금액은 고객 결제가 기준이고 최근일은 EDI 최신 수집일입니다. 입금 예정(정산·공제) 구간은 거래 조건이 포함되어 표시하지 않습니다.' },
@@ -4462,7 +4495,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const key = BI_PAGES[pg].k, BLOCK = { inf: ['181779110'], rank: ['2016237970'] };
     const all = (await biTabsOf(key)).filter(function (t) { return (BLOCK[key] || []).indexOf(String(t.gid)) < 0; });
     if (!all.length) return '<div class="bi-empty">열 수 있는 탭이 없습니다.</div>';
-    let gid = BIX.tabSel[key] || ({ sales: '1115730697', journey: '1280577857', inf: '1384807088', rev: '1682728294', paid: '599649638', rank: '183848060', comp: '1005', qna: '1244766666' })[key]; if (!all.some(function (t) { return String(t.gid) === String(gid); })) gid = all[0].gid;
+    let gid = BIX.tabSel[key] || ({ sales: '1115730697', journey: '1280577857', inf: '1384807088', rev: '1682728294', paid: '599649638', rank: '183848060', comp: '1005', qna: '1244766666', news: '1237927501' })[key]; if (!all.some(function (t) { return String(t.gid) === String(gid); })) gid = all[0].gid;
     const g = await biFetch(key, gid, 1200, true), v = g.values || [];
     let lr = v.length, lc = 0; while (lr > 0 && !v[lr - 1].some(function (x) { return bnorm(x); })) lr--;
     v.slice(0, lr).forEach(function (r) { for (let c = r.length - 1; c >= 0; c--) { if (bnorm(r[c])) { if (c + 1 > lc) lc = c + 1; break; } } });
@@ -4501,11 +4534,11 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function biRisks(D, today) {
     const R = [], add = function (lv, t, x, link) { R.push({ lv: lv, t: t, x: x, link: link || '' }); };
-    const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재', comp: '경쟁사 모니터링', qna: '콘텐츠 소재 수집' };
+    const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재', comp: '경쟁사 모니터링', qna: '콘텐츠 소재 수집', news: '뉴스 브리핑' };
     Object.keys(names).forEach(function (k) { const d = D[k]; if (!d) { if (BIX.pend && BIX.pend[k]) return; add('red', names[k] + ' 읽기 실패', '시트를 읽지 못했습니다. 권한이나 시트 구조를 확인해 주세요.', 'bi-' + k); return; } const a = d.fresh.age; if (a !== null && a !== undefined) { if (a > BI_RULES.stale[1]) add('red', names[k] + ' 갱신 중단', d.fresh.label + ' (' + a + '일 전). 자동화가 멈췄는지 확인하세요.', 'bi-' + k); else if (a > BI_RULES.stale[0]) add('yel', names[k] + ' 갱신 지연', d.fresh.label + ' (' + a + '일 전)', 'bi-' + k); } });
     const cm = today.getMonth() + 1; const behind = function (txt) { const m = /(\d+)월/.exec(txt || ''); return m ? cm - (+m[1]) : 0; };
     if (D.rev) { const b = behind(D.rev.lastM); if (b >= BI_RULES.monthsBehind[1]) add('red', '리뷰 월별 표 입력 지연', '표의 마지막 월이 ' + D.rev.lastM + '입니다 (' + b + '개월 전).', 'bi-rev'); else if (b >= BI_RULES.monthsBehind[0]) add('yel', '리뷰 월별 표 입력 지연', '표의 마지막 월이 ' + D.rev.lastM + '입니다.', 'bi-rev'); }
-    if (D.paid && D.paid.filled.length) { const lm = D.paid.filled[D.paid.filled.length - 1].m, b = behind(lm); if (b >= BI_RULES.monthsBehind[0]) add(b >= BI_RULES.monthsBehind[1] ? 'red' : 'yel', '소재 기획 수량 입력 지연', '월간 기획 수량은 ' + lm + '까지만 입력되어 있습니다.', 'bi-paid'); }
+    if (D.paid && D.paid.filled && D.paid.filled.length) { const lm = D.paid.filled[D.paid.filled.length - 1].m, b = behind(lm); if (b >= BI_RULES.monthsBehind[0]) add(b >= BI_RULES.monthsBehind[1] ? 'red' : 'yel', '소재 기획 수량 입력 지연', '월간 기획 수량은 ' + lm + '까지만 입력되어 있습니다.', 'bi-paid'); }
     const val = function (arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; };
     if (D.sales) {
       const s = D.sales, L = s.last, sv = val(s.sS, L), av = val(s.sA, L), isCur = (+L.replace('월', '')) === cm;
@@ -4532,15 +4565,16 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const red = risks.filter(function (r) { return r.lv === 'red'; }), yel = risks.filter(function (r) { return r.lv === 'yel'; });
     if (D.rank && D.rank.rk && D.rank.sl) { const rk = D.rank.rk, sl = D.rank.sl; B.push(['올영', '최근 랭킹 ' + rk.vals[0] + ' (' + rk.subs[0] + '), 최근 7일 평균 ' + rk.vals[2] + ' (' + rk.subs[2] + '). 이번 달 누적 판매 ' + sl.vals[3] + ' (' + sl.subs[3] + ').']); }
     if (D.comp) { const R = D.comp.j.reviews; B.push(['경쟁사', '올영 TOP20 경쟁 제품 ' + D.comp.j.prods.length + '개 추적, 리뷰 ' + fN(R.total) + '건 수집(마지막 ' + R.lastCollected + '), 가격 마지막 수집 ' + D.comp.j.priceLast + '.']); }
+    if (D.news) B.push(['뉴스', D.news.fresh.label + '.']);
     if (D.qna) B.push(['소재', '지식iN·카페 글 누적 ' + fN(D.qna.j.total) + '건, 마지막 수집 ' + D.qna.j.last + '.']);
     B.push(['종합', red.length || yel.length ? '위험 ' + red.length + '건, 주의 ' + yel.length + '건. ' + (red.length ? '가장 먼저 볼 것: ' + red[0].t + '.' : yel.length ? '가장 먼저 볼 것: ' + yel[0].t + '.' : '') : '자동 점검 기준에서 위험·주의 항목이 없습니다.']);
     return B;
   }
   function biRace(p, ms) { return Promise.race([p, new Promise(function (res) { setTimeout(function () { res({ pending: true }); }, ms); })]); }
   async function biViewOverview() {
-    const jobs = { sales: biLoadSales(), journey: biLoadJourney('2026.10'), rank: biLoadRank(), inf: biLoadInf(), rev: biLoadRev(), paid: biLoadPaid(), comp: biRace(biLoadComp(), 20000), qna: biRace(biLoadQna(), 20000), days: biTrendData() };
+    const jobs = { sales: biLoadSales(), journey: biLoadJourney('2026.10'), rank: biLoadRank(), inf: biLoadInf(), rev: biLoadRev(), paid: biLoadPaid(), comp: biRace(biLoadComp(), 20000), qna: biRace(biLoadQna(), 20000), news: biRace(biLoadNews(), 20000), days: biTrendData() };
     const keys = Object.keys(jobs), res = await Promise.allSettled(keys.map(function (k) { return jobs[k]; })), D = {}; keys.forEach(function (k, i) { D[k] = res[i].status === 'fulfilled' ? res[i].value : null; });
-    BIX.pend = {}; ['comp', 'qna'].forEach(function (k) { if (D[k] && D[k].pending) { BIX.pend[k] = 1; D[k] = null; } });
+    BIX.pend = {}; ['comp', 'qna', 'news'].forEach(function (k) { if (D[k] && D[k].pending) { BIX.pend[k] = 1; D[k] = null; } });
     const today = new Date(), val = function (arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; };
     if (D.days) { const ks = Object.keys(D.days).sort(), cm = {}; ks.forEach(function (k) { const m = k.slice(0, 7); const o = cm[m] || (cm[m] = { v: 0, c: 0 }); o.v += D.days[k]['방문수']; o.c += D.days[k]['전환수']; }); const ms = Object.keys(cm).sort(); if (ms.length >= 2) { const a = cm[ms[ms.length - 1]], b = cm[ms[ms.length - 2]], ca = a.v ? a.c / a.v * 100 : NaN, cb = b.v ? b.c / b.v * 100 : NaN; D.cvr = { drop: isFinite(ca) && isFinite(cb) && cb ? (cb - ca) / cb * 100 : NaN, txt: (+ms[ms.length - 1].slice(5)) + '월 전환율 ' + fP(ca, 2) + ' / 전월 ' + fP(cb, 2) }; } }
     BIX.ovR = true; const kp = [], kx = [];
@@ -4549,12 +4583,12 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (D.rev) { const c = D.rev.col, l = D.rev.rows[D.rev.rows.length - 1]; kp.push(bKpi(D.rev.lastM + ' 리뷰', esc(l[c('전체리뷰율')]), '', '평점 ' + esc(l[c('평균평점')]) + ' · 부정 VOC ' + esc(l[c('부정VOC비율')]) + '%')); kx.push([D.rev.lastM + ' 전체 리뷰율', l[c('전체리뷰율')], '평점 ' + l[c('평균평점')] + ' / 부정 VOC ' + l[c('부정VOC비율')] + '%']); }
     if (D.rank && D.rank.rk) { kp.push(bKpi('올영 최근 랭킹', esc(D.rank.rk.vals[0] || '-'), '', esc((D.rank.rk.subs[0] || '') + ' · 7일 평균 ' + (D.rank.rk.vals[2] || '-')))); kx.push(['올영 최근 랭킹', D.rank.rk.vals[0], (D.rank.rk.subs[0] || '') + ' / 7일 평균 ' + (D.rank.rk.vals[2] || '-')]); }
     if (D.inf) { kp.push(bKpi('인플루언서 컨택 리스트', fN(D.inf.total), '건', '마지막 컨택 ' + esc(D.inf.lastD))); kx.push(['인플루언서 컨택 리스트', fN(D.inf.total) + '건', '마지막 컨택 ' + D.inf.lastD]); }
-    const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재', comp: '경쟁사 모니터링', qna: '콘텐츠 소재 수집' };
+    const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재', comp: '경쟁사 모니터링', qna: '콘텐츠 소재 수집', news: '뉴스 브리핑' };
     BIX.ovR = false; const risks = biRisks(D, today), brief = biBrief(D, risks, today); BIX.risks = risks; const ack = biAck(), nAck = risks.filter(function (r) { return ack[r.t]; }).length;
     const g = BIX.ovg || '주', m = BIX.ovm || '방문수', tr = D.days ? biAgg(D.days, g, m) : { labels: [], vals: [] };
-    const frs = ['sales', 'journey', 'rank', 'inf', 'rev', 'paid', 'comp', 'qna'].map(function (k) { const d = D[k]; return '<tr><td><b>' + names[k] + '</b></td><td>' + (d ? fresh(d.fresh.label, d.fresh.age) : (BIX.pend && BIX.pend[k] ? '<span class="bi-b mo">불러오는 중 (새로고침)</span>' : '<span class="bi-b stale">읽기 실패</span>')) + '</td><td><a href="#bi-' + k + '">열기</a></td></tr>'; }).join('');
+    const frs = ['sales', 'journey', 'rank', 'inf', 'rev', 'paid', 'comp', 'qna', 'news'].map(function (k) { const d = D[k]; return '<tr><td><b>' + names[k] + '</b></td><td>' + (d ? fresh(d.fresh.label, d.fresh.age) : (BIX.pend && BIX.pend[k] ? '<span class="bi-b mo">불러오는 중 (새로고침)</span>' : '<span class="bi-b stale">읽기 실패</span>')) + '</td><td><a href="#bi-' + k + '">열기</a></td></tr>'; }).join('');
     const vis = risks.filter(function (r) { return !ack[r.t]; }), nr = vis.filter(function (r) { return r.lv === 'red'; }).length, ny = vis.filter(function (r) { return r.lv === 'yel'; }).length, ng = vis.length - nr - ny;
-    BIX.ovx = { date: biDateKo(today), kpis: kx, risks: risks.map(function (r) { return [BI_LV[r.lv], r.t, r.x]; }), brief: brief, fresh: ['sales', 'journey', 'rank', 'inf', 'rev', 'paid', 'comp', 'qna'].map(function (k) { const d = D[k]; return [names[k], d ? d.fresh.label : '읽기 실패', d && d.fresh.age !== null ? d.fresh.age + '일 전' : '']; }), trend: { g: g, m: m, labels: tr.labels, vals: tr.vals } };
+    BIX.ovx = { date: biDateKo(today), kpis: kx, risks: risks.map(function (r) { return [BI_LV[r.lv], r.t, r.x]; }), brief: brief, fresh: ['sales', 'journey', 'rank', 'inf', 'rev', 'paid', 'comp', 'qna', 'news'].map(function (k) { const d = D[k]; return [names[k], d ? d.fresh.label : '읽기 실패', d && d.fresh.age !== null ? d.fresh.age + '일 전' : '']; }), trend: { g: g, m: m, labels: tr.labels, vals: tr.vals } };
     const gt = ['일', '주', '월', '년'].map(function (x) { return '<button type="button" class="bi-seg' + (x === g ? ' on' : '') + '" data-ovg="' + x + '">' + x + '</button>'; }).join(''), mt = ['방문수', '전환수', '구매금액'].map(function (x) { return '<button type="button" class="bi-chip' + (x === m ? ' on' : '') + '" data-ovm="' + x + '">' + x + '</button>'; }).join('');
     const rk = risks.length ? risks.map(function (r, i) { return ack[r.t] ? '' : '<button type="button" class="bi-risk ' + r.lv + '" data-birisk="' + i + '"><i></i><div><b>' + esc(r.t) + '</b><span>' + esc(r.x) + '</span></div><em>' + BI_LV[r.lv] + ' ›</em></button>'; }).join('') + (nAck ? '<div class="bi-note">오늘 확인 완료한 항목 ' + nAck + '건은 숨겼습니다. 항목을 열어 "확인 취소"로 되돌릴 수 있습니다.</div>' : '') : '<div class="bi-empty">점검할 항목을 만들 데이터가 없습니다.</div>';
     return '<div class="bi-kpis">' + kp.join('') + '</div>' + biOvPick(D)
@@ -4613,7 +4647,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     biOpenDrawer(r.t, '<div class="bi-dr-lv ' + r.lv + '">' + BI_LV[r.lv] + '</div><p class="bi-dr-p">' + esc(r.x) + '</p><h4>다음에 할 일</h4><p class="bi-dr-p">' + esc(biRiskAction(r.t)) + '</p><div class="bi-dr-btns">' + (r.link ? '<a class="bi-btn" href="#' + r.link + '" data-biclose="1">관련 화면 열기</a>' : '') + (r.link && BI_SRC[r.link.replace('bi-', '')] ? '<a class="bi-btn" href="' + esc(BI_SRC[r.link.replace('bi-', '')].u) + '" target="_blank" rel="noopener noreferrer">원본 시트 ↗</a>' : '') + '<button type="button" class="bi-btn ok" data-biack="' + i + '">' + (acked ? '확인 취소' : '오늘은 확인 완료') + '</button></div><div class="bi-note">"확인 완료"는 이 브라우저에서 오늘 하루만 목록에서 숨깁니다.</div>');
   }
   function biCtx() {
-    return Promise.allSettled([biLoadSales(), biLoadJourney('2026.10'), biLoadRank(), biLoadInf(), biLoadRev(), biLoadPaid(), biLoadComp(), biLoadQna()]).then(function (rs) { const k = ['sales', 'journey', 'rank', 'inf', 'rev', 'paid', 'comp', 'qna'], D = {}; k.forEach(function (n, i) { D[n] = rs[i].status === 'fulfilled' ? rs[i].value : null; }); return D; });
+    return Promise.allSettled([biLoadSales(), biLoadJourney('2026.10'), biLoadRank(), biLoadInf(), biLoadRev(), biLoadPaid(), biLoadComp(), biLoadQna(), biLoadNews()]).then(function (rs) { const k = ['sales', 'journey', 'rank', 'inf', 'rev', 'paid', 'comp', 'qna', 'news'], D = {}; k.forEach(function (n, i) { D[n] = rs[i].status === 'fulfilled' ? rs[i].value : null; }); return D; });
   }
   function biVal(arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; }
   function biGoal(s, mo, targetWon) {
@@ -4720,7 +4754,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
 
   /* 질문창 · 이벤트 */
-  const BI_CHIPS = ['이번 달 목표까지 얼마 남았어?', '광고 효율이 낮은 채널은?', '오늘 추천 인플루언서는?', '전환율이 높은 상품은?', '올영 랭킹은 어때?', '경쟁사 가격은 어때?', '요즘 뜨는 키워드는?', '지금 확인할 게 뭐야?'];
+  const BI_CHIPS = ['이번 달 목표까지 얼마 남았어?', '광고 효율이 낮은 채널은?', '오늘 추천 인플루언서는?', '전환율이 높은 상품은?', '올영 랭킹은 어때?', '경쟁사 가격은 어때?', '요즘 뜨는 키워드는?', '오늘 뉴스 알려줘', '지금 확인할 게 뭐야?'];
   const BI_EXTRA = { 'bi-sales': biExtraSales, 'bi-journey': biExtraJourney, 'bi-rank': biExtraRank, 'bi-rev': biExtraRev };
   function biKpiLink(l) { return /실매출/.test(l) ? 'bi-sales' : /주력상품 방문/.test(l) ? 'bi-journey' : /랭킹/.test(l) ? 'bi-rank' : /리뷰/.test(l) ? 'bi-rev' : /인플루언서/.test(l) ? 'bi-inf' : ''; }
   function biOvPick(D) {
@@ -4729,6 +4763,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function biAnswer(q, D) {
     const t = q.toLowerCase(), has = function (re) { return re.test(t); }, link = function (p, l) { return '<a class="bi-btn" href="#' + p + '">' + l + '</a>'; };
+    if (has(/뉴스|기사|동향/)) { if (!D.news) return { t: '뉴스', h: '<p>뉴스 시트를 읽지 못했습니다.</p>' }; const day = D.news.days[D.news.tabs[0].gid]; return { t: '오늘의 뉴스 브리핑', h: day ? '<ul class="bi-ins"><li>오늘의 초점: <b>' + esc(day.focus) + '</b> (' + day.items.length + '건)</li>' + day.items.slice(0, 4).map(function (it) { return '<li>' + esc(it.t) + '</li>'; }).join('') + '</ul>' + link('bi-news', '전체 기사·공유 문안 보기') : '<p>브리핑을 읽지 못했습니다.</p>' }; }
+    if (has(/소재 이미지|레퍼런스|크리에이티브|광고 소재/)) { return { t: '페이드 소재', h: '<p>시트의 경쟁사 레퍼런스와 자사 소재 이미지를 갤러리에서 볼 수 있고, 골라서 소재 브리프를 만들 수 있습니다.</p>' + link('bi-paid', '소재 갤러리 열기') }; }
     if (has(/경쟁사|경쟁 제품|가격|할인|프로모션/)) { if (!D.comp) return { t: '경쟁사', h: '<p>경쟁사 시트를 읽지 못했습니다.</p>' }; const j = D.comp.j, R = j.reviews; return { t: '경쟁사 모니터링', h: '<ul class="bi-ins"><li>올영 TOP20 경쟁 제품 <b>' + j.prods.length + '개</b> 추적, 가격 마지막 수집 <b>' + esc(j.priceLast) + '</b></li><li>리뷰 ' + fN(R.total) + '건 수집, 가장 많은 브랜드 <b>' + esc(R.brand[0].b) + '</b> (' + fN(R.brand[0].n) + '건, 평균 ★' + R.brand[0].avg.toFixed(2) + ')</li></ul>' + link('bi-comp', '가격·할인·낮은 별점 리뷰 보기') }; }
     if (has(/키워드|소재 수집|지식|카페|언급|트렌드|고객 질문/)) { if (!D.qna) return { t: '콘텐츠 소재', h: '<p>소재 수집 시트를 읽지 못했습니다.</p>' }; const j = D.qna.j, ks = j.kw.map(function (k) { const w = qnWeek(j, k); return { k: k.k, a: w[0], b: w[1], ch: w[1] ? (w[0] - w[1]) / w[1] * 100 : NaN }; }).filter(function (k) { return k.a >= 20 && isFinite(k.ch); }).sort(function (a, b) { return b.ch - a.ch; }).slice(0, 5); return { t: '요즘 뜨는 키워드', h: '<ul class="bi-ins">' + ks.map(function (k) { return '<li><b>' + esc(k.k) + '</b> 최근 7일 ' + fN(k.a) + '건 (직전 ' + fN(k.b) + '건, ' + (k.ch >= 0 ? '+' : '') + fP(k.ch, 0) + ')</li>'; }).join('') + '</ul>' + link('bi-qna', '키워드별 글 모아보기') }; }
     if (has(/인플루언서|추천|섭외|협찬|제안/)) { if (!D.inf) return { t: '인플루언서', h: '<p>인플루언서 시트를 읽지 못했습니다.</p>' }; BIX.infd = D.inf; const p = infPicks(D.inf, 3); return { t: '오늘의 추천 인플루언서', h: '<ul class="bi-ins">' + p.map(function (c) { return '<li><b>@' + esc(c.h) + '</b> (' + (c.p === 'youtube' ? '유튜브' : '인스타') + ', ' + esc(infFmt(c.n)) + ', ' + esc(c.gr) + ') — ' + esc(c.re.join(' · ') || '기본 후보') + '</li>'; }).join('') + '</ul>' + link('bi-inf', '근거·아이디어·제안 문구 보기') }; }
@@ -4773,15 +4809,31 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if ((x = t.closest('[data-qnf]'))) { const q = BIX.qn = BIX.qn || { cat: '전체', src: '전체', kw: '', q: '', qOnly: false }, k = x.dataset.qnf, v = x.dataset.v; if (k === 'q') q.qOnly = !q.qOnly; else if (k === 'kw') q.kw = q.kw === v ? '' : v; else q[k] = v; biRender('bi-qna', true); return; }
       if ((x = t.closest('[data-qnk]'))) { const q = BIX.qn = BIX.qn || {}; q.kw = q.kw === x.dataset.qnk ? '' : x.dataset.qnk; biRender('bi-qna', true); return; }
       if (t.closest('[data-qncopy]')) { const dd = BIX.cur; if (dd && dd.j && dd.j.items) { const f = qnFeed(dd.j); biCopy(f.items.slice(0, 30).map(function (r) { return '[' + r[2] + '/' + r[3] + '] ' + r[4] + ' ' + r[5]; }).join('\n'), '제목 ' + Math.min(30, f.items.length) + '건을 복사했습니다.'); } return; }
+      if ((x = t.closest('[data-bistage]'))) { BIX.stageBy = BIX.stageBy || {}; BIX.stageBy[BIX.page] = x.dataset.bistage; const mm = $('#biMain'); if (mm) mm.setAttribute('data-stage', x.dataset.bistage); $$('.bi-stage').forEach(function (b) { b.classList.toggle('on', b.dataset.bistage === x.dataset.bistage); }); return; }
+      if ((x = t.closest('[data-biact]'))) { biOpenAct(+x.dataset.biact); return; }
+      if ((x = t.closest('[data-actcopy]'))) { const ta = $('#' + x.dataset.actcopy); if (ta) biCopy(ta.value, '복사했습니다. 필요한 곳에 붙여 넣으세요.'); return; }
+      if ((x = t.closest('[data-nwday]'))) { BIX.nw = BIX.nw || {}; BIX.nw.gid = x.dataset.nwday; BIX.nw.cat = '전체'; biRender('bi-news', true); return; }
+      if ((x = t.closest('[data-nwcat]'))) { BIX.nw = BIX.nw || {}; BIX.nw.cat = x.dataset.nwcat; biRender('bi-news', true); return; }
+      if ((x = t.closest('[data-nwkw]'))) { BIX.nw = BIX.nw || {}; BIX.nw.q = x.dataset.nwkw; biRender('bi-news', true); return; }
+      if ((x = t.closest('[data-nwshare]'))) { const it = (BIX.nwList || [])[+x.dataset.nwshare]; if (it) biCopy('[뉴스 공유] ' + it.t + '\n' + (it.c ? it.c + '\n' : '') + nwLink(it) + '\n※ AI 자동 취합 참고 자료입니다. 원문 확인 필요.', '공유 문안을 복사했습니다.'); return; }
+      if ((x = t.closest('[data-nwasi]'))) { const it = (BIX.nwList || [])[+x.dataset.nwasi]; if (it) biCopy(biAside('다음 기사 원문을 열어 핵심 3줄로 요약하고, 라이브오랄스(구강케어·올리브영 중심 판매)에 주는 시사점 2가지와 우리가 할 수 있는 액션 1가지를 정리해줘. 기사에 없는 내용은 추측하지 말고 "확인 필요"로 표시해줘.\n제목: ' + it.t + '\n링크: ' + nwLink(it)), '어사이드 지시문을 복사했습니다.'); return; }
+      if ((x = t.closest('[data-pgpick]'))) { const i = +x.dataset.pgpick; BIX.pgPick = BIX.pgPick || {}; if (BIX.pgPick[i]) delete BIX.pgPick[i]; else { if (Object.keys(BIX.pgPick).length >= 6) { toast('브리프에는 최대 6건까지 담을 수 있습니다.', 'error'); return; } BIX.pgPick[i] = true; } pgGalUpd(); if ($('#biDrawer') && $('#biDrawer').classList.contains('open')) pgOpen(i); return; }
+      if ((x = t.closest('[data-pgf]'))) { const st = BIX.pg = BIX.pg || { kind: '전체', tab: '전체', q: '', sort: '기본' }; st[x.dataset.pgf] = x.dataset.v; pgGalUpd(); return; }
+      if ((x = t.closest('[data-pgo]'))) { pgOpen(+x.dataset.pgo); return; }
+      if (t.closest('[data-pgbrief]')) { pgBriefOpen(); return; }
+      if (t.closest('[data-pgclear]')) { BIX.pgPick = {}; pgGalUpd(); return; }
       const th = t.closest('.bi-t th'); if (th) { const table = th.closest('table'), idx = Array.prototype.indexOf.call(th.parentNode.children, th), tb = table.tBodies[0]; if (!tb) return; const dir = th.dataset.dir === 'asc' ? 'desc' : 'asc'; Array.prototype.forEach.call(th.parentNode.children, function (h) { delete h.dataset.dir; }); th.dataset.dir = dir; const rows = Array.prototype.slice.call(tb.rows); rows.sort(function (a, b) { const x1 = (a.cells[idx] || {}).textContent || '', y1 = (b.cells[idx] || {}).textContent || '', nx = bn(x1), ny = bn(y1); const r = isFinite(nx) && isFinite(ny) ? nx - ny : x1.localeCompare(y1, 'ko'); return dir === 'asc' ? r : -r; }); rows.forEach(function (r) { tb.appendChild(r); }); }
     });
     app.addEventListener('input', function (e) {
       if (e.target.id === 'gcT' || e.target.id === 'gcM') { biGoalUpd(); }
+      if (e.target.id === 'nwQ') { BIX.nw = BIX.nw || {}; BIX.nw.q = e.target.value; clearTimeout(BIX.nwT); BIX.nwT = setTimeout(nwListUpd, 150); }
+      if (e.target.id === 'pgQ') { const st = BIX.pg = BIX.pg || { kind: '전체', tab: '전체', q: '', sort: '기본' }; st.q = e.target.value; clearTimeout(BIX.pgT); BIX.pgT = setTimeout(function () { const f = $('#pgQ'), pos = f ? f.selectionStart : 0; pgGalUpd(); const g = $('#pgQ'); if (g) { g.focus(); try { g.setSelectionRange(pos, pos); } catch (er) {} } }, 200); }
       if (e.target.id === 'qnQ') { const q = BIX.qn = BIX.qn || {}; q.q = e.target.value; clearTimeout(BIX.qnT); BIX.qnT = setTimeout(qnFeedUpd, 150); }
     });
     app.addEventListener('change', function (e) {
       const t = e.target;
       if (t.id === 'gcM') { const s = BIX.sd; if (s) { const g = biGoal(s, t.value, s.target || 0); $('#gcT').value = Math.round((s.target || 0) / 1e4); } biGoalUpd(); }
+      if (t.id === 'nwSel') { BIX.nw = BIX.nw || {}; BIX.nw.gid = t.value; BIX.nw.cat = '전체'; biRender('bi-news', true); }
       if (t.id === 'mcA' || t.id === 'mcB') { const s = BIX.sd; if (s) $('#mcOut').innerHTML = biMonthCmp(s, $('#mcA').value, $('#mcB').value); }
       if (t.dataset && t.dataset.revchk) { const d = biLS('lo_bi_rev', {}); d[t.dataset.revchk] = t.checked; biLSset('lo_bi_rev', d); }
     });
@@ -4882,32 +4934,249 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       + '<section class="bi-card"><div class="bi-ch"><h3>글 모아보기 <span class="bi-ms" id="qnFeedCnt">' + fN(feed.items.length) + '건' + (feed.items.length > 40 ? ' 중 최신 40건' : '') + '</span></h3><button type="button" class="bi-btn" data-qncopy="1">제목 목록 복사</button></div><input type="search" id="qnQ" class="bi-q" style="max-width:none;width:100%;margin-bottom:8px" placeholder="제목·키워드 검색" value="' + esc(st.q || '') + '"><div class="bi-tw" style="max-height:420px;overflow:auto"><table class="bi-t"><thead><tr><th>날짜</th><th>출처</th><th>키워드</th><th>제목</th></tr></thead><tbody id="qnFeedBody">' + feed.html + '</tbody></table></div><div class="bi-note">최근 수집 500건 안에서 필터합니다. 제목 목록 복사는 콘텐츠 기획 회의용입니다.</div></section></div>';
   }
 
+  /* ── 과거·현재·미래 3단계 프레임 + 실무 액션 ── */
+  const BI_STAGES = [['explore', '과거 · 탐색', '쌓인 데이터를 필터·클릭으로 찾기'], ['insight', '현재 · 인사이트', '분석 결과와 전략·주의사항'], ['action', '미래 · 액션', '클릭으로 바로 실무 시작']];
+  const BI_STAGE_RULES = {
+    'bi': [[/추천 인플루언서|실무 액션/, 'action'], [/신호등|AUTO BRIEF|자동 분석/, 'insight']],
+    'bi-sales': [[/계산기|실무 액션/, 'action'], [/채널 효율/, 'insight']],
+    'bi-journey': [[/실무 액션/, 'action'], [/퍼널|자동 인사이트/, 'insight']],
+    'bi-rank': [[/실무 액션|캡처 아카이브/, 'action'], [/자동 인사이트|순위 추이|시간대별/, 'insight']],
+    'bi-inf': [[/오늘의 추천|추천 \d|관심 목록|실무 액션/, 'action'], [/진행 사례에서 배우기/, 'insight']],
+    'bi-rev': [[/실무 액션|체크리스트/, 'action'], [/목표 대비/, 'insight']],
+    'bi-paid': [[/실무 액션|소재 브리프/, 'action'], [/인사이트|자주 쓰는|성과 비교/, 'insight']],
+    'bi-comp': [[/실무 액션/, 'action'], [/인사이트|낮은 별점/, 'insight']],
+    'bi-qna': [[/실무 액션/, 'action'], [/인사이트|키워드 트렌드/, 'insight']],
+    'bi-news': [[/실무 액션/, 'action'], [/오늘의 초점|초점 흐름|키워드|분류별|주의/, 'insight']]
+  };
+  function biStageTag(pg) {
+    const body = $('#biBody'); if (!body) return; const rules = BI_STAGE_RULES[pg] || [];
+    Array.prototype.forEach.call(body.querySelectorAll('.bi-kpis, .bi-warn, .bi-bar2, section.bi-card, section.bi-brief, .bi-brief, .bi-picks-head, .bi-picks, details.bi-man, .bi-grid2 > div'), function (el) {
+      if (el.closest('[data-st]') && el.closest('[data-st]') !== el) return;
+      if (el.matches('.bi-kpis, .bi-warn, .bi-bar2')) { el.setAttribute('data-st', 'all'); return; }
+      if (el.matches('details.bi-man')) { el.setAttribute('data-st', 'explore'); return; }
+      const h = el.querySelector('h3, h4') || el, txt = (h.textContent || '') + ' ' + (el.matches('.bi-picks') ? '추천 1' : ''); let st = 'explore';
+      for (let i = 0; i < rules.length; i++) { if (rules[i][0].test(txt)) { st = rules[i][1]; break; } }
+      el.setAttribute('data-st', st);
+    });
+    Array.prototype.forEach.call(body.children, function (el) { if (!el.hasAttribute('data-st') && el.classList.contains('bi-note')) { const p = el.previousElementSibling; el.setAttribute('data-st', p && p.getAttribute('data-st') || 'all'); } });
+    const m = $('#biMain'); if (m) m.setAttribute('data-stage', biStageOf(pg));
+  }
+  function biStageNav(pg) {
+    if (!BI_STAGE_RULES[pg]) return ''; const cur = biStageOf(pg);
+    return '<div class="bi-stages" role="tablist">' + BI_STAGES.map(function (s, i) { return '<button type="button" class="bi-stage' + (cur === s[0] ? ' on' : '') + '" data-bistage="' + s[0] + '"><i>' + (i + 1) + '</i><b>' + s[1] + '</b><span>' + s[2] + '</span></button>'; }).join('') + '</div>';
+  }
+  function biActDone() { const a = biLS('lo_bi_actdone', {}), t = biToday(), o = {}; Object.keys(a).forEach(function (k) { if (a[k] === t) o[k] = t; }); return o; }
+  const BI_AFTER = '\n\n[규칙] 원본 시트는 수정하지 말고 결과는 새 구글 시트/독스에 정리해줘. 원문에 없는 내용은 추측하지 말고 "확인 필요"로 표기하고, 원가·계약·협상 금액과 개인정보는 쓰지 마. 외부 발송·게시가 필요한 단계는 보내기 전에 나에게 확인받아줘.';
+  function biFlow(title, lines) { return (title.indexOf(']') >= 0 ? '[' + title : '[' + title + ']') + '\n' + lines.filter(Boolean).map(function (l) { return l.charAt(0) === '-' || l.charAt(0) === '·' || /^\d\)/.test(l) ? l : '- ' + l; }).join('\n') + '\n- 기한: [  ]  /  담당: [  ]'; }
+  function biAside(task) { return task + BI_AFTER; }
+  function biActCard(items) {
+    BIX.acts = items || []; if (!items || !items.length) return '<section class="bi-card bi-act" data-st="action"><h3>🚀 실무 액션</h3><div class="bi-empty">지금 데이터에서 바로 실행할 항목이 없습니다.</div></section>';
+    const done = biActDone();
+    return '<section class="bi-card bi-act" data-st="action"><h3>🚀 실무 액션 <span class="bi-ms">지금 데이터 기준 · 요청문과 어사이드 지시문을 바로 복사합니다</span></h3><div class="bi-actlist">' + items.map(function (a, i) { const dn = !!done[a.id]; return '<div class="bi-actrow' + (dn ? ' done' : '') + '"><label class="bi-actchk" title="오늘 처리 완료"><input type="checkbox" data-biactdone="' + i + '"' + (dn ? ' checked' : '') + '></label><div class="bi-actmain"><b>' + esc(a.t) + '</b><span>' + esc(a.why || '') + '</span></div><div class="bi-actbtns"><button type="button" class="bi-btn ok" data-biact="' + i + '">요청문·지시문 만들기</button>' + (a.link ? '<a class="bi-btn" href="' + esc(a.link) + '"' + (/^https?:/.test(a.link) ? ' target="_blank" rel="noopener noreferrer"' : '') + '>' + esc(a.linkLabel || '관련 화면') + '</a>' : '') + '</div></div>'; }).join('') + '</div><div class="bi-note">체크는 오늘 하루만 이 브라우저에 저장됩니다. 요청문은 FLOW·메신저에 붙여 넣고, 어사이드 지시문은 어사이드 창에 붙여 넣어 실행합니다. 발송·등록 같은 외부 행동은 사람이 확인한 뒤 진행하세요.</div></section>';
+  }
+  function biOpenAct(i) {
+    const a = (BIX.acts || [])[i]; if (!a) return;
+    if (a.open) { a.open(); return; }
+    biOpenDrawer(a.t, '<p class="bi-dr-p">' + esc(a.why || '') + '</p><h4>① 업무 요청문 <span class="bi-ms">FLOW·메신저에 붙여 넣기</span></h4><textarea id="actFlow" class="bi-ta" rows="8">' + esc(a.flow || '') + '</textarea><div class="bi-dr-btns"><button type="button" class="bi-btn ok" data-actcopy="actFlow">요청문 복사</button></div><h4>② 어사이드 지시문 <span class="bi-ms">어사이드 창에 붙여 넣으면 대신 실행</span></h4><textarea id="actAside" class="bi-ta" rows="8">' + esc(a.aside || '') + '</textarea><div class="bi-dr-btns"><button type="button" class="bi-btn ok" data-actcopy="actAside">지시문 복사</button></div><div class="bi-note">[ ] 부분은 직접 채워 주세요. 초안이므로 보내기 전에 내용을 확인하세요.</div>');
+  }
+  /* 화면별 액션 항목 */
+  function biActsSales(d) {
+    const A = [], eff = biChanEff(d), L = d.last;
+    eff.filter(function (e) { return isFinite(e.ratio) && e.ratio < 1; }).slice(0, 3).forEach(function (e) {
+      const txt = e.l + ' ' + e.mm.m + ' ROAS ' + fP(e.mm.a, 0) + ' / 목표 ' + fP(e.mm.t, 0) + ' (목표 대비 ' + fP(e.ratio * 100, 0) + ')';
+      A.push({ id: 'sales-' + e.l, t: e.l + ' 광고 효율 점검 요청', why: txt, link: 'bi-sales', linkLabel: '채널 효율 보기', flow: biFlow('점검 요청] ' + e.l + ' ROAS 목표 미달', ['현황: ' + txt, '요청 1) 소재·타깃·입찰 중 효율 낮은 캠페인 확인', '요청 2) 일시중지·예산 이동 후보 정리', '요청 3) 개선안 3줄과 다음 주 목표 회신']).replace('[점검 요청] ' + e.l, '[점검 요청] ' + e.l), aside: biAside('구글 시트 "20262025 라오전체 매출/광고현황"의 "월별 요약(신규)" 탭에서 ' + e.l + ' 채널의 월별 ROAS, 목표 ROAS, 광고비를 읽고 목표 미달 원인 가설 3가지와 개선 액션 3가지를 표로 정리해줘. (' + txt + ')') });
+    });
+    const g = biGoal(d, L, d.target || 0);
+    if (g.rem > 0) A.push({ id: 'sales-goal', t: L + ' 매출 목표 진행 보고 초안', why: '목표 ' + fW(g.target) + '원 중 ' + fW(g.sv) + '원(' + fP(g.ach * 100, 0) + ') 달성, 월말 예상 ' + fW(g.proj) + '원', link: 'bi-sales', linkLabel: '목표 계산기', flow: biFlow('보고] ' + L + ' 매출 목표 진행', ['달성: ' + fW(g.sv) + '원 / 목표 ' + fW(g.target) + '원 (' + fP(g.ach * 100, 0) + ')', '남은 금액: ' + fW(g.rem) + '원 · 남은 ' + g.left + '일', g.left > 0 ? '하루 필요 매출: ' + fW(g.need) + '원 (지금 일평균 ' + fW(g.avg) + '원)' : '', '월말 예상: ' + fW(g.proj) + '원 (목표의 ' + fP(g.projAch * 100, 0) + ')', '요청: 부족분 보완 방안(채널별) 회신']), aside: biAside('구글 시트 "20262025 라오전체 매출/광고현황"의 "월별 요약(신규)" 탭을 읽고 ' + L + ' 실매출·광고비·채널별 매출을 두괄식으로 요약한 주간 보고 초안을 구글 독스로 만들어줘. 목표 대비 달성률과 부족분 보완 방안 3가지를 포함해줘.') });
+    return A;
+  }
+  function biActsJourney(d) {
+    const A = [], per = d.prods.map(function (p) { const v = biJRow(p, '방문수', 3), c = biJRow(p, '전환수', 3); return { n: p.name.replace(/\s*\(#\d+\)/, ''), v: v, c: c, r: v ? c / v * 100 : NaN }; }).filter(function (x) { return isFinite(x.r); }).sort(function (a, b) { return a.r - b.r; });
+    if (per.length) { const w = per[0]; A.push({ id: 'j-' + w.n, t: w.n + ' 전환율 개선 점검', why: d.month + ' 방문 ' + fN(w.v) + ' → 전환 ' + fN(w.c) + ' (' + fP(w.r, 2) + ')로 상품 중 가장 낮음', link: 'bi-journey', linkLabel: '퍼널 보기', flow: biFlow('개선 요청] ' + w.n + ' 상세페이지·전환 점검', ['현황: ' + d.month + ' 방문 ' + fN(w.v) + ', 전환 ' + fN(w.c) + ', 전환율 ' + fP(w.r, 2), '요청 1) 상세페이지 상단 3스크롤 구성·가격·구성 점검', '요청 2) 방문 대비 구매클릭이 낮은 구간 원인 가설', '요청 3) A/B 테스트 후보 2개 제안']), aside: biAside('구글 시트 "주력상품 일 고객여정 대시보드"의 ' + d.month + ' 탭에서 ' + w.n + '의 방문→구매클릭→전환 퍼널과 스크롤 깊이를 읽고, 이탈이 큰 구간과 개선 가설 3가지를 표로 정리해줘.') }); }
+    return A;
+  }
+  function biActsRank(d) {
+    const A = [], rk = d.rk, sl = d.sl;
+    if (sl) { const m = /(-?\d+)\s*%/.exec(sl.subs[3] || ''); if (m && +m[1] <= -20) A.push({ id: 'r-sales', t: '올영 이번 달 판매 하락 점검 요청', why: sl.vals[3] + ' · ' + sl.subs[3], link: 'bi-rank', linkLabel: '랭킹 화면', flow: biFlow('점검 요청] 올영 판매 하락', ['현황: 이번 달 누적 판매 ' + sl.vals[3] + ' (' + sl.subs[3] + ')', '요청 1) 행사·광고·재고·가격 변경 이력 확인', '요청 2) 제품별 판매 실적 중 하락 폭 큰 제품 정리', '요청 3) 회복 액션 2가지 회신']), aside: biAside('구글 시트 "라이브오랄스 올리브영 구강용품 랭킹 트래커"의 대시보드 탭에서 제품별 판매 실적과 주간 추이를 읽고, 이번 달 판매가 지난달 동기 대비 하락한 원인 가설과 회복 액션을 정리해줘. 정산(입금 예정) 구간은 사용하지 마.') }); }
+    if (d.hours) { const rows = d.hours.rows.filter(function (r) { return isFinite(bn(r[5])); }).sort(function (a, b) { return bn(a[5]) - bn(b[5]); }); if (rows.length) A.push({ id: 'r-hour', t: '행사·광고 시작 시간대 조정 검토', why: '최근 14일 평균 순위가 가장 좋은 시간대: ' + rows[0][0] + ' (' + rows[0][5] + ')', link: 'bi-rank', linkLabel: '시간대 패턴', flow: biFlow('검토 요청] 올영 행사·광고 시작 시간', ['근거: 최근 14일 평균 순위 가장 좋은 시간대 ' + rows[0][0] + ' (' + rows[0][5] + '), 가장 낮은 시간대 ' + rows[rows.length - 1][0] + ' (' + rows[rows.length - 1][5] + ')', '요청: 행사·광고·쿠폰 시작 시간을 좋은 시간대에 맞출 수 있는지 검토(표본이 적을 수 있음)']), aside: biAside('구글 시트 "라이브오랄스 올리브영 구강용품 랭킹 트래커"의 "시간대별 패턴"과 "RawData" 탭을 읽고, 시간대별 평균 순위를 표로 만든 뒤 행사·광고 시작 시간 제안 2가지를 근거와 함께 정리해줘.') }); }
+    A.push({ id: 'r-cap', t: '랭킹 캡처 아카이브 확인', why: '순위가 크게 바뀐 회차의 화면을 슬라이드에서 확인', link: BI_SLIDES, linkLabel: '슬라이드 열기', flow: biFlow('확인 요청] 올영 랭킹 캡처', ['순위 변동이 큰 회차의 캡처를 보고 경쟁 제품·행사 배너 변화를 메모해 주세요.']), aside: biAside('구글 슬라이드 "라이브오랄스 올리브영 랭킹 캡처 아카이브"에서 최근 10개 캡처의 순위와 주변 경쟁 제품·배너를 확인하고, 우리 제품 순위가 오르내린 회차의 특징을 정리해줘.') });
+    return A;
+  }
+  function biActsRev(d) {
+    const A = [], c = d.col, l = d.rows[d.rows.length - 1], voc = bn(l[c('부정VOC비율')]);
+    A.push({ id: 'rev-voc', t: d.lastM + ' 부정 VOC 상위 유형 점검', why: '부정 VOC ' + fP(voc) + ' · 평점 ' + l[c('평균평점')] + ' (표의 마지막 월)', link: 'bi-rev', linkLabel: '리뷰 화면', flow: biFlow('점검 요청] 부정 VOC 상위 유형', ['현황: ' + d.lastM + ' 부정 VOC ' + fP(voc), '요청 1) 부정 리뷰 상위 3개 유형 정리', '요청 2) 답글 가이드·상품 설명 보완 필요 항목 회신']), aside: biAside('구글 시트 "자사/스스 리뷰 운영 기획안"의 "8월운영안/7월성과" 탭을 읽고 월별 리뷰율·부정 VOC 추이를 요약한 뒤, 이번 달 리뷰 운영 전략 3가지를 체크리스트로 만들어줘.') });
+    if ((new Date().getMonth() + 1) - parseInt(d.lastM, 10) >= 2) A.push({ id: 'rev-stale', t: '리뷰 월별 표 입력 요청', why: '표의 마지막 월: ' + d.lastM, flow: biFlow('입력 요청] 리뷰 운영 월별 표', ['월별 표가 ' + d.lastM + '에서 멈춰 있습니다. 최신 월 데이터를 입력해 주세요.']), aside: biAside('자사/스스 스토어의 최근 월 주문건수·리뷰수·포토리뷰수·평점을 확인해서 "자사/스스 리뷰 운영 기획안" 시트 월별 표에 넣을 값 초안을 표로 만들어줘(시트는 수정하지 마).') });
+    return A;
+  }
+  function biActsComp(d) {
+    const A = [], j = d.j, R = j.reviews, low = R.low.slice(0, 6);
+    if (low.length) A.push({ id: 'c-low', t: '경쟁사 낮은 별점 리뷰 → 소재 아이디어 브리프', why: '최근 1~2점 리뷰 ' + low.length + '건에서 불만 포인트를 우리 소재의 차별점 후보로', link: 'bi-comp', linkLabel: '낮은 별점 리뷰', flow: biFlow('브리프 요청] 경쟁사 불만 포인트 기반 소재 아이디어', ['자료: 올영 경쟁 제품 최근 1~2점 리뷰 ' + low.length + '건(경쟁사 시트)', '요청 1) 불만 키워드 묶음 3개', '요청 2) 우리 소재에서 해소할 수 있는 포인트(근거 필요)', '※ 광고 자료에는 타사 브랜드명·비교 표기 금지']), aside: biAside('구글 시트 "경쟁사 리뷰/가격 크롤링 자동화"의 Raw_OliveYoung 탭에서 최근 1~2점 리뷰를 읽고 불만 키워드를 묶어 정리한 뒤, 라이브오랄스 제품의 상세페이지·광고 소재에 활용할 수 있는 차별 포인트 후보를 제안해줘. 타사 브랜드명과 직접 비교 문구는 결과물에 쓰지 마.') });
+    const hot = j.latest.slice().sort(function (a, b) { return b[5] - a[5]; })[0]; if (hot) A.push({ id: 'c-disc', t: '경쟁 제품 큰 할인 대응 점검', why: hot[0] + ' ' + hot[1] + ' ' + hot[5] + '% 할인 (' + (j.priceLast || '') + ')', link: 'bi-comp', linkLabel: '할인 목록', flow: biFlow('점검 요청] 경쟁 제품 가격·프로모션 대응', ['현황: ' + hot[0] + ' 카테고리 최대 할인 ' + hot[5] + '% (' + j.priceLast + ')', '요청: 우리 제품 가격·행사 대응 필요 여부 검토']), aside: biAside('구글 시트 "경쟁사 리뷰/가격 크롤링 자동화"의 Price_History 탭 최근 수집일 데이터를 읽고 카테고리별 할인율 상위 제품과 프로모션 태그를 표로 정리한 뒤, 우리 제품 가격·행사 대응 필요성을 판단 근거와 함께 제안해줘.') });
+    A.push({ id: 'c-dash', t: '시트 Dashboard 집계 수식 점검 요청', why: 'Dashboard 탭 리뷰 수집 현황이 0으로 표시되지만 Raw에는 ' + fN(R.total) + '건 있음', flow: biFlow('점검 요청] 경쟁사 시트 Dashboard 집계', ['Dashboard 탭 "리뷰 수집 현황"이 0으로 표시되나 Raw_OliveYoung에는 ' + fN(R.total) + '건이 있습니다. 집계 수식 점검 요청합니다.']), aside: biAside('구글 시트 "경쟁사 리뷰/가격 크롤링 자동화"의 Dashboard 탭 수식과 Raw_OliveYoung 데이터를 비교해서, 리뷰 수집 현황이 0으로 나오는 원인을 찾아 수정안을 제안해줘(수정은 내 확인 후).') });
+    return A;
+  }
+  function biActsQna(d) {
+    const A = [], j = d.j, ks = j.kw.map(function (k) { const w = qnWeek(j, k); return { k: k.k, c: k.c, a: w[0], b: w[1], ch: w[1] ? (w[0] - w[1]) / w[1] * 100 : NaN }; }).filter(function (k) { return k.a >= 20 && isFinite(k.ch); }).sort(function (a, b) { return b.ch - a.ch; });
+    if (ks[0]) { const k = ks[0], ts = j.items.filter(function (r) { return r[3] === k.k; }).slice(-8).reverse().map(function (r) { return '· ' + r[4]; }); A.push({ id: 'q-rise', t: '"' + k.k + '" 콘텐츠 주제 브리프', why: '최근 7일 ' + fN(k.a) + '건(직전 ' + fN(k.b) + '건, ' + (k.ch >= 0 ? '+' : '') + fP(k.ch, 0) + ') — 가장 크게 늘어난 키워드', link: 'bi-qna', linkLabel: '글 모아보기', flow: biFlow('콘텐츠 기획] "' + k.k + '" 관련 고객 질문 기반 주제', ['근거: 지식iN·카페 최근 7일 ' + fN(k.a) + '건(증가)', '고객 글 제목 예시:'].concat(ts).concat(['요청: 블로그·인스타 주제 3개와 FAQ 5개 초안'])), aside: biAside('구글 시트 "네이버 지식iN/카페 기반 콘텐츠 소재 자동 수집"의 콘텐츠소재 탭에서 키워드 "' + k.k + '" 최근 글 제목을 읽고, 고객이 궁금해하는 질문을 5개로 묶어 블로그·인스타 콘텐츠 주제 3개와 FAQ 5개 초안을 만들어줘. 의료·효능 단정 표현은 쓰지 마.') }); }
+    const own = j.kw.filter(function (k) { return k.k === '라이브오랄스'; })[0]; if (own) A.push({ id: 'q-own', t: '라이브오랄스 언급 글 정리', why: '누적 ' + fN(own.t) + '건 · 어떤 맥락에서 언급되는지 확인', link: 'bi-qna', linkLabel: '언급 보기', flow: biFlow('모니터링] 라이브오랄스 언급 글', ['지식iN·카페에서 우리 브랜드가 언급된 글을 확인하고 긍정/부정/문의로 분류해 주세요.']), aside: biAside('구글 시트 "네이버 지식iN/카페 기반 콘텐츠 소재 자동 수집"의 콘텐츠소재 탭에서 검색키워드가 "라이브오랄스"인 글을 읽고 긍정·부정·문의로 분류해 요약해줘. 대응이 필요한 글은 링크와 함께 따로 표시해줘.') });
+    return A;
+  }
+  function biActsOverview() {
+    const rs = (BIX.risks || []).filter(function (r) { return r.lv !== 'grn' && !biAck()[r.t]; }).slice(0, 4);
+    return rs.map(function (r) { return { id: 'ov-' + r.t, t: r.t + ' — 담당자에게 요청', why: r.x, link: r.link || '', linkLabel: '관련 화면', flow: biFlow((r.lv === 'red' ? '긴급' : '확인') + ' 요청] ' + r.t, ['내용: ' + r.x, '요청: ' + biRiskAction(r.t)]), aside: biAside('대시보드 알림 "' + r.t + '" (' + r.x + ')의 원인을 해당 구글 시트에서 확인하고, 원인 가설과 필요한 조치를 정리해줘. ' + biRiskAction(r.t)) }; });
+  }
+
+  /* ── 뉴스 브리핑 ── */
+  const NW_STOP = ['기자', '출시', '위해', '통해', '관련', '있는', '이번', '대한', '에서', '으로', '최근', '올해', '내년', '신규', '국내', '개최', '발표', '진행', '기반', '확대', '강화', '공개', '시장', '제품', '브랜드', '대표', '지원', '추진', '선보여', '선보인', '본격', '나선다', '돌파', '이어'];
+  function nwParse(j) {
+    const v = j.values || [], get = function (l) { const r = v.find(function (x) { return bnorm(x[0]) === l; }); return r ? bnorm(r[1]) : ''; };
+    const hi = v.findIndex(function (r) { return bnorm(r[0]) === '구분'; }), items = []; let lastCat = '';
+    if (hi >= 0) for (let r = hi + 1; r < v.length; r++) { const x = v[r]; if (!bnorm(x[2])) continue; if (bnorm(x[0])) lastCat = bnorm(x[0]); items.push({ cat: bnorm(x[0]) || lastCat, sub: bnorm(x[1]), t: bnorm(x[2]), d: bnorm(x[3]), c: bnorm(x[4]), u: bnorm(x[5]), q: bnorm(x[6]) }); }
+    return { date: get('브리핑 날짜'), focus: get('오늘의 초점'), head: get('헤드라인'), items: items };
+  }
+  async function biLoadNews() {
+    const tl = await biTabsOf('news'), valid = tl.filter(function (t) { return /^\d{4}$/.test(t.name); }); if (!valid.length) throw new Error('뉴스 탭을 찾지 못했습니다');
+    const st = BIX.nw = BIX.nw || { gid: '', cat: '전체', q: '' }; if (!st.gid || !valid.some(function (t) { return t.gid === st.gid; })) st.gid = valid[0].gid;
+    const need = [st.gid].concat(valid.slice(0, 7).map(function (t) { return t.gid; })).filter(function (g, i, a) { return a.indexOf(g) === i; });
+    const js = await Promise.all(need.map(function (g) { return biFetch('news', g, 120, true).catch(function () { return null; }); })), days = {};
+    need.forEach(function (g, i) { if (js[i]) days[g] = nwParse(js[i]); });
+    const top = valid[0], mm = +top.name.slice(0, 2), dd = +top.name.slice(2), dt = new Date(new Date().getFullYear(), mm - 1, dd), age = dAgo(dt);
+    return { tabs: valid, all: tl, days: days, sel: st.gid, fresh: { label: '최신 브리핑 ' + mm + '/' + dd + ' · ' + (days[valid[0].gid] ? days[valid[0].gid].items.length : '-') + '건', age: age } };
+  }
+  function nwLink(it) { return it.u || ('https://search.naver.com/search.naver?where=news&query=' + encodeURIComponent(it.q || it.t)); }
+  function nwFilter(day) { const st = BIX.nw || {}; return day.items.filter(function (it) { return (!st.cat || st.cat === '전체' || (it.cat + (it.sub ? ' · ' + it.sub : '')) === st.cat || it.cat === st.cat) && (!st.q || (it.t + ' ' + it.c + ' ' + it.sub).toLowerCase().indexOf(st.q.toLowerCase()) >= 0); }); }
+  function nwListHtml(day) {
+    const list = nwFilter(day); BIX.nwList = list;
+    return list.length ? list.map(function (it, i) { return '<div class="bi-news"><div class="bi-nw-top"><span class="bi-mini">' + esc(it.cat) + '</span>' + (it.sub ? '<span class="bi-mini">' + esc(it.sub) + '</span>' : '') + (it.d ? '<span class="bi-ms">' + esc(it.d) + '</span>' : '') + '</div><a class="bi-nw-t" href="' + esc(nwLink(it)) + '" target="_blank" rel="noopener noreferrer">' + esc(it.t) + ' ↗</a>' + (it.u ? '' : '<span class="bi-ms"> (링크 없음 · 검색 링크로 연결)</span>') + '<p>' + esc(it.c) + '</p><div class="bi-nw-b"><button type="button" class="bi-btn" data-nwshare="' + i + '">공유 문안 복사</button><button type="button" class="bi-btn" data-nwasi="' + i + '">어사이드 요약 지시문</button></div></div>'; }).join('') : '<div class="bi-empty">조건에 맞는 기사가 없습니다.</div>';
+  }
+  function nwListUpd() { const d = BIX.cur; if (!d || !d.days) return; const day = d.days[d.sel]; if (!day) return; const b = $('#nwList'); if (b) b.innerHTML = nwListHtml(day); const c = $('#nwCnt'); if (c) c.textContent = BIX.nwList.length + '건'; }
+  function nwKeywords(d) { const cnt = {}; Object.keys(d.days).forEach(function (g) { const seen = {}; d.days[g].items.forEach(function (it) { (it.t.match(/[가-힣A-Za-z0-9]{2,}/g) || []).forEach(function (w) { if (NW_STOP.indexOf(w) >= 0 || /^\d+$/.test(w)) return; seen[w] = 1; }); }); Object.keys(seen).forEach(function (w) { cnt[w] = (cnt[w] || 0) + 1; }); }); return Object.keys(cnt).map(function (k) { return { k: k, n: cnt[k] }; }).filter(function (x) { return x.n >= 3; }).sort(function (a, b) { return b.n - a.n; }).slice(0, 16); }
+  function biViewNews(d) {
+    const st = BIX.nw, day = d.days[d.sel]; if (!day) return '<div class="bi-warn">선택한 날짜의 브리핑을 읽지 못했습니다.</div>';
+    const chips = d.tabs.slice(0, 14).map(function (t) { return '<button type="button" class="bi-chip' + (t.gid === d.sel ? ' on' : '') + '" data-nwday="' + t.gid + '">' + t.name.slice(0, 2) + '/' + t.name.slice(2) + '</button>'; }).join('');
+    const opts = d.tabs.map(function (t) { return '<option value="' + t.gid + '"' + (t.gid === d.sel ? ' selected' : '') + '>' + t.name.slice(0, 2) + '/' + t.name.slice(2) + '</option>'; }).join('');
+    const cats = ['전체'].concat(Array.from(new Set(day.items.map(function (it) { return it.cat; }))));
+    const catChips = cats.map(function (c) { return '<button type="button" class="bi-chip' + (st.cat === c ? ' on' : '') + '" data-nwcat="' + esc(c) + '">' + esc(c) + '</button>'; }).join('');
+    const catCnt = {}; day.items.forEach(function (it) { catCnt[it.cat] = (catCnt[it.cat] || 0) + 1; });
+    const kws = nwKeywords(d), loaded = Object.keys(d.days).length, tot7 = Object.keys(d.days).reduce(function (s, g) { return s + d.days[g].items.length; }, 0);
+    const tl = d.tabs.slice(0, 7).map(function (t) { const x = d.days[t.gid]; return x ? '<li class="bi-click" data-nwday="' + t.gid + '"><b>' + t.name.slice(0, 2) + '/' + t.name.slice(2) + '</b> ' + esc(x.focus || '-') + ' <span class="bi-ms">(' + x.items.length + '건)</span></li>' : ''; }).join('');
+    const insightRows = day.items.filter(function (it) { return /인사이트/.test(it.cat); });
+    const noLink = day.items.filter(function (it) { return !it.u; }).length;
+    return '<div class="bi-kpis">' + bKpi('선택한 브리핑', esc(day.date || '-'), '', day.items.length + '건') + bKpi('오늘의 초점', '<span style="font-size:15px;line-height:1.4;display:block">' + esc(day.focus || '-') + '</span>', '', '') + bKpi('분류', fN(cats.length - 1), '개', Object.keys(catCnt).map(function (k) { return k + ' ' + catCnt[k]; }).join(' · ').slice(0, 60)) + bKpi('최근 ' + loaded + '일 기사', fN(tot7), '건', '일별 브리핑 합계') + '</div>'
+      + '<div class="bi-bar2"><span class="bi-bl">날짜</span>' + chips + '<select id="nwSel" class="bi-sel" aria-label="전체 날짜">' + opts + '</select></div>'
+      + '<section class="bi-card"><h3>📰 ' + esc(day.date || '') + ' 브리핑 기사 <span class="bi-ms" id="nwCnt">' + nwFilter(day).length + '건</span></h3><div class="bi-bar2" style="margin-top:0">' + catChips + '</div><input type="search" id="nwQ" class="bi-q" style="max-width:none;width:100%;margin:4px 0 10px" placeholder="제목·내용 검색" value="' + esc(st.q || '') + '"><div id="nwList">' + nwListHtml(day) + '</div></section>'
+      + '<section class="bi-card"><h3>오늘의 초점 · 헤드라인</h3><p class="bi-dr-p"><b>' + esc(day.focus || '-') + '</b></p><p class="bi-dr-p">' + esc(day.head || '') + '</p><ul class="bi-ins"><li>이 브리핑은 시트에 적힌 대로 <b>AI가 자동 취합한 참고 자료</b>입니다. 의사결정에 쓰기 전에 출처 링크로 원문을 확인하세요.</li>' + (noLink ? '<li>출처 링크가 없는 기사가 ' + noLink + '건 있습니다. 해당 기사는 검색 링크로 연결되므로 원문 확인이 더 필요합니다.</li>' : '') + (insightRows.length ? '<li>시트가 "인사이트"로 분류한 항목 ' + insightRows.length + '건: ' + insightRows.map(function (x) { return esc(x.t); }).join(' / ') + '</li>' : '') + '</ul></section>'
+      + '<div class="bi-grid2"><section class="bi-card"><h3>최근 브리핑 초점 흐름 <span class="bi-ms">행을 누르면 그날 기사로 이동</span></h3><ul class="bi-ins bi-tl">' + tl + '</ul></section><section class="bi-card"><h3>자주 나온 키워드 (최근 ' + loaded + '일 제목) <span class="bi-ms">누르면 검색</span></h3><div class="bi-pk-re">' + (kws.map(function (k) { return '<button type="button" class="bi-chip" data-nwkw="' + esc(k.k) + '">' + esc(k.k) + ' ' + k.n + '</button>'; }).join('') || '<span class="bi-ms">반복 키워드 없음</span>') + '</div><div class="bi-note">제목에서 뽑은 단어가 3일 이상 반복된 것입니다(조사·일반어 제외).</div></section></div>';
+  }
+  function biActsNews(d) {
+    const day = d.days[d.sel]; if (!day) return []; const A = [], depts = {}; day.items.forEach(function (it) { if (/부서별/.test(it.cat) && it.sub) (depts[it.sub] = depts[it.sub] || []).push(it); });
+    const mk = function (items, label) { return items.map(function (it) { return '· ' + it.t + ' — ' + it.c.slice(0, 80) + '\n  ' + nwLink(it); }).join('\n'); };
+    A.push({ id: 'n-all', t: day.date + ' 뉴스 브리핑 팀 공유 문안', why: day.items.length + '건 · 오늘의 초점: ' + day.focus, flow: biFlow('공유] ' + day.date + ' 구강케어·유통 동향 브리핑', ['오늘의 초점: ' + day.focus, '※ AI 자동 취합 참고 자료입니다. 원문은 링크에서 확인해 주세요.', '', mk(day.items.slice(0, 8))]), aside: biAside('구글 시트 "라이브오랄스 데일리 브리핑 아카이브"의 ' + (BIX.nw && d.tabs.find(function (t) { return t.gid === d.sel; }) ? d.tabs.find(function (t) { return t.gid === d.sel; }).name : '') + ' 탭을 읽고 오늘 브리핑을 핵심 3줄 + 우리 회사에 주는 시사점 3가지로 요약해줘. 기사 원문 링크를 열어 사실 여부를 확인하고, 확인하지 못한 내용은 "확인 필요"로 표시해줘.') });
+    Object.keys(depts).slice(0, 4).forEach(function (k) { A.push({ id: 'n-' + k, t: k + ' 부서 공유 문안', why: depts[k].length + '건 · 부서별 참고자료', flow: biFlow('공유] ' + k + ' 참고 기사 (' + day.date + ')', ['※ AI 자동 취합 참고 자료입니다.', '', mk(depts[k])]), aside: biAside('구글 시트 "라이브오랄스 데일리 브리핑 아카이브"에서 오늘 탭의 부서별 참고자료 중 "' + k + '" 항목을 읽고, ' + k + ' 업무에 바로 쓸 수 있는 시사점과 해볼 액션을 3가지로 정리해줘.') }); });
+    return A;
+  }
+  /* ── 페이드 소재: 이미지 갤러리·레퍼런스 ── */
+  function pgThumb(u, s) { return String(u || '').replace(/=s\d+(\?|$)/, '=s' + (s || 480) + '$1'); }
+  function pgLocal(it) { return 'assets/paid/' + it.gid + '_' + it.r + '_' + it.c + '.jpg'; }
+  function pgNorm(it) {
+    const c = it.ctx || [], h = (it.hdr || []).map(function (x) { return x.replace(/\s/g, ''); }), ix = function (re) { return h.findIndex(function (x) { return re.test(x); }); }, g = function (re) { const i = ix(re); return i >= 0 ? (c[i] || '') : ''; };
+    if (it.gid === '1486980400') return { kind: '경쟁사 레퍼런스', tab: '경쟁사 소재 분석', date: g(/수집일/), brand: g(/^브랜드/), prod: g(/활용상품/), copy: g(/메인카피/), kw: g(/핵심키워드/), usp: g(/핵심usp/i), why: g(/선정이유/), idea: g(/활용포인트|아이디어/), link: g(/링크/) || it.link || '', u: pgLocal(it), thumb: pgLocal(it), ctr: NaN };
+    const pct = function (s) { const v = parseFloat(String(s).replace(/[%,]/g, '')); return isNaN(v) ? NaN : v; };
+    return { kind: '자사 소재', tab: it.tab, date: g(/세팅.*일자/), brand: '', prod: it.tab.replace(/^\d+월\s*/, '').replace(/_.*/, ''), landing: g(/랜딩/), copy: g(/^카피/), usp: g(/^usp/i), why: '', idea: g(/^내용/), owner: g(/담당자/), ctr: pct(g(/^CTR/)), cpc: g(/^CPC/), roas: pct(g(/^ROAS/)), imp: g(/^노출/), clk: g(/^클릭/), view: g(/평균(재생|시청)/), status: g(/게재상태/), link: '', u: pgLocal(it), thumb: pgLocal(it) };
+  }
+  function pgItems() { const j = BIX.pimgs; if (!j || !j.items) return []; if (!BIX.pgN || BIX.pgN._src !== j) { BIX.pgN = j.items.map(pgNorm); BIX.pgN._src = j; } return BIX.pgN; }
+  function pgFiltered() {
+    const st = BIX.pg = BIX.pg || { kind: '전체', tab: '전체', q: '', sort: '기본' }; let a = pgItems().filter(function (x) { return (st.kind === '전체' || x.kind === st.kind) && (st.tab === '전체' || x.tab === st.tab) && (!st.q || (x.copy + ' ' + x.usp + ' ' + x.kw + ' ' + x.brand + ' ' + x.idea + ' ' + x.why).toLowerCase().indexOf(st.q.toLowerCase()) >= 0); });
+    if (st.sort === 'CTR') a = a.slice().sort(function (x, y) { return (isFinite(y.ctr) ? y.ctr : -1) - (isFinite(x.ctr) ? x.ctr : -1); }); return a;
+  }
+  function pgCard(x) {
+    const idx = BIX.pgN.indexOf(x), pk = (BIX.pgPick || {})[idx];
+    return '<div class="pg-card' + (pk ? ' picked' : '') + '"><button type="button" class="pg-img" data-pgo="' + idx + '" aria-label="소재 상세"><img loading="lazy" src="' + esc(x.thumb) + '" alt="' + esc(x.copy || x.kw || x.kind) + '" onerror="this.parentNode.classList.add(\'err\')"><em>이미지 없음</em></button><div class="pg-meta"><div class="pg-tags"><span class="bi-mini">' + esc(x.kind === '자사 소재' ? x.tab : (x.brand || '레퍼런스')) + '</span>' + (x.prod ? '<span class="bi-mini">' + esc(x.prod) + '</span>' : '') + (isFinite(x.ctr) ? '<span class="bi-pill grn">CTR ' + x.ctr.toFixed(2) + '%</span>' : '') + '</div><div class="pg-copy">' + esc((x.copy || x.kw || '(카피 미기재)').slice(0, 60)) + '</div><div class="pg-btns"><button type="button" class="bi-btn" data-pgo="' + idx + '">상세</button><button type="button" class="bi-btn' + (pk ? ' ok' : '') + '" data-pgpick="' + idx + '">' + (pk ? '브리프에 담음' : '브리프에 담기') + '</button></div></div></div>';
+  }
+  function pgIns() {
+    const A = pgItems(); if (!A.length) return ''; const refs = A.filter(function (x) { return x.kind !== '자사 소재'; }), own = A.filter(function (x) { return x.kind === '자사 소재' && isFinite(x.ctr); });
+    const kw = {}; refs.forEach(function (x) { (x.kw || '').split(/[\/,·]/).forEach(function (w) { w = w.trim(); if (w.length >= 2 && w.length <= 16) kw[w] = (kw[w] || 0) + 1; }); }); const kwI = Object.keys(kw).map(function (k) { return { l: k, v: kw[k] }; }).sort(function (a, b) { return b.v - a.v; }).slice(0, 8);
+    const br = {}; refs.forEach(function (x) { if (x.brand) br[x.brand] = (br[x.brand] || 0) + 1; }); const brI = Object.keys(br).map(function (k) { return { l: k, v: br[k] }; }).sort(function (a, b) { return b.v - a.v; });
+    const lan = {}; own.forEach(function (x) { if (x.landing) { (lan[x.landing] = lan[x.landing] || []).push(x.ctr); } }); const lanI = Object.keys(lan).map(function (k) { return { l: k + ' (' + lan[k].length + '건)', v: biSum(lan[k]) / lan[k].length }; });
+    const top = own.slice().sort(function (a, b) { return b.ctr - a.ctr; }).slice(0, 4), low = own.slice().sort(function (a, b) { return a.ctr - b.ctr; }).slice(0, 3), ins = [];
+    if (kwI.length) ins.push('경쟁사 레퍼런스에서 가장 자주 쓰인 소구 키워드: ' + kwI.slice(0, 5).map(function (k) { return '<b>' + esc(k.l) + '</b>(' + k.v + ')'; }).join(', ') + '. 우리 소재의 후킹 문구 후보로 비교해 보세요(타사 문구 그대로 사용 금지).');
+    if (lanI.length > 1) { const s = lanI.slice().sort(function (a, b) { return b.v - a.v; }); ins.push('자사 소재 평균 CTR은 <b>' + esc(s[0].l) + ' ' + s[0].v.toFixed(2) + '%</b>가 가장 높고 ' + esc(s[s.length - 1].l) + ' ' + s[s.length - 1].v.toFixed(2) + '%가 가장 낮습니다.'); }
+    if (top[0]) ins.push('CTR 상위 소재: ' + top.map(function (x) { return '<b>' + esc((x.copy || x.tab).slice(0, 22)) + '</b> ' + x.ctr.toFixed(2) + '%'; }).join(' · ') + ' → 어떤 후킹이었는지 상세에서 확인해 반복해 볼 만합니다.');
+    if (low[0]) ins.push('CTR 하위 소재: ' + low.map(function (x) { return esc((x.copy || x.tab).slice(0, 22)) + ' ' + x.ctr.toFixed(2) + '%'; }).join(' · ') + ' → 소재 교체·중단 후보입니다.');
+    const wr = A.filter(function (x) { return /성과저조/.test(x.idea); }).slice(0, 2); wr.forEach(function (x) { ins.push('시트에 적힌 성과저조 이유(' + esc(x.tab) + '): ' + esc(x.idea.replace(/^.*\[성과저조 이유\]\s*>?/, '').slice(0, 120))); });
+    ins.push('이미지는 시트에서 읽은 임시 링크라 일정 시간이 지나면 만료됩니다. 안 보이면 새로고침하세요(구글 로그인이 필요할 수 있습니다).');
+    return '<section class="bi-card"><h3>💡 소재 인사이트 ' + bReal + '</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul><div class="bi-grid2" style="margin-top:12px"><div><h4 class="bi-h4">레퍼런스 키워드 빈도</h4>' + (kwI.length ? bH(kwI, fN, '#14C4A9') : '') + '</div><div><h4 class="bi-h4">랜딩별 평균 CTR</h4>' + (lanI.length ? bH(lanI, function (v) { return v.toFixed(2) + '%'; }, '#F5A524') : '<span class="bi-ms">CTR 데이터 부족</span>') + '</div></div></section>';
+  }
+  function pgGalUpd() {
+    const box = $('#pgGal'); if (!box) return; const j = BIX.pimgs;
+    if (!j) { box.innerHTML = '<div class="bi-loading">' + (BIX.pimgsErr ? '이미지를 불러오지 못했습니다: ' + esc(BIX.pimgsErr) : '시트의 소재 이미지를 찾는 중입니다 (처음에는 30초 정도 걸릴 수 있습니다)...') + '</div>'; return; }
+    const A = pgFiltered(), tabs = ['전체'].concat(j.tabs.map(function (t) { return t.name; })), st = BIX.pg;
+    const chip = function (k, v, on, lb) { return '<button type="button" class="bi-chip' + (on ? ' on' : '') + '" data-pgf="' + k + '" data-v="' + esc(v) + '">' + esc(lb || v) + '</button>'; };
+    box.innerHTML = '<div class="bi-bar2"><span class="bi-bl">구분</span>' + ['전체', '경쟁사 레퍼런스', '자사 소재'].map(function (k) { return chip('kind', k, st.kind === k); }).join('') + '<span class="bi-bl">탭</span>' + tabs.map(function (t) { return chip('tab', t, st.tab === t); }).join('') + '<span class="bi-bl">정렬</span>' + chip('sort', '기본', st.sort === '기본') + chip('sort', 'CTR', st.sort === 'CTR', 'CTR 높은순') + '</div><input type="search" id="pgQ" class="bi-q" style="max-width:none;width:100%;margin:4px 0 12px" placeholder="카피·USP·키워드·브랜드 검색" value="' + esc(st.q || '') + '"><div class="bi-note" style="margin:0 0 8px">' + A.length + '건 / 전체 ' + pgItems().length + '건 · 이미지를 누르면 상세와 활용 아이디어가 열립니다 · 이미지는 2026-10-29 시트 기준 스냅샷</div><div class="pg-grid">' + (A.length ? A.map(pgCard).join('') : '<div class="bi-empty">조건에 맞는 소재가 없습니다.</div>') + '</div>';
+    const ins = $('#pgIns'); if (ins) ins.innerHTML = pgIns(); const pc = $('#pgPickCnt'); if (pc) pc.textContent = Object.keys(BIX.pgPick || {}).filter(function (k) { return BIX.pgPick[k]; }).length;
+  }
+  function pgOpen(i) {
+    const x = pgItems()[i]; if (!x) return; const big = pgThumb(x.u, 900), rows = [['구분', x.kind], ['수집/세팅일', x.date], ['브랜드·제품', (x.brand || '') + ' ' + (x.prod || '')], ['메인 카피', x.copy], ['핵심 키워드', x.kw], ['USP', x.usp], ['선정 이유', x.why], ['우리에게 활용 아이디어', x.idea], ['랜딩', x.landing], ['담당', x.owner], ['성과', isFinite(x.ctr) ? 'CTR ' + x.ctr.toFixed(2) + '% · CPC ' + (x.cpc || '-') + ' · 노출 ' + (x.imp || '-') + ' · 클릭 ' + (x.clk || '-') + ' · ROAS ' + (isFinite(x.roas) ? x.roas.toFixed(2) + '%' : '-') : '']].filter(function (r) { return String(r[1]).trim(); });
+    const pk = (BIX.pgPick || {})[i];
+    biOpenDrawer((x.copy || x.kw || x.kind).slice(0, 40), '<div class="pg-big"><img src="' + esc(big) + '" alt="" onerror="this.outerHTML=\'<div class=bi-empty>이미지를 불러오지 못했습니다. 새로고침하거나 원본 시트에서 확인하세요.</div>\'"></div><dl class="bi-dl">' + rows.map(function (r) { return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('') + '</dl><div class="bi-dr-btns">' + (x.link ? '<a class="bi-btn" href="' + esc(x.link) + '" target="_blank" rel="noopener noreferrer">광고 원본 열기 ↗</a>' : '') + '<button type="button" class="bi-btn' + (pk ? ' ok' : '') + '" data-pgpick="' + i + '">' + (pk ? '브리프에 담음 (해제)' : '브리프에 담기') + '</button><a class="bi-btn" href="' + esc(BI_SRC.paid.u) + '" target="_blank" rel="noopener noreferrer">원본 시트 ↗</a></div><div class="bi-note">타사 소재는 참고용입니다. 광고 자료에는 타사 브랜드명·직접 비교 표기를 쓰지 마세요(채널 광고 심의).</div>');
+  }
+  function pgBriefOpen() {
+    const picks = Object.keys(BIX.pgPick || {}).filter(function (k) { return BIX.pgPick[k]; }).map(function (k) { return pgItems()[+k]; }).filter(Boolean);
+    if (!picks.length) { toast('브리프에 담은 소재가 없습니다. 갤러리에서 소재를 골라 담아 주세요.', 'error'); return; }
+    const lines = picks.map(function (x, i) { return (i + 1) + ') [' + (x.kind === '자사 소재' ? x.tab : (x.brand || '레퍼런스')) + '] 카피: ' + (x.copy || '-') + (x.usp ? ' / USP: ' + x.usp : '') + (x.idea ? ' / 활용: ' + x.idea.slice(0, 80) : '') + (isFinite(x.ctr) ? ' / CTR ' + x.ctr.toFixed(2) + '%' : '') + (x.link ? ' / ' + x.link : ''); }).join('\n');
+    const flow = biFlow('소재 기획 요청] 레퍼런스 ' + picks.length + '건 기반 광고 소재 브리프', ['참고 소재:', lines, '', '요청 1) 후킹·본문·CTA 3안 (제품: [  ])', '요청 2) 타사 브랜드명·직접 비교·효능 단정 표현 제외', '요청 3) 디자인팀 전달용 이미지 구도 메모']);
+    const asi = biAside('아래 레퍼런스 소재 ' + picks.length + '건의 소구 방식을 분석해서, 라이브오랄스 [제품명] 광고 소재 문구 3안(후킹 문구 / 본문 / CTA)을 만들어줘. 각 안마다 어떤 레퍼런스의 어떤 점을 참고했는지와 이미지 구도 제안도 적어줘. 타사 브랜드명과 직접 비교 문구, 효능 단정 표현은 쓰지 마(채널 광고 심의). 최종 표현 판단은 사람이 한다.\n\n' + lines);
+    biOpenDrawer('소재 브리프 (' + picks.length + '건)', '<h4>① 업무 요청문</h4><textarea id="actFlow" class="bi-ta" rows="9">' + esc(flow) + '</textarea><div class="bi-dr-btns"><button type="button" class="bi-btn ok" data-actcopy="actFlow">요청문 복사</button></div><h4>② 어사이드 지시문</h4><textarea id="actAside" class="bi-ta" rows="9">' + esc(asi) + '</textarea><div class="bi-dr-btns"><button type="button" class="bi-btn ok" data-actcopy="actAside">지시문 복사</button></div><div class="bi-note">[ ] 부분은 직접 채워 주세요.</div>');
+  }
+  function biPimgsLoad() { biAggFetch('bi_pimgs').then(function (j) { BIX.pimgs = j; BIX.pimgsErr = ''; if (BIX.page === 'bi-paid') pgGalUpd(); }).catch(function (e) { BIX.pimgsErr = String((e && e.message) || e); if (BIX.page === 'bi-paid') pgGalUpd(); }); }
+  async function biLoadPaid2() { const d = await biLoadPaid(); if (!BIX.pimgs) biPimgsLoad(); return d; }
+  function biViewPaid2(d) {
+    const picks = Object.keys(BIX.pgPick || {}).filter(function (k) { return BIX.pgPick[k]; }).length;
+    setTimeout(pgGalUpd, 0);
+    return '<section class="bi-card"><h3>🖼️ 소재·레퍼런스 갤러리 ' + bReal + ' <span class="bi-ms">시트의 이미지를 그대로 모았습니다</span></h3><div id="pgGal"><div class="bi-loading">소재 이미지를 불러오는 중...</div></div></section>'
+      + '<div id="pgIns" data-st="insight"></div>'
+      + '<section class="bi-card bi-act" data-st="action"><h3>🚀 실무 액션 · 소재 브리프 만들기</h3><div class="bi-actrow"><div class="bi-actmain"><b>갤러리에서 고른 소재로 광고 소재 브리프 만들기</b><span>담은 소재 <b id="pgPickCnt">' + picks + '</b>건 · 요청문과 어사이드 지시문을 한 번에 만듭니다</span></div><div class="bi-actbtns"><button type="button" class="bi-btn ok" data-pgbrief="1">브리프 만들기</button><button type="button" class="bi-btn" data-pgclear="1">담은 소재 비우기</button></div></div><div class="bi-note">갤러리 카드의 "브리프에 담기"로 최대 6건까지 담습니다. 광고 표현의 최종 판단은 사람이 합니다.</div></section>'
+      + biViewPaid(d);
+  }
+
+  const BI_STAGE_DEF = { 'bi-inf': 'action', 'bi-paid': 'explore', 'bi-news': 'explore' };
+  function biStageOf(pg) { return (BIX.stageBy && BIX.stageBy[pg]) || BI_STAGE_DEF[pg] || 'insight'; }
+  function biActsInf(d) {
+    const A = [], pk = infPicks(d, 3); BIX.infd = d;
+    pk.forEach(function (c) { A.push({ id: 'inf-' + c.h, t: '@' + c.h + ' 제안 준비 (' + (c.re[0] || '기본 후보') + ')', why: (c.p === 'youtube' ? '유튜브' : '인스타') + ' · 구독자 ' + infFmt(c.n) + ' · ' + c.gr + ' · 추천 제품 ' + (c.prod || '미정'), open: function () { infOpen(c.h); } }); });
+    if (d.age !== null && d.age > 30) A.push({ id: 'inf-stale', t: '인플루언서 후보 신규 발굴 요청', why: '리스트업 탭 마지막 컨택 ' + d.lastD + ' (' + d.age + '일 전) — 추천 후보가 오래됨', flow: biFlow('요청] 인플루언서 후보 신규 발굴', ['현황: 리스트업 마지막 컨택일 ' + d.lastD + ' (' + d.age + '일 전)', '요청 1) 선정 기준(전문성·활동 지속성·설정형 콘텐츠)에 맞는 신규 후보 20명', '요청 2) 계정·구독자·비고(직업/공구 경험) 리스트업 탭에 추가']), aside: biAside('구글 시트 "[MK] 2026 인플루언서 마케팅 리스트"의 "선정 기준" 탭 기준에 맞는 인스타그램·유튜브 계정 후보 20개를 찾아 계정 링크, 구독자 수, 선정 이유를 표로 정리해줘(시트에는 쓰지 말고 새 시트에 정리). 개인 연락처·이메일은 수집하지 마.') });
+    return A;
+  }
+  const BI_ACTS = { 'bi-sales': biActsSales, 'bi-journey': biActsJourney, 'bi-rank': biActsRank, 'bi-inf': biActsInf, 'bi-rev': biActsRev, 'bi-comp': biActsComp, 'bi-qna': biActsQna, 'bi-news': biActsNews };
+  function biActCardFor(pg, d) { const f = BI_ACTS[pg]; if (!f) { BIX.acts = []; return ''; } try { return biActCard(f(d)); } catch (e) { BIX.acts = []; return ''; } }
+
   const BI_PAGES = {
-    'bi': { t: '종합 현황', s: '시트 8개에서 읽은 핵심 수치와 데이터 최신성을 한눈에 봅니다.' },
+    'bi': { t: '종합 현황', s: '시트 9개에서 읽은 핵심 수치와 데이터 최신성을 한눈에 봅니다.' },
     'bi-sales': { t: '매출 · 광고', s: '채널별 월 매출, 광고비, ROAS를 손익분기표에서 읽어 옵니다.', k: 'sales' },
     'bi-journey': { t: '주력상품 고객여정', s: '주력상품의 일별 방문 → 구매클릭 → 전환 → 구매금액.', k: 'journey' },
     'bi-rank': { t: '올영 랭킹', s: '올리브영 제품별 순위 기록과 추이.', k: 'rank' },
     'bi-inf': { t: '인플루언서', s: '오늘 추천할 인플루언서와 추천 근거, 브랜드 연결 아이디어, 제안 문구, 진행 사례 인사이트.', k: 'inf' },
     'bi-rev': { t: '리뷰 운영', s: '월별 리뷰율, 포토리뷰, 부정 VOC, 평점.', k: 'rev' },
-    'bi-paid': { t: '페이드 소재', s: '월간 소재 기획 수량과 경쟁사 소재 수집 현황.', k: 'paid' },
+    'bi-paid': { t: '페이드 소재', s: '경쟁사 레퍼런스와 자사 소재 이미지를 모아 보고, 성과·소구 포인트를 읽고, 소재 브리프로 바로 연결합니다.', k: 'paid' },
+    'bi-news': { t: '뉴스 브리핑', s: '매일 자동 취합되는 구강케어·유통 동향 뉴스를 탐색하고, 시사점과 공유 문안으로 바로 활용합니다.', k: 'news' },
     'bi-comp': { t: '경쟁사 모니터링', s: '올리브영 TOP20 경쟁 제품의 가격·할인·리뷰와 경쟁사의 약점.', k: 'comp' },
     'bi-qna': { t: '콘텐츠 소재 수집', s: '지식iN·카페 글에서 고객이 궁금해하는 주제와 뜨는 키워드를 찾습니다.', k: 'qna' },
     'bi-manual': { t: '시트 메뉴얼', s: '시트별 구성과 읽는 방법(초안).' }
   };
   function biFrame(pg, inner, stamp) {
     const m = BI_PAGES[pg], src = m.k ? BI_SRC[m.k] : null;
-    return '<div class="bi-head"><div><h1>' + esc(m.t) + '</h1><p>' + esc(m.s) + '</p></div><div class="bi-ha">' + (pg === 'bi' ? '<span class="bi-date">' + esc(biDateKo(new Date())) + '</span><button type="button" class="bi-exp x" data-biexp="xlsx">EXCEL</button><button type="button" class="bi-exp p" data-biexp="pdf">PDF</button><button type="button" class="bi-exp t" data-biexp="ppt">PPT</button>' : '') + (src ? '<a class="bi-btn" href="' + esc(src.u) + '" target="_blank" rel="noopener noreferrer">원본 시트 ↗</a>' : '') + '<button type="button" class="bi-btn" data-birefresh="1">새로고침</button></div></div>' + (src ? '<div class="bi-src">시트: ' + esc(src.t) + (stamp ? ' · 읽은 시각 ' + esc(stamp) : '') + '</div><div class="bi-views"><button type="button" class="bi-vt' + (BIX.view[pg] === 'tabs' ? '' : ' on') + '" data-biview="sum">요약</button><button type="button" class="bi-vt' + (BIX.view[pg] === 'tabs' ? ' on' : '') + '" data-biview="tabs">전체 탭 보기</button></div>' : '') + inner;
+    return '<div class="bi-head"><div><h1>' + esc(m.t) + '</h1><p>' + esc(m.s) + '</p></div><div class="bi-ha">' + (pg === 'bi' ? '<span class="bi-date">' + esc(biDateKo(new Date())) + '</span><button type="button" class="bi-exp x" data-biexp="xlsx">EXCEL</button><button type="button" class="bi-exp p" data-biexp="pdf">PDF</button><button type="button" class="bi-exp t" data-biexp="ppt">PPT</button>' : '') + (src ? '<a class="bi-btn" href="' + esc(src.u) + '" target="_blank" rel="noopener noreferrer">원본 시트 ↗</a>' : '') + '<button type="button" class="bi-btn" data-birefresh="1">새로고침</button></div></div>' + (src ? '<div class="bi-src">시트: ' + esc(src.t) + (stamp ? ' · 읽은 시각 ' + esc(stamp) : '') + '</div><div class="bi-views"><button type="button" class="bi-vt' + (BIX.view[pg] === 'tabs' ? '' : ' on') + '" data-biview="sum">요약</button><button type="button" class="bi-vt' + (BIX.view[pg] === 'tabs' ? ' on' : '') + '" data-biview="tabs">전체 탭 보기</button></div>' : '') + (BIX.view[pg] === 'tabs' ? '' : biStageNav(pg)) + '<div id="biBody">' + inner + '</div>';
   }
   async function biRender(pg, quiet) {
     const el = $('#biMain'); if (!el) return; BIX.page = pg; const m = BI_PAGES[pg]; if (!m) return;
     if (!quiet) el.innerHTML = '<div class="bi-loading">시트에서 데이터를 읽는 중...</div>';
     try {
       let inner = '';
-      if (pg === 'bi') inner = await biViewOverview();
+      if (pg === 'bi') { inner = await biViewOverview(); inner += biActCard(biActsOverview()); }
       else if (pg === 'bi-manual') inner = biViewManual();
       else if (m.k && BIX.view[pg] === 'tabs') inner = await biViewTabs(pg);
-      else { const K = { 'bi-sales': [biLoadSales, biViewSales], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna] }[pg]; const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
-      if (BIX.page === pg) el.innerHTML = biFrame(pg, inner, BIX.stamp);
+      else { const K = { 'bi-sales': [biLoadSales, biViewSales], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna], 'bi-news': [biLoadNews, biViewNews] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
+      if (BIX.page === pg) { el.innerHTML = biFrame(pg, inner, BIX.stamp); biStageTag(pg); }
     } catch (e) { if (BIX.page === pg) el.innerHTML = biFrame(pg, '<div class="bi-warn">데이터를 불러오지 못했습니다: ' + esc(e.message || String(e)) + '<br>시트 구조가 바뀌었거나 네트워크 문제일 수 있습니다. 새로고침으로 다시 시도해 주세요.</div>', ''); }
   }
   function biRoute(pg) {
@@ -6738,7 +7007,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 })();
 
 </script>
-<div id="biApp"><aside class="bs"><a class="bs-brand" href="#gate" aria-label="첫 화면"><img src="logo.svg" alt="Live orals" width="154" height="22"><span class="bs-sub">데이터 대시보드</span></a><nav class="bs-nav"><div class="bs-g">오늘</div><a href="#bi" data-bi="bi"><span class="bs-ic">🏠</span>종합 현황</a><div class="bs-g">성과</div><a href="#bi-sales" data-bi="bi-sales"><span class="bs-ic">💰</span>매출 · 광고</a><a href="#bi-journey" data-bi="bi-journey"><span class="bs-ic">🛒</span>주력상품 고객여정</a><a href="#bi-rank" data-bi="bi-rank"><span class="bs-ic">🏆</span>올영 랭킹</a><div class="bs-g">마케팅</div><a href="#bi-inf" data-bi="bi-inf"><span class="bs-ic">🤝</span>인플루언서</a><a href="#bi-rev" data-bi="bi-rev"><span class="bs-ic">⭐</span>리뷰 운영</a><a href="#bi-paid" data-bi="bi-paid"><span class="bs-ic">🎯</span>페이드 소재</a><a href="#bi-comp" data-bi="bi-comp"><span class="bs-ic">🔍</span>경쟁사 모니터링</a><a href="#bi-qna" data-bi="bi-qna"><span class="bs-ic">🧲</span>콘텐츠 소재 수집</a><div class="bs-g">자료</div><a href="#bi-manual" data-bi="bi-manual"><span class="bs-ic">📘</span>시트 메뉴얼</a></nav><div class="bs-foot"><a href="#gate">← 첫 화면</a><button type="button" data-bilock="1">🔒 잠그기</button></div></aside><main class="bm"><div class="bm-banner"><span class="bi-b real">실제</span> 표시는 구글 시트에서 읽은 값 · 5분마다 자동 갱신 · 마지막 데이터가 오래되면 <b>주황색</b>으로 알려 드립니다</div><div class="bi-askbar"><span>✨</span><input id="biAskQ" type="search" placeholder="무엇이 궁금하세요? 예) 이번 달 목표까지 얼마 남았어? · 오늘 추천 인플루언서는? · 지금 확인할 게 뭐야?" autocomplete="off" aria-label="질문"><kbd>Ctrl K</kbd></div><div class="bi-askchips" id="biAskChips"></div><div id="biAns"></div><div id="biMain"></div></main><div id="biDrawer"><aside class="bi-drawer" role="dialog" aria-modal="true"><div class="bi-drawer-h"><h3 id="biDrawerT"></h3><button type="button" id="biDrawerX" aria-label="닫기">✕</button></div><div id="biDrawerB"></div></aside></div></div>
+<div id="biApp"><aside class="bs"><a class="bs-brand" href="#gate" aria-label="첫 화면"><img src="logo.svg" alt="Live orals" width="154" height="22"><span class="bs-sub">데이터 대시보드</span></a><nav class="bs-nav"><div class="bs-g">오늘</div><a href="#bi" data-bi="bi"><span class="bs-ic">🏠</span>종합 현황</a><div class="bs-g">성과</div><a href="#bi-sales" data-bi="bi-sales"><span class="bs-ic">💰</span>매출 · 광고</a><a href="#bi-journey" data-bi="bi-journey"><span class="bs-ic">🛒</span>주력상품 고객여정</a><a href="#bi-rank" data-bi="bi-rank"><span class="bs-ic">🏆</span>올영 랭킹</a><div class="bs-g">마케팅</div><a href="#bi-inf" data-bi="bi-inf"><span class="bs-ic">🤝</span>인플루언서</a><a href="#bi-rev" data-bi="bi-rev"><span class="bs-ic">⭐</span>리뷰 운영</a><a href="#bi-paid" data-bi="bi-paid"><span class="bs-ic">🎯</span>페이드 소재</a><a href="#bi-comp" data-bi="bi-comp"><span class="bs-ic">🔍</span>경쟁사 모니터링</a><a href="#bi-qna" data-bi="bi-qna"><span class="bs-ic">🧲</span>콘텐츠 소재 수집</a><a href="#bi-news" data-bi="bi-news"><span class="bs-ic">📰</span>뉴스 브리핑</a><div class="bs-g">자료</div><a href="#bi-manual" data-bi="bi-manual"><span class="bs-ic">📘</span>시트 메뉴얼</a></nav><div class="bs-foot"><a href="#gate">← 첫 화면</a><button type="button" data-bilock="1">🔒 잠그기</button></div></aside><main class="bm"><div class="bm-banner"><span class="bi-b real">실제</span> 표시는 구글 시트에서 읽은 값 · 5분마다 자동 갱신 · 마지막 데이터가 오래되면 <b>주황색</b>으로 알려 드립니다</div><div class="bi-askbar"><span>✨</span><input id="biAskQ" type="search" placeholder="무엇이 궁금하세요? 예) 이번 달 목표까지 얼마 남았어? · 오늘 추천 인플루언서는? · 지금 확인할 게 뭐야?" autocomplete="off" aria-label="질문"><kbd>Ctrl K</kbd></div><div class="bi-askchips" id="biAskChips"></div><div id="biAns"></div><div id="biMain"></div></main><div id="biDrawer"><aside class="bi-drawer" role="dialog" aria-modal="true"><div class="bi-drawer-h"><h3 id="biDrawerT"></h3><button type="button" id="biDrawerX" aria-label="닫기">✕</button></div><div id="biDrawerB"></div></aside></div></div>
 <footer class="site-footer"><div class="site-footer-inner"><div><img src="logo.svg" alt="Live orals" width="120"><br><b>어사이드 활용 플랫폼</b> &middot; 라이브오랄스 사내용<br>치과의사가 만든 구강제품 전문브랜드 라이브오랄스</div><div>&copy; LIVEORALS 사내용 &middot; 원가·급여·계약·협상 금액은 입력하지 마세요.</div></div></footer>
 <div class="fab"><button type="button" class="fab-top" id="fabTop" aria-label="맨 위로">&#8593;</button><a class="fab-chat" href="#requests" aria-label="기능 추가 요청" title="기능 추가 요청"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.6-5A8.5 8.5 0 1 1 21 11.5z"/><circle cx="8.5" cy="11.5" r=".6" fill="#fff"/><circle cx="12.5" cy="11.5" r=".6" fill="#fff"/><circle cx="16.5" cy="11.5" r=".6" fill="#fff"/></svg></a></div>
 <script>
