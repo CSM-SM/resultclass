@@ -1905,6 +1905,18 @@ body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax
   .bs-foot { flex-direction: row; } .bi-grid2 { grid-template-columns: 1fr; } .bi-cards2 { grid-template-columns: 1fr; }
   .bi-hr { grid-template-columns: 90px 1fr 60px; }
 }
+.bi-views { display: flex; gap: 6px; margin: 4px 0 12px; }
+.bi-vt { border: 1px solid #DCE2EC; background: #fff; border-radius: 10px; padding: 7px 16px; font-size: 13px; font-weight: 600; cursor: pointer; color: #3c4766; }
+.bi-vt.on { background: #121F42; border-color: #121F42; color: #fff; }
+.bi-tabbar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 4px 0 10px; }
+.bi-sel { border: 1px solid #DCE2EC; border-radius: 10px; padding: 8px 10px; font-size: 13px; background: #fff; max-width: 360px; min-width: 200px; }
+.bi-q { border: 1px solid #DCE2EC; border-radius: 10px; padding: 8px 12px; font-size: 13px; min-width: 200px; flex: 1; max-width: 320px; background: #fff; }
+.bi-sheet { background: #fff; border: 1px solid #E3E8F0; border-radius: 12px; overflow: auto; max-height: 72vh; max-width: 100%; }
+.bi-sheet table { border-collapse: separate; border-spacing: 0; font-size: 12.5px; min-width: 100%; }
+.bi-sheet th { position: sticky; top: 0; z-index: 2; background: #F3F5F9; color: #7D879E; font-weight: 600; padding: 5px 10px; border-bottom: 1px solid #E3E8F0; border-right: 1px solid #EEF1F6; }
+.bi-sheet td { padding: 4px 10px; border-bottom: 1px solid #F0F2F6; border-right: 1px solid #F4F6F9; max-width: 320px; min-width: 92px; white-space: pre-wrap; vertical-align: top; }
+.bi-sheet .bi-rn { position: sticky; left: 0; background: #F3F5F9; color: #A5ADBF; text-align: right; min-width: 40px; z-index: 1; }
+.bi-sheet th.bi-rn { z-index: 3; }
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -3967,7 +3979,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
 
   /* ── 대시보드 앱 (시트 요약 · 암호 보호) ───────────────────── */
-  const BIX = { cache: {}, page: 'bi', timer: null, jm: '2026.10', jp: 0, jmet: '방문수', stamp: '' };
+  const BIX = { view: {}, tabSel: {}, tabsCache: {}, cache: {}, page: 'bi', timer: null, jm: '2026.10', jp: 0, jmet: '방문수', stamp: '' };
   const BI_SRC = {
     sales: { t: '20262025 라오전체 매출/광고현황', u: 'https://docs.google.com/spreadsheets/d/1WXSrYGUAiPNGV6Wrm0FE7hV1ON-v0Xyv1DqD7rKYAIw/edit?gid=1115730697#gid=1115730697' },
     journey: { t: '주력상품 일 고객여정 대시보드', u: 'https://docs.google.com/spreadsheets/d/1ylxLgTobQLWrPUNrqhMmjMafa8JHnrJfoxBqqK5EEtM/edit?gid=1040615685#gid=1040615685' },
@@ -3977,19 +3989,19 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     rank: { t: 'oliveyoung_rank_log(올영 랭킹추적 자동화)', u: 'https://docs.google.com/spreadsheets/d/1ovMG7yM7btTv54O1SxU1zmLZYdUbNXlarYL89_q4fLI/edit?gid=141352098#gid=141352098' }
   };
   const BI_MANUAL = {
-    sales: { what: '매체(채널)별 월 매출·광고비·ROAS를 한 장으로 모은 손익분기표입니다. 시트 제목에 [보안] 표시가 있는 내부 자료입니다.', tabs: '월별 요약(신규) = 매체별 손익분기표(이 화면이 읽는 탭) · 26년 7~11월·25년 4월~26년 6월 월별 탭 · 월별 국내 B2C/B2B 일별 탭 · 월별 요약', read: '월별 요약(신규)에서 실매출 합계, 국내외 광고비 합계, 채널별 매출, 채널별 ROAS(목표 대비)를 읽습니다.', note: '월 목표·월별 값은 시트에 입력된 그대로이며, 값이 비어 있는 월(11·12월)은 표시하지 않습니다.' },
+    sales: { what: '매체(채널)별 월 매출·광고비·ROAS를 한 장으로 모은 손익분기표입니다. 시트 제목에 [보안] 표시가 있는 내부 자료입니다.', tabs: '월별 요약(신규) = 매체별 손익분기표(이 화면이 읽는 탭) · 26년 7~11월·25년 4월~26년 6월 월별 탭 · 월별 국내 B2C/B2B 일별 탭 · 월별 요약', read: '월별 요약(신규)에서 실매출 합계, 국내외 광고비 합계, 채널별 매출, 채널별 ROAS(목표 대비)를 읽습니다.', note: '월 목표·월별 값은 시트에 입력된 그대로이며, 값이 비어 있는 월(11·12월)은 요약에 표시하지 않습니다. 다른 월 탭과 일별 탭은 "전체 탭 보기"에서 볼 수 있습니다.' },
     journey: { what: '주력상품 4종(전동칫솔, 치아미백제 세트, 농축가글액, 미백치약)의 일별 방문·구매클릭·전환·구매금액·스크롤 깊이를 모은 시트입니다.', tabs: '2026.07~2026.10(일 고객여정) · CTR_2026.xx(구매클릭률 요약) · 이벤트_2026.xx · 안내 · 주력_템플릿 · 이벤트_템플릿', read: '선택한 월 탭(2026.xx)에서 상품별 방문수, 구매클릭수, 전환수, 구매금액, 평균 객단가를 읽습니다.', note: '당월 탭은 날짜 칸이 월말까지 있고, 아직 값이 없는 날은 비어 있습니다. 데이터가 있는 마지막 날짜까지만 표시합니다.' },
-    inf: { what: '인플루언서 후보 컨택 리스트와 월별 진행 기록을 관리하는 시트입니다.', tabs: '인플루언서 리스트업(이 화면이 읽는 탭) · 2025.06월~2026.09월 월별 탭 · 공구 · 스타일씨 · 선정 기준 · 매뉴얼.계약서 · 영상 기획(템플릿) · 파트너십 광고 인원별 · 영상 캘린더', read: '리스트업 탭에서 컨택 건수, 컨택 월, 플랫폼, 구독자 규모를 집계합니다.', note: '단가·고료·이메일·현황 메모는 협의 금액과 개인정보가 포함되어 있어 서버 단계에서 제외하고, 건수만 집계합니다.' },
+    inf: { what: '인플루언서 후보 컨택 리스트와 월별 진행 기록을 관리하는 시트입니다.', tabs: '인플루언서 리스트업(이 화면이 읽는 탭) · 2025.06월~2026.09월 월별 탭 · 공구 · 스타일씨 · 선정 기준 · 매뉴얼.계약서 · 영상 기획(템플릿) · 파트너십 광고 인원별 · 영상 캘린더', read: '리스트업 탭에서 컨택 건수, 컨택 월, 플랫폼, 구독자 규모를 집계합니다.', note: '요약은 건수만 집계합니다. 전체 탭 보기에서는 금액·이메일·연락처를 가리고(서버에서 처리), 계약서 탭은 열 수 없게 막았습니다.' },
     rev: { what: '자사몰/스마트스토어 리뷰 운영 현황과 월별 KPI(리뷰율, 포토리뷰율, 부정 VOC, 평점)를 정리한 기획안입니다.', tabs: '리뷰 운영 기획안 · 8월운영안/7월성과(이 화면이 읽는 탭) · 7월운영안/6월성과 · 6월운영안/5월성과 · 5월 리뷰 운영 현황 및 성과 공유 · 리뷰 운영 기획안(5월) · 추가 운영안', read: '8월운영안/7월성과 탭의 월별 표(1~7월)를 읽습니다.', note: '월별 표는 사람이 갱신하는 방식으로 보이며, 이 탭의 마지막 월은 7월입니다.' },
-    paid: { what: '마케팅팀 광고 소재의 기획·성과와 경쟁사 소재 분석을 모은 리포트입니다.', tabs: '월간 소재기획 대시보드(이 화면이 읽는 탭) · 경쟁사 소재 분석 리포트(수집일·브랜드만 집계) · 경쟁사 분석/리뷰 분석 데이터 · 7월 미백제_스스/올영 · 7월 전동칫솔_스스 · 6월 미백제 · 6월 고체가글', read: '월간 총괄 현황의 월별 총 기획 수량·담당자 수, 경쟁사 소재 수집 건수를 읽습니다.', note: '광고 문구·링크·USP 같은 상세 내용은 이 화면에 가져오지 않습니다. 소재별 지출·ROAS 탭은 시트에서 직접 확인하세요.' },
+    paid: { what: '마케팅팀 광고 소재의 기획·성과와 경쟁사 소재 분석을 모은 리포트입니다.', tabs: '월간 소재기획 대시보드(이 화면이 읽는 탭) · 경쟁사 소재 분석 리포트(수집일·브랜드만 집계) · 경쟁사 분석/리뷰 분석 데이터 · 7월 미백제_스스/올영 · 7월 전동칫솔_스스 · 6월 미백제 · 6월 고체가글', read: '월간 총괄 현황의 월별 총 기획 수량·담당자 수, 경쟁사 소재 수집 건수를 읽습니다.', note: '요약은 수량과 건수만 보여 줍니다. 소재별 지출·ROAS, 경쟁사 소재 상세는 "전체 탭 보기"에서 탭을 골라 확인하세요.' },
     rank: { what: '올리브영 구강용품 제품별 순위를 시간대별로 기록하는 자동화 로그입니다.', tabs: 'oliveyoung_rank_log.csv(이 화면이 읽는 탭) · Calc_Data · Dashboard · 기준', read: '제품별 가장 최근 순위, 기록된 최고 순위, 순위 추이를 읽습니다. 이름에 (test)가 붙은 기록은 제외합니다.', note: '"순위권 밖"은 순위 숫자 없이 표시합니다.' }
   };
   function biPw() { try { return sessionStorage.getItem('lo_bi_pw') || ''; } catch (e) { return ''; } }
   function biRelock() { try { sessionStorage.removeItem('lo_bi_ok'); sessionStorage.removeItem('lo_bi_pw'); } catch (e) {} go('gate'); }
-  function biFetch(key, gid, rows) {
-    const ck = key + ':' + gid, c = BIX.cache[ck];
+  function biFetch(key, gid, rows, raw) {
+    const ck = key + ':' + gid + (raw ? ':raw' : ''), c = BIX.cache[ck];
     if (c && Date.now() - c.t < 45000) return Promise.resolve(c.j);
-    return fetch(SHEET_ENDPOINT + '?type=bi_grid&pw=' + encodeURIComponent(biPw()) + '&key=' + key + '&gid=' + gid + '&r=' + (rows || 400))
+    return fetch(SHEET_ENDPOINT + '?type=bi_grid&pw=' + encodeURIComponent(biPw()) + '&key=' + key + '&gid=' + gid + '&r=' + (rows || 400) + (raw ? '&raw=1' : ''))
       .then(function (r) { return r.json(); })
       .then(function (j) { if (!j.ok) { if (j.error === 'auth') { biRelock(); } throw new Error(j.error === 'auth' ? '암호가 맞지 않습니다' : (j.error || '읽기 실패')); } BIX.cache[ck] = { t: Date.now(), j: j }; BIX.stamp = j.updated || BIX.stamp; return j; });
   }
@@ -4122,7 +4134,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const toI = function (o, order) { const ks = order || Object.keys(o).sort(); return ks.filter(function (k) { return o[k]; }).map(function (k) { return { l: k, v: o[k] }; }); };
     return warn + '<div class="bi-kpis">' + bKpi('컨택 리스트', fN(d.total), '건', '인플루언서 리스트업 탭') + bKpi('인스타그램', fN(d.byPlat.instagram || 0), '건', fP((d.byPlat.instagram || 0) / d.total * 100, 0) + '') + bKpi('유튜브', fN(d.byPlat.youtube || 0), '건', fP((d.byPlat.youtube || 0) / d.total * 100, 0) + '') + bKpi('현황 기록 있음', fN(d.noted), '건', '내용은 표시하지 않음') + '</div>'
       + '<div class="bi-grid2"><section class="bi-card"><h3>컨택 월별 건수 ' + bReal + '</h3>' + bH(toI(d.byMonth), fN) + '</section><section class="bi-card"><h3>플랫폼 ' + bReal + '</h3>' + bH(toI(d.byPlat, ['instagram', 'youtube', 'tiktok', 'naver', '기타', '미표기']), fN, '#F57902') + '</section></div>'
-      + '<section class="bi-card"><h3>구독자 규모 ' + bReal + '</h3>' + bH(toI(d.bucket, ['1천 미만', '1천~1만', '1만~5만', '5만 이상', '미표기']), fN, '#1C9A68') + '<div class="bi-note">구독자 칸이 "1.3만", "3.97천"처럼 적혀 있어 숫자로 환산했습니다. 단가·고료·이메일은 이 화면에 가져오지 않습니다.</div></section>';
+      + '<section class="bi-card"><h3>구독자 규모 ' + bReal + '</h3>' + bH(toI(d.bucket, ['1천 미만', '1천~1만', '1만~5만', '5만 이상', '미표기']), fN, '#1C9A68') + '<div class="bi-note">구독자 칸이 "1.3만", "3.97천"처럼 적혀 있어 숫자로 환산했습니다. 요약에서는 단가·고료·이메일을 가져오지 않습니다. 탭 원본은 "전체 탭 보기"에서 확인하세요(금액·이메일·연락처는 가림).</div></section>';
   }
 
   /* 리뷰 운영 */
@@ -4164,9 +4176,37 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const bi = Object.keys(d.brand).map(function (k) { return { l: k, v: d.brand[k] }; }).sort(function (x, y) { return y.v - x.v; }).slice(0, 8);
     return warn + '<div class="bi-kpis">' + bKpi('최근 입력 월 기획 수량', d.filled.length ? fN(d.filled[d.filled.length - 1].n) : '-', '건', d.filled.length ? d.filled[d.filled.length - 1].m + ' · 담당 ' + esc(d.filled[d.filled.length - 1].who) : '') + bKpi('경쟁사 소재 수집 행', fN(d.comp), '건', '수집일·브랜드가 있는 행') + bKpi('마지막 수집일', esc(d.lastD || '-'), '', d.age !== null ? d.age + '일 전' : '') + '</div>'
       + '<div class="bi-grid2"><section class="bi-card"><h3>월간 소재 기획 현황 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>월</th><th>총 기획 수량</th><th>담당자</th></tr></thead><tbody>' + tb + '</tbody></table></div></section>'
-      + '<section class="bi-card"><h3>경쟁사 소재 수집 · 브랜드별 ' + bReal + '</h3>' + (bi.length ? bH(bi, fN, '#F57902') : '<div class="bi-empty">브랜드가 입력된 행이 없습니다.</div>') + '<div class="bi-note">광고 문구·링크·USP는 가져오지 않고 건수만 집계합니다.</div></section></div>';
+      + '<section class="bi-card"><h3>경쟁사 소재 수집 · 브랜드별 ' + bReal + '</h3>' + (bi.length ? bH(bi, fN, '#F57902') : '<div class="bi-empty">브랜드가 입력된 행이 없습니다.</div>') + '<div class="bi-note">요약에서는 건수만 집계합니다. 상세 내용은 "전체 탭 보기"에서 확인하세요.</div></section></div>';
   }
 
+  /* 전체 탭 보기 (시트 원본 그대로) */
+  function biTabsOf(key) {
+    const c = BIX.tabsCache[key]; if (c && Date.now() - c.t < 300000) return Promise.resolve(c.v);
+    return fetch(SHEET_ENDPOINT + '?type=bi_tabs&pw=' + encodeURIComponent(biPw()) + '&key=' + key).then(function (r) { return r.json(); }).then(function (j) {
+      if (!j.ok) { if (j.error === 'auth') biRelock(); throw new Error(j.error === 'auth' ? '암호가 맞지 않습니다' : (j.error || '탭 목록 읽기 실패')); }
+      const s = j.sources && j.sources[key]; if (!s || s.error) throw new Error('탭 목록을 읽지 못했습니다');
+      BIX.tabsCache[key] = { t: Date.now(), v: s.tabs }; return s.tabs;
+    });
+  }
+  function colL(i) { let s = ''; i++; while (i > 0) { const m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); } return s; }
+  async function biViewTabs(pg) {
+    const key = BI_PAGES[pg].k, BLOCK = { inf: ['181779110'] };
+    const all = (await biTabsOf(key)).filter(function (t) { return (BLOCK[key] || []).indexOf(String(t.gid)) < 0; });
+    if (!all.length) return '<div class="bi-empty">열 수 있는 탭이 없습니다.</div>';
+    let gid = BIX.tabSel[key]; if (!all.some(function (t) { return String(t.gid) === String(gid); })) gid = all[0].gid;
+    const g = await biFetch(key, gid, 1200, true), v = g.values || [];
+    let lr = v.length, lc = 0; while (lr > 0 && !v[lr - 1].some(function (x) { return bnorm(x); })) lr--;
+    v.slice(0, lr).forEach(function (r) { for (let c = r.length - 1; c >= 0; c--) { if (bnorm(r[c])) { if (c + 1 > lc) lc = c + 1; break; } } });
+    const LIM = 800, shown = Math.min(lr, LIM);
+    const sid = (/\/d\/([^/]+)/.exec(BI_SRC[key].u) || [])[1];
+    const opts = all.map(function (t) { return '<option value="' + esc(String(t.gid)) + '"' + (String(t.gid) === String(gid) ? ' selected' : '') + '>' + esc(t.name) + '</option>'; }).join('');
+    let head = '<tr><th class="bi-rn"></th>'; for (let c = 0; c < lc; c++) head += '<th>' + colL(c) + '</th>'; head += '</tr>';
+    let body = ''; for (let r = 0; r < shown; r++) { const row = v[r]; let tds = '', txt = ''; for (let c = 0; c < lc; c++) { const x = row[c] === undefined ? '' : String(row[c]); txt += x + ' '; tds += '<td>' + esc(x) + '</td>'; } body += '<tr data-t="' + esc(txt.toLowerCase()) + '"><td class="bi-rn">' + (r + 1) + '</td>' + tds + '</tr>'; }
+    const emptyMsg = lr === 0 ? '<div class="bi-empty">이 탭에는 값이 없습니다.</div>' : '';
+    return '<div class="bi-tabbar"><label class="bi-bl" for="biTabSel">탭</label><select id="biTabSel" class="bi-sel">' + opts + '</select><input type="search" id="biTabQ" class="bi-q" placeholder="이 탭에서 검색" aria-label="탭 내 검색"><a class="bi-btn" href="https://docs.google.com/spreadsheets/d/' + esc(sid) + '/edit#gid=' + esc(String(gid)) + '" target="_blank" rel="noopener noreferrer">이 탭을 시트에서 열기 ↗</a></div>'
+      + '<div class="bi-note" style="margin:0 0 8px">' + esc(g.name) + ' · 전체 ' + fN(g.totalRows) + '행 × ' + fN(g.totalCols) + '열' + (lr > LIM ? ' · 처음 ' + LIM + '행만 표시' : '') + (g.totalRows > 1200 ? ' · 시트가 길어 처음 1,200행까지 읽었습니다' : '') + (g.totalCols > 60 ? ' · 처음 60열까지 표시' : '') + ' · 값은 시트에 보이는 그대로(수식 결과)이며 서식·색은 가져오지 않습니다.' + (key === 'inf' ? ' 금액·이메일·연락처는 가렸습니다.' : ' 이메일·연락처는 가렸습니다.') + '</div>'
+      + (lr === 0 ? emptyMsg : '<div class="bi-sheet"><table>' + '<thead>' + head + '</thead><tbody id="biTabBody">' + body + '</tbody></table></div>');
+  }
   /* 시트 메뉴얼 */
   function biViewManual() {
     return '<div class="bi-note" style="margin:0 0 14px">시트별 사용 메뉴얼(초안)입니다. 시트에서 확인한 탭 구성과 이 대시보드가 읽는 범위를 적었고, 상세 작성 메뉴얼은 순차적으로 보강합니다.</div><div class="bi-cards2">' + Object.keys(BI_MANUAL).map(function (k) { const m = BI_MANUAL[k], s = BI_SRC[k]; return '<section class="bi-card"><div class="bi-ch"><h3>' + esc(s.t) + '</h3><span class="bi-b mo">메뉴얼 초안</span></div><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(m.what) + '</dd><dt>탭 구성</dt><dd>' + esc(m.tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(m.read) + '</dd><dt>알아둘 점</dt><dd>' + esc(m.note) + '</dd></dl><a class="bi-btn" href="' + esc(s.u) + '" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a></section>'; }).join('') + '</div>';
@@ -4200,7 +4240,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   };
   function biFrame(pg, inner, stamp) {
     const m = BI_PAGES[pg], src = m.k ? BI_SRC[m.k] : null;
-    return '<div class="bi-head"><div><h1>' + esc(m.t) + '</h1><p>' + esc(m.s) + '</p></div><div class="bi-ha">' + (src ? '<a class="bi-btn" href="' + esc(src.u) + '" target="_blank" rel="noopener noreferrer">원본 시트 ↗</a>' : '') + '<button type="button" class="bi-btn" data-birefresh="1">새로고침</button></div></div>' + (src ? '<div class="bi-src">시트: ' + esc(src.t) + (stamp ? ' · 읽은 시각 ' + esc(stamp) : '') + '</div>' : '') + inner;
+    return '<div class="bi-head"><div><h1>' + esc(m.t) + '</h1><p>' + esc(m.s) + '</p></div><div class="bi-ha">' + (src ? '<a class="bi-btn" href="' + esc(src.u) + '" target="_blank" rel="noopener noreferrer">원본 시트 ↗</a>' : '') + '<button type="button" class="bi-btn" data-birefresh="1">새로고침</button></div></div>' + (src ? '<div class="bi-src">시트: ' + esc(src.t) + (stamp ? ' · 읽은 시각 ' + esc(stamp) : '') + '</div><div class="bi-views"><button type="button" class="bi-vt' + (BIX.view[pg] === 'tabs' ? '' : ' on') + '" data-biview="sum">요약</button><button type="button" class="bi-vt' + (BIX.view[pg] === 'tabs' ? ' on' : '') + '" data-biview="tabs">전체 탭 보기</button></div>' : '') + inner;
   }
   async function biRender(pg, quiet) {
     const el = $('#biMain'); if (!el) return; BIX.page = pg; const m = BI_PAGES[pg]; if (!m) return;
@@ -4209,6 +4249,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       let inner = '';
       if (pg === 'bi') inner = await biViewOverview();
       else if (pg === 'bi-manual') inner = biViewManual();
+      else if (m.k && BIX.view[pg] === 'tabs') inner = await biViewTabs(pg);
       else { const K = { 'bi-sales': [biLoadSales, biViewSales], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid] }[pg]; const d = await K[0](); inner = K[1](d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
       if (BIX.page === pg) el.innerHTML = biFrame(pg, inner, BIX.stamp);
     } catch (e) { if (BIX.page === pg) el.innerHTML = biFrame(pg, '<div class="bi-warn">데이터를 불러오지 못했습니다: ' + esc(e.message || String(e)) + '<br>시트 구조가 바뀌었거나 네트워크 문제일 수 있습니다. 새로고침으로 다시 시도해 주세요.</div>', ''); }
@@ -4216,16 +4257,22 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function biRoute(pg) {
     BIX.page = pg; $$('#biApp .bs-nav a').forEach(function (a) { a.classList.toggle('on', a.dataset.bi === pg); });
     $('#biApp').scrollTop = 0; window.scrollTo(0, 0); biRender(pg);
-    clearInterval(BIX.timer); BIX.timer = setInterval(function () { if (document.body.dataset.mode === 'bi' && !document.hidden) { BIX.cache = {}; biRender(BIX.page, true); } }, 300000);
+    clearInterval(BIX.timer); BIX.timer = setInterval(function () { if (document.body.dataset.mode === 'bi' && !document.hidden && BIX.view[BIX.page] !== 'tabs') { BIX.cache = {}; biRender(BIX.page, true); } }, 300000);
   }
   function bindBiApp() {
     const app = $('#biApp'); if (!app) return;
     app.addEventListener('click', function (e) {
       if (e.target.closest('[data-birefresh]')) { BIX.cache = {}; biRender(BIX.page); return; }
+      const vw = e.target.closest('[data-biview]'); if (vw) { BIX.view[BIX.page] = vw.dataset.biview; biRender(BIX.page); return; }
       const jm = e.target.closest('[data-jm]'); if (jm) { BIX.jm = jm.dataset.jm; biRender(BIX.page); return; }
       const jp = e.target.closest('[data-jp]'); if (jp) { BIX.jp = +jp.dataset.jp; biRender(BIX.page, true); return; }
       const jt = e.target.closest('[data-jmet]'); if (jt) { BIX.jmet = jt.dataset.jmet; biRender(BIX.page, true); return; }
       if (e.target.closest('[data-bilock]')) { biRelock(); }
+    });
+    app.addEventListener('change', function (e) { if (e.target && e.target.id === 'biTabSel') { BIX.tabSel[BI_PAGES[BIX.page].k] = e.target.value; biRender(BIX.page); } });
+    app.addEventListener('input', function (e) {
+      if (!e.target || e.target.id !== 'biTabQ') return; const q = e.target.value.trim().toLowerCase();
+      $$('#biTabBody tr').forEach(function (tr) { tr.style.display = !q || (tr.dataset.t || '').indexOf(q) >= 0 ? '' : 'none'; });
     });
   }
 
