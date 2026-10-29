@@ -1950,6 +1950,8 @@ body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax
   .bi-rlist { max-height: none; }
 }
 @media (max-width: 980px) { .bi-grid2.ov, .bi-grid2.ov2 { grid-template-columns: 1fr; } }
+.bi-h3 { font-size: 15px; margin: 18px 0 2px; display: flex; gap: 8px; align-items: center; }
+.bi-slides { width: 100%; aspect-ratio: 16 / 9; border: 1px solid #E3E8F0; border-radius: 10px; background: #fff; }
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -4019,7 +4021,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     inf: { t: '[MK] 2026 인플루언서 마케팅 리스트', u: 'https://docs.google.com/spreadsheets/d/19LoIX57UdN13nUXqHbfRA6zFhkRkwobaY0QKokueqzo/edit?gid=1384807088#gid=1384807088' },
     rev: { t: '자사/스스 리뷰 운영 기획안', u: 'https://docs.google.com/spreadsheets/d/10z94a9TJFrMKlEAeWDdw6BLBuPHXRz4yuLkUHug8LcM/edit?gid=1682728294#gid=1682728294' },
     paid: { t: '[마케팅팀]2026 페이드 소재 리포트', u: 'https://docs.google.com/spreadsheets/d/1Smrlc0ijiMUDRlY4j7RDLcpGWe5mETTFSwDzZoGBq94/edit?gid=73896278#gid=73896278' },
-    rank: { t: 'oliveyoung_rank_log(올영 랭킹추적 자동화)', u: 'https://docs.google.com/spreadsheets/d/1ovMG7yM7btTv54O1SxU1zmLZYdUbNXlarYL89_q4fLI/edit?gid=141352098#gid=141352098' }
+    rank: { t: '라이브오랄스 올리브영 구강용품 랭킹 트래커', u: 'https://docs.google.com/spreadsheets/d/1QD7M4tHciImxKbjNsIECqODVH80RnzUpC5N9rzxEtsM/edit?gid=183848060#gid=183848060' }
   };
   const BI_MANUAL = {
     sales: { what: '매체(채널)별 월 매출·광고비·ROAS를 한 장으로 모은 손익분기표입니다. 시트 제목에 [보안] 표시가 있는 내부 자료입니다.', tabs: '월별 요약(신규) = 매체별 손익분기표(이 화면이 읽는 탭) · 26년 7~11월·25년 4월~26년 6월 월별 탭 · 월별 국내 B2C/B2B 일별 탭 · 월별 요약', read: '월별 요약(신규)에서 실매출 합계, 국내외 광고비 합계, 채널별 매출, 채널별 ROAS(목표 대비)를 읽습니다.', note: '월 목표·월별 값은 시트에 입력된 그대로이며, 값이 비어 있는 월(11·12월)은 요약에 표시하지 않습니다. 다른 월 탭과 일별 탭은 "전체 탭 보기"에서 볼 수 있습니다.' },
@@ -4027,7 +4029,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     inf: { what: '인플루언서 후보 컨택 리스트와 월별 진행 기록을 관리하는 시트입니다.', tabs: '인플루언서 리스트업(이 화면이 읽는 탭) · 2025.06월~2026.09월 월별 탭 · 공구 · 스타일씨 · 선정 기준 · 매뉴얼.계약서 · 영상 기획(템플릿) · 파트너십 광고 인원별 · 영상 캘린더', read: '리스트업 탭에서 컨택 건수, 컨택 월, 플랫폼, 구독자 규모를 집계합니다.', note: '요약은 건수만 집계합니다. 전체 탭 보기에서는 금액·이메일·연락처를 가리고(서버에서 처리), 계약서 탭은 열 수 없게 막았습니다.' },
     rev: { what: '자사몰/스마트스토어 리뷰 운영 현황과 월별 KPI(리뷰율, 포토리뷰율, 부정 VOC, 평점)를 정리한 기획안입니다.', tabs: '리뷰 운영 기획안 · 8월운영안/7월성과(이 화면이 읽는 탭) · 7월운영안/6월성과 · 6월운영안/5월성과 · 5월 리뷰 운영 현황 및 성과 공유 · 리뷰 운영 기획안(5월) · 추가 운영안', read: '8월운영안/7월성과 탭의 월별 표(1~7월)를 읽습니다.', note: '월별 표는 사람이 갱신하는 방식으로 보이며, 이 탭의 마지막 월은 7월입니다.' },
     paid: { what: '마케팅팀 광고 소재의 기획·성과와 경쟁사 소재 분석을 모은 리포트입니다.', tabs: '월간 소재기획 대시보드(이 화면이 읽는 탭) · 경쟁사 소재 분석 리포트(수집일·브랜드만 집계) · 경쟁사 분석/리뷰 분석 데이터 · 7월 미백제_스스/올영 · 7월 전동칫솔_스스 · 6월 미백제 · 6월 고체가글', read: '월간 총괄 현황의 월별 총 기획 수량·담당자 수, 경쟁사 소재 수집 건수를 읽습니다.', note: '요약은 수량과 건수만 보여 줍니다. 소재별 지출·ROAS, 경쟁사 소재 상세는 "전체 탭 보기"에서 탭을 골라 확인하세요.' },
-    rank: { what: '올리브영 구강용품 제품별 순위를 시간대별로 기록하는 자동화 로그입니다.', tabs: 'oliveyoung_rank_log.csv(이 화면이 읽는 탭) · Calc_Data · Dashboard · 기준', read: '제품별 가장 최근 순위, 기록된 최고 순위, 순위 추이를 읽습니다. 이름에 (test)가 붙은 기록은 제외합니다.', note: '"순위권 밖"은 순위 숫자 없이 표시합니다.' }
+    rank: { what: '올리브영 구강용품 제품별 랭킹과 올리브영 EDI 판매 실적을 회차마다 자동으로 모으는 대시보드 시트입니다. 랭킹 캡처는 구글 슬라이드에 최신순으로 쌓입니다.', tabs: '대시보드(이 화면이 읽는 탭) · 일자별추세 · 제품별추세 · 회차별추세 · RawData(회차별 순위 원자료) · 판매RawData · 상품매핑 · _차트데이터 · 입금예정(정산 자료라 열 수 없게 막음)', read: '대시보드 탭에서 랭킹 지표, 판매 지표, 제품별 랭킹·판매 표, 주간 추이, 시간대별 패턴, 최근 10회차 순위를 읽습니다.', note: '판매금액은 고객 결제가 기준이고 최근일은 EDI 최신 수집일입니다. 입금 예정(정산·공제) 구간은 거래 조건이 포함되어 표시하지 않습니다.' },
   };
   function biPw() { try { return sessionStorage.getItem('lo_bi_pw') || ''; } catch (e) { return ''; } }
   function biRelock() { try { sessionStorage.removeItem('lo_bi_ok'); sessionStorage.removeItem('lo_bi_pw'); } catch (e) {} go('gate'); }
@@ -4132,22 +4134,41 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       + '<section class="bi-card"><h3>상품별 누적 요약 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>상품</th><th>방문</th><th>구매클릭</th><th>CTR</th><th>전환</th><th>전환율</th><th>구매금액</th><th>객단가</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>';
   }
 
-  /* 올영 랭킹 */
+  /* 올영 랭킹 (랭킹 트래커 시트) */
+  const BI_SLIDES = 'https://docs.google.com/presentation/d/1Nx7UmxRve6zGOA5vUt0UPKDQkQFD2bv3Z9zO4cKdlVg/edit';
   async function biLoadRank() {
-    const j = await biFetch('rank', '1815489030', 400), v = j.values, H = v[0] || [];
-    const recs = v.slice(1).filter(function (r) { return bnorm(r[0]) && !/test/i.test(r[0]); });
-    const prods = []; for (let c = 1; c < H.length; c++) { if (bnorm(H[c])) prods.push({ c: c, name: bnorm(H[c]) }); }
-    prods.forEach(function (p) {
-      const pts = recs.map(function (r) { const x = bnorm(r[p.c]); return { t: r[0], raw: x, n: /^\d+$/.test(x) ? +x : NaN }; }).filter(function (x) { return x.raw !== ''; });
-      p.pts = pts; p.last = pts[pts.length - 1]; p.best = pts.reduce(function (b, x) { return isFinite(x.n) && (b === null || x.n < b) ? x.n : b; }, null);
-    });
-    const lastT = recs.length ? recs[recs.length - 1][0] : ''; let age = null; const mm = /^(\d{4})-(\d{2})-(\d{2})/.exec(lastT); if (mm) age = dAgo(new Date(+mm[1], +mm[2] - 1, +mm[3]));
-    return { j: j, prods: prods, recs: recs, lastT: lastT, age: age, fresh: { label: '마지막 기록 ' + (lastT ? lastT.slice(0, 10) : '-'), age: age } };
+    const j = await biFetch('rank', '183848060', 200), v = j.values;
+    const cell = function (r, c) { return bnorm(v[r] && v[r][c]); };
+    const rowOf = function (pre) { return v.findIndex(function (r) { return bnorm(r[0]).indexOf(pre) === 0; }); };
+    const head = (v[rowOf('랭킹 최근 수집')] || [''])[0] || '', mt = /랭킹 최근 수집\s+(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})/.exec(head);
+    const block = function (pre) { const i = rowOf(pre); if (i < 0) return null; const cs = [1, 3, 5, 7, 9, 11]; return { labels: cs.map(function (c) { return cell(i, c); }), vals: cs.map(function (c) { return cell(i + 1, c); }), subs: cs.map(function (c) { return cell(i + 2, c); }), note: cell(i + 1, 0) }; };
+    const table = function (first, second) { const i = v.findIndex(function (r) { return bnorm(r[0]) === first && (!second || bnorm(r[1]) === second); }); if (i < 0) return null; let n = 0; v[i].forEach(function (x, c) { if (bnorm(x)) n = c + 1; }); const rows = []; for (let r = i + 1; r < v.length; r++) { if (!bnorm(v[r][0])) break; rows.push(v[r].slice(0, n).map(bnorm)); } return { head: v[i].slice(0, n).map(bnorm), rows: rows }; };
+    const lastT = mt ? mt[1] : ''; let age = null; const dm = /^(\d{4})-(\d{2})-(\d{2})/.exec(lastT); if (dm) age = dAgo(new Date(+dm[1], +dm[2] - 1, +dm[3]));
+    return { j: j, head: head, lastT: lastT, age: age, rk: block('랭킹 지표'), sl: block('판매 지표'), prods: table('상품명', '상품번호'), sales: table('상품명 (EDI)'), hours: table('시간대'), recent: table('수집일시'), weeks: table('주 시작(월)'), fresh: { label: '마지막 수집 ' + (lastT || '-'), age: age } };
+  }
+  function bTable(t, opt) {
+    if (!t || !t.rows.length) return '<div class="bi-empty">표시할 값이 없습니다.</div>';
+    opt = opt || {}; const cut = opt.cut || 99;
+    return '<div class="bi-tw"><table class="bi-t"><thead><tr>' + t.head.map(function (h, i) { return '<th>' + esc(h.length > 28 ? h.slice(0, 26) + '…' : h) + '</th>'; }).join('') + '</tr></thead><tbody>' + t.rows.slice(0, cut).map(function (r) { return '<tr>' + t.head.map(function (h, i) { const x = r[i] === undefined ? '' : r[i]; return '<td' + (i === 0 && opt.wide ? ' style="min-width:220px"' : '') + '>' + (i === 0 ? '<b>' + esc(x) + '</b>' : esc(x)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table></div>';
   }
   function biViewRank(d) {
-    const warn = d.age !== null && d.age > 14 ? '<div class="bi-warn">⚠️ 이 로그의 마지막 기록은 <b>' + esc(d.lastT) + '</b> (' + d.age + '일 전)입니다. 자동 수집이 멈췄거나 시트가 갱신되지 않은 상태일 수 있으니 자동화 실행 여부를 확인해 주세요.</div>' : '';
-    const cards = d.prods.map(function (p) { const l = p.last; return '<div class="bi-card sm"><div class="bi-pn">' + esc(p.name) + '</div><div class="bi-kv">' + (l ? (isFinite(l.n) ? l.n + '<small>위</small>' : '<span class="bi-out">' + esc(l.raw) + '</span>') : '-') + '</div><div class="bi-ks">' + (l ? esc(l.t) + ' 기록' : '기록 없음') + ' · 최고 ' + (p.best === null ? '-' : p.best + '위') + ' · 기록 ' + p.pts.length + '건</div>' + bSpark(p.pts.map(function (x) { return x.n; }), true) + '</div>'; }).join('');
-    return warn + '<div class="bi-cards">' + cards + '</div><div class="bi-note">순위가 낮을수록(1위에 가까울수록) 그래프 선이 위로 올라갑니다. 전체 기록 ' + d.recs.length + '건 (test 표시 기록 제외).</div>';
+    const warn = d.age !== null && d.age > 14 ? '<div class="bi-warn">⚠️ 랭킹 마지막 수집은 <b>' + esc(d.lastT) + '</b> (' + d.age + '일 전)입니다. 자동 수집이 멈췄는지 확인해 주세요.</div>' : '';
+    const kp = function (b, tone) { return b ? '<div class="bi-kpis">' + b.labels.map(function (l, i) { return bKpi(l, esc(b.vals[i] || '-'), '', esc(b.subs[i] || '')); }).join('') + '</div>' : ''; };
+    const wk = d.weeks ? d.weeks.rows.slice(0, 9).reverse() : [], wi = d.weeks ? d.weeks.head.indexOf('판매금액') : -1;
+    const wLab = wk.map(function (r) { return String(r[1] || r[0]).split('~')[0] + '~'; }), wVal = wk.map(function (r) { return wi >= 0 ? bn(r[wi]) : NaN; });
+    const rec = d.recent, ri = rec ? rec.head.map(function (h, i) { return i; }).filter(function (i) { return i > 0 && rec.rows.some(function (r) { return /\d/.test(r[i] || ''); }); }) : [];
+    const sparks = rec ? ri.map(function (i) { const vals = rec.rows.slice().reverse().map(function (r) { const m = /(\d+)\s*위/.exec(r[i] || ''); return m ? +m[1] : NaN; }); const last = rec.rows.find(function (r) { return /\d/.test(r[i] || ''); }); return '<div class="bi-card sm"><div class="bi-pn">' + esc(rec.head[i]) + '</div><div class="bi-kv">' + esc(last ? last[i] : '-') + '</div><div class="bi-ks">' + (last ? esc(last[0]) + ' 기록' : '') + '</div>' + bSpark(vals, true) + '</div>'; }).join('') : '';
+    return warn + '<div class="bi-src" style="margin-top:0">' + esc(d.head) + '</div>'
+      + '<h3 class="bi-h3">랭킹 지표 ' + bReal + '</h3>' + kp(d.rk)
+      + '<h3 class="bi-h3">판매 지표 (올리브영 EDI) ' + bReal + '</h3>' + kp(d.sl) + (d.sl && d.sl.note ? '<div class="bi-note" style="margin:-6px 0 14px">' + esc(d.sl.note) + '</div>' : '')
+      + '<div class="bi-grid2"><section class="bi-card"><h3>주간 판매금액 추이 ' + bReal + '</h3>' + bBars(wLab, [wVal], ['#28407D'], fW, '주 시작일 기준, 최근 9주 (EDI 수집분, 단위: 원)') + '</section>'
+      + '<section class="bi-card"><h3>주간 랭킹 요약 ' + bReal + '</h3>' + (d.weeks ? bTable({ head: ['주 시작', '수집 회차', '주간 최고', '주간 평균', 'TOP10 비율'].filter(Boolean), rows: d.weeks.rows.slice(0, 6).map(function (r) { const h = d.weeks.head; const g = function (n) { return r[h.indexOf(n)] || ''; }; return [g('주 시작(월)'), g('수집 회차'), g('주간 최고'), g('주간 평균'), g('TOP10 비율')]; }) }) : '') + '</section></div>'
+      + '<section class="bi-card"><h3>제품별 랭킹 현황 ' + bReal + '</h3>' + bTable(d.prods, { wide: true }) + '</section>'
+      + '<section class="bi-card"><h3>제품별 판매 실적 (이번 달 판매금액 순) ' + bReal + '</h3>' + bTable(d.sales, { wide: true }) + '</section>'
+      + (sparks ? '<h3 class="bi-h3">최근 회차 순위 추이 ' + bReal + '</h3><div class="bi-cards">' + sparks + '</div><div class="bi-note">선이 위로 올라갈수록 순위가 높습니다(1위에 가까움). 시트의 "최근 10회차 순위"를 그대로 그렸습니다.</div>' : '')
+      + '<section class="bi-card"><h3>시간대별 패턴 ' + bReal + '</h3>' + bTable(d.hours) + '<div class="bi-note">회차별 라이브오랄스 최고순위 기준입니다.</div></section>'
+      + '<section class="bi-card"><div class="bi-ch"><h3>📸 랭킹 캡처 아카이브 (구글 슬라이드)</h3><a class="bi-btn" href="' + BI_SLIDES + '" target="_blank" rel="noopener noreferrer">슬라이드 열기 ↗</a></div><div class="bi-note" style="margin:0 0 8px">회차마다 자동으로 추가되는 랭킹 화면 캡처(최신순)입니다. 열람 권한이 있는 구글 계정으로 로그인되어 있어야 보입니다.</div><details class="bi-man" style="margin:0" data-slides="1"><summary>미리보기 펼치기</summary><div id="biSlideBox" style="margin-top:10px"></div></details></section>'
+      + '<div class="bi-note">올리브영 정산(입금 예정)·공제 내역은 거래 조건이 포함되어 있어 이 대시보드에서 표시하지 않습니다.</div>';
   }
 
   /* 인플루언서 */
@@ -4223,10 +4244,10 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function colL(i) { let s = ''; i++; while (i > 0) { const m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); } return s; }
   async function biViewTabs(pg) {
-    const key = BI_PAGES[pg].k, BLOCK = { inf: ['181779110'] };
+    const key = BI_PAGES[pg].k, BLOCK = { inf: ['181779110'], rank: ['2016237970'] };
     const all = (await biTabsOf(key)).filter(function (t) { return (BLOCK[key] || []).indexOf(String(t.gid)) < 0; });
     if (!all.length) return '<div class="bi-empty">열 수 있는 탭이 없습니다.</div>';
-    let gid = BIX.tabSel[key] || ({ sales: '1115730697', journey: '1280577857', inf: '1384807088', rev: '1682728294', paid: '599649638', rank: '1815489030' })[key]; if (!all.some(function (t) { return String(t.gid) === String(gid); })) gid = all[0].gid;
+    let gid = BIX.tabSel[key] || ({ sales: '1115730697', journey: '1280577857', inf: '1384807088', rev: '1682728294', paid: '599649638', rank: '183848060' })[key]; if (!all.some(function (t) { return String(t.gid) === String(gid); })) gid = all[0].gid;
     const g = await biFetch(key, gid, 1200, true), v = g.values || [];
     let lr = v.length, lc = 0; while (lr > 0 && !v[lr - 1].some(function (x) { return bnorm(x); })) lr--;
     v.slice(0, lr).forEach(function (r) { for (let c = r.length - 1; c >= 0; c--) { if (bnorm(r[c])) { if (c + 1 > lc) lc = c + 1; break; } } });
@@ -4246,7 +4267,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
 
   /* 종합 */
-  const BI_RULES = { stale: [14, 30], adRatio: [40, 60], voc: [15, 20], roasLow: [0.7, 1], cvrDrop: 20, monthsBehind: [2, 3] };
+  const BI_RULES = { salesDrop: [30, 50], rankWorse: 1.2, stale: [14, 30], adRatio: [40, 60], voc: [15, 20], roasLow: [0.7, 1], cvrDrop: 20, monthsBehind: [2, 3] };
   const BI_LV = { red: '위험', yel: '주의', grn: '양호' };
   function biLib(src) { return new Promise(function (res, rej) { if (document.querySelector('script[data-lib="' + src + '"]')) { res(); return; } const s = document.createElement('script'); s.src = src; s.dataset.lib = src; s.onload = function () { res(); }; s.onerror = function () { rej(new Error('내보내기 라이브러리를 불러오지 못했습니다(인터넷 연결 확인)')); }; document.head.appendChild(s); }); }
   function biDateKo(d) { return d.getFullYear() + '년 ' + (d.getMonth() + 1) + '월 ' + d.getDate() + '일 ' + '일월화수목금토'.charAt(d.getDay()); }
@@ -4279,6 +4300,12 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if (!low) add('grn', '채널 ROAS', '목표가 입력된 채널은 모두 목표 이상입니다.', 'bi-sales');
     }
     if (D.rev) { const c = D.rev.col, l = D.rev.rows[D.rev.rows.length - 1], v = bn(l[c('부정VOC비율')]); if (isFinite(v)) add(v >= BI_RULES.voc[1] ? 'red' : v >= BI_RULES.voc[0] ? 'yel' : 'grn', D.rev.lastM + ' 부정 VOC', '비율 ' + fP(v) + ' (기준 ' + BI_RULES.voc[0] + '% 주의 / ' + BI_RULES.voc[1] + '% 위험)', 'bi-rev'); }
+    if (D.rank && D.rank.rk && D.rank.sl) {
+      const rk = D.rank.rk, sl = D.rank.sl, avg = parseFloat(rk.vals[2]), pm = /직전 7일\s*([\d.]+)/.exec(rk.subs[2] || ''), prev = pm ? parseFloat(pm[1]) : NaN;
+      if (isFinite(avg) && isFinite(prev)) add(avg > prev * BI_RULES.rankWorse ? 'yel' : 'grn', '올영 7일 평균 순위', '최근 7일 평균 ' + rk.vals[2] + ' / 직전 7일 ' + pm[1] + '위' + (avg > prev * BI_RULES.rankWorse ? ' (악화)' : ''), 'bi-rank');
+      const sm = /(-?\d+)\s*%/.exec(sl.subs[3] || ''), pct = sm ? +sm[1] : NaN;
+      if (isFinite(pct)) add(pct <= -BI_RULES.salesDrop[1] ? 'red' : pct <= -BI_RULES.salesDrop[0] ? 'yel' : 'grn', '올영 이번 달 누적 판매', sl.vals[3] + ' · ' + sl.subs[3] + ' (기준 -' + BI_RULES.salesDrop[0] + '% 주의 / -' + BI_RULES.salesDrop[1] + '% 위험)', 'bi-rank');
+    }
     if (D.cvr && isFinite(D.cvr.drop)) add(D.cvr.drop >= BI_RULES.cvrDrop ? 'yel' : 'grn', '주력상품 전환율', D.cvr.txt, 'bi-journey');
     const ord = { red: 0, yel: 1, grn: 2 }; R.sort(function (a, b) { return ord[a.lv] - ord[b.lv]; }); return R;
   }
@@ -4288,6 +4315,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (D.journey) { const j = D.journey, tot = function (lb) { return j.prods.reduce(function (s, p) { const r = p.rows[lb], x = r ? bn(r[3]) : NaN; return s + (isFinite(x) ? x : 0); }, 0); }; const v = tot('방문수'), c = tot('전환수'); B.push(['고객여정', j.month + ' 주력상품 방문 ' + fN(v) + '회, 전환 ' + fN(c) + '건(전환율 ' + fP(v ? c / v * 100 : NaN, 2) + '), 구매금액 ' + fW(tot('구매금액')) + '원. 마지막 기록일 ' + j.lastLabel + '.']); }
     if (D.rev) { const c = D.rev.col, l = D.rev.rows[D.rev.rows.length - 1]; B.push(['리뷰', D.rev.lastM + ' 전체 리뷰율 ' + l[c('전체리뷰율')] + ', 평점 ' + l[c('평균평점')] + ', 부정 VOC ' + l[c('부정VOC비율')] + '%.']); }
     const red = risks.filter(function (r) { return r.lv === 'red'; }), yel = risks.filter(function (r) { return r.lv === 'yel'; });
+    if (D.rank && D.rank.rk && D.rank.sl) { const rk = D.rank.rk, sl = D.rank.sl; B.push(['올영', '최근 랭킹 ' + rk.vals[0] + ' (' + rk.subs[0] + '), 최근 7일 평균 ' + rk.vals[2] + ' (' + rk.subs[2] + '). 이번 달 누적 판매 ' + sl.vals[3] + ' (' + sl.subs[3] + ').']); }
     B.push(['종합', red.length || yel.length ? '위험 ' + red.length + '건, 주의 ' + yel.length + '건. ' + (red.length ? '가장 먼저 볼 것: ' + red[0].t + '.' : yel.length ? '가장 먼저 볼 것: ' + yel[0].t + '.' : '') : '자동 점검 기준에서 위험·주의 항목이 없습니다.']);
     return B;
   }
@@ -4300,6 +4328,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (D.sales) { const s = val(D.sales.sS, D.sales.last), a = val(D.sales.sA, D.sales.last); kp.push(bKpi(D.sales.last + ' 실매출', fW(s), '원', '광고비 ' + fW(a) + '원 · 비율 ' + fP(a / s * 100))); kx.push([D.sales.last + ' 실매출', fW(s) + '원', '광고비 ' + fW(a) + '원 / 비율 ' + fP(a / s * 100)]); }
     if (D.journey) { const tot = function (lb) { return D.journey.prods.reduce(function (s, p) { const r = p.rows[lb]; const x = r ? bn(r[3]) : NaN; return s + (isFinite(x) ? x : 0); }, 0); }; kp.push(bKpi(D.journey.month + ' 주력상품 방문', fN(tot('방문수')), '회', '전환 ' + fN(tot('전환수')) + '건 · 구매금액 ' + fW(tot('구매금액')) + '원')); kx.push([D.journey.month + ' 주력상품 방문', fN(tot('방문수')) + '회', '전환 ' + fN(tot('전환수')) + '건 / 구매금액 ' + fW(tot('구매금액')) + '원']); }
     if (D.rev) { const c = D.rev.col, l = D.rev.rows[D.rev.rows.length - 1]; kp.push(bKpi(D.rev.lastM + ' 리뷰', esc(l[c('전체리뷰율')]), '', '평점 ' + esc(l[c('평균평점')]) + ' · 부정 VOC ' + esc(l[c('부정VOC비율')]) + '%')); kx.push([D.rev.lastM + ' 전체 리뷰율', l[c('전체리뷰율')], '평점 ' + l[c('평균평점')] + ' / 부정 VOC ' + l[c('부정VOC비율')] + '%']); }
+    if (D.rank && D.rank.rk) { kp.push(bKpi('올영 최근 랭킹', esc(D.rank.rk.vals[0] || '-'), '', esc((D.rank.rk.subs[0] || '') + ' · 7일 평균 ' + (D.rank.rk.vals[2] || '-')))); kx.push(['올영 최근 랭킹', D.rank.rk.vals[0], (D.rank.rk.subs[0] || '') + ' / 7일 평균 ' + (D.rank.rk.vals[2] || '-')]); }
     if (D.inf) { kp.push(bKpi('인플루언서 컨택 리스트', fN(D.inf.total), '건', '마지막 컨택 ' + esc(D.inf.lastD))); kx.push(['인플루언서 컨택 리스트', fN(D.inf.total) + '건', '마지막 컨택 ' + D.inf.lastD]); }
     const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재' };
     const risks = biRisks(D, today), brief = biBrief(D, risks, today);
@@ -4385,6 +4414,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       const jt = e.target.closest('[data-jmet]'); if (jt) { BIX.jmet = jt.dataset.jmet; biRender(BIX.page, true); return; }
       if (e.target.closest('[data-bilock]')) { biRelock(); }
     });
+    app.addEventListener('toggle', function (e) { const t = e.target; if (t && t.dataset && t.dataset.slides && t.open) { const b = $('#biSlideBox'); if (b && !b.firstChild) b.innerHTML = '<iframe src="https://docs.google.com/presentation/d/1Nx7UmxRve6zGOA5vUt0UPKDQkQFD2bv3Z9zO4cKdlVg/embed?start=false&loop=false&delayms=3000" class="bi-slides" allowfullscreen loading="lazy" title="랭킹 캡처 아카이브"></iframe>'; } }, true);
     app.addEventListener('change', function (e) { if (e.target && e.target.id === 'biTabSel') { BIX.tabSel[BI_PAGES[BIX.page].k] = e.target.value; biRender(BIX.page); } });
     app.addEventListener('input', function (e) {
       if (!e.target || e.target.id !== 'biTabQ') return; const q = e.target.value.trim().toLowerCase();
@@ -4392,7 +4422,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     });
   }
 
-  const BI_SHEETS = [{"t":"20262025 라오전체 매출/광고현황","tag":"매출·광고","u":"https://docs.google.com/spreadsheets/d/1WXSrYGUAiPNGV6Wrm0FE7hV1ON-v0Xyv1DqD7rKYAIw/edit?gid=1115730697#gid=1115730697"},{"t":"[MK] 2026 인플루언서 마케팅 리스트","tag":"마케팅","u":"https://docs.google.com/spreadsheets/d/19LoIX57UdN13nUXqHbfRA6zFhkRkwobaY0QKokueqzo/edit?gid=1384807088#gid=1384807088"},{"t":"자사/스스 리뷰 운영 기획안","tag":"리뷰 운영","u":"https://docs.google.com/spreadsheets/d/10z94a9TJFrMKlEAeWDdw6BLBuPHXRz4yuLkUHug8LcM/edit?gid=1682728294#gid=1682728294"},{"t":"[마케팅팀]2026 페이드 소재 리포트","tag":"마케팅","u":"https://docs.google.com/spreadsheets/d/1Smrlc0ijiMUDRlY4j7RDLcpGWe5mETTFSwDzZoGBq94/edit?gid=73896278#gid=73896278"},{"t":"oliveyoung_rank_log(올영 랭킹추적 자동화)","tag":"올영 랭킹","u":"https://docs.google.com/spreadsheets/d/1ovMG7yM7btTv54O1SxU1zmLZYdUbNXlarYL89_q4fLI/edit?gid=141352098#gid=141352098","note":"연결 AI 자산: 올리브영 랭킹 크롤링 (A037)"}];
+  const BI_SHEETS = [{"t":"20262025 라오전체 매출/광고현황","tag":"매출·광고","u":"https://docs.google.com/spreadsheets/d/1WXSrYGUAiPNGV6Wrm0FE7hV1ON-v0Xyv1DqD7rKYAIw/edit?gid=1115730697#gid=1115730697"},{"t":"[MK] 2026 인플루언서 마케팅 리스트","tag":"마케팅","u":"https://docs.google.com/spreadsheets/d/19LoIX57UdN13nUXqHbfRA6zFhkRkwobaY0QKokueqzo/edit?gid=1384807088#gid=1384807088"},{"t":"자사/스스 리뷰 운영 기획안","tag":"리뷰 운영","u":"https://docs.google.com/spreadsheets/d/10z94a9TJFrMKlEAeWDdw6BLBuPHXRz4yuLkUHug8LcM/edit?gid=1682728294#gid=1682728294"},{"t":"[마케팅팀]2026 페이드 소재 리포트","tag":"마케팅","u":"https://docs.google.com/spreadsheets/d/1Smrlc0ijiMUDRlY4j7RDLcpGWe5mETTFSwDzZoGBq94/edit?gid=73896278#gid=73896278"},{"t":"라이브오랄스 올리브영 구강용품 랭킹 트래커","tag":"올영 랭킹","u":"https://docs.google.com/spreadsheets/d/1QD7M4tHciImxKbjNsIECqODVH80RnzUpC5N9rzxEtsM/edit?gid=183848060#gid=183848060","note":"연결 AI 자산: 올리브영 랭킹 크롤링 (A037)"}];
   function renderBi() {
     const el = $('#biGrid'); if (!el) return;
     el.innerHTML = BI_SHEETS.map(function (s) {
