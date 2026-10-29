@@ -1952,6 +1952,7 @@ body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax
 @media (max-width: 980px) { .bi-grid2.ov, .bi-grid2.ov2 { grid-template-columns: 1fr; } }
 .bi-h3 { font-size: 15px; margin: 18px 0 2px; display: flex; gap: 8px; align-items: center; }
 .bi-slides { width: 100%; aspect-ratio: 16 / 9; border: 1px solid #E3E8F0; border-radius: 10px; background: #fff; }
+.bi-pw { -webkit-text-security: disc; text-security: disc; }
 /* 반응형 */
 @media (max-width: 1180px) {
   .sidebar-nav { gap: 16px; }
@@ -2419,7 +2420,7 @@ img, svg, video { max-width: 100%; }
         </div>
       </section>
 
-      <div class="bi-lock" id="biLock" role="dialog" aria-modal="true" aria-labelledby="biLockTitle"><div class="bi-lock-box"><div class="bi-lock-ico">🔒</div><b id="biLockTitle">대시보드 암호</b><p>대시보드는 암호를 입력해야 열립니다.</p><input type="password" id="biPw" class="form-control" placeholder="암호" autocomplete="off" aria-label="암호"><div class="bi-lock-err" id="biLockErr" role="alert"></div><div class="bi-lock-btns"><button type="button" class="btn-secondary" id="biLockCancel">취소</button><button type="button" class="btn-gold" id="biLockOk">확인</button></div></div></div>
+      <div class="bi-lock" id="biLock" role="dialog" aria-modal="true" aria-labelledby="biLockTitle"><div class="bi-lock-box"><div class="bi-lock-ico">🔒</div><b id="biLockTitle">대시보드 암호</b><p>대시보드는 암호를 입력해야 열립니다.</p><input type="text" id="biPw" class="form-control bi-pw" placeholder="암호" autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore aria-label="암호"><div class="bi-lock-err" id="biLockErr" role="alert"></div><div class="bi-lock-btns"><button type="button" class="btn-secondary" id="biLockCancel">취소</button><button type="button" class="btn-gold" id="biLockOk">확인</button></div></div></div>
 
       <!-- ═══ 업무 대시보드 (시트 모음) ═══ -->
       <section class="page" id="page-bi">
