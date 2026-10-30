@@ -5386,7 +5386,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 
 
   /* ===== 필터 패널: 한 줄로 늘어선 칩을 그룹별 패널(선택 상자·버튼·초기화)로 정리 ===== */
-  const FP_ATTRS = ['data-ctf', 'data-chf', 'data-cff', 'data-prf', 'data-stf', 'data-skf', 'data-bnf', 'data-qnf', 'data-inff', 'data-rtf', 'data-arf', 'data-pgf', 'data-nwcat'];
+  const FP_ATTRS = ['data-cpm', 'data-ctf', 'data-chf', 'data-cff', 'data-prf', 'data-stf', 'data-skf', 'data-bnf', 'data-qnf', 'data-inff', 'data-rtf', 'data-arf', 'data-pgf', 'data-nwcat'];
   const BI_STAGE_HINT = { explore: '', insight: '시트 값을 규칙에 따라 계산한 분석입니다(AI가 문장을 쓴 것이 아님). 숫자는 화면·시트에서 다시 확인하세요.', action: '항목의 버튼을 누르면 요청문·지시문이 열립니다. 복사해서 FLOW나 어사이드에 붙여 넣으세요.' };
   function fpKey(c) { for (let i = 0; i < FP_ATTRS.length; i++) { const v = c.getAttribute(FP_ATTRS[i]); if (v !== null) return FP_ATTRS[i] + ':' + (FP_ATTRS[i] === 'data-nwcat' ? '' : v); } return ''; }
   function fpSel(c) { for (let i = 0; i < FP_ATTRS.length; i++) { const v = c.getAttribute(FP_ATTRS[i]); if (v !== null) { const dv = c.getAttribute('data-v'); return '[' + FP_ATTRS[i] + '="' + String(v).replace(/"/g, '\\"') + '"]' + (dv !== null ? '[data-v="' + String(dv).replace(/"/g, '\\"') + '"]' : ''); } } return ''; }
@@ -6031,11 +6031,12 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (wa) ins.push('최근 7일 광고비 ' + fW(wa.l7) + '원, 직전 7일 대비 ' + chGrowth(wa.l7, wa.p7) + (wk ? ' · 광고비 증감과 매출 증감을 같이 봐야 합니다' : ''));
     if (isFinite(r)) ins.push('<b>쿠팡 ROAS</b> ' + fP(r, 0) + (isFinite(tg) ? (r >= tg ? ' — 목표 ' + fP(tg, 0) + ' 이상' : ' — <b class="bi-dn">목표 ' + fP(tg, 0) + '에 ' + fP(tg - r, 0) + 'p 못 미칩니다</b>') : ' (목표 미표기)') + '. 광고비는 매출의 ' + fP(ad / rk.sum * 100, 0) + '입니다.');
     if (isFinite(sin)) ins.push('사입(실매출) ' + fW(sin) + '원 vs 로켓 고객인도 매출 ' + fW(rk.sum) + '원 — 기준이 달라 같은 기간에 일치하지 않을 수 있습니다. 입고·재고는 물류 화면에서 확인하세요.');
-    ins.push('쿠팡은 시트에 일별 로켓 매출과 광고비(매출성장)만 있습니다. 상품별·키워드별 데이터와 로켓 외 판매는 연결돼 있지 않습니다.');
+    cpMonthIns(d).forEach(function (t) { ins.push(t); });
+    ins.push('쿠팡은 시트에 월·일별 로켓 매출, 사입(실매출), 광고비(매출성장)만 있습니다. 상품별·키워드별 데이터와 로켓 외 판매는 연결돼 있지 않습니다.');
     const cols = [function (q) { return chW(chB(q, '쿠팡 로켓 매출')); }, function (q) { return chW(chSellIn(d, '쿠팡 로켓 사입', q)); }, function (q) { return chW(chS(q, '쿠팡 매출성장')); }, function (q) { const a = chB(q, '쿠팡 로켓 매출'), b = chS(q, '쿠팡 매출성장'); return isFinite(a / b) ? fP(b / a * 100, 0) : '-'; }, function (q) { const t = chTarget(d, '쿠팡', q), v = chS(q, '쿠팡', /광고 효율/); return '<b>' + chPct(v) + '</b>' + (isFinite(t) ? '<small class="' + (v >= t ? 'bi-up' : 'bi-dn') + '">목표 ' + chPct(t) + '</small>' : ''); }];
     return kp
       + '<div class="bi-grid2"><section class="bi-card"><h3>일별 로켓 매출 ' + bReal + '</h3>' + chDayBars(d, [rk.d], ['#14C4A9'], '단위: 원 · 가로축은 일(日)') + '</section><section class="bi-card"><h3>일별 광고비 (매출성장) ' + bReal + '</h3>' + chDayBars(d, [adRow ? adRow.d : []], ['#F5A524'], '단위: 원 · 가로축은 일(日)') + '</section></div>'
-      + '<section class="bi-card"><h3>월별 비교 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>월</th><th>로켓 매출(고객인도)</th><th>사입(실매출)</th><th>광고비(매출성장)</th><th>광고비/매출</th><th>ROAS</th></tr></thead><tbody>' + chCompareRows(d, cols) + '</tbody></table></div><div class="bi-note">로켓 매출 = 쿠팡이 소비자에게 판매한 금액(시트 표기 "고객인도금액 · 실 매출 x"). 사입 = 쿠팡에 납품한 금액으로 손익분기표의 실매출입니다. ROAS = 로켓 매출 ÷ 광고비(시트 "국내 B2C 온라인 채널 광고 효율" 행), 목표는 손익분기표 값(그 달 칸에 숫자 목표가 없으면 가장 최근 월의 값)입니다. 이번 달은 ' + esc(d.last.slice(5)) + '까지의 누계입니다.</div></section>'
+      + cpMonthSection(d)
       + '<section class="bi-card"><h3>💡 자동 인사이트 <span class="bi-ms">시트 값 비교 · 규칙 기반 · AI 해석 아님</span></h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>';
   }
   function biActsCP(d) {
@@ -6046,7 +6047,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     return A;
   }
   function bindChan(app) {
-    app.addEventListener('click', function (e) { const x = e.target.closest ? e.target.closest('[data-chf]') : null; if (!x) return; BIX.chf = x.dataset.v; const sy = window.scrollY; Promise.resolve(biRender(BIX.page, true)).then(function () { window.scrollTo(0, sy); }); });
+    app.addEventListener('click', function (e) { const mo = e.target.closest ? e.target.closest('[data-cpmo]') : null; if (mo) { cpMonthOpen(mo.dataset.cpmo); return; } const x = e.target.closest ? e.target.closest('[data-chf], [data-cpm]') : null; if (!x) return; if (x.hasAttribute('data-cpm')) BIX.cpm = x.dataset.v; else BIX.chf = x.dataset.v; const sy = window.scrollY; Promise.resolve(biRender(BIX.page, true)).then(function () { window.scrollTo(0, sy); }); });
   }
 
 
@@ -6178,6 +6179,70 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function biStratInit(pg) { if (!$('#biAist')) return; biStratPaint(pg); if (biStageOf(pg) === 'action') biStratAuto(pg); }
   function biStratAuto(pg) { if (!$('#biAist')) return; const s = (BIX.aist || {})[pg] || biStratLoad(pg); if (s && (s.res || s.busy)) { biStratPaint(pg); return; } if (s && s.err && Date.now() - (BIX.aistErrT || 0) < 20000) return; biStratRun(pg); }
   function bindAist(app) { app.addEventListener('click', function (e) { const x = e.target.closest ? e.target.closest('[data-aist]') : null; if (!x) return; if (x.dataset.aist === 'run') { BIX.aist = BIX.aist || {}; if (BIX.aist[BIX.page] && BIX.aist[BIX.page].busy) return; delete BIX.aist[BIX.page]; try { const o = JSON.parse(localStorage.getItem('lo_bi_strat') || '{}'); delete o[biStratKey(BIX.page)]; localStorage.setItem('lo_bi_strat', JSON.stringify(o)); } catch (er) {} biStratRun(BIX.page); } else if (x.dataset.aist === 'copy') { const t = biStratText(BIX.page); if (t) biCopy(t, 'AI 유통 전략 초안을 복사했습니다. FLOW·메신저에 붙여 넣을 수 있어요.'); } }); }
+
+
+  /* ===== 쿠팡 월별 분석: 월별 요약(2025.1~2026.5) + 26년 6월 탭 + 월별 B2C·B2B 탭(2026.7~) ===== */
+  const CP_HIST_GID = '1710300900', CP_JUN_GID = '674232052';
+  function cpKey(s) { const m = /(\d{4})\D+(\d{1,2})/.exec(String(s || '')); return m ? m[1] + '-' + ('0' + m[2]).slice(-2) : ''; }
+  function cpHistParse(a, b) {
+    const out = {};
+    if (a && a.length) {
+      const hdr = a[0] || [], cols = {}; hdr.forEach(function (h, i) { const k = /^\d{4}\.\s*\d+\./.test(bnorm(h)) ? cpKey(h) : ''; if (k) cols[i] = k; });
+      const row = function (lab, exact) { return a.find(function (r) { const x = bnorm(r[1]); return exact ? x === lab : x.indexOf(lab) === 0; }); };
+      const rr = { rocket: row('쿠팡 로켓 매출', true), sellin: row('쿠팡 로켓 사입', true), ad: row('쿠팡 매출성장', true), nca: row('쿠팡 신규고객', true) };
+      Object.keys(cols).forEach(function (c) { const k = cols[c], o = { k: k, src: '월별 요약' }; let any = false; Object.keys(rr).forEach(function (f) { const v = rr[f] ? bn(rr[f][c]) : NaN; o[f] = v; if (isFinite(v) && v > 0) any = true; }); if (any) out[k] = o; });
+    }
+    if (b && b.length) {
+      const hi = b.findIndex(function (r) { return r.some(function (c) { return bnorm(c) === '월합산'; }); }), vc = hi >= 0 ? b[hi].findIndex(function (c) { return bnorm(c) === '월합산'; }) : 6;
+      const row = function (lab) { return b.find(function (r) { return bnorm(r[1]).indexOf(lab) === 0; }); }, g = function (r) { return r ? bn(r[vc]) : NaN; };
+      const o = { k: '2026-06', src: '26년 6월 탭', rocket: g(row('쿠팡 로켓 매출')), sellin: g(row('쿠팡 로켓 사입')), ad: g(row('쿠팡 매출성장')), nca: g(row('쿠팡 신규고객')) }; if (isFinite(o.rocket) && o.rocket > 0) out['2026-06'] = o;
+    }
+    return out;
+  }
+  async function biLoadCP() {
+    const base = await biLoadChan(); let h = BIX.cph && Date.now() - BIX.cphT < 45000 ? BIX.cph : null;
+    if (!h) { const r = await Promise.all([biFetch('sales', CP_HIST_GID, 120).then(function (j) { return j.values; }).catch(function () { return null; }), biFetch('sales', CP_JUN_GID, 140).then(function (j) { return j.values; }).catch(function () { return null; })]); h = { map: cpHistParse(r[0], r[1]), ok: !!(r[0] || r[1]) }; BIX.cph = h; BIX.cphT = Date.now(); }
+    return Object.assign({}, base, { cph: h });
+  }
+  function cpMonths(d) {
+    const M = {}; Object.keys((d.cph && d.cph.map) || {}).forEach(function (k) { M[k] = Object.assign({}, d.cph.map[k]); });
+    d.months.forEach(function (x) { M[x.k] = { k: x.k, src: '월별 B2C·B2B 탭', rocket: chB(x, '쿠팡 로켓 매출'), sellin: chSellIn(d, '쿠팡 로켓 사입', x), ad: chS(x, '쿠팡 매출성장'), nca: NaN, cur: x === d.cur }; });
+    return Object.keys(M).sort().map(function (k) { const o = M[k]; o.roas = isFinite(o.rocket) && isFinite(o.ad) && o.ad > 0 ? o.rocket / o.ad * 100 : NaN; o.adr = isFinite(o.rocket) && o.rocket > 0 && isFinite(o.ad) ? o.ad / o.rocket * 100 : NaN; return o; }).filter(function (o) { return isFinite(o.rocket) || isFinite(o.ad) || isFinite(o.sellin); });
+  }
+  function cpRange(ms) { const f = BIX.cpm || '12개월'; return f === '전체' ? ms : ms.slice(-(f === '6개월' ? 6 : 12)); }
+  function cpLab(k) { return k.slice(2, 4) + '.' + k.slice(5); }
+  function cpChg(a, b) { return isFinite(a) && isFinite(b) && b ? (a - b) / b * 100 : NaN; }
+  function cpChgHtml(v) { return isFinite(v) ? '<span class="' + (v >= 0 ? 'bi-up' : 'bi-dn') + '">' + (v >= 0 ? '▲ ' : '▼ ') + fP(Math.abs(v), 0) + '</span>' : '<span class="bi-ms">-</span>'; }
+  function cpMonthSection(d) {
+    const all = cpMonths(d), ms = cpRange(all), idx = {}; all.forEach(function (o, i) { idx[o.k] = i; });
+    const f = BIX.cpm || '12개월', bar = '<div class="bi-bar2"><span class="bi-bl">기간</span>' + chChips('data-cpm', ['6개월', '12개월', '전체'], f) + '</div>';
+    if (!ms.length) return bar + '<section class="bi-card"><h3>월별 분석</h3><div class="bi-empty">월별 데이터를 읽지 못했습니다.</div></section>';
+    const lab = ms.map(function (o) { return cpLab(o.k); });
+    const charts = '<div class="bi-grid2"><section class="bi-card"><h3>월별 로켓 매출 vs 사입 ' + bReal + '</h3>' + bBars(lab, [ms.map(function (o) { return o.rocket; }), ms.map(function (o) { return o.sellin; })], ['#14C4A9', '#6C7BFF'], fW, '단위: 원 · 초록 = 로켓 매출(고객인도), 보라 = 사입(실매출) · 가로축은 연.월') + '</section><section class="bi-card"><h3>월별 광고비(매출성장) ' + bReal + '</h3>' + bBars(lab, [ms.map(function (o) { return o.ad; })], ['#F5A524'], fW, '단위: 원 · 가로축은 연.월') + '</section></div>'
+      + '<section class="bi-card"><h3>월별 ROAS (로켓 매출 ÷ 광고비) ' + bReal + '</h3>' + bBars(lab, [ms.map(function (o) { return o.roas; })], ['#E5484D'], function (v) { return fP(v, 0); }, '제가 계산한 값 · 광고비가 있는 달만 표시 · 시트의 "쿠팡 매출성장(고객인도기준)" ROAS와 산식이 다릅니다') + '</section>';
+    const rows = ms.slice().reverse().map(function (o) { const i = idx[o.k], pv = i > 0 ? all[i - 1] : null, yy = all[idx[(+o.k.slice(0, 4) - 1) + o.k.slice(4)]]; return '<tr class="bi-click" data-cpmo="' + o.k + '"><td><b>' + o.k.slice(0, 4) + '.' + o.k.slice(5) + '</b>' + (o.cur ? ' <span class="bi-pill">진행 중</span>' : '') + '</td><td>' + chW(o.rocket) + '</td><td>' + cpChgHtml(pv ? cpChg(o.rocket, pv.rocket) : NaN) + '</td><td>' + cpChgHtml(yy ? cpChg(o.rocket, yy.rocket) : NaN) + '</td><td>' + chW(o.sellin) + '</td><td>' + chW(o.ad) + '</td><td>' + (isFinite(o.adr) ? fP(o.adr, 0) : '-') + '</td><td>' + (isFinite(o.roas) ? '<b>' + fP(o.roas, 0) + '</b>' : '-') + '</td><td class="bi-ms">' + esc(o.src) + '</td></tr>'; }).join('');
+    const tbl = '<section class="bi-card"><h3>월별 상세 표 ' + bReal + ' <span class="bi-ms">행을 누르면 그 달 상세가 열립니다</span></h3><div class="bi-tw" style="max-height:560px;overflow:auto"><table class="bi-t"><thead><tr><th>월</th><th>로켓 매출(고객인도)</th><th>전월 대비</th><th>전년 동월 대비</th><th>사입(실매출)</th><th>광고비(매출성장)</th><th>광고비/매출</th><th>ROAS(계산)</th><th>출처 탭</th></tr></thead><tbody>' + rows + '</tbody></table></div><div class="bi-note">로켓 매출 = 쿠팡이 소비자에게 판매한 금액(시트 표기 "고객인도금액 · 우리 매출 x"). 사입 = 쿠팡에 납품한 금액으로 손익분기표의 실매출입니다. ROAS = 로켓 매출 ÷ 광고비(제가 계산). 2026.7월부터는 월별 국내 B2C·B2B 탭, 2026.6은 "26년 6월" 탭, 2025.1~2026.5는 "월별 요약" 탭 값입니다(2026.6 이전 탭은 일부 달이 비어 있고 로켓 매출은 2025.6부터 있습니다). 탭마다 집계 방식이 조금 다를 수 있어 6월과 7월 사이의 큰 변화는 원본 확인이 필요합니다. 이번 달은 ' + esc(d.last.slice(5)) + '까지의 누계입니다.</div></section>';
+    return bar + charts + tbl;
+  }
+  function cpMonthIns(d) {
+    const all = cpMonths(d), done = all.filter(function (o) { return !o.cur; }), R = done.filter(function (o) { return isFinite(o.rocket); }), out = []; if (R.length < 3) return out;
+    const best = R.slice().sort(function (a, b) { return b.rocket - a.rocket; })[0], low = R.slice().sort(function (a, b) { return a.rocket - b.rocket; })[0];
+    out.push('<b>월별 로켓 매출</b>(완료된 달 ' + R.length + '개월): 최고 ' + best.k.replace('-', '.') + ' ' + fW(best.rocket) + '원, 최저 ' + low.k.replace('-', '.') + ' ' + fW(low.rocket) + '원');
+    if (R.length >= 6) { const a = R.slice(-3), b = R.slice(-6, -3), av = function (x) { return x.reduce(function (s, o) { return s + o.rocket; }, 0) / x.length; }; out.push('최근 3개월(' + a[0].k.replace('-', '.') + '~' + a[2].k.replace('-', '.') + ') 월평균 로켓 매출 ' + fW(av(a)) + '원, 직전 3개월 월평균 ' + fW(av(b)) + '원 대비 ' + chGrowth(av(a), av(b))); }
+    const P = done.slice(-13).filter(function (o, i, arr) { return i > 0 && isFinite(o.rocket) && isFinite(arr[i - 1].rocket) && isFinite(o.ad) && isFinite(arr[i - 1].ad); });
+    if (P.length >= 4) { const arr = done.slice(-13); let same = 0, n = 0; arr.forEach(function (o, i) { if (i === 0) return; const p = arr[i - 1]; if (isFinite(o.rocket) && isFinite(p.rocket) && isFinite(o.ad) && isFinite(p.ad)) { n++; if ((o.rocket - p.rocket) * (o.ad - p.ad) > 0) same++; } }); out.push('최근 ' + n + '개월 중 <b>' + same + '개월</b>은 광고비와 로켓 매출이 같은 방향으로 움직였습니다(둘 다 늘거나 둘 다 줄어듦). 광고가 매출을 만들었는지는 이 숫자만으로 알 수 없어, 인과 판단은 담당자가 합니다.'); }
+    const RO = done.filter(function (o) { return isFinite(o.roas); }); if (RO.length >= 3) { const hb = RO.slice().sort(function (a, b) { return b.roas - a.roas; })[0], lw = RO.slice().sort(function (a, b) { return a.roas - b.roas; })[0]; out.push('ROAS(계산)는 ' + hb.k.replace('-', '.') + '에 ' + fP(hb.roas, 0) + '로 가장 높고 ' + lw.k.replace('-', '.') + '에 ' + fP(lw.roas, 0) + '로 가장 낮았습니다.'); }
+    const jun = all.filter(function (o) { return o.k === '2026-06' || o.k === '2026-07'; }); if (jun.length === 2 && isFinite(jun[0].rocket) && isFinite(jun[1].rocket) && jun[0].rocket / jun[1].rocket > 2) out.push('<b>2026.6 → 2026.7 로켓 매출이 ' + fW(jun[0].rocket) + '원에서 ' + fW(jun[1].rocket) + '원으로 크게 줄었고</b> 같은 시기 광고비도 ' + fW(jun[0].ad) + '원에서 ' + fW(jun[1].ad) + '원으로 줄었습니다. 시트 탭이 바뀌는 시점이라 집계 기준 차이인지 실제 감소인지 원본 확인이 필요합니다.');
+    return out;
+  }
+  function cpMonthOpen(k) {
+    const d = BIX.cur; if (!d || !d.cph) return; const all = cpMonths(d), i = all.findIndex(function (o) { return o.k === k; }), o = all[i]; if (!o) return; BIX.qpTxt = {}; const pv = i > 0 ? all[i - 1] : null, yy = all.find(function (q) { return q.k === (+k.slice(0, 4) - 1) + k.slice(4); });
+    const rows = [['로켓 매출(고객인도)', chW(o.rocket)], ['사입(실매출)', chW(o.sellin)], ['광고비(매출성장)', chW(o.ad)], ['신규고객 광고(NCA)', isFinite(o.nca) ? chW(o.nca) : '-'], ['광고비/매출', isFinite(o.adr) ? fP(o.adr, 1) : '-'], ['ROAS(계산)', isFinite(o.roas) ? fP(o.roas, 0) : '-'], ['전월 대비 로켓 매출', pv && isFinite(cpChg(o.rocket, pv.rocket)) ? (cpChg(o.rocket, pv.rocket) >= 0 ? '+' : '') + fP(cpChg(o.rocket, pv.rocket), 1) + ' (' + pv.k.replace('-', '.') + ' ' + chW(pv.rocket) + ')' : '-'], ['전년 동월 대비 로켓 매출', yy && isFinite(cpChg(o.rocket, yy.rocket)) ? (cpChg(o.rocket, yy.rocket) >= 0 ? '+' : '') + fP(cpChg(o.rocket, yy.rocket), 1) + ' (' + yy.k.replace('-', '.') + ' ' + chW(yy.rocket) + ')' : '-'], ['출처 탭', o.src]];
+    const mo = d.months.find(function (x) { return x.k === k; }), dr = mo ? chRow(mo.b, '쿠팡 로켓 매출') : null, da = mo ? chRow(mo.c, '쿠팡 매출성장') : null;
+    const daily = dr ? '<h4>일별 로켓 매출 <span class="bi-ms">월별 B2C·B2B 탭</span></h4>' + bBars(mo.c.dates.map(function (x) { return x.slice(8).replace(/^0/, ''); }), [dr.d.map(function (v, j) { return mo === d.cur && j > d.lastIdx ? NaN : v; })], ['#14C4A9'], fW, '단위: 원 · 가로축은 일(日)') + (da ? '<h4>일별 광고비 (매출성장)</h4>' + bBars(mo.c.dates.map(function (x) { return x.slice(8).replace(/^0/, ''); }), [da.d.map(function (v, j) { return mo === d.cur && j > d.lastIdx ? NaN : v; })], ['#F5A524'], fW, '단위: 원') : '') : '<p class="bi-dr-p">이 달은 일별 데이터 탭이 없어 월 합계만 있습니다.</p>';
+    const line = '쿠팡 ' + k.replace('-', '.') + ' | 로켓 매출 ' + chW(o.rocket) + ' | 사입 ' + chW(o.sellin) + ' | 광고비 ' + chW(o.ad) + ' | ROAS(계산) ' + (isFinite(o.roas) ? fP(o.roas, 0) : '-');
+    biOpenDrawer('쿠팡 ' + k.replace('-', '.') + ' 월 상세', '<dl class="bi-dl">' + rows.map(function (r) { return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('') + '</dl>' + daily + '<div class="bi-dr-btns">' + qpCopyBtn('한 줄 복사', line) + '</div><div class="bi-note">ROAS와 광고비/매출은 제가 계산한 값입니다.</div>');
+  }
 
   function bindBi2(app) {
     app.addEventListener('click', function (e) {
@@ -6589,7 +6654,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     'bi-cafe': { t: '자사몰 · 카페24', s: '카페24 자사몰 시트를 읽고, 손익분기표 숫자와 맞는지 교차 검증합니다. 주문·후기 원본 등 개인 정보 탭은 읽지 않습니다.', k: 'cafe' },
     'bi-d2c': { t: '자사몰 · 스마트스토어', s: '자사몰과 스마트스토어의 일별·월별 매출, 광고비, ROAS를 한 화면에서 비교합니다. (손익분기표 파일의 월별 국내 B2C 탭)', k: 'sales' },
     'bi-oy': { t: '올리브영', s: '올리브영 온라인·매장 판매, 판매량, 광고 효율, 사입(실매출)을 따로 분석합니다. (월별 국내 B2C·B2B 탭)', k: 'sales' },
-    'bi-cp': { t: '쿠팡', s: '쿠팡 로켓 매출과 광고비(매출성장), ROAS를 따로 분석합니다. (월별 국내 B2C·B2B 탭)', k: 'sales' },
+    'bi-cp': { t: '쿠팡', s: '쿠팡 로켓 매출과 광고비(매출성장), ROAS를 일별·월별로 따로 분석합니다. (월별 국내 B2C·B2B 탭 + 월별 요약)', k: 'sales' },
     'bi-sales': { t: '매출', s: '영업팀 · 채널별 월 실매출과 월 목표 달성 현황, 월별 비교를 손익분기표에서 읽어 옵니다.', k: 'sales' },
     'bi-ads': { t: '광고', s: '마케팅팀 · 월별 광고비, 광고비 비율, 채널별 ROAS와 목표를 손익분기표에서 읽어 옵니다.', k: 'sales' },
     'bi-journey': { t: '주력상품 고객여정', s: '자사몰(카페24 쇼핑몰) 주력상품 상세 페이지의 일별 방문 → 구매클릭 → 전환 → 구매금액.', k: 'journey' },
@@ -6632,14 +6697,14 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if (pg === 'bi') { inner = await biViewOverview(); inner += biStratCard('bi') + biActCard(biActsOverview()); }
       else if (pg === 'bi-manual') inner = biViewManual();
       else if (m.k && BIX.view[pg] === 'tabs') inner = await biViewTabs(pg);
-      else { const K = { 'bi-d2c': [biLoadChan, biViewD2C], 'bi-oy': [biLoadChan, biViewOY], 'bi-cp': [biLoadChan, biViewCP], 'bi-cafe': [biLoadCafe, biViewCafe], 'bi-price': [biLoadPrice, biViewPrice], 'bi-sales': [biLoadSalesX, biViewSales], 'bi-ads': [biLoadSalesX, biViewAds], 'bi-stock': [biLoadLogi, biViewStock], 'bi-ship': [biLoadShip, biViewShip], 'bi-sku': [biLoadLogi, biViewSku], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews], 'bi-rights': [biLoadRights, biViewRights], 'bi-arch': [biLoadArch, biViewArch], 'bi-plan': [biLoadPlan, biViewPlan] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + biStratCard(pg) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
+      else { const K = { 'bi-d2c': [biLoadChan, biViewD2C], 'bi-oy': [biLoadChan, biViewOY], 'bi-cp': [biLoadCP, biViewCP], 'bi-cafe': [biLoadCafe, biViewCafe], 'bi-price': [biLoadPrice, biViewPrice], 'bi-sales': [biLoadSalesX, biViewSales], 'bi-ads': [biLoadSalesX, biViewAds], 'bi-stock': [biLoadLogi, biViewStock], 'bi-ship': [biLoadShip, biViewShip], 'bi-sku': [biLoadLogi, biViewSku], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews], 'bi-rights': [biLoadRights, biViewRights], 'bi-arch': [biLoadArch, biViewArch], 'bi-plan': [biLoadPlan, biViewPlan] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + biStratCard(pg) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
       if (BIX.page === pg) { el.innerHTML = biFrame(pg, inner, BIX.stamp); biStageTag(pg); biStageBadges(pg); biWarm(); biStash(pg); if (pg === 'bi-qna' || pg === 'bi-plan') qpProdFill(); if (pg === 'bi-arch') arGalUpd(); if (pg === 'bi-sku') skGen(); }
     } catch (e) { if (BIX.page === pg) el.innerHTML = biFrame(pg, '<div class="bi-warn">데이터를 불러오지 못했습니다: ' + esc(e.message || String(e)) + '<br>시트 구조가 바뀌었거나 네트워크 문제일 수 있습니다. 새로고침으로 다시 시도해 주세요.</div>', ''); }
   }
 
   function biPrefetch(pg) {
     if (!biUnlocked() || pg === BIX.page) return;
-    const L = { 'bi-d2c': biLoadChan, 'bi-oy': biLoadChan, 'bi-cp': biLoadChan, 'bi-cafe': biLoadCafe, 'bi-price': biLoadPrice, 'bi-sales': biLoadSalesX, 'bi-ads': biLoadSalesX, 'bi-stock': biLoadLogi, 'bi-ship': biLoadShip, 'bi-sku': biLoadLogi, 'bi-journey': biLoadJourney, 'bi-rank': biLoadRank, 'bi-inf': biLoadInf, 'bi-rev': biLoadRev, 'bi-comp': biLoadComp, 'bi-qna': biLoadQna, 'bi-news': biLoadNews, 'bi-rights': biLoadRights }[pg];
+    const L = { 'bi-d2c': biLoadChan, 'bi-oy': biLoadChan, 'bi-cp': biLoadCP, 'bi-cafe': biLoadCafe, 'bi-price': biLoadPrice, 'bi-sales': biLoadSalesX, 'bi-ads': biLoadSalesX, 'bi-stock': biLoadLogi, 'bi-ship': biLoadShip, 'bi-sku': biLoadLogi, 'bi-journey': biLoadJourney, 'bi-rank': biLoadRank, 'bi-inf': biLoadInf, 'bi-rev': biLoadRev, 'bi-comp': biLoadComp, 'bi-qna': biLoadQna, 'bi-news': biLoadNews, 'bi-rights': biLoadRights }[pg];
     if (!L) return; BIX.pre = BIX.pre || {}; if (BIX.pre[pg] && Date.now() - BIX.pre[pg] < 60000) return; BIX.pre[pg] = Date.now();
     try { Promise.resolve(L()).catch(function () {}); } catch (e) {}
   }
