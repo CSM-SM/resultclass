@@ -2185,6 +2185,17 @@ body[data-mode="bi"] #biApp { grid-template-columns: 272px minmax(0, 1fr); backg
 .bi-sumline button { margin-left: auto; border: 0; background: none; text-decoration: underline; font: inherit; font-size: 12.5px; cursor: pointer; color: #111; }
 #biMain[data-stage="insight"] .bi-sumline { display: none; }
 .bi-stagehint:empty { display: none; }
+.bi-skel { padding-top: 8px; }
+.bi-skh { font-size: 32px; font-weight: 800; letter-spacing: -.02em; margin: 0 0 6px; }
+.bi-skp { color: #6B7076; font-size: 14px; margin: 0 0 18px; }
+.bi-skk { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+.bi-skk i, .bi-skc { display: block; border-radius: 16px; background: linear-gradient(90deg, #F2F3F5 25%, #E9EBEE 37%, #F2F3F5 63%); background-size: 400% 100%; animation: biSk 1.3s ease infinite; }
+.bi-skk i { height: 96px; }
+.bi-skc { height: 180px; margin-bottom: 12px; }
+.bi-skc.s { height: 120px; }
+.bi-sknote { font-size: 12.5px; color: #8B9096; margin-top: 6px; }
+@keyframes biSk { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
+@media (max-width: 980px) { .bi-skk { grid-template-columns: repeat(2, 1fr); } .bi-skh { font-size: 26px; } }
 .bi-stagebar { margin: 4px 0 6px; }
 @media print { .bi-stagebar { display: none !important; } }
 .nw-dates .bi-chip:nth-of-type(n+9) { display: none; }
@@ -4298,14 +4309,31 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     rank: { what: '올리브영 구강용품 제품별 랭킹과 올리브영 EDI 판매 실적을 회차마다 자동으로 모으는 대시보드 시트입니다. 랭킹 캡처는 구글 슬라이드에 최신순으로 쌓입니다.', tabs: '대시보드(이 화면이 읽는 탭) · 일자별추세 · 제품별추세 · 회차별추세 · RawData(회차별 순위 원자료) · 판매RawData · 상품매핑 · _차트데이터 · 입금예정(정산 자료라 열 수 없게 막음)', read: '대시보드 탭에서 랭킹 지표, 판매 지표, 제품별 랭킹·판매 표, 주간 추이, 시간대별 패턴, 최근 10회차 순위를 읽습니다.', note: '판매금액은 고객 결제가 기준이고 최근일은 EDI 최신 수집일입니다. 입금 예정(정산·공제) 구간은 거래 조건이 포함되어 표시하지 않습니다.' },
   };
   function biPw() { try { return sessionStorage.getItem('lo_bi_pw') || ''; } catch (e) { return ''; } }
-  function biRelock() { try { sessionStorage.removeItem('lo_bi_ok'); sessionStorage.removeItem('lo_bi_pw'); sessionStorage.removeItem('lo_bi_ts'); sessionStorage.removeItem('lo_bi_chat'); } catch (e) {} if (BIX.chat) { BIX.chat.msgs = []; BIX.chat.open = false; const pp = document.getElementById('biChatPanel'); if (pp) pp.hidden = true; } BIX.cbase = null; BIX.pt = {}; BIX.stashP = null; go('gate'); }
+  function biRelock() { try { biEvictC(true); sessionStorage.removeItem('lo_bi_warm'); sessionStorage.removeItem('lo_bi_ok'); sessionStorage.removeItem('lo_bi_pw'); sessionStorage.removeItem('lo_bi_ts'); sessionStorage.removeItem('lo_bi_chat'); } catch (e) {} if (BIX.chat) { BIX.chat.msgs = []; BIX.chat.open = false; const pp = document.getElementById('biChatPanel'); if (pp) pp.hidden = true; } BIX.cbase = null; BIX.pt = {}; BIX.stashP = null; go('gate'); }
+  function biGetC(ck) { try { const s = sessionStorage.getItem('lo_bc:' + ck); if (!s) return null; const o = JSON.parse(s); return o && o.j && Date.now() - o.t < 43200000 ? o : null; } catch (e) { return null; } }
+  function biEvictC(all) { try { const ks = []; for (let i = 0; i < sessionStorage.length; i++) { const k = sessionStorage.key(i); if (k && k.indexOf('lo_bc:') === 0) ks.push(k); } (all ? ks : ks.slice(0, Math.ceil(ks.length / 2))).forEach(function (k) { sessionStorage.removeItem(k); }); } catch (e) {} }
+  function biPutC(ck, j) { const k = 'lo_bc:' + ck; let v = ''; try { v = JSON.stringify({ t: Date.now(), j: j }); sessionStorage.setItem(k, v); } catch (e) { biEvictC(false); try { sessionStorage.setItem(k, v); } catch (e2) {} } }
+  function biStaleChanged() {
+    clearTimeout(BIX.stT); BIX.stT = setTimeout(function () {
+      const pg = BIX.page; if (!pg || document.body.dataset.mode !== 'bi' || (BIX.view && BIX.view[pg] === 'tabs')) return;
+      const ae = document.activeElement; if (ae && /^(INPUT|TEXTAREA|SELECT)$/.test(ae.tagName)) return;
+      const dr = document.getElementById('biDrawer'); if (dr && dr.classList.contains('open')) return;
+      const ap = document.getElementById('biApp'), sy = window.scrollY, st = ap ? ap.scrollTop : 0;
+      Promise.resolve(biRender(pg, true)).then(function () { window.scrollTo(0, sy); if (ap) ap.scrollTop = st; });
+    }, 500);
+  }
   function biFetch(key, gid, rows, raw) {
     if (!biUnlocked()) { biRelock(); return Promise.reject(new Error('암호를 다시 입력해 주세요')); }
     const ck = key + ':' + gid + (raw ? ':raw' : ''), c = BIX.cache[ck];
     if (c && Date.now() - c.t < 45000) return Promise.resolve(c.j);
-    return fetch(SHEET_ENDPOINT + '?type=bi_grid&pw=' + encodeURIComponent(biPw()) + '&key=' + key + '&gid=' + gid + '&r=' + (rows || 400) + (raw ? '&raw=1' : ''))
+    BIX.infl = BIX.infl || {};
+    const net = BIX.infl[ck] || (BIX.infl[ck] = fetch(SHEET_ENDPOINT + '?type=bi_grid&pw=' + encodeURIComponent(biPw()) + '&key=' + key + '&gid=' + gid + '&r=' + (rows || 400) + (raw ? '&raw=1' : ''))
       .then(function (r) { return r.json(); })
-      .then(function (j) { if (!j.ok) { if (j.error === 'auth') { biRelock(); } throw new Error(j.error === 'auth' ? '암호가 맞지 않습니다' : (j.error || '읽기 실패')); } BIX.cache[ck] = { t: Date.now(), j: j }; BIX.stamp = j.updated || BIX.stamp; return j; });
+      .then(function (j) { if (!j.ok) { if (j.error === 'auth') { biRelock(); } throw new Error(j.error === 'auth' ? '암호가 맞지 않습니다' : (j.error || '읽기 실패')); } BIX.cache[ck] = { t: Date.now(), j: j }; BIX.stamp = j.updated || BIX.stamp; biPutC(ck, j); return j; })
+      .then(function (j) { delete BIX.infl[ck]; return j; }, function (er) { delete BIX.infl[ck]; throw er; }));
+    const st = Date.now() > (BIX.noStaleUntil || 0) ? (c || biGetC(ck)) : null;
+    if (st && st.j) { net.then(function (j) { if (JSON.stringify(j.values) !== JSON.stringify(st.j.values)) biStaleChanged(); }, function () {}); return Promise.resolve(st.j); }
+    return net;
   }
   function bn(s) { if (s === undefined || s === null) return NaN; s = String(s).trim(); if (!s || s === '-') return NaN; const v = parseFloat(s.replace(/[₩$,%\s초원건회]/g, '')); return isNaN(v) ? NaN : v; }
   function fN(n) { return isFinite(n) ? Math.round(n).toLocaleString('ko-KR') : '-'; }
@@ -4695,9 +4723,9 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function biRace(p, ms) { return Promise.race([p, new Promise(function (res) { setTimeout(function () { res({ pending: true }); }, ms); })]); }
   async function biViewOverview() {
-    const jobs = { sales: biLoadSales(), journey: biLoadJourney('2026.10'), rank: biLoadRank(), inf: biLoadInf(), rev: biLoadRev(), paid: biLoadPaid(), comp: biRace(biLoadComp(), 20000), qna: biRace(biLoadQna(), 20000), news: biRace(biLoadNews(), 20000), rights: biRace(biLoadRights(), 20000), stock: biRace(biLoadStock(), 20000), days: biTrendData() };
+    const raws = { sales: biLoadSales(), journey: biLoadJourney('2026.10'), rank: biLoadRank(), inf: biLoadInf(), rev: biLoadRev(), paid: biLoadPaid(), comp: biLoadComp(), qna: biLoadQna(), news: biLoadNews(), rights: biLoadRights(), stock: biLoadStock(), days: biTrendData() }, jobs = {}; Object.keys(raws).forEach(function (k) { jobs[k] = biRace(raws[k], 4500); });
     const keys = Object.keys(jobs), res = await Promise.allSettled(keys.map(function (k) { return jobs[k]; })), D = {}; keys.forEach(function (k, i) { D[k] = res[i].status === 'fulfilled' ? res[i].value : null; });
-    BIX.pend = {}; ['comp', 'qna', 'news', 'rights', 'stock'].forEach(function (k) { if (D[k] && D[k].pending) { BIX.pend[k] = 1; D[k] = null; } });
+    BIX.pend = {}; keys.forEach(function (k) { if (D[k] && D[k].pending) { if (['comp', 'qna', 'news', 'rights', 'stock'].indexOf(k) >= 0) BIX.pend[k] = 1; D[k] = null; raws[k].then(biStaleChanged, function () {}); } });
     const today = new Date(), val = function (arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; };
     if (D.days) { const ks = Object.keys(D.days).sort(), cm = {}; ks.forEach(function (k) { const m = k.slice(0, 7); const o = cm[m] || (cm[m] = { v: 0, c: 0 }); o.v += D.days[k]['방문수']; o.c += D.days[k]['전환수']; }); const ms = Object.keys(cm).sort(); if (ms.length >= 2) { const a = cm[ms[ms.length - 1]], b = cm[ms[ms.length - 2]], ca = a.v ? a.c / a.v * 100 : NaN, cb = b.v ? b.c / b.v * 100 : NaN; D.cvr = { drop: isFinite(ca) && isFinite(cb) && cb ? (cb - ca) / cb * 100 : NaN, txt: (+ms[ms.length - 1].slice(5)) + '월 전환율 ' + fP(ca, 2) + ' / 전월 ' + fP(cb, 2) }; } }
     BIX.ovR = true; const kp = [], kx = [];
@@ -5623,7 +5651,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const msg = mode === 'ads' ? '재고가 곧 바닥나는 품목에 광고·행사가 걸려 있으면 소진 뒤 노출 비용만 나갑니다. 아래 품목의 진행 광고를 확인하세요.' : '재고가 바닥나면 해당 품목 매출이 멈춥니다. 아래 품목은 입고 일정과 함께 챙겨야 합니다.';
     return '<section class="bi-card"><div class="bi-ch"><h3>📦 재고 연동 · ' + (mode === 'ads' ? '소진 임박 품목' : '매출에 영향 줄 품목') + ' <span class="bi-ms">기준일 ' + esc(L.asOf || '-') + '</span></h3><a class="bi-btn" href="#bi-stock">재고 현황 열기</a></div><p class="bi-dr-p">' + msg + '</p>' + (hot.length ? '<div class="bi-tw"><table class="bi-t"><thead><tr><th>상태</th><th>품목</th><th>김포재고</th><th>하루 판매</th><th>남은 일수</th><th>입고 예정</th><th>하루 매출 규모(추정)</th></tr></thead><tbody>' + rows + '</tbody></table></div>' + (expoN ? '<div class="bi-note">하루 매출 규모(추정) = 하루 판매 개수 × 가격표의 판매가입니다. 실제 판매가·채널별 할인과 다를 수 있어 참고용이며, 합계 약 <b>' + fW(expo) + '원</b>(' + expoN + '개 품목)입니다.</div>' : '<div class="bi-note">가격표와 연결된 품목이 없어 금액 추정은 생략했습니다.</div>') : '<div class="bi-empty">긴급·주의 품목이 없습니다.</div>') + '</section>';
   }
-  async function biLoadSalesX() { const d = await biLoadSales(); let lg = null; try { const r = await biRace(biLoadLogi(), 12000); lg = r && r.pending ? null : r; } catch (e) { lg = null; } return Object.assign({}, d, { lg: lg }); }
+  async function biLoadSalesX() { const d = await biLoadSales(); let lg = null; try { const pr = biLoadLogi(), r = await biRace(pr, 1500); lg = r && r.pending ? null : r; if (!lg) pr.then(biStaleChanged, function () {}); } catch (e) { lg = null; } return Object.assign({}, d, { lg: lg }); }
   function bindLogi(app) {
     app.addEventListener('click', function (e) {
       const t = e.target; let x;
@@ -5650,7 +5678,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       it.out = /sku\s*(삭제|out)/i.test(it.off + ' ' + it.det); it.hasP = isFinite(it.sale) && it.sale > 0; it.disc = isFinite(it.list) && it.list > 0 && it.hasP ? (1 - it.sale / it.list) * 100 : NaN;
       it.dev = []; if (it.hasP) PR_CH.forEach(function (c) { const x = it.ch[c[0]]; if (isFinite(x) && x > 0) { const q = x / it.sale; if (Math.abs(q - 1) >= 0.1) it.dev.push({ ch: c[0], v: x, d: (q - 1) * 100, bad: q < 0.5 || q > 2 }); } });
       rows.push(it); }
-    let lg = null; try { const r = await biRace(biLoadLogi(), 8000); lg = r && r.pending ? null : r; } catch (e) { lg = null; }
+    let lg = null; try { const pr = biLoadLogi(), r = await biRace(pr, 1500); lg = r && r.pending ? null : r; if (!lg) pr.then(biStaleChanged, function () {}); } catch (e) { lg = null; }
     if (lg) rows.forEach(function (it) { it.stock = it.bc ? lg.items.filter(function (x) { return x.bc === it.bc; })[0] || null : null; });
     const live = rows.filter(function (x) { return !x.out; });
     return { rows: rows, live: live, lg: lg, fresh: { label: '가격표 ' + live.length + '품목 (SKU 삭제 제외)', age: null } };
@@ -6252,29 +6280,40 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   async function biRender(pg, quiet) {
     const el = $('#biMain'); if (!el) return; BIX.page = pg; const m = BI_PAGES[pg]; if (!m) return;
-    if (!quiet) el.innerHTML = '<div class="bi-loading">시트에서 데이터를 읽는 중...</div>';
+    if (!quiet) el.innerHTML = '<div class="bi-skel"><div class="bi-skh">' + esc(m.t) + '</div><p class="bi-skp">' + esc(m.s || '') + '</p><div class="bi-skk"><i></i><i></i><i></i><i></i></div><div class="bi-skc"></div><div class="bi-skc s"></div><div class="bi-sknote">시트에서 최신 값을 읽는 중입니다</div></div>';
     try {
       let inner = '';
       if (pg === 'bi') { inner = await biViewOverview(); inner += biActCard(biActsOverview()); }
       else if (pg === 'bi-manual') inner = biViewManual();
       else if (m.k && BIX.view[pg] === 'tabs') inner = await biViewTabs(pg);
       else { const K = { 'bi-cafe': [biLoadCafe, biViewCafe], 'bi-price': [biLoadPrice, biViewPrice], 'bi-sales': [biLoadSalesX, biViewSales], 'bi-ads': [biLoadSalesX, biViewAds], 'bi-stock': [biLoadLogi, biViewStock], 'bi-ship': [biLoadShip, biViewShip], 'bi-sku': [biLoadLogi, biViewSku], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews], 'bi-rights': [biLoadRights, biViewRights], 'bi-arch': [biLoadArch, biViewArch], 'bi-plan': [biLoadPlan, biViewPlan] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
-      if (BIX.page === pg) { el.innerHTML = biFrame(pg, inner, BIX.stamp); biStageTag(pg); biStageBadges(pg); biStash(pg); if (pg === 'bi-qna' || pg === 'bi-plan') qpProdFill(); if (pg === 'bi-arch') arGalUpd(); if (pg === 'bi-sku') skGen(); }
+      if (BIX.page === pg) { el.innerHTML = biFrame(pg, inner, BIX.stamp); biStageTag(pg); biStageBadges(pg); biWarm(); biStash(pg); if (pg === 'bi-qna' || pg === 'bi-plan') qpProdFill(); if (pg === 'bi-arch') arGalUpd(); if (pg === 'bi-sku') skGen(); }
     } catch (e) { if (BIX.page === pg) el.innerHTML = biFrame(pg, '<div class="bi-warn">데이터를 불러오지 못했습니다: ' + esc(e.message || String(e)) + '<br>시트 구조가 바뀌었거나 네트워크 문제일 수 있습니다. 새로고침으로 다시 시도해 주세요.</div>', ''); }
+  }
+
+  function biPrefetch(pg) {
+    if (!biUnlocked() || pg === BIX.page) return;
+    const L = { 'bi-cafe': biLoadCafe, 'bi-price': biLoadPrice, 'bi-sales': biLoadSalesX, 'bi-ads': biLoadSalesX, 'bi-stock': biLoadLogi, 'bi-ship': biLoadShip, 'bi-sku': biLoadLogi, 'bi-journey': biLoadJourney, 'bi-rank': biLoadRank, 'bi-inf': biLoadInf, 'bi-rev': biLoadRev, 'bi-comp': biLoadComp, 'bi-qna': biLoadQna, 'bi-news': biLoadNews, 'bi-rights': biLoadRights }[pg];
+    if (!L) return; BIX.pre = BIX.pre || {}; if (BIX.pre[pg] && Date.now() - BIX.pre[pg] < 60000) return; BIX.pre[pg] = Date.now();
+    try { Promise.resolve(L()).catch(function () {}); } catch (e) {}
+  }
+  function biWarm() {
+    try { if (sessionStorage.getItem('lo_bi_warm')) return; sessionStorage.setItem('lo_bi_warm', '1'); } catch (e) {}
+    ['bi-sales', 'bi-stock', 'bi-cafe'].forEach(function (p, i) { setTimeout(function () { if (document.body.dataset.mode === 'bi' && !document.hidden) biPrefetch(p); }, 3500 + i * 3500); });
   }
   function biRoute(pg) {
     BIX.page = pg; $$('#biApp .bs-nav a').forEach(function (a) { a.classList.toggle('on', a.dataset.bi === pg); });
     $('#biApp').scrollTop = 0; window.scrollTo(0, 0); biRender(pg);
-    clearInterval(BIX.timer); BIX.timer = setInterval(function () { if (document.body.dataset.mode === 'bi' && !document.hidden && BIX.view[BIX.page] !== 'tabs') { BIX.cache = {}; biRender(BIX.page, true); } }, 300000);
+    clearInterval(BIX.timer); BIX.timer = setInterval(function () { if (document.body.dataset.mode === 'bi' && !document.hidden && BIX.view[BIX.page] !== 'tabs') { BIX.cache = {}; BIX.noStaleUntil = Date.now() + 20000; biRender(BIX.page, true); } }, 300000);
   }
   function bindBiApp() {
-    const app = $('#biApp'); if (!app) return; bindBi2(app); bindQp(app); bindArch(app); bindBench(app); bindLogi(app); bindPrice(app); bindCafe(app); biChatInit(); fpInit();
+    const app = $('#biApp'); if (!app) return; bindBi2(app); bindQp(app); bindArch(app); bindBench(app); bindLogi(app); bindPrice(app); bindCafe(app); biChatInit(); fpInit(); app.addEventListener('mouseover', function (e) { const a = e.target.closest ? e.target.closest('.bs-nav a[data-bi]') : null; if (a) biPrefetch(a.dataset.bi); }); app.addEventListener('touchstart', function (e) { const a = e.target.closest ? e.target.closest('.bs-nav a[data-bi]') : null; if (a) biPrefetch(a.dataset.bi); }, { passive: true });
     app.addEventListener('click', function (e) {
-      if (e.target.closest('[data-birefresh]')) { BIX.cache = {}; biRender(BIX.page); return; }
+      if (e.target.closest('[data-birefresh]')) { BIX.cache = {}; BIX.noStaleUntil = Date.now() + 20000; biRender(BIX.page); return; }
       const ex = e.target.closest('[data-biexp]'); if (ex) { biExport(ex.dataset.biexp); return; }
       const og = e.target.closest('[data-ovg]'); if (og) { BIX.ovg = og.dataset.ovg; biRender('bi', true); return; }
       const om = e.target.closest('[data-ovm]'); if (om) { BIX.ovm = om.dataset.ovm; biRender('bi', true); return; }
-      if (e.target.closest('[data-bibrief]')) { BIX.cache = {}; biRender('bi'); return; }
+      if (e.target.closest('[data-bibrief]')) { BIX.cache = {}; BIX.noStaleUntil = Date.now() + 20000; biRender('bi'); return; }
       const vw = e.target.closest('[data-biview]'); if (vw) { BIX.view[BIX.page] = vw.dataset.biview; biRender(BIX.page); return; }
       const jm = e.target.closest('[data-jm]'); if (jm) { BIX.jm = jm.dataset.jm; biRender(BIX.page); return; }
       const jp = e.target.closest('[data-jp]'); if (jp) { BIX.jp = +jp.dataset.jp; biRender(BIX.page, true); return; }
