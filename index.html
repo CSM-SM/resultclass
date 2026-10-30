@@ -6022,12 +6022,14 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       it.ct = null; it.ctAlt = []; it.ctBy = ''; const k = lgKey(it.name), ko = it.price ? lgKey(it.price.official) : ''; let m = [], by = '';
       if (it.bc) { m = cts.filter(function (c) { return c.bc && c.bc === it.bc; }); if (m.length) by = '바코드'; }
       if (!m.length) { m = cts.filter(function (c) { const a = lgKey(c.name), b = lgKey(c.off); return (a && a === k) || (b && ko && b === ko); }); if (m.length) by = '제품명'; }
-      if (!m.length) { const f = cts.filter(function (c) { const a = lgKey(c.name); return a.length >= 4 && (k.indexOf(a) >= 0 || a.indexOf(k) >= 0); }); const base = f.filter(function (c) { return !c.oy; }); if (base.length && new Set(base.map(function (c) { return c.name; })).size === 1) { m = f.filter(function (c) { return lgKey(c.name).indexOf(lgKey(base[0].name)) === 0 || c.bc && c.bc === base[0].bc; }); by = '제품명(유사)'; } }
+      if (!m.length) { const tk = ctTok(it.name); let best = null, bs = 0, second = 0; if (tk.length >= 2) cts.forEach(function (c) { const t2 = ctTok(c.name); const s = ctSim(tk, t2); if (s > bs) { second = bs; bs = s; best = c; } else if (s > second) second = s; }); if (best && bs >= 0.75 && bs > second) { m = cts.filter(function (c) { return c === best || (best.bc && c.bc === best.bc); }); by = '제품명(유사)'; } }
       if (!m.length) return; const main = m.filter(function (c) { return !c.oy; })[0] || m[0]; it.ct = main; it.ctBy = by; it.ctAlt = m.filter(function (c) { return c !== main; }); m.forEach(function (c) { c.used = true; });
     });
   }
+  function ctTok(s) { return String(s || '').toLowerCase().replace(/라이브오랄스|킥스윙|프로젝트|오라원|셀프|올리브영|올영|라브|납품 규격/g, ' ').replace(/v컷팅/g, 'v컷').replace(/[()\[\]_\/,·\-+]+/g, ' ').split(/\s+/).filter(Boolean).map(function (w) { return w.length >= 3 ? w.replace(/모$/, '') : w; }); }
+  function ctSim(a, b) { const A = new Set(a), B = new Set(b); if (!A.size || !B.size) return 0; const nA = a.filter(function (w) { return /\d/.test(w); }).sort().join(','), nB = b.filter(function (w) { return /\d/.test(w); }).sort().join(','); if (nA !== nB) return 0; let i = 0; A.forEach(function (w) { if (B.has(w)) i++; }); return i / (A.size + B.size - i); }
   function ctDim(a) { return a.every(isFinite) ? a.map(function (x) { return fN(x); }).join('×') : '-'; }
-  function ctShort(it) { const c = it.ct; if (!c) return '<span class="bi-ms">-</span>'; return c.hasCt ? ctDim(c.ct) + ' · ' + (c.qty > 0 ? fN(c.qty) + '입' : '입수 미기재') : '<span class="bi-pill yel">규격 미비</span>'; }
+  function ctShort(it) { const c = it.ct; if (!c) return '<span class="bi-ms">-</span>'; return c.hasCt ? ctDim(c.ct) + ' · ' + (c.qty > 0 ? fN(c.qty) + '입' : '입수 미기재') + (/유사/.test(it.ctBy) ? ' <small class="bi-ms" title="이름이 비슷해 연결한 값입니다. 확인이 필요합니다">유사</small>' : '') : '<span class="bi-pill yel">규격 미비</span>'; }
   function ctItemOf(d, c) { return (d.items || []).filter(function (it) { return it.ct === c || (it.ctAlt || []).indexOf(c) >= 0; })[0] || null; }
   function ctComplete(c) { return c.hasCt && c.qty > 0 && isFinite(c.gross); }
   function ctIns(d) {
