@@ -4692,8 +4692,16 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       + (lr === 0 ? emptyMsg : '<div class="bi-sheet"><table>' + '<thead>' + head + '</thead><tbody id="biTabBody">' + body + '</tbody></table></div>');
   }
   /* 시트 메뉴얼 */
+  const BI_MTEAMS = [
+    ['영업팀', [['sales', '매체별 월 매출·광고비·ROAS를 모은 손익분기표'], ['price', '제품 분류·바코드·정상가·판매가·채널별 가격 표준 가격표'], ['cafe', '카페24 자사몰의 매출·방문·구매율·광고비를 매일 모은 대시보드'], ['journey', '주력상품 4종의 일별 방문·구매클릭·전환·구매금액'], ['rank', '올리브영 제품별 랭킹과 EDI 판매 실적 자동 수집']]],
+    ['마케팅팀', [['inf', '인플루언서 후보 컨택 리스트와 월별 진행 기록'], ['paid', '광고 소재 기획·성과와 경쟁사 소재 분석 리포트'], ['bench', '인스타 광고소재를 매일 수집해 TOP50을 뽑는 DB'], ['rights', '모델·유튜버 소재의 계약일·사용 가능 기간 관리'], ['arch', '숏폼 바이럴 레퍼런스의 대본·기획·활용 방안'], ['qna', '지식iN·카페 글을 매일 수집해 콘텐츠 소재 찾기'], ['news', '구강케어·유통 뉴스를 매일 자동 취합한 브리핑'], ['comp', '올리브영 TOP20 경쟁 제품의 가격·할인·리뷰 매일 수집'], ['rev', '자사몰·스마트스토어 리뷰율·부정 VOC·평점 운영 현황']]],
+    ['개발팀', [['pidea', '신제품 아이디어를 분류·우선순위로 모은 자동화 시트'], ['pstat', '상품개발·리뉴얼 프로젝트의 등급·일정·진행 현황'], ['pdaiso', '다이소 구강용품 425개 품목 시장 요약'], ['stock', '이카운트 재고·출고·입고와 소진 임박 품목 대시보드']]]
+  ];
   function biViewManual() {
-    return '<div class="bi-note" style="margin:0 0 14px">시트별 사용 메뉴얼(초안)입니다. 시트에서 확인한 탭 구성과 이 대시보드가 읽는 범위를 적었고, 상세 작성 메뉴얼은 순차적으로 보강합니다.</div><div class="bi-cards2">' + Object.keys(BI_MANUAL).map(function (k) { const m = BI_MANUAL[k], s = BI_SRC[k]; return '<section class="bi-card"><div class="bi-ch"><h3>' + esc(s.t) + '</h3><span class="bi-b mo">메뉴얼 초안</span></div><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(m.what) + '</dd><dt>탭 구성</dt><dd>' + esc(m.tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(m.read) + '</dd><dt>알아둘 점</dt><dd>' + esc(m.note) + '</dd></dl><a class="bi-btn" href="' + esc(s.u) + '" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a></section>'; }).join('') + '</div>';
+    return '<div class="bi-note" style="margin:0 0 14px">팀별로 모은 시트 목록입니다. 시트 열기를 누르면 원본이 새 창으로 열립니다.</div>' + BI_MTEAMS.map(function (t) {
+      const items = t[1].filter(function (x) { return BI_SRC[x[0]]; });
+      return '<h3 class="bi-h3">' + esc(t[0]) + ' <span class="bi-ms">' + items.length + '개</span></h3><div class="bi-cards2">' + items.map(function (x) { const s = BI_SRC[x[0]]; return '<section class="bi-card"><div class="bi-ch"><h3>' + esc(s.t) + '</h3></div><p class="bi-dr-p" style="margin:6px 0 12px">' + esc(x[1]) + '</p><a class="bi-btn" href="' + esc(s.u) + '" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a></section>'; }).join('') + '</div>';
+    }).join('');
   }
 
   /* 종합 */
