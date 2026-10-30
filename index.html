@@ -1861,6 +1861,13 @@ body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax
 .bi-kv small { font-size: 13px; font-weight: 600; color: #6B7076; margin-left: 3px; }
 .bi-ks { font-size: 12px; color: #8B9096; margin-top: 6px; min-height: 16px; }
 .bi-up { color: #0E8F7B; } .bi-dn { color: #D24545; }
+.pd-th { width: 46px; height: 46px; border-radius: 10px; object-fit: cover; background: #F1F3F5; display: inline-flex; align-items: center; justify-content: center; font-size: 22px; vertical-align: middle; flex: none; }
+.pd-th.lg { width: 64px; height: 64px; border-radius: 12px; font-size: 30px; }
+.pd-th.ph { filter: grayscale(.2); opacity: .8; }
+.pd-hd { display: flex; gap: 12px; align-items: center; margin: 6px 0 8px; }
+.pd-hd .bi-pk-h { margin: 0; }
+.pd-ref { color: #0E8F7B; font-weight: 600; text-decoration: none; }
+.pd-ref:hover { text-decoration: underline; }
 .bi-grid2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 16px; }
 .bi-grid2 > .bi-card { margin-bottom: 16px; }
 .bi-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; margin-bottom: 14px; }
@@ -6435,8 +6442,14 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     }
     const cats = []; ideas.forEach(function (c) { if (c.cat && cats.indexOf(c.cat) < 0) cats.push(c.cat); });
     const td = new Date(); td.setHours(0, 0, 0, 0);
-    return { ideas: ideas, cats: cats, proj: proj, bom: bom, projOk: !!R[1], bomOk: !!R[2], today: td, age: null };
+    const th = await pdThumbs();
+    return { ideas: ideas, cats: cats, proj: proj, bom: bom, projOk: !!R[1], bomOk: !!R[2], today: td, age: null, th: th };
   }
+  async function pdThumbs() { if (BIX.pdTh) return BIX.pdTh; try { const r = await fetch('assets/pd-thumb.json?v=1'); BIX.pdTh = r.ok ? await r.json() : {}; } catch (e) { BIX.pdTh = {}; } return BIX.pdTh; }
+  const PD_ICON = { '전동칫솔': '🪥', '농축가글': '🧴', '불소도포제': '🦷', '치아미백제': '✨', '신규블루오션후보': '💡' };
+  function pdThumb(c, big) { const th = (BIX.pdd && BIX.pdd.th) || BIX.pdTh || {}, u = th[c.name]; return u ? '<img class="pd-th' + (big ? ' lg' : '') + '" src="' + u + '" alt="' + esc(c.name) + ' 참고 이미지" loading="lazy">' : '<span class="pd-th' + (big ? ' lg' : '') + ' ph" title="참고 이미지 없음">' + (PD_ICON[c.cat] || '📦') + '</span>'; }
+  function pdHost(u) { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; } }
+  function pdRef(c) { return c.doc ? '<a class="pd-ref" href="' + esc(c.doc) + '" target="_blank" rel="noopener noreferrer">' + esc(pdHost(c.doc) || '링크') + ' ↗</a>' : '<span class="bi-ms">링크 없음</span>'; }
   function pdPass(c) { const f = BIX.pd || {}; if (f.cat && f.cat !== '전체' && c.cat !== f.cat) return false; if (f.pri && f.pri !== '전체' && c.pri !== f.pri) return false; if (f.cost && f.cost !== '전체' && c.costK !== f.cost) return false; return true; }
   function pdPicks(d, n) {
     const sk = biLS('lo_bi_pd_skip', {}), td = biToday();
@@ -6449,7 +6462,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function pdChips(c) { return c.pt.map(function (p) { return '<span>' + esc(p[0].replace(/ \(시트.*\)| \(시트\)/, '')) + '</span>'; }).join('') || '<span>기본 후보</span>'; }
   function pdCard(c, i) {
     const fav = biLS('lo_bi_pd_fav', {})[c.name];
-    return '<div class="bi-pick"><div class="bi-pk-top"><span class="bi-pk-rk">추천 ' + (i + 1) + '</span><span class="bi-pk-sc" title="' + esc(pdTip(c)) + '">임시 점수 ' + c.s + ' / ' + PD_MAX + '</span></div><div class="bi-pk-h" style="font-weight:800">' + esc(c.name) + '</div><div class="bi-pk-m">' + esc(c.cat) + ' · 우선순위 ' + esc(c.pri || '미표기') + ' · 개발비용 ' + esc(c.costK || '미표기') + ' · ' + esc(c.dur || '기간 미표기') + '</div><div class="bi-pk-re">' + pdChips(c) + '</div><div class="bi-pk-idea"><small>고객 불편</small><p>' + esc(c.pain[0] || '미표기') + '</p></div><div class="bi-pk-idea"><small>해결 방안</small><p>' + esc(c.sol[0] || '미표기') + '</p></div><div class="bi-pk-prod">판매 채널 <b>' + esc(c.chRaw || '미표기') + '</b></div><div class="bi-pk-btns"><button type="button" class="bi-btn" data-pdopen="' + esc(String(c.id)) + '">자세히</button><button type="button" class="bi-btn" data-pdcopy="' + esc(String(c.id)) + '">티켓 초안 복사</button><button type="button" class="bi-btn' + (fav ? ' ok' : '') + '" data-pdfav="' + esc(String(c.id)) + '">' + (fav ? '★ 관심' : '☆ 관심') + '</button><button type="button" class="bi-btn" data-pdskip="' + esc(String(c.id)) + '">오늘 제외</button></div></div>';
+    return '<div class="bi-pick"><div class="bi-pk-top"><span class="bi-pk-rk">추천 ' + (i + 1) + '</span><span class="bi-pk-sc" title="' + esc(pdTip(c)) + '">임시 점수 ' + c.s + ' / ' + PD_MAX + '</span></div><div class="pd-hd">' + pdThumb(c, true) + '<div><div class="bi-pk-h" style="font-weight:800">' + esc(c.name) + '</div><div class="bi-pk-m">' + esc(c.cat) + ' · 우선순위 ' + esc(c.pri || '미표기') + ' · 개발비용 ' + esc(c.costK || '미표기') + ' · ' + esc(c.dur || '기간 미표기') + '</div></div></div><div class="bi-pk-re">' + pdChips(c) + '</div><div class="bi-pk-idea"><small>고객 불편</small><p>' + esc(c.pain[0] || '미표기') + '</p></div><div class="bi-pk-idea"><small>해결 방안</small><p>' + esc(c.sol[0] || '미표기') + '</p></div><div class="bi-pk-prod">판매 채널 <b>' + esc(c.chRaw || '미표기') + '</b></div><div class="bi-pk-prod">참고 제품 ' + pdRef(c) + '</div><div class="bi-pk-btns"><button type="button" class="bi-btn" data-pdopen="' + esc(String(c.id)) + '">자세히</button><button type="button" class="bi-btn" data-pdcopy="' + esc(String(c.id)) + '">티켓 초안 복사</button><button type="button" class="bi-btn' + (fav ? ' ok' : '') + '" data-pdfav="' + esc(String(c.id)) + '">' + (fav ? '★ 관심' : '☆ 관심') + '</button><button type="button" class="bi-btn" data-pdskip="' + esc(String(c.id)) + '">오늘 제외</button></div></div>';
   }
   function pdFind(id) { const d = BIX.pdd; return d ? d.ideas.find(function (x) { return String(x.id) === String(id); }) : null; }
   function pdTicket(c) {
@@ -6480,7 +6493,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const chip = function (k, v, label, on) { return '<button type="button" class="bi-chip' + (on ? ' on' : '') + '" data-pdf="' + k + '" data-v="' + esc(v) + '">' + esc(label) + '</button>'; };
     const filt = '<div class="bi-bar2"><span class="bi-bl">분류</span>' + ['전체'].concat(d.cats).map(function (x) { return chip('cat', x, x, f.cat === x); }).join('') + '<span class="bi-bl">우선순위</span>' + ['전체', 'S', 'A', 'B'].map(function (x) { return chip('pri', x, x, f.pri === x); }).join('') + '<span class="bi-bl">개발비용(추정)</span>' + ['전체', '낮음', '중간', '높음'].map(function (x) { return chip('cost', x, x, f.cost === x); }).join('') + '</div>';
     const fav = biLS('lo_bi_pd_fav', {}), fk = Object.keys(fav), S = d.ideas.filter(function (c) { return c.pri === 'S'; }).length;
-    const rows = pool.slice().sort(function (a, b) { return b.s - a.s || a.id - b.id; }).slice(0, 30).map(function (c, i) { return '<tr class="bi-click" data-pdopen="' + esc(String(c.id)) + '"><td>' + (i + 1) + '</td><td><b>' + esc(c.name) + '</b>' + (c.sim ? ' <span class="bi-mini">개발 현황 유사</span>' : '') + '</td><td>' + esc(c.cat) + '</td><td>' + esc(c.pri || '-') + '</td><td>' + esc(c.costK || '-') + '</td><td>' + esc(c.dur.replace('(추정)', '') || '-') + '</td><td><b>' + c.s + '</b><span class="bi-ms"> / ' + PD_MAX + '</span></td></tr>'; }).join('');
+    const rows = pool.slice().sort(function (a, b) { return b.s - a.s || a.id - b.id; }).slice(0, 30).map(function (c, i) { return '<tr class="bi-click" data-pdopen="' + esc(String(c.id)) + '"><td>' + (i + 1) + '</td><td>' + pdThumb(c) + '</td><td><b>' + esc(c.name) + '</b>' + (c.sim ? ' <span class="bi-mini">개발 현황 유사</span>' : '') + '</td><td>' + esc(c.cat) + '</td><td>' + esc(c.pri || '-') + '</td><td>' + esc(c.costK || '-') + '</td><td>' + esc(c.dur.replace('(추정)', '') || '-') + '</td><td><b>' + c.s + '</b><span class="bi-ms"> / ' + PD_MAX + '</span></td><td>' + pdRef(c) + '</td></tr>'; }).join('');
     const cc = d.cats.map(function (k) { const a = d.ideas.filter(function (c) { return c.cat === k; }); return { l: k + ' (S ' + a.filter(function (c) { return c.pri === 'S'; }).length + ')', v: a.length }; });
     const ins = pdInsights(d);
     return '<div class="bi-kpis">' + bKpi('아이디어', fN(d.ideas.length), '건', '자동화 시트 누적') + bKpi('우선순위 S', fN(S), '건', '시트 기준') + bKpi('개발 현황 유사', fN(d.ideas.filter(function (c) { return c.sim; }).length), '건', '추천에서 제외') + bKpi('개발 중 프로젝트', fN(d.proj.length), '건', d.projOk ? '현황도 등급표' : '읽지 못함') + '</div>'
@@ -6488,7 +6501,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       + (picks.length ? '<div class="bi-picks">' + picks.map(pdCard).join('') + '</div>' : '<div class="bi-empty">조건에 맞는 후보가 없습니다. 아래 필터를 풀어 보세요.</div>')
       + '<div class="bi-note" style="margin:6px 0 14px">자동화 시트의 아이디어를 시트의 우선순위·개발비용·개발기간·참고 리뷰·채널로 점수를 매겨(만점 ' + PD_MAX + '점, 임시 기준) 하루 3개를 분류가 겹치지 않게 뽑습니다. 개발 현황에 비슷한 이름이 있는 건은 제외합니다. 개발비용·기간·가격은 시트의 <b>추정값</b>이며 검증된 수치가 아닙니다.</div>' + filt
       + (fk.length ? '<section class="bi-card"><h3>★ 관심 목록 (' + fk.length + ')</h3><div class="bi-pk-re">' + fk.map(function (k) { return '<span class="bi-favchip"><a href="#" data-pdopen="' + esc(String(fav[k].id)) + '">' + esc(k) + '</a><button type="button" data-pdfav="' + esc(String(fav[k].id)) + '" aria-label="관심 해제">✕</button></span>'; }).join('') + '</div><div class="bi-dr-btns"><button type="button" class="bi-btn" data-pdfavcopy="1">목록 복사</button></div></section>' : '')
-      + '<section class="bi-card"><h3>후보 순위 (상위 30) <span class="bi-ms">행을 누르면 근거와 티켓 초안이 열립니다</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>#</th><th>제품 아이디어</th><th>분류</th><th>우선순위</th><th>개발비용(추정)</th><th>개발기간(추정)</th><th>점수</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>'
+      + '<section class="bi-card"><h3>후보 순위 (상위 30) <span class="bi-ms">행을 누르면 근거와 티켓 초안이 열립니다</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>#</th><th>이미지</th><th>제품 아이디어</th><th>분류</th><th>우선순위</th><th>개발비용(추정)</th><th>개발기간(추정)</th><th>점수</th><th>참고 제품 링크</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>'
       + '<section class="bi-card"><h3>💡 자동 인사이트 ' + bReal + '</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul><h4 class="bi-h4" style="margin-top:12px">분류별 아이디어 수</h4>' + bH(cc, fN, '#14C4A9') + '</section>';
   }
   function biActsPd(d) {
@@ -6568,6 +6581,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function bindPd(app) {
     app.addEventListener('click', function (e) {
       const t = e.target; let x;
+      if (t.closest('a.pd-ref')) return;
       if ((x = t.closest('[data-pdf]'))) { const f = BIX.pd = BIX.pd || { cat: '전체', pri: '전체', cost: '전체' }; f[x.dataset.pdf] = x.dataset.v; biRender(BIX.page, true); return; }
       if (t.closest('[data-pdshuffle]')) { BIX.pdShuf = (BIX.pdShuf || 0) + 1; biRender(BIX.page, true); return; }
       if ((x = t.closest('[data-pdopen]'))) { e.preventDefault(); pdOpen(x.dataset.pdopen); return; }
