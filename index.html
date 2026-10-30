@@ -2171,6 +2171,21 @@ body[data-mode="bi"] #biApp { grid-template-columns: 272px minmax(0, 1fr); backg
 .pr-out { opacity: .55; }
 .bi-fp-sel { width: 100%; border: 1px solid #DDE0E4; border-radius: 10px; padding: 8px 10px; font: inherit; font-size: 13px; background: #fff; text-overflow: ellipsis; } .bi-fp-sel:focus { border-color: #14C4A9; outline: 0; }
 .bi-stagehint { margin: -4px 0 12px; padding-left: 4px; font-size: 12.5px; color: #6B7076; }
+#biMain .bi-stages { display: flex; gap: 28px; margin: 4px 0 8px; border-bottom: 1px solid #E6E8EB; flex-wrap: wrap; }
+#biMain .bi-stage { display: inline-flex; align-items: center; gap: 7px; background: none; border: 0; border-bottom: 2px solid transparent; border-radius: 0; padding: 10px 2px; margin-bottom: -1px; font: inherit; font-size: 15.5px; color: #6B7076; cursor: pointer; }
+#biMain .bi-stage:hover { color: #111; background: none; border-color: transparent; }
+#biMain .bi-stage.on { background: none; color: #111; font-weight: 700; border-bottom-color: #111; }
+.bi-tb { font-style: normal; min-width: 20px; padding: 0 7px; border-radius: 999px; background: #F0F1F3; color: #3c3a39; font-size: 11.5px; line-height: 20px; text-align: center; font-weight: 700; }
+.bi-tb.warn { background: #E5484D; color: #fff; }
+.bi-tb[hidden], .bi-sumline[hidden] { display: none; }
+.bi-sumline { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; padding: 10px 14px; border-radius: 12px; background: #FFF1F1; font-size: 13.5px; color: #2e2e2e; margin: 2px 0 10px; }
+.bi-sumline b { color: #C62A2F; flex: none; }
+.bi-sumline span { flex: 1; min-width: 200px; }
+.bi-sumline button { margin-left: auto; border: 0; background: none; text-decoration: underline; font: inherit; font-size: 12.5px; cursor: pointer; color: #111; }
+#biMain[data-stage="insight"] .bi-sumline { display: none; }
+.bi-stagehint:empty { display: none; }
+.bi-stagebar { margin: 4px 0 6px; }
+@media print { .bi-stagebar { display: none !important; } }
 .nw-dates .bi-chip:nth-of-type(n+9) { display: none; }
 @media print { .bi-fp { display: none !important; } #biMain .bi-bar2[data-fp="1"] { display: flex !important; } }
 /* 반응형 */
@@ -5316,7 +5331,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 
   /* ===== 필터 패널: 한 줄로 늘어선 칩을 그룹별 패널(선택 상자·버튼·초기화)로 정리 ===== */
   const FP_ATTRS = ['data-cff', 'data-prf', 'data-stf', 'data-skf', 'data-bnf', 'data-qnf', 'data-inff', 'data-rtf', 'data-arf', 'data-pgf', 'data-nwcat'];
-  const BI_STAGE_HINT = { explore: '필터로 좁히고, 항목을 눌러 자세히 보세요.', insight: '시트 값으로 계산한 분석과 주의할 점입니다. 숫자는 화면·시트에서 다시 확인하세요.', action: '항목의 버튼을 누르면 요청문·지시문이 열립니다. 복사해서 FLOW나 어사이드에 붙여 넣으세요.' };
+  const BI_STAGE_HINT = { explore: '', insight: '시트 값을 규칙에 따라 계산한 분석입니다(AI가 문장을 쓴 것이 아님). 숫자는 화면·시트에서 다시 확인하세요.', action: '항목의 버튼을 누르면 요청문·지시문이 열립니다. 복사해서 FLOW나 어사이드에 붙여 넣으세요.' };
   function fpKey(c) { for (let i = 0; i < FP_ATTRS.length; i++) { const v = c.getAttribute(FP_ATTRS[i]); if (v !== null) return FP_ATTRS[i] + ':' + (FP_ATTRS[i] === 'data-nwcat' ? '' : v); } return ''; }
   function fpSel(c) { for (let i = 0; i < FP_ATTRS.length; i++) { const v = c.getAttribute(FP_ATTRS[i]); if (v !== null) { const dv = c.getAttribute('data-v'); return '[' + FP_ATTRS[i] + '="' + String(v).replace(/"/g, '\\"') + '"]' + (dv !== null ? '[data-v="' + String(dv).replace(/"/g, '\\"') + '"]' : ''); } } return ''; }
   function fpBuild(bar) {
@@ -5341,7 +5356,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       else { const seg = document.createElement('div'); seg.className = 'bi-fseg'; g.chips.forEach(function (c) { seg.appendChild(c); }); box.appendChild(seg); }
       gbox.appendChild(box);
     });
-    let anchor = bar; if (bar.parentNode && bar.parentNode.id === 'biBody') { const first = Array.prototype.filter.call(bar.parentNode.children, function (el) { return !el.matches('.bi-kpis, .qp-banner, .bi-note, .bi-warn, .bi-fp'); })[0]; if (first && first !== bar) anchor = first; }
+    let anchor = bar; if (bar.parentNode && bar.parentNode.id === 'biBody') { const first = Array.prototype.filter.call(bar.parentNode.children, function (el) { return !el.matches('.bi-kpis, .qp-banner, .bi-note, .bi-warn, .bi-fp, .bi-stagebar'); })[0]; if (first && first !== bar) anchor = first; }
     anchor.parentNode.insertBefore(panel, anchor); bar.style.display = 'none'; bar.setAttribute('data-fp', '1'); return true;
   }
   function fpSync(panel) {
@@ -5967,7 +5982,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
 
   /* ── 과거·현재·미래 3단계 프레임 + 실무 액션 ── */
-  const BI_STAGES = [['explore', '과거 · 탐색', '쌓인 데이터를 필터·클릭으로 찾기'], ['insight', '현재 · 인사이트', '분석 결과와 전략·주의사항'], ['action', '미래 · 액션', '클릭으로 바로 실무 시작']];
+  const BI_STAGES = [['explore', '데이터', '쌓인 데이터를 필터·클릭으로 찾습니다'], ['insight', 'AI분석', '시트 값으로 해석과 주의할 점을 봅니다'], ['action', '전략', '바로 실행할 요청문·지시문을 만듭니다']];
   const BI_STAGE_RULES = {
     'bi': [[/추천 인플루언서|실무 액션/, 'action'], [/신호등|AUTO BRIEF|자동 분석/, 'insight']],
     'bi-sales': [[/계산기|실무 액션/, 'action'], [/월 비교/, 'insight']],
@@ -6004,7 +6019,18 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function biStageNav(pg) {
     if (!BI_STAGE_RULES[pg]) return ''; const cur = biStageOf(pg);
-    return '<div class="bi-stages" role="tablist">' + BI_STAGES.map(function (s, i) { return '<button type="button" class="bi-stage' + (cur === s[0] ? ' on' : '') + '" data-bistage="' + s[0] + '"><i>' + (i + 1) + '</i><b>' + s[1] + '</b><span>' + s[2] + '</span></button>'; }).join('') + '</div><div class="bi-stagehint" id="biStageHint">' + esc(BI_STAGE_HINT[cur]) + '</div>';
+    return '<div class="bi-stagebar" id="biStageBar"><div class="bi-sumline" id="biSumLine" hidden></div><div class="bi-stages" role="tablist">' + BI_STAGES.map(function (s) { return '<button type="button" role="tab" class="bi-stage' + (cur === s[0] ? ' on' : '') + '" data-bistage="' + s[0] + '" title="' + esc(s[2]) + '"><span class="bi-tl">' + s[1] + '</span><em class="bi-tb" hidden></em></button>'; }).join('') + '</div><div class="bi-stagehint" id="biStageHint">' + esc(BI_STAGE_HINT[cur]) + '</div></div>';
+  }
+  function biStageBadges(pg) {
+    const bar = $('#biStageBar'), body = $('#biBody'); if (!bar || !body) return;
+    const kp = body.querySelector(':scope > .bi-kpis'); if (kp && bar.parentNode !== body) kp.insertAdjacentElement('afterend', bar);
+    const WARN = /확인 필요|경고|위험|미달|지연|임박|부족|초과|하락|급감|소진|만료|불일치|오류|긴급/, ins = Array.prototype.slice.call(body.querySelectorAll('[data-st="insight"]')), items = [];
+    ins.forEach(function (el) { Array.prototype.forEach.call(el.querySelectorAll('li, .bi-risk'), function (x) { items.push(x); }); });
+    const hot = items.filter(function (x) { return x.classList.contains('bi-risk') ? (x.classList.contains('red') || x.classList.contains('yel')) : WARN.test(x.textContent); });
+    const nI = items.length || ins.length, nA = body.querySelectorAll('.bi-actrow').length;
+    const set = function (k, n, warn) { const b = bar.querySelector('[data-bistage="' + k + '"] .bi-tb'); if (!b) return; if (n > 0) { b.hidden = false; b.textContent = n > 99 ? '99+' : String(n); b.classList.toggle('warn', !!warn); } else b.hidden = true; };
+    set('insight', nI, hot.length > 0); set('action', nA, false);
+    const sl = $('#biSumLine'); if (sl) { if (hot.length) { const t = (hot[0].textContent || '').replace(/\s+/g, ' ').trim(); sl.hidden = false; sl.innerHTML = '<b>주의 ' + hot.length + '건</b><span>' + esc(t.length > 110 ? t.slice(0, 110) + '…' : t) + '</span><button type="button" data-bistage="insight">AI분석 보기</button>'; } else sl.hidden = true; }
   }
   function biActDone() { const a = biLS('lo_bi_actdone', {}), t = biToday(), o = {}; Object.keys(a).forEach(function (k) { if (a[k] === t) o[k] = t; }); return o; }
   const BI_AFTER = '\n\n[규칙] 원본 시트는 수정하지 말고 결과는 새 구글 시트/독스에 정리해줘. 원문에 없는 내용은 추측하지 말고 "확인 필요"로 표기하고, 원가·계약·협상 금액과 개인정보는 쓰지 마. 외부 발송·게시가 필요한 단계는 보내기 전에 나에게 확인받아줘.';
@@ -6186,8 +6212,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       + biViewPaid(d);
   }
 
-  const BI_STAGE_DEF = { 'bi-cafe': 'explore', 'bi-price': 'explore', 'bi-stock': 'explore', 'bi-ship': 'explore', 'bi-sku': 'explore', 'bi-sales': 'explore', 'bi-ads': 'explore', 'bi-inf': 'action', 'bi-paid': 'explore', 'bi-news': 'explore', 'bi-arch': 'explore', 'bi-rights': 'insight' };
-  function biStageOf(pg) { return (BIX.stageBy && BIX.stageBy[pg]) || BI_STAGE_DEF[pg] || 'insight'; }
+  const BI_STAGE_DEF = { 'bi': 'insight', 'bi-cafe': 'explore', 'bi-price': 'explore', 'bi-stock': 'explore', 'bi-ship': 'explore', 'bi-sku': 'explore', 'bi-sales': 'explore', 'bi-ads': 'explore', 'bi-inf': 'action', 'bi-paid': 'explore', 'bi-news': 'explore', 'bi-arch': 'explore', 'bi-rights': 'explore' };
+  function biStageOf(pg) { return (BIX.stageBy && BIX.stageBy[pg]) || BI_STAGE_DEF[pg] || 'explore'; }
   function biActsInf(d) {
     const A = [], pk = infPicks(d, 3); BIX.infd = d;
     pk.forEach(function (c) { A.push({ id: 'inf-' + c.h, t: '@' + c.h + ' 제안 준비 (' + (c.re[0] || '기본 후보') + ')', why: (c.p === 'youtube' ? '유튜브' : '인스타') + ' · 구독자 ' + infFmt(c.n) + ' · ' + c.gr + ' · 추천 제품 ' + (c.prod || '미정'), open: function () { infOpen(c.h); } }); });
@@ -6232,7 +6258,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       else if (pg === 'bi-manual') inner = biViewManual();
       else if (m.k && BIX.view[pg] === 'tabs') inner = await biViewTabs(pg);
       else { const K = { 'bi-cafe': [biLoadCafe, biViewCafe], 'bi-price': [biLoadPrice, biViewPrice], 'bi-sales': [biLoadSalesX, biViewSales], 'bi-ads': [biLoadSalesX, biViewAds], 'bi-stock': [biLoadLogi, biViewStock], 'bi-ship': [biLoadShip, biViewShip], 'bi-sku': [biLoadLogi, biViewSku], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews], 'bi-rights': [biLoadRights, biViewRights], 'bi-arch': [biLoadArch, biViewArch], 'bi-plan': [biLoadPlan, biViewPlan] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
-      if (BIX.page === pg) { el.innerHTML = biFrame(pg, inner, BIX.stamp); biStageTag(pg); biStash(pg); if (pg === 'bi-qna' || pg === 'bi-plan') qpProdFill(); if (pg === 'bi-arch') arGalUpd(); if (pg === 'bi-sku') skGen(); }
+      if (BIX.page === pg) { el.innerHTML = biFrame(pg, inner, BIX.stamp); biStageTag(pg); biStageBadges(pg); biStash(pg); if (pg === 'bi-qna' || pg === 'bi-plan') qpProdFill(); if (pg === 'bi-arch') arGalUpd(); if (pg === 'bi-sku') skGen(); }
     } catch (e) { if (BIX.page === pg) el.innerHTML = biFrame(pg, '<div class="bi-warn">데이터를 불러오지 못했습니다: ' + esc(e.message || String(e)) + '<br>시트 구조가 바뀌었거나 네트워크 문제일 수 있습니다. 새로고침으로 다시 시도해 주세요.</div>', ''); }
   }
   function biRoute(pg) {
