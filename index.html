@@ -2185,6 +2185,11 @@ body[data-mode="bi"] #biApp { grid-template-columns: 272px minmax(0, 1fr); backg
 .bi-sumline button { margin-left: auto; border: 0; background: none; text-decoration: underline; font: inherit; font-size: 12.5px; cursor: pointer; color: #111; }
 #biMain[data-stage="insight"] .bi-sumline { display: none; }
 .bi-stagehint:empty { display: none; }
+.announce, .bm-banner { position: relative; }
+.lv-live { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 12px; font-weight: 600; color: #fff; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
+.lv-live i { width: 7px; height: 7px; border-radius: 50%; background: #14C4A9; box-shadow: 0 0 0 3px rgba(20,196,169,.28); }
+.lv-live b { font-variant-numeric: tabular-nums; }
+@media (max-width: 860px) { .lv-live { position: static; transform: none; margin-left: 10px; } }
 .bi-aist { border-color: #BFEDE5; background: linear-gradient(180deg, #F6FDFB, #fff 60px); }
 .bi-aist h4 { margin: 16px 0 6px; font-size: 13.5px; color: #0E8F7B; }
 .aist-head { font-size: 17px; font-weight: 800; line-height: 1.5; letter-spacing: -.01em; margin: 4px 0 6px; }
@@ -6243,6 +6248,17 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const line = '쿠팡 ' + k.replace('-', '.') + ' | 로켓 매출 ' + chW(o.rocket) + ' | 사입 ' + chW(o.sellin) + ' | 광고비 ' + chW(o.ad) + ' | ROAS(계산) ' + (isFinite(o.roas) ? fP(o.roas, 0) : '-');
     biOpenDrawer('쿠팡 ' + k.replace('-', '.') + ' 월 상세', '<dl class="bi-dl">' + rows.map(function (r) { return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('') + '</dl>' + daily + '<div class="bi-dr-btns">' + qpCopyBtn('한 줄 복사', line) + '</div><div class="bi-note">ROAS와 광고비/매출은 제가 계산한 값입니다.</div>');
   }
+
+
+  /* ===== 동시 접속자 표시 (상단 검은 줄 오른쪽) ===== */
+  setTimeout(function () {
+    let ID = ''; try { ID = localStorage.getItem('lo_pid') || ''; if (!ID) { ID = 'p' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4); localStorage.setItem('lo_pid', ID); } } catch (e) { ID = 'p' + Math.random().toString(36).slice(2, 12); }
+    function paint(n) { document.querySelectorAll('.announce, .bm-banner').forEach(function (b) { let s = b.querySelector('.lv-live'); if (!s) { s = document.createElement('span'); s.className = 'lv-live'; b.appendChild(s); } s.title = '최근 2분 안에 이 사이트를 열어 둔 브라우저 수입니다(본인 포함)'; s.innerHTML = '<i></i>지금 접속 <b>' + n + '</b>명'; }); }
+    function beat(leave) { if (document.hidden && !leave) return; fetch(SHEET_ENDPOINT + '?type=presence&id=' + encodeURIComponent(ID) + (leave ? '&leave=1' : ''), leave ? { keepalive: true } : undefined).then(function (r) { return r.json(); }).then(function (j) { if (!leave && j && j.ok && isFinite(j.n)) paint(j.n); }).catch(function () {}); }
+    beat(); setInterval(beat, 60000);
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) beat(); });
+    window.addEventListener('pagehide', function () { beat(true); });
+  }, 800);
 
   function bindBi2(app) {
     app.addEventListener('click', function (e) {
