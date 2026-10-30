@@ -1861,6 +1861,10 @@ body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax
 .bi-kv small { font-size: 13px; font-weight: 600; color: #6B7076; margin-left: 3px; }
 .bi-ks { font-size: 12px; color: #8B9096; margin-top: 6px; min-height: 16px; }
 .bi-up { color: #0E8F7B; } .bi-dn { color: #D24545; }
+.bi-trio { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; margin-bottom: 16px; }
+.bi-trio > .bi-card { margin-bottom: 0; min-width: 0; }
+#biMain .bi-grid2.ov, #biMain .bi-grid2.ov2 { grid-template-columns: 1fr; }
+.ov-tool { align-items: center; }
 .lc-sum { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 12px; }
 .lc-chip { display: inline-block; padding: 3px 9px; border-radius: 999px; background: #F1F3F5; color: #5B6168; font-size: 11.5px; font-weight: 700; white-space: nowrap; }
 .lc-chip.hot { background: #FFF1E6; color: #B25B00; } .lc-chip.red { background: #FDECEC; color: #C23B3B; } .lc-chip.mint { background: #E3F8F4; color: #0E8F7B; }
@@ -4762,6 +4766,30 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     keys = Object.keys(g).sort(); if (gran === '주') keys = keys.slice(-12);
     return { labels: keys.map(function (k) { return gran === '주' ? (+k.slice(5, 7)) + '/' + (+k.slice(8)) + '주' : gran === '월' ? (+k.slice(5)) + '월' : k + '년'; }), vals: keys.map(function (k) { return g[k]; }) };
   }
+  function ovSeries(C, ch, g) {
+    if (!C || !C.months) return null; if (!C.cph && C.chr) C.cph = { map: cpHistParse(C.chr[0], C.chr[1]) };
+    const getRow = function (x) { return ch === 'oy' ? chRow(x.b, '올리브영 on/off 총매출') : ch === 'cp' ? chRow(x.b, '쿠팡 로켓 매출') : chRow(x.c, '자사몰', /D2C/); };
+    if (g === '일' || g === '주') {
+      const days = {}; C.months.forEach(function (x) { const r = getRow(x); if (!r) return; const last = x === C.cur ? C.lastIdx : r.d.length - 1; for (let i = 0; i <= last && i < r.d.length; i++) { const v = r.d[i], dt = x.c.dates[i]; if (dt && isFinite(v)) days[dt] = { v: v }; } });
+      return biAgg(days, g, 'v');
+    }
+    const ms = ch === 'oy' ? chmMonths(C, 'oy').map(function (o) { return [o.k, o.tot]; }) : ch === 'cp' ? cpMonths(C).map(function (o) { return [o.k, o.rocket]; }) : chmMonths(C, 'd2c').map(function (o) { return [o.k, o.self]; });
+    const ok = ms.filter(function (p) { return isFinite(p[1]); });
+    if (g === '월') { const t = ok.slice(-12); return { labels: t.map(function (p) { return cpLab(p[0]); }), vals: t.map(function (p) { return p[1]; }) }; }
+    const y = {}; ok.forEach(function (p) { const k = p[0].slice(0, 4); y[k] = (y[k] || 0) + p[1]; }); const ks = Object.keys(y).sort(); return { labels: ks.map(function (k) { return k + '년'; }), vals: ks.map(function (k) { return y[k]; }) };
+  }
+  function ovTrio(D, g, m, tr, mt) {
+    const C = D.chan, wait = '<div class="bi-empty">채널 매출 시트를 불러오는 중입니다. 잠시 뒤 새로고침해 주세요.</div>';
+    const span = g === '일' ? '최근 30일' : g === '주' ? '최근 12주(월요일 시작, 이번 주는 진행 중)' : g === '월' ? '최근 12개월' : '연도별 합계(올해는 진행 중)';
+    const card = function (title, color, S, note) { return '<section class="bi-card"><div class="bi-ch"><h3>' + title + ' ' + bReal + '</h3></div>' + (S && S.vals.length ? bBars(S.labels, [S.vals], [color], fW, note) : wait) + '</section>'; };
+    const oy = ovSeries(C, 'oy', g), cp = ovSeries(C, 'cp', g), d2 = m === '매출' ? tr : null;
+    const noteBase = ' · 단위: 원 · ' + span + (g === '일' || g === '주' ? ' · 일·주는 월별 시트(최근 4개월) 기준' : ' · 월·년은 월별 요약+월별 시트 기준(탭이 바뀌는 달은 집계 차이 가능)');
+    const oyC = card('올리브영 매출 추이', '#6C7BFF', oy, '온라인+매장 총매출(소비자 판매 기준, 사입 실매출 아님)' + noteBase);
+    const cpC = card('쿠팡 로켓 매출 추이', '#F5A524', cp, '로켓 매출(고객인도 기준, 사입 실매출 아님)' + noteBase + (g === '년' ? ' · 로켓 매출 값이 2025.6부터 있어 2025년은 6~12월 합계' : ''));
+    const own = m === '매출' ? '<section class="bi-card"><div class="bi-ch"><h3>자사몰 매출 추이 ' + bReal + '</h3></div><div class="bi-bar2">' + mt + '</div>' + (tr.vals.length ? bBars(tr.labels, [tr.vals], ['#14C4A9'], fW, '자사몰 D2C 매출(공동구매 제외)' + noteBase) : wait) + '</section>'
+      : '<section class="bi-card"><div class="bi-ch"><h3>자사몰 주력상품 추이 ' + bReal + '</h3></div><div class="bi-bar2">' + mt + '</div>' + bBars(tr.labels, [tr.vals], ['#14C4A9'], m === '구매금액' ? fW : fN, '<b>자사몰(카페24 쇼핑몰) 한정</b> · 전동칫솔·치아미백제 세트·농축가글액·미백치약 4개 상품 상세 페이지의 합계입니다(방문수·구매클릭수는 GA4, 전환수·구매금액은 카페24 결제완료). 스마트스토어·올리브영·쿠팡은 포함되지 않고, 한 사람이 여러 상품 페이지를 보면 중복으로 셉니다. ' + span + '.') + '</section>';
+    return oyC + own + cpC;
+  }
   function biRisks(D, today) {
     const R = [], add = function (lv, t, x, link) { R.push({ lv: lv, t: t, x: x, link: link || '' }); };
     const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재', comp: '경쟁사 모니터링', qna: '콘텐츠 소재 수집', news: '뉴스 브리핑', rights: '소재 사용권', stock: '재고·출고' };
@@ -4806,7 +4834,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function biRace(p, ms) { return Promise.race([p, new Promise(function (res) { setTimeout(function () { res({ pending: true }); }, ms); })]); }
   async function biViewOverview() {
-    const raws = { sales: biLoadSales(), journey: biLoadJourney('2026.10'), rank: biLoadRank(), inf: biLoadInf(), rev: biLoadRev(), paid: biLoadPaid(), comp: biLoadComp(), qna: biLoadQna(), news: biLoadNews(), rights: biLoadRights(), stock: biLoadStock(), days: biTrendData() }, jobs = {}; Object.keys(raws).forEach(function (k) { jobs[k] = biRace(raws[k], 4500); });
+    const raws = { sales: biLoadSales(), journey: biLoadJourney('2026.10'), rank: biLoadRank(), inf: biLoadInf(), rev: biLoadRev(), paid: biLoadPaid(), comp: biLoadComp(), qna: biLoadQna(), news: biLoadNews(), rights: biLoadRights(), stock: biLoadStock(), days: biTrendData(), chan: biLoadChanH() }, jobs = {}; Object.keys(raws).forEach(function (k) { jobs[k] = biRace(raws[k], 4500); });
     const keys = Object.keys(jobs), res = await Promise.allSettled(keys.map(function (k) { return jobs[k]; })), D = {}; keys.forEach(function (k, i) { D[k] = res[i].status === 'fulfilled' ? res[i].value : null; });
     BIX.pend = {}; keys.forEach(function (k) { if (D[k] && D[k].pending) { if (['comp', 'qna', 'news', 'rights', 'stock'].indexOf(k) >= 0) BIX.pend[k] = 1; D[k] = null; raws[k].then(biStaleChanged, function () {}); } });
     const today = new Date(), val = function (arr, m) { const o = arr.find(function (x) { return x.m === m; }); return o ? o.v : NaN; };
@@ -4819,14 +4847,14 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (D.inf) { kp.push(bKpi('인플루언서 컨택 리스트', fN(D.inf.total), '건', '마지막 컨택 ' + esc(D.inf.lastD))); kx.push(['인플루언서 컨택 리스트', fN(D.inf.total) + '건', '마지막 컨택 ' + D.inf.lastD]); }
     const names = { sales: '매출·광고', journey: '주력상품 고객여정', rank: '올영 랭킹', inf: '인플루언서', rev: '리뷰 운영', paid: '페이드 소재', comp: '경쟁사 모니터링', qna: '콘텐츠 소재 수집', news: '뉴스 브리핑', rights: '소재 사용권', stock: '재고·출고' };
     BIX.ovR = false; const risks = biRisks(D, today), brief = biBrief(D, risks, today); BIX.risks = risks; const ack = biAck(), nAck = risks.filter(function (r) { return ack[r.t]; }).length;
-    const g = BIX.ovg || '주', m = BIX.ovm || '방문수', tr = D.days ? biAgg(D.days, g, m) : { labels: [], vals: [] };
+    const g = BIX.ovg || '주', m = BIX.ovm || '매출', tr = m === '매출' ? (ovSeries(D.chan, 'd2c', g) || { labels: [], vals: [] }) : (D.days ? biAgg(D.days, g, m) : { labels: [], vals: [] });
     const frs = ['sales', 'journey', 'rank', 'inf', 'rev', 'paid', 'comp', 'qna', 'news', 'rights', 'stock'].map(function (k) { const d = D[k]; return '<tr><td><b>' + names[k] + '</b></td><td>' + (d ? fresh(d.fresh.label, d.fresh.age) : (BIX.pend && BIX.pend[k] ? '<span class="bi-b mo">불러오는 중 (새로고침)</span>' : '<span class="bi-b stale">읽기 실패</span>')) + '</td><td><a href="#bi-' + k + '">열기</a></td></tr>'; }).join('');
     const vis = risks.filter(function (r) { return !ack[r.t]; }), nr = vis.filter(function (r) { return r.lv === 'red'; }).length, ny = vis.filter(function (r) { return r.lv === 'yel'; }).length, ng = vis.length - nr - ny;
     BIX.ovx = { date: biDateKo(today), kpis: kx, risks: risks.map(function (r) { return [BI_LV[r.lv], r.t, r.x]; }), brief: brief, fresh: ['sales', 'journey', 'rank', 'inf', 'rev', 'paid', 'comp', 'qna', 'news', 'rights', 'stock'].map(function (k) { const d = D[k]; return [names[k], d ? d.fresh.label : '읽기 실패', d && d.fresh.age !== null ? d.fresh.age + '일 전' : '']; }), trend: { g: g, m: m, labels: tr.labels, vals: tr.vals } };
-    const gt = ['일', '주', '월', '년'].map(function (x) { return '<button type="button" class="bi-seg' + (x === g ? ' on' : '') + '" data-ovg="' + x + '">' + x + '</button>'; }).join(''), mt = ['방문수', '전환수', '구매금액'].map(function (x) { return '<button type="button" class="bi-chip' + (x === m ? ' on' : '') + '" data-ovm="' + x + '">' + x + '</button>'; }).join('');
+    const gt = ['일', '주', '월', '년'].map(function (x) { return '<button type="button" class="bi-seg' + (x === g ? ' on' : '') + '" data-ovg="' + x + '">' + x + '</button>'; }).join(''), mt = ['매출', '방문수', '전환수', '구매금액'].map(function (x) { return '<button type="button" class="bi-chip' + (x === m ? ' on' : '') + '" data-ovm="' + x + '">' + x + '</button>'; }).join('');
     const rk = risks.length ? risks.map(function (r, i) { return ack[r.t] ? '' : '<button type="button" class="bi-risk ' + r.lv + '" data-birisk="' + i + '"><i></i><div><b>' + esc(r.t) + '</b><span>' + esc(r.x) + '</span></div><em>' + BI_LV[r.lv] + ' ›</em></button>'; }).join('') + (nAck ? '<div class="bi-note">오늘 확인 완료한 항목 ' + nAck + '건은 숨겼습니다. 항목을 열어 "확인 취소"로 되돌릴 수 있습니다.</div>' : '') : '<div class="bi-empty">점검할 항목을 만들 데이터가 없습니다.</div>';
     return '<div class="bi-kpis">' + kp.join('') + '</div>' + biOvPick(D)
-      + '<div class="bi-grid2 ov"><section class="bi-card"><div class="bi-ch"><h3>자사몰 주력상품 추이 ' + bReal + '</h3><div class="bi-segs">' + gt + '</div></div><div class="bi-bar2">' + mt + '</div>' + bBars(tr.labels, [tr.vals], ['#14C4A9'], m === '구매금액' ? fW : fN, '<b>자사몰(카페24 쇼핑몰) 한정</b> · 전동칫솔·치아미백제 세트·농축가글액·미백치약 4개 상품 상세 페이지의 합계입니다. 방문수·구매클릭수는 GA4, 전환수·구매금액은 카페24 결제완료 기준입니다. 스마트스토어·올리브영·쿠팡은 포함되지 않고, 한 사람이 여러 상품 페이지를 보면 중복으로 셉니다. 일/주/월/년 단위로 묶어 보며, 일은 최근 30일, 주는 최근 12주(월요일 시작, 이번 주는 진행 중)입니다.') + '</section>'
+      + '<div class="bi-bar2 ov-tool"><span class="bi-bl">채널별 추이</span><div class="bi-segs">' + gt + '</div></div><div class="bi-trio">' + ovTrio(D, g, m, tr, mt) + '</div><div class="bi-grid2 ov">'
       + '<section class="bi-card"><div class="bi-ch"><h3>🚦 신호등 리스크 센터</h3><span class="bi-ms">항목을 누르면 할 일이 열립니다</span></div><div class="bi-rsum"><span class="red">위험 ' + nr + '</span><span class="yel">주의 ' + ny + '</span><span class="grn">양호 ' + ng + '</span></div><div class="bi-rlist">' + rk + '</div><div class="bi-note">점검 기준은 임시 기준입니다(갱신 ' + BI_RULES.stale[0] + '일 주의·' + BI_RULES.stale[1] + '일 위험, 광고비 비율 ' + BI_RULES.adRatio[0] + '%·' + BI_RULES.adRatio[1] + '%, 부정 VOC ' + BI_RULES.voc[0] + '%·' + BI_RULES.voc[1] + '%, ROAS 목표 대비 100%·70%). 실제 운영 기준에 맞게 조정이 필요합니다.</div></section></div>'
       + '<div class="bi-grid2 ov2"><section class="bi-brief"><div class="bi-ch"><span class="bi-tagx">● AUTO BRIEF</span><button type="button" class="bi-rbtn" data-bibrief="1">↻ 새로고침</button></div><h3>' + (today.getMonth() + 1) + '월 ' + today.getDate() + '일 자동 분석 브리핑</h3>' + brief.map(function (b) { return '<div class="bi-bl2"><span class="bi-tg t' + b[0].length + '">' + esc(b[0]) + '</span><p>' + esc(b[1]) + '</p></div>'; }).join('') + '<div class="bi-bnote">시트 값으로 문장을 자동 조립한 요약입니다(AI 해석 아님). 새로고침하면 시트를 다시 읽습니다.</div></section>'
       + '<section class="bi-card"><h3>시트별 데이터 최신성 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>시트</th><th>마지막 데이터</th><th></th></tr></thead><tbody>' + frs + '</tbody></table></div><div class="bi-note">"월 기준"은 월 단위로 입력되는 시트라 일수를 계산하지 않습니다. 14일 넘게 지난 날짜 기준 시트는 주황색으로 표시합니다.</div></section></div>';
@@ -7225,7 +7253,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function biWarm() {
     try { if (sessionStorage.getItem('lo_bi_warm')) return; sessionStorage.setItem('lo_bi_warm', '1'); } catch (e) {}
-    ['bi-sales', 'bi-stock', 'bi-cafe'].forEach(function (p, i) { setTimeout(function () { if (document.body.dataset.mode === 'bi' && !document.hidden) biPrefetch(p); }, 3500 + i * 3500); });
+    ['bi-sales', 'bi-stock', 'bi-cafe', 'bi-d2c'].forEach(function (p, i) { setTimeout(function () { if (document.body.dataset.mode === 'bi' && !document.hidden) biPrefetch(p); }, 3500 + i * 3500); });
   }
   function biRoute(pg) {
     BIX.page = pg; $$('#biApp .bs-nav a').forEach(function (a) { a.classList.toggle('on', a.dataset.bi === (biGroupOf(pg) ? biGroupOf(pg).id : pg)); });
