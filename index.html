@@ -6253,7 +6253,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   /* ===== 동시 접속자 표시 (상단 검은 줄 오른쪽) ===== */
   setTimeout(function () {
     let ID = ''; try { ID = localStorage.getItem('lo_pid') || ''; if (!ID) { ID = 'p' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4); localStorage.setItem('lo_pid', ID); } } catch (e) { ID = 'p' + Math.random().toString(36).slice(2, 12); }
-    function paint(n) { document.querySelectorAll('.announce, .bm-banner').forEach(function (b) { let s = b.querySelector('.lv-live'); if (!s) { s = document.createElement('span'); s.className = 'lv-live'; b.appendChild(s); } s.title = '최근 2분 안에 이 사이트를 열어 둔 브라우저 수입니다(본인 포함)'; s.innerHTML = '<i></i>지금 접속 <b>' + n + '</b>명'; }); }
+    function paint(n) { document.querySelectorAll('.announce, .bm-banner').forEach(function (b) { let s = b.querySelector('.lv-live'); if (!s) { s = document.createElement('span'); s.className = 'lv-live'; b.appendChild(s); } s.title = '최근 2분 안에 이 사이트를 열어 둔 브라우저 수입니다(본인 포함)'; s.innerHTML = '<i></i><span>지금 접속 <b>' + n + '</b>명</span>'; }); }
     function beat(leave) { if (document.hidden && !leave) return; fetch(SHEET_ENDPOINT + '?type=presence&id=' + encodeURIComponent(ID) + (leave ? '&leave=1' : ''), leave ? { keepalive: true } : undefined).then(function (r) { return r.json(); }).then(function (j) { if (!leave && j && j.ok && isFinite(j.n)) paint(j.n); }).catch(function () {}); }
     beat(); setInterval(beat, 60000);
     document.addEventListener('visibilitychange', function () { if (!document.hidden) beat(); });
