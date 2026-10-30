@@ -6022,7 +6022,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       it.ct = null; it.ctAlt = []; it.ctBy = ''; const k = lgKey(it.name), ko = it.price ? lgKey(it.price.official) : ''; let m = [], by = '';
       if (it.bc) { m = cts.filter(function (c) { return c.bc && c.bc === it.bc; }); if (m.length) by = '바코드'; }
       if (!m.length) { m = cts.filter(function (c) { const a = lgKey(c.name), b = lgKey(c.off); return (a && a === k) || (b && ko && b === ko); }); if (m.length) by = '제품명'; }
-      if (!m.length) { const tk = ctTok(it.name); let best = null, bs = 0, second = 0; if (tk.length >= 2) cts.forEach(function (c) { const t2 = ctTok(c.name); const s = ctSim(tk, t2); if (s > bs) { second = bs; bs = s; best = c; } else if (s > second) second = s; }); if (best && bs >= 0.75 && bs > second) { m = cts.filter(function (c) { return c === best || (best.bc && c.bc === best.bc); }); by = '제품명(유사)'; } }
+      if (!m.length) { const tk = ctTok(it.name); let best = null, bs = 0, second = 0; if (tk.length >= 1 && tk.join('').length >= 4) cts.forEach(function (c) { const t2 = ctTok(c.name); const s = ctSim(tk, t2); if (s > bs) { second = bs; bs = s; best = c; } else if (s > second) second = s; }); if (best && bs >= 0.75 && bs > second && (tk.length >= 2 || bs === 1)) { m = cts.filter(function (c) { return c === best || (best.bc && c.bc === best.bc); }); by = '제품명(유사)'; } }
       if (!m.length) return; const main = m.filter(function (c) { return !c.oy; })[0] || m[0]; it.ct = main; it.ctBy = by; it.ctAlt = m.filter(function (c) { return c !== main; }); m.forEach(function (c) { c.used = true; });
     });
   }
