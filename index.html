@@ -2201,6 +2201,8 @@ body[data-mode="bi"] #biApp { grid-template-columns: 272px minmax(0, 1fr); backg
 .aist-busy i { width: 8px; height: 8px; border-radius: 50%; background: #14C4A9; animation: aistB 1s ease-in-out infinite; } .aist-busy i:nth-child(2) { animation-delay: .15s; } .aist-busy i:nth-child(3) { animation-delay: .3s; }
 @keyframes aistB { 0%, 80%, 100% { opacity: .25; transform: scale(.8); } 40% { opacity: 1; transform: scale(1.1); } }
 @media print { .bi-aist { display: block !important; } }
+.bi-aist .bi-ha .bi-btn { white-space: nowrap; }
+@media (max-width: 700px) { .bi-aist .bi-ch { flex-wrap: wrap; gap: 8px; } .bi-aist .bi-ch h3 { flex: 1 1 100%; } .bi-aist .bi-ha { margin-left: 0; } }
 .bi-info { background: #F1FAF8; border: 1px solid #BFEDE5; border-radius: 12px; padding: 12px 16px; font-size: 13px; line-height: 1.7; color: #2e2e2e; margin: 0 0 12px; }
 .bi-skel { padding-top: 8px; }
 .bi-skh { font-size: 32px; font-weight: 800; letter-spacing: -.02em; margin: 0 0 6px; }
