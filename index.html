@@ -5889,10 +5889,10 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (BIX.chan && Date.now() - BIX.chanT < 45000) return BIX.chan;
     const tl = await biTabsOf('sales'), mons = {};
     tl.forEach(function (t) { const m = /^(\d{2})년 (\d{1,2})월 \(국내 (B2[CB])\)$/.exec(String(t.name).trim()); if (m) { const k = '20' + m[1] + '-' + ('0' + m[2]).slice(-2); (mons[k] = mons[k] || {})[m[3]] = t.gid; } });
-    const keys = Object.keys(mons).sort().slice(-6);
+    const nowK = new Date().getFullYear() + '-' + ('0' + (new Date().getMonth() + 1)).slice(-2), keys = Object.keys(mons).sort().filter(function (k) { return k <= nowK; }).slice(-4);
     const parts = await Promise.all(keys.map(function (k) { return Promise.all(['B2C', 'B2B'].map(function (t) { return mons[k][t] ? biFetch('sales', mons[k][t], 60).then(function (j) { return chParse(j.values); }).catch(function () { return null; }) : Promise.resolve(null); })); }));
     const sales = await biLoadSales().catch(function () { return null; });
-    const list = keys.map(function (k, i) { return { k: k, m: +k.slice(5), c: parts[i][0], b: parts[i][1] }; }).filter(function (x) { const r = chRow(x.c, '자사몰', /D2C/); return r && isFinite(r.sum) && r.sum > 0; }).slice(-5);
+    const list = keys.map(function (k, i) { return { k: k, m: +k.slice(5), c: parts[i][0], b: parts[i][1] }; }).filter(function (x) { const r = chRow(x.c, '자사몰', /D2C/); return r && isFinite(r.sum) && r.sum > 0; });
     if (!list.length) throw new Error('월별 국내 B2C 탭에서 값을 찾지 못했습니다');
     const cur = list[list.length - 1], li = chLastIdx(cur), ld = li >= 0 ? cur.c.dates[li] : '';
     const out = { months: list, cur: cur, last: ld, lastIdx: li, sales: sales, fresh: { label: '시트 최신 일자 ' + (ld || '-'), age: ld ? dAgo(new Date(ld + 'T00:00:00')) : null } };
@@ -5910,7 +5910,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   const chPct = function (v) { return isFinite(v) ? fP(v, 0) : '-'; };
   const chInfo = function (t) { return '<div class="bi-info" data-st="explore">' + t + '</div>'; };
 
-  function chChips(attr, list, cur) { return list.map(function (v) { return '<button type="button" class="bi-chip' + (cur === v ? ' on' : '') + '" ' + attr + '="' + esc(v) + '">' + esc(v) + '</button>'; }).join(''); }
+  function chChips(attr, list, cur) { return list.map(function (v) { return '<button type="button" class="bi-chip' + (cur === v ? ' on' : '') + '" ' + attr + '="ch" data-v="' + esc(v) + '">' + esc(v) + '</button>'; }).join(''); }
   function chAdBars(x, labs) { const it = labs.map(function (l) { return { l: l.replace(/_(스토어|자사몰)$/, ''), v: chS(x, l) }; }).filter(function (q) { return isFinite(q.v) && q.v > 0; }).sort(function (a, b) { return b.v - a.v; }); return it.length ? bH(it, fW) : '<div class="bi-empty">이번 달 광고비 세부 항목이 없습니다.</div>'; }
   const CH_AD_SS = ['네이버 쇼핑검색_스토어', '네이버 ADVoost_스토어', '네이버 파워링크_스토어', '네이버 GFA_스토어', '카탈로그 NDA_스토어', '메타_스마트스토어', '카카오 모먼트_스마트스토어'];
   const CH_AD_SELF = ['메타_자사몰', '네이버 파워링크_자사몰', '네이버 쇼핑검색_자사몰', '네이버 GFA_자사몰', '네이버 ADVoost_자사몰', '틱톡_자사몰', '구글검색_자사몰'];
@@ -5995,7 +5995,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     return A;
   }
   function bindChan(app) {
-    app.addEventListener('click', function (e) { const x = e.target.closest ? e.target.closest('[data-chf]') : null; if (!x) return; BIX.chf = x.dataset.chf; const sy = window.scrollY; Promise.resolve(biRender(BIX.page, true)).then(function () { window.scrollTo(0, sy); }); });
+    app.addEventListener('click', function (e) { const x = e.target.closest ? e.target.closest('[data-chf]') : null; if (!x) return; BIX.chf = x.dataset.v; const sy = window.scrollY; Promise.resolve(biRender(BIX.page, true)).then(function () { window.scrollTo(0, sy); }); });
   }
 
   function bindBi2(app) {
