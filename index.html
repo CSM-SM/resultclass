@@ -6268,7 +6268,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   const PD_MAX = 15, PD_SIM = 0.45;
   const PD_CATALOG = [
     { t: '상품기획 신규 아이디어 자동화 시트', id: '1Tr1e6pIEjAbPvBKItfZ528IRYNeARH_UHiu9nmyrLpc', d: '10/6', use: '오늘의 상품 추천의 원본(아이디어 167건)', rd: '읽음' },
-    { t: '[상품기획] 상품개발 & 리뉴얼 전체 현황도', id: '1gmSgv769BrN8q2c2lSGL1EFPVpwNbuLrFvrf9CD7Asc', d: '공유 시트', use: '개발 현황 화면의 원본(프로젝트 등급·일정, 품목별 진행 단계)', rd: '읽음(업체명·비용·인력 열 제외)' },
+    { t: '[상품기획] 상품개발 & 리뉴얼 전체 현황도', id: '1gmSgv769BrN8q2c2lSGL1EFPVpwNbuLrFvrf9CD7Asc', d: '', use: '개발 현황 화면의 원본(프로젝트 등급·일정, 품목별 진행 단계)', rd: '읽음(업체명·비용·인력 열 제외)' },
     { t: '다이소 시장분석 및 전략 방안', id: '1ZElrviqGsfXmdQd_Bcv5PvQYNUY7PfuyzgT_0gO-Glg', d: '10/13', use: '다이소 구강용품 425개 품목 시장 요약', rd: '요약 탭만 읽음(예상 원가·마진이 있는 전략 탭은 읽지 않음)' },
     { t: '초음파UV 세척·보관기 OEM 소싱표', id: '1pB1FIRTaloAJ5VIGMv4iF2Q40JDHopnT9V0knK_Ze5w', d: '10/30', use: '검색량 키워드 신호', rd: '검색량 탭만 읽음(업체·단가 탭은 읽지 않음)' },
     { t: '유아개구기 LED 부직포 밴드형 라이트 소싱 후보', id: '1nJVhuSMjvl4WMrCHimkOM5J2d7L0lfyQdNYz8Ay6u2g', d: '10/27', use: '소싱 후보 비교(FLOW #5320 관련)', rd: '링크만(업체 연락처·단가 포함)' },
@@ -6281,7 +6281,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
   const PD_LINKS = [['bi-comp', '경쟁사 리뷰/가격 크롤링 자동화', '경쟁사 모니터링'], ['bi-rank', '올리브영 구강용품 랭킹 트래커', '올영 랭킹'], ['bi-qna', '네이버 지식iN/카페 소재 자동 수집', '콘텐츠 소재 수집'], ['bi-news', '라이브오랄스 데일리 브리핑 아카이브', '뉴스 브리핑']];
   function pdN(s) { const m = /\d[\d,]*/.exec(String(s || '')); return m ? parseInt(m[0].replace(/,/g, ''), 10) : NaN; }
-  function pdNm(s) { return String(s || '').replace(/라이브오랄스|퓨어다이아|퓨어브레스/g, '').replace(/[\s\-_·,()\[\]\/+]/g, '').toLowerCase(); }
+  const PD_GEN = ['치아미백제', '농축가글', '구강스프레이', '전동칫솔', '미백패치', '구강세정기', '불소도포제', '도포제', '어린이', '구강', '스프레이', '가글', '칫솔', '치약', '치실', '미백제', '미백', '불소', '케어', '세트', '키트', '리뉴얼', '패키지', '개발', '신규', '신제품', '검토', '용기', '프로젝트', '단상자', '블리스터'];
+  function pdNm(s) { let t = String(s || '').replace(/라이브오랄스|퓨어다이아|퓨어브레스/g, '').replace(/[\s\-_·,()\[\]\/+]/g, '').toLowerCase(); PD_GEN.forEach(function (g) { t = t.split(g).join(''); }); return t; }
   function pdBig(s) { const o = {}; for (let i = 0; i < s.length - 1; i++) { const k = s.substr(i, 2); o[k] = (o[k] || 0) + 1; } return o; }
   function pdDice(a, b) { if (a.length < 2 || b.length < 2) return 0; const x = pdBig(a), y = pdBig(b); let n = 0, t = 0, u = 0, k; for (k in x) { t += x[k]; if (y[k]) n += Math.min(x[k], y[k]); } for (k in y) u += y[k]; return 2 * n / (t + u); }
   function pdKeys(name) { const a = String(name || ''), main = a.replace(/\(.*$/, ''), m = /\(([^)]*)/.exec(a); return [pdNm(main), pdNm(m ? m[1] : '')].filter(function (x) { return x.length >= 3; }); }
@@ -6323,7 +6324,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       const m = /(\d+)(?:\s*~\s*(\d+))?\s*개월/.exec(bnorm(r[7])), doc = bnorm(r[4]), chRaw = bnorm(r[5]);
       const c = { id: i + 1, cat: bnorm(r[0]), full: full, name: full.replace(/^라이브오랄스\s*/, ''), pain: pdList(r[2]), sol: pdList(r[3]), doc: /^https?:\/\//.test(doc) ? doc : '', chRaw: chRaw, ch: chRaw.split(/[,\/·]/).map(bnorm).filter(Boolean), cost: bnorm(r[6]), costK: (bnorm(r[6]).match(/낮음|중간|높음/) || [''])[0], dur: bnorm(r[7]), dmax: m ? +(m[2] || m[1]) : NaN, usp: pdList(r[8]), pri: bnorm(r[9]), comp: bnorm(r[10]), key: bnorm(r[11]), price: bnorm(r[12]), search: bnorm(r[13]), revRaw: bnorm(r[14]), rev: pdN(r[14]) };
       c.chOwn = c.ch.filter(function (x) { return /쿠팡|올리브영|올영|자사몰|스마트스토어/.test(x); }).length;
-      const a = pdNm(c.name); let best = 0, bn2 = ''; keyed.forEach(function (x) { const s = pdDice(a, x.k); if (s > best) { best = s; bn2 = x.n; } }); c.sim = best >= PD_SIM ? { s: best, n: bn2 } : null;
+      const a = pdNm(c.name); let best = 0, bn2 = ''; if (a.length >= 3) keyed.forEach(function (x) { const s = pdDice(a, x.k); if (s > best) { best = s; bn2 = x.n; } }); c.sim = best >= PD_SIM ? { s: best, n: bn2 } : null;
       ideas.push(pdScore(c));
     }
     const cats = []; ideas.forEach(function (c) { if (c.cat && cats.indexOf(c.cat) < 0) cats.push(c.cat); });
@@ -6416,7 +6417,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     return '<div class="bi-kpis">' + bKpi('프로젝트', fN(P.length), '건', '등급표 기준') + bKpi('진행', fN(cnt('진행')), '건', '현황 칸 기준') + bKpi('완료', fN(cnt('완료')), '건', '') + bKpi('종료일 지남', fN(late.length), '건', '완료·중단 표기 없음', late.length ? 'bi-dn' : '') + '</div>'
       + '<section class="bi-card"><h3>프로젝트 등급·일정 <span class="bi-ms">행을 누르면 관련 품목 라인과 확인 요청문이 열립니다</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>분류</th><th>프로젝트</th><th>등급</th><th>시작</th><th>종료</th><th>현황</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>'
       + '<div class="bi-grid2"><section class="bi-card"><h3>품목 라인 진행 단계 (' + d.bom.length + '행)</h3>' + (stI.length ? bH(stI, fN, '#14C4A9') : '<div class="bi-empty">표시할 값이 없습니다.</div>') + '</section><section class="bi-card"><h3>진행 구분</h3>' + (kI.length ? bH(kI, fN, '#6C8EF5') : '<div class="bi-empty">표시할 값이 없습니다.</div>') + '</section></div>'
-      + '<section class="bi-card"><h3>샘플·창고 입고 일정이 적힌 품목 <span class="bi-ms">최근 순 12건</span></h3>' + (evRows ? '<div class="bi-tw"><table class="bi-t"><thead><tr><th>일자</th><th>구분</th><th>제품</th><th>BOM</th><th>단계</th></tr></thead><tbody>' + evRows + '</tbody></table></div>' : '<div class="bi-empty">일정이 적힌 행이 없습니다.</div>') + '</section>'
+      + '<section class="bi-card"><h3>샘플·창고 입고 일정이 적힌 품목 <span class="bi-ms">최근 순 ' + Math.min(ev.length, 12) + '건</span></h3>' + (evRows ? '<div class="bi-tw"><table class="bi-t"><thead><tr><th>일자</th><th>구분</th><th>제품</th><th>BOM</th><th>단계</th></tr></thead><tbody>' + evRows + '</tbody></table></div>' : '<div class="bi-empty">일정이 적힌 행이 없습니다.</div>') + '</section>'
       + '<section class="bi-card"><h3>💡 자동 인사이트 ' + bReal + '</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul><div class="bi-note">현황도의 업체명·비용·인력 열은 읽지 않습니다. 완료·진행 분류는 현황 칸 글자 기준이라 실제 상태와 다를 수 있습니다.</div></section>';
   }
   function biActsPdst(d) {
@@ -6439,7 +6440,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     return { dz: dz, kw: kw };
   }
   function biViewPdmk(d) {
-    const z = d.dz, cat = function (c) { return '<li><b>' + esc(c.t) + '</b> <span class="bi-ms">' + esc(c.d) + ' 수정 · ' + esc(c.use) + ' · 대시보드: ' + esc(c.rd) + '</span> <a class="bi-btn" href="https://docs.google.com/spreadsheets/d/' + esc(c.id) + '/edit" target="_blank" rel="noopener noreferrer">열기 ↗</a></li>'; };
+    const z = d.dz, cat = function (c) { return '<li><b>' + esc(c.t) + '</b> <span class="bi-ms">' + (c.d ? esc(c.d) + ' 수정 · ' : '') + esc(c.use) + ' · 대시보드: ' + esc(c.rd) + '</span> <a class="bi-btn" href="https://docs.google.com/spreadsheets/d/' + esc(c.id) + '/edit" target="_blank" rel="noopener noreferrer">열기 ↗</a></li>'; };
     let out = '';
     if (z) {
       const al = z.all ? z.all.rows.filter(function (r) { return r[0].indexOf('합계') < 0; }) : [], lo = z.low ? z.low.rows.filter(function (r) { return r[0].indexOf('합계') < 0; }) : [];
