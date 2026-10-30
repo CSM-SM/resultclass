@@ -4249,7 +4249,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { gate: '첫 화면', 'bi-d2c': '자사몰 · 스마트스토어', 'bi-oy': '올리브영', 'bi-cp': '쿠팡', 'bi-cafe': '자사몰 · 카페24', 'bi-price': '제품 가격', 'bi-stock': '재고 현황', 'bi-ship': '출고·입고', 'bi-sku': '품목 마스터', 'bi-plan': '콘텐츠 기획', 'bi-news': '뉴스 브리핑', 'bi-rights': '소재 사용권', 'bi-arch': '소재 아카이브', 'bi-comp': '경쟁사 모니터링', 'bi-qna': '콘텐츠 소재 수집', bi: '종합 현황', 'bi-sales': '매출', 'bi-ads': '광고', 'bi-journey': '주력상품 고객여정', 'bi-rank': '올영 랭킹', 'bi-inf': '인플루언서', 'bi-rev': '리뷰 운영', 'bi-paid': '페이드 소재', 'bi-manual': '시트 메뉴얼', setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { gate: '첫 화면', 'bi-d2c': '자사몰 · 스마트스토어', 'bi-oy': '올리브영', 'bi-cp': '쿠팡', 'bi-cafe': '자사몰 · 카페24', 'bi-price': '제품 가격', 'bi-stock': '재고 현황', 'bi-ship': '출고·입고', 'bi-sku': '품목 마스터', 'bi-plan': '콘텐츠 기획', 'bi-news': '뉴스 브리핑', 'bi-rights': '소재 사용권', 'bi-arch': '소재 아카이브', 'bi-comp': '경쟁사 모니터링', 'bi-qna': '콘텐츠 소재 수집', bi: '종합 현황', 'bi-sales': '매출', 'bi-ads': '광고', 'bi-journey': '주력상품 고객여정', 'bi-rank': '올영 랭킹', 'bi-inf': '인플루언서', 'bi-rev': '리뷰 운영', 'bi-paid': '페이드 소재', 'bi-manual': '시트 메뉴얼', 'bi-pd': '오늘의 상품 추천', 'bi-pdst': '개발 현황', 'bi-pdmk': '시장·소싱 자료', setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page, replaceHist) {
     if (page === 'automations') { page = 'assets'; replaceHist = true; }
@@ -4305,6 +4305,10 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   /* ── 대시보드 앱 (시트 요약 · 암호 보호) ───────────────────── */
   const BIX = { view: {}, tabSel: {}, tabsCache: {}, cache: {}, page: 'bi', timer: null, jm: '2026.10', jp: 0, jmet: '방문수', stamp: '' };
   const BI_SRC = {
+    pidea: { t: '상품기획 신규 아이디어 자동화 시트', u: 'https://docs.google.com/spreadsheets/d/1Tr1e6pIEjAbPvBKItfZ528IRYNeARH_UHiu9nmyrLpc/edit?gid=0#gid=0' },
+    pstat: { t: '[상품기획] 상품개발 & 리뉴얼 전체 현황도', u: 'https://docs.google.com/spreadsheets/d/1gmSgv769BrN8q2c2lSGL1EFPVpwNbuLrFvrf9CD7Asc/edit?gid=1368087878#gid=1368087878' },
+    pdaiso: { t: '다이소 시장분석 및 전략 방안', u: 'https://docs.google.com/spreadsheets/d/1ZElrviqGsfXmdQd_Bcv5PvQYNUY7PfuyzgT_0gO-Glg/edit?gid=74539630#gid=74539630' },
+    puv: { t: '초음파UV 세척·보관기 OEM 소싱표', u: 'https://docs.google.com/spreadsheets/d/1pB1FIRTaloAJ5VIGMv4iF2Q40JDHopnT9V0knK_Ze5w/edit?gid=1178758391#gid=1178758391' },
     sales: { t: '20262025 라오전체 매출/광고현황', u: 'https://docs.google.com/spreadsheets/d/1WXSrYGUAiPNGV6Wrm0FE7hV1ON-v0Xyv1DqD7rKYAIw/edit?gid=1115730697#gid=1115730697' },
     journey: { t: '주력상품 일 고객여정 대시보드', u: 'https://docs.google.com/spreadsheets/d/1ylxLgTobQLWrPUNrqhMmjMafa8JHnrJfoxBqqK5EEtM/edit?gid=1040615685#gid=1040615685' },
     inf: { t: '[MK] 2026 인플루언서 마케팅 리스트', u: 'https://docs.google.com/spreadsheets/d/19LoIX57UdN13nUXqHbfRA6zFhkRkwobaY0QKokueqzo/edit?gid=1384807088#gid=1384807088' },
@@ -4670,10 +4674,10 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function colL(i) { let s = ''; i++; while (i > 0) { const m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); } return s; }
   async function biViewTabs(pg) {
-    const key = BI_PAGES[pg].k, BLOCK = { inf: ['181779110'], rank: ['2016237970'] };
-    const all = (await biTabsOf(key)).filter(function (t) { return (BLOCK[key] || []).indexOf(String(t.gid)) < 0; });
+    const key = BI_PAGES[pg].k, BLOCK = { inf: ['181779110'], rank: ['2016237970'] }, ONLY = { pidea: ['0'], pstat: ['0', '1368087878'], pdaiso: ['74539630'], puv: ['1178758391'] };
+    const all = (await biTabsOf(key)).filter(function (t) { return (BLOCK[key] || []).indexOf(String(t.gid)) < 0 && (!ONLY[key] || ONLY[key].indexOf(String(t.gid)) >= 0); });
     if (!all.length) return '<div class="bi-empty">열 수 있는 탭이 없습니다.</div>';
-    let gid = BIX.tabSel[key] || ({ sales: '1115730697', journey: '1280577857', inf: '1384807088', rev: '1682728294', paid: '599649638', rank: '183848060', comp: '1005', qna: '1244766666', news: '1237927501' })[key]; if (!all.some(function (t) { return String(t.gid) === String(gid); })) gid = all[0].gid;
+    let gid = BIX.tabSel[key] || ({ sales: '1115730697', journey: '1280577857', inf: '1384807088', rev: '1682728294', paid: '599649638', rank: '183848060', comp: '1005', qna: '1244766666', news: '1237927501', pidea: '0', pstat: '1368087878', pdaiso: '74539630', puv: '1178758391' })[key]; if (!all.some(function (t) { return String(t.gid) === String(gid); })) gid = all[0].gid;
     const g = await biFetch(key, gid, 1200, true), v = g.values || [];
     let lr = v.length, lc = 0; while (lr > 0 && !v[lr - 1].some(function (x) { return bnorm(x); })) lr--;
     v.slice(0, lr).forEach(function (r) { for (let c = r.length - 1; c >= 0; c--) { if (bnorm(r[c])) { if (c + 1 > lc) lc = c + 1; break; } } });
@@ -6137,8 +6141,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 
 
   /* ===== 전략 탭: AI 유통 전략 분석 (Gemini · 화면의 시트 값 기반 초안) ===== */
-  const STRAT_FOCUS = { 'bi': '전 채널 종합: 이번 달 목표·광고·재고·리스크를 보고 채널별 우선순위와 이번 주 유통 전략', 'bi-sales': '채널 믹스와 월 목표 달성: 어느 채널에 판매·재고·프로모션 비중을 둘지', 'bi-d2c': '자사몰과 스마트스토어의 역할 분담, 광고 효율(ROAS)과 매출 흐름을 반영한 운영·프로모션 전략', 'bi-oy': '올리브영 온라인·매장 판매, 광고 효율, 사입(실매출)·고객인도 차이를 반영한 올리브영 전용 전략', 'bi-cp': '쿠팡 로켓 판매·광고(매출성장)·ROAS를 반영한 쿠팡 전용 전략과 재고 연계', 'bi-ads': '채널별 광고 예산 배분과 효율 개선 방향', 'bi-cafe': '자사몰 전환(구매율)·방문·광고·공구 구조를 반영한 자사몰 운영 전략', 'bi-price': '채널별 가격 편차와 할인 구조를 반영한 가격 운영 제안(가격 결정은 대표 컨펌)', 'bi-stock': '채널 판매 속도와 재고 소진일을 반영한 재고 배분·발주 시점 전략', 'bi-ship': '채널별 출고 흐름을 반영한 물량 배분·입고 계획', 'bi-sku': '품목·카톤 규격·재고 데이터를 반영한 출고·적재·발주 운영 전략', 'bi-journey': '자사몰 주력상품 상세 페이지의 방문→구매 흐름을 반영한 상품·유입 전략', 'bi-rank': '올리브영 랭킹 흐름을 반영한 올영 운영·프로모션 전략', 'bi-inf': '인플루언서 후보를 어느 채널 판매(공구·올영 연계 등)에 연결할지', 'bi-rev': '리뷰 데이터를 채널별 판매 전략에 반영하는 방법', 'bi-paid': '광고 소재 분석을 채널별 광고·판매 전략에 반영하는 방법', 'bi-comp': '경쟁 제품의 가격·할인·리뷰를 반영한 포지셔닝·가격·프로모션 전략', 'bi-qna': '고객 질문 흐름을 상품·채널별 콘텐츠·판매 전략에 반영하는 방법', 'bi-rights': '소재 사용 가능 기간을 채널별 광고·콘텐츠 운영에 반영하는 방법', 'bi-arch': '소재 아카이브를 채널별 판매 콘텐츠 전략에 반영하는 방법', 'bi-news': '시장·유통 뉴스를 채널 전략에 반영하는 방법' };
-  const STRAT_REL = { 'bi-oy': ['bi-stock', 'bi-rank', 'bi-sales', 'bi-ads'], 'bi-cp': ['bi-stock', 'bi-sales', 'bi-ads'], 'bi-d2c': ['bi-sales', 'bi-ads', 'bi-journey', 'bi-rev'], 'bi-sales': ['bi-ads', 'bi-stock'], 'bi-ads': ['bi-sales', 'bi-stock'], 'bi-stock': ['bi-sales', 'bi-ship'], 'bi-ship': ['bi-stock', 'bi-sales'], 'bi-sku': ['bi-stock'], 'bi-cafe': ['bi-journey', 'bi-ads', 'bi-rev'], 'bi-price': ['bi-comp', 'bi-sales'], 'bi-journey': ['bi-ads', 'bi-rev'], 'bi-rank': ['bi-sales', 'bi-stock', 'bi-comp'], 'bi-comp': ['bi-rank', 'bi-sales'], 'bi-inf': ['bi-sales'] };
+  const STRAT_FOCUS = { 'bi-pd': '오늘 추천된 신상품 후보를 어느 채널(올리브영·쿠팡·자사몰·스마트스토어)에서 먼저 검증하고 판매할지, 개발 일정과 재고 부담을 반영한 유통 전략(개발·출시 결정은 대표·실장 컨펌)', 'bi-pdst': '개발 중인 프로젝트의 출시 일정에 맞춘 채널별 입고·재고·판매 준비 전략', 'bi-pdmk': '다이소 등 저가 채널 진입 가능성과 시장 신호를 반영한 채널 전략(입점 조건·가격은 영업·대표 확인)', 'bi': '전 채널 종합: 이번 달 목표·광고·재고·리스크를 보고 채널별 우선순위와 이번 주 유통 전략', 'bi-sales': '채널 믹스와 월 목표 달성: 어느 채널에 판매·재고·프로모션 비중을 둘지', 'bi-d2c': '자사몰과 스마트스토어의 역할 분담, 광고 효율(ROAS)과 매출 흐름을 반영한 운영·프로모션 전략', 'bi-oy': '올리브영 온라인·매장 판매, 광고 효율, 사입(실매출)·고객인도 차이를 반영한 올리브영 전용 전략', 'bi-cp': '쿠팡 로켓 판매·광고(매출성장)·ROAS를 반영한 쿠팡 전용 전략과 재고 연계', 'bi-ads': '채널별 광고 예산 배분과 효율 개선 방향', 'bi-cafe': '자사몰 전환(구매율)·방문·광고·공구 구조를 반영한 자사몰 운영 전략', 'bi-price': '채널별 가격 편차와 할인 구조를 반영한 가격 운영 제안(가격 결정은 대표 컨펌)', 'bi-stock': '채널 판매 속도와 재고 소진일을 반영한 재고 배분·발주 시점 전략', 'bi-ship': '채널별 출고 흐름을 반영한 물량 배분·입고 계획', 'bi-sku': '품목·카톤 규격·재고 데이터를 반영한 출고·적재·발주 운영 전략', 'bi-journey': '자사몰 주력상품 상세 페이지의 방문→구매 흐름을 반영한 상품·유입 전략', 'bi-rank': '올리브영 랭킹 흐름을 반영한 올영 운영·프로모션 전략', 'bi-inf': '인플루언서 후보를 어느 채널 판매(공구·올영 연계 등)에 연결할지', 'bi-rev': '리뷰 데이터를 채널별 판매 전략에 반영하는 방법', 'bi-paid': '광고 소재 분석을 채널별 광고·판매 전략에 반영하는 방법', 'bi-comp': '경쟁 제품의 가격·할인·리뷰를 반영한 포지셔닝·가격·프로모션 전략', 'bi-qna': '고객 질문 흐름을 상품·채널별 콘텐츠·판매 전략에 반영하는 방법', 'bi-rights': '소재 사용 가능 기간을 채널별 광고·콘텐츠 운영에 반영하는 방법', 'bi-arch': '소재 아카이브를 채널별 판매 콘텐츠 전략에 반영하는 방법', 'bi-news': '시장·유통 뉴스를 채널 전략에 반영하는 방법' };
+  const STRAT_REL = { 'bi-pd': ['bi-comp', 'bi-rank', 'bi-stock'], 'bi-pdst': ['bi-stock', 'bi-pd'], 'bi-pdmk': ['bi-comp', 'bi-pd'], 'bi-oy': ['bi-stock', 'bi-rank', 'bi-sales', 'bi-ads'], 'bi-cp': ['bi-stock', 'bi-sales', 'bi-ads'], 'bi-d2c': ['bi-sales', 'bi-ads', 'bi-journey', 'bi-rev'], 'bi-sales': ['bi-ads', 'bi-stock'], 'bi-ads': ['bi-sales', 'bi-stock'], 'bi-stock': ['bi-sales', 'bi-ship'], 'bi-ship': ['bi-stock', 'bi-sales'], 'bi-sku': ['bi-stock'], 'bi-cafe': ['bi-journey', 'bi-ads', 'bi-rev'], 'bi-price': ['bi-comp', 'bi-sales'], 'bi-journey': ['bi-ads', 'bi-rev'], 'bi-rank': ['bi-sales', 'bi-stock', 'bi-comp'], 'bi-comp': ['bi-rank', 'bi-sales'], 'bi-inf': ['bi-sales'] };
   function biStratKey(pg) { return pg + '|' + biToday(); }
   function biStratLoad(pg) { try { const o = JSON.parse(localStorage.getItem('lo_bi_strat') || '{}'); return o[biStratKey(pg)] || null; } catch (e) { return null; } }
   function biStratSave(pg, v) { try { const o = JSON.parse(localStorage.getItem('lo_bi_strat') || '{}'); o[biStratKey(pg)] = v; const ks = Object.keys(o); if (ks.length > 24) ks.sort(function (a, b) { return (o[a].t || 0) - (o[b].t || 0); }).slice(0, ks.length - 24).forEach(function (k) { delete o[k]; }); localStorage.setItem('lo_bi_strat', JSON.stringify(o)); } catch (e) {} }
@@ -6259,6 +6263,216 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     document.addEventListener('visibilitychange', function () { if (!document.hidden) beat(); });
     window.addEventListener('pagehide', function () { beat(true); });
   }, 800);
+
+  /* ── 상품개발: 오늘의 상품 추천 · 개발 현황 · 시장·소싱 자료 ──────────────── */
+  const PD_MAX = 15, PD_SIM = 0.45;
+  const PD_CATALOG = [
+    { t: '상품기획 신규 아이디어 자동화 시트', id: '1Tr1e6pIEjAbPvBKItfZ528IRYNeARH_UHiu9nmyrLpc', d: '10/6', use: '오늘의 상품 추천의 원본(아이디어 167건)', rd: '읽음' },
+    { t: '[상품기획] 상품개발 & 리뉴얼 전체 현황도', id: '1gmSgv769BrN8q2c2lSGL1EFPVpwNbuLrFvrf9CD7Asc', d: '공유 시트', use: '개발 현황 화면의 원본(프로젝트 등급·일정, 품목별 진행 단계)', rd: '읽음(업체명·비용·인력 열 제외)' },
+    { t: '다이소 시장분석 및 전략 방안', id: '1ZElrviqGsfXmdQd_Bcv5PvQYNUY7PfuyzgT_0gO-Glg', d: '10/13', use: '다이소 구강용품 425개 품목 시장 요약', rd: '요약 탭만 읽음(예상 원가·마진이 있는 전략 탭은 읽지 않음)' },
+    { t: '초음파UV 세척·보관기 OEM 소싱표', id: '1pB1FIRTaloAJ5VIGMv4iF2Q40JDHopnT9V0knK_Ze5w', d: '10/30', use: '검색량 키워드 신호', rd: '검색량 탭만 읽음(업체·단가 탭은 읽지 않음)' },
+    { t: '유아개구기 LED 부직포 밴드형 라이트 소싱 후보', id: '1nJVhuSMjvl4WMrCHimkOM5J2d7L0lfyQdNYz8Ay6u2g', d: '10/27', use: '소싱 후보 비교(FLOW #5320 관련)', rd: '링크만(업체 연락처·단가 포함)' },
+    { t: 'LED칫솔 헤드 팁 중국 소싱 후보', id: '1LDAqkSLkfyyRHx17mEQMMbOJZxfjZoe3iKt1O-LFNNA', d: '10/23', use: '소싱 후보 비교', rd: '링크만(업체 연락처·단가 포함)' },
+    { t: '[소싱] 어린이 칫솔 3줄모 OEM 제조사 리스트_샘플요청', id: '1dJ2qiKOXyFTQUwxrbfM58n3U0oSGoLbYlPudeN6gQxA', d: '10/29', use: '제조사 리스트·샘플 요청 진행', rd: '링크만(업체 연락처 포함)' },
+    { t: '유아개구기 살균기 소싱 후보 (1688·Made-in-China)', id: '1-MYVhrsI_RtaN1jsQF-rgZsgJT6vxtpeAWpXelbEizI', d: '10/22', use: '살균기 소싱 후보(FLOW #5368 관련)', rd: '링크만(업체 연락처·단가 포함)' },
+    { t: '[시장조사] 핵심 4개 제품 경쟁사', id: '1dToqzvX2Pdo56eAMQhiZRTU-tJ1-BvncMSg6fDtAIa8', d: '7/29', use: '미백·불소·전동칫솔·가글 경쟁사 조사', rd: '링크만' },
+    { t: '[시장조사] LED 마스크', id: '1YACqbu-DsCmUANDK-Ld7v5lJjX4cyVv31VzVUZZesnk', d: '8/5', use: 'LED 제품 경쟁 사례와 인사이트', rd: '링크만' },
+    { t: '20260724_경쟁사_벤치마킹', id: '1v97bpvAdY_7qYOSL3ORcs4d9uJGk21HSN_eEe89LsSk', d: '7/24', use: '경쟁사 벤치마킹 정리', rd: '링크만' }
+  ];
+  const PD_LINKS = [['bi-comp', '경쟁사 리뷰/가격 크롤링 자동화', '경쟁사 모니터링'], ['bi-rank', '올리브영 구강용품 랭킹 트래커', '올영 랭킹'], ['bi-qna', '네이버 지식iN/카페 소재 자동 수집', '콘텐츠 소재 수집'], ['bi-news', '라이브오랄스 데일리 브리핑 아카이브', '뉴스 브리핑']];
+  function pdN(s) { const m = /\d[\d,]*/.exec(String(s || '')); return m ? parseInt(m[0].replace(/,/g, ''), 10) : NaN; }
+  function pdNm(s) { return String(s || '').replace(/라이브오랄스|퓨어다이아|퓨어브레스/g, '').replace(/[\s\-_·,()\[\]\/+]/g, '').toLowerCase(); }
+  function pdBig(s) { const o = {}; for (let i = 0; i < s.length - 1; i++) { const k = s.substr(i, 2); o[k] = (o[k] || 0) + 1; } return o; }
+  function pdDice(a, b) { if (a.length < 2 || b.length < 2) return 0; const x = pdBig(a), y = pdBig(b); let n = 0, t = 0, u = 0, k; for (k in x) { t += x[k]; if (y[k]) n += Math.min(x[k], y[k]); } for (k in y) u += y[k]; return 2 * n / (t + u); }
+  function pdKeys(name) { const a = String(name || ''), main = a.replace(/\(.*$/, ''), m = /\(([^)]*)/.exec(a); return [pdNm(main), pdNm(m ? m[1] : '')].filter(function (x) { return x.length >= 3; }); }
+  function pdDate(s) { const m = /(\d{4})\.\s*(\d{1,2})\.\s*(\d{1,2})/.exec(String(s || '')); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; }
+  function pdFmtD(d) { return d ? d.getFullYear() + '.' + (d.getMonth() + 1) + '.' + d.getDate() : ''; }
+  function pdList(s) { return String(s || '').split(/\n|•/).map(bnorm).filter(Boolean); }
+  function pdClass(st) { const t = bnorm(st); if (/완료|출시/.test(t)) return '완료'; if (/스탑|중단|단종|보류/.test(t)) return '중단'; return t ? '진행' : '미표기'; }
+  function pdProjects(j) {
+    if (!j || !j.values) return null; const v = j.values, h = v.findIndex(function (r) { return bnorm(r[0]) === '카테고리'; }); if (h < 0) return null;
+    const out = []; let cat = '';
+    for (let i = h + 1; i < v.length; i++) { const r = v[i]; if (bnorm(r[0])) cat = bnorm(r[0]); const nm = bnorm(r[1]); if (!nm) continue; const ed = pdDate(r[5]); out.push({ cat: cat, name: nm, short: nm.replace(/\s*\(.*$/, ''), gr: bnorm(r[2]), sd: pdDate(r[3]), ed: ed, st: bnorm(r[6]), cls: pdClass(r[6]) }); }
+    return out;
+  }
+  function pdBom(j) {
+    if (!j || !j.values) return null; const v = j.values, h = v.findIndex(function (r) { return bnorm(r[0]) === '카테고리'; }); if (h < 0) return null;
+    const out = []; let cat = '', prod = '';
+    for (let i = h + 1; i < v.length; i++) { const r = v[i]; if (bnorm(r[0])) cat = bnorm(r[0]); if (bnorm(r[1])) prod = bnorm(r[1]).replace(/\s+/g, ' '); const bom = bnorm(r[2]); if (!bom || !prod) continue; out.push({ cat: cat, prod: prod, bom: bom, kind: bnorm(r[3]), stage: bnorm(r[4]), note: bnorm(r[5]), sample: pdDate(r[6]), wh: pdDate(r[7]), sd: pdDate(r[8]), ed: pdDate(r[9]), prog: bnorm(r[10]) }); }
+    return out;
+  }
+  function pdScore(c) {
+    const pt = []; const add = function (l, n) { if (n > 0) pt.push([l, n]); };
+    add('우선순위 ' + c.pri + ' (시트)', { S: 5, A: 3, B: 1 }[c.pri] || 0);
+    add('개발비용 ' + c.costK + ' (시트 추정)', { '낮음': 3, '중간': 2 }[c.costK] || 0);
+    add('개발기간 ' + (c.dmax || '') + '개월 이내 (시트 추정)', c.dmax <= 6 ? 3 : c.dmax <= 9 ? 2 : c.dmax <= 12 ? 1 : 0);
+    add('참고 리뷰 ' + fN(c.rev) + '건 (시트)', c.rev >= 1000 ? 2 : c.rev > 0 ? 1 : 0);
+    add('참고 제품 링크 있음', c.doc ? 1 : 0);
+    add('자사 운영 채널 ' + c.chOwn + '개 포함', c.chOwn >= 2 ? 1 : 0);
+    c.pt = pt; c.s = pt.reduce(function (a, p) { return a + p[1]; }, 0); return c;
+  }
+  async function biLoadPd() {
+    const R = await Promise.all([biFetch('pidea', '0', 400), biFetch('pstat', '1368087878', 200).catch(function () { return null; }), biFetch('pstat', '0', 400).catch(function () { return null; })]);
+    const v = R[0].values || [], h = v.findIndex(function (r) { return bnorm(r[0]) === '카테고리' && bnorm(r[1]) === '기획 제품명'; });
+    if (h < 0) throw new Error('아이디어 시트의 머리글(카테고리·기획 제품명)을 찾지 못했습니다. 시트 구조가 바뀌었는지 확인해 주세요.');
+    const proj = pdProjects(R[1]) || [], bom = pdBom(R[2]) || [];
+    const keyed = []; proj.forEach(function (p) { pdKeys(p.name).forEach(function (k) { keyed.push({ k: k, n: p.short }); }); }); bom.forEach(function (b) { pdKeys(b.prod).forEach(function (k) { keyed.push({ k: k, n: b.prod.replace(/\s*\(.*$/, '') }); }); });
+    const ideas = [];
+    for (let i = h + 1; i < v.length; i++) {
+      const r = v[i], full = bnorm(r[1]); if (!full) continue;
+      const m = /(\d+)(?:\s*~\s*(\d+))?\s*개월/.exec(bnorm(r[7])), doc = bnorm(r[4]), chRaw = bnorm(r[5]);
+      const c = { id: i + 1, cat: bnorm(r[0]), full: full, name: full.replace(/^라이브오랄스\s*/, ''), pain: pdList(r[2]), sol: pdList(r[3]), doc: /^https?:\/\//.test(doc) ? doc : '', chRaw: chRaw, ch: chRaw.split(/[,\/·]/).map(bnorm).filter(Boolean), cost: bnorm(r[6]), costK: (bnorm(r[6]).match(/낮음|중간|높음/) || [''])[0], dur: bnorm(r[7]), dmax: m ? +(m[2] || m[1]) : NaN, usp: pdList(r[8]), pri: bnorm(r[9]), comp: bnorm(r[10]), key: bnorm(r[11]), price: bnorm(r[12]), search: bnorm(r[13]), revRaw: bnorm(r[14]), rev: pdN(r[14]) };
+      c.chOwn = c.ch.filter(function (x) { return /쿠팡|올리브영|올영|자사몰|스마트스토어/.test(x); }).length;
+      const a = pdNm(c.name); let best = 0, bn2 = ''; keyed.forEach(function (x) { const s = pdDice(a, x.k); if (s > best) { best = s; bn2 = x.n; } }); c.sim = best >= PD_SIM ? { s: best, n: bn2 } : null;
+      ideas.push(pdScore(c));
+    }
+    const cats = []; ideas.forEach(function (c) { if (c.cat && cats.indexOf(c.cat) < 0) cats.push(c.cat); });
+    const td = new Date(); td.setHours(0, 0, 0, 0);
+    return { ideas: ideas, cats: cats, proj: proj, bom: bom, projOk: !!R[1], bomOk: !!R[2], today: td, age: null };
+  }
+  function pdPass(c) { const f = BIX.pd || {}; if (f.cat && f.cat !== '전체' && c.cat !== f.cat) return false; if (f.pri && f.pri !== '전체' && c.pri !== f.pri) return false; if (f.cost && f.cost !== '전체' && c.costK !== f.cost) return false; return true; }
+  function pdPicks(d, n) {
+    const sk = biLS('lo_bi_pd_skip', {}), td = biToday();
+    const pool = d.ideas.filter(function (c) { return pdPass(c) && sk[c.name] !== td && !c.sim; }).sort(function (a, b) { return b.s - a.s || a.id - b.id; }).slice(0, 18); if (!pool.length) return [];
+    let seed = Number(String(td).replace(/\D/g, '')) + (BIX.pdShuf || 0) * 7919; const rnd = function () { seed = (seed * 1664525 + 1013904223) % 4294967296; return seed / 4294967296; };
+    const arr = pool.slice(); for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)), t = arr[i]; arr[i] = arr[j]; arr[j] = t; }
+    const out = [], used = {}; arr.forEach(function (c) { if (out.length < n && !used[c.cat]) { used[c.cat] = 1; out.push(c); } }); arr.forEach(function (c) { if (out.length < n && out.indexOf(c) < 0) out.push(c); }); return out;
+  }
+  function pdTip(c) { return c.pt.map(function (p) { return p[0] + ' +' + p[1]; }).join(' / ') + ' = ' + c.s + '점 (만점 ' + PD_MAX + ', 임시 기준)'; }
+  function pdChips(c) { return c.pt.map(function (p) { return '<span>' + esc(p[0].replace(/ \(시트.*\)| \(시트\)/, '')) + '</span>'; }).join('') || '<span>기본 후보</span>'; }
+  function pdCard(c, i) {
+    const fav = biLS('lo_bi_pd_fav', {})[c.name];
+    return '<div class="bi-pick"><div class="bi-pk-top"><span class="bi-pk-rk">추천 ' + (i + 1) + '</span><span class="bi-pk-sc" title="' + esc(pdTip(c)) + '">임시 점수 ' + c.s + ' / ' + PD_MAX + '</span></div><div class="bi-pk-h" style="font-weight:800">' + esc(c.name) + '</div><div class="bi-pk-m">' + esc(c.cat) + ' · 우선순위 ' + esc(c.pri || '미표기') + ' · 개발비용 ' + esc(c.costK || '미표기') + ' · ' + esc(c.dur || '기간 미표기') + '</div><div class="bi-pk-re">' + pdChips(c) + '</div><div class="bi-pk-idea"><small>고객 불편</small><p>' + esc(c.pain[0] || '미표기') + '</p></div><div class="bi-pk-idea"><small>해결 방안</small><p>' + esc(c.sol[0] || '미표기') + '</p></div><div class="bi-pk-prod">판매 채널 <b>' + esc(c.chRaw || '미표기') + '</b></div><div class="bi-pk-btns"><button type="button" class="bi-btn" data-pdopen="' + esc(String(c.id)) + '">자세히</button><button type="button" class="bi-btn" data-pdcopy="' + esc(String(c.id)) + '">티켓 초안 복사</button><button type="button" class="bi-btn' + (fav ? ' ok' : '') + '" data-pdfav="' + esc(String(c.id)) + '">' + (fav ? '★ 관심' : '☆ 관심') + '</button><button type="button" class="bi-btn" data-pdskip="' + esc(String(c.id)) + '">오늘 제외</button></div></div>';
+  }
+  function pdFind(id) { const d = BIX.pdd; return d ? d.ideas.find(function (x) { return String(x.id) === String(id); }) : null; }
+  function pdTicket(c) {
+    return biFlow('PM] 신제품 검토 - ' + c.name, ['분류: ' + c.cat + ' / 시트 우선순위 ' + (c.pri || '미표기') + ' (자동화 시트 ' + c.id + '행 기준)', '고객 불편: ' + (c.pain.join(' / ') || '미표기'), '해결 방안: ' + (c.sol.join(' / ') || '미표기'), '핵심 USP: ' + (c.key || c.usp[0] || '미표기'), '판매 채널(시트): ' + (c.chRaw || '미표기'), '개발비용·기간(시트 추정): ' + (c.costK || '미표기') + ' / ' + (c.dur || '미표기'), c.doc ? '참고 제품 링크: ' + c.doc : '', c.sim ? '유의: 개발 현황의 「' + c.sim.n + '」와 유사 - 중복 여부 먼저 확인' : '', '체크 1) 개발 현황·기존 SKU와 중복 여부', '체크 2) 시장 검색량·경쟁 제품 가격·리뷰 조사 (조사 시점·출처 표기)', '체크 3) 표시·광고·허가 가능 여부는 담당자·대표 확인 후 판단', '※ 개발비용·기간·가격은 시트의 추정값이며 확정 수치가 아님']);
+  }
+  function pdAside(c) { return biAside('구글 시트 "상품기획 신규 아이디어 자동화 시트"의 ' + c.id + '행(' + c.full + ')을 읽고, 네이버 월간 검색량과 쿠팡·올리브영의 유사 제품 가격·리뷰수를 조사해 새 구글 시트(탭: 시장조사)로 정리해줘. 각 값에는 조사 시점과 출처 URL을 같이 적고, 확인하지 못한 값은 "미표기"로 둬. 제조사 단가·연락처·원가는 쓰지 말고, 효능·표시 문구도 쓰지 마.'); }
+  function pdOpen(id) {
+    const c = pdFind(id); if (!c) return; const ul = function (a) { return a.length ? '<ul class="bi-dr-ul">' + a.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : '<p class="bi-dr-p">미표기</p>'; };
+    biOpenDrawer(c.name, '<div class="bi-pk-m" style="margin:0 0 8px">' + esc(c.cat) + ' · 우선순위 ' + esc(c.pri || '미표기') + ' · 임시 점수 ' + c.s + ' / ' + PD_MAX + ' · 자동화 시트 ' + c.id + '행</div>'
+      + (c.sim ? '<div class="bi-warn">개발 현황에 이름이 비슷한 「' + esc(c.sim.n) + '」가 있습니다(유사도 ' + Math.round(c.sim.s * 100) + '%). 중복 여부를 먼저 확인하세요. 오늘의 추천에서는 제외됩니다.</div>' : '')
+      + '<div class="bi-dr-btns"><button type="button" class="bi-btn ok" data-pdcopy="' + esc(String(c.id)) + '">FLOW 티켓 초안 복사</button><button type="button" class="bi-btn" data-pdaside="' + esc(String(c.id)) + '">어사이드 시장조사 지시문 복사</button>' + (c.doc ? '<a class="bi-btn" href="' + esc(c.doc) + '" target="_blank" rel="noopener noreferrer">참고 제품 링크 ↗</a>' : '') + '</div>'
+      + '<h4>점수 구성 <span class="bi-ms">(임시 기준, 만점 ' + PD_MAX + '점)</span></h4><ul class="bi-dr-ul">' + c.pt.map(function (p) { return '<li>' + esc(p[0]) + ' <b>+' + p[1] + '</b></li>'; }).join('') + '<li>합계 <b>' + c.s + '점</b></li></ul>'
+      + '<h4>고객 불편</h4>' + ul(c.pain) + '<h4>해결 방안</h4>' + ul(c.sol) + '<h4>USP 전략</h4>' + ul(c.usp) + (c.key ? '<h4>핵심 USP 한 줄</h4><p class="bi-dr-p">' + esc(c.key) + '</p>' : '')
+      + '<h4>시트의 추정·시장 값</h4><ul class="bi-dr-ul"><li>판매 채널: ' + esc(c.chRaw || '미표기') + '</li><li>개발비용: ' + esc(c.cost || '미표기') + '</li><li>개발기간: ' + esc(c.dur || '미표기') + '</li><li>가격: ' + esc(c.price || '미표기') + '</li><li>검색량: ' + esc(c.search || '미표기') + '</li><li>참고 리뷰수: ' + esc(c.revRaw || '미표기') + '</li><li>경쟁 브랜드(시트 원문): ' + esc(c.comp || '미표기') + '</li></ul>'
+      + '<p class="bi-note">개발비용·기간·가격은 자동화 시트의 추정값이고 검색량은 비어 있습니다. 효능·표시 문구와 허가 여부는 사람이 확인한 뒤 판단하세요.</p>');
+  }
+  function pdInsights(d) {
+    const L = [], I = d.ideas, S = I.filter(function (c) { return c.pri === 'S'; });
+    const cc = {}; I.forEach(function (c) { cc[c.cat] = (cc[c.cat] || 0) + 1; });
+    L.push('아이디어 <b>' + I.length + '건</b> 중 우선순위 S는 <b>' + S.length + '건</b>, 분류는 ' + Object.keys(cc).map(function (k) { return esc(k) + ' ' + cc[k]; }).join(' · ') + '입니다.');
+    const q = S.filter(function (c) { return c.costK === '낮음' && c.dmax <= 9; }); if (q.length) L.push('S 중 개발비용이 낮고 9개월 이내로 추정된 후보는 <b>' + q.length + '건</b>입니다 (예: ' + q.slice(0, 3).map(function (c) { return esc(c.name); }).join(', ') + '). 추정값이므로 실제 개발 가능 여부는 확인이 필요합니다.');
+    const sm = I.filter(function (c) { return c.sim; }); if (sm.length) L.push('개발 현황과 이름이 비슷한 아이디어가 <b>' + sm.length + '건</b> 있어 오늘의 추천에서 제외했습니다: ' + sm.slice(0, 4).map(function (c) { return esc(c.name) + ' ↔ ' + esc(c.sim.n); }).join(', ') + '.');
+    const rv = I.filter(function (c) { return c.rev > 0; }).length; L.push('참고 리뷰수가 숫자로 적힌 아이디어는 <b>' + rv + '건</b>(' + Math.round(rv / I.length * 100) + '%)이고, 검색량은 ' + (I.filter(function (c) { return c.search && c.search !== '미표기'; }).length ? '일부만' : '전부') + ' 미표기입니다. 시장 규모 판단에는 별도 조사가 필요합니다.');
+    return L;
+  }
+  function biViewPd(d) {
+    BIX.pdd = d; const f = BIX.pd = BIX.pd || { cat: '전체', pri: '전체', cost: '전체' }, picks = pdPicks(d, 3), pool = d.ideas.filter(pdPass);
+    const chip = function (k, v, label, on) { return '<button type="button" class="bi-chip' + (on ? ' on' : '') + '" data-pdf="' + k + '" data-v="' + esc(v) + '">' + esc(label) + '</button>'; };
+    const filt = '<div class="bi-bar2"><span class="bi-bl">분류</span>' + ['전체'].concat(d.cats).map(function (x) { return chip('cat', x, x, f.cat === x); }).join('') + '<span class="bi-bl">우선순위</span>' + ['전체', 'S', 'A', 'B'].map(function (x) { return chip('pri', x, x, f.pri === x); }).join('') + '<span class="bi-bl">개발비용(추정)</span>' + ['전체', '낮음', '중간', '높음'].map(function (x) { return chip('cost', x, x, f.cost === x); }).join('') + '</div>';
+    const fav = biLS('lo_bi_pd_fav', {}), fk = Object.keys(fav), S = d.ideas.filter(function (c) { return c.pri === 'S'; }).length;
+    const rows = pool.slice().sort(function (a, b) { return b.s - a.s || a.id - b.id; }).slice(0, 30).map(function (c, i) { return '<tr class="bi-click" data-pdopen="' + esc(String(c.id)) + '"><td>' + (i + 1) + '</td><td><b>' + esc(c.name) + '</b>' + (c.sim ? ' <span class="bi-mini">개발 현황 유사</span>' : '') + '</td><td>' + esc(c.cat) + '</td><td>' + esc(c.pri || '-') + '</td><td>' + esc(c.costK || '-') + '</td><td>' + esc(c.dur.replace('(추정)', '') || '-') + '</td><td><b>' + c.s + '</b><span class="bi-ms"> / ' + PD_MAX + '</span></td></tr>'; }).join('');
+    const cc = d.cats.map(function (k) { const a = d.ideas.filter(function (c) { return c.cat === k; }); return { l: k + ' (S ' + a.filter(function (c) { return c.pri === 'S'; }).length + ')', v: a.length }; });
+    const ins = pdInsights(d);
+    return '<div class="bi-kpis">' + bKpi('아이디어', fN(d.ideas.length), '건', '자동화 시트 누적') + bKpi('우선순위 S', fN(S), '건', '시트 기준') + bKpi('개발 현황 유사', fN(d.ideas.filter(function (c) { return c.sim; }).length), '건', '추천에서 제외') + bKpi('개발 중 프로젝트', fN(d.proj.length), '건', d.projOk ? '현황도 등급표' : '읽지 못함') + '</div>'
+      + '<div class="bi-picks-head"><h3 class="bi-h3" style="margin:0">💡 오늘의 추천 상품 <span class="bi-ms">' + esc(biDateKo(new Date())) + ' · 후보 ' + pool.length + '건 중</span></h3><button type="button" class="bi-btn" data-pdshuffle="1">↻ 다른 추천 보기</button></div>'
+      + (picks.length ? '<div class="bi-picks">' + picks.map(pdCard).join('') + '</div>' : '<div class="bi-empty">조건에 맞는 후보가 없습니다. 아래 필터를 풀어 보세요.</div>')
+      + '<div class="bi-note" style="margin:6px 0 14px">자동화 시트의 아이디어를 시트의 우선순위·개발비용·개발기간·참고 리뷰·채널로 점수를 매겨(만점 ' + PD_MAX + '점, 임시 기준) 하루 3개를 분류가 겹치지 않게 뽑습니다. 개발 현황에 비슷한 이름이 있는 건은 제외합니다. 개발비용·기간·가격은 시트의 <b>추정값</b>이며 검증된 수치가 아닙니다.</div>' + filt
+      + (fk.length ? '<section class="bi-card"><h3>★ 관심 목록 (' + fk.length + ')</h3><div class="bi-pk-re">' + fk.map(function (k) { return '<span class="bi-favchip"><a href="#" data-pdopen="' + esc(String(fav[k].id)) + '">' + esc(k) + '</a><button type="button" data-pdfav="' + esc(String(fav[k].id)) + '" aria-label="관심 해제">✕</button></span>'; }).join('') + '</div><div class="bi-dr-btns"><button type="button" class="bi-btn" data-pdfavcopy="1">목록 복사</button></div></section>' : '')
+      + '<section class="bi-card"><h3>후보 순위 (상위 30) <span class="bi-ms">행을 누르면 근거와 티켓 초안이 열립니다</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>#</th><th>제품 아이디어</th><th>분류</th><th>우선순위</th><th>개발비용(추정)</th><th>개발기간(추정)</th><th>점수</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>'
+      + '<section class="bi-card"><h3>💡 자동 인사이트 ' + bReal + '</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul><h4 class="bi-h4" style="margin-top:12px">분류별 아이디어 수</h4>' + bH(cc, fN, '#14C4A9') + '</section>';
+  }
+  function biActsPd(d) {
+    const A = [], pk = pdPicks(d, 3); if (!pk.length) return A;
+    const c = pk[0]; A.push({ id: 'pd-tk-' + c.name, t: '오늘 추천 1순위 「' + c.name + '」 상품기획 티켓 초안', why: c.cat + ' · 우선순위 ' + (c.pri || '미표기') + ' · 임시 점수 ' + c.s + '/' + PD_MAX, flow: pdTicket(c), aside: pdAside(c) });
+    A.push({ id: 'pd-all', t: '오늘 추천 ' + pk.length + '개 시장조사 일괄 요청 (어사이드)', why: pk.map(function (x) { return x.name; }).join(', '), flow: biFlow('PM] 신제품 후보 시장조사 요청', pk.map(function (x) { return '· ' + x.name + ' (' + x.cat + ', 우선순위 ' + (x.pri || '미표기') + ')'; }).concat(['요청: 네이버 월간 검색량, 쿠팡·올리브영 유사 제품 가격·리뷰수 조사 (조사 시점·출처 표기)', '개발비용·기간은 자동화 시트의 추정값이며 확정 전 검증 필요'])), aside: biAside('구글 시트 "상품기획 신규 아이디어 자동화 시트"에서 다음 제품 아이디어 행을 읽고 네이버 월간 검색량, 쿠팡·올리브영 유사 제품의 가격·리뷰수를 조사해 하나의 구글 시트(제품별 탭)로 정리해줘: ' + pk.map(function (x) { return x.id + '행 ' + x.full; }).join(' / ') + '. 값마다 조사 시점과 출처 URL을 적고, 확인하지 못한 값은 "미표기"로 둬. 제조사 단가·연락처·원가·효능 문구는 쓰지 마.') });
+    const sm = d.ideas.filter(function (x) { return x.sim; }); if (sm.length) A.push({ id: 'pd-sim', t: '개발 현황과 비슷한 아이디어 ' + sm.length + '건 중복 확인 요청', why: sm.slice(0, 3).map(function (x) { return x.name + ' ↔ ' + x.sim.n; }).join(', '), link: 'bi-pdst', linkLabel: '개발 현황', flow: biFlow('확인 요청] 신제품 아이디어와 개발 중 프로젝트 중복', sm.slice(0, 10).map(function (x) { return '· ' + x.name + ' ↔ ' + x.sim.n + ' (이름 유사도 ' + Math.round(x.sim.s * 100) + '%)'; }).concat(['요청: 같은 제품인지 확인 후 아이디어 시트에서 제외 또 병합 여부 회신'])) });
+    return A;
+  }
+  /* 개발 현황 */
+  function pdPrjOpen(i) {
+    const d = BIX.pdd; if (!d) return; const p = d.proj[i]; if (!p) return; const a = pdNm(p.short);
+    const rel = d.bom.filter(function (b) { return pdDice(a, pdNm(b.prod.replace(/\s*\(.*$/, ''))) >= 0.5; }).slice(0, 10);
+    biOpenDrawer(p.short, '<div class="bi-pk-m" style="margin:0 0 8px">' + esc(p.cat) + ' · 등급 ' + esc(p.gr || '미표기') + ' · ' + esc(p.cls) + '</div><ul class="bi-dr-ul"><li>시작일: ' + esc(pdFmtD(p.sd) || '미표기') + '</li><li>종료일: ' + esc(pdFmtD(p.ed) || '미표기') + (pdLate(p, d) ? ' <b>(지남, 현황 확인 필요)</b>' : '') + '</li><li>현황(시트 원문): ' + esc(p.st || '미표기') + '</li><li>시트의 정식 이름: ' + esc(p.name) + '</li></ul>'
+      + '<h4>관련 품목 라인 <span class="bi-ms">(이름이 비슷한 BOM 행)</span></h4>' + (rel.length ? '<ul class="bi-dr-ul">' + rel.map(function (b) { return '<li><b>' + esc(b.bom) + '</b> · ' + esc(b.stage || '단계 미표기') + (b.note ? ' · ' + esc(b.note.slice(0, 60)) : '') + '</li>'; }).join('') + '</ul>' : '<p class="bi-dr-p">이름이 비슷한 BOM 행이 없습니다.</p>')
+      + '<div class="bi-dr-btns"><button type="button" class="bi-btn ok" data-pdprjcopy="' + i + '">진행 확인 요청문 복사</button></div>');
+  }
+  function pdLate(p, d) { return !!p.ed && p.ed < d.today && p.cls !== '완료' && p.cls !== '중단'; }
+  function biViewPdst(d) {
+    if (!d.projOk) return '<div class="bi-warn">개발 현황 시트의 프로젝트표를 읽지 못했습니다. 잠시 후 새로고침해 주세요.</div>';
+    const P = d.proj, cnt = function (k) { return P.filter(function (p) { return p.cls === k; }).length; }, late = P.filter(function (p) { return pdLate(p, d); });
+    const order = { S: 0, A: 1, B: 2, C: 3 }, sorted = P.map(function (p, i) { return { p: p, i: i }; }).sort(function (a, b) { return (order[a.p.gr] === undefined ? 9 : order[a.p.gr]) - (order[b.p.gr] === undefined ? 9 : order[b.p.gr]) || (a.p.ed ? a.p.ed.getTime() : 9e15) - (b.p.ed ? b.p.ed.getTime() : 9e15); });
+    const rows = sorted.map(function (x) { const p = x.p; return '<tr class="bi-click" data-pdprj="' + x.i + '"><td>' + esc(p.cat) + '</td><td><b>' + esc(p.short) + '</b></td><td>' + esc(p.gr || '-') + '</td><td>' + esc(pdFmtD(p.sd) || '-') + '</td><td>' + esc(pdFmtD(p.ed) || '-') + (pdLate(p, d) ? ' <span class="bi-mini">기한 지남</span>' : '') + '</td><td>' + esc(p.cls) + (p.st ? ' · ' + esc(p.st.slice(0, 30)) : '') + '</td></tr>'; }).join('');
+    const stc = {}; d.bom.forEach(function (b) { const k = b.stage || '미표기'; stc[k] = (stc[k] || 0) + 1; }); const stI = Object.keys(stc).map(function (k) { return { l: k, v: stc[k] }; }).sort(function (a, b) { return b.v - a.v; });
+    const kc = {}; d.bom.forEach(function (b) { if (b.kind) kc[b.kind] = (kc[b.kind] || 0) + 1; }); const kI = Object.keys(kc).map(function (k) { return { l: k, v: kc[k] }; }).sort(function (a, b) { return b.v - a.v; });
+    const ev = []; d.bom.forEach(function (b) { if (b.sample) ev.push({ b: b, k: '샘플 입고', dt: b.sample }); if (b.wh) ev.push({ b: b, k: '창고 입고', dt: b.wh }); }); ev.sort(function (a, b) { return b.dt - a.dt; });
+    const evRows = ev.slice(0, 12).map(function (e) { return '<tr><td>' + esc(pdFmtD(e.dt)) + (e.dt >= d.today ? ' <span class="bi-mini">예정</span>' : '') + '</td><td>' + esc(e.k) + '</td><td><b>' + esc(e.b.prod.replace(/\s*\(.*$/, '').slice(0, 30)) + '</b></td><td>' + esc(e.b.bom.slice(0, 30)) + '</td><td>' + esc(e.b.stage || '-') + '</td></tr>'; }).join('');
+    const noSt = P.filter(function (p) { return p.cls === '미표기'; }), ins = [];
+    ins.push('프로젝트 등급표 <b>' + P.length + '건</b>: 진행 ' + cnt('진행') + ' · 완료 ' + cnt('완료') + ' · 중단·스탑 ' + cnt('중단') + ' · 현황 미기재 ' + cnt('미표기') + '건입니다 (현황 칸의 글자로 분류한 값).');
+    if (late.length) ins.push('종료일이 지났는데 완료·중단 표기가 없는 프로젝트가 <b>' + late.length + '건</b>입니다: ' + late.slice(0, 5).map(function (p) { return esc(p.short.slice(0, 18)) + '(' + esc(pdFmtD(p.ed)) + ')'; }).join(', ') + '. 시트가 갱신되지 않았을 수도 있어 확인이 필요합니다.');
+    if (noSt.length) ins.push('현황 칸이 비어 있는 프로젝트 <b>' + noSt.length + '건</b>: ' + noSt.slice(0, 5).map(function (p) { return esc(p.short.slice(0, 18)); }).join(', ') + '.');
+    return '<div class="bi-kpis">' + bKpi('프로젝트', fN(P.length), '건', '등급표 기준') + bKpi('진행', fN(cnt('진행')), '건', '현황 칸 기준') + bKpi('완료', fN(cnt('완료')), '건', '') + bKpi('종료일 지남', fN(late.length), '건', '완료·중단 표기 없음', late.length ? 'bi-dn' : '') + '</div>'
+      + '<section class="bi-card"><h3>프로젝트 등급·일정 <span class="bi-ms">행을 누르면 관련 품목 라인과 확인 요청문이 열립니다</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>분류</th><th>프로젝트</th><th>등급</th><th>시작</th><th>종료</th><th>현황</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>'
+      + '<div class="bi-grid2"><section class="bi-card"><h3>품목 라인 진행 단계 (' + d.bom.length + '행)</h3>' + (stI.length ? bH(stI, fN, '#14C4A9') : '<div class="bi-empty">표시할 값이 없습니다.</div>') + '</section><section class="bi-card"><h3>진행 구분</h3>' + (kI.length ? bH(kI, fN, '#6C8EF5') : '<div class="bi-empty">표시할 값이 없습니다.</div>') + '</section></div>'
+      + '<section class="bi-card"><h3>샘플·창고 입고 일정이 적힌 품목 <span class="bi-ms">최근 순 12건</span></h3>' + (evRows ? '<div class="bi-tw"><table class="bi-t"><thead><tr><th>일자</th><th>구분</th><th>제품</th><th>BOM</th><th>단계</th></tr></thead><tbody>' + evRows + '</tbody></table></div>' : '<div class="bi-empty">일정이 적힌 행이 없습니다.</div>') + '</section>'
+      + '<section class="bi-card"><h3>💡 자동 인사이트 ' + bReal + '</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul><div class="bi-note">현황도의 업체명·비용·인력 열은 읽지 않습니다. 완료·진행 분류는 현황 칸 글자 기준이라 실제 상태와 다를 수 있습니다.</div></section>';
+  }
+  function biActsPdst(d) {
+    const A = [], late = (d.proj || []).filter(function (p) { return pdLate(p, d); }), noSt = (d.proj || []).filter(function (p) { return p.cls === '미표기'; });
+    if (late.length) A.push({ id: 'pds-late', t: '종료일 지난 프로젝트 ' + late.length + '건 진행 확인 요청', why: late.slice(0, 3).map(function (p) { return p.short.slice(0, 14); }).join(', '), flow: biFlow('확인 요청] 상품개발 프로젝트 종료일 경과 건 현황', late.slice(0, 12).map(function (p) { return '· ' + p.short + ' (' + p.cat + ', 등급 ' + (p.gr || '미표기') + ', 종료일 ' + pdFmtD(p.ed) + ', 현황: ' + (p.st || '미기재') + ')'; }).concat(['요청 1) 실제 진행 상태와 새 종료일 회신', '요청 2) 현황도 시트의 현황 칸 갱신'])), aside: biAside('구글 시트 "[상품기획] 상품개발 & 리뉴얼 전체 현황도"의 프로젝트 등급표에서 종료일이 오늘보다 이전이고 현황이 비어 있거나 완료가 아닌 프로젝트를 표로 정리해줘. 업체명·비용·인력 열은 읽거나 쓰지 마.') });
+    if (noSt.length) A.push({ id: 'pds-nost', t: '현황 칸이 빈 프로젝트 ' + noSt.length + '건 정리 요청', why: noSt.slice(0, 4).map(function (p) { return p.short.slice(0, 14); }).join(', '), flow: biFlow('정리 요청] 현황 미기재 프로젝트', noSt.slice(0, 12).map(function (p) { return '· ' + p.short + ' (' + p.cat + ', 등급 ' + (p.gr || '미표기') + ')'; }).concat(['요청: 현황 칸 입력 또는 보류·중단 표기'])) });
+    return A;
+  }
+  /* 시장·소싱 자료 */
+  async function biLoadPdmk() {
+    const R = await Promise.all([biFetch('pdaiso', '74539630', 80).catch(function () { return null; }), biFetch('puv', '1178758391', 60).catch(function () { return null; })]);
+    const v = R[0] ? R[0].values : null, row = function (lab, from) { return v ? v.findIndex(function (r, i) { return i >= (from || 0) && bnorm(r[1]) === lab; }) : -1; };
+    let dz = null;
+    if (v) {
+      const k = v.findIndex(function (r) { return bnorm(r[1]) === '전체 등록 상품 수'; }), dt = v.findIndex(function (r) { return /시장조사 일자/.test(bnorm(r[1])); });
+      const tab = function (title) { const i = v.findIndex(function (r) { return bnorm(r[1]).indexOf(title) === 0; }); if (i < 0) return null; const rows = []; for (let r = i + 2; r < v.length; r++) { if (!bnorm(v[r][1])) break; rows.push(v[r].slice(1, 7).map(bnorm)); } return { head: v[i + 1].slice(1, 7).map(bnorm), rows: rows }; };
+      dz = { date: dt >= 0 ? bnorm(v[dt][1]).replace(/^시장조사 일자\s*:\s*/, '') : '', kpi: k >= 0 ? [[v[k][1], v[k + 1][1]], [v[k][4], v[k + 1][4]], [v[k][7], v[k + 1][7]], [v[k][10], v[k + 1][10]], [v[k][13], v[k + 1][13]]].map(function (x) { return [bnorm(x[0]), bnorm(x[1])]; }) : [], all: tab('카테고리별 시장 현황 (전수'), low: tab('카테고리별 시장 현황 (판매가 5,000원') };
+    }
+    let kw = null; if (R[1] && R[1].values) { const u = R[1].values, h = u.findIndex(function (r) { return bnorm(r[0]) === '키워드'; }); if (h >= 0) kw = { head: u[h].slice(0, 5).map(bnorm), rows: u.slice(h + 1).filter(function (r) { return bnorm(r[0]); }).map(function (r) { return r.slice(0, 5).map(bnorm); }) }; }
+    return { dz: dz, kw: kw };
+  }
+  function biViewPdmk(d) {
+    const z = d.dz, cat = function (c) { return '<li><b>' + esc(c.t) + '</b> <span class="bi-ms">' + esc(c.d) + ' 수정 · ' + esc(c.use) + ' · 대시보드: ' + esc(c.rd) + '</span> <a class="bi-btn" href="https://docs.google.com/spreadsheets/d/' + esc(c.id) + '/edit" target="_blank" rel="noopener noreferrer">열기 ↗</a></li>'; };
+    let out = '';
+    if (z) {
+      const al = z.all ? z.all.rows.filter(function (r) { return r[0].indexOf('합계') < 0; }) : [], lo = z.low ? z.low.rows.filter(function (r) { return r[0].indexOf('합계') < 0; }) : [];
+      out += '<div class="bi-kpis">' + z.kpi.slice(0, 4).map(function (k, i) { return bKpi('다이소 ' + k[0], esc(k[1]), '', i === 0 ? '조사일 ' + esc(z.date) : ''); }).join('') + '</div>';
+      out += '<div class="bi-grid2"><section class="bi-card"><h3>다이소 구강용품 분류별 현황 (전체 425개)</h3>' + (z.all ? bTable({ head: z.all.head, rows: z.all.rows }) : '<div class="bi-empty">읽지 못했습니다.</div>') + '</section><section class="bi-card"><h3>판매가 5,000원 미만 구간</h3>' + (z.low ? bTable({ head: z.low.head, rows: z.low.rows }) : '<div class="bi-empty">읽지 못했습니다.</div>') + '</section></div>';
+      d.ins = []; if (al.length) { const mx = al.slice().sort(function (a, b) { return bn(b[1]) - bn(a[1]); })[0], mr = al.slice().sort(function (a, b) { return bn(b[3]) - bn(a[3]); })[0], lt = z.low && z.low.rows.length ? z.low.rows[z.low.rows.length - 1] : null, tt = z.all.rows[z.all.rows.length - 1]; d.ins.push('등록 상품 수가 가장 많은 분류는 <b>' + esc(mx[0]) + '(' + esc(mx[1]) + '개)</b>, 누적 리뷰가 가장 많은 분류는 <b>' + esc(mr[0]) + '(' + esc(mr[3]) + '건)</b>입니다.'); if (lt && tt && bn(tt[1]) > 0) d.ins.push('판매가 5,000원 미만 상품은 전체 ' + esc(tt[1]) + '개 중 <b>' + esc(lt[1]) + '개(' + Math.round(bn(lt[1]) / bn(tt[1]) * 100) + '%)</b>입니다. 다이소는 저가 구간 비중이 큽니다.'); }
+    } else out += '<div class="bi-warn">다이소 시장 요약 탭을 읽지 못했습니다. 잠시 후 새로고침해 주세요.</div>';
+    out += '<section class="bi-card"><h3>검색량 신호 (초음파 세척기 키워드) <span class="bi-ms">네이버 월간 검색량, 경쟁 비율</span></h3>' + (d.kw ? bTable({ head: ['키워드', '월간 검색량', '경쟁 비율', '구분', '조회일'], rows: d.kw.rows.slice(0, 12) }) : '<div class="bi-empty">읽지 못했습니다.</div>') + '<div class="bi-note">UV·초음파 세척기 소싱 검토용으로 수집한 키워드입니다. 다른 제품군의 검색량은 이 시트에 없습니다.</div></section>';
+    if (d.ins && d.ins.length) out += '<section class="bi-card"><h3>💡 자동 인사이트 ' + bReal + '</h3><ul class="bi-ins">' + d.ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>';
+    out += '<section class="bi-card"><h3>상품개발 자료 모음 <span class="bi-ms">드라이브 기준 · 소싱 시트는 연락처·단가가 있어 대시보드가 읽지 않고 링크만 둡니다</span></h3><ul class="bi-ins">' + PD_CATALOG.map(cat).join('') + '</ul></section>';
+    out += '<section class="bi-card"><h3>자동 수집 시트와 연결된 화면</h3><ul class="bi-ins">' + PD_LINKS.map(function (l) { return '<li><b>' + esc(l[1]) + '</b> → <a class="bi-btn" href="#' + l[0] + '">' + esc(l[2]) + ' 열기</a></li>'; }).join('') + '</ul></section>';
+    return out;
+  }
+  function biActsPdmk(d) {
+    const A = [];
+    A.push({ id: 'pdm-daiso', t: '다이소 입점 후보 상품 조사 요청', why: '다이소 5,000원 미만 구간 비중이 큰 분류에서 자사 아이디어와 맞는 상품 찾기', flow: biFlow('PM] 다이소 입점 후보 조사', ['다이소 시장분석 시트(전체 425개 품목) 기준으로 자사 신제품 아이디어와 겹치는 분류 정리', '분류별 가격 구간·리뷰수·품절률 확인', '입점 조건·판매가·마진 판단은 영업·대표 확인 후 진행']), aside: biAside('구글 시트 "다이소 시장분석 및 전략 방안"의 요약 탭과 상품별 상세 목록을 읽고, 분류별 가격 구간·리뷰수·품절률을 표로 정리해줘. 예상 원가·마진 열은 읽거나 쓰지 마.') });
+    return A;
+  }
+  function bindPd(app) {
+    app.addEventListener('click', function (e) {
+      const t = e.target; let x;
+      if ((x = t.closest('[data-pdf]'))) { const f = BIX.pd = BIX.pd || { cat: '전체', pri: '전체', cost: '전체' }; f[x.dataset.pdf] = x.dataset.v; biRender(BIX.page, true); return; }
+      if (t.closest('[data-pdshuffle]')) { BIX.pdShuf = (BIX.pdShuf || 0) + 1; biRender(BIX.page, true); return; }
+      if ((x = t.closest('[data-pdopen]'))) { e.preventDefault(); pdOpen(x.dataset.pdopen); return; }
+      if ((x = t.closest('[data-pdcopy]'))) { const c = pdFind(x.dataset.pdcopy); if (c) biCopy(pdTicket(c), '티켓 초안을 복사했습니다. FLOW에 붙여 넣으세요.'); return; }
+      if ((x = t.closest('[data-pdaside]'))) { const c = pdFind(x.dataset.pdaside); if (c) biCopy(pdAside(c), '어사이드 지시문을 복사했습니다.'); return; }
+      if ((x = t.closest('[data-pdfav]'))) { const c = pdFind(x.dataset.pdfav), fv = biLS('lo_bi_pd_fav', {}); if (c) { if (fv[c.name]) delete fv[c.name]; else fv[c.name] = { id: c.id }; biLSset('lo_bi_pd_fav', fv); biRender(BIX.page, true); } return; }
+      if ((x = t.closest('[data-pdskip]'))) { const c = pdFind(x.dataset.pdskip), sk = biLS('lo_bi_pd_skip', {}); if (c) { sk[c.name] = biToday(); biLSset('lo_bi_pd_skip', sk); biRender(BIX.page, true); } return; }
+      if (t.closest('[data-pdfavcopy]')) { const fv = biLS('lo_bi_pd_fav', {}); biCopy('[관심 상품 아이디어]\n' + Object.keys(fv).map(function (k) { return '- ' + k; }).join('\n'), '관심 목록을 복사했습니다.'); return; }
+      if ((x = t.closest('[data-pdprj]'))) { pdPrjOpen(+x.dataset.pdprj); return; }
+      if ((x = t.closest('[data-pdprjcopy]'))) { const d = BIX.pdd, p = d && d.proj[+x.dataset.pdprjcopy]; if (p) biCopy(biFlow('확인 요청] ' + p.short + ' 진행 현황', ['분류: ' + p.cat + ' / 등급 ' + (p.gr || '미표기'), '일정: ' + (pdFmtD(p.sd) || '미표기') + ' ~ ' + (pdFmtD(p.ed) || '미표기'), '현황(시트): ' + (p.st || '미기재'), '요청: 현재 진행 단계와 다음 일정 회신, 현황도 시트 갱신']), '확인 요청문을 복사했습니다.'); return; }
+    });
+  }
 
   function bindBi2(app) {
     app.addEventListener('click', function (e) {
@@ -6437,6 +6651,9 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     'bi-qna': [[/기획 요청|기획 규칙|기획 결과|실무 액션/, 'action'], [/인사이트|키워드 트렌드/, 'insight']],
     'bi-rights': [[/실무 액션/, 'action'], [/인사이트|만료 일정|제품별/, 'insight']],
     'bi-arch': [[/실무 액션/, 'action'], [/인사이트|분류별|자주 나온/, 'insight']],
+    'bi-pd': [[/오늘의 추천|추천 \d|관심 목록|실무 액션/, 'action'], [/자동 인사이트/, 'insight']],
+    'bi-pdst': [[/실무 액션/, 'action'], [/자동 인사이트|진행 단계|진행 구분/, 'insight']],
+    'bi-pdmk': [[/실무 액션/, 'action'], [/자동 인사이트/, 'insight']],
     'bi-news': [[/실무 액션/, 'action'], [/오늘의 핵심|주제 흐름|키워드|분류별|주의/, 'insight']]
   };
   function biStageTag(pg) {
@@ -6444,7 +6661,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     Array.prototype.forEach.call(body.querySelectorAll('.bi-kpis, .bi-warn, .bi-bar2, section.bi-card, section.bi-brief, .bi-brief, .bi-picks-head, .bi-picks, details.bi-man, .bi-grid2 > div'), function (el) {
       if (el.closest('[data-st]') && el.closest('[data-st]') !== el) return;
       if (el.matches('.bi-kpis, .bi-warn')) { el.setAttribute('data-st', 'all'); return; }
-      if (el.matches('.bi-bar2')) { el.setAttribute('data-st', pg === 'bi-inf' ? 'all' : 'explore'); return; }
+      if (el.matches('.bi-bar2')) { el.setAttribute('data-st', (pg === 'bi-inf' || pg === 'bi-pd') ? 'all' : 'explore'); return; }
       if (el.matches('details.bi-man')) { if (!el.hasAttribute('data-st')) el.setAttribute('data-st', 'explore'); return; }
       const h = el.querySelector('h3, h4') || el, txt = (h.textContent || '') + ' ' + (el.matches('.bi-picks') ? '추천 1' : ''); let st = 'explore';
       for (let i = 0; i < rules.length; i++) { if (rules[i][0].test(txt)) { st = rules[i][1]; break; } }
@@ -6650,7 +6867,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       + biViewPaid(d);
   }
 
-  const BI_STAGE_DEF = { 'bi': 'insight', 'bi-cafe': 'explore', 'bi-price': 'explore', 'bi-stock': 'explore', 'bi-ship': 'explore', 'bi-sku': 'explore', 'bi-sales': 'explore', 'bi-ads': 'explore', 'bi-inf': 'action', 'bi-paid': 'explore', 'bi-news': 'explore', 'bi-arch': 'explore', 'bi-rights': 'explore' };
+  const BI_STAGE_DEF = { 'bi-pd': 'action', 'bi': 'insight', 'bi-cafe': 'explore', 'bi-price': 'explore', 'bi-stock': 'explore', 'bi-ship': 'explore', 'bi-sku': 'explore', 'bi-sales': 'explore', 'bi-ads': 'explore', 'bi-inf': 'action', 'bi-paid': 'explore', 'bi-news': 'explore', 'bi-arch': 'explore', 'bi-rights': 'explore' };
   function biStageOf(pg) { return (BIX.stageBy && BIX.stageBy[pg]) || BI_STAGE_DEF[pg] || 'explore'; }
   function biActsInf(d) {
     const A = [], pk = infPicks(d, 3); BIX.infd = d;
@@ -6658,7 +6875,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (d.age !== null && d.age > 30) A.push({ id: 'inf-stale', t: '인플루언서 후보 신규 발굴 요청', why: '리스트업 탭 마지막 컨택 ' + d.lastD + ' (' + d.age + '일 전) — 추천 후보가 오래됨', flow: biFlow('요청] 인플루언서 후보 신규 발굴', ['현황: 리스트업 마지막 컨택일 ' + d.lastD + ' (' + d.age + '일 전)', '요청 1) 선정 기준(전문성·활동 지속성·설정형 콘텐츠)에 맞는 신규 후보 20명', '요청 2) 계정·구독자·비고(직업/공구 경험) 리스트업 탭에 추가']), aside: biAside('구글 시트 "[MK] 2026 인플루언서 마케팅 리스트"의 "선정 기준" 탭 기준에 맞는 인스타그램·유튜브 계정 후보 20개를 찾아 계정 링크, 구독자 수, 선정 이유를 표로 정리해줘(시트에는 쓰지 말고 새 시트에 정리). 개인 연락처·이메일은 수집하지 마.') });
     return A;
   }
-  const BI_ACTS = { 'bi-sales': biActsSales, 'bi-ads': biActsAds, 'bi-d2c': biActsD2C, 'bi-oy': biActsOY, 'bi-cp': biActsCP, 'bi-cafe': biActsCafe, 'bi-price': biActsPrice, 'bi-stock': biActsStock, 'bi-ship': biActsShip, 'bi-sku': biActsSku, 'bi-journey': biActsJourney, 'bi-rank': biActsRank, 'bi-inf': biActsInf, 'bi-rev': biActsRev, 'bi-comp': biActsComp, 'bi-qna': biActsQna, 'bi-news': biActsNews, 'bi-rights': biActsRights, 'bi-arch': biActsArch };
+  const BI_ACTS = { 'bi-pd': biActsPd, 'bi-pdst': biActsPdst, 'bi-pdmk': biActsPdmk, 'bi-sales': biActsSales, 'bi-ads': biActsAds, 'bi-d2c': biActsD2C, 'bi-oy': biActsOY, 'bi-cp': biActsCP, 'bi-cafe': biActsCafe, 'bi-price': biActsPrice, 'bi-stock': biActsStock, 'bi-ship': biActsShip, 'bi-sku': biActsSku, 'bi-journey': biActsJourney, 'bi-rank': biActsRank, 'bi-inf': biActsInf, 'bi-rev': biActsRev, 'bi-comp': biActsComp, 'bi-qna': biActsQna, 'bi-news': biActsNews, 'bi-rights': biActsRights, 'bi-arch': biActsArch };
   function biActCardFor(pg, d) { const f = BI_ACTS[pg]; if (!f) { BIX.acts = []; return ''; } try { return biActCard(f(d)); } catch (e) { BIX.acts = []; return ''; } }
 
   const BI_PAGES = {
@@ -6684,6 +6901,9 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     'bi-news': { t: '뉴스 브리핑', s: '매일 자동 취합되는 구강케어·유통 동향 뉴스를 탐색하고, 시사점과 공유 문안으로 바로 활용합니다.', k: 'news' },
     'bi-comp': { t: '경쟁사 모니터링', s: '올리브영 TOP20 경쟁 제품의 가격·할인·리뷰와 경쟁사의 약점.', k: 'comp' },
     'bi-qna': { t: '콘텐츠 소재 수집', s: '지식iN·카페 글에서 고객이 궁금해하는 주제와 뜨는 키워드를 찾습니다.', k: 'qna' },
+    'bi-pd': { t: '오늘의 상품 추천', s: '상품개발팀 · 자동화 시트에 쌓인 신제품 아이디어를 우선순위·개발비용·기간으로 점수화해 오늘 검토할 상품을 추천하고, FLOW 티켓 초안과 시장조사 지시문으로 바로 넘깁니다.', k: 'pidea' },
+    'bi-pdst': { t: '개발 현황', s: '상품개발팀 · 개발·리뉴얼 프로젝트의 등급·일정·현황과 품목별 진행 단계를 현황도 시트에서 읽습니다. 업체명·비용·인력 열은 읽지 않습니다.', k: 'pstat' },
+    'bi-pdmk': { t: '시장·소싱 자료', s: '상품개발팀 · 다이소 시장 요약, 검색량 신호, 소싱·시장조사 시트 모음. 소싱 시트는 연락처·단가가 있어 링크만 둡니다.', k: 'pdaiso' },
     'bi-manual': { t: '시트 메뉴얼', s: '시트별 구성과 읽는 방법(초안).' }
   };
 
@@ -6713,14 +6933,14 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if (pg === 'bi') { inner = await biViewOverview(); inner += biStratCard('bi') + biActCard(biActsOverview()); }
       else if (pg === 'bi-manual') inner = biViewManual();
       else if (m.k && BIX.view[pg] === 'tabs') inner = await biViewTabs(pg);
-      else { const K = { 'bi-d2c': [biLoadChan, biViewD2C], 'bi-oy': [biLoadChan, biViewOY], 'bi-cp': [biLoadCP, biViewCP], 'bi-cafe': [biLoadCafe, biViewCafe], 'bi-price': [biLoadPrice, biViewPrice], 'bi-sales': [biLoadSalesX, biViewSales], 'bi-ads': [biLoadSalesX, biViewAds], 'bi-stock': [biLoadLogi, biViewStock], 'bi-ship': [biLoadShip, biViewShip], 'bi-sku': [biLoadLogi, biViewSku], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews], 'bi-rights': [biLoadRights, biViewRights], 'bi-arch': [biLoadArch, biViewArch], 'bi-plan': [biLoadPlan, biViewPlan] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + biStratCard(pg) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
+      else { const K = { 'bi-d2c': [biLoadChan, biViewD2C], 'bi-oy': [biLoadChan, biViewOY], 'bi-cp': [biLoadCP, biViewCP], 'bi-cafe': [biLoadCafe, biViewCafe], 'bi-price': [biLoadPrice, biViewPrice], 'bi-sales': [biLoadSalesX, biViewSales], 'bi-ads': [biLoadSalesX, biViewAds], 'bi-stock': [biLoadLogi, biViewStock], 'bi-ship': [biLoadShip, biViewShip], 'bi-sku': [biLoadLogi, biViewSku], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews], 'bi-rights': [biLoadRights, biViewRights], 'bi-arch': [biLoadArch, biViewArch], 'bi-plan': [biLoadPlan, biViewPlan], 'bi-pd': [biLoadPd, biViewPd], 'bi-pdst': [biLoadPd, biViewPdst], 'bi-pdmk': [biLoadPdmk, biViewPdmk] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + biStratCard(pg) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
       if (BIX.page === pg) { el.innerHTML = biFrame(pg, inner, BIX.stamp); biStageTag(pg); biStageBadges(pg); biWarm(); biStash(pg); if (pg === 'bi-qna' || pg === 'bi-plan') qpProdFill(); if (pg === 'bi-arch') arGalUpd(); if (pg === 'bi-sku') skGen(); }
     } catch (e) { if (BIX.page === pg) el.innerHTML = biFrame(pg, '<div class="bi-warn">데이터를 불러오지 못했습니다: ' + esc(e.message || String(e)) + '<br>시트 구조가 바뀌었거나 네트워크 문제일 수 있습니다. 새로고침으로 다시 시도해 주세요.</div>', ''); }
   }
 
   function biPrefetch(pg) {
     if (!biUnlocked() || pg === BIX.page) return;
-    const L = { 'bi-d2c': biLoadChan, 'bi-oy': biLoadChan, 'bi-cp': biLoadCP, 'bi-cafe': biLoadCafe, 'bi-price': biLoadPrice, 'bi-sales': biLoadSalesX, 'bi-ads': biLoadSalesX, 'bi-stock': biLoadLogi, 'bi-ship': biLoadShip, 'bi-sku': biLoadLogi, 'bi-journey': biLoadJourney, 'bi-rank': biLoadRank, 'bi-inf': biLoadInf, 'bi-rev': biLoadRev, 'bi-comp': biLoadComp, 'bi-qna': biLoadQna, 'bi-news': biLoadNews, 'bi-rights': biLoadRights }[pg];
+    const L = { 'bi-d2c': biLoadChan, 'bi-oy': biLoadChan, 'bi-cp': biLoadCP, 'bi-cafe': biLoadCafe, 'bi-price': biLoadPrice, 'bi-sales': biLoadSalesX, 'bi-ads': biLoadSalesX, 'bi-stock': biLoadLogi, 'bi-ship': biLoadShip, 'bi-sku': biLoadLogi, 'bi-journey': biLoadJourney, 'bi-rank': biLoadRank, 'bi-inf': biLoadInf, 'bi-rev': biLoadRev, 'bi-comp': biLoadComp, 'bi-qna': biLoadQna, 'bi-news': biLoadNews, 'bi-rights': biLoadRights, 'bi-pd': biLoadPd, 'bi-pdst': biLoadPd, 'bi-pdmk': biLoadPdmk }[pg];
     if (!L) return; BIX.pre = BIX.pre || {}; if (BIX.pre[pg] && Date.now() - BIX.pre[pg] < 60000) return; BIX.pre[pg] = Date.now();
     try { Promise.resolve(L()).catch(function () {}); } catch (e) {}
   }
@@ -6734,7 +6954,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     clearInterval(BIX.timer); BIX.timer = setInterval(function () { if (document.body.dataset.mode === 'bi' && !document.hidden && BIX.view[BIX.page] !== 'tabs') { BIX.cache = {}; BIX.noStaleUntil = Date.now() + 20000; biRender(BIX.page, true); } }, 300000);
   }
   function bindBiApp() {
-    const app = $('#biApp'); if (!app) return; bindBi2(app); bindQp(app); bindArch(app); bindBench(app); bindLogi(app); bindPrice(app); bindCafe(app); bindChan(app); bindCt(app); bindAist(app); biChatInit(); fpInit(); app.addEventListener('mouseover', function (e) { const a = e.target.closest ? e.target.closest('.bs-nav a[data-bi], .bi-gsw a[data-bi]') : null; if (a) biPrefetch(a.dataset.bi); }); app.addEventListener('touchstart', function (e) { const a = e.target.closest ? e.target.closest('.bs-nav a[data-bi], .bi-gsw a[data-bi]') : null; if (a) biPrefetch(a.dataset.bi); }, { passive: true });
+    const app = $('#biApp'); if (!app) return; bindBi2(app); bindQp(app); bindArch(app); bindBench(app); bindLogi(app); bindPrice(app); bindCafe(app); bindChan(app); bindCt(app); bindPd(app); bindAist(app); biChatInit(); fpInit(); app.addEventListener('mouseover', function (e) { const a = e.target.closest ? e.target.closest('.bs-nav a[data-bi], .bi-gsw a[data-bi]') : null; if (a) biPrefetch(a.dataset.bi); }); app.addEventListener('touchstart', function (e) { const a = e.target.closest ? e.target.closest('.bs-nav a[data-bi], .bi-gsw a[data-bi]') : null; if (a) biPrefetch(a.dataset.bi); }, { passive: true });
     app.addEventListener('click', function (e) {
       if (e.target.closest('[data-birefresh]')) { BIX.cache = {}; BIX.noStaleUntil = Date.now() + 20000; biRender(BIX.page); return; }
       const ex = e.target.closest('[data-biexp]'); if (ex) { biExport(ex.dataset.biexp); return; }
@@ -8556,7 +8776,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 })();
 
 </script>
-<div id="biApp"><aside class="bs"><a class="bs-brand" href="#gate" aria-label="첫 화면"><img src="logo.svg" alt="Live orals" width="154" height="22"><span class="bs-sub">데이터 대시보드</span></a><nav class="bs-nav"><div class="bs-g">오늘</div><a href="#bi" data-bi="bi"><span class="bs-ic">🏠</span>종합 현황</a><a href="#bi-news" data-bi="bi-news"><span class="bs-ic">📰</span>뉴스 브리핑</a><div class="bs-g">영업</div><a href="#bi-sales" data-bi="bi-sales"><span class="bs-ic">💰</span>매출<em class="bs-team">영업팀</em></a><a href="#bi-price" data-bi="bi-price"><span class="bs-ic">🏷️</span>제품 가격<em class="bs-team">영업팀</em></a><div class="bs-g">채널</div><a href="#bi-d2c" data-bi="bi-d2c"><span class="bs-ic">🛍️</span>자사몰 · 스마트스토어</a><a href="#bi-oy" data-bi="bi-oy"><span class="bs-ic">🫒</span>올리브영</a><a href="#bi-cp" data-bi="bi-cp"><span class="bs-ic">🚀</span>쿠팡</a><div class="bs-g">물류</div><a href="#bi-stock" data-bi="bi-stock"><span class="bs-ic">📦</span>재고 현황</a><a href="#bi-ship" data-bi="bi-ship"><span class="bs-ic">🚚</span>출고·입고</a><a href="#bi-sku" data-bi="bi-sku"><span class="bs-ic">🧾</span>품목 마스터</a><div class="bs-g">마케팅</div><a href="#bi-plan" data-bi="bi-plan" class="bs-hot"><span class="bs-ic">✍️</span>콘텐츠 기획<em>바로 시작</em></a><a href="#bi-ads" data-bi="bi-ads"><span class="bs-ic">📣</span>광고<em class="bs-team">마케팅팀</em></a><a href="#bi-inf" data-bi="bi-inf"><span class="bs-ic">🤝</span>인플루언서</a><a href="#bi-rev" data-bi="bi-rev"><span class="bs-ic">⭐</span>고객·시장</a><div class="bs-g">자료</div><a href="#bi-manual" data-bi="bi-manual"><span class="bs-ic">📘</span>시트 메뉴얼</a></nav><div class="bs-foot"><a href="#gate">← 첫 화면</a><button type="button" data-bilock="1">🔒 잠그기</button></div></aside><main class="bm"><div class="bm-banner"><span class="bi-b real">실제</span> 표시는 구글 시트에서 읽은 값 · 5분마다 자동 갱신 · 마지막 데이터가 오래되면 <b>주황색</b>으로 알려 드립니다</div><div class="bi-askbar"><span>✨</span><input id="biAskQ" type="search" placeholder="무엇이든 물어보세요. 시트 데이터와 AI가 함께 답합니다 · 예) 이번 달 목표 어떻게 채울까? · 광고 효율 개선 아이디어" autocomplete="off" aria-label="질문"><kbd>Ctrl K</kbd></div><div class="bi-askchips" id="biAskChips"></div><div id="biAns"></div><div id="biMain"></div></main><div id="biDrawer"><aside class="bi-drawer" role="dialog" aria-modal="true"><div class="bi-drawer-h"><h3 id="biDrawerT"></h3><button type="button" id="biDrawerX" aria-label="닫기">✕</button></div><div id="biDrawerB"></div></aside></div></div>
+<div id="biApp"><aside class="bs"><a class="bs-brand" href="#gate" aria-label="첫 화면"><img src="logo.svg" alt="Live orals" width="154" height="22"><span class="bs-sub">데이터 대시보드</span></a><nav class="bs-nav"><div class="bs-g">오늘</div><a href="#bi" data-bi="bi"><span class="bs-ic">🏠</span>종합 현황</a><a href="#bi-news" data-bi="bi-news"><span class="bs-ic">📰</span>뉴스 브리핑</a><div class="bs-g">영업</div><a href="#bi-sales" data-bi="bi-sales"><span class="bs-ic">💰</span>매출<em class="bs-team">영업팀</em></a><a href="#bi-price" data-bi="bi-price"><span class="bs-ic">🏷️</span>제품 가격<em class="bs-team">영업팀</em></a><div class="bs-g">채널</div><a href="#bi-d2c" data-bi="bi-d2c"><span class="bs-ic">🛍️</span>자사몰 · 스마트스토어</a><a href="#bi-oy" data-bi="bi-oy"><span class="bs-ic">🫒</span>올리브영</a><a href="#bi-cp" data-bi="bi-cp"><span class="bs-ic">🚀</span>쿠팡</a><div class="bs-g">물류</div><a href="#bi-stock" data-bi="bi-stock"><span class="bs-ic">📦</span>재고 현황</a><a href="#bi-ship" data-bi="bi-ship"><span class="bs-ic">🚚</span>출고·입고</a><a href="#bi-sku" data-bi="bi-sku"><span class="bs-ic">🧾</span>품목 마스터</a><div class="bs-g">마케팅</div><a href="#bi-plan" data-bi="bi-plan" class="bs-hot"><span class="bs-ic">✍️</span>콘텐츠 기획<em>바로 시작</em></a><a href="#bi-ads" data-bi="bi-ads"><span class="bs-ic">📣</span>광고<em class="bs-team">마케팅팀</em></a><a href="#bi-inf" data-bi="bi-inf"><span class="bs-ic">🤝</span>인플루언서</a><a href="#bi-rev" data-bi="bi-rev"><span class="bs-ic">⭐</span>고객·시장</a><div class="bs-g">상품개발</div><a href="#bi-pd" data-bi="bi-pd" class="bs-hot"><span class="bs-ic">💡</span>오늘의 상품 추천<em>바로 시작</em></a><a href="#bi-pdst" data-bi="bi-pdst"><span class="bs-ic">🧪</span>개발 현황</a><a href="#bi-pdmk" data-bi="bi-pdmk"><span class="bs-ic">🔎</span>시장·소싱 자료</a><div class="bs-g">자료</div><a href="#bi-manual" data-bi="bi-manual"><span class="bs-ic">📘</span>시트 메뉴얼</a></nav><div class="bs-foot"><a href="#gate">← 첫 화면</a><button type="button" data-bilock="1">🔒 잠그기</button></div></aside><main class="bm"><div class="bm-banner"><span class="bi-b real">실제</span> 표시는 구글 시트에서 읽은 값 · 5분마다 자동 갱신 · 마지막 데이터가 오래되면 <b>주황색</b>으로 알려 드립니다</div><div class="bi-askbar"><span>✨</span><input id="biAskQ" type="search" placeholder="무엇이든 물어보세요. 시트 데이터와 AI가 함께 답합니다 · 예) 이번 달 목표 어떻게 채울까? · 광고 효율 개선 아이디어" autocomplete="off" aria-label="질문"><kbd>Ctrl K</kbd></div><div class="bi-askchips" id="biAskChips"></div><div id="biAns"></div><div id="biMain"></div></main><div id="biDrawer"><aside class="bi-drawer" role="dialog" aria-modal="true"><div class="bi-drawer-h"><h3 id="biDrawerT"></h3><button type="button" id="biDrawerX" aria-label="닫기">✕</button></div><div id="biDrawerB"></div></aside></div></div>
 <footer class="site-footer"><div class="site-footer-inner"><div><img src="logo.svg" alt="Live orals" width="120"><br><b>어사이드 활용 플랫폼</b> &middot; 라이브오랄스 사내용<br>치과의사가 만든 구강제품 전문브랜드 라이브오랄스</div><div>&copy; LIVEORALS 사내용 &middot; 원가·급여·계약·협상 금액은 입력하지 마세요.</div></div></footer>
 <div class="fab"><button type="button" class="fab-top" id="fabTop" aria-label="맨 위로">&#8593;</button><a class="fab-chat" href="#requests" aria-label="기능 추가 요청" title="기능 추가 요청"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 20.5l1.6-5A8.5 8.5 0 1 1 21 11.5z"/><circle cx="8.5" cy="11.5" r=".6" fill="#fff"/><circle cx="12.5" cy="11.5" r=".6" fill="#fff"/><circle cx="16.5" cy="11.5" r=".6" fill="#fff"/></svg></a></div>
 <script>
