@@ -5990,10 +5990,11 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     wk.forEach(function (a) { if (a[1]) ins.push('<b>' + a[0] + '</b> 최근 7일(' + a[1].from.slice(5) + '~' + a[1].to.slice(5) + ') 매출 ' + fW(a[1].l7) + '원, 직전 7일 대비 ' + chGrowth(a[1].l7, a[1].p7)); });
     [['자사몰', rS, tS, adS, self], ['스마트스토어', rT, tT, adT, ss]].forEach(function (a) { if (!isFinite(a[1])) return; ins.push('<b>' + a[0] + ' ROAS</b> ' + fP(a[1], 0) + (isFinite(a[2]) ? (a[1] >= a[2] ? ' — 목표 ' + fP(a[2], 0) + ' 이상입니다' : ' — <b class="bi-dn">목표 ' + fP(a[2], 0) + '에 ' + fP(a[2] - a[1], 0) + 'p 못 미칩니다</b>') : ' (목표 미표기)') + ' · 광고비 ' + fW(a[3]) + '원은 매출의 ' + fP(a[3] / a[4].sum * 100, 0) + '입니다'); });
     const topT = CH_AD_SS.map(function (l) { return [l, chS(x, l)]; }).filter(function (q) { return isFinite(q[1]) && q[1] > 0; }).sort(function (u, v) { return v[1] - u[1]; })[0]; if (topT && adT) ins.push('스마트스토어 광고비 1위 항목은 <b>' + esc(topT[0].replace('_스토어', '')) + '</b> ' + fW(topT[1]) + '원(스마트스토어 광고비의 ' + fP(topT[1] / adT * 100, 0) + ')입니다');
+    chmIns(d, 'd2c').forEach(function (t) { ins.push(t); });
     ins.push('이 화면은 시트의 매출·광고비·ROAS만 읽습니다. <b>스마트스토어는 방문자·전환 데이터가 연결돼 있지 않습니다.</b> 자사몰 방문·구매율은 "카페24 교차검증", 상품 페이지 방문은 "상품 페이지 고객여정"에서 봅니다.');
     return kp + bar
       + '<section class="bi-card"><h3>일별 매출 ' + bReal + '</h3>' + chDayBars(d, ser, col, '단위: 원 · 가로축은 일(日) · ' + names.join(' / ')) + '</section>'
-      + '<section class="bi-card"><h3>월별 비교 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>월</th>' + hd.join('') + '</tr></thead><tbody>' + chCompareRows(d, cols) + '</tbody></table></div><div class="bi-note">자사몰 = 시트의 "자사몰" 행(공동구매는 별도 행이라 제외). ROAS = 채널 매출 ÷ 그 채널 광고비 소계(시트 "국내 B2C 온라인 채널 광고 효율" 행). 목표 ROAS는 손익분기표의 값(그 달 칸에 숫자 목표가 없으면 가장 최근 월의 값)이라 산식이 조금 다를 수 있습니다. 이번 달은 ' + esc(d.last.slice(5)) + '까지의 누계입니다.</div></section>'
+      + chmSection(d, 'd2c') + '<section class="bi-card"><h3>최근 4개월 상세 비교 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>월</th>' + hd.join('') + '</tr></thead><tbody>' + chCompareRows(d, cols) + '</tbody></table></div><div class="bi-note">자사몰 = 시트의 "자사몰" 행(공동구매는 별도 행이라 제외). ROAS = 채널 매출 ÷ 그 채널 광고비 소계(시트 "국내 B2C 온라인 채널 광고 효율" 행). 목표 ROAS는 손익분기표의 값(그 달 칸에 숫자 목표가 없으면 가장 최근 월의 값)이라 산식이 조금 다를 수 있습니다. 이번 달은 ' + esc(d.last.slice(5)) + '까지의 누계입니다.</div></section>'
       + '<div class="bi-grid2">' + (showS ? '<section class="bi-card"><h3>자사몰 광고비 구성 ' + bReal + '</h3>' + chAdBars(x, CH_AD_SELF) + '<div class="bi-note">' + x.m + '월 누계, 원</div></section>' : '') + (showT ? '<section class="bi-card"><h3>스마트스토어 광고비 구성 ' + bReal + '</h3>' + chAdBars(x, CH_AD_SS) + '<div class="bi-note">' + x.m + '월 누계, 원</div></section>' : '') + '</div>'
       + '<section class="bi-card"><h3>💡 자동 인사이트 <span class="bi-ms">시트 값 비교 · 규칙 기반 · AI 해석 아님</span></h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>';
   }
@@ -6017,11 +6018,12 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (isFinite(rAll)) ins.push('<b>광고 ROAS(온·오프 합산)</b> ' + fP(rAll, 0) + (isFinite(tg) ? (rAll >= tg ? ' — 목표 ' + fP(tg, 0) + ' 이상' : ' — <b class="bi-dn">목표 ' + fP(tg, 0) + '에 ' + fP(tg - rAll, 0) + 'p 못 미칩니다</b>') : '') + '. 온라인 매출만 보면 ' + fP(rOn, 0) + '입니다. 광고는 온라인 중심이라 매장 매출까지 광고 효과로 볼 수는 없어 두 값을 같이 봐야 합니다(해석은 담당자 판단).');
     if (isFinite(sin) && isFinite(tot.sum)) ins.push('사입(실매출) ' + fW(sin) + '원 vs 고객인도 총매출 ' + fW(tot.sum) + '원 — 차이 ' + fW(tot.sum - sin) + '원. 두 값은 기준이 달라 같은 기간에 일치하지 않는 것이 정상일 수 있으나, 입고·재고 흐름은 물류 화면에서 확인이 필요합니다.');
     if (spikes.length) ins.push('총매출이 일평균의 2배를 넘은 날: ' + spikes.map(function (q) { return d.cur.c.dates[q[0]].slice(5) + ' ' + fW(q[1]) + '원'; }).join(', ') + ' (행사·노출 이벤트 여부는 시트에 표기되지 않음)');
+    chmIns(d, 'oy').forEach(function (t) { ins.push(t); });
     ins.push('올리브영은 광고비(메타)와 매출만 시트에 있고, 상품별·옵션별 판매는 연결돼 있지 않습니다. 제품별 순위는 "랭킹 트래커"에서 봅니다.');
     const cols = [function (q) { return chW(chB(q, '올리브영 on/off 총매출')); }, function (q) { return chW(chB(q, '올리브영 매출(온라인)')); }, function (q) { return chW(chB(q, '올리브영 매출(매장)')); }, function (q) { const a = chB(q, '올리브영 매출(온라인)'), b = chB(q, '올리브영 on/off 총매출'); return isFinite(a / b) ? fP(a / b * 100, 0) : '-'; }, function (q) { return fN(chB(q, '올리브영 판매량(온라인)')) + ' / ' + fN(chB(q, '올리브영 판매량(매장)')); }, function (q) { return fN(chB(q, '올리브영 객단가', 'avg')) + '원'; }, function (q) { return chW(chS(q, '올리브영 광고비 소계')); }, function (q) { const a = chB(q, '올리브영 on/off 총매출'), b = chS(q, '올리브영 광고비 소계'), t = chTarget(d, '올리브영', q), r = b ? a / b * 100 : NaN; return '<b>' + chPct(r) + '</b>' + (isFinite(t) ? '<small class="' + (r >= t ? 'bi-up' : 'bi-dn') + '">목표 ' + chPct(t) + '</small>' : ''); }, function (q) { return chW(chSellIn(d, '올리브영 사입', q)); }];
     return kp
       + '<section class="bi-card"><h3>일별 매출: 온라인 vs 매장 ' + bReal + '</h3>' + chDayBars(d, [on.d, off.d], ['#14C4A9', '#F5A524'], '단위: 원 · 가로축은 일(日) · 초록 = 온라인, 주황 = 매장') + '</section>'
-      + '<section class="bi-card"><h3>월별 비교 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>월</th><th>총매출(고객인도)</th><th>온라인</th><th>매장</th><th>온라인 비중</th><th>판매량 온라인/매장</th><th>객단가(일평균)</th><th>광고비(메타)</th><th>ROAS(온·오프 합산)</th><th>사입(실매출)</th></tr></thead><tbody>' + chCompareRows(d, cols) + '</tbody></table></div><div class="bi-note">총매출 = 올리브영 온·오프 판매(소비자에게 팔린 금액, 시트 표기 "고객인도금액 · 실 매출 x"). 사입 = 올리브영에 납품한 금액으로 손익분기표의 실매출입니다. ROAS(합산)는 총매출 ÷ 올리브영 광고비 소계로 제가 계산했고, 목표는 손익분기표 값(그 달 칸에 숫자 목표가 없으면 가장 최근 월의 값)입니다. 이번 달은 ' + esc(d.last.slice(5)) + '까지의 누계입니다.</div></section>'
+      + chmSection(d, 'oy') + '<section class="bi-card"><h3>최근 4개월 상세 비교 ' + bReal + '</h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>월</th><th>총매출(고객인도)</th><th>온라인</th><th>매장</th><th>온라인 비중</th><th>판매량 온라인/매장</th><th>객단가(일평균)</th><th>광고비(메타)</th><th>ROAS(온·오프 합산)</th><th>사입(실매출)</th></tr></thead><tbody>' + chCompareRows(d, cols) + '</tbody></table></div><div class="bi-note">총매출 = 올리브영 온·오프 판매(소비자에게 팔린 금액, 시트 표기 "고객인도금액 · 실 매출 x"). 사입 = 올리브영에 납품한 금액으로 손익분기표의 실매출입니다. ROAS(합산)는 총매출 ÷ 올리브영 광고비 소계로 제가 계산했고, 목표는 손익분기표 값(그 달 칸에 숫자 목표가 없으면 가장 최근 월의 값)입니다. 이번 달은 ' + esc(d.last.slice(5)) + '까지의 누계입니다.</div></section>'
       + '<section class="bi-card"><h3>💡 자동 인사이트 <span class="bi-ms">시트 값 비교 · 규칙 기반 · AI 해석 아님</span></h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>';
   }
   function biActsOY(d) {
@@ -6055,6 +6057,103 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     A.push({ id: 'cp-stock', t: '쿠팡 재고 연동 확인', why: '품절·소진 임박 품목은 재고 현황에서 봅니다', link: 'bi-stock', linkLabel: '재고 현황 열기', open: function () { location.hash = '#bi-stock'; } });
     return A;
   }
+  /* ===== 자사몰·스마트스토어 / 올리브영 월별 분석 (월별 요약 + 26년 6월 탭 + 월별 B2C·B2B 탭) ===== */
+  function chRawHist() {
+    const c = BIX.chr; if (c && Date.now() - c.t < 45000) return Promise.resolve(c.v);
+    return Promise.all([biFetch('sales', CP_HIST_GID, 120).then(function (j) { return j.values; }).catch(function () { return null; }), biFetch('sales', CP_JUN_GID, 140).then(function (j) { return j.values; }).catch(function () { return null; })]).then(function (r) { BIX.chr = { t: Date.now(), v: r }; return r; });
+  }
+  async function biLoadChanH() { const base = await biLoadChan(), r = await chRawHist(); return Object.assign({}, base, { chr: r }); }
+  function chHistMap(r, spec) {
+    const a = r && r[0], b = r && r[1], out = {}, fs = Object.keys(spec);
+    if (a && a.length) {
+      const hdr = a[0] || [], rows = {}; fs.forEach(function (f) { rows[f] = a.find(function (x) { return bnorm(x[1]) === spec[f]; }); });
+      hdr.forEach(function (h, i) { const k = /^\d{4}\.\s*\d+\./.test(bnorm(h)) ? cpKey(h) : ''; if (!k) return; const o = { k: k, src: '월별 요약' }; let any = false; fs.forEach(function (f) { const v = rows[f] ? bn(rows[f][i]) : NaN; o[f] = v; if (isFinite(v) && v > 0) any = true; }); if (any) out[k] = o; });
+    }
+    if (b && b.length) {
+      const hi = b.findIndex(function (x) { return x.some(function (c) { return bnorm(c) === '월합산'; }); }), vc = hi >= 0 ? b[hi].findIndex(function (c) { return bnorm(c) === '월합산'; }) : 6, o = { k: '2026-06', src: '26년 6월 탭' }; let any = false;
+      fs.forEach(function (f) { const row = b.find(function (x) { return bnorm(x[1]) === spec[f]; }), v = row ? bn(row[vc]) : NaN; o[f] = v; if (isFinite(v) && v > 0) any = true; }); if (any) out['2026-06'] = o;
+    }
+    return out;
+  }
+  function chmMonths(d, kind) {
+    const spec = kind === 'd2c' ? { self: '자사몰', ss: '스마트스토어' } : { tot: '올리브영 매출', qty: '올리브영 판매량', sellin: '올리브영 사입' }, M = chHistMap(d.chr, spec);
+    Object.keys(M).forEach(function (k) { ['adS', 'adT', 'rS', 'rT', 'ad', 'roas'].forEach(function (f) { if (M[k][f] === undefined) M[k][f] = NaN; }); });
+    d.months.forEach(function (x) {
+      if (kind === 'd2c') { const s = chRow(x.c, '자사몰', /D2C/), t = chRow(x.c, '스마트스토어', /D2C/); M[x.k] = { k: x.k, src: '월별 B2C·B2B 탭', self: s ? s.sum : NaN, ss: t ? t.sum : NaN, adS: chS(x, '자사몰 광고비 소계'), adT: chS(x, '스마트스토어 광고비 소계'), rS: chS(x, '자사몰', /광고 효율/), rT: chS(x, '스마트스토어', /광고 효율/), cur: x === d.cur }; }
+      else { const tot = chRow(x.b, '올리브영 on/off 총매출'), ad = chS(x, '올리브영 광고비 소계'), q = chB(x, '올리브영 판매량(온라인)') + chB(x, '올리브영 판매량(매장)'); M[x.k] = { k: x.k, src: '월별 B2C·B2B 탭', tot: tot ? tot.sum : NaN, qty: q, sellin: chSellIn(d, '올리브영 사입', x), ad: ad, roas: ad && tot ? tot.sum / ad * 100 : NaN, cur: x === d.cur }; }
+    });
+    return Object.keys(M).sort().map(function (k) { return M[k]; }).filter(function (o) { return kind === 'd2c' ? (isFinite(o.self) || isFinite(o.ss)) : (isFinite(o.tot) || isFinite(o.sellin)); });
+  }
+  function chmRange(ms) { const f = BIX.chm || '12개월'; return f === '전체' ? ms : ms.slice(-(f === '6개월' ? 6 : 12)); }
+  function chmSection(d, kind) {
+    const all = chmMonths(d, kind), ms = chmRange(all), idx = {}; all.forEach(function (o, i) { idx[o.k] = i; });
+    const f = BIX.chm || '12개월', bar = '<div class="bi-bar2"><span class="bi-bl">월별 기간</span>' + chChips('data-chm', ['6개월', '12개월', '전체'], f) + '</div>';
+    if (!ms.length) return bar + '<section class="bi-card"><h3>월별 분석</h3><div class="bi-empty">월별 데이터를 읽지 못했습니다.</div></section>';
+    const lab = ms.map(function (o) { return cpLab(o.k); }), fl = BIX.chf || '전체', showS = fl === '전체' || fl === '자사몰', showT = fl === '전체' || fl === '스마트스토어';
+    const adMs = ms.filter(function (o) { return kind === 'd2c' ? (isFinite(o.adS) || isFinite(o.adT)) : isFinite(o.ad); }), adLab = adMs.map(function (o) { return cpLab(o.k); });
+    const chg = function (o, fld) { const i = idx[o.k], pv = i > 0 && !o.cur ? all[i - 1] : null, yy = o.cur ? null : all[idx[(+o.k.slice(0, 4) - 1) + o.k.slice(4)]]; return [cpChgHtml(pv ? cpChg(o[fld], pv[fld]) : NaN), cpChgHtml(yy ? cpChg(o[fld], yy[fld]) : NaN)]; };
+    const pill = function (o) { return '<b>' + o.k.slice(0, 4) + '.' + o.k.slice(5) + '</b>' + (o.cur ? ' <span class="bi-pill">진행 중</span>' : ''); };
+    let charts, rows, head, note;
+    if (kind === 'd2c') {
+      const ser = [], col = [], nm = []; if (showS) { ser.push(ms.map(function (o) { return o.self; })); col.push('#14C4A9'); nm.push('초록 = 자사몰(공구 제외)'); } if (showT) { ser.push(ms.map(function (o) { return o.ss; })); col.push('#6C7BFF'); nm.push('보라 = 스마트스토어'); }
+      const adSer = [], adCol = [], adNm = []; if (showS) { adSer.push(adMs.map(function (o) { return o.adS; })); adCol.push('#14C4A9'); adNm.push('초록 = 자사몰'); } if (showT) { adSer.push(adMs.map(function (o) { return o.adT; })); adCol.push('#6C7BFF'); adNm.push('보라 = 스마트스토어'); }
+      const roSer = [], roCol = []; if (showS) { roSer.push(adMs.map(function (o) { return o.rS; })); roCol.push('#14C4A9'); } if (showT) { roSer.push(adMs.map(function (o) { return o.rT; })); roCol.push('#6C7BFF'); }
+      charts = '<section class="bi-card"><h3>월별 매출 ' + bReal + '</h3>' + bBars(lab, ser, col, fW, '단위: 원 · ' + nm.join(', ') + ' · 가로축은 연.월') + '</section>'
+        + (adMs.length >= 2 ? '<div class="bi-grid2"><section class="bi-card"><h3>월별 광고비 ' + bReal + '</h3>' + bBars(adLab, adSer, adCol, fW, '단위: 원 · ' + adNm.join(', ') + ' · 월별 B2C 탭이 있는 달만') + '</section><section class="bi-card"><h3>월별 광고 ROAS ' + bReal + '</h3>' + bBars(adLab, roSer, roCol, function (v) { return fP(v, 0); }, '시트의 "광고 효율" 값 · 월별 B2C 탭이 있는 달만') + '</section></div>' : '<div class="bi-note" style="margin:0 0 12px">채널별 광고비·ROAS는 월별 B2C 탭이 있는 달(최근 ' + adMs.length + '개월)만 시트에 있어 그래프를 만들 수 없습니다.</div>');
+      head = '<th>월</th><th>자사몰 매출</th><th>전월 대비</th><th>전년 동월 대비</th><th>스마트스토어 매출</th><th>전월 대비</th><th>전년 동월 대비</th><th>자사몰 광고비 · ROAS</th><th>스마트스토어 광고비 · ROAS</th><th>출처 탭</th>';
+      const ad = function (a, r) { return isFinite(a) ? chW(a) + (isFinite(r) ? ' · <b>' + fP(r, 0) + '</b>' : '') : '-'; };
+      rows = ms.slice().reverse().map(function (o) { const a = chg(o, 'self'), b = chg(o, 'ss'); return '<tr class="bi-click" data-chmo="d2c:' + o.k + '"><td>' + pill(o) + '</td><td>' + chW(o.self) + '</td><td>' + a[0] + '</td><td>' + a[1] + '</td><td>' + chW(o.ss) + '</td><td>' + b[0] + '</td><td>' + b[1] + '</td><td>' + ad(o.adS, o.rS) + '</td><td>' + ad(o.adT, o.rT) + '</td><td class="bi-ms">' + esc(o.src) + '</td></tr>'; }).join('');
+      note = '자사몰 = 시트의 "자사몰" 행(공동구매는 별도 행이라 제외), 스마트스토어 = "스마트스토어" 행입니다. 광고비·ROAS는 월별 국내 B2C 탭(2026.7~)에만 채널별로 있고, 이전 달은 "월별 요약"·"26년 6월" 탭에 채널별 광고비가 없어 비워 둡니다. 진행 중인 달은 누계라 전월·전년 비교를 표시하지 않습니다.';
+    } else {
+      const twoMs = ms.filter(function (o) { return isFinite(o.qty) && o.qty > 0; });
+      charts = '<div class="bi-grid2"><section class="bi-card"><h3>월별 총매출(고객인도) vs 사입(실매출) ' + bReal + '</h3>' + bBars(lab, [ms.map(function (o) { return o.tot; }), ms.map(function (o) { return o.sellin; })], ['#14C4A9', '#6C7BFF'], fW, '단위: 원 · 초록 = 총매출(소비자 판매), 보라 = 사입(올리브영 납품, 실매출) · 가로축은 연.월') + '</section><section class="bi-card"><h3>월별 판매량 ' + bReal + '</h3>' + bBars(twoMs.map(function (o) { return cpLab(o.k); }), [twoMs.map(function (o) { return o.qty; })], ['#F5A524'], fN, '단위: 개 · 시트의 "올리브영 판매량" · 값이 있는 달만') + '</section></div>'
+        + (adMs.length >= 2 ? '<div class="bi-grid2"><section class="bi-card"><h3>월별 광고비 (올리브영 광고비 소계) ' + bReal + '</h3>' + bBars(adLab, [adMs.map(function (o) { return o.ad; })], ['#E5484D'], fW, '단위: 원 · 월별 B2C 탭이 있는 달만') + '</section><section class="bi-card"><h3>월별 ROAS (총매출 ÷ 광고비) ' + bReal + '</h3>' + bBars(adLab, [adMs.map(function (o) { return o.roas; })], ['#F5A524'], function (v) { return fP(v, 0); }, '제가 계산한 값 · 온·오프 합산 · 월별 B2C 탭이 있는 달만') + '</section></div>' : '<div class="bi-note" style="margin:0 0 12px">올리브영 광고비는 월별 B2C 탭이 있는 달(최근 ' + adMs.length + '개월)만 시트에 있어 그래프를 만들 수 없습니다.</div>');
+      head = '<th>월</th><th>총매출(고객인도)</th><th>전월 대비</th><th>전년 동월 대비</th><th>사입(실매출)</th><th>판매량</th><th>광고비</th><th>ROAS(온·오프 합산)</th><th>출처 탭</th>';
+      rows = ms.slice().reverse().map(function (o) { const a = chg(o, 'tot'); return '<tr class="bi-click" data-chmo="oy:' + o.k + '"><td>' + pill(o) + '</td><td>' + chW(o.tot) + '</td><td>' + a[0] + '</td><td>' + a[1] + '</td><td>' + chW(o.sellin) + '</td><td>' + (isFinite(o.qty) && o.qty > 0 ? fN(o.qty) : '-') + '</td><td>' + chW(o.ad) + '</td><td>' + (isFinite(o.roas) ? '<b>' + fP(o.roas, 0) + '</b>' : '-') + '</td><td class="bi-ms">' + esc(o.src) + '</td></tr>'; }).join('');
+      note = '총매출 = 올리브영 온·오프 판매(소비자에게 팔린 금액, 시트 표기 "고객인도금액 · 실 매출 x"), 사입 = 올리브영에 납품한 금액으로 손익분기표의 실매출입니다. 광고비·ROAS는 월별 국내 B2C 탭(2026.7~)에만 올리브영 광고비 소계가 있어 이전 달은 비워 둡니다. 온라인·매장 구분은 월 상세(행 클릭)에서 월별 탭이 있는 달만 볼 수 있습니다. 진행 중인 달은 누계라 전월·전년 비교를 표시하지 않습니다.';
+    }
+    const tbl = '<section class="bi-card"><h3>월별 상세 표 ' + bReal + ' <span class="bi-ms">행을 누르면 그 달 상세가 열립니다</span></h3><div class="bi-tw" style="max-height:560px;overflow:auto"><table class="bi-t"><thead><tr>' + head + '</tr></thead><tbody>' + rows + '</tbody></table></div><div class="bi-note">' + note + ' 2025.1~2026.5는 "월별 요약" 탭, 2026.6은 "26년 6월" 탭, 2026.7부터는 월별 국내 B2C·B2B 탭 값입니다. 탭마다 집계 방식이 조금 다를 수 있어 6월과 7월 사이의 큰 변화는 원본 확인이 필요합니다. 이번 달은 ' + esc(d.last.slice(5)) + '까지의 누계입니다.</div></section>';
+    return bar + charts + tbl;
+  }
+  function chmIns(d, kind) {
+    const all = chmMonths(d, kind), done = all.filter(function (o) { return !o.cur; }), out = [];
+    const defs = kind === 'd2c' ? [['자사몰', 'self'], ['스마트스토어', 'ss']] : [['올리브영 총매출(고객인도)', 'tot'], ['올리브영 사입(실매출)', 'sellin']], ym = function (o) { return o.k.replace('-', '.'); };
+    defs.forEach(function (df) {
+      const fld = df[1], R = done.filter(function (o) { return isFinite(o[fld]) && o[fld] > 0; }); if (R.length < 3) return;
+      const best = R.slice().sort(function (a, b) { return b[fld] - a[fld]; })[0], low = R.slice().sort(function (a, b) { return a[fld] - b[fld]; })[0];
+      out.push('<b>월별 ' + df[0] + '</b>(완료된 달 ' + R.length + '개월): 최고 ' + ym(best) + ' ' + fW(best[fld]) + '원, 최저 ' + ym(low) + ' ' + fW(low[fld]) + '원');
+      if (R.length >= 6) { const a = R.slice(-3), b = R.slice(-6, -3), av = function (x) { return x.reduce(function (s, o) { return s + o[fld]; }, 0) / x.length; }; out.push('최근 3개월(' + ym(a[0]) + '~' + ym(a[2]) + ') 월평균 ' + df[0] + ' ' + fW(av(a)) + '원, 직전 3개월 월평균 ' + fW(av(b)) + '원 대비 ' + chGrowth(av(a), av(b))); }
+    });
+    const j6 = all.find(function (o) { return o.k === '2026-06'; }), j7 = all.find(function (o) { return o.k === '2026-07'; }), f0 = defs[0][1];
+    if (j6 && j7 && isFinite(j6[f0]) && isFinite(j7[f0]) && j6[f0] > 0 && Math.abs(j7[f0] / j6[f0] - 1) >= 0.5) out.push('2026.6 → 2026.7에 ' + defs[0][0] + '이 ' + fW(j6[f0]) + '원 → ' + fW(j7[f0]) + '원으로 크게 달라졌습니다. 두 달은 값을 읽은 탭이 달라(26년 6월 탭 → 월별 B2C 탭) 집계 기준 차이일 수 있어 원본 확인이 필요합니다.');
+    return out;
+  }
+  function chmOpen(arg) {
+    const kind = arg.split(':')[0], k = arg.split(':')[1], d = BIX.cur; if (!d || !d.chr) return; const all = chmMonths(d, kind), i = all.findIndex(function (o) { return o.k === k; }), o = all[i]; if (!o) return;
+    const pv = i > 0 ? all[i - 1] : null, yy = all.find(function (q) { return q.k === (+k.slice(0, 4) - 1) + k.slice(4); }), cg = function (fld) { const p = pv && !o.cur ? cpChg(o[fld], pv[fld]) : NaN, y = yy && !o.cur ? cpChg(o[fld], yy[fld]) : NaN; return [isFinite(p) ? (p >= 0 ? '+' : '') + fP(p, 1) + ' (' + pv.k.replace('-', '.') + ' ' + chW(pv[fld]) + ')' : '-', isFinite(y) ? (y >= 0 ? '+' : '') + fP(y, 1) + ' (' + yy.k.replace('-', '.') + ' ' + chW(yy[fld]) + ')' : '-']; };
+    const mo = d.months.find(function (x) { return x.k === k; }), dts = mo ? mo.c.dates.map(function (x) { return x.slice(8).replace(/^0/, ''); }) : [], cut = function (a) { return a.map(function (v, j) { return mo === d.cur && j > d.lastIdx ? NaN : v; }); };
+    let rows, daily = '', title, line;
+    if (kind === 'd2c') {
+      const a = cg('self'), b = cg('ss'); rows = [['자사몰 매출(공구 제외)', chW(o.self)], ['전월 대비', a[0]], ['전년 동월 대비', a[1]], ['스마트스토어 매출', chW(o.ss)], ['전월 대비', b[0]], ['전년 동월 대비', b[1]], ['자사몰 광고비 · ROAS', isFinite(o.adS) ? chW(o.adS) + ' · ' + fP(o.rS, 0) : '-'], ['스마트스토어 광고비 · ROAS', isFinite(o.adT) ? chW(o.adT) + ' · ' + fP(o.rT, 0) : '-'], ['출처 탭', o.src]];
+      const s = mo ? chRow(mo.c, '자사몰', /D2C/) : null, t = mo ? chRow(mo.c, '스마트스토어', /D2C/) : null;
+      daily = s && t ? '<h4>일별 매출 <span class="bi-ms">월별 B2C 탭</span></h4>' + bBars(dts, [cut(s.d), cut(t.d)], ['#14C4A9', '#6C7BFF'], fW, '단위: 원 · 가로축은 일(日) · 초록 = 자사몰, 보라 = 스마트스토어') : '<p class="bi-dr-p">이 달은 일별 데이터 탭이 없어 월 합계만 있습니다.</p>';
+      title = '자사몰·스마트스토어 ' + k.replace('-', '.') + ' 월 상세'; line = '자사몰·스마트스토어 ' + k.replace('-', '.') + ' | 자사몰 ' + chW(o.self) + ' | 스마트스토어 ' + chW(o.ss) + ' | 자사몰 ROAS ' + (isFinite(o.rS) ? fP(o.rS, 0) : '-') + ' | 스마트스토어 ROAS ' + (isFinite(o.rT) ? fP(o.rT, 0) : '-');
+    } else {
+      const a = cg('tot'); rows = [['총매출(고객인도)', chW(o.tot)], ['전월 대비', a[0]], ['전년 동월 대비', a[1]], ['사입(실매출)', chW(o.sellin)], ['판매량', isFinite(o.qty) && o.qty > 0 ? fN(o.qty) + '개' : '-'], ['광고비', chW(o.ad)], ['ROAS(총매출 ÷ 광고비, 계산)', isFinite(o.roas) ? fP(o.roas, 0) : '-'], ['출처 탭', o.src]];
+      const on = mo ? chRow(mo.b, '올리브영 매출(온라인)') : null, off = mo ? chRow(mo.b, '올리브영 매출(매장)') : null;
+      daily = on && off ? '<h4>일별 매출: 온라인 vs 매장 <span class="bi-ms">월별 B2B 탭</span></h4>' + bBars(dts, [cut(on.d), cut(off.d)], ['#14C4A9', '#F5A524'], fW, '단위: 원 · 가로축은 일(日) · 초록 = 온라인, 주황 = 매장') + '<p class="bi-dr-p">온라인 ' + chW(on.sum) + ' · 매장 ' + chW(off.sum) + '</p>' : '<p class="bi-dr-p">이 달은 일별 데이터 탭이 없어 월 합계만 있습니다.</p>';
+      title = '올리브영 ' + k.replace('-', '.') + ' 월 상세'; line = '올리브영 ' + k.replace('-', '.') + ' | 총매출 ' + chW(o.tot) + ' | 사입 ' + chW(o.sellin) + ' | 광고비 ' + chW(o.ad) + ' | ROAS(계산) ' + (isFinite(o.roas) ? fP(o.roas, 0) : '-');
+    }
+    BIX.qpTxt = {}; biOpenDrawer(title, '<dl class="bi-dl">' + rows.map(function (r) { return '<dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd>'; }).join('') + '</dl>' + daily + '<div class="bi-dr-btns">' + qpCopyBtn('한 줄 복사', line) + '</div><div class="bi-note">ROAS(올리브영)와 증감률은 제가 계산한 값입니다.</div>');
+  }
+  function bindChm(app) {
+    app.addEventListener('click', function (e) {
+      const t = e.target; let x;
+      if ((x = t.closest('[data-chmo]'))) { chmOpen(x.dataset.chmo); return; }
+      if ((x = t.closest('[data-chm]'))) { BIX.chm = x.dataset.v; const sy = window.scrollY; Promise.resolve(biRender(BIX.page, true)).then(function () { window.scrollTo(0, sy); }); }
+    });
+  }
+
   function bindChan(app) {
     app.addEventListener('click', function (e) { const mo = e.target.closest ? e.target.closest('[data-cpmo]') : null; if (mo) { cpMonthOpen(mo.dataset.cpmo); return; } const x = e.target.closest ? e.target.closest('[data-chf], [data-cpm]') : null; if (!x) return; if (x.hasAttribute('data-cpm')) BIX.cpm = x.dataset.v; else BIX.chf = x.dataset.v; const sy = window.scrollY; Promise.resolve(biRender(BIX.page, true)).then(function () { window.scrollTo(0, sy); }); });
   }
@@ -6934,14 +7033,14 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if (pg === 'bi') { inner = await biViewOverview(); inner += biStratCard('bi') + biActCard(biActsOverview()); }
       else if (pg === 'bi-manual') inner = biViewManual();
       else if (m.k && BIX.view[pg] === 'tabs') inner = await biViewTabs(pg);
-      else { const K = { 'bi-d2c': [biLoadChan, biViewD2C], 'bi-oy': [biLoadChan, biViewOY], 'bi-cp': [biLoadCP, biViewCP], 'bi-cafe': [biLoadCafe, biViewCafe], 'bi-price': [biLoadPrice, biViewPrice], 'bi-sales': [biLoadSalesX, biViewSales], 'bi-ads': [biLoadSalesX, biViewAds], 'bi-stock': [biLoadLogi, biViewStock], 'bi-ship': [biLoadShip, biViewShip], 'bi-sku': [biLoadLogi, biViewSku], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews], 'bi-rights': [biLoadRights, biViewRights], 'bi-arch': [biLoadArch, biViewArch], 'bi-plan': [biLoadPlan, biViewPlan], 'bi-pd': [biLoadPd, biViewPd], 'bi-pdst': [biLoadPd, biViewPdst], 'bi-pdmk': [biLoadPdmk, biViewPdmk] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + biStratCard(pg) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
+      else { const K = { 'bi-d2c': [biLoadChanH, biViewD2C], 'bi-oy': [biLoadChanH, biViewOY], 'bi-cp': [biLoadCP, biViewCP], 'bi-cafe': [biLoadCafe, biViewCafe], 'bi-price': [biLoadPrice, biViewPrice], 'bi-sales': [biLoadSalesX, biViewSales], 'bi-ads': [biLoadSalesX, biViewAds], 'bi-stock': [biLoadLogi, biViewStock], 'bi-ship': [biLoadShip, biViewShip], 'bi-sku': [biLoadLogi, biViewSku], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews], 'bi-rights': [biLoadRights, biViewRights], 'bi-arch': [biLoadArch, biViewArch], 'bi-plan': [biLoadPlan, biViewPlan], 'bi-pd': [biLoadPd, biViewPd], 'bi-pdst': [biLoadPd, biViewPdst], 'bi-pdmk': [biLoadPdmk, biViewPdmk] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + biStratCard(pg) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
       if (BIX.page === pg) { el.innerHTML = biFrame(pg, inner, BIX.stamp); biStageTag(pg); biStageBadges(pg); biWarm(); biStash(pg); if (pg === 'bi-qna' || pg === 'bi-plan') qpProdFill(); if (pg === 'bi-arch') arGalUpd(); if (pg === 'bi-sku') skGen(); }
     } catch (e) { if (BIX.page === pg) el.innerHTML = biFrame(pg, '<div class="bi-warn">데이터를 불러오지 못했습니다: ' + esc(e.message || String(e)) + '<br>시트 구조가 바뀌었거나 네트워크 문제일 수 있습니다. 새로고침으로 다시 시도해 주세요.</div>', ''); }
   }
 
   function biPrefetch(pg) {
     if (!biUnlocked() || pg === BIX.page) return;
-    const L = { 'bi-d2c': biLoadChan, 'bi-oy': biLoadChan, 'bi-cp': biLoadCP, 'bi-cafe': biLoadCafe, 'bi-price': biLoadPrice, 'bi-sales': biLoadSalesX, 'bi-ads': biLoadSalesX, 'bi-stock': biLoadLogi, 'bi-ship': biLoadShip, 'bi-sku': biLoadLogi, 'bi-journey': biLoadJourney, 'bi-rank': biLoadRank, 'bi-inf': biLoadInf, 'bi-rev': biLoadRev, 'bi-comp': biLoadComp, 'bi-qna': biLoadQna, 'bi-news': biLoadNews, 'bi-rights': biLoadRights, 'bi-pd': biLoadPd, 'bi-pdst': biLoadPd, 'bi-pdmk': biLoadPdmk }[pg];
+    const L = { 'bi-d2c': biLoadChanH, 'bi-oy': biLoadChanH, 'bi-cp': biLoadCP, 'bi-cafe': biLoadCafe, 'bi-price': biLoadPrice, 'bi-sales': biLoadSalesX, 'bi-ads': biLoadSalesX, 'bi-stock': biLoadLogi, 'bi-ship': biLoadShip, 'bi-sku': biLoadLogi, 'bi-journey': biLoadJourney, 'bi-rank': biLoadRank, 'bi-inf': biLoadInf, 'bi-rev': biLoadRev, 'bi-comp': biLoadComp, 'bi-qna': biLoadQna, 'bi-news': biLoadNews, 'bi-rights': biLoadRights, 'bi-pd': biLoadPd, 'bi-pdst': biLoadPd, 'bi-pdmk': biLoadPdmk }[pg];
     if (!L) return; BIX.pre = BIX.pre || {}; if (BIX.pre[pg] && Date.now() - BIX.pre[pg] < 60000) return; BIX.pre[pg] = Date.now();
     try { Promise.resolve(L()).catch(function () {}); } catch (e) {}
   }
@@ -6955,7 +7054,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     clearInterval(BIX.timer); BIX.timer = setInterval(function () { if (document.body.dataset.mode === 'bi' && !document.hidden && BIX.view[BIX.page] !== 'tabs') { BIX.cache = {}; BIX.noStaleUntil = Date.now() + 20000; biRender(BIX.page, true); } }, 300000);
   }
   function bindBiApp() {
-    const app = $('#biApp'); if (!app) return; bindBi2(app); bindQp(app); bindArch(app); bindBench(app); bindLogi(app); bindPrice(app); bindCafe(app); bindChan(app); bindCt(app); bindPd(app); bindAist(app); biChatInit(); fpInit(); app.addEventListener('mouseover', function (e) { const a = e.target.closest ? e.target.closest('.bs-nav a[data-bi], .bi-gsw a[data-bi]') : null; if (a) biPrefetch(a.dataset.bi); }); app.addEventListener('touchstart', function (e) { const a = e.target.closest ? e.target.closest('.bs-nav a[data-bi], .bi-gsw a[data-bi]') : null; if (a) biPrefetch(a.dataset.bi); }, { passive: true });
+    const app = $('#biApp'); if (!app) return; bindBi2(app); bindQp(app); bindArch(app); bindBench(app); bindLogi(app); bindPrice(app); bindCafe(app); bindChan(app); bindCt(app); bindPd(app); bindChm(app); bindAist(app); biChatInit(); fpInit(); app.addEventListener('mouseover', function (e) { const a = e.target.closest ? e.target.closest('.bs-nav a[data-bi], .bi-gsw a[data-bi]') : null; if (a) biPrefetch(a.dataset.bi); }); app.addEventListener('touchstart', function (e) { const a = e.target.closest ? e.target.closest('.bs-nav a[data-bi], .bi-gsw a[data-bi]') : null; if (a) biPrefetch(a.dataset.bi); }, { passive: true });
     app.addEventListener('click', function (e) {
       if (e.target.closest('[data-birefresh]')) { BIX.cache = {}; BIX.noStaleUntil = Date.now() + 20000; biRender(BIX.page); return; }
       const ex = e.target.closest('[data-biexp]'); if (ex) { biExport(ex.dataset.biexp); return; }
