@@ -2196,7 +2196,9 @@ body[data-mode="bi"] #biApp { grid-template-columns: 272px minmax(0, 1fr); backg
 .bi-sknote { font-size: 12.5px; color: #8B9096; margin-top: 6px; }
 @keyframes biSk { 0% { background-position: 100% 50%; } 100% { background-position: 0 50%; } }
 @media (max-width: 980px) { .bi-skk { grid-template-columns: repeat(2, 1fr); } .bi-skh { font-size: 26px; } }
-.bi-stagebar { margin: 4px 0 6px; }
+.bi-stagebar { display: contents; }
+#biMain .bi-stages { position: sticky; top: 0; z-index: 40; background: #fff; margin-top: 6px; }
+.bi-stagehint { margin-bottom: 8px; }
 @media print { .bi-stagebar, .bi-gsw { display: none !important; } }
 .bi-gsw { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 14px; }
 .bi-gsw a { padding: 7px 16px; border-radius: 999px; border: 1px solid #E6E8EB; background: #fff; font-size: 13.5px; font-weight: 600; color: #4a4e53; text-decoration: none; }
@@ -5889,7 +5891,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if ((x = t.closest('[data-qnf]'))) { const q = BIX.qn = BIX.qn || { cat: '전체', src: '전체', kw: '', q: '', qOnly: false }, k = x.dataset.qnf, v = x.dataset.v; if (k === 'q') q.qOnly = !q.qOnly; else if (k === 'kw') q.kw = q.kw === v ? '' : v; else q[k] = v; biRender('bi-qna', true); return; }
       if ((x = t.closest('[data-qnk]'))) { const q = BIX.qn = BIX.qn || {}; q.kw = q.kw === x.dataset.qnk ? '' : x.dataset.qnk; biRender('bi-qna', true); return; }
       if (t.closest('[data-qncopy]')) { const dd = BIX.cur; if (dd && dd.j && dd.j.items) { const f = qnFeed(dd.j); biCopy(f.items.slice(0, 30).map(function (r) { return '[' + r[2] + '/' + r[3] + '] ' + r[4] + ' ' + r[5]; }).join('\n'), '제목 ' + Math.min(30, f.items.length) + '건을 복사했습니다.'); } return; }
-      if ((x = t.closest('[data-bistage]'))) { BIX.stageBy = BIX.stageBy || {}; BIX.stageBy[BIX.page] = x.dataset.bistage; const mm = $('#biMain'); if (mm) mm.setAttribute('data-stage', x.dataset.bistage); $$('.bi-stage').forEach(function (b) { b.classList.toggle('on', b.dataset.bistage === x.dataset.bistage); }); const hh = $('#biStageHint'); if (hh) hh.textContent = BI_STAGE_HINT[x.dataset.bistage] || ''; return; }
+      if ((x = t.closest('[data-bistage]'))) { BIX.stageBy = BIX.stageBy || {}; BIX.stageBy[BIX.page] = x.dataset.bistage; const mm = $('#biMain'); if (mm) mm.setAttribute('data-stage', x.dataset.bistage); $$('.bi-stage').forEach(function (b) { b.classList.toggle('on', b.dataset.bistage === x.dataset.bistage); }); const hh = $('#biStageHint'); if (hh) hh.textContent = BI_STAGE_HINT[x.dataset.bistage] || ''; const bb = $('#biBody'); if (bb) { const top = bb.getBoundingClientRect().top + window.scrollY - 12; if (window.scrollY > top) window.scrollTo({ top: Math.max(0, top), behavior: 'auto' }); } return; }
       if ((x = t.closest('[data-biact]'))) { biOpenAct(+x.dataset.biact); return; }
       if ((x = t.closest('[data-actcopy]'))) { const ta = $('#' + x.dataset.actcopy); if (ta) biCopy(ta.value, '복사했습니다. 필요한 곳에 붙여 넣으세요.'); return; }
       if ((x = t.closest('[data-nwday]'))) { BIX.nw = BIX.nw || {}; BIX.nw.gid = x.dataset.nwday; BIX.nw.cat = '전체'; biRender('bi-news', true); return; }
