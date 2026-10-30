@@ -2105,9 +2105,9 @@ body[data-mode="bi"] #biApp { grid-template-columns: 272px minmax(0, 1fr); backg
 @media print { .bi-stages { display: none !important; } #biMain #biBody [data-st] { display: block !important; } }
 
 #biChat { position: fixed; right: 22px; bottom: 22px; z-index: 350; font-family: inherit; }
-#biChatFab { width: 62px; height: 62px; border-radius: 50%; border: 3px solid #111; background: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.22); cursor: pointer; display: grid; place-items: center; padding: 0; transition: transform .15s; }
-#biChatFab:hover { transform: scale(1.06); } #biChatFab svg { width: 44px; height: 44px; }
-#biChatPanel { position: absolute; right: 0; bottom: 76px; width: 390px; max-width: calc(100vw - 28px); height: min(600px, calc(100vh - 130px)); background: #fff; border-radius: 22px; box-shadow: 0 18px 60px rgba(0,0,0,.28); display: flex; flex-direction: column; overflow: hidden; border: 1px solid #E6E8EB; }
+#biChatFab { width: 124px; height: 124px; border-radius: 50%; border: 5px solid #111; background: #fff; box-shadow: 0 12px 32px rgba(0,0,0,.24); cursor: pointer; display: grid; place-items: center; padding: 0; transition: transform .15s; }
+#biChatFab:hover { transform: scale(1.06); } #biChatFab svg { width: 88px; height: 88px; }
+#biChatPanel { position: absolute; right: 0; bottom: 140px; width: 390px; max-width: calc(100vw - 28px); height: min(600px, calc(100vh - 190px)); background: #fff; border-radius: 22px; box-shadow: 0 18px 60px rgba(0,0,0,.28); display: flex; flex-direction: column; overflow: hidden; border: 1px solid #E6E8EB; }
 #biChatPanel[hidden] { display: none; }
 .bi-ch-h { display: flex; align-items: center; gap: 10px; padding: 14px 16px; background: linear-gradient(135deg, #111 0%, #0b3d36 100%); color: #fff; }
 .bi-ch-h > div { flex: 1; min-width: 0; } .bi-ch-h b { display: block; font-size: 16px; } .bi-ch-h small { display: block; color: #9FE9DD; font-size: 12px; margin-top: 1px; }
@@ -2132,7 +2132,7 @@ body[data-mode="bi"] #biApp { grid-template-columns: 272px minmax(0, 1fr); backg
 .bi-aisec { margin-top: 12px; padding-top: 12px; border-top: 1px dashed #D5E9E5; } .bi-aihd { display: flex; align-items: center; gap: 8px; font-size: 13.5px; margin-bottom: 6px; } .bi-aihd small { color: #8B9096; }
 .bi-aitext { font-size: 14px; line-height: 1.75; color: #222; } .bi-aitext p { margin: 0 0 6px; } .bi-aitext ul { margin: 4px 0 6px; padding-left: 20px; } .bi-aitext blockquote { margin: 6px 0; padding: 9px 12px; background: #F0FBF9; border-left: 3px solid #14C4A9; border-radius: 6px; white-space: pre-wrap; } .bi-aitext hr { border: 0; border-top: 1px solid #E6E8EB; margin: 8px 0; }
 .bi-rulehd { margin-bottom: 4px; font-size: 14px; } .bi-rulehd small { color: #8B9096; }
-@media (max-width: 640px) { #biChat { right: 12px; bottom: 12px; } #biChatPanel { position: fixed; left: 8px; right: 8px; bottom: 86px; width: auto; height: min(560px, calc(100vh - 110px)); } }
+@media (max-width: 640px) { #biChat { right: 12px; bottom: 12px; } #biChatPanel { position: fixed; left: 8px; right: 8px; bottom: 124px; width: auto; height: min(560px, calc(100vh - 150px)); } #biChatFab { width: 96px; height: 96px; border-width: 4px; } #biChatFab svg { width: 68px; height: 68px; } }
 @media print { #biChat { display: none !important; } }
 
 .bi-btn.pri { background: #0E8F7B; border-color: #0E8F7B; color: #fff; } .bi-btn.pri:hover { background: #0b7968; color: #fff; } .bi-btn.pri:disabled { opacity: .55; cursor: wait; }
