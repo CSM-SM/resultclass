@@ -6554,6 +6554,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function pdLate(p, d) { return !!p.ed && p.ed < d.today && p.cls !== '완료' && p.cls !== '중단'; }
   function biViewPdst(d) {
+    BIX.pdd = d;
     if (!d.projOk) return '<div class="bi-warn">개발 현황 시트의 프로젝트표를 읽지 못했습니다. 잠시 후 새로고침해 주세요.</div>';
     const P = d.proj, cnt = function (k) { return P.filter(function (p) { return p.cls === k; }).length; }, late = P.filter(function (p) { return pdLate(p, d); });
     const order = { S: 0, A: 1, B: 2, C: 3 }, sorted = P.map(function (p, i) { return { p: p, i: i }; }).sort(function (a, b) { return (order[a.p.gr] === undefined ? 9 : order[a.p.gr]) - (order[b.p.gr] === undefined ? 9 : order[b.p.gr]) || (a.p.ed ? a.p.ed.getTime() : 9e15) - (b.p.ed ? b.p.ed.getTime() : 9e15); });
