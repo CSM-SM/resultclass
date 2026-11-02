@@ -1865,6 +1865,8 @@ body[data-mode="bi"] #biApp { display: grid; grid-template-columns: 248px minmax
 .bi-trio > .bi-card { margin-bottom: 0; min-width: 0; }
 #biMain .bi-grid2.ov, #biMain .bi-grid2.ov2 { grid-template-columns: 1fr; }
 .ov-tool { align-items: center; }
+.mn-c .bi-ch { align-items: flex-start; gap: 8px; } .mn-tg { display: flex; gap: 4px; flex-shrink: 0; } .mn-tg em { font-style: normal; font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 999px; white-space: nowrap; } .mn-n { background: #D7F5EE; color: #0A6B5B; } .mn-r { background: #E4E8FF; color: #3C48B5; } .mn-s { background: #FFE7CF; color: #9A4F00; }
+.mn-m { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 4px; } .mn-d { font-size: 12.5px; color: #0E8F7B; } .mn-d b { font-weight: 800; } .mn-d.old { color: #C2570C; } .mn-d.none { color: #8B9096; } .mn-old { background: #FFFCF9; } .mn-rp { font-size: 12px; background: #F4F6FF; border-radius: 8px; padding: 8px 10px; margin: 0 0 10px; color: #3B4046; line-height: 1.5; } .mn-rp a { color: #3C48B5; font-weight: 700; white-space: nowrap; }
 .cg { margin: 6px 0 4px; } .cg-nav { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; } .cg-nav b { font-size: 15px; min-width: 96px; text-align: center; } .cg-lg { margin-left: auto; display: flex; gap: 6px; flex-wrap: wrap; }
 .cg-k { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; }
 .cg-dow { display: grid; grid-template-columns: repeat(7, 1fr); font-size: 11.5px; color: #8B9096; text-align: center; padding: 4px 0; border-top: 1px solid #E9ECEF; border-bottom: 1px solid #E9ECEF; } .cg-dow .sun, .cg-d.sun .cg-n { color: #D24545; } .cg-dow .sat, .cg-d.sat .cg-n { color: #3B6FD4; }
@@ -4767,15 +4769,49 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   /* 시트 메뉴얼 */
   const BI_MTEAMS = [
-    ['영업팀', [['sales', '매체별 월 매출·광고비·ROAS를 모은 손익분기표'], ['price', '제품 분류·바코드·정상가·판매가·채널별 가격 표준 가격표'], ['cafe', '카페24 자사몰의 매출·방문·구매율·광고비를 매일 모은 대시보드'], ['journey', '주력상품 4종의 일별 방문·구매클릭·전환·구매금액'], ['rank', '올리브영 제품별 랭킹과 EDI 판매 실적 자동 수집']]],
-    ['마케팅팀', [['inf', '인플루언서 후보 컨택 리스트와 월별 진행 기록'], ['paid', '광고 소재 기획·성과와 경쟁사 소재 분석 리포트'], ['bench', '인스타 광고소재를 매일 수집해 TOP50을 뽑는 DB'], ['rights', '모델·유튜버 소재의 계약일·사용 가능 기간 관리'], ['arch', '숏폼 바이럴 레퍼런스의 대본·기획·활용 방안'], ['qna', '지식iN·카페 글을 매일 수집해 콘텐츠 소재 찾기'], ['news', '구강케어·유통 뉴스를 매일 자동 취합한 브리핑'], ['comp', '올리브영 TOP20 경쟁 제품의 가격·할인·리뷰 매일 수집'], ['rev', '자사몰·스마트스토어 리뷰율·부정 VOC·평점 운영 현황']]],
-    ['개발팀', [['pidea', '신제품 아이디어를 분류·우선순위로 모은 자동화 시트'], ['pstat', '상품개발·리뉴얼 프로젝트의 등급·일정·진행 현황'], ['pdaiso', '다이소 구강용품 425개 품목 시장 요약'], ['stock', '이카운트 재고·출고·입고와 소진 임박 품목 대시보드']]]
+    ['영업팀', [['cafe', '카페24 자사몰의 매출·방문·구매율·광고비를 매일 모은 대시보드'], ['rank', '올리브영 제품별 랭킹과 EDI 판매 실적 자동 수집'], ['journey', '주력상품 4종의 일별 방문·구매클릭·전환·구매금액'], ['sales', '매체별 월 매출·광고비·ROAS를 모은 손익분기표'], ['x_cp'], ['price', '제품 분류·바코드·정상가·판매가·채널별 가격 표준 가격표']]],
+    ['마케팅팀', [['qna', '지식iN·카페 글을 매일 수집해 콘텐츠 소재 찾기'], ['comp', '올리브영 TOP20 경쟁 제품의 가격·할인·리뷰 매일 수집'], ['news', '구강케어·유통 뉴스를 매일 자동 취합한 브리핑'], ['x_blog'], ['bench', '인스타 광고소재를 매일 수집해 TOP50을 뽑는 DB'], ['x_seed'], ['x_rights2'], ['x_seller'], ['x_jny2'], ['inf', '인플루언서 후보 컨택 리스트와 월별 진행 기록'], ['paid', '광고 소재 기획·성과와 경쟁사 소재 분석 리포트'], ['rev', '자사몰·스마트스토어 리뷰율·부정 VOC·평점 운영 현황'], ['arch', '숏폼 바이럴 레퍼런스의 대본·기획·활용 방안']]],
+    ['개발팀', [['pidea', '신제품 아이디어를 분류·우선순위로 모은 자동화 시트'], ['pstat', '상품개발·리뉴얼 프로젝트의 등급·일정·진행 현황'], ['stock', '이카운트 재고·출고·입고와 소진 임박 품목 대시보드'], ['x_order'], ['pdaiso', '다이소 구강용품 425개 품목 시장 요약']]]
   ];
+  /* 시트 메뉴얼: 2026-11-02 시트를 직접 열어 확인한 마지막 데이터 날짜(고정값). d = 날짜 또는 월, b = 기준 */
+  const MN_BASE = '2026-11-02';
+  const MN_DATE = {
+    cafe: ['2026-11-02', '종합대시보드 기준일'], rank: ['2026-11-02', '마지막 수집'], journey: ['2026-10-31', '2026.10 탭 마지막 날짜'], sales: ['2026-10', '시트 최신 월 (월 기준)'], price: ['2026-05-28', '시트에 적힌 날짜'],
+    qna: ['2026-11-02', '마지막 수집'], comp: ['2026-11-02', '가격·리뷰 수집'], news: ['2026-11-02', '최신 브리핑 11/2'], bench: ['2026-11-02', '시트에 적힌 최근 날짜'], inf: ['2026-07-14', '마지막 컨택 (진행 기록은 2026.09월까지)'], paid: ['2026-08-05', '경쟁사 소재 마지막 수집'], rev: ['2026-07', '표의 마지막 월 (월 기준)'],
+    pidea: ['2026-10-30', '취합 시트 기재 DB 업데이트일'], pstat: ['2026-10-30', '시트에 적힌 최근 날짜'], stock: ['2026-10-29', '재고 기준일'], pdaiso: ['2026-09-10', '시트에 적힌 날짜']
+  };
+  const MN_X = {
+    x_cp: { t: '쿠팡 로켓배송 판매·광고·정산 대시보드', u: 'https://docs.google.com/spreadsheets/d/1Af9Jqv4erGxYOza-M2wxPXyjf39tSTRRPltMHLNsRWE/edit', d: '쿠팡 로켓배송의 일별 방문·주문·셀아웃 매출, 상품군별 월 매출, 광고, 세금계산서 정산 현황을 한 장으로 모은 대시보드', w: '이재명', dt: ['2026-10-28', '시트 기준일'] },
+    x_blog: { t: '라이브오랄스 네이버 블로그 모니터링', u: 'https://docs.google.com/spreadsheets/d/1VTEWE93YPIjwpM8E2DLbu-Yd6Sl_HBn6jMVBnOs_Pc0/edit', d: '네이버 블로그에 올라오는 라이브오랄스 언급 글(제목·블로그명·요약·링크)을 매일 수집하고 실행 기록을 남기는 시트', w: '이재명', dt: ['2026-11-02', '마지막 수집 09:30'] },
+    x_seed: { t: '인플루언서 시딩 자동화 v2 (인스타 시딩 대시보드)', u: 'https://docs.google.com/spreadsheets/d/1o9KHmiiV4lhpOAzwBol4m9H2LqHywv7u/edit?gid=296052475', d: '리스트업 → DM 발송 → 답장 → 확정 → 제품 발송 → 업로드 → 2차 활용까지 시딩 단계를 제품별·일별로 집계', w: '최행순', dt: ['2026-11-02', '시트 기준일'] },
+    x_rights2: { t: '인플루언서 2차활용 만료 관리', u: 'https://docs.google.com/spreadsheets/d/16dDdkrDqBOEFkm4IOL00tnQgm4E1c4cF2fBTd9cR6gw/edit?gid=0', d: '인플루언서 콘텐츠의 2차 활용 기간·만료일·D-day와 증빙 확인 상태(사용 가능·확인 필요·무기한·만료)를 관리', w: '배지영', dt: ['2026-10-26', '가장 최근 진행일'], rep: { t: '셀럽 & 인플루언서 모델 소재 계약현황 및 가치판단 시트', k: 'rights', n: '마지막 업로드 2025-12-31 이후 갱신이 없어 이 시트로 대체했습니다.' } },
+    x_seller: { t: '인스타 육아공구 셀러 발굴 · 개구기 시딩 후보 50', u: 'https://docs.google.com/spreadsheets/d/13InB9fa8zCBocosCKFfspnk8zKBpqD1kHMI9Ci7of1k/edit?gid=0', d: '인스타 육아공구 셀러를 발굴해 시딩 우선순위·팔로워·공구 빈도를 정리하고 일별로 집계하는 시딩 DB', w: '이재명', dt: ['2026-10-30', '취합 시트 기재 DB 업데이트일'] },
+    x_jny2: { t: '고객여정 일별·월별 대시보드', u: 'https://docs.google.com/spreadsheets/d/1F-yNAkxkVxSz4VWlWcoW_4UmvPbvxN98YIsYWGB0Eks/edit?gid=76057445', d: '자사몰의 일별·월별 매출, 방문, 구매자, 구매전환율, 처음 구매·재구매를 모은 대시보드', w: '최행순', dt: ['2026-11-01', '마지막 매출 입력일'] },
+    x_order: { t: '이카운트 발주알림', u: 'https://docs.google.com/spreadsheets/d/1RtHIjYrNEMhLjLtOU6Hgn3n0mjthnGlGfqqsN9rxGR8/edit', d: '이카운트 출고 기준으로 품목별 소진 예상일과 발주 우선순위(등급·김포/올영 재고·수요율)를 계산하는 발주 알림 시트', w: '최성민', dt: ['2026-10-30', '취합 시트 기재 DB 업데이트일'] }
+  };
+  const MN_OLD = { rights: 1 };
+  function mnAge(k) { if (!k) return null; const e = k.length === 7 ? new Date(+k.slice(0, 4), +k.slice(5, 7), 0) : new Date(k + 'T00:00:00'), b = new Date(MN_BASE + 'T00:00:00'); return Math.round((b - e) / 864e5); }
+  function mnItems(t) {
+    return t[1].map(function (x) {
+      const k = x[0], ext = MN_X[k], src = ext ? { t: ext.t, u: ext.u } : BI_SRC[k]; if (!src) return null;
+      const dt = ext ? ext.dt : MN_DATE[k], age = dt ? mnAge(dt[0]) : null;
+      return { k: k, ext: ext, t: src.t, u: src.u, d: ext ? ext.d : x[1], w: ext ? ext.w : '', dk: dt ? dt[0] : '', db: dt ? dt[1] : '', age: age, stale: age !== null && age > BI_RULES.stale[0] };
+    }).filter(Boolean).sort(function (a, b) { const ka = a.dk ? (a.dk.length === 7 ? a.dk + '-31' : a.dk) : '', kb = b.dk ? (b.dk.length === 7 ? b.dk + '-31' : b.dk) : ''; return ka < kb ? 1 : ka > kb ? -1 : 0; });
+  }
+  function mnDate(it) {
+    if (!it.dk) return '<span class="mn-d none">마지막 데이터 날짜 미확인</span>';
+    const lab = it.dk.length === 7 ? (+it.dk.slice(5)) + '월' : it.dk.slice(5).replace('-', '/'), rel = it.dk.length === 7 ? '' : (it.age <= 0 ? ' · 오늘' : ' · ' + it.age + '일 전');
+    return '<span class="mn-d' + (it.stale ? ' old' : '') + '">마지막 데이터 <b>' + lab + '</b>' + rel + '</span><small class="bi-ms">' + esc(it.db) + '</small>';
+  }
   function biViewManual() {
-    return '<div class="bi-note" style="margin:0 0 14px">팀별로 모은 시트 목록입니다. 시트 열기를 누르면 원본이 새 창으로 열립니다.</div>' + BI_MTEAMS.map(function (t) {
-      const items = t[1].filter(function (x) { return BI_SRC[x[0]]; });
-      return '<h3 class="bi-h3">' + esc(t[0]) + ' <span class="bi-ms">' + items.length + '개</span></h3><div class="bi-cards2">' + items.map(function (x) { const s = BI_SRC[x[0]]; return '<section class="bi-card"><div class="bi-ch"><h3>' + esc(s.t) + '</h3></div><p class="bi-dr-p" style="margin:6px 0 12px">' + esc(x[1]) + '</p><a class="bi-btn" href="' + esc(s.u) + '" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a></section>'; }).join('') + '</div>';
-    }).join('');
+    const all = BI_MTEAMS.map(function (t) { return [t[0], mnItems(t)]; }), n = all.reduce(function (s, t) { return s + t[1].length; }, 0), nNew = all.reduce(function (s, t) { return s + t[1].filter(function (x) { return x.ext; }).length; }, 0), nOld = all.reduce(function (s, t) { return s + t[1].filter(function (x) { return x.stale; }).length; }, 0);
+    return '<div class="bi-note" style="margin:0 0 14px">팀별로 모은 시트 목록입니다. 마지막 데이터 날짜가 가장 최근인 시트가 위에 옵니다. 시트 열기를 누르면 원본이 새 창으로 열립니다.</div><div class="bi-kpis">' + bKpi('전체 시트', fN(n), '개', '팀별 합계') + bKpi('새로 추가', fN(nNew), '개', '팀별 자동화 취합 시트 기준') + bKpi('갱신 멈춤', fN(nOld), '개', BI_RULES.stale[0] + '일 넘게 데이터 없음', nOld ? 'bi-dn' : '') + '</div>'
+      + all.map(function (t) {
+        return '<h3 class="bi-h3">' + esc(t[0]) + ' <span class="bi-ms">' + t[1].length + '개 · 최신순</span></h3><div class="bi-cards2">' + t[1].map(function (it) {
+          const rp = it.ext && it.ext.rep, old = rp && BI_SRC[rp.k];
+          return '<section class="bi-card mn-c' + (it.stale ? ' mn-old' : '') + '"><div class="bi-ch"><h3>' + esc(it.t) + '</h3><div class="mn-tg">' + (it.ext ? '<em class="mn-n">신규</em>' : '') + (rp ? '<em class="mn-r">대체</em>' : '') + (it.stale ? '<em class="mn-s">갱신 멈춤</em>' : '') + '</div></div><div class="mn-m">' + mnDate(it) + (it.w ? '<small class="bi-ms">담당 ' + esc(it.w) + '</small>' : '') + '</div><p class="bi-dr-p" style="margin:6px 0 10px">' + esc(it.d) + '</p>' + (old ? '<div class="mn-rp">이전 시트 「' + esc(old.t) + '」: ' + esc(rp.n) + ' <a href="' + esc(old.u) + '" target="_blank" rel="noopener noreferrer">이전 시트 열기 ↗</a></div>' : '') + '<a class="bi-btn" href="' + esc(it.u) + '" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a></section>';
+        }).join('') + '</div>';
+      }).join('') + '<div class="bi-note">마지막 데이터 날짜는 ' + MN_BASE + '에 각 시트를 열어 확인한 값입니다(자동으로 바뀌지 않습니다). 「신규」는 팀별 자동화 취합 시트에 있었지만 이 목록에 없던 시트입니다. 신규 시트는 아직 대시보드 화면에 연결하지 않았습니다. 팀 배치는 시트 성격 기준의 임시 배치입니다.</div>';
   }
 
   /* 종합 */
