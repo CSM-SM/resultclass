@@ -7357,7 +7357,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       + biViewPaid(d);
   }
 
-  const BI_STAGE_DEF = { 'bi-pd': 'action', 'bi': 'insight', 'bi-cafe': 'explore', 'bi-price': 'explore', 'bi-stock': 'explore', 'bi-ship': 'explore', 'bi-sku': 'explore', 'bi-sales': 'explore', 'bi-ads': 'explore', 'bi-inf': 'action', 'bi-paid': 'explore', 'bi-news': 'explore', 'bi-arch': 'explore', 'bi-rights': 'explore' };
+  const BI_STAGE_DEF = { 'bi-pd': 'action', 'bi': 'insight', 'bi-cafe': 'explore', 'bi-price': 'explore', 'bi-stock': 'explore', 'bi-ship': 'explore', 'bi-sku': 'explore', 'bi-sales': 'explore', 'bi-ads': 'explore', 'bi-inf': 'explore', 'bi-paid': 'explore', 'bi-news': 'explore', 'bi-arch': 'explore', 'bi-rights': 'explore' };
   function biStageOf(pg) { return (BIX.stageBy && BIX.stageBy[pg]) || BI_STAGE_DEF[pg] || 'explore'; }
   function biActsInf(d) {
     const A = [], pk = infPicks(d, 3); BIX.infd = d;
@@ -7493,6 +7493,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       + '<section class="bi-card"><h3>💡 시딩 자동 인사이트</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>'
       + '<details class="inf-old" data-st="explore"><summary>과거 컨택 리스트 기반 추천 · 갱신 중단 (참고용)</summary><div class="bi-warn" style="margin:8px 0">[MK] 2026 인플루언서 마케팅 리스트는 마지막 컨택이 7/14이고 월별 진행 기록이 2026.09월에서 멈춰 있습니다. 아래 추천은 그 시점의 자료라 참고용으로만 보세요.</div>';
   };
+  BI_STAGE_RULES['bi-inf'] = [[/오늘의 추천|추천 \d|관심 목록|실무 액션/, 'action'], [/진행 사례에서 배우기|자동 인사이트/, 'insight']];
   const biViewInfOld = biViewInf;
   biViewInf = function (d) { return biViewInfOld(d) + '</details>'; };
   (function () {
@@ -7594,7 +7595,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     ins.push('<b>즉시발주 ' + imm.length + '건</b> (우선순위 ' + Array.from(new Set(imm.map(function (x) { return x.pr; }))).join(' · ') + '): ' + imm.slice(0, 5).map(function (x) { return esc(x.nm) + ' (재고 ' + fN(x.tot) + ', 여유 ' + fN(x.slack) + '일)'; }).join(', ') + (imm.length > 5 ? ' 외 ' + (imm.length - 5) + '건' : '') + '.');
     const late = O.filter(function (x) { return /납기지연/.test(x.g); }); if (late.length) ins.push('발주중이지만 납기 지연 위험으로 분류된 품목: ' + late.map(function (x) { return esc(x.nm) + ' (' + esc(x.po) + ')'; }).join(', ') + '.');
     if (neg.length) ins.push('재고가 0 이하인 품목 ' + neg.length + '건: ' + neg.map(function (x) { return esc(x.nm) + ' (' + fN(x.tot) + ')'; }).join(', ') + '. ' + (O.filter(function (x) { return /입고전표/.test(x.po); }).length ? '시트가 「입고전표 누락」으로 표시한 품목은 이카운트 입고 입력 확인이 필요합니다.' : ''));
-    if (asofs.length) ins.push('올리브영 재고는 시트의 재고기준일이 ' + ymd(asofs[0]) + (asofs[asofs.length - 1] - asofs[0] ? '~' + ymd(asofs[asofs.length - 1]) : '') + '인 품목이 있어 최신이 아닐 수 있습니다(' + nxAgeTxt(nxAge(asofs[asofs.length - 1])) + ' ~ ' + nxAgeTxt(nxAge(asofs[0])) + ').');
+    if (asofs.length) ins.push('올리브영 재고는 시트의 재고기준일이 ' + ymd(asofs[0]) + (asofs[asofs.length - 1] - asofs[0] ? '~' + ymd(asofs[asofs.length - 1]) : '') + '인 품목이 있어 최신이 아닐 수 있습니다(' + (asofs[asofs.length - 1] - asofs[0] ? nxAgeTxt(nxAge(asofs[asofs.length - 1])) + ' ~ ' + nxAgeTxt(nxAge(asofs[0])) : nxAgeTxt(nxAge(asofs[0]))) + ').');
     const oyNeed = O.filter(function (x) { return /보충필요/.test(x.oyRef); }); if (oyNeed.length) ins.push('올영 보충필요 표시 ' + oyNeed.length + '건: ' + oyNeed.map(function (x) { return esc(x.nm); }).join(', ') + '.');
     return '<section class="bi-card"><div class="bi-ch"><h3>🔔 발주 알림 <span class="bi-ms">이카운트 발주알림 시트 · 등급은 시트가 계산한 값</span></h3><a class="bi-btn" href="' + esc(BI_SRC.order.u) + '" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a></div><div class="bi-kpis">' + bKpi('즉시발주', fN(cnt('즉시발주')), '건', '재고 대비 리드타임 초과', cnt('즉시발주') ? 'bi-dn' : '') + bKpi('발주중', fN(cnt('발주중') + cnt('발주중(납기지연위험)')), '건', '납기지연 위험 ' + late.length + '건') + bKpi('발주검토', fN(cnt('발주검토')), '건', '여유일수 짧음') + bKpi('재고확인', fN(cnt('재고확인')), '건', '재고 0 이하·입력 확인') + '</div>'
       + '<div class="bi-bar2"><span class="bi-bl">등급</span>' + grades.map(chip).join('') + '</div><div class="bi-tw" style="max-height:520px;overflow:auto"><table class="bi-t"><thead><tr><th>등급</th><th>우선순위</th><th>품목</th><th>통합재고</th><th>일평균 출고</th><th>소진 예상</th><th>리드타임</th><th>여유일수</th><th>권장 발주수량</th><th>올영 보충</th><th>발주 현황</th></tr></thead><tbody id="ordBody">' + ordRowsHtml(O) + '</tbody></table></div><div class="bi-note">여유일수가 마이너스면 지금 발주해도 리드타임 안에 소진될 수 있다는 뜻입니다. 제조사·발주 금액·재고금액은 이 화면에서 읽지 않습니다. 권장 발주수량은 시트 계산값이며 발주 결정은 담당자가 합니다.</div></section>'
@@ -7628,13 +7629,14 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   BI_POST['bi-d2c'] = function (d) {
     const J = d.jn2; if (!J || !J.mon.length) return '';
     const yr = new Date().getFullYear(), lab = J.mon.map(function (x) { return x.m + '월'; });
-    const ins = [], last = J.mon[J.mon.length - 1], prev = J.mon.length > 1 ? J.mon[J.mon.length - 2] : null;
+    const ld = J.days.length ? J.days[J.days.length - 1] : null, ym = ld ? new Date(yr, ld.m, 0).getDate() : 0, partial = ld && J.mon.length && J.mon[J.mon.length - 1].m === ld.m && ld.d < ym, full = partial ? J.mon.slice(0, -1) : J.mon, ins = [], last = full[full.length - 1] || J.mon[J.mon.length - 1], prev = full.length > 1 ? full[full.length - 2] : null;
+    if (partial) ins.push(ld.m + '월은 ' + ld.d + '일까지만 입력돼 있어(구매자 ' + fN(J.mon[J.mon.length - 1].buyers) + '명) 월 비교에서 뺐습니다. 아래 일별 표에서 확인하세요.');
     ins.push(last.m + '월 구매자 ' + fN(last.buyers) + '명 중 처음 구매 ' + fN(last.nw) + '명(' + fP(nxPct(last.nw, last.buyers), 0) + '), 재구매 ' + fN(last.rp) + '명(' + fP(nxPct(last.rp, last.buyers), 0) + '). 재구매액 비중은 ' + esc(last.rpPct) + '입니다.');
-    ins.push('월별 재구매액 비중: ' + J.mon.map(function (x) { return x.m + '월 ' + esc(x.rpPct); }).join(' → ') + '. ' + (prev ? '직전 달(' + prev.m + '월) 대비 구매자는 ' + fN(prev.buyers) + '명에서 ' + fN(last.buyers) + '명으로 변했고, 구매전환율은 ' + esc(prev.cv) + '에서 ' + esc(last.cv) + '입니다.' : ''));
+    ins.push('월별 재구매액 비중: ' + full.map(function (x) { return x.m + '월 ' + esc(x.rpPct); }).join(' → ') + '. ' + (prev ? '직전 달(' + prev.m + '월) 대비 구매자는 ' + fN(prev.buyers) + '명에서 ' + fN(last.buyers) + '명으로 변했고, 구매전환율은 ' + esc(prev.cv) + '에서 ' + esc(last.cv) + '입니다.' : ''));
     const dl = J.days.slice(-14); const dsum = dl.reduce(function (s, x) { return s + (isFinite(x.nw) ? x.nw : 0); }, 0), dr = dl.reduce(function (s, x) { return s + (isFinite(x.rp) ? x.rp : 0); }, 0);
     if (dl.length) ins.push('최근 ' + dl.length + '일(' + dl[0].m + '/' + dl[0].d + '~' + dl[dl.length - 1].m + '/' + dl[dl.length - 1].d + ') 처음 구매 ' + fN(dsum) + '명, 재구매 ' + fN(dr) + '명 (재구매 ' + fP(nxPct(dr, dsum + dr), 0) + ').');
     ins.push('재구매 비중이 낮다는 것은 신규 유입 의존도가 높다는 뜻으로 읽을 수 있습니다. 재구매 유도(리필·세트 제안)를 할지는 담당자가 판단합니다. 시트의 월 구분은 2026년 값입니다.');
-    const mrow = J.mon.map(function (x) { return '<tr><td><b>' + x.m + '월</b></td><td>' + fN(x.sales) + '</td><td>' + fN(x.vis) + '</td><td>' + fN(x.buyers) + '</td><td>' + esc(x.cv) + '</td><td>' + fN(x.nw) + '</td><td>' + fN(x.rp) + '</td><td>' + esc(x.nwPct) + '</td><td>' + esc(x.rpPct) + '</td></tr>'; }).join('');
+    const mrow = J.mon.map(function (x) { return '<tr><td><b>' + x.m + '월</b>' + (partial && x === J.mon[J.mon.length - 1] ? ' <small class="bi-ms">(' + ld.d + '일까지)</small>' : '') + '</td><td>' + fN(x.sales) + '</td><td>' + fN(x.vis) + '</td><td>' + fN(x.buyers) + '</td><td>' + esc(x.cv) + '</td><td>' + fN(x.nw) + '</td><td>' + fN(x.rp) + '</td><td>' + esc(x.nwPct) + '</td><td>' + esc(x.rpPct) + '</td></tr>'; }).join('');
     const drow = dl.slice().reverse().map(function (x) { return '<tr><td>' + x.m + '/' + x.d + '</td><td>' + fN(x.sales) + '</td><td>' + fN(x.vis) + '</td><td>' + fN(x.buyers) + '</td><td>' + esc(x.cv) + '</td><td>' + fN(x.nw) + '</td><td>' + fN(x.rp) + '</td></tr>'; }).join('');
     return '<section class="bi-card"><div class="bi-ch"><h3>🔁 신규 · 재구매 (월별) <span class="bi-ms">고객여정 일별·월별 대시보드 · 2026년</span></h3><a class="bi-btn" href="' + esc(BI_SRC.jny2.u) + '" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a></div>' + bBars(lab, [J.mon.map(function (x) { return x.nwAmt; }), J.mon.map(function (x) { return x.rpAmt; })], ['#14C4A9', '#F5A524'], fW) + '<div class="bi-note"><span class="cg-k k-프로모션">처음 구매액</span> <span class="cg-k k-공구">재구매액</span> · 월별 값은 시트의 월별 요약 탭입니다.</div><div class="bi-tw"><table class="bi-t"><thead><tr><th>월</th><th>매출(원)</th><th>방문수</th><th>구매자</th><th>전환율</th><th>처음 구매</th><th>재구매</th><th>처음 구매액 비중</th><th>재구매액 비중</th></tr></thead><tbody>' + mrow + '</tbody></table></div></section>'
       + '<section class="bi-card"><h3>💡 신규·재구매 자동 인사이트</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>'
@@ -7760,7 +7762,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     'bi-ads': { t: '광고', s: '마케팅팀 · 월별 광고비, 광고비 비율, 채널별 ROAS와 목표를 손익분기표에서 읽어 옵니다.', k: 'sales' },
     'bi-journey': { t: '주력상품 고객여정', s: '자사몰(카페24 쇼핑몰) 주력상품 상세 페이지의 일별 방문 → 구매클릭 → 전환 → 구매금액.', k: 'journey' },
     'bi-rank': { t: '올영 랭킹', s: '올리브영 제품별 순위 기록과 추이.', k: 'rank' },
-    'bi-inf': { t: '인플루언서', s: '오늘 추천할 인플루언서와 추천 근거, 브랜드 연결 아이디어, 제안 문구, 진행 사례 인사이트.', k: 'inf' },
+    'bi-inf': { t: '인플루언서', s: '인플루언서 시딩 단계(리스트업 → DM → 답장 → 확정 → 발송 → 업로드)와 제품별 진행, 후속 요청문. 과거 컨택 리스트 기반 추천은 참고용으로 아래에 접어 두었습니다.', k: 'seed' },
     'bi-rev': { t: '리뷰 운영', s: '월별 리뷰율, 포토리뷰, 부정 VOC, 평점.', k: 'rev' },
     'bi-paid': { t: '페이드 소재', s: '경쟁사 레퍼런스와 자사 소재 이미지를 모아 보고, 성과·소구 포인트를 읽고, 소재 브리프로 바로 연결합니다.', k: 'paid' },
     'bi-plan': { t: '콘텐츠 기획', s: '고객 질문과 벤치마킹 콘텐츠를 근거로 숏폼 기획서·스레드 원고 초안을 바로 만듭니다.', k: 'bench' },
