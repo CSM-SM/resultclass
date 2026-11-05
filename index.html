@@ -1871,6 +1871,9 @@ tr[data-sdp] td:first-child, .nx-tot td:first-child { white-space: nowrap; }
 .bi-head.geo { flex-wrap: wrap; align-items: stretch; } .bi-head.geo > div:first-child { flex: 1 1 320px; min-width: 0; align-self: flex-end; } .bi-head.geo .bi-ha { align-self: flex-start; }
 .geo-msc { flex: 0 1 380px; background: #E6F5F2; border-radius: 14px; padding: 16px 18px; align-self: center; } .geo-msc h4 { margin: 0 0 8px; font-size: 16px; color: #1E3E3A; } .geo-msc dl { margin: 0; } .geo-msc dt { font-size: 13.5px; font-weight: 800; color: #17A892; margin-top: 8px; } .geo-msc dd { margin: 1px 0 0; font-size: 12.5px; color: #1E3E3A; line-height: 1.5; }
 @media (max-width: 860px) { .geo-msc { flex: 1 1 100%; } }
+.rg-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 4px 0 12px; } .rg-dt { display: inline-flex; align-items: center; gap: 6px; } .rg-dt input { width: 140px; } .rg-info { margin-left: auto; } .rg-sel { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 6px 0 10px; } .rg-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: middle; } .rg-lg { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 6px 0 4px; font-size: 12px; color: #4B5258; } .rg-lg i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: middle; } .rg-line { height: 250px; width: 100%; }
+.st-chart { display: flex; align-items: flex-end; gap: 6px; height: 250px; padding: 8px 4px 0; overflow-x: auto; } .st-chart.wide { gap: 2px; } .st-col { flex: 1 0 22px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; min-width: 0; } .st-bar { display: flex; flex-direction: column-reverse; width: 100%; border-radius: 4px 4px 0 0; overflow: hidden; min-height: 1px; } .st-bar i { display: block; width: 100%; } .st-x { font-size: 10px; color: #8B9096; text-align: center; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.se-own td { background: #F0FBF8; } .am-etc td { color: #8B9096; font-size: 12px; }
 .sd-nav { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; } .sd-nav input[type=date] { width: 150px; } .sd-title { margin-left: 6px; font-size: 14px; } .sd-bar { width: 26%; min-width: 150px; } .sd-bar i { display: block; height: 8px; border-radius: 4px; background: #14C4A9; } .sd-tools { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; } .sd-tools input { max-width: 240px; } .sd-pv { max-height: 600px; overflow: auto; } .sd-t th, .sd-t td { white-space: nowrap; text-align: right; font-size: 12px; padding: 6px 8px; } .sd-t th:first-child, .sd-t td:first-child { text-align: left; } .sd-s { position: sticky; left: 0; background: #fff; z-index: 1; min-width: 170px; max-width: 220px; overflow: hidden; text-overflow: ellipsis; } .sd-t thead th { position: sticky; top: 0; background: #F7F9FA; z-index: 2; } .sd-t thead th.sd-s { z-index: 3; } .sd-dh { cursor: pointer; } .sd-dh:hover { background: #E7F8F4 !important; } .sd-dh.on { background: #D7F5EE !important; } .sd-dh.wk { color: #8B9096; } .sd-tot td { background: #F0F8F6 !important; font-weight: 700; } .sd-z { color: #C9CED3; }
 .nx-tot td { background: #F7F9FA; font-weight: 700; } .nx-idxl { display: grid; gap: 6px; } .nx-idx { display: grid; grid-template-columns: 56px minmax(150px, 1.4fr) minmax(90px, 1fr) minmax(160px, 2.4fr); gap: 8px; align-items: center; padding: 6px 4px; border-bottom: 1px solid #F1F3F5; font-size: 12.5px; } .inf-old { margin: 14px 0; border: 1px solid #EEF0F2; border-radius: 12px; padding: 10px 14px; background: #FCFCFD; } .inf-old > summary { cursor: pointer; font-weight: 700; color: #6B727A; } .mn-bt { display: flex; gap: 8px; flex-wrap: wrap; }
 @media (max-width: 700px) { .nx-idx { grid-template-columns: 1fr; gap: 2px; } }
@@ -4332,7 +4335,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   ];
 
   /* ── 2. 페이지 라우팅 ────────────────────────────────────── */
-  const PAGES = { gate: '첫 화면', 'bi-d2c': '자사몰 · 스마트스토어', 'bi-oy': '올리브영', 'bi-cp': '쿠팡', 'bi-cafe': '자사몰 · 카페24', 'bi-price': '제품 가격', 'bi-stock': '재고 현황', 'bi-ship': '출고·입고', 'bi-sku': '품목 마스터', 'bi-plan': '콘텐츠 기획', 'bi-news': '뉴스 브리핑', 'bi-rights': '소재 사용권', 'bi-arch': '소재 아카이브', 'bi-comp': '경쟁사 모니터링', 'bi-qna': '콘텐츠 소재 수집', bi: '종합 현황', 'bi-sales': '매출', 'bi-ads': '광고', 'bi-journey': '주력상품 고객여정', 'bi-rank': '올영 랭킹', 'bi-inf': '인플루언서', 'bi-rev': '리뷰 운영', 'bi-paid': '페이드 소재', 'bi-manual': '시트 메뉴얼', 'bi-gb': '공동구매', 'bi-blog': '블로그 모니터링', 'bi-geo': 'GEO 마케팅', 'bi-pd': '오늘의 상품 추천', 'bi-pdst': '개발 현황', 'bi-pdmk': '시장·소싱 자료', setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
+  const PAGES = { gate: '첫 화면', 'bi-d2c': '자사몰 · 스마트스토어', 'bi-oy': '올리브영', 'bi-cp': '쿠팡', 'bi-cafe': '자사몰 · 카페24', 'bi-price': '제품 가격', 'bi-stock': '재고 현황', 'bi-ship': '출고·입고', 'bi-sku': '품목 마스터', 'bi-plan': '콘텐츠 기획', 'bi-news': '뉴스 브리핑', 'bi-rights': '소재 사용권', 'bi-arch': '소재 아카이브', 'bi-comp': '경쟁사 모니터링', 'bi-qna': '콘텐츠 소재 수집', bi: '종합 현황', 'bi-sales': '매출', 'bi-ads': '광고', 'bi-journey': '주력상품 고객여정', 'bi-rank': '올영 랭킹', 'bi-inf': '인플루언서', 'bi-rev': '리뷰 운영', 'bi-paid': '페이드 소재', 'bi-manual': '시트 메뉴얼', 'bi-gb': '공동구매', 'bi-blog': '블로그 모니터링', 'bi-geo': 'GEO 마케팅', 'bi-search': '키워드 검색량', 'bi-social': '경쟁사 소셜', 'bi-blogc': '발행량·경쟁사 글', 'bi-pd': '오늘의 상품 추천', 'bi-pdst': '개발 현황', 'bi-pdmk': '시장·소싱 자료', setup: '어사이드 초기 세팅', as: 'AS', quick: '간단 사용법', precheck: '업무 시작 전 확인사항', basic: '기본 프롬프트', refs: '레퍼런스 참고하기', manual: '팀별 AI 자산 등록', requests: '기능 추가 요청', dashboard: '절감 대시보드', home: '홈', functions: '업무기능', builder: '프롬프트 빌더', assets: '팀별 AI 자산', guide: '어사이드 가이드', notice: '공지' };
 
   function go(page, replaceHist) {
     if (page === 'automations') { page = 'assets'; replaceHist = true; }
@@ -4784,7 +4787,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   /* 시트 메뉴얼 */
   const BI_MTEAMS = [
     ['영업팀', [['cafe', '카페24 자사몰의 매출·방문·구매율·광고비를 매일 모은 대시보드'], ['rank', '올리브영 제품별 랭킹과 EDI 판매 실적 자동 수집'], ['journey', '주력상품 4종의 일별 방문·구매클릭·전환·구매금액'], ['sales', '매체별 월 매출·광고비·ROAS를 모은 손익분기표'], ['x_cp'], ['price', '제품 분류·바코드·정상가·판매가·채널별 가격 표준 가격표']]],
-    ['마케팅팀', [['qna', '지식iN·카페 글을 매일 수집해 콘텐츠 소재 찾기'], ['x_geo'], ['comp', '올리브영 TOP20 경쟁 제품의 가격·할인·리뷰 매일 수집'], ['news', '구강케어·유통 뉴스를 매일 자동 취합한 브리핑'], ['x_blog'], ['bench', '인스타 광고소재를 매일 수집해 TOP50을 뽑는 DB'], ['x_seed'], ['x_rights2'], ['x_seller'], ['x_jny2'], ['paid', '광고 소재 기획·성과와 경쟁사 소재 분석 리포트'], ['rev', '자사몰·스마트스토어 리뷰율·부정 VOC·평점 운영 현황'], ['arch', '숏폼 바이럴 레퍼런스의 대본·기획·활용 방안']]],
+    ['마케팅팀', [['qna', '지식iN·카페 글을 매일 수집해 콘텐츠 소재 찾기'], ['x_mkt'], ['x_geo'], ['comp', '올리브영 TOP20 경쟁 제품의 가격·할인·리뷰 매일 수집'], ['news', '구강케어·유통 뉴스를 매일 자동 취합한 브리핑'], ['x_blog'], ['bench', '인스타 광고소재를 매일 수집해 TOP50을 뽑는 DB'], ['x_seed'], ['x_rights2'], ['x_seller'], ['x_jny2'], ['paid', '광고 소재 기획·성과와 경쟁사 소재 분석 리포트'], ['rev', '자사몰·스마트스토어 리뷰율·부정 VOC·평점 운영 현황'], ['arch', '숏폼 바이럴 레퍼런스의 대본·기획·활용 방안']]],
     ['개발팀', [['pidea', '신제품 아이디어를 분류·우선순위로 모은 자동화 시트'], ['pstat', '상품개발·리뉴얼 프로젝트의 등급·일정·진행 현황'], ['stock', '이카운트 재고·출고·입고와 소진 임박 품목 대시보드'], ['x_order'], ['pdaiso', '다이소 구강용품 425개 품목 시장 요약']]]
   ];
   /* 시트 메뉴얼: 2026-11-02 시트를 직접 열어 확인한 마지막 데이터 날짜(고정값). d = 날짜 또는 월, b = 기준 */
@@ -4795,6 +4798,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     pidea: ['2026-10-30', '취합 시트 기재 DB 업데이트일'], pstat: ['2026-10-30', '시트에 적힌 최근 날짜'], stock: ['2026-10-29', '재고 기준일'], pdaiso: ['2026-09-10', '시트에 적힌 날짜']
   };
   const MN_X = {
+    x_mkt: { t: '자사·경쟁사 마케팅 데이터 (검색량·블로그/카페 발행량·소셜)', u: 'https://docs.google.com/spreadsheets/d/1oKN4KiRSlPMs-M-s11eUxPfVmmvPdFcVeS_P0n85Z2c/edit', d: '자사와 경쟁사의 네이버 키워드 검색량, 블로그·카페 일별 발행량과 글 목록, 인스타·카카오·유튜브 계정 지표를 매일 자동 수집', w: '', pg: 'bi-search', dt: ['2026-11-04', '시트 마지막 수집일 (11/5 확인값)'] },
     x_geo: { t: '[AI TF] GEO 일일 측정 기록표', u: 'https://docs.google.com/spreadsheets/d/1zCchGw3o34Vw2mbyNxq8nlpN_9uO5EZVKv2CTUlz2uo/edit', d: 'AI 검색(Gemini·Claude·ChatGPT·Google AI) 답변에 라이브오랄스가 언급·인용되는지 매일 측정한 기록, 노출 예상 시점, 제품명 점검, 주간 콘텐츠 후보', w: 'AI TF', pg: 'bi-geo', dt: ['2026-11-05', '시트 기록 시작'] },
     x_cp: { t: '쿠팡 로켓배송 판매·광고·정산 대시보드', u: 'https://docs.google.com/spreadsheets/d/1Af9Jqv4erGxYOza-M2wxPXyjf39tSTRRPltMHLNsRWE/edit', d: '쿠팡 로켓배송의 일별 방문·주문·셀아웃 매출, 상품군별 월 매출, 광고, 세금계산서 정산 현황을 한 장으로 모은 대시보드', w: '이재명', pg: 'bi-cp', dt: ['2026-10-28', '시트 기준일'] },
     x_blog: { t: '라이브오랄스 네이버 블로그 모니터링', u: 'https://docs.google.com/spreadsheets/d/1VTEWE93YPIjwpM8E2DLbu-Yd6Sl_HBn6jMVBnOs_Pc0/edit', d: '네이버 블로그에 올라오는 라이브오랄스 언급 글(제목·블로그명·요약·링크)을 매일 수집하고 실행 기록을 남기는 시트', w: '이재명', pg: 'bi-blog', dt: ['2026-11-02', '마지막 수집 09:30'] },
@@ -7734,6 +7738,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 
   /* 공통 바인딩: 시딩 제품 상세, 발주 등급 필터, 블로그 필터, 복사 */
   function bindNx(app) {
+    bindRg(app); bindAm(app); bindMk(app);
     bindSd(app); bindGeo(app);
     app.addEventListener('click', function (e) {
       const t = e.target; let x;
@@ -7957,6 +7962,345 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if ((x = t.closest('[data-geoq]'))) { geoQOpen(x.dataset.geoq); return; }
     });
   }
+  /* ===== 공통: 기간 선택 · 선 그래프 · 누적 막대 ===== */
+  const RG_PRESETS = ['7일', '14일', '30일', '90일', '이번 달', '지난 달', '전체'], RG_REF = {}, RG_COLORS = ['#14C4A9', '#6C7BFF', '#F5A524', '#E5484D', '#8B5CF6', '#0EA5E9', '#84CC16', '#EC4899', '#64748B', '#F97316'];
+  function rgAdd(iso, n) { const t = new Date(iso + 'T00:00:00'); t.setDate(t.getDate() + n); return ymd(t); }
+  function rgDiff(a, b) { return Math.round((new Date(b + 'T00:00:00') - new Date(a + 'T00:00:00')) / 864e5); }
+  function rgSt(key, def) { const R = BIX.rg = BIX.rg || {}; return R[key] = R[key] || Object.assign({ preset: '30일', from: '', to: '', unit: '일' }, def || {}); }
+  function rgResolve(key, minD, maxD) {
+    const s = rgSt(key); let from = minD, to = maxD;
+    if (s.preset === '직접' && s.from && s.to) { from = s.from < minD ? minD : s.from; to = s.to > maxD ? maxD : s.to; if (from > to) from = to; }
+    else if (/^\d+일$/.test(s.preset)) { from = rgAdd(maxD, -(parseInt(s.preset, 10) - 1)); }
+    else if (s.preset === '이번 달') { from = maxD.slice(0, 8) + '01'; }
+    else if (s.preset === '지난 달') { const d = new Date(maxD.slice(0, 8) + '01T00:00:00'); d.setDate(0); to = ymd(d); from = to.slice(0, 8) + '01'; }
+    if (from < minD) from = minD; if (to > maxD) to = maxD; return { from: from, to: to, days: rgDiff(from, to) + 1 };
+  }
+  function rgBar(key, minD, maxD, units, extra) {
+    const s = rgSt(key), r = rgResolve(key, minD, maxD);
+    return '<div class="rg-bar"><span class="bi-bl">기간</span>' + RG_PRESETS.map(function (p) { return '<button type="button" class="bi-chip' + (s.preset === p ? ' on' : '') + '" data-rgp="' + key + '|' + p + '">' + p + '</button>'; }).join('') + '<span class="rg-dt"><input type="date" class="bi-q" data-rgf="' + key + '" value="' + r.from + '" min="' + minD + '" max="' + maxD + '"> ~ <input type="date" class="bi-q" data-rgt="' + key + '" value="' + r.to + '" min="' + minD + '" max="' + maxD + '"></span>' + (units ? '<span class="bi-bl">단위</span>' + units.map(function (u) { return '<button type="button" class="bi-chip' + (s.unit === u ? ' on' : '') + '" data-rgu="' + key + '|' + u + '">' + u + '</button>'; }).join('') : '') + (extra || '') + '<small class="bi-ms rg-info">' + r.from + ' ~ ' + r.to + ' · ' + r.days + '일</small></div>';
+  }
+  function rgBuckets(from, to, unit) {
+    const out = [];
+    if (unit === '월') { let d = new Date(from.slice(0, 8) + '01T00:00:00'); while (ymd(d) <= to) { const s = ymd(d), e = new Date(d.getFullYear(), d.getMonth() + 1, 0); out.push({ s: s < from ? from : s, e: ymd(e) > to ? to : ymd(e), l: (d.getMonth() + 1) + '월' }); d = new Date(d.getFullYear(), d.getMonth() + 1, 1); } return out; }
+    if (unit === '주') { const f = new Date(from + 'T00:00:00'); const mon = new Date(f); mon.setDate(f.getDate() - ((f.getDay() + 6) % 7)); let d = mon; while (ymd(d) <= to) { const s = ymd(d), e = rgAdd(s, 6); out.push({ s: s < from ? from : s, e: e > to ? to : e, l: s.slice(5).replace('-', '/') + '~' }); d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 7); } return out; }
+    for (let d = from; d <= to; d = rgAdd(d, 1)) out.push({ s: d, e: d, l: d.slice(5).replace('-', '/') });
+    return out;
+  }
+  function lnChart(labels, series, fmt) {
+    const W = 760, H = 250, pl = 46, pr = 12, pt = 14, pb = 28; let mx = 0; series.forEach(function (s) { s.v.forEach(function (x) { if (isFinite(x) && x > mx) mx = x; }); });
+    if (!mx || labels.length < 2) return '<div class="bi-empty">' + (labels.length < 2 ? '그래프를 그리려면 기간이 2개 단위 이상이어야 합니다.' : '표시할 값이 없습니다.') + '</div>';
+    const px = function (i) { return pl + i / (labels.length - 1) * (W - pl - pr); }, py = function (v) { return pt + (1 - v / mx) * (H - pt - pb); }, f = fmt || fN; let g = '';
+    for (let k = 0; k <= 4; k++) { const y = pt + k / 4 * (H - pt - pb); g += '<line x1="' + pl + '" x2="' + (W - pr) + '" y1="' + y + '" y2="' + y + '" stroke="#EEF0F2"/><text x="' + (pl - 6) + '" y="' + (y + 4) + '" text-anchor="end" class="bi-lt">' + f(mx * (1 - k / 4)) + '</text>'; }
+    const step = Math.ceil(labels.length / 8), xl = labels.map(function (l, i) { return i % step === 0 || i === labels.length - 1 ? '<text x="' + px(i) + '" y="' + (H - 8) + '" text-anchor="middle" class="bi-lt">' + esc(l) + '</text>' : ''; }).join('');
+    const ls = series.map(function (s) { const pts = s.v.map(function (v, i) { return isFinite(v) ? px(i).toFixed(1) + ',' + py(v).toFixed(1) : null; }).filter(Boolean).join(' '); const dots = labels.length <= 40 ? s.v.map(function (v, i) { return isFinite(v) ? '<circle cx="' + px(i).toFixed(1) + '" cy="' + py(v).toFixed(1) + '" r="2.6" fill="' + s.c + '"><title>' + esc(s.n + ' · ' + labels[i] + ' · ' + f(v)) + '</title></circle>' : ''; }).join('') : ''; return '<polyline fill="none" stroke="' + s.c + '" stroke-width="2" points="' + pts + '"/>' + dots; }).join('');
+    return '<svg class="bi-line rg-line" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none">' + g + xl + ls + '</svg><div class="rg-lg">' + series.map(function (s) { return '<span><i style="background:' + s.c + '"></i>' + esc(s.n) + '</span>'; }).join('') + '</div>';
+  }
+  function stChart(labels, series, fmt) {
+    const f = fmt || fN, tot = labels.map(function (l, i) { return series.reduce(function (s, x) { return s + (isFinite(x.v[i]) ? x.v[i] : 0); }, 0); }), mx = Math.max.apply(null, tot.concat([0]));
+    if (!mx) return '<div class="bi-empty">표시할 값이 없습니다.</div>';
+    return '<div class="st-chart' + (labels.length > 16 ? ' wide' : '') + '">' + labels.map(function (l, i) { return '<div class="st-col"><div class="st-bar" style="height:' + Math.round(tot[i] / mx * 100) + '%" title="' + esc(l + ' 합계 ' + f(tot[i])) + '">' + series.map(function (s) { const v = isFinite(s.v[i]) ? s.v[i] : 0; return v > 0 ? '<i style="height:' + (v / tot[i] * 100).toFixed(1) + '%;background:' + s.c + '" title="' + esc(s.n + ' · ' + l + ' · ' + f(v)) + '"></i>' : ''; }).join('') + '</div><div class="st-x">' + esc(l) + '</div></div>'; }).join('') + '</div><div class="rg-lg">' + series.map(function (s) { return '<span><i style="background:' + s.c + '"></i>' + esc(s.n) + '</span>'; }).join('') + '</div>';
+  }
+  function bindRg(app) {
+    app.addEventListener('click', function (e) {
+      const t = e.target; let x; if (!t.closest) return;
+      if ((x = t.closest('[data-rgp]'))) { const p = x.dataset.rgp.split('|'); const s = rgSt(p[0]); s.preset = p[1]; if (RG_REF[p[0]]) RG_REF[p[0]](); return; }
+      if ((x = t.closest('[data-rgu]'))) { const p = x.dataset.rgu.split('|'); rgSt(p[0]).unit = p[1]; if (RG_REF[p[0]]) RG_REF[p[0]](); return; }
+    });
+    app.addEventListener('change', function (e) {
+      const t = e.target; if (!t.dataset) return; let key = t.dataset.rgf || t.dataset.rgt; if (!key) return;
+      const s = rgSt(key), box = t.closest('.rg-bar'); const f = box.querySelector('[data-rgf]').value, to = box.querySelector('[data-rgt]').value;
+      if (f && to) { s.preset = '직접'; s.from = f <= to ? f : to; s.to = f <= to ? to : f; if (RG_REF[key]) RG_REF[key](); }
+    });
+  }
+
+  /* ===== 광고: 매체별 광고비 트렌드 (손익분기표 월별 국내 B2C 일별 탭 · 기간 선택) ===== */
+  const AM_CORE = [
+    { k: 'meta', n: '메타 (자사몰)', rows: ['메타_자사몰'] },
+    { k: 'google', n: '구글', rows: ['구글검색_자사몰', 'GDN_자사몰'] },
+    { k: 'tiktok', n: '틱톡', rows: ['틱톡_자사몰'] },
+    { k: 'kakao', n: '카카오', rows: ['카카오 모먼트_자사몰', '카카오 모먼트_스마트스토어'] },
+    { k: 'naver', n: '네이버 브검·파워링크', rows: ['네이버 파워링크_자사몰', '네이버 파워링크_스토어', '네이버 브랜드 검색_전체 (CPM)'] },
+    { k: 'crm', n: 'CRM', rows: ['CRM (카카오메시지 / 데이터라이즈 / 톡톡)', '올리브영_CRM(카카오메시지)'] }
+  ];
+  const AM_ETC = [
+    { k: 'metaetc', n: '메타 (스스·공구·올영)', rows: ['메타_스마트스토어', '메타_공구', '올리브영_메타'] },
+    { k: 'nshop', n: '네이버 쇼핑검색·GFA·ADVoost', rows: ['네이버 쇼핑검색_스토어', '네이버 GFA_스토어', '네이버 ADVoost_스토어', '카탈로그 NDA_스토어', '네이버 쇼핑검색_자사몰', '네이버 GFA_자사몰', '네이버 ADVoost_자사몰'] },
+    { k: 'cp', n: '쿠팡 매출성장', re: /^쿠팡.*매출성장/ },
+    { k: 'etc', n: '기타(리타겟·올영 GFA)', re: /^(리타겟 매체|올리브영_GFA)/ }
+  ];
+  async function amLoad() {
+    if (BIX.amC && Date.now() - BIX.amC.t < 300000) return BIX.amC.v;
+    const tl = await biTabsOf('sales'), mons = [];
+    tl.forEach(function (t) { const m = /^(\d{2})년 (\d{1,2})월 \(국내 B2C\)$/.exec(String(t.name).trim()); if (m) mons.push({ k: '20' + m[1] + '-' + ('0' + m[2]).slice(-2), gid: t.gid }); });
+    mons.sort(function (a, b) { return a.k < b.k ? -1 : 1; });
+    const parts = await Promise.all(mons.map(function (x) { return biFetch('sales', x.gid, 60).then(function (j) { return chParse(j.values); }).catch(function () { return null; }); }));
+    const D = {}, all = AM_CORE.concat(AM_ETC); let last = '', first = '';
+    parts.forEach(function (p) {
+      if (!p) return; const sales = chRow(p, '자사몰', /D2C/), sub = chRow(p, '자사몰 광고비 소계'), tot = chRow(p, '국내 온라인 매체 광고비 합계');
+      p.dates.forEach(function (dt, i) {
+        const o = D[dt] || (D[dt] = { m: {}, sales: NaN, sub: NaN, tot: NaN }); let any = false;
+        all.forEach(function (g) { let s = 0, has = false; p.rows.forEach(function (r) { if (!/광고/.test(r.sec)) return; const hit = g.rows ? g.rows.indexOf(r.lab) >= 0 : g.re.test(r.lab); if (hit && isFinite(r.d[i])) { s += r.d[i]; has = true; } }); if (has) { o.m[g.k] = s; any = true; } });
+        if (sales && isFinite(sales.d[i])) o.sales = sales.d[i]; if (sub && isFinite(sub.d[i])) o.sub = sub.d[i]; if (tot && isFinite(tot.d[i])) o.tot = tot.d[i];
+        o.has = any && (o.tot > 0 || o.sales > 0);
+        if (o.has) { if (!first || dt < first) first = dt; if (dt > last) last = dt; }
+      });
+    });
+    const v = { D: D, first: first, last: last, months: mons.length, updated: ymd(new Date()) }; BIX.amC = { t: Date.now(), v: v }; return v;
+  }
+  BI_LOADX['bi-ads'] = async function (d) {
+    if (BIX.amC && Date.now() - BIX.amC.t < 300000) { d.am = BIX.amC.v; return; }
+    d.amP = true; amLoad().then(function (v) { if (BIX.page === 'bi-ads' && BIX.cur === d) { d.am = v; d.amP = false; Promise.resolve(biRender('bi-ads', true)); } }, function (er) { if (BIX.page === 'bi-ads' && BIX.cur === d) { d.amP = false; d.amErr = String(er && er.message || er); Promise.resolve(biRender('bi-ads', true)); } });
+  };
+  function amAgg(A, from, to) {
+    const out = { sum: {}, days: 0, sales: 0, sub: 0, tot: 0, byDay: [] };
+    AM_CORE.concat(AM_ETC).forEach(function (g) { out.sum[g.k] = 0; });
+    for (let d = from; d <= to; d = rgAdd(d, 1)) { const o = A.D[d]; if (!o || !o.has) continue; out.days++; out.byDay.push(d); Object.keys(o.m).forEach(function (k) { out.sum[k] += o.m[k]; }); if (isFinite(o.sales)) out.sales += o.sales; if (isFinite(o.sub)) out.sub += o.sub; if (isFinite(o.tot)) out.tot += o.tot; }
+    out.core = AM_CORE.reduce(function (s, g) { return s + out.sum[g.k]; }, 0); out.etc = AM_ETC.reduce(function (s, g) { return s + out.sum[g.k]; }, 0); return out;
+  }
+  function amBucketVals(A, g, bk) { return bk.map(function (b) { let s = 0, n = 0; for (let d = b.s; d <= b.e; d = rgAdd(d, 1)) { const o = A.D[d]; if (o && o.has) { s += o.m[g.k] || 0; n++; } } return n ? s : NaN; }); }
+  function amChg(a, b) { return isFinite(a) && isFinite(b) && b > 0 ? (a - b) / b * 100 : NaN; }
+  function amChgHtml(c) { return isFinite(c) ? '<span class="' + (c > 0 ? 'bi-up' : c < 0 ? 'bi-dn' : '') + '">' + (c > 0 ? '▲ ' : c < 0 ? '▼ ' : '') + fP(Math.abs(c), 0) + '</span>' : '<span class="bi-ms">-</span>'; }
+  function amBox(d) {
+    const A = d.am; if (!A) return d.amP ? '<section class="bi-card" data-st="explore"><h3>📣 매체별 광고비 트렌드 <span class="bi-ms">일별 탭을 읽는 중입니다 (2~3초)</span></h3><div class="bi-skel"><div class="bi-skk"><i></i><i></i><i></i></div></div></section>' : '<section class="bi-card" data-st="explore"><h3>📣 매체별 광고비 트렌드</h3><div class="bi-warn">월별 국내 B2C 일별 탭을 읽지 못했습니다' + (d.amErr ? ' (' + esc(d.amErr) + ')' : '') + '. 새로고침으로 다시 시도해 주세요.</div></section>';
+    const key = 'ads', s = rgSt(key, { unit: '일' }), r = rgResolve(key, A.first, A.last), cur = amAgg(A, r.from, r.to), pTo = rgAdd(r.from, -1), pFrom = rgAdd(pTo, -(r.days - 1)), prev = pFrom >= A.first ? amAgg(A, pFrom, pTo) : null;
+    const sel = BIX.amSel = BIX.amSel || {}, view = BIX.amView = BIX.amView || 'stack', on = function (k) { return sel[k] !== false; }, groups = AM_CORE.filter(function (g) { return on(g.k); });
+    const bk = rgBuckets(r.from, r.to, s.unit), labels = bk.map(function (b) { return b.l; }), series = groups.map(function (g, i) { return { n: g.n, c: RG_COLORS[AM_CORE.indexOf(g)], v: amBucketVals(A, g, bk), k: g.k }; });
+    const roas = cur.sub > 0 ? cur.sales / cur.sub * 100 : NaN, proas = prev && prev.sub > 0 ? prev.sales / prev.sub * 100 : NaN, top = AM_CORE.slice().sort(function (a, b) { return cur.sum[b.k] - cur.sum[a.k]; })[0];
+    const chip = function (g) { return '<button type="button" class="bi-chip' + (on(g.k) ? ' on' : '') + '" data-amsel="' + g.k + '"><i class="rg-dot" style="background:' + RG_COLORS[AM_CORE.indexOf(g)] + '"></i>' + esc(g.n) + '</button>'; };
+    const kp = '<div class="bi-kpis">' + bKpi('6개 매체 광고비 합계', fW(cur.core), '원', r.from.slice(5) + ' ~ ' + r.to.slice(5) + ' · 직전 같은 기간 ' + (prev ? fW(prev.core) + '원' : '자료 없음')) + bKpi('일평균', fW(cur.days ? cur.core / cur.days : NaN), '원', cur.days + '일 기준') + bKpi('1위 매체', esc(top.n.split(' ')[0]), '', cur.core ? fP(cur.sum[top.k] / cur.core * 100, 0) + ' · ' + fW(cur.sum[top.k]) + '원' : '집행 없음') + bKpi('자사몰 ROAS', isFinite(roas) ? fP(roas, 0) : '-', '', '자사몰 매출 ÷ 자사몰 광고비 소계' + (isFinite(proas) ? ' · 직전 ' + fP(proas, 0) : '')) + '</div>';
+    const rows = AM_CORE.map(function (g) { const v = cur.sum[g.k], pv = prev ? prev.sum[g.k] : NaN, vals = amBucketVals(A, g, rgBuckets(r.from, r.to, '일')); return '<tr class="bi-click" data-amrow="' + g.k + '"><td><i class="rg-dot" style="background:' + RG_COLORS[AM_CORE.indexOf(g)] + '"></i><b>' + esc(g.n) + '</b></td><td><b>' + fN(v) + '</b></td><td>' + (cur.core ? fP(v / cur.core * 100, 1) : '-') + '</td><td>' + fN(cur.days ? v / cur.days : NaN) + '</td><td>' + amChgHtml(amChg(v, pv)) + '</td><td>' + (v > 0 ? bSpark(vals) : '<span class="bi-ms">집행 없음</span>') + '</td></tr>'; }).join('') + '<tr class="nx-tot"><td><b>6개 매체 합계</b></td><td><b>' + fN(cur.core) + '</b></td><td>100%</td><td>' + fN(cur.days ? cur.core / cur.days : NaN) + '</td><td>' + amChgHtml(amChg(cur.core, prev ? prev.core : NaN)) + '</td><td></td></tr>' + AM_ETC.map(function (g) { return '<tr class="am-etc"><td>' + esc(g.n) + ' <small class="bi-ms">참고</small></td><td>' + fN(cur.sum[g.k]) + '</td><td colspan="4"></td></tr>'; }).join('');
+    const pv = bk.map(function (b, i) { return '<tr><td>' + esc(b.l) + '</td>' + groups.map(function (g, k) { const x = series[k].v[i]; return '<td>' + (isFinite(x) ? (x > 0 ? fN(x) : '<span class="sd-z">·</span>') : '-') + '</td>'; }).join('') + '<td><b>' + fN(series.reduce(function (sx, q) { return sx + (isFinite(q.v[i]) ? q.v[i] : 0); }, 0)) + '</b></td></tr>'; }).join('');
+    const ins = amInsights(A, r, cur, prev, s);
+    return '<section class="bi-card" data-st="explore"><div class="bi-ch"><h3>📣 매체별 광고비 트렌드 <span class="bi-ms">월별 국내 B2C 일별 탭 · ' + A.first.slice(0, 7) + ' ~ ' + A.last.slice(0, 7) + ' · 기간을 골라 조회</span></h3><button type="button" class="bi-btn" data-amcopy="1">표 복사(엑셀용)</button></div>' + rgBar(key, A.first, A.last, ['일', '주', '월']) + kp
+      + '<div class="rg-sel"><span class="bi-bl">매체 선택</span>' + AM_CORE.map(chip).join('') + '<span class="bi-bl">보기</span><button type="button" class="bi-chip' + (view === 'stack' ? ' on' : '') + '" data-amview="stack">쌓은 막대</button><button type="button" class="bi-chip' + (view === 'line' ? ' on' : '') + '" data-amview="line">매체별 선</button></div>'
+      + (view === 'stack' ? stChart(labels, series, fW) : lnChart(labels, series, fW)) + '<div class="bi-note">광고비는 시트의 매체 행을 합산한 값이며 단위는 원입니다. 구글 = 구글검색 + GDN, 카카오 = 카카오 모먼트, 네이버 = 파워링크(자사몰·스토어) + 브랜드검색(CPM), CRM = 카카오메시지·데이터라이즈·톡톡 + 올영 CRM입니다. 시트 일별 탭은 2026년 7월부터 있어 그 이전은 월 합계만 있고 이 화면에서는 보이지 않습니다.</div></section>'
+      + '<section class="bi-card" data-st="explore"><h3>매체별 요약 <span class="bi-ms">행을 누르면 일별 값</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>매체</th><th>광고비 합계(원)</th><th>비중</th><th>일평균(원)</th><th>직전 같은 기간 대비</th><th>일별 추이</th></tr></thead><tbody>' + rows + '</tbody></table></div><div class="bi-note">「참고」 행은 6개 매체 밖의 광고비(스토어 쇼핑검색·GFA, 올영·공구 메타, 쿠팡 등)입니다. 자사몰 광고비 소계와 국내 온라인 매체 합계는 시트 값 기준입니다.</div></section>'
+      + '<section class="bi-card" data-st="explore"><h3>' + s.unit + '별 광고비 표 <span class="bi-ms">선택한 매체 · 원</span></h3><div class="bi-tw" style="max-height:420px;overflow:auto"><table class="bi-t sd-t"><thead><tr><th>' + s.unit + '</th>' + groups.map(function (g) { return '<th>' + esc(g.n) + '</th>'; }).join('') + '<th>합계</th></tr></thead><tbody>' + pv + '</tbody></table></div></section>'
+      + '<section class="bi-card" data-st="insight"><h3>💡 매체별 광고비 자동 인사이트</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>';
+  }
+  function amInsights(A, r, cur, prev, s) {
+    const ins = [], core = AM_CORE.slice().sort(function (a, b) { return cur.sum[b.k] - cur.sum[a.k]; }), act = core.filter(function (g) { return cur.sum[g.k] > 0; }), zero = AM_CORE.filter(function (g) { return !(cur.sum[g.k] > 0); });
+    if (!cur.days) return ['선택한 기간에 값이 입력된 날이 없습니다.'];
+    ins.push(r.from + ' ~ ' + r.to + '(' + cur.days + '일 입력) 6개 매체 광고비는 <b>' + fN(cur.core) + '원</b>, 일평균 ' + fN(cur.core / cur.days) + '원입니다.' + (prev && prev.core > 0 ? ' 직전 같은 기간(' + fN(prev.core) + '원) 대비 ' + (cur.core >= prev.core ? '▲ ' : '▼ ') + fP(Math.abs(amChg(cur.core, prev.core)), 0) + '.' : ''));
+    if (act.length) ins.push('비중 순서: ' + act.slice(0, 4).map(function (g) { return esc(g.n) + ' ' + fP(cur.sum[g.k] / cur.core * 100, 0); }).join(' · ') + '. 1위 매체 쏠림이 ' + fP(cur.sum[act[0].k] / cur.core * 100, 0) + '입니다.');
+    if (prev) { const ch = AM_CORE.map(function (g) { return { g: g, d: cur.sum[g.k] - prev.sum[g.k], c: amChg(cur.sum[g.k], prev.sum[g.k]) }; }).filter(function (x) { return x.d !== 0; }).sort(function (a, b) { return Math.abs(b.d) - Math.abs(a.d); }); if (ch.length) ins.push('직전 같은 기간과 가장 크게 달라진 매체: ' + ch.slice(0, 3).map(function (x) { return esc(x.g.n) + ' ' + (x.d > 0 ? '+' : '-') + fW(Math.abs(x.d)) + '원' + (isFinite(x.c) ? '(' + (x.c > 0 ? '▲' : '▼') + fP(Math.abs(x.c), 0) + ')' : '(신규 집행)'); }).join(', ') + '.'); }
+    if (zero.length) ins.push('이 기간에 집행 기록이 없는 매체: ' + zero.map(function (g) { return esc(g.n); }).join(', ') + '. 시트에 0원이거나 비어 있습니다(실제 미집행인지 입력 누락인지는 담당자 확인).');
+    if (cur.sub > 0) ins.push('자사몰 매출 ' + fW(cur.sales) + '원 ÷ 자사몰 광고비 소계 ' + fW(cur.sub) + '원 = ROAS <b>' + fP(cur.sales / cur.sub * 100, 0) + '</b>(시트 기준, 매체별 ROAS는 시트에 월 단위로만 있어 이 화면에서는 계산하지 않습니다).');
+    const peak = A.D && cur.byDay.slice().sort(function (a, b) { return (A.D[b].m.meta || 0) - (A.D[a].m.meta || 0); })[0]; if (peak && (A.D[peak].m.meta || 0) > 0) ins.push('기간 중 메타(자사몰) 광고비가 가장 큰 날은 ' + peak.slice(5) + '(' + fN(A.D[peak].m.meta) + '원)입니다.');
+    ins.push('예산·집행 변경은 이 숫자만으로 정하지 않고 대표·실장 컨펌 후 진행합니다.');
+    return ins;
+  }
+  function amRefresh() { const d = BIX.cur; if (!d || !d.am) return; const b = $('#amBox'); if (b) b.innerHTML = amBox(d); }
+  RG_REF.ads = amRefresh;
+  (function () { const old = BI_EXTRA['bi-ads']; BI_EXTRA['bi-ads'] = function (d) { return '<div id="amBox">' + amBox(d) + '</div>' + (old ? old(d) : ''); }; })();
+  BI_STAGE_RULES['bi-ads'] = [[/실무 액션/, 'action'], [/채널 효율|월 비교|자동 인사이트/, 'insight']];
+  function amOpen(k) {
+    const d = BIX.cur, A = d && d.am; if (!A) return; const g = AM_CORE.filter(function (x) { return x.k === k; })[0], r = rgResolve('ads', A.first, A.last), days = []; for (let x = r.from; x <= r.to; x = rgAdd(x, 1)) { const o = A.D[x]; if (o && o.has) days.push([x, o.m[k] || 0]); }
+    const vals = days.map(function (x) { return x[1]; }), sum = vals.reduce(function (s, x) { return s + x; }, 0), act = vals.filter(function (x) { return x > 0; }).length, mx = Math.max.apply(null, vals.concat([0])), mi = days[vals.indexOf(mx)];
+    biOpenDrawer(g.n + ' 일별 광고비', '<ul class="bi-dr-ul"><li>기간 ' + r.from + ' ~ ' + r.to + ' · 합계 <b>' + fN(sum) + '원</b> · 집행한 날 ' + act + '일 / 입력된 날 ' + days.length + '일</li>' + (mx > 0 ? '<li>가장 큰 날 ' + mi[0].slice(5) + ' ' + fN(mx) + '원 · 일평균 ' + fN(days.length ? sum / days.length : 0) + '원</li>' : '<li>이 기간에 집행 기록이 없습니다.</li>') + '<li>합산한 시트 행: ' + esc(g.rows.join(', ')) + '</li></ul>' + (days.length > 1 ? bBars(days.map(function (x) { return x[0].slice(5).replace('-', '/'); }), [vals], [RG_COLORS[AM_CORE.indexOf(g)]], fW) : '') + '<div class="bi-tw" style="max-height:320px;overflow:auto"><table class="bi-t"><thead><tr><th>날짜</th><th>광고비(원)</th></tr></thead><tbody>' + days.slice().reverse().map(function (x) { return '<tr><td>' + x[0] + '</td><td>' + (x[1] > 0 ? fN(x[1]) : '<span class="sd-z">·</span>') + '</td></tr>'; }).join('') + '</tbody></table></div>');
+  }
+  function amCopy() {
+    const d = BIX.cur, A = d && d.am; if (!A) return; const s = rgSt('ads'), r = rgResolve('ads', A.first, A.last), bk = rgBuckets(r.from, r.to, s.unit), lines = [[s.unit].concat(AM_CORE.map(function (g) { return g.n; })).concat(['6개 매체 합계']).join('\t')];
+    bk.forEach(function (b, i) { const v = AM_CORE.map(function (g) { return amBucketVals(A, g, [b])[0]; }); lines.push([b.s + (b.e !== b.s ? '~' + b.e : '')].concat(v.map(function (x) { return isFinite(x) ? Math.round(x) : ''; })).concat([Math.round(v.reduce(function (sx, q) { return sx + (isFinite(q) ? q : 0); }, 0))]).join('\t')); });
+    try { navigator.clipboard.writeText(lines.join('\n')); toast('표를 복사했습니다. 엑셀·구글 시트에 붙여 넣으세요.'); } catch (e) { toast('복사하지 못했습니다.', 'error'); }
+  }
+  function bindAm(app) {
+    app.addEventListener('click', function (e) {
+      const t = e.target; let x; if (!t.closest) return;
+      if ((x = t.closest('[data-amsel]'))) { const s = BIX.amSel = BIX.amSel || {}; s[x.dataset.amsel] = s[x.dataset.amsel] === false; amRefresh(); return; }
+      if ((x = t.closest('[data-amview]'))) { BIX.amView = x.dataset.amview; amRefresh(); return; }
+      if ((x = t.closest('[data-amrow]'))) { amOpen(x.dataset.amrow); return; }
+      if (t.closest('[data-amcopy]')) { amCopy(); return; }
+    });
+  }
+  (function () {
+    const old = BI_ACTS['bi-ads'];
+    BI_ACTS['bi-ads'] = function (d) {
+      const A = [], M = d.am; let rest = []; try { rest = old ? (old(d) || []) : []; } catch (e) { rest = []; }
+      if (M) {
+        const r = rgResolve('ads', M.first, M.last), cur = amAgg(M, r.from, r.to), act = AM_CORE.filter(function (g) { return cur.sum[g.k] > 0; }).sort(function (a, b) { return cur.sum[b.k] - cur.sum[a.k]; }), zero = AM_CORE.filter(function (g) { return !(cur.sum[g.k] > 0); });
+        if (cur.days) A.push({ id: 'am-check', t: '매체별 집행 현황 점검 요청 (' + r.from.slice(5) + '~' + r.to.slice(5) + ')', why: act.slice(0, 3).map(function (g) { return g.n.split(' ')[0] + ' ' + fP(cur.sum[g.k] / cur.core * 100, 0); }).join(' · ') + (zero.length ? ' · 미집행 ' + zero.map(function (g) { return g.n.split(' ')[0]; }).join('·') : ''), link: '#bi-ads', linkLabel: '매체별 트렌드 보기',
+          flow: biFlow('광고] 매체별 광고비 점검 (' + r.from + ' ~ ' + r.to + ')', ['현황(손익분기표 일별 탭 기준, 원):'].concat(act.map(function (g) { return '· ' + g.n + ': ' + fN(cur.sum[g.k]) + ' (' + fP(cur.sum[g.k] / cur.core * 100, 0) + ')'; })).concat(zero.length ? ['· 집행 기록 없음: ' + zero.map(function (g) { return g.n; }).join(', ')] : []).concat(['요청 1) 매체별 집행 의도와 실제가 맞는지 확인(미집행 매체는 입력 누락인지 확인)', '요청 2) 비중이 한 매체에 쏠린 이유와 대안 매체 검토', '요청 3) 예산·집행 변경은 대표·실장 컨펌 후 진행'])),
+          aside: biAside('구글 시트 "2026 매체별 손익분기표"의 월별 국내 B2C 일별 탭에서 ' + r.from + '부터 ' + r.to + '까지 자사몰 광고비 매체 행(메타·구글·틱톡·카카오·네이버·CRM)을 읽고 매체별 합계와 일별 추이를 표로 정리해줘. 시트에는 쓰지 마.') });
+      }
+      return A.concat(rest);
+    };
+  })();
+  /* ===== 시장·경쟁사: 키워드 검색량 · 경쟁사 소셜 · 블로그·카페 발행량과 경쟁사 글 (자사·경쟁사 마케팅 데이터 시트) ===== */
+  const MK_URL = 'https://docs.google.com/spreadsheets/d/1oKN4KiRSlPMs-M-s11eUxPfVmmvPdFcVeS_P0n85Z2c/edit';
+  function mkNet(kind) {
+    BIX.mkNet = BIX.mkNet || {}; if (BIX.mkNet[kind]) return BIX.mkNet[kind];
+    BIX.mkNet[kind] = fetch(SHEET_ENDPOINT + '?type=bi_mkt&pw=' + encodeURIComponent(biPw()) + '&kind=' + kind).then(function (r) { return r.json(); }).then(function (j) { delete BIX.mkNet[kind]; if (!j || !j.ok) throw new Error((j && j.error) || '시트를 읽지 못했습니다'); (BIX.mkC = BIX.mkC || {})[kind] = { t: Date.now(), j: j }; try { localStorage.setItem('lo_mkt_' + kind, JSON.stringify({ t: Date.now(), j: j })); } catch (e) {} return j; }, function (er) { delete BIX.mkNet[kind]; throw er; });
+    return BIX.mkNet[kind];
+  }
+  function mkHave(kind) { const c = (BIX.mkC || {})[kind]; if (c) return c; try { const s = JSON.parse(localStorage.getItem('lo_mkt_' + kind) || 'null'); if (s && s.j && Date.now() - s.t < 7 * 864e5) { (BIX.mkC = BIX.mkC || {})[kind] = s; return s; } } catch (e) {} return null; }
+  /* 화면을 먼저 그리고 시트 데이터는 뒤에서: 저장된 값이 있으면 바로 보여 주고, 없으면 불러오는 중 표시 후 다시 그림 */
+  function mkLoader(page, kinds) {
+    return async function (d) {
+      if (!biUnlocked()) return; d.mk = {}; let miss = false, stale = false;
+      kinds.forEach(function (k) { const c = mkHave(k); if (c) { d.mk[k] = c.j; if (Date.now() - c.t > 900000) stale = true; } else miss = true; });
+      const fresh = kinds.every(function (k) { const c = (BIX.mkC || {})[k]; return c && Date.now() - c.t < 900000; });
+      if (fresh) return; const done = function () { if (BIX.page === page && BIX.cur === d) Promise.resolve(biRender(page, true)); };
+      Promise.all(kinds.map(mkNet)).then(function () { if (miss || stale) done(); }, function (er) { if (miss && BIX.page === page && BIX.cur === d) { d.mkErr = String(er && er.message || er); done(); } });
+      if (miss) d.mkPending = true;
+    };
+  }
+  function mkWait(d, title) { return '<section class="bi-card" data-st="explore"><h3>' + title + ' <span class="bi-ms">시트 데이터를 불러오는 중입니다 (처음 한 번은 10초 안팎 걸릴 수 있습니다)</span></h3><div class="bi-skel"><div class="bi-skk"><i></i><i></i><i></i></div></div></section>'; }
+  function mkErr(d, title) { return '<section class="bi-card" data-st="explore"><h3>' + title + '</h3><div class="bi-warn">시트를 읽지 못했습니다' + (d.mkErr ? ' (' + esc(d.mkErr) + ')' : '') + '. 새로고침으로 다시 시도해 주세요.</div></section>'; }
+  function mkSum(arr, dates, from, to) { let s = 0; for (let i = 0; i < dates.length; i++) if (dates[i] >= from && dates[i] <= to) s += arr[i] || 0; return s; }
+  function mkBucketVals(arr, dates, bk) { return bk.map(function (b) { let s = 0, n = 0; for (let i = 0; i < dates.length; i++) if (dates[i] >= b.s && dates[i] <= b.e) { s += arr[i] || 0; n++; } return n ? s : NaN; }); }
+  function mkPrev(r, minD) { const pTo = rgAdd(r.from, -1), pFrom = rgAdd(pTo, -(r.days - 1)); return pFrom >= minD ? { from: pFrom, to: pTo } : null; }
+
+  /* --- 키워드 검색량 --- */
+  BI_LOADX['bi-search'] = mkLoader('bi-search', ['search']);
+  function seItems(S, grp) {
+    const kws = S.kws, mk = function (name, own, v) { return { n: name, own: own, v: v }; }, sumv = function (list) { return S.dates.map(function (x, i) { return list.reduce(function (s, k) { return s + (k.v[i] || 0); }, 0); }); };
+    if (grp === '브랜드 합산') { const by = {}; kws.filter(function (k) { return k.t !== '카테고리'; }).forEach(function (k) { (by[k.b] = by[k.b] || []).push(k); }); return Object.keys(by).map(function (b) { return mk(b, by[b][0].o, sumv(by[b])); }); }
+    if (grp === '브랜드명') return kws.filter(function (k) { return k.t === '브랜드'; }).map(function (k) { return mk(k.k, k.o, k.v); });
+    if (grp === '제품') return kws.filter(function (k) { return k.t === '제품'; }).map(function (k) { return mk(k.k, k.o, k.v); });
+    return kws.filter(function (k) { return k.t === '카테고리'; }).map(function (k) { return mk(k.k, 0, k.v); });
+  }
+  function seBox(d) {
+    const S = d.mk && d.mk.search; if (!S) return d.mkErr ? mkErr(d, '🔎 키워드 검색량') : mkWait(d, '🔎 키워드 검색량');
+    const key = 'search', st = BIX.se = BIX.se || { grp: '브랜드 합산', sel: null }, s = rgSt(key, { preset: '30일', unit: '일' }), minD = S.dates[0], maxD = S.dates[S.dates.length - 1], r = rgResolve(key, minD, maxD), pr = mkPrev(r, minD);
+    const items = seItems(S, st.grp).map(function (x) { x.cur = mkSum(x.v, S.dates, r.from, r.to); x.prev = pr ? mkSum(x.v, S.dates, pr.from, pr.to) : NaN; return x; }).filter(function (x) { return x.cur > 0 || x.prev > 0; }).sort(function (a, b) { return b.cur - a.cur; });
+    const total = items.reduce(function (sx, x) { return sx + x.cur; }, 0), own = items.filter(function (x) { return x.own; }), ownSum = own.reduce(function (sx, x) { return sx + x.cur; }, 0);
+    const defSel = items.slice(0, 5).map(function (x) { return x.n; }); own.forEach(function (x) { if (defSel.indexOf(x.n) < 0) defSel.push(x.n); });
+    const sel = (st.sel && st.sel.grp === st.grp) ? st.sel.list : defSel, bk = rgBuckets(r.from, r.to, s.unit), labels = bk.map(function (b) { return b.l; });
+    const series = items.filter(function (x) { return sel.indexOf(x.n) >= 0; }).map(function (x, i) { return { n: x.n + (x.own ? ' (자사)' : ''), c: x.own ? '#14C4A9' : RG_COLORS[(i + 1) % RG_COLORS.length], v: mkBucketVals(x.v, S.dates, bk) }; });
+    const grpChip = ['브랜드 합산', '브랜드명', '제품', '카테고리'].map(function (g) { return '<button type="button" class="bi-chip' + (st.grp === g ? ' on' : '') + '" data-segrp="' + g + '">' + g + '</button>'; }).join('');
+    const rows = items.slice(0, 40).map(function (x) { const on = sel.indexOf(x.n) >= 0; return '<tr class="bi-click' + (x.own ? ' se-own' : '') + '" data-sesel="' + esc(x.n) + '"><td><input type="checkbox" ' + (on ? 'checked' : '') + ' tabindex="-1"> <b>' + esc(x.n) + '</b>' + (x.own ? ' <span class="bi-pill grn">자사</span>' : '') + '</td><td><b>' + fN(x.cur) + '</b></td><td>' + (total ? fP(x.cur / total * 100, 1) : '-') + '</td><td>' + fN(r.days ? x.cur / r.days : NaN) + '</td><td>' + amChgHtml(amChg(x.cur, x.prev)) + '</td><td>' + bSpark(mkBucketVals(x.v, S.dates, rgBuckets(r.from, r.to, '일'))) + '</td></tr>'; }).join('');
+    const kp = '<div class="bi-kpis">' + bKpi('자사 검색량 (기간 합)', fN(ownSum), '회', own.length ? esc(own.map(function (x) { return x.n; }).join('·')) + ' · ' + (pr ? '직전 ' + fN(own.reduce(function (sx, x) { return sx + (x.prev || 0); }, 0)) : '비교 자료 없음') : '자사 키워드 없음') + bKpi('자사 비중', total ? fP(ownSum / total * 100, 1) : '-', '', st.grp + ' 키워드 전체 대비') + bKpi('1위', esc(items[0] ? items[0].n : '-'), '', items[0] ? fN(items[0].cur) + '회 · ' + fP(items[0].cur / total * 100, 0) : '') + bKpi('일평균(전체)', fN(r.days ? total / r.days : NaN), '회', '표시된 ' + st.grp + ' 키워드 합') + '</div>';
+    const ins = seInsights(S, st.grp, items, r, pr, own, total);
+    const gm = (S.google || []).slice().sort(function (a, b) { return a[0] < b[0] ? 1 : -1; }).slice(0, 12);
+    return '<section class="bi-card" data-st="explore"><div class="bi-ch"><h3>🔎 키워드 검색량 <span class="bi-ms">네이버 일별 추정치(PC+모바일) · 자사·경쟁사 마케팅 데이터 시트</span></h3><a class="bi-btn" href="' + MK_URL + '?gid=1954532866" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a></div>' + rgBar(key, minD, maxD, ['일', '주', '월']) + '<div class="rg-sel"><span class="bi-bl">보기</span>' + grpChip + '</div>' + kp + '<div class="bi-note" style="margin:0 0 6px">표에서 행을 누르면 그래프에 넣고 뺄 수 있습니다(선택 ' + series.length + '개).</div>' + lnChart(labels, series, fN) + '<div class="bi-note">네이버는 일별 실제 검색수를 공개하지 않아 검색광고 API의 30일 검색수와 검색어 트렌드의 일별 지수로 추정한 값입니다. 날짜가 지난 값도 최근 7일은 매일 다시 계산됩니다.</div></section>'
+      + '<section class="bi-card" data-st="explore"><h3>' + esc(st.grp) + ' 검색량 순위 <span class="bi-ms">' + r.from.slice(5) + ' ~ ' + r.to.slice(5) + ' · 상위 ' + Math.min(40, items.length) + '개</span></h3><div class="bi-tw" style="max-height:480px;overflow:auto"><table class="bi-t"><thead><tr><th>' + (st.grp === '카테고리' ? '키워드' : st.grp === '제품' ? '제품 키워드' : '브랜드') + '</th><th>검색량(회)</th><th>비중</th><th>일평균</th><th>직전 같은 기간 대비</th><th>일별 추이</th></tr></thead><tbody>' + (rows || '<tr><td colspan="6" class="bi-ms">값이 없습니다.</td></tr>') + '</tbody></table></div></section>'
+      + '<section class="bi-card" data-st="insight"><h3>💡 검색량 자동 인사이트</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>'
+      + (gm.length ? '<section class="bi-card" data-st="explore"><h3>구글 월 검색량 (수동 입력) <span class="bi-ms">시트 입력값 · 최근 ' + gm.length + '건</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>월말</th><th>키워드</th><th>검색량</th></tr></thead><tbody>' + gm.map(function (g) { return '<tr><td>' + g[0] + '</td><td>' + esc(g[1]) + '</td><td>' + fN(g[2]) + '</td></tr>'; }).join('') + '</tbody></table></div><div class="bi-note">구글은 일별 공개 데이터가 없어 담당자가 월 검색량을 직접 입력합니다. 네이버 일별 값과 비교하지 마세요.</div></section>' : '');
+  }
+  function seInsights(S, grp, items, r, pr, own, total) {
+    const ins = []; if (!items.length) return ['선택한 기간에 값이 없습니다.'];
+    ins.push(r.from + ' ~ ' + r.to + ' ' + esc(grp) + ' 검색량 1위는 <b>' + esc(items[0].n) + '</b> ' + fN(items[0].cur) + '회(' + fP(items[0].cur / total * 100, 0) + ')입니다.' + (own.length ? ' 자사(' + esc(own[0].n) + ')는 ' + (items.indexOf(own[0]) + 1) + '위, ' + fN(own.reduce(function (sx, x) { return sx + x.cur; }, 0)) + '회입니다.' : ''));
+    if (pr) { const up = items.filter(function (x) { return x.prev > 0 && x.cur > 20; }).map(function (x) { return { x: x, c: amChg(x.cur, x.prev) }; }).filter(function (o) { return isFinite(o.c); }).sort(function (a, b) { return b.c - a.c; }); if (up.length) ins.push('직전 같은 기간 대비 가장 늘어난 항목: ' + up.slice(0, 3).map(function (o) { return esc(o.x.n) + ' ▲' + fP(o.c, 0) + ' (' + fN(o.x.prev) + '→' + fN(o.x.cur) + ')'; }).join(', ') + (up[up.length - 1].c < 0 ? '. 가장 줄어든 항목: ' + esc(up[up.length - 1].x.n) + ' ▼' + fP(Math.abs(up[up.length - 1].c), 0) : '') + '.'); }
+    if (own.length) { const o = own[0], pk = o.v.map(function (v, i) { return [S.dates[i], v]; }).filter(function (p) { return p[0] >= r.from && p[0] <= r.to; }).sort(function (a, b) { return b[1] - a[1]; })[0]; if (pk && pk[1] > 0) ins.push('기간 중 자사(' + esc(o.n) + ') 검색량이 가장 높은 날은 ' + pk[0].slice(5) + '(' + fN(pk[1]) + '회)입니다. 그날 광고·콘텐츠·공구 일정과 맞춰 보면 원인을 찾을 수 있습니다.'); }
+    const cat = seItems(S, '카테고리').map(function (x) { return { n: x.n, c: mkSum(x.v, S.dates, r.from, r.to) }; }).sort(function (a, b) { return b.c - a.c; }); if (cat.length) ins.push('카테고리 키워드 중 검색량이 가장 큰 것은 ' + cat.slice(0, 3).map(function (x) { return esc(x.n) + ' ' + fN(x.c) + '회'; }).join(', ') + '입니다. 브랜드를 모르는 사람이 찾는 말이라 콘텐츠·GEO 질문의 단서가 됩니다.');
+    ins.push('이 화면은 시트의 추정치를 그대로 합산합니다. 검색이 매우 적은 날은 0으로 기록될 수 있습니다.');
+    return ins;
+  }
+  function biViewSearch(d) { return '<div id="seBox">' + seBox(d) + '</div>'; }
+  function seRefresh() { const d = BIX.cur; if (!d || !d.mk) return; const b = $('#seBox'); if (b) b.innerHTML = seBox(d); }
+  RG_REF.search = seRefresh;
+
+  /* --- 경쟁사 소셜 --- */
+  BI_LOADX['bi-social'] = mkLoader('bi-social', ['social']);
+  const SO_PF = { instagram: ['인스타 팔로워', 5], kakao_channel: ['카카오 채널 친구', 7], youtube: ['유튜브 구독자', 8] };
+  function soBuild(S) {
+    const by = {}; S.rows.forEach(function (r) { const k = r[1] + '|' + r[3] + '|' + r[4]; (by[k] = by[k] || { brand: r[1], own: r[2], pf: r[3], acc: r[4], pts: [] }).pts.push(r); });
+    return Object.keys(by).map(function (k) { const a = by[k]; a.pts.sort(function (x, y) { return x[0] < y[0] ? -1 : 1; }); return a; });
+  }
+  function soBox(d) {
+    const S = d.mk && d.mk.social; if (!S) return d.mkErr ? mkErr(d, '👥 경쟁사 소셜') : mkWait(d, '👥 경쟁사 소셜');
+    const st = BIX.so = BIX.so || { pf: 'instagram' }, accs = soBuild(S), dates = Array.from(new Set(S.rows.map(function (r) { return r[0]; }))).sort(), minD = dates[0], maxD = dates[dates.length - 1], key = 'social', s = rgSt(key, { preset: '전체', unit: '일' }), r = rgResolve(key, minD, maxD), spec = SO_PF[st.pf], col = spec[1];
+    const items = accs.filter(function (a) { return a.pf === st.pf; }).map(function (a) { const pts = a.pts.filter(function (p) { return p[col] !== null && p[col] !== undefined; }), inR = pts.filter(function (p) { return p[0] >= r.from && p[0] <= r.to; }), lastP = inR[inR.length - 1] || pts[pts.length - 1], firstP = inR[0]; return { a: a, brand: a.brand, own: a.own, acc: a.acc, last: lastP ? lastP[col] : NaN, first: firstP ? firstP[col] : NaN, posts: lastP && st.pf === 'instagram' ? lastP[6] : NaN, vals: dates.map(function (dt) { const q = pts.filter(function (p) { return p[0] === dt; })[0]; return q ? q[col] : NaN; }), n: inR.length }; }).filter(function (x) { return isFinite(x.last); });
+    const agg = {}; items.forEach(function (x) { const o = agg[x.brand] || (agg[x.brand] = { brand: x.brand, own: x.own, last: 0, first: 0, vals: dates.map(function () { return 0; }), accs: [] }); o.last += x.last; o.first += isFinite(x.first) ? x.first : 0; o.accs.push(x.acc); x.vals.forEach(function (v, i) { if (isFinite(v)) o.vals[i] += v; }); });
+    const rowsB = Object.keys(agg).map(function (k) { return agg[k]; }).sort(function (a, b) { return b.last - a.last; }), ownB = rowsB.filter(function (x) { return x.own; })[0], rank = ownB ? rowsB.indexOf(ownB) + 1 : 0;
+    const bk = rgBuckets(r.from, r.to, s.unit), labels = bk.map(function (b) { return b.l; }), sel = rowsB.slice(0, 6).concat(ownB && rowsB.indexOf(ownB) >= 6 ? [ownB] : []);
+    const series = sel.map(function (x, i) { return { n: x.brand + (x.own ? ' (자사)' : ''), c: x.own ? '#14C4A9' : RG_COLORS[(i + 1) % RG_COLORS.length], v: bk.map(function (b) { let last = NaN; for (let k = 0; k < dates.length; k++) if (dates[k] >= b.s && dates[k] <= b.e && x.vals[k] > 0) last = x.vals[k]; return last; }) }; });
+    const pfChip = Object.keys(SO_PF).map(function (p) { return '<button type="button" class="bi-chip' + (st.pf === p ? ' on' : '') + '" data-sopf="' + p + '">' + SO_PF[p][0] + '</button>'; }).join('');
+    const rows = rowsB.map(function (x, i) { const diff = x.last - x.first; return '<tr' + (x.own ? ' class="se-own"' : '') + '><td>' + (i + 1) + '</td><td><b>' + esc(x.brand) + '</b>' + (x.own ? ' <span class="bi-pill grn">자사</span>' : '') + '<small class="bi-ms"> ' + esc(x.accs.join(', ')) + '</small></td><td><b>' + fN(x.last) + '</b></td><td>' + (x.first > 0 ? '<span class="' + (diff > 0 ? 'bi-up' : diff < 0 ? 'bi-dn' : '') + '">' + (diff > 0 ? '+' : '') + fN(diff) + '</span>' : '-') + '</td><td>' + (x.first > 0 ? amChgHtml(diff / x.first * 100) : '-') + '</td><td>' + bSpark(x.vals.map(function (v) { return v > 0 ? v : NaN; })) + '</td></tr>'; }).join('');
+    const days = rgDiff(minD, maxD) + 1, ins = [];
+    ins.push('시트의 소셜 기록은 ' + minD + '부터 ' + maxD + '까지 <b>' + days + '일치</b>라 추세로 보기에는 짧습니다. 증감은 선택한 기간의 첫 값과 마지막 값 차이입니다.');
+    if (rowsB.length) ins.push(spec[0] + ' 1위는 <b>' + esc(rowsB[0].brand) + '</b> ' + fN(rowsB[0].last) + '입니다.' + (ownB ? ' 자사(' + esc(ownB.brand) + ')는 ' + fN(ownB.last) + '로 ' + rank + '위이고, 1위와 ' + fN(rowsB[0].last - ownB.last) + ' 차이입니다.' : ''));
+    const gr = rowsB.filter(function (x) { return x.first > 0; }).map(function (x) { return { x: x, c: (x.last - x.first) / x.first * 100, dlt: x.last - x.first }; }).sort(function (a, b) { return b.dlt - a.dlt; }); if (gr.length && gr[0].dlt !== 0) ins.push('기간 중 가장 많이 늘어난 곳: ' + gr.slice(0, 3).filter(function (o) { return o.dlt > 0; }).map(function (o) { return esc(o.x.brand) + ' +' + fN(o.dlt) + '(' + fP(o.c, 1) + ')'; }).join(', ') + '.');
+    ins.push('수집 대상: 인스타·카카오 채널·유튜브의 공개 숫자입니다(로그인 없이 읽는 값). 비공개·광고 성과는 포함되지 않습니다.');
+    return '<section class="bi-card" data-st="explore"><div class="bi-ch"><h3>👥 경쟁사 소셜 <span class="bi-ms">인스타 · 카카오 채널 · 유튜브 · 자사·경쟁사 마케팅 데이터 시트</span></h3><a class="bi-btn" href="' + MK_URL + '?gid=1607402152" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a></div>' + rgBar(key, minD, maxD, ['일', '주']) + '<div class="rg-sel"><span class="bi-bl">지표</span>' + pfChip + '</div><div class="bi-kpis">' + bKpi('자사 ' + spec[0], ownB ? fN(ownB.last) : '-', '', ownB ? rank + '위 / ' + rowsB.length + '개 브랜드' : '자사 계정 없음') + bKpi('1위', esc(rowsB[0] ? rowsB[0].brand : '-'), '', rowsB[0] ? fN(rowsB[0].last) : '') + bKpi('브랜드 수', fN(rowsB.length), '곳', '계정 ' + items.length + '개') + bKpi('기록 기간', fN(days), '일', minD.slice(5) + ' ~ ' + maxD.slice(5)) + '</div>' + lnChart(labels, series, fN) + '</section>'
+      + '<section class="bi-card" data-st="explore"><h3>' + spec[0] + ' 순위 <span class="bi-ms">브랜드별 합산 · 마지막 값 기준</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>#</th><th>브랜드 · 계정</th><th>마지막 값</th><th>기간 증감</th><th>증감률</th><th>일별 추이</th></tr></thead><tbody>' + (rows || '<tr><td colspan="6" class="bi-ms">값이 없습니다.</td></tr>') + '</tbody></table></div></section>'
+      + '<section class="bi-card" data-st="insight"><h3>💡 소셜 자동 인사이트</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>';
+  }
+  function biViewSocial(d) { return '<div id="soBox">' + soBox(d) + '</div>'; }
+  function soRefresh() { const d = BIX.cur; if (!d || !d.mk) return; const b = $('#soBox'); if (b) b.innerHTML = soBox(d); }
+  RG_REF.social = soRefresh;
+
+  /* --- 블로그·카페 발행량 · 경쟁사 글 --- */
+  BI_LOADX['bi-blogc'] = mkLoader('bi-blogc', ['content', 'posts']);
+  function bcBrands(C, plat) {
+    const by = {}; C.kws.forEach(function (k) { const b = k.t === '카테고리' ? null : k.b; if (!b) return; const o = by[b] || (by[b] = { brand: b, own: k.o, bl: C.dates.map(function () { return 0; }), ca: C.dates.map(function () { return 0; }) }); k.bl.forEach(function (v, i) { o.bl[i] += v; }); k.ca.forEach(function (v, i) { o.ca[i] += v; }); }); return Object.keys(by).map(function (k) { const o = by[k]; o.v = C.dates.map(function (x, i) { return (plat === 'bl' ? o.bl[i] : plat === 'ca' ? o.ca[i] : o.bl[i] + o.ca[i]); }); return o; });
+  }
+  function bcBox(d) {
+    const C = d.mk && d.mk.content, P = d.mk && d.mk.posts; if (!C || !P) return d.mkErr ? mkErr(d, '✍️ 블로그·카페 발행량') : mkWait(d, '✍️ 블로그·카페 발행량');
+    const key = 'blogc', st = BIX.bc = BIX.bc || { plat: 'all', brand: '전체', sort: '최신', q: '', n: 30 }, s = rgSt(key, { preset: '30일', unit: '일' }), minD = C.dates[0], maxD = C.dates[C.dates.length - 1], r = rgResolve(key, minD, maxD), pr = mkPrev(r, minD);
+    const items = bcBrands(C, st.plat).map(function (x) { x.cur = mkSum(x.v, C.dates, r.from, r.to); x.prev = pr ? mkSum(x.v, C.dates, pr.from, pr.to) : NaN; x.b = mkSum(x.bl, C.dates, r.from, r.to); x.c = mkSum(x.ca, C.dates, r.from, r.to); return x; }).sort(function (a, b) { return b.cur - a.cur; });
+    const total = items.reduce(function (sx, x) { return sx + x.cur; }, 0), ownI = items.filter(function (x) { return x.own; })[0], ownPrev = ownI && isFinite(ownI.prev) ? ownI.prev : NaN, prevTotal = pr ? items.reduce(function (sx, x) { return sx + (x.prev || 0); }, 0) : NaN;
+    const bk = rgBuckets(r.from, r.to, s.unit), labels = bk.map(function (b) { return b.l; }), sel = items.filter(function (x) { return x.cur > 0; }).slice(0, 6); if (ownI && sel.indexOf(ownI) < 0) sel.push(ownI);
+    const series = sel.map(function (x, i) { return { n: x.brand + (x.own ? ' (자사)' : ''), c: x.own ? '#14C4A9' : RG_COLORS[(i + 1) % RG_COLORS.length], v: mkBucketVals(x.v, C.dates, bk) }; });
+    const pfChip = [['all', '블로그+카페'], ['bl', '블로그'], ['ca', '카페']].map(function (p) { return '<button type="button" class="bi-chip' + (st.plat === p[0] ? ' on' : '') + '" data-bcpf="' + p[0] + '">' + p[1] + '</button>'; }).join('');
+    const rows = items.map(function (x) { return '<tr' + (x.own ? ' class="se-own"' : '') + '><td><b>' + esc(x.brand) + '</b>' + (x.own ? ' <span class="bi-pill grn">자사</span>' : '') + '</td><td>' + fN(x.b) + '</td><td>' + fN(x.c) + '</td><td><b>' + fN(x.cur) + '</b></td><td>' + (total ? fP(x.cur / total * 100, 1) : '-') + '</td><td>' + amChgHtml(amChg(x.cur, x.prev)) + '</td><td>' + bSpark(mkBucketVals(x.v, C.dates, rgBuckets(r.from, r.to, '일'))) + '</td></tr>'; }).join('');
+    const ins = bcInsights(items, r, pr, total, prevTotal, ownI);
+    const months = Array.from(new Set([].concat.apply([], Object.keys(P.bm).map(function (b) { return Object.keys(P.bm[b]); })))).sort(), brs = Object.keys(P.bm).sort(function (a, b) { return mkBm(P, b, months) < mkBm(P, a, months) ? -1 : 1; });
+    const mrows = brs.map(function (b) { const own = (items.filter(function (x) { return x.brand === b; })[0] || {}).own; return '<tr' + (own ? ' class="se-own"' : '') + '><td><b>' + esc(b) + '</b></td>' + months.map(function (m) { const a = P.bm[b][m] || [0, 0]; return '<td>' + (a[0] + a[1] ? fN(a[0] + a[1]) : '<span class="sd-z">·</span>') + '</td>'; }).join('') + '<td><b>' + fN(mkBm(P, b, months)) + '</b></td></tr>'; }).join('');
+    return '<section class="bi-card" data-st="explore"><div class="bi-ch"><h3>✍️ 블로그·카페 발행량 <span class="bi-ms">키워드 정확 일치 검색 결과 수 · 자사·경쟁사 마케팅 데이터 시트</span></h3><a class="bi-btn" href="' + MK_URL + '?gid=1800687723" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a></div>' + rgBar(key, minD, maxD, ['일', '주', '월']) + '<div class="rg-sel"><span class="bi-bl">채널</span>' + pfChip + '</div><div class="bi-kpis">' + bKpi('자사 발행량(기간)', ownI ? fN(ownI.cur) : '-', '건', ownI ? '블로그 ' + fN(ownI.b) + ' · 카페 ' + fN(ownI.c) + (isFinite(ownPrev) ? ' · 직전 ' + fN(ownPrev) : '') : '자사 키워드 없음') + bKpi('자사 비중', total && ownI ? fP(ownI.cur / total * 100, 1) : '-', '', '브랜드 키워드 14곳 합 대비') + bKpi('1위 브랜드', esc(items[0] ? items[0].brand : '-'), '', items[0] ? fN(items[0].cur) + '건 · ' + fP(items[0].cur / total * 100, 0) : '') + bKpi('전체 발행량', fN(total), '건', isFinite(prevTotal) ? '직전 같은 기간 ' + fN(prevTotal) : '') + '</div>' + lnChart(labels, series, fN) + '<div class="bi-note">브랜드 키워드를 큰따옴표로 감싼 정확 일치 검색의 하루 결과 수입니다(광고성·재게시 글 포함). 카페는 공개 글만 셉니다.</div></section>'
+      + '<section class="bi-card" data-st="explore"><h3>브랜드별 발행량 <span class="bi-ms">' + r.from.slice(5) + ' ~ ' + r.to.slice(5) + '</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>브랜드</th><th>블로그</th><th>카페</th><th>합계</th><th>비중</th><th>직전 같은 기간 대비</th><th>일별 추이</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>'
+      + '<section class="bi-card" data-st="insight"><h3>💡 발행량 자동 인사이트</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>'
+      + '<section class="bi-card" data-st="explore"><h3>월별 글 수 (수집된 글 기준) <span class="bi-ms">글 목록 탭 ' + fN(P.total) + '건 · 블로그+카페</span></h3><div class="bi-tw"><table class="bi-t sd-t"><thead><tr><th>브랜드</th>' + months.map(function (m) { return '<th>' + (+m.slice(5)) + '월</th>'; }).join('') + '<th>합계</th></tr></thead><tbody>' + mrows + '</tbody></table></div><div class="bi-note">하루 발행량이 많은 키워드는 개별 글을 저장하지 않아 위 발행량 표와 숫자가 다를 수 있습니다.</div></section>'
+      + bcPosts(d, C, P);
+  }
+  function mkBm(P, b, months) { return months.reduce(function (sx, m) { const a = P.bm[b][m] || [0, 0]; return sx + a[0] + a[1]; }, 0); }
+  function bcPostRows(P, st, r) {
+    const q = (st.q || '').toLowerCase(), list = P.recent.filter(function (p) { return p[0] >= r.from && p[0] <= r.to && (st.brand === '전체' || p[3] === st.brand) && (st.pf2 === undefined || st.pf2 === '전체' || (st.pf2 === '블로그' ? p[1] === 0 : p[1] === 1)) && (!q || (p[4] + ' ' + p[6] + ' ' + p[3]).toLowerCase().indexOf(q) >= 0); });
+    if (st.sort === '반응 높은순') list.sort(function (a, b) { return (b[7] + b[8]) - (a[7] + a[8]) || (a[0] < b[0] ? 1 : -1); });
+    return list;
+  }
+  function bcPostsBody(P, st, r) {
+    const list = bcPostRows(P, st, r), sh = list.slice(0, st.n);
+    return { n: list.length, shown: sh.length, html: sh.length ? sh.map(function (p) { return '<tr><td>' + p[0].slice(5).replace('-', '/') + '</td><td><b>' + esc(p[3]) + '</b></td><td>' + (/^https?:/.test(p[5]) ? '<a href="' + esc(p[5]) + '" target="_blank" rel="noopener noreferrer">' + esc(p[4]) + ' ↗</a>' : esc(p[4])) + '</td><td>' + esc(p[6]) + '</td><td>' + (p[1] ? '카페' : '블로그') + '</td><td>' + (p[7] + p[8] ? '<b>' + fN(p[7] + p[8]) + '</b> <small class="bi-ms">좋아요 ' + p[7] + ' · 댓글 ' + p[8] + '</small>' : '<span class="sd-z">·</span>') + '</td></tr>'; }).join('') : '<tr><td colspan="6" class="bi-ms">조건에 맞는 글이 없습니다.</td></tr>' };
+  }
+  function bcPosts(d, C, P) {
+    const st = BIX.bc, key = 'blogc', minD = C.dates[0], maxD = C.dates[C.dates.length - 1], r = rgResolve(key, minD, maxD), brands = ['전체'].concat(Object.keys(P.bm).sort()), chip = function (k, v, on) { return '<button type="button" class="bi-chip' + (on ? ' on' : '') + '" data-bcf="' + k + '" data-v="' + esc(v) + '">' + esc(v) + '</button>'; };
+    if (st.pf2 === undefined) st.pf2 = '전체'; const b = bcPostsBody(P, st, r);
+    return '<section class="bi-card" data-st="explore"><div class="bi-ch"><h3>경쟁사·자사 글 목록 <span class="bi-ms" id="bcCnt">' + fN(b.n) + '건 중 ' + fN(b.shown) + '건 · 최근 60일 안에서 위 기간 적용</span></h3><a class="bi-btn" href="' + MK_URL + '?gid=834869944" target="_blank" rel="noopener noreferrer">시트 열기 ↗</a></div><div class="bi-bar2"><span class="bi-bl">브랜드</span>' + brands.map(function (x) { return chip('brand', x, st.brand === x); }).join('') + '<span class="bi-bl">채널</span>' + ['전체', '블로그', '카페'].map(function (x) { return chip('pf2', x, st.pf2 === x); }).join('') + '<span class="bi-bl">정렬</span>' + ['최신', '반응 높은순'].map(function (x) { return chip('sort', x, st.sort === x); }).join('') + '</div><input type="search" id="bcQ" class="bi-q" style="max-width:none;width:100%;margin-bottom:8px" placeholder="제목·블로그명·카페명 검색" value="' + esc(st.q || '') + '"><div class="bi-tw" style="max-height:560px;overflow:auto"><table class="bi-t"><thead><tr><th>날짜</th><th>브랜드</th><th>제목</th><th>블로그·카페명</th><th>채널</th><th>반응</th></tr></thead><tbody id="bcBody">' + b.html + '</tbody></table></div><div class="bi-dr-btns"><button type="button" class="bi-btn" id="bcMore" data-bcmore="1"' + (b.shown >= b.n ? ' hidden' : '') + '>30건 더 보기</button></div><div class="bi-note">제목을 누르면 원문이 새 창으로 열립니다. 좋아요·댓글은 작성 후 7일 동안 갱신된 값입니다. 글의 내용·광고 여부는 원문에서 담당자가 확인합니다.</div></section>';
+  }
+  function bcPostsUpd() { const d = BIX.cur; if (!d || !d.mk || !d.mk.posts) return; const C = d.mk.content, r = rgResolve('blogc', C.dates[0], C.dates[C.dates.length - 1]), b = bcPostsBody(d.mk.posts, BIX.bc, r), body = $('#bcBody'); if (body) body.innerHTML = b.html; const c = $('#bcCnt'); if (c) c.textContent = fN(b.n) + '건 중 ' + fN(b.shown) + '건 · 최근 60일 안에서 위 기간 적용'; const m = $('#bcMore'); if (m) m.hidden = b.shown >= b.n; }
+  function bcInsights(items, r, pr, total, prevTotal, ownI) {
+    const ins = []; if (!total) return ['선택한 기간에 발행량이 없습니다.'];
+    ins.push(r.from + ' ~ ' + r.to + ' 브랜드 키워드 발행량 합계는 <b>' + fN(total) + '건</b>' + (isFinite(prevTotal) && prevTotal > 0 ? '(직전 같은 기간 ' + fN(prevTotal) + '건 대비 ' + (total >= prevTotal ? '▲ ' : '▼ ') + fP(Math.abs(amChg(total, prevTotal)), 0) + ')' : '') + '이고 1위는 <b>' + esc(items[0].brand) + '</b> ' + fN(items[0].cur) + '건(' + fP(items[0].cur / total * 100, 0) + ')입니다.');
+    if (ownI) ins.push('자사(' + esc(ownI.brand) + ')는 ' + fN(ownI.cur) + '건으로 ' + (items.indexOf(ownI) + 1) + '위, 비중 ' + fP(ownI.cur / total * 100, 1) + '입니다. 블로그 ' + fN(ownI.b) + '건 · 카페 ' + fN(ownI.c) + '건.' + (isFinite(ownI.prev) && ownI.prev > 0 ? ' 직전 같은 기간 대비 ' + (ownI.cur >= ownI.prev ? '▲ ' : '▼ ') + fP(Math.abs(amChg(ownI.cur, ownI.prev)), 0) + '.' : ''));
+    const up = items.filter(function (x) { return x.prev > 0 && x.cur >= 10; }).map(function (x) { return { x: x, c: amChg(x.cur, x.prev) }; }).filter(function (o) { return isFinite(o.c); }).sort(function (a, b) { return b.c - a.c; }); if (up.length && up[0].c > 0) ins.push('직전 같은 기간 대비 가장 늘어난 브랜드: ' + up.slice(0, 3).filter(function (o) { return o.c > 0; }).map(function (o) { return esc(o.x.brand) + ' ▲' + fP(o.c, 0) + '(' + fN(o.x.prev) + '→' + fN(o.x.cur) + ')'; }).join(', ') + '. 이 브랜드의 글 목록에서 반응이 높은 글을 확인해 보세요.');
+    ins.push('발행량은 검색 결과 수라 홍보성 글과 자동 생성 글이 섞여 있을 수 있습니다. 숫자의 크기보다 변화 방향을 참고하세요.');
+    return ins;
+  }
+  function biViewBlogc(d) { return '<div id="bcBox">' + bcBox(d) + '</div>'; }
+  function bcRefresh() { const d = BIX.cur; if (!d || !d.mk) return; const b = $('#bcBox'); if (b) b.innerHTML = bcBox(d); }
+  RG_REF.blogc = bcRefresh;
+  function biActsSearch(d) {
+    const A = [], S = d.mk && d.mk.search; if (!S) return A; const r = rgResolve('search', S.dates[0], S.dates[S.dates.length - 1]), pr = mkPrev(r, S.dates[0]); if (!pr) return A;
+    const cat = seItems(S, '카테고리').map(function (x) { const c = mkSum(x.v, S.dates, r.from, r.to), p = mkSum(x.v, S.dates, pr.from, pr.to); return { n: x.n, c: c, p: p, ch: amChg(c, p) }; }).filter(function (x) { return x.p > 0 && x.c > 50 && isFinite(x.ch); }).sort(function (a, b) { return b.ch - a.ch; }).slice(0, 5);
+    if (cat.length && cat[0].ch > 0) A.push({ id: 'se-cat', t: '검색량이 늘고 있는 카테고리 키워드 ' + cat.filter(function (x) { return x.ch > 0; }).length + '개로 콘텐츠 기획', why: cat.slice(0, 3).map(function (x) { return x.n + ' ▲' + fP(x.ch, 0); }).join(' · '), link: '#bi-plan', linkLabel: '콘텐츠 기획 열기',
+      flow: biFlow('콘텐츠 기획] 검색량 증가 키워드 (' + r.from + ' ~ ' + r.to + ')', ['직전 같은 기간 대비 검색량(네이버 추정치, 회):'].concat(cat.filter(function (x) { return x.ch > 0; }).map(function (x) { return '· ' + x.n + ': ' + fN(x.p) + ' → ' + fN(x.c) + ' (▲' + fP(x.ch, 0) + ')'; })).concat(['요청 1) 이 키워드로 답할 수 있는 콘텐츠 주제 3개 제안', '요청 2) 광고 표현·타사 비교 표기는 사람이 최종 확인', '요청 3) 블로그·GEO 질문 후보와 연결 여부 확인'])),
+      aside: biAside('구글 시트 "자사·경쟁사 마케팅 데이터"의 td_search_daily에서 키워드 유형이 카테고리인 키워드의 최근 30일 합계를 직전 30일과 비교해 표로 정리하고, 늘어난 상위 5개에 맞는 콘텐츠 주제를 키워드마다 1개씩 제안해줘. 타사 브랜드명은 쓰지 말고 시트에는 쓰지 마.') });
+    return A;
+  }
+  function biActsBlogc(d) {
+    const A = [], P = d.mk && d.mk.posts; if (!P) return A; const top = P.recent.filter(function (p) { return p[3] !== '라이브오랄스'; }).slice().sort(function (a, b) { return (b[7] + b[8]) - (a[7] + a[8]); }).slice(0, 5).filter(function (p) { return p[7] + p[8] > 0; });
+    if (top.length) A.push({ id: 'bc-top', t: '경쟁사 글 중 반응이 높은 ' + top.length + '건 소구 방식 분석', why: top.slice(0, 2).map(function (p) { return p[3] + ' ' + (p[7] + p[8]) + '회'; }).join(' · '), link: '#bi-blogc', linkLabel: '글 목록 보기',
+      flow: biFlow('콘텐츠 분석] 경쟁사 글 반응 TOP ' + top.length + ' (최근 60일)', ['제목 · 반응(좋아요+댓글) · 링크 (내부 참고용, 광고 문구에는 타사명 사용 금지):'].concat(top.map(function (p) { return '· ' + p[4] + ' / ' + (p[7] + p[8]) + ' / ' + p[5]; })).concat(['요청 1) 글의 소구 포인트와 구성만 정리(브랜드명·수치 인용 없이)', '요청 2) 우리 콘텐츠에 쓸 수 있는 형식·주제 제안', '요청 3) 광고성 글 여부는 원문에서 확인'])),
+      aside: biAside('아래 블로그·카페 글 링크를 열어 제목·구성·소구 포인트를 3줄씩 요약해줘. 타사 브랜드명과 수치는 요약에 쓰지 말고, 우리 콘텐츠에 쓸 수 있는 형식 아이디어만 제안해줘.\n' + top.map(function (p) { return p[5]; }).join('\n')) });
+    return A;
+  }
+  BI_ACTS['bi-search'] = biActsSearch; BI_ACTS['bi-blogc'] = biActsBlogc;
+  BI_STAGE_RULES['bi-search'] = [[/실무 액션/, 'action'], [/자동 인사이트/, 'insight']]; BI_STAGE_RULES['bi-social'] = [[/실무 액션/, 'action'], [/자동 인사이트/, 'insight']]; BI_STAGE_RULES['bi-blogc'] = [[/실무 액션/, 'action'], [/자동 인사이트/, 'insight']];
+  function bindMk(app) {
+    app.addEventListener('click', function (e) {
+      const t = e.target; let x; if (!t.closest) return;
+      if ((x = t.closest('[data-segrp]'))) { BIX.se = BIX.se || {}; BIX.se.grp = x.dataset.segrp; BIX.se.sel = null; seRefresh(); return; }
+      if ((x = t.closest('[data-sesel]'))) { const st = BIX.se = BIX.se || { grp: '브랜드 합산' }, S = BIX.cur && BIX.cur.mk && BIX.cur.mk.search; if (!S) return; const r = rgResolve('search', S.dates[0], S.dates[S.dates.length - 1]); let cur = st.sel && st.sel.grp === st.grp ? st.sel.list.slice() : seItems(S, st.grp).map(function (q) { q.cur = mkSum(q.v, S.dates, r.from, r.to); return q; }).sort(function (a, b) { return b.cur - a.cur; }).slice(0, 5).map(function (q) { return q.n; }); const n = x.dataset.sesel, i = cur.indexOf(n); if (i >= 0) cur.splice(i, 1); else cur.push(n); st.sel = { grp: st.grp, list: cur }; seRefresh(); return; }
+      if ((x = t.closest('[data-sopf]'))) { (BIX.so = BIX.so || {}).pf = x.dataset.sopf; soRefresh(); return; }
+      if ((x = t.closest('[data-bcpf]'))) { (BIX.bc = BIX.bc || { brand: '전체', sort: '최신', q: '', n: 30 }).plat = x.dataset.bcpf; bcRefresh(); return; }
+      if ((x = t.closest('[data-bcf]'))) { const st = BIX.bc; st[x.dataset.bcf] = x.dataset.v; st.n = 30; $$('[data-bcf="' + x.dataset.bcf + '"]').forEach(function (b) { b.classList.toggle('on', b.dataset.v === x.dataset.v); }); bcPostsUpd(); return; }
+      if (t.closest('[data-bcmore]')) { BIX.bc.n += 30; bcPostsUpd(); return; }
+    });
+    app.addEventListener('input', function (e) { if (e.target.id === 'bcQ' && BIX.bc) { BIX.bc.q = e.target.value; BIX.bc.n = 30; clearTimeout(BIX.bcT); BIX.bcT = setTimeout(bcPostsUpd, 200); } });
+  }
+  async function mkStub() { return {}; }
   const BI_PAGES = {
     'bi': { t: '종합 현황', s: '시트 10개에서 읽은 핵심 수치와 데이터 최신성을 한눈에 봅니다.' },
     'bi-stock': { t: '재고 현황', s: '이카운트 재고·출고 대시보드의 최신 재고를 품목별로 보고, 소진 임박·미입고 발주를 확인합니다.', k: 'stock' },
@@ -7986,6 +8330,9 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     'bi-gb': { t: '공동구매', s: '마케팅팀·영업팀 공유 일정(구글 캘린더)과 FLOW 공동구매 티켓 기준 셀러별 진행 단계, 개인/업체(벤더) 구분, 정산 진행 단계를 한 화면에서 봅니다.' },
     'bi-blog': { t: '블로그 모니터링', s: '마케팅팀 · 네이버 블로그에 올라오는 라이브오랄스 언급 글을 날짜·블로그·제품별로 보고, 새 글을 팀에 공유합니다.' },
     'bi-geo': { t: 'GEO 마케팅', s: '마케팅팀 · AI 검색(Gemini·Claude·ChatGPT·Google AI) 답변에 라이브오랄스가 언급·인용되는지 매일 측정한 결과, 노출 예상 시점, 상품명 점검, 주간 콘텐츠 후보를 봅니다.', k: 'geo' },
+    'bi-search': { t: '키워드 검색량', s: '고객·시장 · 자사와 경쟁 브랜드, 제품, 카테고리 키워드의 네이버 일별 검색량을 기간을 골라 비교합니다.' },
+    'bi-social': { t: '경쟁사 소셜', s: '고객·시장 · 자사와 경쟁사의 인스타 팔로워, 카카오 채널 친구, 유튜브 구독자 추이를 봅니다.' },
+    'bi-blogc': { t: '발행량·경쟁사 글', s: '블로그 모니터링 · 브랜드 키워드의 블로그·카페 발행량을 자사와 경쟁사로 비교하고, 경쟁사 글과 반응을 찾아 봅니다.' },
     'bi-manual': { t: '시트 메뉴얼', s: '팀별로 모은 대시보드 원본 시트 목록입니다.' }
   };
 
@@ -7996,7 +8343,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     { id: 'bi-plan', members: ['bi-plan', 'bi-qna', 'bi-arch'], items: [['bi-plan', '기획하기'], ['bi-qna', '소재 수집'], ['bi-arch', '소재 아카이브']] },
     { id: 'bi-ads', members: ['bi-ads', 'bi-paid'], items: [['bi-ads', '광고 효율'], ['bi-paid', '페이드 소재']] },
     { id: 'bi-inf', members: ['bi-inf', 'bi-rights'], items: [] },
-    { id: 'bi-rev', members: ['bi-rev', 'bi-comp'], items: [['bi-rev', '리뷰 운영'], ['bi-comp', '경쟁사 모니터링']] }
+    { id: 'bi-rev', members: ['bi-rev', 'bi-comp', 'bi-search', 'bi-social'], items: [['bi-rev', '리뷰 운영'], ['bi-comp', '경쟁사 모니터링'], ['bi-search', '키워드 검색량'], ['bi-social', '경쟁사 소셜']] },
+    { id: 'bi-blog', members: ['bi-blog', 'bi-blogc'], items: [['bi-blog', '우리 브랜드 글'], ['bi-blogc', '발행량·경쟁사 글']] }
   ];
   function biGroupOf(pg) { return BI_GRP.filter(function (g) { return g.members.indexOf(pg) >= 0; })[0] || null; }
   function biGroupSw(pg) {
@@ -8015,7 +8363,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if (pg === 'bi') { inner = await biViewOverview(); inner += biStratCard('bi') + biActCard(biActsOverview()); }
       else if (pg === 'bi-manual') inner = biViewManual();
       else if (m.k && BIX.view[pg] === 'tabs') inner = await biViewTabs(pg);
-      else { const K = { 'bi-d2c': [biLoadChanH, biViewD2C], 'bi-oy': [biLoadChanH, biViewOY], 'bi-cp': [biLoadCP, biViewCP], 'bi-cafe': [biLoadCafe, biViewCafe], 'bi-price': [biLoadPrice, biViewPrice], 'bi-sales': [biLoadSalesX, biViewSales], 'bi-ads': [biLoadSalesX, biViewAds], 'bi-stock': [biLoadLogi, biViewStock], 'bi-ship': [biLoadShip, biViewShip], 'bi-sku': [biLoadLogi, biViewSku], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews], 'bi-rights': [biLoadRights, biViewRights], 'bi-arch': [biLoadArch, biViewArch], 'bi-plan': [biLoadPlan, biViewPlan], 'bi-gb': [biLoadGb, biViewGb], 'bi-pd': [biLoadPd, biViewPd], 'bi-pdst': [biLoadPd, biViewPdst], 'bi-pdmk': [biLoadPdmk, biViewPdmk], 'bi-blog': [biLoadBlog, biViewBlog], 'bi-geo': [biLoadGeo, biViewGeo] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); if (BI_LOADX[pg]) { try { await BI_LOADX[pg](d); } catch (lxe) { d.loadErr = String(lxe && lxe.message || lxe); } } BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + (BI_POST[pg] ? BI_POST[pg](d) : '') + biStratCard(pg) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
+      else { const K = { 'bi-d2c': [biLoadChanH, biViewD2C], 'bi-oy': [biLoadChanH, biViewOY], 'bi-cp': [biLoadCP, biViewCP], 'bi-cafe': [biLoadCafe, biViewCafe], 'bi-price': [biLoadPrice, biViewPrice], 'bi-sales': [biLoadSalesX, biViewSales], 'bi-ads': [biLoadSalesX, biViewAds], 'bi-stock': [biLoadLogi, biViewStock], 'bi-ship': [biLoadShip, biViewShip], 'bi-sku': [biLoadLogi, biViewSku], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews], 'bi-rights': [biLoadRights, biViewRights], 'bi-arch': [biLoadArch, biViewArch], 'bi-plan': [biLoadPlan, biViewPlan], 'bi-gb': [biLoadGb, biViewGb], 'bi-pd': [biLoadPd, biViewPd], 'bi-pdst': [biLoadPd, biViewPdst], 'bi-pdmk': [biLoadPdmk, biViewPdmk], 'bi-blog': [biLoadBlog, biViewBlog], 'bi-geo': [biLoadGeo, biViewGeo], 'bi-search': [mkStub, biViewSearch], 'bi-social': [mkStub, biViewSocial], 'bi-blogc': [mkStub, biViewBlogc] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); if (BI_LOADX[pg]) { try { await BI_LOADX[pg](d); } catch (lxe) { d.loadErr = String(lxe && lxe.message || lxe); } } BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + (BI_POST[pg] ? BI_POST[pg](d) : '') + biStratCard(pg) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
       if (BIX.page === pg) { el.innerHTML = biFrame(pg, inner, BIX.stamp); biStageTag(pg); biStageBadges(pg); biWarm(); biStash(pg); if (pg === 'bi-qna' || pg === 'bi-plan') qpProdFill(); if (pg === 'bi-arch') arGalUpd(); if (pg === 'bi-sku') skGen(); }
     } catch (e) { if (BIX.page === pg) el.innerHTML = biFrame(pg, '<div class="bi-warn">데이터를 불러오지 못했습니다: ' + esc(e.message || String(e)) + '<br>시트 구조가 바뀌었거나 네트워크 문제일 수 있습니다. 새로고침으로 다시 시도해 주세요.</div>', ''); }
   }
