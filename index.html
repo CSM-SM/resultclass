@@ -7761,7 +7761,8 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       o.tot += q; o.kinds[kind] = (o.kinds[kind] || 0) + q; const key = pr[0] + '|' + pr[1]; (o.prods[key] = o.prods[key] || { code: pr[0], name: pr[1], qty: 0 }).qty += q;
       (prod[key] = prod[key] || { code: pr[0], name: pr[1], days: {} }).days[d] = (prod[key].days[d] || 0) + q;
     });
-    return { last: j.last, from: j.from, by: by, prod: prod, updated: j.updated };
+    const ls = Object.keys(by).filter(function (k) { return by[k].tot > 0; }).sort().slice(-1)[0] || j.last;
+    return { last: j.last, lastShip: ls, from: j.from, by: by, prod: prod, updated: j.updated };
   }
   BI_LOADX['bi-ship'] = async function (d) {
     if (!biUnlocked()) return;
@@ -7771,7 +7772,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   };
   function sdAdd(iso, n) { const t = new Date(iso + 'T00:00:00'); t.setDate(t.getDate() + n); return ymd(t); }
   function sdDow(iso) { return '일월화수목금토'.charAt(new Date(iso + 'T00:00:00').getDay()); }
-  function sdState(S) { const f = BIX.sd = BIX.sd || {}; if (!f.date || f.date > S.last) f.date = S.last; if (!f.range) f.range = 14; if (f.q === undefined) f.q = ''; if (f.all === undefined) f.all = false; return f; }
+  function sdState(S) { const f = BIX.sd = BIX.sd || {}; if (!f.date || f.date > S.last) f.date = S.lastShip || S.last; if (!f.range) f.range = 14; if (f.q === undefined) f.q = ''; if (f.all === undefined) f.all = false; return f; }
   function sdQty(n) { return n > 0 ? fN(n) : n < 0 ? '<span class="bi-dn">' + fN(n) + '</span>' : '<span class="sd-z">·</span>'; }
   function sdDayHtml(S, d) {
     const f = sdState(S), o = S.by[f.date], pv = S.by[sdAdd(f.date, -1)], tot = o ? o.tot : 0, ptot = pv ? pv.tot : 0;
@@ -7780,7 +7781,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const sheetDay = (d.days || []).filter(function (x) { return x.d === f.date; })[0], mis = sheetDay && isFinite(sheetDay.tot) && sheetDay.tot !== tot;
     const kinds = ['B2B', '이커머스', '기타'].map(function (k) { return bKpi(k + ' 출고', fN(o && o.kinds[k] ? o.kinds[k] : 0), '개', tot ? fP(((o && o.kinds[k]) || 0) / tot * 100, 0) + ' · 총 수량 대비' : ''); }).join('');
     const rows = list.map(function (x, i) { const pk = x.code + '|' + x.name, pq = pvp[pk] ? pvp[pk].qty : 0, diff = x.qty - pq; return '<tr class="bi-click" data-sdpd="' + esc(pk) + '"><td>' + (i + 1) + '</td><td><b>' + esc(x.name || x.code) + '</b><small class="bi-ms"> ' + esc(x.code) + '</small></td><td><b>' + fN(x.qty) + '</b></td><td class="sd-bar"><i style="width:' + Math.max(2, Math.round(x.qty / mx * 100)) + '%"></i></td><td>' + fP(tot > 0 ? x.qty / tot * 100 : NaN, 1) + '</td><td class="' + (diff > 0 ? 'bi-up' : diff < 0 ? 'bi-dn' : '') + '">' + (pv ? (diff > 0 ? '▲ ' : diff < 0 ? '▼ ' : '') + fN(Math.abs(diff)) : '-') + '</td></tr>'; }).join('');
-    return '<div class="sd-nav"><button type="button" class="bi-btn" data-sdn="-1" aria-label="전날">◀</button><input type="date" id="sdDate" class="bi-q" value="' + f.date + '" max="' + S.last + '" min="' + esc(S.from || '') + '"><button type="button" class="bi-btn" data-sdn="1" aria-label="다음날"' + (f.date >= S.last ? ' disabled' : '') + '>▶</button><button type="button" class="bi-btn" data-sdn="last">최근 출고일(' + nxMD(nxDt(S.last)) + ')</button><b class="sd-title">' + f.date + ' (' + sdDow(f.date) + ')</b></div>'
+    return '<div class="sd-nav"><button type="button" class="bi-btn" data-sdn="-1" aria-label="전날">◀</button><input type="date" id="sdDate" class="bi-q" value="' + f.date + '" max="' + S.last + '" min="' + esc(S.from || '') + '"><button type="button" class="bi-btn" data-sdn="1" aria-label="다음날"' + (f.date >= S.last ? ' disabled' : '') + '>▶</button><button type="button" class="bi-btn" data-sdn="last">최근 출고일(' + nxMD(nxDt(S.lastShip || S.last)) + ')</button><b class="sd-title">' + f.date + ' (' + sdDow(f.date) + ')</b></div>'
       + '<div class="bi-kpis">' + bKpi('총 출고 수량', fN(tot), '개', pv ? '전일 ' + fN(ptot) + '개 ' + (ptot ? (tot >= ptot ? '▲ ' : '▼ ') + fP(Math.abs(tot - ptot) / ptot * 100, 0) : '') : '') + kinds + bKpi('출고 품목', fN(list.length), '종', list[0] ? '1위 ' + (list[0].name || list[0].code) : '출고 없음') + '</div>'
       + (mis ? '<div class="bi-warn">이 날짜의 총 수량이 시트 「일별」 탭 합계(' + fN(sheetDay.tot) + '개)와 다릅니다. 원본 시트에서 확인해 주세요.</div>' : '')
       + (rows ? '<div class="bi-tw" style="max-height:480px;overflow:auto"><table class="bi-t"><thead><tr><th>#</th><th>제품</th><th>출고 수량</th><th>비중</th><th>%</th><th>전일 대비</th></tr></thead><tbody>' + rows + '</tbody></table></div><div class="bi-note">제품 행을 누르면 그 제품의 일별 출고 추이가 열립니다. 마이너스 수량(반품·취소 등으로 보이는 값)은 합계에 그대로 반영했습니다.</div>' : '<div class="bi-empty">이 날짜에는 출고 기록이 없습니다(주말·휴일 등).</div>');
@@ -7831,7 +7832,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     app.addEventListener('click', function (e) {
       const t = e.target; let x; const d = BIX.cur, S = d && d.shp;
       if (!S || !t.closest) return;
-      if ((x = t.closest('[data-sdn]'))) { const f = sdState(S), v = x.dataset.sdn; f.date = v === 'last' ? S.last : sdAdd(f.date, +v); if (f.date > S.last) f.date = S.last; sdRefresh(); return; }
+      if ((x = t.closest('[data-sdn]'))) { const f = sdState(S), v = x.dataset.sdn; f.date = v === 'last' ? (S.lastShip || S.last) : sdAdd(f.date, +v); if (f.date > S.last) f.date = S.last; sdRefresh(); return; }
       if ((x = t.closest('[data-sdr]'))) { sdState(S).range = +x.dataset.sdr; sdRefresh(); return; }
       if ((x = t.closest('[data-sdday]'))) { sdState(S).date = x.dataset.sdday; sdRefresh(); const el = $('#sdDay'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
       if ((x = t.closest('[data-sdall]'))) { sdState(S).all = x.dataset.sdall === '1'; sdRefresh(); return; }
