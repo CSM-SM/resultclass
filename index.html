@@ -5462,7 +5462,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 
 
   /* ===== 필터 패널: 한 줄로 늘어선 칩을 그룹별 패널(선택 상자·버튼·초기화)로 정리 ===== */
-  const FP_ATTRS = ['data-cpm', 'data-ctf', 'data-chf', 'data-cff', 'data-prf', 'data-stf', 'data-skf', 'data-bnf', 'data-qnf', 'data-inff', 'data-rtf', 'data-arf', 'data-pgf', 'data-nwcat', 'data-gbc', 'data-gbf', 'data-pdf', 'data-mkf', 'data-chm', 'data-geof', 'data-ordf', 'data-blf'];
+  const FP_ATTRS = ['data-cpm', 'data-ctf', 'data-chf', 'data-cff', 'data-prf', 'data-stf', 'data-skf', 'data-bnf', 'data-qnf', 'data-inff', 'data-rtf', 'data-arf', 'data-pgf', 'data-nwcat', 'data-gbc', 'data-gbf', 'data-pdf', 'data-mkf', 'data-chm', 'data-geof', 'data-ordf', 'data-blf', 'data-bcf'];
   const BI_STAGE_HINT = { explore: '', insight: '시트 값을 규칙에 따라 계산한 분석입니다(AI가 문장을 쓴 것이 아님). 숫자는 화면·시트에서 다시 확인하세요.', action: '항목의 버튼을 누르면 요청문·지시문이 열립니다. 복사해서 FLOW나 어사이드에 붙여 넣으세요.' };
   function fpKey(c) { for (let i = 0; i < FP_ATTRS.length; i++) { const v = c.getAttribute(FP_ATTRS[i]); if (v !== null) return FP_ATTRS[i] + ':' + (FP_ATTRS[i] === 'data-nwcat' ? '' : v); } return ''; }
   function fpSel(c) { for (let i = 0; i < FP_ATTRS.length; i++) { const v = c.getAttribute(FP_ATTRS[i]); if (v !== null) { const dv = c.getAttribute('data-v'); return '[' + FP_ATTRS[i] + '="' + String(v).replace(/"/g, '\\"') + '"]' + (dv !== null ? '[data-v="' + String(dv).replace(/"/g, '\\"') + '"]' : ''); } } return ''; }
