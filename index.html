@@ -8029,6 +8029,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   function biWarm() {
     try { if (sessionStorage.getItem('lo_bi_warm')) return; sessionStorage.setItem('lo_bi_warm', '1'); } catch (e) {}
     ['bi-sales', 'bi-stock', 'bi-cafe', 'bi-d2c'].forEach(function (p, i) { setTimeout(function () { if (document.body.dataset.mode === 'bi' && !document.hidden) biPrefetch(p); }, 3500 + i * 3500); });
+    setTimeout(function () { if (document.body.dataset.mode === 'bi' && !document.hidden && !(BIX.shpC && Date.now() - BIX.shpC.t < 600000)) sdFetchNet().catch(function () {}); }, 2500);
   }
   function biRoute(pg) {
     BIX.page = pg; $$('#biApp .bs-nav a').forEach(function (a) { a.classList.toggle('on', a.dataset.bi === (biGroupOf(pg) ? biGroupOf(pg).id : pg)); });
