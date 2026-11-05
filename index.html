@@ -7767,11 +7767,20 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const ls = Object.keys(by).filter(function (k) { return by[k].tot > 0; }).sort().slice(-1)[0] || j.last;
     return { last: j.last, lastShip: ls, from: j.from, by: by, prod: prod, updated: j.updated };
   }
+  /* 화면은 먼저 그리고, 제품별 출고 데이터는 따로 불러옴(저장된 값이 있으면 바로 보여 주고 뒤에서 갱신) */
+  function sdFetchNet() {
+    if (BIX.shpNet) return BIX.shpNet;
+    BIX.shpNet = fetch(SHEET_ENDPOINT + '?type=bi_shipd&pw=' + encodeURIComponent(biPw())).then(function (r) { return r.json(); }).then(function (j) { BIX.shpNet = null; if (!j || !j.ok) throw new Error((j && j.error) || '제품별 출고 데이터를 읽지 못했습니다'); BIX.shpC = { t: Date.now(), s: sdBuild(j) }; try { localStorage.setItem('lo_shpd', JSON.stringify({ t: Date.now(), j: j })); } catch (e) {} return BIX.shpC.s; }, function (er) { BIX.shpNet = null; throw er; });
+    return BIX.shpNet;
+  }
   BI_LOADX['bi-ship'] = async function (d) {
     if (!biUnlocked()) return;
-    const j = await fetch(SHEET_ENDPOINT + '?type=bi_shipd&pw=' + encodeURIComponent(biPw())).then(function (r) { return r.json(); });
-    if (!j || !j.ok) throw new Error((j && j.error) || '제품별 출고 데이터를 읽지 못했습니다');
-    d.shp = sdBuild(j);
+    if (BIX.shpC && Date.now() - BIX.shpC.t < 600000) { d.shp = BIX.shpC.s; return; }
+    let st = null; try { st = JSON.parse(localStorage.getItem('lo_shpd') || 'null'); } catch (e) {}
+    const done = function (S) { if (BIX.page === 'bi-ship' && BIX.cur === d) { d.shp = S; d.shpPending = false; d.shpErr = ''; Promise.resolve(biRender('bi-ship', true)); } };
+    const net = sdFetchNet();
+    if (st && st.j && Date.now() - st.t < 86400000) { d.shp = sdBuild(st.j); d.shpStale = true; net.then(function (S) { const o = d.shp, changed = !o || S.last !== o.last || Object.keys(S.by).length !== Object.keys(o.by).length || (S.by[S.lastShip] && o.by[S.lastShip] && S.by[S.lastShip].tot !== o.by[S.lastShip].tot); if (changed) done(S); }, function () {}); return; }
+    d.shpPending = true; net.then(done, function (er) { if (BIX.page === 'bi-ship' && BIX.cur === d) { d.shpPending = false; d.shpErr = String(er && er.message || er); Promise.resolve(biRender('bi-ship', true)); } });
   };
   function sdAdd(iso, n) { const t = new Date(iso + 'T00:00:00'); t.setDate(t.getDate() + n); return ymd(t); }
   function sdDow(iso) { return '일월화수목금토'.charAt(new Date(iso + 'T00:00:00').getDay()); }
@@ -7803,7 +7812,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function sdBoxHtml(d) { const S = d.shp; return '<section class="bi-card" data-st="explore"><div class="bi-ch"><h3>📅 일별 출고 조회 <span class="bi-ms">총 수량 + 제품별 출고 수량 · 이카운트 raw_출고 합산</span></h3></div><div id="sdDay">' + sdDayHtml(S, d) + '</div></section><section class="bi-card" data-st="explore"><div class="bi-ch"><h3>🧾 제품별 일별 출고표 <span class="bi-ms">제품 x 날짜 · 수량 합계</span></h3></div><div id="sdPv">' + sdPivot(S) + '</div></section>'; }
   BI_EXTRA['bi-ship'] = function (d) {
-    const S = d.shp; if (!S) return '<section class="bi-card" data-st="explore"><h3>📅 일별 출고 조회</h3><div class="bi-warn">제품별 출고 데이터를 읽지 못했습니다' + (d.loadErr ? ' (' + esc(d.loadErr) + ')' : '') + '. 새로고침으로 다시 시도해 주세요.</div></section>';
+    const S = d.shp; if (!S) return d.shpPending ? '<section class="bi-card" data-st="explore"><h3>📅 일별 출고 조회 <span class="bi-ms">제품별 수량을 불러오는 중입니다 (처음 한 번은 10초 안팎 걸릴 수 있습니다)</span></h3><div class="bi-skel"><div class="bi-skk"><i></i><i></i><i></i></div></div></section>' : '<section class="bi-card" data-st="explore"><h3>📅 일별 출고 조회</h3><div class="bi-warn">제품별 출고 데이터를 읽지 못했습니다' + (d.shpErr ? ' (' + esc(d.shpErr) + ')' : '') + '. 새로고침으로 다시 시도해 주세요.</div></section>';
     return '<div id="sdBox">' + sdBoxHtml(d) + '</div>';
   };
   function sdInsights(d) {
