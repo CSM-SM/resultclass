@@ -1871,6 +1871,7 @@ tr[data-sdp] td:first-child, .nx-tot td:first-child { white-space: nowrap; }
 .bi-head.geo { flex-wrap: wrap; align-items: stretch; } .bi-head.geo > div:first-child { flex: 1 1 320px; min-width: 0; align-self: flex-end; } .bi-head.geo .bi-ha { align-self: flex-start; }
 .geo-msc { flex: 0 1 380px; background: #E6F5F2; border-radius: 14px; padding: 16px 18px; align-self: center; } .geo-msc h4 { margin: 0 0 8px; font-size: 16px; color: #1E3E3A; } .geo-msc dl { margin: 0; } .geo-msc dt { font-size: 13.5px; font-weight: 800; color: #17A892; margin-top: 8px; } .geo-msc dd { margin: 1px 0 0; font-size: 12.5px; color: #1E3E3A; line-height: 1.5; }
 @media (max-width: 860px) { .geo-msc { flex: 1 1 100%; } }
+.rv-h { margin: 12px 0 4px; font-size: 13.5px; color: #3B4046; }
 .rg-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 4px 0 12px; } .rg-dt { display: inline-flex; align-items: center; gap: 6px; } .rg-dt input { width: 140px; } @media (max-width: 700px) { .rg-dt { flex: 1 1 100%; } .rg-dt input { flex: 1 1 0; min-width: 0; width: auto; } .rg-info { margin-left: 0; } .rg-sel .bi-chip, .rg-bar .bi-chip { flex-shrink: 0; } } .rg-info { margin-left: auto; } .rg-sel { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin: 6px 0 10px; } .rg-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; vertical-align: middle; } .rg-lg { display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 6px 0 4px; font-size: 12px; color: #4B5258; } .rg-lg i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 5px; vertical-align: middle; } .rg-line { height: 250px; width: 100%; }
 .st-chart { display: flex; align-items: flex-end; gap: 6px; height: 250px; padding: 8px 4px 0; overflow-x: auto; } .st-chart.wide { gap: 2px; } .st-col { flex: 1 0 22px; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; min-width: 0; } .st-bar { display: flex; flex-direction: column-reverse; width: 100%; border-radius: 4px 4px 0 0; overflow: hidden; min-height: 1px; } .st-bar i { display: block; width: 100%; } .st-x { font-size: 10px; color: #8B9096; text-align: center; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .se-own td { background: #F0FBF8; } .am-etc td { color: #8B9096; font-size: 12px; }
@@ -5462,7 +5463,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 
 
   /* ===== 필터 패널: 한 줄로 늘어선 칩을 그룹별 패널(선택 상자·버튼·초기화)로 정리 ===== */
-  const FP_ATTRS = ['data-cpm', 'data-ctf', 'data-chf', 'data-cff', 'data-prf', 'data-stf', 'data-skf', 'data-bnf', 'data-qnf', 'data-inff', 'data-rtf', 'data-arf', 'data-pgf', 'data-nwcat', 'data-gbc', 'data-gbf', 'data-pdf', 'data-mkf', 'data-chm', 'data-geof', 'data-ordf', 'data-blf', 'data-bcf'];
+  const FP_ATTRS = ['data-cpm', 'data-ctf', 'data-chf', 'data-cff', 'data-prf', 'data-stf', 'data-skf', 'data-bnf', 'data-qnf', 'data-inff', 'data-rtf', 'data-arf', 'data-pgf', 'data-nwcat', 'data-gbc', 'data-gbf', 'data-pdf', 'data-mkf', 'data-chm', 'data-geof', 'data-ordf', 'data-blf', 'data-bcf', 'data-rvf'];
   const BI_STAGE_HINT = { explore: '', insight: '시트 값을 규칙에 따라 계산한 분석입니다(AI가 문장을 쓴 것이 아님). 숫자는 화면·시트에서 다시 확인하세요.', action: '항목의 버튼을 누르면 요청문·지시문이 열립니다. 복사해서 FLOW나 어사이드에 붙여 넣으세요.' };
   function fpKey(c) { for (let i = 0; i < FP_ATTRS.length; i++) { const v = c.getAttribute(FP_ATTRS[i]); if (v !== null) return FP_ATTRS[i] + ':' + (FP_ATTRS[i] === 'data-nwcat' ? '' : v); } return ''; }
   function fpSel(c) { for (let i = 0; i < FP_ATTRS.length; i++) { const v = c.getAttribute(FP_ATTRS[i]); if (v !== null) { const dv = c.getAttribute('data-v'); return '[' + FP_ATTRS[i] + '="' + String(v).replace(/"/g, '\\"') + '"]' + (dv !== null ? '[data-v="' + String(dv).replace(/"/g, '\\"') + '"]' : ''); } } return ''; }
@@ -7738,7 +7739,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
 
   /* 공통 바인딩: 시딩 제품 상세, 발주 등급 필터, 블로그 필터, 복사 */
   function bindNx(app) {
-    bindRg(app); bindAm(app); bindMk(app);
+    bindRg(app); bindAm(app); bindMk(app); bindRv(app);
     bindSd(app); bindGeo(app);
     app.addEventListener('click', function (e) {
       const t = e.target; let x;
@@ -8301,6 +8302,104 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     app.addEventListener('input', function (e) { if (e.target.id === 'bcQ' && BIX.bc) { BIX.bc.q = e.target.value; BIX.bc.n = 30; clearTimeout(BIX.bcT); BIX.bcT = setTimeout(bcPostsUpd, 200); } });
   }
   async function mkStub() { return {}; }
+  /* ===== 고객·시장: 일별 리뷰·Q&A (리뷰 운영) · 일별 가격·경쟁사 리뷰 (경쟁사 모니터링) ===== */
+  function rvNet() {
+    if (BIX.rvNet) return BIX.rvNet;
+    BIX.rvNet = fetch(SHEET_ENDPOINT + '?type=bi_revd&pw=' + encodeURIComponent(biPw())).then(function (r) { return r.json(); }).then(function (j) { BIX.rvNet = null; if (!j || !j.ok) throw new Error((j && j.error) || '일별 리뷰 데이터를 읽지 못했습니다'); BIX.rvC = { t: Date.now(), j: j }; try { localStorage.setItem('lo_revd', JSON.stringify({ t: Date.now(), j: j })); } catch (e) {} return j; }, function (er) { BIX.rvNet = null; throw er; });
+    return BIX.rvNet;
+  }
+  function rvHave() { if (BIX.rvC) return BIX.rvC; try { const s = JSON.parse(localStorage.getItem('lo_revd') || 'null'); if (s && s.j && Date.now() - s.t < 7 * 864e5) { BIX.rvC = s; return s; } } catch (e) {} return null; }
+  BI_LOADX['bi-rev'] = async function (d) {
+    if (!biUnlocked()) return; const c = rvHave(), fresh = c && Date.now() - c.t < 600000; if (c) d.rvd = c.j; if (fresh) return;
+    const done = function () { if (BIX.page === 'bi-rev' && BIX.cur === d) Promise.resolve(biRender('bi-rev', true)); };
+    rvNet().then(function () { done(); }, function (er) { if (!c && BIX.page === 'bi-rev' && BIX.cur === d) { d.rvdErr = String(er && er.message || er); done(); } });
+    if (!c) d.rvdPending = true;
+  };
+  function rvSt() { const f = BIX.rvf = BIX.rvf || { ch: '전체', gb: '전체', cls: '전체' }; return f; }
+  function rvDay(R, f, from, to) {
+    const out = {}, ok = function (x) { return (f.ch === '전체' || R.ch[x[1]] === f.ch) && (f.gb === '전체' || R.gb[x[3]] === f.gb) && (f.cls === '전체' || R.cls[x[2]] === f.cls); };
+    R.r.forEach(function (x) { if (x[0] < from || x[0] > to || !ok(x)) return; const o = out[x[0]] || (out[x[0]] = { n: 0, rs: 0, low: 0, ph: 0, q: 0, qu: 0 }); o.n += x[4]; o.rs += x[5]; o.low += x[6]; o.ph += x[7]; });
+    R.q.forEach(function (x) { if (x[0] < from || x[0] > to) return; const o = out[x[0]] || (out[x[0]] = { n: 0, rs: 0, low: 0, ph: 0, q: 0, qu: 0 }); o.q += x[2]; o.qu += x[3]; });
+    return out;
+  }
+  function rvSumRange(m, from, to) { const s = { n: 0, rs: 0, low: 0, ph: 0, q: 0, qu: 0, days: 0 }; for (let d = from; d <= to; d = rgAdd(d, 1)) { const o = m[d]; if (!o) continue; s.n += o.n; s.rs += o.rs; s.low += o.low; s.ph += o.ph; s.q += o.q; s.qu += o.qu; s.days++; } return s; }
+  function rvBox(d) {
+    const R = d.rvd; if (!R) return d.rvdErr ? '<section class="bi-card" data-st="explore"><h3>📅 일별 리뷰·문의</h3><div class="bi-warn">일별 리뷰 데이터를 읽지 못했습니다 (' + esc(d.rvdErr) + '). 새로고침으로 다시 시도해 주세요.</div></section>' : '<section class="bi-card" data-st="explore"><h3>📅 일별 리뷰·문의 <span class="bi-ms">시트에서 일별 값을 모으는 중입니다 (처음 한 번은 5~10초)</span></h3><div class="bi-skel"><div class="bi-skk"><i></i><i></i><i></i></div></div></section>';
+    const key = 'revd', s = rgSt(key, { preset: '30일', unit: '일' }), f = rvSt(), minD = R.r[0][0], maxD = R.last, r = rgResolve(key, minD, maxD), pTo = rgAdd(r.from, -1), pFrom = rgAdd(pTo, -(r.days - 1)), hasPrev = pFrom >= minD;
+    const m = rvDay(R, f, minD, maxD), cur = rvSumRange(m, r.from, r.to), prev = hasPrev ? rvSumRange(m, pFrom, pTo) : null;
+    const avg = function (x) { return x.n ? x.rs / x.n : NaN; }, pct = function (a, b) { return b > 0 ? a / b * 100 : NaN; };
+    const bk = rgBuckets(r.from, r.to, s.unit), bv = bk.map(function (b) { const x = { n: 0, rs: 0, low: 0, ph: 0, q: 0, qu: 0 }; for (let d = b.s; d <= b.e; d = rgAdd(d, 1)) { const o = m[d]; if (o) { x.n += o.n; x.rs += o.rs; x.low += o.low; x.ph += o.ph; x.q += o.q; x.qu += o.qu; } } return x; });
+    const chip = function (k, v, on) { return '<button type="button" class="bi-chip' + (on ? ' on' : '') + '" data-rvf="' + k + '" data-v="' + esc(v) + '">' + esc(v) + '</button>'; };
+    const filt = '<div class="bi-bar2"><span class="bi-bl">채널</span>' + ['전체'].concat(R.ch).map(function (x) { return chip('ch', x, f.ch === x); }).join('') + '<span class="bi-bl">구분</span>' + ['전체'].concat(R.gb).map(function (x) { return chip('gb', x, f.gb === x); }).join('') + '<span class="bi-bl">제품 분류</span>' + ['전체'].concat(R.cls).map(function (x) { return chip('cls', x, f.cls === x); }).join('') + '</div>';
+    const kp = '<div class="bi-kpis">' + bKpi('리뷰 수 (기간)', fN(cur.n), '건', '일평균 ' + fN(r.days ? cur.n / r.days : NaN) + (prev ? ' · 직전 ' + fN(prev.n) : '')) + bKpi('평균 별점', isFinite(avg(cur)) ? avg(cur).toFixed(2) : '-', '점', prev && prev.n ? '직전 ' + avg(prev).toFixed(2) : '') + bKpi('저평점(3점 이하)', fN(cur.low), '건', cur.n ? fP(pct(cur.low, cur.n), 1) + (prev && prev.n ? ' · 직전 ' + fP(pct(prev.low, prev.n), 1) : '') : '', cur.n && pct(cur.low, cur.n) >= BI_RULES.voc[0] ? 'bi-dn' : '') + bKpi('포토 리뷰 비율', cur.n ? fP(pct(cur.ph, cur.n), 0) : '-', '', fN(cur.ph) + '건') + bKpi('Q&A', fN(cur.q), '건', '미답변 ' + fN(cur.qu) + '건 · 문의 시트 ' + R.q[R.q.length - 1][0].slice(5) + '까지') + '</div>';
+    const lab = bk.map(function (b) { return b.l; });
+    const rows = bk.map(function (b, i) { const x = bv[i]; return '<tr><td>' + esc(b.l) + '</td><td><b>' + fN(x.n) + '</b></td><td>' + (x.n ? avg(x).toFixed(2) : '-') + '</td><td>' + fN(x.low) + (x.n ? ' <small class="bi-ms">' + fP(pct(x.low, x.n), 0) + '</small>' : '') + '</td><td>' + (x.n ? fP(pct(x.ph, x.n), 0) : '-') + '</td><td>' + fN(x.q) + (x.qu ? ' <span class="bi-pill yel">미답변 ' + x.qu + '</span>' : '') + '</td></tr>'; }).join('');
+    const by = function (names, idxOf, extraFilter) { return names.map(function (nm, k) { const x = { n: 0, rs: 0, low: 0 }; R.r.forEach(function (q) { if (q[0] < r.from || q[0] > r.to || idxOf(q) !== k || !extraFilter(q)) return; x.n += q[4]; x.rs += q[5]; x.low += q[6]; }); return { nm: nm, x: x }; }).filter(function (o) { return o.x.n > 0; }).sort(function (a, b) { return b.x.n - a.x.n; }); };
+    const byCls = by(R.cls, function (q) { return q[2]; }, function (q) { return (f.ch === '전체' || R.ch[q[1]] === f.ch) && (f.gb === '전체' || R.gb[q[3]] === f.gb); }), byCh = by(R.ch, function (q) { return q[1]; }, function (q) { return (f.gb === '전체' || R.gb[q[3]] === f.gb) && (f.cls === '전체' || R.cls[q[2]] === f.cls); });
+    const tbl = function (list, tot) { return list.map(function (o) { return '<tr><td><b>' + esc(o.nm) + '</b></td><td>' + fN(o.x.n) + '</td><td>' + fP(pct(o.x.n, tot), 0) + '</td><td>' + (o.x.rs / o.x.n).toFixed(2) + '</td><td>' + fN(o.x.low) + ' <small class="bi-ms">' + fP(pct(o.x.low, o.x.n), 0) + '</small></td></tr>'; }).join(''); };
+    const ins = rvInsights(R, f, r, cur, prev, byCls, byCh, m);
+    return '<section class="bi-card" data-st="explore"><div class="bi-ch"><h3>📅 일별 리뷰·문의 <span class="bi-ms">카페24 시트 raw_후기·raw_QnA를 날짜별로 합산 · 후기 내용·작성자는 읽지 않음</span></h3></div>' + rgBar(key, minD, maxD, ['일', '주', '월']) + filt + kp + '<h4 class="rv-h">리뷰 수</h4>' + bBars(lab, [bv.map(function (x) { return x.n; })], ['#14C4A9'], fN) + '<h4 class="rv-h">저평점률(%)</h4>' + lnChart(lab, [{ n: '저평점률', c: '#E5484D', v: bv.map(function (x) { return x.n >= 3 ? pct(x.low, x.n) : NaN; }) }], function (v) { return fP(v, 0); }) + '<div class="bi-note">저평점은 별점 3점 이하입니다. 하루 리뷰가 3건 미만인 구간은 저평점률 점을 찍지 않습니다. 채널·구분·분류 필터는 위 숫자와 표에 모두 적용됩니다.</div></section>'
+      + '<section class="bi-card" data-st="explore"><h3>' + s.unit + '별 표 <span class="bi-ms">' + r.from.slice(5) + ' ~ ' + r.to.slice(5) + '</span></h3><div class="bi-tw" style="max-height:420px;overflow:auto"><table class="bi-t"><thead><tr><th>' + s.unit + '</th><th>리뷰 수</th><th>평균 별점</th><th>저평점</th><th>포토</th><th>Q&A</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>'
+      + '<div class="bi-grid2"><section class="bi-card" data-st="explore"><h3>제품 분류별 <span class="bi-ms">기간 내</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>분류</th><th>리뷰</th><th>비중</th><th>별점</th><th>저평점</th></tr></thead><tbody>' + (tbl(byCls, cur.n) || '<tr><td colspan="5" class="bi-ms">값이 없습니다.</td></tr>') + '</tbody></table></div></section><section class="bi-card" data-st="explore"><h3>채널별 <span class="bi-ms">기간 내</span></h3><div class="bi-tw"><table class="bi-t"><thead><tr><th>채널</th><th>리뷰</th><th>비중</th><th>별점</th><th>저평점</th></tr></thead><tbody>' + (tbl(byCh, cur.n) || '<tr><td colspan="5" class="bi-ms">값이 없습니다.</td></tr>') + '</tbody></table></div></section></div>'
+      + '<section class="bi-card" data-st="insight"><h3>💡 일별 리뷰·문의 자동 인사이트</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>';
+  }
+  function rvInsights(R, f, r, cur, prev, byCls, byCh, m) {
+    const ins = [], pct = function (a, b) { return b > 0 ? a / b * 100 : NaN; }; if (!cur.n) return ['선택한 기간·조건에 리뷰가 없습니다.'];
+    ins.push(r.from + ' ~ ' + r.to + ' 리뷰 <b>' + fN(cur.n) + '건</b>(일평균 ' + fN(cur.n / r.days) + '건), 평균 별점 ' + (cur.rs / cur.n).toFixed(2) + ', 저평점 ' + fN(cur.low) + '건(' + fP(pct(cur.low, cur.n), 1) + ').' + (prev && prev.n ? ' 직전 같은 기간 ' + fN(prev.n) + '건(' + (cur.n >= prev.n ? '▲ ' : '▼ ') + fP(Math.abs(amChg(cur.n, prev.n)), 0) + '), 저평점률 ' + fP(pct(prev.low, prev.n), 1) + '.' : ''));
+    const days = Object.keys(m).filter(function (d) { return d >= r.from && d <= r.to && m[d].n > 0; }).sort(function (a, b) { return m[b].n - m[a].n; }); if (days.length) ins.push('리뷰가 가장 많았던 날은 ' + days[0].slice(5) + '(' + fN(m[days[0]].n) + '건)입니다.' + (m[days[0]].low >= 5 ? ' 그날 저평점이 ' + m[days[0]].low + '건 섞여 있습니다.' : ''));
+    const lowD = days.filter(function (d) { return m[d].n >= 10; }).sort(function (a, b) { return pct(m[b].low, m[b].n) - pct(m[a].low, m[a].n); })[0]; if (lowD && m[lowD].low >= 3) ins.push('하루 10건 이상 중 저평점률이 가장 높았던 날은 ' + lowD.slice(5) + '(' + fN(m[lowD].low) + '/' + fN(m[lowD].n) + '건, ' + fP(pct(m[lowD].low, m[lowD].n), 0) + ')입니다. 그날 배송·이벤트·제품 이슈가 있었는지 확인해 보세요.');
+    const bc = byCls.filter(function (o) { return o.x.n >= 20; }).sort(function (a, b) { return pct(b.x.low, b.x.n) - pct(a.x.low, a.x.n); })[0]; if (bc) ins.push('리뷰 20건 이상인 분류 중 저평점률이 가장 높은 곳은 <b>' + esc(bc.nm) + '</b> ' + fP(pct(bc.x.low, bc.x.n), 1) + '(' + fN(bc.x.low) + '/' + fN(bc.x.n) + '건)입니다.');
+    if (cur.qu > 0) ins.push('기간 내 미답변 Q&A ' + fN(cur.qu) + '건이 있습니다(문의 시트 마지막 날짜까지). 카페24 게시판에서 답변 상태를 확인해야 합니다.');
+    ins.push('이 숫자는 raw_후기·raw_QnA의 날짜별 건수와 별점 합계입니다. 월별 목표 대비 운영 현황(리뷰율)은 아래 기존 표에 있으며 시트의 마지막 월이 7월입니다.');
+    return ins;
+  }
+  (function () { const old = BI_EXTRA['bi-rev']; BI_EXTRA['bi-rev'] = function (d) { return '<div id="rvBox">' + rvBox(d) + '</div>' + (old ? old(d) : ''); }; })();
+  BI_STAGE_RULES['bi-rev'] = [[/실무 액션|체크리스트/, 'action'], [/목표 대비|자동 인사이트/, 'insight']];
+  function rvRefresh() { const d = BIX.cur; if (!d || !d.rvd) return; const b = $('#rvBox'); if (b) b.innerHTML = rvBox(d); }
+  RG_REF.revd = rvRefresh;
+  (function () {
+    const old = BI_ACTS['bi-rev'];
+    BI_ACTS['bi-rev'] = function (d) {
+      const A = [], R = d.rvd; let rest = []; try { rest = old ? (old(d) || []) : []; } catch (e) { rest = []; }
+      if (R) {
+        const key = 'revd', r = rgResolve(key, R.r[0][0], R.last), f = rvSt(), m = rvDay(R, f, R.r[0][0], R.last), cur = rvSumRange(m, r.from, r.to);
+        if (cur.low > 0) A.push({ id: 'rv-low', t: '저평점 리뷰 ' + cur.low + '건 확인·응대 요청 (' + r.from.slice(5) + '~' + r.to.slice(5) + ')', why: '저평점률 ' + fP(cur.low / cur.n * 100, 1) + ' · 평균 별점 ' + (cur.rs / cur.n).toFixed(2), link: '#bi-rev', linkLabel: '일별 리뷰 보기',
+          flow: biFlow('리뷰 응대] 저평점(3점 이하) ' + cur.low + '건 확인 (' + r.from + ' ~ ' + r.to + ')', ['현황(카페24 시트 raw_후기 기준): 리뷰 ' + fN(cur.n) + '건 중 저평점 ' + fN(cur.low) + '건(' + fP(cur.low / cur.n * 100, 1) + ')', '요청 1) 저평점 리뷰 내용을 읽고 원인을 배송·제품·기대 불일치로 분류', '요청 2) 응대가 필요한 건은 채널(알파리뷰·카페24·스마트스토어)별로 답글 작성 (개인정보·보상 약속은 담당자가 판단)', '요청 3) 같은 원인이 반복되면 상세페이지·제품 개선 과제로 정리']),
+          aside: biAside('구글 시트 "카페24 자사몰 대시보드"의 raw_후기 탭에서 일자가 ' + r.from + '부터 ' + r.to + '이고 저평점(3이하)이 1인 행을 읽고, 후기내용(100자)의 불만 유형을 분류해 건수 표로 정리해줘. 작성자 정보와 개인 정보는 쓰지 말고 시트에는 쓰지 마.') });
+        if (cur.qu > 0) A.push({ id: 'rv-qna', t: '미답변 Q&A ' + cur.qu + '건 답변 요청', why: '기간 내 문의 ' + cur.q + '건 중 미답변', link: '#bi-rev', linkLabel: '일별 리뷰·문의 보기', flow: biFlow('CS] 카페24 미답변 Q&A ' + cur.qu + '건', ['기간 ' + r.from + ' ~ ' + r.to + ' · 카페24 문의하기 게시판 기준', '요청 1) 미답변 문의 확인 후 답변 등록', '요청 2) 같은 질문이 반복되면 FAQ 시트에 추가']), aside: biAside('구글 시트 "카페24 자사몰 대시보드"의 raw_QnA 탭에서 상태가 답변완료가 아닌 행의 분류별 건수를 표로 정리해줘. 제목과 작성자 정보는 쓰지 마.') });
+      }
+      return A.concat(rest);
+    };
+  })();
+
+  /* --- 경쟁사 모니터링: 일별 가격 · 일별 리뷰 수 (기간 선택) --- */
+  BI_EXTRA['bi-comp'] = function (d) { return '<div id="cdBox">' + cdBox(d) + '</div>'; };
+  function cdBox(d) {
+    const j = d.j, P = j.price || [], RV = (j.reviews && j.reviews.days) || []; if (!P.length) return '';
+    const key = 'compd', s = rgSt(key, { preset: '30일', unit: '일' }), pDates = P.map(function (x) { return x.d; }), minD = pDates[0], maxD = (j.reviews && j.reviews.dayMax && j.reviews.dayMax > pDates[pDates.length - 1]) ? j.reviews.dayMax : pDates[pDates.length - 1], r = rgResolve(key, minD, maxD);
+    const cats = Array.from(new Set(j.prods.map(function (p) { return p[0]; }))), bk = rgBuckets(r.from, r.to, s.unit), lab = bk.map(function (b) { return b.l; });
+    const pser = cats.map(function (c, i) { return { n: c, c: CP_COL[i % CP_COL.length], v: bk.map(function (b) { let t = 0, n = 0; P.forEach(function (x) { if (x.d >= b.s && x.d <= b.e && x[c] !== undefined) { t += x[c]; n++; } }); return n ? Math.round(t / n) : NaN; }) }; });
+    const brands = {}; RV.forEach(function (x) { if (x[0] < minD) return; const o = brands[x[1]] || (brands[x[1]] = { b: x[1], by: {}, tot: 0, low: 0, ptot: 0 }); o.by[x[0]] = [x[2], x[3]]; });
+    const pTo = rgAdd(r.from, -1), pFrom = rgAdd(pTo, -(r.days - 1)), list = Object.keys(brands).map(function (k) { const o = brands[k]; Object.keys(o.by).forEach(function (dt) { if (dt >= r.from && dt <= r.to) { o.tot += o.by[dt][0]; o.low += o.by[dt][1]; } if (dt >= pFrom && dt <= pTo) o.ptot += o.by[dt][0]; }); return o; }).sort(function (a, b) { return b.tot - a.tot; });
+    const st = BIX.cd = BIX.cd || { sel: null }, own = list.filter(function (o) { return o.b === '라이브오랄스'; })[0], def = list.slice(0, 4).map(function (o) { return o.b; }); if (own && def.indexOf(own.b) < 0) def.push(own.b); const sel = st.sel || def;
+    const rser = list.filter(function (o) { return sel.indexOf(o.b) >= 0; }).map(function (o, i) { return { n: o.b + (o.b === '라이브오랄스' ? ' (자사)' : ''), c: o.b === '라이브오랄스' ? '#14C4A9' : RG_COLORS[(i + 1) % RG_COLORS.length], v: bk.map(function (b) { let t = 0, n = 0; for (let dt = b.s; dt <= b.e; dt = rgAdd(dt, 1)) { if (o.by[dt]) t += o.by[dt][0]; n++; } return t; }) }; });
+    const rows = list.map(function (o) { const on = sel.indexOf(o.b) >= 0, vals = rgBuckets(r.from, r.to, '일').map(function (b) { return o.by[b.s] ? o.by[b.s][0] : 0; }); return '<tr class="bi-click' + (o.b === '라이브오랄스' ? ' se-own' : '') + '" data-cdsel="' + esc(o.b) + '"><td><input type="checkbox" ' + (on ? 'checked' : '') + ' tabindex="-1"> <b>' + esc(o.b) + '</b></td><td><b>' + fN(o.tot) + '</b></td><td>' + fN(o.low) + (o.tot ? ' <small class="bi-ms">' + fP(o.low / o.tot * 100, 0) + '</small>' : '') + '</td><td>' + amChgHtml(amChg(o.tot, o.ptot)) + '</td><td>' + bSpark(vals) + '</td></tr>'; }).join('');
+    const ins = []; const pr = cats.map(function (c) { const a = pser[cats.indexOf(c)].v.filter(isFinite); return a.length > 1 ? { c: c, a: a[0], b: a[a.length - 1] } : null; }).filter(Boolean);
+    if (pr.length) ins.push('기간 첫 구간 대비 마지막 구간의 경쟁 제품 평균 판매가: ' + pr.map(function (x) { return esc(x.c) + ' ' + fN(x.a) + '→' + fN(x.b) + '원(' + (x.b >= x.a ? '▲' : '▼') + fP(Math.abs(amChg(x.b, x.a)), 0) + ')'; }).join(', ') + '.');
+    if (list.length) { ins.push('올리브영 상위 제품 리뷰는 기간 중 ' + fN(list.reduce(function (sx, o) { return sx + o.tot; }, 0)) + '건 수집됐고, 가장 많은 브랜드는 ' + esc(list[0].b) + ' ' + fN(list[0].tot) + '건입니다.' + (own ? ' 자사는 ' + fN(own.tot) + '건(' + (list.indexOf(own) + 1) + '위)입니다.' : '')); const up = list.filter(function (o) { return o.ptot >= 10 && o.tot > o.ptot * 1.3; }); if (up.length) ins.push('직전 같은 기간보다 리뷰가 30% 넘게 늘어난 브랜드: ' + up.slice(0, 3).map(function (o) { return esc(o.b) + ' ' + fN(o.ptot) + '→' + fN(o.tot); }).join(', ') + '. 프로모션·신제품 출시와 겹치는지 확인해 보세요.'); }
+    ins.push('가격은 시트의 Price_History(올리브영 상위 제품, 하루 한 번 수집)를 카테고리별로 평균 낸 값이고, 리뷰 수는 Raw_OliveYoung의 리뷰 작성일 기준입니다. 수집이 없는 날은 비어 있습니다.');
+    return '<section class="bi-card" data-st="explore"><div class="bi-ch"><h3>📅 일별 조회 <span class="bi-ms">경쟁 제품 평균 판매가 · 브랜드별 리뷰 수 · 기간을 골라 조회</span></h3></div>' + rgBar(key, minD, maxD, ['일', '주', '월']) + '<h4 class="rv-h">카테고리별 경쟁 제품 평균 판매가 (원)</h4>' + lnChart(lab, pser, function (v) { return fN(v); }) + '<h4 class="rv-h">브랜드별 리뷰 수 <small class="bi-ms">(표에서 행을 눌러 그래프에 넣고 뺍니다)</small></h4>' + (RV.length ? lnChart(lab, rser, fN) : '<div class="bi-empty">일별 리뷰 데이터가 아직 없습니다(서버 갱신 후 표시).</div>') + '<div class="bi-tw" style="max-height:360px;overflow:auto"><table class="bi-t"><thead><tr><th>브랜드</th><th>리뷰 수(기간)</th><th>낮은 별점(2점 이하)</th><th>직전 같은 기간 대비</th><th>일별 추이</th></tr></thead><tbody>' + (rows || '<tr><td colspan="5" class="bi-ms">값이 없습니다.</td></tr>') + '</tbody></table></div></section><section class="bi-card" data-st="insight"><h3>💡 일별 경쟁사 자동 인사이트</h3><ul class="bi-ins">' + ins.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></section>';
+  }
+  function cdRefresh() { const d = BIX.cur; if (!d || !d.j) return; const b = $('#cdBox'); if (b) b.innerHTML = cdBox(d); }
+  RG_REF.compd = cdRefresh;
+  BI_STAGE_RULES['bi-comp'] = (BI_STAGE_RULES['bi-comp'] || []).concat([[/자동 인사이트/, 'insight']]);
+  function bindRv(app) {
+    app.addEventListener('click', function (e) {
+      const t = e.target; let x; if (!t.closest) return;
+      if ((x = t.closest('[data-rvf]'))) { rvSt()[x.dataset.rvf] = x.dataset.v; rvRefresh(); return; }
+      if ((x = t.closest('[data-cdsel]'))) { const st = BIX.cd = BIX.cd || { sel: null }, d = BIX.cur; if (!d || !d.j) return; let cur = st.sel; if (!cur) { const RV = (d.j.reviews && d.j.reviews.days) || [], tot = {}; RV.forEach(function (q) { tot[q[1]] = (tot[q[1]] || 0) + q[2]; }); cur = Object.keys(tot).sort(function (a, b) { return tot[b] - tot[a]; }).slice(0, 4); if (cur.indexOf('라이브오랄스') < 0 && tot['라이브오랄스']) cur.push('라이브오랄스'); } cur = cur.slice(); const n = x.dataset.cdsel, i = cur.indexOf(n); if (i >= 0) cur.splice(i, 1); else cur.push(n); st.sel = cur; cdRefresh(); return; }
+    });
+  }
   const BI_PAGES = {
     'bi': { t: '종합 현황', s: '시트 10개에서 읽은 핵심 수치와 데이터 최신성을 한눈에 봅니다.' },
     'bi-stock': { t: '재고 현황', s: '이카운트 재고·출고 대시보드의 최신 재고를 품목별로 보고, 소진 임박·미입고 발주를 확인합니다.', k: 'stock' },
