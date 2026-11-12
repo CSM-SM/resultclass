@@ -2387,6 +2387,13 @@ img, svg, video { max-width: 100%; }
   .asset-table td .cell, .gd-table td .cell { flex: 1; min-width: 0; }
   .page [style*="display:flex"] { flex-wrap: wrap; }
 }
+
+.bi-head.geo { align-items: flex-start; padding-top: 20px; }
+.bi-head.geo > div:first-child { align-self: flex-start; }
+.bi-head.geo .geo-msc { order: 3; flex: 1 1 100%; align-self: stretch; margin-top: 6px; padding: 14px 18px; }
+.bi-head.geo .geo-msc h4 { margin-bottom: 4px; }
+.bi-head.geo .geo-msc dt { margin-top: 6px; }
+@media (min-width: 900px) { .bi-head.geo .geo-msc dl { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; grid-auto-flow: column; column-gap: 28px; } }
 </style>
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
