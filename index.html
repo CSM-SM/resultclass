@@ -7181,6 +7181,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const bar = $('#biStageBar'), body = $('#biBody'); if (!bar || !body) return;
     const kp = body.querySelector(':scope > .bi-kpis');
     if (kp) { const grp = [kp]; let pv = kp.previousElementSibling; while (pv && pv.matches('.bi-src, .bi-h3, .bi-warn, .qp-banner')) { grp.unshift(pv); pv = pv.previousElementSibling; } const first = body.firstElementChild; if (first !== grp[0]) grp.forEach(function (n) { body.insertBefore(n, first); }); if (kp.nextElementSibling !== bar) kp.insertAdjacentElement('afterend', bar); }
+    const gpf = body.querySelector('#geoPerf'); if (gpf && body.firstElementChild !== gpf) body.insertBefore(gpf, body.firstElementChild);
     const WARN = /확인 필요|경고|위험|미달|지연|임박|부족|초과|하락|급감|소진|만료|불일치|오류|긴급/, ins = Array.prototype.slice.call(body.querySelectorAll('[data-st="insight"]')), items = [];
     ins.forEach(function (el) { Array.prototype.forEach.call(el.querySelectorAll('li, .bi-risk'), function (x) { items.push(x); }); });
     const hot = items.filter(function (x) { return x.classList.contains('bi-risk') ? (x.classList.contains('red') || x.classList.contains('yel')) : WARN.test(x.textContent); });
@@ -7959,7 +7960,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const bars = '<div style="display:flex;gap:6px;align-items:flex-end;height:96px;padding:6px 2px 0;overflow-x:auto">' + dl.map(function (x, i) { return '<div style="flex:1;min-width:34px;text-align:center;font-size:11px"><div style="font-weight:700;color:#111">' + cnt[i] + '</div><div title="' + x + ' 발행 ' + cnt[i] + '건" style="margin:2px auto 0;width:70%;max-width:34px;height:' + (Math.round(cnt[i] / mx * 56) + 2) + 'px;border-radius:4px 4px 0 0;background:' + (cnt[i] >= goal ? '#14C4A9' : '#cbd5e1') + '"></div><div class="bi-ms" style="margin-top:3px">' + x.slice(5).replace('-', '/') + '</div></div>'; }).join('') + '</div>';
     const head = '<div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap;background:#f4f5f7;border-radius:16px;padding:18px 24px;margin:10px 0 14px"><div style="text-align:center;min-width:120px"><div style="font-size:12px;color:#666">AI 검색 노출 진단</div><div style="font-size:56px;font-weight:800;line-height:1.1;color:' + col + '">' + g + '</div>' + (nxt ? '<div class="bi-ms">다음 ' + nxt[1] + '까지 ' + Math.max(0.1, nxt[0] - sc).toFixed(1) + '점</div>' : '') + '</div><div style="flex:1;min-width:260px"><div style="font-weight:700;font-size:15px">종합 ' + sc.toFixed(1) + '점 <span class="bi-ms">(M 40% · S 30% · C 30%)</span></div><div style="margin-top:6px;font-size:14px;line-height:1.5;color:#333">' + esc(why) + '</div>' + (trend ? '<div style="margin-top:8px;font-size:13px;color:#0f766e;font-weight:600">📈 ' + esc(trend) + '</div>' : '') + '</div></div>';
     const kp2 = '<div class="bi-kpis">' + bKpi('운영 기간', fN(run), '일째', startD.slice(5).replace('-', '/') + ' 시작 · 매일 측정·발행') + bKpi('누적 발행', fN(okRec.length), '건', '일일 목표 ' + goal + '건 · ' + streak + '일 연속 달성') + bKpi('누적 측정 (정기)', fN(reg.length), '건', '매일 ' + plan + '건 · AI 4종') + bKpi('브랜드 언급률', fP(M, 0), '', isFinite(mB) ? '시작 직후 ' + fP(mB, 0) + ' → 최근 ' + fP(mA, 0) : '정기 측정 기준') + '</div>';
-    return '<section class="bi-card" data-st="all"><div class="bi-ch"><h3>🏆 GEO 성과 리포트 <span class="bi-ms">' + startD.slice(5).replace('-', '/') + ' 시작 · 구글 문서 발행 + 매일 AI 4종 측정</span></h3></div>' + head + kp2
+    return '<section class="bi-card" id="geoPerf" data-st="all"><div class="bi-ch"><h3>🏆 GEO 성과 리포트 <span class="bi-ms">' + startD.slice(5).replace('-', '/') + ' 시작 · 구글 문서 발행 + 매일 AI 4종 측정</span></h3></div>' + head + kp2
       + (hl ? '<h4 class="rv-h" style="margin:16px 0 6px">⭐ 눈에 띄는 변화</h4><ul class="bi-ins">' + hl + '</ul>' : '')
       + '<h4 class="rv-h" style="margin:16px 0 4px">📅 매일 발행 기록 <span class="bi-ms">초록 = 일일 목표 ' + goal + '건 달성</span></h4>' + bars
       + (cmpRows ? '<h4 class="rv-h" style="margin:16px 0 4px">📊 시작 직후 vs 최근 <span class="bi-ms">' + bTxt + ' → ' + rTxt + '</span></h4><div class="bi-tw"><table class="bi-t"><thead><tr><th>항목</th><th>시작 직후</th><th>최근</th><th>변화</th></tr></thead><tbody>' + cmpRows + '</tbody></table></div>' : '')
@@ -8037,7 +8038,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     return A;
   }
   BI_ACTS['bi-geo'] = biActsGeo;
-  BI_STAGE_RULES['bi-geo'] = [[/실무 액션/, 'action'], [/자동 인사이트|AI별 노출|질문유형별|노출 예상/, 'insight']];
+  BI_STAGE_RULES['bi-geo'] = [[/GEO 성과 리포트/, 'all'], [/실무 액션/, 'action'], [/자동 인사이트|AI별 노출|질문유형별|노출 예상/, 'insight']];
   function bindGeo(app) {
     app.addEventListener('click', function (e) {
       const t = e.target; let x; if (!t.closest) return;
