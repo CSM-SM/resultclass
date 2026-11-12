@@ -5490,7 +5490,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       else { const seg = document.createElement('div'); seg.className = 'bi-fseg'; g.chips.forEach(function (c) { seg.appendChild(c); }); box.appendChild(seg); }
       gbox.appendChild(box);
     });
-    let anchor = bar; if (bar.parentNode && bar.parentNode.id === 'biBody') { const first = Array.prototype.filter.call(bar.parentNode.children, function (el) { return !el.matches('.bi-kpis, .qp-banner, .bi-note, .bi-warn, .bi-fp, .bi-stagebar'); })[0]; if (first && first !== bar) anchor = first; }
+    let anchor = bar; if (bar.parentNode && bar.parentNode.id === 'biBody') { const first = Array.prototype.filter.call(bar.parentNode.children, function (el) { return !el.matches('.bi-kpis, .qp-banner, .bi-note, .bi-warn, .bi-fp, .bi-stagebar, #geoPerf'); })[0]; if (first && first !== bar) anchor = first; }
     anchor.parentNode.insertBefore(panel, anchor); bar.style.display = 'none'; bar.setAttribute('data-fp', '1'); return true;
   }
   function fpSync(panel) {
