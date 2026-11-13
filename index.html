@@ -6763,7 +6763,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const board = '<section class="bi-card"><h3>🧭 단계별 FLOW 티켓 <span class="bi-ms">단계를 누르면 그 단계의 티켓이 상품별로 한눈에 보입니다 (마우스를 올리면 담당·마감)</span></h3><div class="lf-legend"><span class="lf-tk s-ok"><i></i>완료</span><span class="lf-tk s-go"><i></i>진행</span><span class="lf-tk s-wait"><i></i>대기</span><span class="lf-tk s-fb"><i></i>피드백(회신 대기)</span><span class="lf-tk s-hold"><i></i>보류</span><span class="lf-tk s-go late"><i></i>마감 지연</span></div><div id="lfBoard">' + lfBoardHtml(d) + '</div></section>';
     const tbl = '<section class="bi-card"><h3>📋 파트별 현황표 <span class="bi-ms">세부 프로세스마다 AI가 하는 일 · 사람이 하는 일 · 표준 티켓명 (초안, 담당 과장 확인 후 확정)</span></h3>' + lfTableHtml(d) + '<div class="bi-note">진행 상태: 운영 중 = 자동으로 돌아감 · 일부 = 자동 기능과 사람이 요청해야 하는 부분이 섞임. 세부 프로세스는 FLOW 티켓 이름(견적서·패키지 문안·상페 기획서 등)을 보고 나눴습니다.</div></section>';
     const plan = '<section class="bi-card"><h3>⏰ 자동 발송·FLOW 템플릿 <span class="bi-ms">예정 · 아직 발송되지 않습니다</span></h3><div class="lf-cols"><div><h4>매일 10시 「상품 런칭 진단」 1종</h4><ul class="bi-ins"><li><b>내용</b>: 마감 지연 · 회신 대기 N일 초과 · 런칭 D-14 미충족 (위 진단과 같은 기준)</li><li><b>방법</b>: 이미 있는 FLOW 동기화와 지연 알림을 확장</li><li><b>확인 필요</b>: 발송 채널, 회신 대기 기준 N일, 수신자</li></ul></div><div><h4>FLOW 템플릿 고정</h4><ul class="bi-ins"><li>6단계 · 22개 세부 프로세스의 표준 티켓명을 상품 티켓 하위업무 템플릿으로 고정</li><li>FLOW 템플릿 등록은 아직 안 됨 (복사해서 새 상품 티켓에 붙여 쓰기)</li></ul><button type="button" class="bi-btn" data-lfcopy="tpl">표준 티켓명 복사</button></div></div></section>';
-    return kp + src + diag + board + tbl + plan;
+    return board + kp + src + diag + tbl + plan;
   }
   (function lfBind() {
     if (window.__lfBound2) return; window.__lfBound2 = true;
