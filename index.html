@@ -2402,22 +2402,26 @@ img, svg, video { max-width: 100%; }
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#ffffff">
 <style id="lf-css">
-.lf-q{margin:14px 0 6px;font-size:14px}.lf-todo{background:#F6F8FA;border:1px dashed #C9D0D6;border-radius:10px;padding:10px 12px;font-size:13px;color:#5A6169;line-height:1.6}
-.lf-chip{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}.lf-chip.ok{background:#E3F8F3;color:#0B8F7A}.lf-chip.wait{background:#FFF4DD;color:#9A6700}.lf-chip.no{background:#FDECEC;color:#C0392B}
-.lf-gates{display:flex;flex-wrap:wrap;gap:6px 14px}.lf-g em{font-style:normal;font-size:12px;color:#6B7280;margin-right:5px}
-.lf-flow{display:flex;align-items:stretch;gap:6px;margin:10px 0}.lf-node{flex:1;min-width:0;border:1px solid #DDE3E8;border-radius:12px;padding:10px;background:#fff;text-decoration:none;color:inherit;display:block}.lf-node:hover{border-color:#14C4A9;background:#F2FCFA}.lf-node b{display:block;margin:4px 0;font-size:14px}.lf-node small{display:block;font-size:11.5px;color:#6B7280;line-height:1.45}.lf-arr{align-self:center;color:#14C4A9;font-size:20px}
+.lf-chip{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}.lf-chip.ok{background:#E3F8F3;color:#0B8F7A}.lf-chip.go{background:#EAF1FF;color:#2F5FD0}.lf-chip.wait{background:#FFF4DD;color:#9A6700}.lf-chip.no{background:#FDECEC;color:#C0392B}.lf-chip.hold,.lf-chip.none{background:#EEF0F2;color:#6B7280}
+.lf-src{font-size:12px;color:#6B7280;margin:-4px 0 10px}.lf-src.old{color:#9A6700}
+.lf-dn{font-size:13px;color:#4B5563;line-height:1.6;margin:6px 0 10px}.lf-dn select{padding:2px 6px;border:1px solid #CBD2D9;border-radius:6px}
+.lf-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}.lf-tab{border:1px solid #DDE3E8;background:#fff;border-radius:999px;padding:6px 14px;font-size:13px;cursor:pointer}.lf-tab.on{background:#14C4A9;border-color:#14C4A9;color:#fff;font-weight:700}
+.lf-nr{border:1px solid #E5E8EB;border-radius:12px;padding:10px 12px;margin:8px 0}.lf-nh{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:6px}.lf-ns{display:flex;gap:8px;align-items:flex-start;margin:4px 0}.lf-sn{font-size:12px;font-weight:700;color:#0B8F7A;min-width:84px;padding-top:4px;flex:none}
+.lf-tk{display:inline-flex;align-items:center;gap:5px;max-width:100%;border:1px solid #E1E5E9;border-radius:8px;padding:3px 8px;font-size:12px;line-height:1.4;background:#fff;margin:2px 4px 2px 0}.lf-tk i{width:8px;height:8px;border-radius:50%;flex:none;background:#B8C0C8}.lf-tk b{font-weight:500;word-break:keep-all}.lf-tk em{font-style:normal;font-size:11px;color:#6B7280;white-space:nowrap}
+.lf-tk.s-ok{background:#F3FBF8;border-color:#CDEFE6}.lf-tk.s-ok i{background:#14C4A9}.lf-tk.s-ok b{color:#5B7A73}.lf-tk.s-go i{background:#3B6FE0}.lf-tk.s-wait i{background:#E0A526}.lf-tk.s-fb{background:#FFF8EC;border-color:#F3DDB0}.lf-tk.s-fb i{background:#F08A24}.lf-tk.s-hold{background:#F4F5F7}.lf-tk.s-hold i{background:#9AA3AD}.lf-tk.s-hold b{color:#8B9096}
+.lf-tk.late{border-color:#F0B4B4;background:#FDF2F2}.lf-tk.late em{color:#C0392B;font-weight:700}
+.lf-legend{display:flex;flex-wrap:wrap;gap:2px 6px;margin:2px 0 10px}
+.lf-scs{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:8px}.lf-sc{border:1px solid #DDE3E8;background:#fff;border-radius:12px;padding:9px 8px;text-align:left;cursor:pointer;display:flex;flex-direction:column;gap:3px}.lf-sc:hover{border-color:#14C4A9}.lf-sc.on{border-color:#14C4A9;background:#E9FAF6;box-shadow:0 0 0 2px #BFEDE4}.lf-sc b{font-size:14px}.lf-sc small{font-size:11.5px;color:#6B7280}.lf-sc small u{color:#C0392B;text-decoration:none;font-weight:700}
 .lf-no{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:#14C4A9;color:#fff;font-size:12px;font-weight:700}
-.lf-guide{background:#F2FCFA;border:1px solid #BFEDE4;border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.65}
-.lf-tw{width:100%}.lf-t{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}.lf-t th{background:#F6F8FA;text-align:left;padding:8px 10px;border-bottom:1px solid #E5E8EB}.lf-t td{padding:9px 10px;border-bottom:1px solid #EEF0F2;vertical-align:top;line-height:1.55;word-break:keep-all}.lf-t th:nth-child(1){width:11%}.lf-t th:nth-child(4){width:9%}
+.lf-tg{display:inline-flex;align-items:center;gap:6px;font-size:13px;margin:4px 0 8px;cursor:pointer}.lf-hint{background:#F6F8FA;border-radius:10px;padding:9px 12px;font-size:13px;line-height:1.6;margin:4px 0 10px}
+.lf-mx{display:block;border:1px solid #E5E8EB;border-radius:12px;overflow:hidden}.lf-mh,.lf-mr{display:grid;grid-template-columns:190px repeat(var(--lf-c),minmax(0,1fr))}.lf-mh{background:#F6F8FA;font-size:12.5px;font-weight:700;color:#4B5563}.lf-mh>div{padding:8px 10px;border-left:1px solid #E5E8EB}.lf-mh>div:first-child{border-left:0}.lf-mr{border-top:1px solid #EEF0F2}.lf-mp{padding:10px;display:flex;flex-direction:column;gap:4px;background:#FCFDFD}.lf-mp small{font-size:11.5px;color:#6B7280}.lf-mc{padding:8px 8px;border-left:1px solid #EEF0F2;min-width:0}.lf-dash{color:#C4CAD0}
+.lf-tw{width:100%}.lf-t{width:100%;border-collapse:collapse;font-size:13px;table-layout:fixed}.lf-t th{background:#F6F8FA;text-align:left;padding:8px 10px;border-bottom:1px solid #E5E8EB}.lf-t td{padding:8px 10px;border-bottom:1px solid #EEF0F2;vertical-align:top;line-height:1.55;word-break:keep-all}
+.lf-tt th:nth-child(1){width:20%}.lf-tt th:nth-child(5){width:56px}.lf-cmp th:nth-child(2){width:14%}.lf-pt th:nth-child(1){width:13%}.lf-pt th:nth-child(2){width:14%}.lf-pt th:nth-child(5){width:14%}.lf-pt th:nth-child(6){width:9%}.lf-pt tr.first td{border-top:2px solid #DDE3E8}.lf-sub{color:#9AA3AD;font-size:12px}.lf-pt code{font-size:12px;background:#F2F4F6;padding:1px 5px;border-radius:5px;word-break:break-all}
 .lf-st{display:inline-block;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:600;white-space:nowrap}.lf-sta{background:#E3F8F3;color:#0B8F7A}.lf-stb{background:#EAF1FF;color:#2F5FD0}.lf-stc{background:#FFF4DD;color:#9A6700}
-.lf-sel{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:8px 0 12px}.lf-sel select{padding:6px 10px;border:1px solid #CBD2D9;border-radius:8px;font-size:13px;max-width:100%}
-.lf-d{border:1px solid #E5E8EB;border-radius:12px;margin:8px 0;background:#fff}.lf-d summary{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;list-style:none}.lf-d summary::-webkit-details-marker{display:none}.lf-prog{margin-left:auto;font-size:12.5px;color:#6B7280}
-.lf-body{padding:4px 14px 14px}.lf-goal{margin:0 0 10px;font-size:13px;color:#4B5563}.lf-cols{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}.lf-cols h4{margin:10px 0 4px;font-size:13px}.lf-cols h4:first-child{margin-top:0}.lf-cols p{margin:0;font-size:13px;line-height:1.6}
-.lf-c{display:flex;gap:8px;align-items:flex-start;padding:5px 0;font-size:13px;line-height:1.5;cursor:pointer}.lf-c input{margin-top:3px;flex:none}.lf-links{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.lf-plan{grid-template-columns:1fr 1fr}
-@media (max-width:980px){.lf-flow{display:grid;grid-template-columns:1fr 1fr 1fr}.lf-arr{display:none}.lf-cols,.lf-plan{grid-template-columns:1fr}
-.lf-t,.lf-t thead,.lf-t tbody,.lf-t tr,.lf-t td{display:block;width:auto}.lf-t thead{display:none}.lf-t tr{border:1px solid #E5E8EB;border-radius:12px;padding:6px 10px;margin:8px 0}.lf-t td{border:0;padding:5px 0}.lf-t td::before{content:attr(data-label);display:block;font-size:11.5px;color:#8B9096;margin-bottom:1px}}
-@media (max-width:560px){.lf-flow{grid-template-columns:1fr 1fr}}
+.lf-cols{display:grid;grid-template-columns:1fr 1fr;gap:18px}.lf-cols h4{margin:4px 0 6px;font-size:13px}
+@media (max-width:980px){.lf-scs{grid-template-columns:repeat(4,1fr)}.lf-cols{grid-template-columns:1fr}.lf-mh{display:none}.lf-mr{display:block}.lf-mc{border-left:0;border-top:1px dashed #EEF0F2}.lf-mc::before{content:attr(data-label);display:block;font-size:11.5px;color:#8B9096;margin-bottom:3px}
+.lf-t,.lf-t thead,.lf-t tbody,.lf-t tr,.lf-t td{display:block;width:auto}.lf-t thead{display:none}.lf-t tr{border:1px solid #E5E8EB;border-radius:12px;padding:6px 10px;margin:8px 0}.lf-t td{border:0;padding:4px 0}.lf-t td::before{content:attr(data-label);display:block;font-size:11.5px;color:#8B9096;margin-bottom:1px}}
+@media (max-width:560px){.lf-scs{grid-template-columns:1fr 1fr}}
 </style></head>
 <body>
 <div class="announce"><a href="#quick">누가 써도 같은 품질로 &middot; 어사이드에게 <b>목적과 내용</b>만 말하세요 &middot; <b>간단 사용법</b> 보기</a></div>
@@ -6599,100 +6603,182 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
   }
   function pdLate(p, d) { return !!p.ed && p.ed < d.today && p.cls !== '완료' && p.cls !== '중단'; }
 
-  /* ===== 상품 런칭 프로세스: 매일 진단 + 6단계 표준 체크리스트 (2026-11-13) ===== */
-  const LF_STEPS = [
-    { n: '기획', st: '운영 중', goal: '무엇을 왜 만들지 정하고, FLOW에 상품 티켓과 런칭 일정을 만든다.',
-      ai: '오늘의 상품 추천(우선순위·개발비용·기간 점수화), 시장·소싱 자료 요약, 경쟁 제품·불만 리뷰 정리, 기획서 초안',
-      hu: '개발 여부·콘셉트·목표 런칭일 결정, 실장 → 대표님 컨펌', out: '상품 기획서, FLOW 상품 티켓 + 「런칭일정」 하위업무',
-      links: [['bi-pd', '오늘의 상품 추천'], ['bi-pdmk', '시장·소싱 자료']],
-      chk: ['상품 아이디어·타깃·해결할 문제를 한 줄로 정리', '오늘의 상품 추천·시장·소싱 자료로 경쟁 제품과 불만 리뷰 확인', '개발 현황에서 이미 개발 중인 상품과 겹치는지 확인', '콘셉트·목표 런칭일·등급(S/A/B/C) 초안 작성', 'FLOW [PM] 상품개발/기획지원에 상품 티켓과 「런칭일정」 하위업무 생성', '실장 → 대표님에게 개발 여부 컨펌 받기'] },
-    { n: '소싱', st: '일부 수동', goal: '만들 곳(제조사)과 원료·부자재, 샘플을 확정한다.',
-      ai: '제조사·부자재 후보 비교표, 문의 메일 초안, 샘플 평가 체크리스트, 리드타임 기준 일정 역산',
-      hu: '제조사 연락·협상(단가·일정), 샘플 직접 사용 평가, 제조사 선정', out: '제조사·사양 확정안, 샘플 일정(1~3차)',
-      links: [['bi-pdmk', '시장·소싱 자료']],
-      chk: ['제조사·원료·부자재 후보 2곳 이상 정리(소싱 시트 활용)', '견적·MOQ·리드타임 요청 (단가·금액은 이 사이트에 적지 않기)', '샘플 요청 후 1~3차 샘플 수령 일정을 FLOW에 등록', '샘플 사용 평가(사용감·향·성분)를 기록', '제조사·사양 확정 후 실장에게 보고'] },
-    { n: '허가·표시', st: '일부 수동', goal: '제품 분류에 맞는 허가·신고를 마치고, 표시사항을 허가증 기준으로 확정한다.',
-      ai: '허가증과 표시사항·성분·함량 대조, 누락·불일치 항목 체크, 검수표 정리',
-      hu: '허가증 기준 최종 판단(허가증이 최우선), 제조사·식약처 확인 답변 반영, 표시 문구 확정', out: '허가증(또는 신고서), 표시사항 확정본',
-      links: [['functions', '업무기능']],
-      chk: ['제품 분류(의약외품·화장품·건강기능식품 등)와 허가·신고 필요 여부 확인', '허가증 확보 (표시사항 검수의 최우선 기준)', '성분·함량·사용법·주의사항이 허가증과 일치하는지 대조', '제조사·실장 확정 답변은 "확인 필요"로 미루지 말고 바로 반영', '효능·효과 문구는 허가 범위 안에서만 사용'] },
-    { n: '도면', st: '일부 수동', goal: '단상자·용기·라벨 도면과 문안을 확정하고 인쇄·생산에 넘긴다.',
-      ai: '표시사항 문안 초안, 도면 문안·오탈자·바코드·필수 표시 대조, 디자인 의뢰서 초안',
-      hu: '도면·사양 확정, 디자인 컨펌, 인쇄 감리·제조사 확인', out: '확정 도면(칼선), 인쇄 발주 일정',
-      links: [['functions', '업무기능']],
-      chk: ['단상자·용기·라벨 사양과 도면(칼선) 확정', '표시사항 문안 작성 (허가증 기준, 국·영문 병행 여부 확인)', '디자인 의뢰서 작성 후 디자인팀에 의뢰', '시안 검수(오탈자·바코드·필수 표시) 후 컨펌', '인쇄 발주·감리 일정을 FLOW에 등록'] },
-    { n: '상세페이지', st: '일부 수동', goal: '근거 있는 상세페이지를 만들어 채널 심의를 통과한다.',
-      ai: '상세페이지 기획안(구조·핵심 메시지), 카피 초안, 성적서 수치 대조, 타사 브랜드명·금지 표현 점검',
-      hu: '광고 표현 최종 판단, 상세 디자인 컨펌, 채널 심의 대응', out: '상페 기획서, 상세 디자인 시안·최종본',
-      links: [['functions', '업무기능(상세페이지 기획안)']],
-      chk: ['상세페이지 기획서(구조·핵심 메시지·근거) 작성', '수치·효능 근거는 시험성적서 기준으로 확인', '타사 브랜드명·비교 표기가 없는지 확인 (채널 광고 심의)', '상세 디자인 의뢰 후 시안 검수', '의약외품 광고 표현은 상급자에게 최종 판단 받기'] },
-    { n: '런칭', st: '일부 운영', goal: '생산·입고·채널 등록을 마치고 런칭일에 맞춰 공개한다.',
-      ai: 'FLOW 런칭일 자동 동기화·D-day 표시, 매일 런칭 진단, 입고·재고 점검, 채널 등록 체크리스트·런칭 공지 초안',
-      hu: '양품 승인·입고 확인, 채널 등록·가격 확정, 런칭일 최종 결정', out: '입고 완료, 채널 등록, 런칭 공지',
-      links: [['bi-pdst', '개발 현황'], ['bi-stock', '재고 현황'], ['bi-sku', '품목 마스터']],
-      chk: ['생산·충진 일정, 양품 확인, 창고 입고 일정 확인', 'D-14 진단(마감 지연·회신 대기·미충족) 항목 해소', '채널 등록 준비(자사몰·스마트스토어·올리브영·쿠팡)', '품목 마스터·바코드·재고 세팅', '런칭일 최종 확정 후 전사 공유', '런칭 1주 후 판매·리뷰·클레임 점검'] }
+  /* ===== 런칭 프로세스 (FLOW 티켓 기준) ===== */
+
+  const LF_ST = [
+    { n: '기획', st: '운영 중', goal: '무엇을 왜 만들지 정하고 FLOW에 상품 티켓을 만든다.', steps: [
+      { k: '기획서·콘셉트·USP', re: /상품\s*기획서|USP|콘셉트|컨셉|포지셔닝|가치\s*판단|벤치마크|아이디어|논문|17종|소싱 검토|기획안$/, ai: '오늘의 상품 추천 점수화, 시장·경쟁 자료 요약, 기획서 초안', hu: '개발 여부·콘셉트·USP 결정, 실장 → 대표님 컨펌', tpl: '[PM] 상품기획서' },
+      { k: '제품명·로고·색상', re: /제품명|명명|로고|네이밍|색상|컬러|칼라/, ai: '제품명 후보 제안, 유사명·상표 중복 검색', hu: '제품명·로고·색상 최종 선정', tpl: '[PM] 제품명·색상 선정' } ] },
+    { n: '소싱', st: '일부 수동', goal: '만들 곳과 가격·사양을 정하고 샘플로 검증한다.', steps: [
+      { k: '제조사·업체 선정', re: /제조사|업체|소싱|협력사|선정|개발 요청|독려/, ai: '후보 비교표, 문의 메일 초안', hu: '제조사 연락·협상, 선정', tpl: '[PM] 제조사 선정' },
+      { k: '견적·원가', re: /견적|원가/, ai: '견적 항목 비교표 (금액은 이 사이트에 적지 않음)', hu: '견적서 접수, 단가·MOQ 협상·확정', tpl: '[PM] 견적서' },
+      { k: '샘플링·테스트', re: /샘플|테스트|사용\s*평가|레시피|처방|시험설계|베타/, ai: '평가 체크리스트, 평가 결과 정리', hu: '샘플 수령, 직접 사용 평가', tpl: '[PM] 샘플수령 / 샘플테스트' },
+      { k: '사양·금형·용기', re: /사양|용량|금형|용기|튜브|제형|렌더링/, ai: '사양서 초안, 리드타임 역산', hu: '용량·용기·튜브·금형 확정', tpl: '[PM] 제품 사양 확정' } ] },
+    { n: '허가·표시', st: '일부 수동', goal: '허가·신고·시험을 마치고 표시 근거를 확보한다.', steps: [
+      { k: '품목신고·인증', re: /품목신고|허가|인증|KC|비건|마크|식약처|신고|해외상표|등록증|적합필증/, ai: '필요한 인허가·서류 체크리스트', hu: '신고·인증 진행, 식약처 질의', tpl: '[PM] 품목신고 / 인증' },
+      { k: '시험성적서', re: /성적서|유해|중금속|불검출|봉쇄성|시험|외부기관|회수품/, ai: '성적서 수치 요약, 표시 문구와 대조', hu: '시험 의뢰·성적서 수령', tpl: '[PM] 시험성적서' },
+      { k: '상품기술서·정보고시', re: /상품기술서|정보고시|표시광고|기술서/, ai: '상품기술서·정보고시 초안', hu: '허가증 기준으로 확정', tpl: '[PM] 상품기술서' },
+      { k: '특허·상표', re: /특허|상표|출원|의견제출/, ai: '선행 조사 요약', hu: '출원 판단·진행', tpl: '[PM] 특허 / 상표 출원' } ] },
+    { n: '도면', st: '일부 수동', goal: '패키지 문안·도면·시안을 확정하고 인쇄에 넘긴다.', steps: [
+      { k: '패키지 문안·표시사항', re: /문안|표시사항|표시필수|원고|전성분|표기|사용설명서|보증서/, ai: '허가증과 대조한 문안 초안, 누락 점검', hu: '문안 확정(허가증 최우선), 제조사 확인', tpl: '[PM] 패키지 문안' },
+      { k: '칼선·패키지 사양', re: /칼선|도면|단상자|패키지\s*(타입|사양)|케이스|블리스터|포장/, ai: '사양 비교·체크', hu: '단상자 타입·칼선 확정', tpl: '[PM] 패키지 칼선' },
+      { k: '패키지 디자인(시안)', re: /패키지|시안|디자인|기획안에 대한 의견/, ai: '디자인 의뢰서 초안, 시안 검수표', hu: '디자인 의뢰, 시안 컨펌', tpl: '[DE] 패키지 디자인 (N차 시안)' },
+      { k: '바코드·인쇄 발주', re: /바코드|인쇄|다우리|감리|라벨/, ai: '바코드·필수 표시 체크', hu: '바코드 발행, 인쇄 발주·감리', tpl: '[PM] 바코드 / 인쇄 발주' } ] },
+    { n: '상세페이지', st: '일부 수동', goal: '근거 있는 상세페이지를 만들어 채널 심의를 통과한다.', steps: [
+      { k: '상페 기획서', re: /(상페|상세페이지|상세\s*페이지).*(기획|구성|제안)|기획.*(상페|상세페이지)/, ai: '구조·핵심 메시지 초안, 성적서 수치 대조', hu: '광고 표현 판단, 기획서 확정', tpl: '[PM] 상페 기획서' },
+      { k: '상페 디자인', re: /상페|상세페이지|상세\s*디자인|썸네일|히스토리/, ai: '디자인 의뢰서, 시안 검수(타사명·금지 표현)', hu: '시안 컨펌, 채널 심의 대응', tpl: '[DE] 상페 디자인' },
+      { k: 'FAQ·콘텐츠', re: /FAQ|영상|콘텐츠|가이드/, ai: 'FAQ 초안', hu: '내용 검수', tpl: '[PM] FAQ 고도화' } ] },
+    { n: '런칭', st: '일부 운영', goal: '생산·입고·채널 등록을 마치고 런칭일에 공개한다.', steps: [
+      { k: '생산·충진·입고', re: /생산|충진|입고|납품|양산|발주|양품|출고/, ai: '입고 일정 점검·지연 알림', hu: '발주, 양품 승인, 입고 확인', tpl: '[PM] 생산·입고 일정' },
+      { k: '런칭일정', re: /런칭|출시/, ai: 'FLOW → 개발 현황 자동 동기화, D-day 진단', hu: '런칭일 최종 결정', tpl: '[PM] 런칭일정' },
+      { k: '채널 세팅', re: /세팅|채널|등록|스마트\s*스토어|자사몰|올영|올리브영|업로드|판매가/, ai: '등록 체크리스트, 상품 정보 초안', hu: '가격 확정, 채널 등록', tpl: '[MD] 채널 세팅' },
+      { k: '공구·영업 자료', re: /공구|공동구매|셀러|영업|시딩|바이럴|리테일|세트|번들|제안|키워드/, ai: '가이드·제안서 초안', hu: '셀러·거래처 소통', tpl: '[MK] 공구·영업 자료' },
+      { k: '사후 점검', re: /추가\s*발주|불량|AS|CS|클레임|리뷰/, ai: '리뷰·클레임 요약', hu: '추가 발주 판단', tpl: '[PM] 추가 발주 검토' } ] }
   ];
-  const LF_KEY = 'lo_lflow_v1';
-  function lfSt() { try { return JSON.parse(localStorage.getItem(LF_KEY) || '{}') || {}; } catch (e) { return {}; } }
-  function lfSave(o) { try { localStorage.setItem(LF_KEY, JSON.stringify(o)); } catch (e) {} }
-  function lfFind(it, re) { const m = (it.ms || []).filter(function (x) { return re.test(x.l || ''); }).sort(function (a, b) { return a.d < b.d ? 1 : -1; }); return m[0] || null; }
-  function lfGate(it, re, today) {
-    const m = lfFind(it, re); if (!m) return { s: 'no', t: '일정 없음' };
-    const dt = lcD(m.d); if (!dt) return { s: 'no', t: '일정 없음' };
-    return dt <= today ? { s: 'ok', t: lcMD(m.d) + ' 지남' } : { s: 'wait', t: lcMD(m.d) + ' 예정' };
+  const LF_RULE = [
+    [4, 0], [4, 1], [4, 2],
+    [2, 3], [3, 0], [3, 3], [1, 1], [2, 1], [2, 2], [2, 0], [1, 2], [1, 3],
+    [5, 4], [5, 1], [5, 0], [5, 2], [5, 3],
+    [3, 1], [3, 2], [0, 1], [1, 0], [0, 0]
+  ];
+  function lfCls(name) {
+    const n = String(name || '').replace(/^\s*(\[[^\]]*\]\s*)+/, '');
+    for (let i = 0; i < LF_RULE.length; i++) { const s = LF_ST[LF_RULE[i][0]].steps[LF_RULE[i][1]]; if (s.re.test(n)) return [LF_RULE[i][0], LF_RULE[i][1]]; }
+    return null;
   }
-  function lfDiag(d) {
-    const today = d.today, P = d.proj || [], L = (d.lc && d.lc.items) || [], open = L.filter(function (i) { return i.status !== '완료'; });
-    const late = P.filter(function (p) { return pdLate(p, d); }).map(function (p) { return { name: p.short, ed: p.ed, days: Math.round((today - p.ed) / 864e5), st: p.st || '현황 미기재', gr: p.gr || '-' }; }).sort(function (a, b) { return b.days - a.days; });
-    const lcLate = open.map(function (i) { return { i: i, n: lcDday(i, today) }; }).filter(function (x) { return x.n !== null && x.n < 0; });
-    const near = open.map(function (i) { return { i: i, n: lcDday(i, today) }; }).filter(function (x) { return x.n !== null && x.n >= 0 && x.n <= 14; }).sort(function (a, b) { return a.n - b.n; }).map(function (x) {
-      const it = x.i, setOk = !!it.flow && !/미설정/.test(it.basis || '');
-      const g = [{ l: '런칭일 FLOW 설정', r: setOk ? { s: 'ok', t: lcMD(it.flow) } : { s: 'no', t: '미설정' } }, { l: '패키지·도면', r: lfGate(it, /패키지|도면|칼선|단상자|문안/, today) }, { l: '상세페이지', r: lfGate(it, /상세|상페/, today) }, { l: '양품·입고', r: lfGate(it, /양품|입고/, today) }];
-      return { it: it, n: x.n, g: g, miss: g.filter(function (q) { return q.r.s !== 'ok'; }) };
+
+  const LF_SEC = /^개발팀|신제품 기획안|제품개선/;
+  const LF_MAP = [[/LED\s*미백기/, ['19']], [/불소도포제/, ['24']], [/미소교정기/, ['21']], [/미백제치약/, ['20']], [/12개입/, ['77']], [/온가족|유산균 온/, ['82']], [/불소치실|휴대용치실/, ['118']], [/어린이치약/, ['26']], [/개구기/, ['22']], [/시린니/, ['92']], [/화한/, ['89']], [/펌핑/, ['85']], [/레시피/, ['18']], [/미백패치/, ['99']], [/ㄹ|ㅅ/, ['98', '5799']]];
+  function lfD(s) { const m = /^(\d{4})(\d{2})(\d{2})/.exec(String(s || '')); return m ? new Date(+m[1], +m[2] - 1, +m[3]) : null; }
+  function lfMD(s) { const d = lfD(s); return d ? (d.getMonth() + 1) + '/' + d.getDate() : '-'; }
+  function lfYMD(d) { return d.getFullYear() + String(d.getMonth() + 1).padStart(2, '0') + String(d.getDate()).padStart(2, '0'); }
+  function lfDays(a, b) { return Math.round((b - a) / 864e5); }
+  function lfPN(n) { return String(n || '').replace(/^\s*(\[[^\]]*\]\s*)+/, '').trim(); }
+  function lfTN(n) { return String(n || '').replace(/^\s*\[PM\]\s*/, '').trim(); }
+  function lfSc(st) { return ({ '완료': 'ok', '진행': 'go', '대기': 'wait', '피드백': 'fb', '보류': 'hold' })[st] || 'wait'; }
+  async function lfFtk(force) {
+    if (!force && BIX.ftk && Date.now() - BIX.ftkT < 30000) return BIX.ftk;
+    const r = await fetch(SHEET_ENDPOINT + '?type=bi_ftk&pw=' + encodeURIComponent(biPw())), j = await r.json();
+    if (!j.ok) { if (j.error === 'auth') biRelock(); throw new Error('FLOW 티켓을 읽지 못했습니다'); }
+    BIX.ftk = lfBuild(j); BIX.ftkT = Date.now(); return BIX.ftk;
+  }
+  function lfBuild(j) {
+    const R = (j.rows || []).map(function (a) { return { id: a[0], up: a[1], num: a[2], n: a[3], st: a[4], who: a[5], sd: a[6], ed: a[7], sec: a[8], md: a[9] }; });
+    const by = {}; R.forEach(function (r) { by[r.id] = r; });
+    const rootOf = function (r) { let x = r, g = 0; while (x.up !== '-1' && by[x.up] && g++ < 8) x = by[x.up]; return x; };
+    const prods = [], pmap = {}, tk = [];
+    R.filter(function (r) { return r.up === '-1' && LF_SEC.test(r.sec); }).forEach(function (r) { const p = { root: r, name: lfPN(r.n), tk: [] }; prods.push(p); pmap[r.id] = p; });
+    R.forEach(function (r) { if (r.up === '-1') return; const p = pmap[rootOf(r).id]; if (!p) return; const t = Object.assign({}, r, { prod: p, cls: lfCls(r.n) }); p.tk.push(t); tk.push(t); });
+    prods.forEach(function (p) {
+      if (!p.tk.length && /신제품 기획안/.test(p.root.sec)) { const t = Object.assign({}, p.root, { prod: p, cls: [0, 0], self: true }); p.tk.push(t); tk.push(t); }
+      const l = p.tk.filter(function (t) { return /런칭/.test(t.n) && t.up === p.root.id && t.ed; })[0];
+      p.launch = l ? l.ed : (p.root.ed || ''); p.lsrc = l ? '런칭 하위업무' : '상위 업무 마감';
     });
-    const nomiss = lcLate.length, nearMiss = near.filter(function (x) { return x.miss.length; });
-    const T = ['[상품 런칭 진단 ' + pdFmtD(today) + ']', '1. 마감 지연(프로젝트 종료일 지남): ' + late.length + '건' + (late.length ? ' - ' + late.slice(0, 5).map(function (p) { return p.name + ' D+' + p.days; }).join(', ') : ''), '', '2. 런칭일 지남(FLOW 기준, 출시 완료 아님): ' + lcLate.length + '건' + (lcLate.length ? ' - ' + lcLate.map(function (x) { return x.i.name; }).join(', ') : ''), '', '3. 회신 대기 N일 초과: 연동 예정(확인 필요)', '', '4. 런칭 D-14 이내 ' + near.length + '건 중 미충족 ' + nearMiss.length + '건' + (nearMiss.length ? ' - ' + nearMiss.map(function (x) { return x.it.name + ' D-' + x.n + '(' + x.miss.map(function (q) { return q.l; }).join('·') + ')'; }).join(', ') : '')];
-    return { late: late, lcLate: lcLate, near: near, nearMiss: nearMiss, text: T.join('\n') };
+    return { R: R, by: by, prods: prods, pmap: pmap, tk: tk, syncAt: j.syncAt || '', n: R.length };
   }
-  function lfChip(r) { return '<span class="lf-chip ' + r.s + '">' + esc(r.t) + '</span>'; }
-  function lfTpl() {
-    return '[상품 런칭 표준 체크리스트] [상품명]\n\n' + LF_STEPS.map(function (s, i) { return (i + 1) + '. ' + s.n + '\n' + s.chk.map(function (c) { return '- [ ] ' + c; }).join('\n') + '\n'; }).join('\n');
+  async function biLoadLflow() { const d = await biLoadPd(); try { d.ftk = await lfFtk(); } catch (e) { d.ftkErr = String(e.message || e); } return d; }
+  function lfActive(p) { return p.root.st === '대기' || p.root.st === '진행' || p.root.st === '피드백'; }
+  function lfOpen(t) { return t.st !== '완료' && t.st !== '보류'; }
+  function lfItems(F) { const o = []; F.prods.filter(lfActive).forEach(function (p) { p.tk.forEach(function (t) { o.push(t); }); if (!(p.tk.length && p.tk[0].self)) o.push(Object.assign({}, p.root, { prod: p, cls: null, isRoot: true })); }); return o; }
+  function lfDiagF(F, d, N) {
+    const T = d.today, ts = lfYMD(T), it = lfItems(F);
+    const late = it.filter(function (t) { return lfOpen(t) && t.ed && t.ed < ts; }).sort(function (a, b) { return a.ed < b.ed ? -1 : 1; });
+    const wait = it.filter(function (t) { const m = lfD(t.md); return t.st === '피드백' && m && lfDays(m, T) >= N; }).sort(function (a, b) { return a.md < b.md ? -1 : 1; });
+    const near = []; ((d.lc && d.lc.items) || []).forEach(function (x) {
+      if (x.status === '완료') return; const n = lcDday(x, T); if (n === null || n > 14) return; const p = F.pmap[x.key]; if (!p) return;
+      const st = {}; p.tk.forEach(function (t) { if (t.cls && t.cls[0] <= 4 && t.st !== '완료') (st[t.cls[0]] = st[t.cls[0]] || []).push(t); });
+      near.push({ x: x, n: n, p: p, st: st, miss: Object.keys(st).length, unset: /미설정/.test(x.basis || '') });
+    }); near.sort(function (a, b) { return a.n - b.n; });
+    const cmp = []; (d.proj || []).filter(function (p) { return pdLate(p, d); }).forEach(function (sp) {
+      let ids = null; for (let i = 0; i < LF_MAP.length; i++) if (LF_MAP[i][0].test(sp.short)) { ids = LF_MAP[i][1]; break; }
+      const ps = F.prods.filter(function (p) { return (ids || []).indexOf(p.root.num) >= 0; });
+      let v, c;
+      if (!ps.length) { v = 'FLOW 티켓 없음'; c = 'none'; }
+      else if (ps.every(function (p) { return p.root.st === '완료'; })) { v = 'FLOW 완료 → 시트 갱신 필요'; c = 'ok'; }
+      else if (ps.every(function (p) { return p.root.st === '보류'; })) { v = 'FLOW 보류'; c = 'hold'; }
+      else { const lt = late.filter(function (t) { return ps.indexOf(t.prod) >= 0; }).length; v = lt ? 'FLOW도 지연 ' + lt + '건' : 'FLOW는 지연 없음 (시트 종료일만 지남)'; c = lt ? 'no' : 'go'; }
+      cmp.push({ sp: sp, ps: ps, v: v, c: c });
+    });
+    return { late: late, wait: wait, near: near, cmp: cmp };
   }
+  function lfPill(t, d) {
+    const ts = lfYMD(d.today), lt = lfOpen(t) && t.ed && t.ed < ts, dd = t.ed ? lfD(t.ed) : null;
+    return '<span class="lf-tk s-' + lfSc(t.st) + (lt ? ' late' : '') + '" title="' + esc('#' + t.num + ' · ' + t.st + ' · 담당 ' + (t.who || '-') + ' · 마감 ' + (t.ed ? lfMD(t.ed) : '미설정')) + '"><i></i><b>' + esc(lfTN(t.n)) + '</b>' + (t.st !== '완료' && dd ? '<em>' + (lt ? 'D+' + lfDays(dd, d.today) : '~' + lfMD(t.ed)) + '</em>' : '') + '</span>';
+  }
+  function lfRowTk(t, d) { return '<tr><td data-label="상품"><b>' + esc(t.prod.name.slice(0, 22)) + '</b></td><td data-label="티켓">' + lfPill(t, d) + '</td><td data-label="담당">' + esc(t.who || '-') + '</td><td data-label="마감·상태">' + esc(lfMD(t.ed)) + ' <span class="bi-mini">' + esc(t.st) + '</span></td><td data-label="#">' + esc(t.num) + '</td></tr>'; }
+  function lfDiagHtml(d) {
+    const F = d.ftk, S = BIX.lf, D = lfDiagF(F, d, S.N); BIX.lfD = D;
+    const tabs = [['late', '마감 지연 ' + D.late.length], ['wait', '회신 대기 ' + D.wait.length], ['near', 'D-14 미충족 ' + D.near.filter(function (x) { return x.miss || x.unset; }).length + '/' + D.near.length], ['cmp', '시트 대조 ' + D.cmp.length]];
+    let b = '';
+    const tbl = function (arr) { return arr.length ? '<div class="bi-tw"><table class="lf-t lf-tt"><thead><tr><th>상품</th><th>티켓</th><th>담당</th><th>마감·상태</th><th>#</th></tr></thead><tbody>' + arr.map(function (t) { return lfRowTk(t, d); }).join('') + '</tbody></table></div>' : '<div class="bi-empty">해당하는 티켓이 없습니다.</div>'; };
+    if (S.tab === 'late') b = '<p class="lf-dn">FLOW에서 <b>마감일이 지났는데 완료·보류가 아닌 티켓</b>입니다 (대기·진행·피드백 상품만 · 시트가 아니라 FLOW 기준).</p>' + tbl(D.late);
+    else if (S.tab === 'wait') b = '<p class="lf-dn">상태가 <b>피드백</b>(확인·회신 대기)인 채로 <select id="lfN">' + [1, 2, 3, 5, 7].map(function (n) { return '<option value="' + n + '"' + (n === S.N ? ' selected' : '') + '>' + n + '</option>'; }).join('') + '</select>일 이상 지난 티켓입니다. 기준은 마지막 수정일이며, 기준 일수는 확정이 필요합니다(제안 3일).</p>' + tbl(D.wait);
+    else if (S.tab === 'near') b = '<p class="lf-dn">런칭 <b>14일 이내</b> 상품(개발 현황 런칭일 기준)에서 <b>기획~상세페이지 단계에 아직 완료되지 않은 티켓</b>이 있으면 미충족입니다. 보류는 끝나지 않은 것으로 봅니다.</p>' + (D.near.length ? D.near.map(function (x) {
+      const bad = x.miss || x.unset;
+      return '<div class="lf-nr"><div class="lf-nh"><b>' + esc(x.p.name.slice(0, 30)) + '</b> ' + lcDChip(x.x, d.today) + ' <span class="lf-chip ' + (bad ? 'no' : 'ok') + '">' + (bad ? '미충족' : '충족') + '</span>' + (x.unset ? ' <span class="lf-chip wait">런칭 하위업무 미설정</span>' : '') + '</div>' + (x.miss ? Object.keys(x.st).map(function (k) { return '<div class="lf-ns"><span class="lf-sn">' + (+k + 1) + ' ' + esc(LF_ST[k].n) + '</span><span>' + x.st[k].map(function (t) { return lfPill(t, d); }).join('') + '</span></div>'; }).join('') : '<div class="bi-note">기획~상세페이지 단계의 열린 티켓이 없습니다.</div>') + '</div>';
+    }).join('') : '<div class="bi-empty">14일 안에 런칭하는 상품이 없습니다.</div>');
+    else b = '<p class="lf-dn">개발 현황 <b>시트의 종료일 지남</b> 프로젝트를 FLOW 상품 티켓과 대조했습니다. 시트가 갱신되지 않은 건은 시트 쪽을 고쳐야 합니다.</p><div class="bi-tw"><table class="lf-t lf-cmp"><thead><tr><th>시트 프로젝트</th><th>시트 종료일</th><th>FLOW 상품 (상태 · 마감)</th><th>판정</th></tr></thead><tbody>' + D.cmp.map(function (c) { return '<tr><td data-label="시트"><b>' + esc(c.sp.short.slice(0, 24)) + '</b></td><td data-label="시트 종료일">' + esc(pdFmtD(c.sp.ed)) + '</td><td data-label="FLOW">' + (c.ps.length ? c.ps.map(function (p) { return esc(p.name.slice(0, 20)) + ' <span class="lf-chip ' + (p.root.st === '완료' ? 'ok' : p.root.st === '보류' ? 'hold' : 'go') + '">' + esc(p.root.st) + '</span> ' + esc(lfMD(p.root.ed)); }).join('<br>') : '-') + '</td><td data-label="판정"><span class="lf-chip ' + c.c + '">' + esc(c.v) + '</span></td></tr>'; }).join('') + '</tbody></table></div>';
+    return '<div class="lf-tabs" role="tablist">' + tabs.map(function (t) { return '<button type="button" class="lf-tab' + (S.tab === t[0] ? ' on' : '') + '" data-lftab="' + t[0] + '">' + esc(t[1]) + '</button>'; }).join('') + '</div>' + b;
+  }
+  function lfStageStats(F, d) {
+    const ts = lfYMD(d.today), o = LF_ST.map(function () { return { open: 0, late: 0, all: 0 }; }); o.push({ open: 0, late: 0, all: 0 });
+    F.prods.filter(lfActive).forEach(function (p) { p.tk.forEach(function (t) { const i = t.cls ? t.cls[0] : 6; o[i].all++; if (lfOpen(t)) { o[i].open++; if (t.ed && t.ed < ts) o[i].late++; } }); });
+    return o;
+  }
+  function lfBoardHtml(d) {
+    const F = d.ftk, S = BIX.lf, st = lfStageStats(F, d), si = S.stage;
+    const prods = F.prods.filter(function (p) { return S.done ? true : lfActive(p); });
+    prods.sort(function (a, b) { return (a.launch || '9') < (b.launch || '9') ? -1 : 1; });
+    const chips = LF_ST.concat([{ n: '분류 안 됨' }]).map(function (s, i) { const x = st[i]; return '<button type="button" class="lf-sc' + (si === i ? ' on' : '') + '" data-lfstage="' + i + '"><span class="lf-no">' + (i < 6 ? i + 1 : '·') + '</span><b>' + esc(s.n) + '</b><small>열린 ' + x.open + '건' + (x.late ? ' · <u>지연 ' + x.late + '</u>' : '') + '</small></button>'; }).join('');
+    const steps = si < 6 ? LF_ST[si].steps : [{ k: '이름에 단계 키워드가 없는 티켓', ai: '', hu: '' }];
+    const rows = prods.map(function (p) {
+      const cells = steps.map(function (s, j) { return p.tk.filter(function (t) { return si < 6 ? (t.cls && t.cls[0] === si && t.cls[1] === j) : !t.cls; }); });
+      const cnt = cells.reduce(function (a, c) { return a + c.length; }, 0); if (!cnt) return null;
+      const dn = cells.reduce(function (a, c) { return a + c.filter(function (t) { return t.st === '완료'; }).length; }, 0);
+      const ln = p.launch ? lcDday({ ov: '', flow: p.launch.slice(0, 4) + '-' + p.launch.slice(4, 6) + '-' + p.launch.slice(6, 8) }, d.today) : null;
+      return { p: p, cells: cells, cnt: cnt, dn: dn, ln: ln };
+    }).filter(Boolean);
+    const emptyN = prods.length - rows.length;
+    const body = '<div class="lf-hint"><b>' + (si < 6 ? (si + 1) + '. ' + esc(LF_ST[si].n) : '분류 안 됨') + '</b> ' + (si < 6 ? esc(LF_ST[si].goal) : '티켓 이름만으로 단계를 정할 수 없는 항목입니다. 이름에 단계 키워드(견적·문안·상페 등)를 넣으면 자동으로 분류됩니다.') + '</div>' +
+      (rows.length ? '<div class="lf-mx" style="--lf-c:' + steps.length + '"><div class="lf-mh"><div>상품</div>' + steps.map(function (s) { return '<div title="' + esc((s.ai ? 'AI: ' + s.ai + ' / ' : '') + (s.hu ? '사람: ' + s.hu : '')) + '">' + esc(s.k) + '</div>'; }).join('') + '</div>' + rows.map(function (r) {
+        return '<div class="lf-mr"><div class="lf-mp"><b>' + esc(r.p.name.slice(0, 26)) + '</b><span><span class="lf-chip ' + (r.p.root.st === '완료' ? 'ok' : r.p.root.st === '보류' ? 'hold' : 'go') + '">' + esc(r.p.root.st) + '</span>' + (r.ln !== null && r.p.root.st !== '완료' ? ' <span class="lf-chip ' + (r.ln < 0 ? 'no' : r.ln <= 14 ? 'wait' : '') + '">' + (r.ln < 0 ? '마감 D+' + (-r.ln) : '마감 D-' + r.ln) + '</span>' : '') + '</span><small>' + r.dn + '/' + r.cnt + ' 완료</small></div>' + r.cells.map(function (c, j) { return '<div class="lf-mc" data-label="' + esc(steps[j].k) + '">' + (c.length ? c.map(function (t) { return lfPill(t, d); }).join('') : '<span class="lf-dash">-</span>') + '</div>'; }).join('') + '</div>';
+      }).join('') + '</div>' : '<div class="bi-empty">이 단계에 해당하는 티켓이 없습니다.</div>') + (emptyN > 0 ? '<div class="bi-note">이 단계 티켓이 없는 상품 ' + emptyN + '개는 표시하지 않았습니다.</div>' : '');
+    return '<div class="lf-scs">' + chips + '</div><label class="lf-tg"><input type="checkbox" id="lfDone"' + (S.done ? ' checked' : '') + '> 완료·보류 상품도 보기</label>' + body;
+  }
+  function lfTableHtml(d) {
+    const it = lfItems(d.ftk).filter(lfOpen);
+    return '<div class="lf-tw"><table class="lf-t lf-pt"><thead><tr><th>단계</th><th>세부 프로세스</th><th>AI가 하는 일</th><th>사람이 하는 일</th><th>표준 FLOW 티켓명</th><th>열린 티켓</th></tr></thead><tbody>' + LF_ST.map(function (s, i) {
+      return s.steps.map(function (x, j) { const n = it.filter(function (t) { return t.cls && t.cls[0] === i && t.cls[1] === j; }).length; return '<tr class="lf-pr' + (j === 0 ? ' first' : '') + '"><td data-label="단계">' + (j === 0 ? '<b>' + (i + 1) + '. ' + esc(s.n) + '</b> <span class="lf-st lf-st' + (s.st === '운영 중' ? 'a' : s.st === '일부 운영' ? 'b' : 'c') + '">' + esc(s.st) + '</span>' : '<span class="lf-sub">' + (i + 1) + '. ' + esc(s.n) + '</span>') + '</td><td data-label="세부 프로세스"><b>' + esc(x.k) + '</b></td><td data-label="AI가 하는 일">' + esc(x.ai) + '</td><td data-label="사람이 하는 일">' + esc(x.hu) + '</td><td data-label="표준 FLOW 티켓명"><code>' + esc(x.tpl) + '</code></td><td data-label="열린 티켓"><a href="#" class="lf-go" data-lfgo="' + i + '">' + n + '건 보기</a></td></tr>'; }).join('');
+    }).join('') + '</tbody></table></div>';
+  }
+  function lfTpl() { return '[상품 런칭 표준 FLOW 템플릿] [상품명]\n\n' + LF_ST.map(function (s, i) { return (i + 1) + '. ' + s.n + '\n' + s.steps.map(function (x) { return '- ' + x.tpl; }).join('\n') + '\n'; }).join('\n'); }
   function biViewLflow(d) {
-    if (!d.projOk && !d.lc) return '<div class="bi-warn">개발 현황 데이터를 읽지 못했습니다. 잠시 후 새로고침해 주세요.</div>';
-    const D = lfDiag(d); BIX.lfD = D; BIX.lfPrd = ((d.lc && d.lc.items) || []).filter(function (i) { return i.status !== '완료'; }).map(function (i) { return i.name; });
-    const lateRows = D.late.slice(0, 8).map(function (p) { return '<tr><td><b>' + esc(p.name) + '</b></td><td>' + esc(p.gr) + '</td><td>' + esc(pdFmtD(p.ed)) + ' <span class="bi-mini">D+' + p.days + '</span></td><td>' + esc(p.st.slice(0, 30)) + '</td></tr>'; }).join('');
-    const nearRows = D.near.map(function (x) { return '<tr><td><b>' + esc(x.it.name) + '</b></td><td>' + lcDChip(x.it, d.today) + '</td><td><div class="lf-gates">' + x.g.map(function (q) { return '<span class="lf-g"><em>' + esc(q.l) + '</em>' + lfChip(q.r) + '</span>'; }).join('') + '</div></td></tr>'; }).join('');
-    const lcLateRows = D.lcLate.map(function (x) { return '<tr><td><b>' + esc(x.i.name) + '</b></td><td>' + esc(lcMD(lcEff(x.i))) + ' <span class="bi-mini">D+' + (-x.n) + '</span></td><td>' + esc(x.i.status) + '</td></tr>'; }).join('');
-    const kp = '<div class="bi-kpis">' + bKpi('마감 지연', fN(D.late.length), '건', '프로젝트 종료일 지남', D.late.length ? 'bi-dn' : '') + bKpi('런칭일 지남', fN(D.lcLate.length), '건', 'FLOW 기준 · 출시 완료 아님', D.lcLate.length ? 'bi-dn' : '') + bKpi('회신 대기 초과', '-', '', '연동 예정 · 기준 N일 확인 필요') + bKpi('D-14 미충족', fN(D.nearMiss.length) + '/' + fN(D.near.length), '건', '14일 내 런칭 중') + '</div>';
-    const diag = '<section class="bi-card"><div class="bi-ch"><h3>🩺 오늘의 런칭 진단 <span class="bi-ms">화면을 열 때 FLOW 런칭 일정·개발 현황 시트로 계산한 값</span></h3><div class="bi-ha"><button type="button" class="bi-btn" data-lfcopy="diag">진단 결과 복사</button></div></div>'
-      + '<div class="lf-q"><b>1. 마감 지연</b> <span class="bi-ms">종료일이 지났는데 완료·중단 표기가 없는 프로젝트 (오래된 순 8건)</span></div>' + (lateRows ? '<div class="bi-tw"><table class="bi-t"><thead><tr><th>프로젝트</th><th>등급</th><th>종료일</th><th>현황</th></tr></thead><tbody>' + lateRows + '</tbody></table></div>' + (D.late.length > 8 ? '<div class="bi-note">외 ' + (D.late.length - 8) + '건은 <a href="#bi-pdst">개발 현황</a>에서 볼 수 있습니다.</div>' : '') : '<div class="bi-empty">마감이 지난 프로젝트가 없습니다.</div>')
-      + (lcLateRows ? '<div class="lf-q"><b>런칭일이 지난 상품</b> <span class="bi-ms">FLOW 기준 런칭일이 지났고 출시 완료 표시가 없음</span></div><div class="bi-tw"><table class="bi-t"><thead><tr><th>상품</th><th>런칭일</th><th>상태</th></tr></thead><tbody>' + lcLateRows + '</tbody></table></div>' : '')
-      + '<div class="lf-q"><b>2. 회신 대기 N일 초과</b></div><div class="lf-todo">제조사·디자인·실장 회신을 기다리는 일이 며칠째인지는 아직 이 화면에서 읽지 못합니다. FLOW 동기화에 「회신 대기」 상태와 요청일을 가져오는 단계를 추가하면 표시됩니다. (기준 N일은 확인 필요, 제안: 3일)</div>'
-      + '<div class="lf-q"><b>3. 런칭 D-14 미충족</b> <span class="bi-ms">런칭 14일 이내 상품의 4개 항목 · 일정 날짜 기준 임시 판정</span></div>' + (nearRows ? '<div class="bi-tw"><table class="bi-t lf-nt"><thead><tr><th>상품</th><th>D-day</th><th>항목별 상태</th></tr></thead><tbody>' + nearRows + '</tbody></table></div><div class="bi-note">「지남」은 FLOW 일정 날짜가 지났다는 뜻이며 실제 완료는 FLOW 티켓에서 확인합니다. 「예정」·「일정 없음」·「미설정」이 있으면 D-14 미충족으로 봅니다.</div>' : '<div class="bi-empty">14일 안에 런칭 예정인 상품이 없습니다.</div>') + '</section>';
-    const flow = '<section class="bi-card"><h3>🧭 상품 개발 6단계 <span class="bi-ms">상품기획이 처음이어도 이 순서대로 따라가면 됩니다</span></h3><div class="lf-flow">' + LF_STEPS.map(function (s, i) { return '<a class="lf-node" href="#lfStep' + i + '" data-lfgo="' + i + '"><span class="lf-no">' + (i + 1) + '</span><b>' + esc(s.n) + '</b><small>' + esc(s.goal) + '</small></a>'; }).join('<div class="lf-arr" aria-hidden="true">›</div>') + '</div><div class="lf-guide"><b>처음이라면</b> ① 위 6단계에서 지금 단계를 찾고 → ② 아래 표에서 AI에게 맡길 일과 내가 할 일을 확인 → ③ 단계별 체크리스트에서 상품을 고르고 하나씩 체크 → ④ 막히면 담당 과장 또는 실장에게 바로 문의합니다. 허가증·광고 표현·단가 협상·최종 컨펌은 항상 사람이 합니다.</div></section>';
-    const tbl = '<section class="bi-card"><h3>📋 파트별 현황표 <span class="bi-ms">단계마다 AI가 하는 일 · 사람이 하는 일 · 진행 상태 (초안, 담당 과장 확인 후 확정)</span></h3><div class="lf-tw"><table class="lf-t"><thead><tr><th>단계</th><th>AI가 하는 일</th><th>사람이 하는 일</th><th>진행 상태</th><th>산출물</th></tr></thead><tbody>' + LF_STEPS.map(function (s, i) { return '<tr><td data-label="단계"><b>' + (i + 1) + '. ' + esc(s.n) + '</b></td><td data-label="AI가 하는 일">' + esc(s.ai) + '</td><td data-label="사람이 하는 일">' + esc(s.hu) + '</td><td data-label="진행 상태"><span class="lf-st lf-st' + (s.st === '운영 중' ? 'a' : s.st === '일부 운영' ? 'b' : 'c') + '">' + esc(s.st) + '</span></td><td data-label="산출물">' + esc(s.out) + '</td></tr>'; }).join('') + '</tbody></table></div><div class="bi-note">진행 상태: 운영 중 = 자동으로 돌아감 · 일부 운영/일부 수동 = 자동 기능과 사람이 요청해야 하는 부분이 섞임. 항목은 FLOW 템플릿 고정 후 같은 표로 관리합니다.</div></section>';
-    const st = lfSt(), cur = (BIX.lfPrd.indexOf(BIX.lfCur) >= 0 ? BIX.lfCur : (BIX.lfPrd[0] || '')); BIX.lfCur = cur;
-    const sel = '<div class="lf-sel"><label for="lfProd">상품 선택</label><select id="lfProd">' + (BIX.lfPrd.length ? BIX.lfPrd.map(function (n) { return '<option value="' + esc(n) + '"' + (n === cur ? ' selected' : '') + '>' + esc(n) + '</option>'; }).join('') : '<option value="">(직접 연습용)</option>') + '</select><span class="bi-ms">체크 상태는 이 브라우저에만 저장됩니다 (다른 사람과 공유되지 않음)</span></div>';
-    const chk = '<section class="bi-card"><h3>✅ 단계별 체크리스트 <span class="bi-ms">표준 6단계 · FLOW 템플릿과 같은 항목</span></h3>' + sel + LF_STEPS.map(function (s, i) { const done = s.chk.filter(function (c, j) { return (st[cur] || {})[i + '-' + j]; }).length; return '<details class="lf-d" id="lfStep' + i + '"' + (i === 0 ? ' open' : '') + '><summary><span class="lf-no">' + (i + 1) + '</span><b>' + esc(s.n) + '</b><span class="lf-prog" data-lfprog="' + i + '">' + done + '/' + s.chk.length + '</span><span class="lf-st lf-st' + (s.st === '운영 중' ? 'a' : s.st === '일부 운영' ? 'b' : 'c') + '">' + esc(s.st) + '</span></summary><div class="lf-body"><p class="lf-goal">' + esc(s.goal) + '</p><div class="lf-cols"><div><h4>해야 할 일</h4>' + s.chk.map(function (c, j) { const k = i + '-' + j; return '<label class="lf-c"><input type="checkbox" data-lfchk="' + k + '"' + ((st[cur] || {})[k] ? ' checked' : '') + '><span>' + esc(c) + '</span></label>'; }).join('') + '</div><div><h4>🤖 AI에게 맡기기</h4><p>' + esc(s.ai) + '</p><h4>🙋 내가 직접 하기</h4><p>' + esc(s.hu) + '</p><h4>산출물</h4><p>' + esc(s.out) + '</p><div class="lf-links">' + s.links.map(function (l) { return '<a class="bi-chip" href="#' + l[0] + '">' + esc(l[1]) + '</a>'; }).join('') + '</div></div></div></div></details>'; }).join('') + '</section>';
-    const plan = '<section class="bi-card"><h3>⏰ 자동 발송·FLOW 템플릿 계획 <span class="bi-ms">예정 · 아직 발송되지 않습니다</span></h3><div class="lf-cols lf-plan"><div><h4>매일 10시 「상품 런칭 진단」 1종</h4><ul class="bi-ins"><li><b>대상</b>: FLOW [PM] 상품개발/기획지원 + 개발 현황 시트</li><li><b>내용</b>: 마감 지연 · 회신 대기 N일 초과 · 런칭 D-14 미충족</li><li><b>방법</b>: 이미 있는 FLOW 동기화(런칭일정 → 개발 현황)와 지연 알림을 확장</li><li><b>확인 필요</b>: 발송 채널, 회신 대기 기준 N일, 발송 대상자</li></ul></div><div><h4>FLOW 템플릿 고정</h4><ul class="bi-ins"><li>기획 → 소싱 → 허가·표시 → 도면 → 상세페이지 → 런칭 6단계를 상품 티켓 하위업무 템플릿으로 고정</li><li>FLOW 템플릿 등록은 아직 안 됨 (아래 버튼으로 복사해 새 상품 티켓에 붙여 쓰기)</li></ul><button type="button" class="bi-btn" data-lfcopy="tpl">체크리스트 텍스트 복사</button></div></div></section>';
-    return kp + diag + flow + tbl + chk + plan;
+    if (!d.ftk) return '<div class="bi-warn">FLOW 티켓을 읽지 못했습니다: ' + esc(d.ftkErr || '') + '<br>새로고침으로 다시 시도해 주세요.</div>';
+    BIX.lfd = d; BIX.lf = BIX.lf || { stage: 0, tab: 'late', done: false, N: 3 };
+    const F = d.ftk, D = lfDiagF(F, d, BIX.lf.N), age = F.syncAt ? Math.round((Date.now() - new Date(F.syncAt.replace(' ', 'T') + '+09:00')) / 36e5) : null;
+    const nearBad = D.near.filter(function (x) { return x.miss || x.unset; }).length, cmpOk = D.cmp.filter(function (c) { return c.c === 'ok'; }).length;
+    const kp = '<div class="bi-kpis">' + bKpi('마감 지연', fN(D.late.length), '건', 'FLOW 티켓 기준', D.late.length ? 'bi-dn' : '') + bKpi('회신 대기', fN(D.wait.length), '건', '피드백 ' + BIX.lf.N + '일 이상') + bKpi('D-14 미충족', nearBad + '/' + D.near.length, '건', '14일 내 런칭 상품') + bKpi('시트 불일치', fN(cmpOk), '건', '시트 지연인데 FLOW 완료') + '</div>';
+    const src = '<div class="lf-src' + (age !== null && age > 30 ? ' old' : '') + '">FLOW [PM] 상품개발/기획지원 티켓 ' + F.n + '건 · FLOW 기준 시각 ' + esc(F.syncAt || '-') + (age !== null && age > 30 ? ' · <b>' + age + '시간 지남, 최신이 아닐 수 있습니다</b>' : '') + ' · 업무번호(#)는 FLOW 검색창에 입력하면 열립니다</div>';
+    const diag = '<section class="bi-card"><h3>🩺 런칭 진단 <span class="bi-ms">FLOW 티켓과 직접 대조한 값 · 개발 현황 시트가 아닙니다</span></h3><div class="bi-ha" style="margin:-6px 0 8px"><button type="button" class="bi-btn" data-lfcopy="diag">진단 결과 복사</button></div><div id="lfDiag">' + lfDiagHtml(d) + '</div></section>';
+    const board = '<section class="bi-card"><h3>🧭 단계별 FLOW 티켓 <span class="bi-ms">단계를 누르면 그 단계의 티켓이 상품별로 한눈에 보입니다 (마우스를 올리면 담당·마감)</span></h3><div class="lf-legend"><span class="lf-tk s-ok"><i></i>완료</span><span class="lf-tk s-go"><i></i>진행</span><span class="lf-tk s-wait"><i></i>대기</span><span class="lf-tk s-fb"><i></i>피드백(회신 대기)</span><span class="lf-tk s-hold"><i></i>보류</span><span class="lf-tk s-go late"><i></i>마감 지연</span></div><div id="lfBoard">' + lfBoardHtml(d) + '</div></section>';
+    const tbl = '<section class="bi-card"><h3>📋 파트별 현황표 <span class="bi-ms">세부 프로세스마다 AI가 하는 일 · 사람이 하는 일 · 표준 티켓명 (초안, 담당 과장 확인 후 확정)</span></h3>' + lfTableHtml(d) + '<div class="bi-note">진행 상태: 운영 중 = 자동으로 돌아감 · 일부 = 자동 기능과 사람이 요청해야 하는 부분이 섞임. 세부 프로세스는 FLOW 티켓 이름(견적서·패키지 문안·상페 기획서 등)을 보고 나눴습니다.</div></section>';
+    const plan = '<section class="bi-card"><h3>⏰ 자동 발송·FLOW 템플릿 <span class="bi-ms">예정 · 아직 발송되지 않습니다</span></h3><div class="lf-cols"><div><h4>매일 10시 「상품 런칭 진단」 1종</h4><ul class="bi-ins"><li><b>내용</b>: 마감 지연 · 회신 대기 N일 초과 · 런칭 D-14 미충족 (위 진단과 같은 기준)</li><li><b>방법</b>: 이미 있는 FLOW 동기화와 지연 알림을 확장</li><li><b>확인 필요</b>: 발송 채널, 회신 대기 기준 N일, 수신자</li></ul></div><div><h4>FLOW 템플릿 고정</h4><ul class="bi-ins"><li>6단계 · 22개 세부 프로세스의 표준 티켓명을 상품 티켓 하위업무 템플릿으로 고정</li><li>FLOW 템플릿 등록은 아직 안 됨 (복사해서 새 상품 티켓에 붙여 쓰기)</li></ul><button type="button" class="bi-btn" data-lfcopy="tpl">표준 티켓명 복사</button></div></div></section>';
+    return kp + src + diag + board + tbl + plan;
   }
   (function lfBind() {
-    if (window.__lfBound) return; window.__lfBound = true;
-    document.addEventListener('change', function (e) {
-      const t = e.target; if (!t || !t.matches) return;
-      if (t.matches('[data-lfchk]')) { const st = lfSt(), p = BIX.lfCur || ''; st[p] = st[p] || {}; if (t.checked) st[p][t.getAttribute('data-lfchk')] = 1; else delete st[p][t.getAttribute('data-lfchk')]; lfSave(st); lfProg(); }
-      else if (t.id === 'lfProd') { BIX.lfCur = t.value; const st = lfSt()[t.value] || {}; document.querySelectorAll('[data-lfchk]').forEach(function (c) { c.checked = !!st[c.getAttribute('data-lfchk')]; }); lfProg(); }
-    });
+    if (window.__lfBound2) return; window.__lfBound2 = true;
+    const redo = function () { const d = BIX.lfd; if (!d || !d.ftk) return; const a = document.getElementById('lfDiag'), b = document.getElementById('lfBoard'); if (a) a.innerHTML = lfDiagHtml(d); if (b) b.innerHTML = lfBoardHtml(d); };
+    document.addEventListener('change', function (e) { const t = e.target; if (!t || !BIX.lf) return; if (t.id === 'lfN') { BIX.lf.N = +t.value; redo(); } else if (t.id === 'lfDone') { BIX.lf.done = t.checked; redo(); } });
     document.addEventListener('click', function (e) {
-      const b = e.target && e.target.closest ? e.target.closest('[data-lfcopy],[data-lfgo]') : null; if (!b) return;
-      if (b.hasAttribute('data-lfgo')) { e.preventDefault(); const el = document.getElementById('lfStep' + b.getAttribute('data-lfgo')); if (el) { el.open = true; el.scrollIntoView({ behavior: 'smooth', block: 'start' }); } return; }
-      const txt = b.getAttribute('data-lfcopy') === 'tpl' ? lfTpl() : ((BIX.lfD && BIX.lfD.text) || ''); const old = b.textContent;
-      const done = function () { b.textContent = '복사했습니다'; setTimeout(function () { b.textContent = old; }, 1500); };
-      try { navigator.clipboard.writeText(txt).then(done, function () { b.textContent = '복사 실패'; }); } catch (er) { b.textContent = '복사 실패'; }
+      const b = e.target && e.target.closest ? e.target.closest('[data-lfcopy],[data-lfgo],[data-lfstage],[data-lftab]') : null; if (!b || !BIX.lf) return;
+      if (b.hasAttribute('data-lftab')) { BIX.lf.tab = b.getAttribute('data-lftab'); redo(); return; }
+      if (b.hasAttribute('data-lfstage')) { BIX.lf.stage = +b.getAttribute('data-lfstage'); redo(); return; }
+      if (b.hasAttribute('data-lfgo')) { e.preventDefault(); BIX.lf.stage = +b.getAttribute('data-lfgo'); redo(); const el = document.getElementById('lfBoard'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+      const D = BIX.lfD, d = BIX.lfd; let txt = '';
+      if (b.getAttribute('data-lfcopy') === 'tpl') txt = lfTpl();
+      else if (D && d) txt = ['[상품 런칭 진단 ' + pdFmtD(d.today) + ' · FLOW 기준]', '1. 마감 지연: ' + D.late.length + '건' + (D.late.length ? ' - ' + D.late.slice(0, 8).map(function (t) { return t.prod.name.slice(0, 12) + ' ' + lfTN(t.n).slice(0, 18); }).join(', ') : ''), '', '2. 회신 대기(피드백 ' + BIX.lf.N + '일 이상): ' + D.wait.length + '건' + (D.wait.length ? ' - ' + D.wait.slice(0, 8).map(function (t) { return lfTN(t.n).slice(0, 20); }).join(', ') : ''), '', '3. 런칭 D-14 미충족: ' + D.near.filter(function (x) { return x.miss || x.unset; }).length + '/' + D.near.length + '건' + D.near.map(function (x) { return ' - ' + x.p.name.slice(0, 14) + ' D' + (x.n < 0 ? '+' + (-x.n) : '-' + x.n) + (x.miss ? '(열린 ' + Object.keys(x.st).map(function (k) { return LF_ST[k].n; }).join('·') + ')' : '') + (x.unset ? '(런칭 하위업무 미설정)' : ''); }).join('')].join('\n');
+      const old = b.textContent; try { navigator.clipboard.writeText(txt).then(function () { b.textContent = '복사했습니다'; setTimeout(function () { b.textContent = old; }, 1500); }, function () { b.textContent = '복사 실패'; }); } catch (er) { b.textContent = '복사 실패'; }
     });
-    function lfProg() { document.querySelectorAll('[data-lfprog]').forEach(function (el) { const i = el.getAttribute('data-lfprog'), all = document.querySelectorAll('[data-lfchk^="' + i + '-"]'); let n = 0; all.forEach(function (c) { if (c.checked) n++; }); el.textContent = n + '/' + all.length; }); }
   })();
 
   function biViewPdst(d) {
@@ -8631,7 +8717,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     'bi-qna': { t: '콘텐츠 소재 수집', s: '지식iN·카페 글에서 고객이 궁금해하는 주제와 뜨는 키워드를 찾습니다.', k: 'qna' },
     'bi-pd': { t: '오늘의 상품 추천', s: '상품개발팀 · 자동화 시트에 쌓인 신제품 아이디어를 우선순위·개발비용·기간으로 점수화해 오늘 검토할 상품을 추천하고, FLOW 티켓 초안과 시장조사 지시문으로 바로 넘깁니다.', k: 'pidea' },
     'bi-pdst': { t: '개발 현황', s: '상품개발팀 · FLOW 기준 상품별 런칭 일정(타임라인)과 개발·리뉴얼 프로젝트의 등급·일정·현황을 봅니다. 런칭일은 사이트에서 직접 수정할 수 있고, FLOW 날짜가 바뀌면 자동 반영됩니다.', k: 'pstat' },
-    'bi-lflow': { t: '런칭 프로세스', s: '상품개발팀 · 기획 → 소싱 → 허가·표시 → 도면 → 상세페이지 → 런칭 6단계 표준 체크리스트와 단계별 AI·사람 역할, 매일 확인할 런칭 진단(마감 지연·회신 대기·D-14 미충족)을 한 화면에서 봅니다.' },
+    'bi-lflow': { t: '런칭 프로세스', s: '상품개발팀 · FLOW 티켓을 기획 → 소싱 → 허가·표시 → 도면 → 상세페이지 → 런칭 6단계(세부 22개 프로세스)로 나눠 단계별로 한눈에 보고, 마감 지연·회신 대기·D-14 미충족을 FLOW 기준으로 점검합니다. 단계마다 AI가 하는 일과 사람이 하는 일을 함께 정리했습니다.' },
     'bi-pdmk': { t: '시장·소싱 자료', s: '상품개발팀 · 베스트셀러 크롤링 DB, 불만 리뷰 분석, 어린이 신규 아이디어, 다이소 시장 요약, 검색량 신호, 소싱·시장조사 시트 모음. 소싱 시트는 연락처·단가가 있어 링크만 둡니다.', k: 'pdaiso' },
     'bi-gb': { t: '공동구매', s: '마케팅팀·영업팀 공유 일정(구글 캘린더)과 FLOW 공동구매 티켓 기준 셀러별 진행 단계, 개인/업체(벤더) 구분, 정산 진행 단계를 한 화면에서 봅니다.' },
     'bi-blog': { t: '블로그 모니터링', s: '마케팅팀 · 네이버 블로그에 올라오는 라이브오랄스 언급 글을 날짜·블로그·제품별로 보고, 새 글을 팀에 공유합니다.' },
@@ -8669,14 +8755,14 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
       if (pg === 'bi') { inner = await biViewOverview(); inner += biStratCard('bi') + biActCard(biActsOverview()); }
       else if (pg === 'bi-manual') inner = biViewManual();
       else if (m.k && BIX.view[pg] === 'tabs') inner = await biViewTabs(pg);
-      else { const K = { 'bi-d2c': [biLoadChanH, biViewD2C], 'bi-oy': [biLoadChanH, biViewOY], 'bi-cp': [biLoadCP, biViewCP], 'bi-cafe': [biLoadCafe, biViewCafe], 'bi-price': [biLoadPrice, biViewPrice], 'bi-sales': [biLoadSalesX, biViewSales], 'bi-ads': [biLoadSalesX, biViewAds], 'bi-stock': [biLoadLogi, biViewStock], 'bi-ship': [biLoadShip, biViewShip], 'bi-sku': [biLoadLogi, biViewSku], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews], 'bi-rights': [biLoadRights, biViewRights], 'bi-arch': [biLoadArch, biViewArch], 'bi-plan': [biLoadPlan, biViewPlan], 'bi-gb': [biLoadGb, biViewGb], 'bi-pd': [biLoadPd, biViewPd], 'bi-pdst': [biLoadPd, biViewPdst], 'bi-lflow': [biLoadPd, biViewLflow], 'bi-pdmk': [biLoadPdmk, biViewPdmk], 'bi-blog': [biLoadBlog, biViewBlog], 'bi-geo': [biLoadGeo, biViewGeo], 'bi-search': [mkStub, biViewSearch], 'bi-social': [mkStub, biViewSocial], 'bi-blogc': [mkStub, biViewBlogc] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); if (BI_LOADX[pg]) { try { await BI_LOADX[pg](d); } catch (lxe) { d.loadErr = String(lxe && lxe.message || lxe); } } BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + (BI_POST[pg] ? BI_POST[pg](d) : '') + biStratCard(pg) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
+      else { const K = { 'bi-d2c': [biLoadChanH, biViewD2C], 'bi-oy': [biLoadChanH, biViewOY], 'bi-cp': [biLoadCP, biViewCP], 'bi-cafe': [biLoadCafe, biViewCafe], 'bi-price': [biLoadPrice, biViewPrice], 'bi-sales': [biLoadSalesX, biViewSales], 'bi-ads': [biLoadSalesX, biViewAds], 'bi-stock': [biLoadLogi, biViewStock], 'bi-ship': [biLoadShip, biViewShip], 'bi-sku': [biLoadLogi, biViewSku], 'bi-journey': [biLoadJourney, biViewJourney], 'bi-rank': [biLoadRank, biViewRank], 'bi-inf': [biLoadInf, biViewInf], 'bi-rev': [biLoadRev, biViewRev], 'bi-paid': [biLoadPaid, biViewPaid], 'bi-comp': [biLoadComp, biViewComp], 'bi-qna': [biLoadQna, biViewQna2], 'bi-news': [biLoadNews, biViewNews], 'bi-rights': [biLoadRights, biViewRights], 'bi-arch': [biLoadArch, biViewArch], 'bi-plan': [biLoadPlan, biViewPlan], 'bi-gb': [biLoadGb, biViewGb], 'bi-pd': [biLoadPd, biViewPd], 'bi-pdst': [biLoadPd, biViewPdst], 'bi-lflow': [biLoadLflow, biViewLflow], 'bi-pdmk': [biLoadPdmk, biViewPdmk], 'bi-blog': [biLoadBlog, biViewBlog], 'bi-geo': [biLoadGeo, biViewGeo], 'bi-search': [mkStub, biViewSearch], 'bi-social': [mkStub, biViewSocial], 'bi-blogc': [mkStub, biViewBlogc] }[pg]; if (pg === 'bi-paid') { K[0] = biLoadPaid2; K[1] = biViewPaid2; } const d = await K[0](); if (BI_LOADX[pg]) { try { await BI_LOADX[pg](d); } catch (lxe) { d.loadErr = String(lxe && lxe.message || lxe); } } BIX.cur = d; inner = (BI_EXTRA[pg] ? BI_EXTRA[pg](d) : '') + K[1](d) + (BI_POST[pg] ? BI_POST[pg](d) : '') + biStratCard(pg) + biActCardFor(pg, d) + (BI_MANUAL[m.k] ? '<details class="bi-man"><summary>이 시트 보는 법 (메뉴얼 초안)</summary><dl class="bi-dl"><dt>무엇인가</dt><dd>' + esc(BI_MANUAL[m.k].what) + '</dd><dt>탭 구성</dt><dd>' + esc(BI_MANUAL[m.k].tabs) + '</dd><dt>이 화면이 읽는 값</dt><dd>' + esc(BI_MANUAL[m.k].read) + '</dd><dt>알아둘 점</dt><dd>' + esc(BI_MANUAL[m.k].note) + '</dd></dl></details>' : ''); }
       if (BIX.page === pg) { el.innerHTML = biFrame(pg, inner, BIX.stamp); biStageTag(pg); biStageBadges(pg); biWarm(); biStash(pg); if (pg === 'bi-qna' || pg === 'bi-plan') qpProdFill(); if (pg === 'bi-arch') arGalUpd(); if (pg === 'bi-sku') skGen(); }
     } catch (e) { if (BIX.page === pg) el.innerHTML = biFrame(pg, '<div class="bi-warn">데이터를 불러오지 못했습니다: ' + esc(e.message || String(e)) + '<br>시트 구조가 바뀌었거나 네트워크 문제일 수 있습니다. 새로고침으로 다시 시도해 주세요.</div>', ''); }
   }
 
   function biPrefetch(pg) {
     if (!biUnlocked() || pg === BIX.page) return;
-    const L = { 'bi-d2c': biLoadChanH, 'bi-oy': biLoadChanH, 'bi-cp': biLoadCP, 'bi-cafe': biLoadCafe, 'bi-price': biLoadPrice, 'bi-sales': biLoadSalesX, 'bi-ads': biLoadSalesX, 'bi-stock': biLoadLogi, 'bi-ship': biLoadShip, 'bi-sku': biLoadLogi, 'bi-journey': biLoadJourney, 'bi-rank': biLoadRank, 'bi-inf': biLoadInf, 'bi-rev': biLoadRev, 'bi-comp': biLoadComp, 'bi-qna': biLoadQna, 'bi-news': biLoadNews, 'bi-rights': biLoadRights, 'bi-gb': biLoadGb, 'bi-pd': biLoadPd, 'bi-pdst': biLoadPd, 'bi-lflow': biLoadPd, 'bi-pdmk': biLoadPdmk, 'bi-blog': biLoadBlog, 'bi-geo': biLoadGeo }[pg];
+    const L = { 'bi-d2c': biLoadChanH, 'bi-oy': biLoadChanH, 'bi-cp': biLoadCP, 'bi-cafe': biLoadCafe, 'bi-price': biLoadPrice, 'bi-sales': biLoadSalesX, 'bi-ads': biLoadSalesX, 'bi-stock': biLoadLogi, 'bi-ship': biLoadShip, 'bi-sku': biLoadLogi, 'bi-journey': biLoadJourney, 'bi-rank': biLoadRank, 'bi-inf': biLoadInf, 'bi-rev': biLoadRev, 'bi-comp': biLoadComp, 'bi-qna': biLoadQna, 'bi-news': biLoadNews, 'bi-rights': biLoadRights, 'bi-gb': biLoadGb, 'bi-pd': biLoadPd, 'bi-pdst': biLoadPd, 'bi-lflow': biLoadLflow, 'bi-pdmk': biLoadPdmk, 'bi-blog': biLoadBlog, 'bi-geo': biLoadGeo }[pg];
     if (!L) return; BIX.pre = BIX.pre || {}; if (BIX.pre[pg] && Date.now() - BIX.pre[pg] < 60000) return; BIX.pre[pg] = Date.now();
     try { Promise.resolve(L()).catch(function () {}); } catch (e) {}
   }
