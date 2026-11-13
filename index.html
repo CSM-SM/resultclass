@@ -7410,7 +7410,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     const bar = $('#biStageBar'), body = $('#biBody'); if (!bar || !body) return;
     const kp = body.querySelector(':scope > .bi-kpis');
     if (kp) { const grp = [kp]; let pv = kp.previousElementSibling; while (pv && pv.matches('.bi-src, .bi-h3, .bi-warn, .qp-banner')) { grp.unshift(pv); pv = pv.previousElementSibling; } const first = body.firstElementChild; if (first !== grp[0]) grp.forEach(function (n) { body.insertBefore(n, first); }); if (kp.nextElementSibling !== bar) kp.insertAdjacentElement('afterend', bar); }
-    const gpf = body.querySelector('#geoPerf'); if (gpf && body.firstElementChild !== gpf) body.insertBefore(gpf, body.firstElementChild);
+    const gpf = body.querySelector('#geoPerf'), gtab = body.querySelector('.geo-tabs'); if (gpf && body.firstElementChild !== gpf) body.insertBefore(gpf, body.firstElementChild); if (gtab && body.firstElementChild !== gtab) body.insertBefore(gtab, body.firstElementChild); if (gtab && gpf) gtab.insertAdjacentElement('afterend', gpf);
     const WARN = /확인 필요|경고|위험|미달|지연|임박|부족|초과|하락|급감|소진|만료|불일치|오류|긴급/, ins = Array.prototype.slice.call(body.querySelectorAll('[data-st="insight"]')), items = [];
     ins.forEach(function (el) { Array.prototype.forEach.call(el.querySelectorAll('li, .bi-risk'), function (x) { items.push(x); }); });
     const hot = items.filter(function (x) { return x.classList.contains('bi-risk') ? (x.classList.contains('red') || x.classList.contains('yel')) : WARN.test(x.textContent); });
