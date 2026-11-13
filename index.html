@@ -8289,7 +8289,7 @@ const SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxyn1RzdEJZhxQkm
     if (tab === 'sm') return tabs + '<div data-st="explore">' + gmBox(d) + acc('paa', '주간 콘텐츠 후보', '구글 자동완성 질문 후보 ' + d.paa.length + '개 · 선정 ' + paaPick.length + '개', SEC.paa, true) + '</div>' + SEC.insight;
     if (tab === 'wh') return tabs + '<div data-st="explore">' + ghBox(d) + '</div>';
     const accs = acc('qres', '질문별 결과', '행을 누르면 AI별 답변 기록 · ' + Object.keys(qMap).length + '개 질문', SEC.qres, true) + acc('brand', 'AI 추천 브랜드·인용 출처 TOP', '경쟁 현황 참고(내부용)', SEC.brand) + acc('exp', '노출 예상 시점·가속 조건', 'AI TF 가정값 · 조건 ' + d.chk.length + '개', SEC.exp + SEC.chk) + acc('sku', '제품명 점검 (SKU)', '명칭 다름 ' + (skuK['명칭 다름'] || 0) + ' · 올영 미입점 ' + (skuK['올영 미입점'] || 0) + ' · 전체 ' + d.sku.length + '개', SEC.sku, true) + acc('ops', '측정 운영 기록', '일일 현황 · 루틴 실행 기록', SEC.daily + SEC.logs);
-    return geoPerf(d) + kp + warn + tabs + '<div data-st="explore">' + gsBox(d) + '</div>' + bar + gdBox(d, R) + SEC.aiTy + SEC.insight + '<div data-st="explore">' + accs + '</div>';
+    return tabs + geoPerf(d) + kp + warn + '<div data-st="explore">' + gsBox(d) + '</div>' + bar + gdBox(d, R) + SEC.aiTy + SEC.insight + '<div data-st="explore">' + accs + '</div>';
 
   }
   function geoInsights(d, R, A, brs, srcs) {
